@@ -6,7 +6,7 @@
 /*   By: imoumini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 19:03:02 by imoumini          #+#    #+#             */
-/*   Updated: 2022/05/24 20:12:03 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/05/26 17:40:48 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef __FT_LIBFT_H
@@ -37,6 +37,8 @@ int	ft_atoi(const char *nptr);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strtrim(char const *s1, char const *s2);
 
 
 #endif

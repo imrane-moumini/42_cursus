@@ -26,7 +26,9 @@ SRC = ft_isalpha.c \
 		ft_atoi.c \
 		ft_calloc.c \
 		ft_strdup.c \
-    ft_substr.c
+    ft_substr.c \
+    ft_strjoin.c \
+    ft_strtrim.c
 
 BONUS_SRC = ft_lstnew_bonus.c \
             ft_lstadd_front_bonus.c \
