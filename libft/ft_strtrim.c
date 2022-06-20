@@ -14,7 +14,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-int	is_in_set(char const a, char const	*set)
+static int	is_in_set(char const a, char const	*set)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ int	is_in_set(char const a, char const	*set)
 	return (0);
 }
 
-int	count_real_size(char const *s1, char const *set)
+static int	count_real_size(char const *s1, char const *set)
 {
 	int	i;
 	int	j;

@@ -16,7 +16,7 @@
 #include <mcheck.h>
 #include <string.h>
 
-size_t	lenght_of_substr(char const *s, unsigned int start, size_t len)
+static size_t	lenght_of_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	size_t	j;

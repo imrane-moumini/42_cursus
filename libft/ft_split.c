@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include "libft.h"
 
-int	number_of_tab(char const *s, char c)
+static int	number_of_tab(char const *s, char c)
 {
 	int	i;
 	int	count;
@@ -36,7 +36,7 @@ int	number_of_tab(char const *s, char c)
 	return (count);
 }
 
-void	fill_tab(char const *s, char c, char **p, int l)
+static void	fill_tab(char const *s, char c, char **p, int l)
 {
 	int	i;
 	int	j;

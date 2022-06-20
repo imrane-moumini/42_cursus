@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int	ft_nbr(char c)
+static int	ft_nbr(char c)
 {
 	int	nbr;
 

@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	count_int(long long n)
+static int	count_int(long long n)
 {
 	int	power;
 
@@ -33,12 +33,10 @@ int	count_int(long long n)
 char	*ft_itoa(int n)
 {
 	char		*p;
-	int			i;
 	long long	nbr;
 	int			lenght;
 	char		c;
 
-	i = 0;
 	nbr = n;
 	if (n < 0)
 		nbr = nbr * -1;
@@ -46,8 +44,10 @@ char	*ft_itoa(int n)
 	if (n < 0)
 		lenght = lenght + 1;
 	p = malloc(sizeof(char) * (lenght + 1));
+	if (p == NULL)
+		return (NULL);
 	p[lenght] = '\0';
-	while (i < lenght)
+	while (0 < lenght)
 	{
 		c = (nbr % 10) + '0';
 		p[lenght - 1] = c;

@@ -1,45 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imoumini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/15 18:09:35 by imoumini          #+#    #+#             */
-/*   Updated: 2022/05/22 17:24:40 by imoumini         ###   ########.fr       */
+/*   Created: 2022/06/14 22:22:28 by imoumini          #+#    #+#             */
+/*   Updated: 2022/06/14 22:22:33 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 #include <stdio.h>
+#include <stdlib.h>
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+t_list	*ft_lstlast(t_list *lst)
 {
-	unsigned char	*t1;
-	unsigned char	*t2;
-	size_t			i;
+	t_list	*tmp;
 
-	i = 0;
-	t1 = (unsigned char *)s1;
-	t2 = (unsigned char *)s2;
-	if (n == 0)
+	if (lst == NULL)
 	{
-		return (0);
+		return (NULL);
 	}
-	while (i < n)
+	while (lst != NULL)
 	{
-		if (t1[i] != t2[i])
-		{
-			return (t1[i] - t2[i]);
-		}
-		i++;
+		tmp = lst;
+		lst = lst -> next;
 	}
-	return (0);
+	return (tmp);
 }
+
 // int	main(void)
 // {
-// 	//char s[] = {-128, 0, 127, 0};
-// 	//char sCpy[] = {-128, 0, 127, 0};
-// 	char s2[] = {0, 0, 127, 0};
-// 	char s3[] = {0, 0, 42, 0};
-// 	printf("%d", ft_memcmp(s2, s3, 4));
+// 	int *p = malloc(sizeof(int));
+//     *p = 4;
+// 	int *q = malloc(sizeof(int));
+//     *q = 5;
+// 	t_list *list;
+//     t_list *n;
+// 	t_list *o;
+// 	t_list *z;
+// 	n = ft_lstnew(p);
+// 	o = ft_lstnew(q);
+// 	n -> next = o;
+// 	list = n;
+// 	z = ft_lstlast(list);
+// 	int *r = z -> content;
+// 	printf("%d", *r );
 // }
