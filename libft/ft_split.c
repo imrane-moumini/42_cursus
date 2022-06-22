@@ -62,54 +62,80 @@ static void	fill_tab(char const *s, char c, char **p, int l)
 	}
 }
 
-char	**ft_split(char const *s, char c)
+static void	ft_free(char **p, int j)
+{
+	while (0 <= j)
+	{
+		free(p[j]);
+		p[j] = NULL;
+		j--;
+	}
+}
+
+static char	**numberofcharacter(char const *s, char c, char **p)
 {
 	size_t	i;
 	int		j;
 	int		count;
-	char	**p;
 
 	i = 0;
 	j = 0;
-	count = 0;
-	p = (char **)ft_calloc(sizeof(char *), (number_of_tab(s, c) + 1));
-	if (number_of_tab(s, c) == 0)
-		return (p);
 	while (i <= (ft_strlen(s) - 1))
 	{
+		count = 0;
 		while ((s[i] == c) && (s[i]))
 			i++;
 		while ((s[i] != c) && (s[i++]))
 			count++;
 		if (count != 0)
-			p[j++] = ft_calloc((char) sizeof(char), (count + 1));
-		count = 0;
+		{
+			p[j] = ft_calloc((char) sizeof(char), (count + 1));
+			if (p[j++] == NULL)
+			{
+				ft_free(p, j);
+				return (p);
+			}
+		}
 		i++;
+	}
+	return (p);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**p;
+
+	p = (char **)ft_calloc(sizeof(char *), (number_of_tab(s, c) + 1));
+	if (number_of_tab(s, c) == 0)
+		return (p);
+	p = numberofcharacter(s, c, p);
+	if (p == NULL)
+	{
+		return (p);
 	}
 	fill_tab(s, c, p, ft_strlen(s));
 	return (p);
 }
 
-// int        main(void)
+// int main()
 // {
 //     char    **tabstr;
-//     // int        i;
-//     tabstr = ft_split("  tripouille  42  ", ' ');
+//     int        i;
 
-//     // i = 0;
-//     if (tabstr[2] == NULL)
+//     i = 0;
+//     if (!(tabstr = ft_split("lorem ipsnon risus. Suspendisse", ' ')))
 //         printf("NULL\n");
-// }
-// 	return 0;
-	//  (!(tabstr = ft_split("  tripouille  42  ", ' ')))
-	// 	printf("NULL");
-	// else
-	// {
-	// 	while (tabstr[i] != NULL)
-	// 	{
-	// 		printf("%s\n", tabstr[i]);
-	// 		//write(1, "\n", 1);
-	// 		i++;
-	// 	}
-	// }
+//     // if (tabstr)
+//     //     printf("NULLL");
+//     else
+//     {
+//         while (tabstr[i])
+//         {
+//             printf("%s\n", tabstr[i]);
+//             free(tabstr[i]);        
+//             write(1, "\n", 1);
+//             i++;
+//         }
+//     }
+//     free (tabstr);
 // }

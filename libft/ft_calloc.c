@@ -18,8 +18,9 @@ void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*p;
 	size_t	i;
+
 	if (nmemb && ((nmemb * size / nmemb) != size))
-        return (NULL);
+		return (NULL);
 	if (nmemb == 0 || size == 0)
 	{
 		nmemb = 1;
