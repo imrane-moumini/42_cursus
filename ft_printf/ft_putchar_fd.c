@@ -9,7 +9,6 @@
 /*   Updated: 2022/06/06 23:12:45 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 #include <unistd.h>
 
 void	ft_putchar_fd(char c, int fd)

@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   printstr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imoumini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/06 23:52:17 by imoumini          #+#    #+#             */
-/*   Updated: 2022/06/06 23:52:21 by imoumini         ###   ########.fr       */
+/*   Created: 2022/06/27 22:43:08 by imoumini          #+#    #+#             */
+/*   Updated: 2022/06/27 22:43:10 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "ft_printf.h"
 #include <unistd.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <stdio.h>
 
-void	ft_putendl_fd(char *s, int fd)
+int printstr(char *str)
 {
-	int	i;
+	int len;
 
-	i = 0;
-	while (s[i] != '\0')
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
-	write(fd, "\n", 1);
+	len = ft_putstr_spe_fd(str, 1);
+	return (len);
 }

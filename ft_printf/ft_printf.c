@@ -9,158 +9,102 @@
 /*   Updated: 2022/06/22 21:04:17 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "ft_printf.h"
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
-// void	ft_putnbr_dec_fd(double n, int fd)
-// {
-// 	long long	nbr;
-// 	char		c;
 
-// 	nbr = n;
-// 	if (n < 0)
-// 	{
-// 		nbr = nbr * -1;
-// 		write(fd, "-", 1);
-// 	}
-// 	if (nbr < 10)
-// 	{
-// 		c = nbr + '0';
-// 		write(fd, &c, 1);
-// 	}
-// 	else
-// 	{
-// 		ft_putnbr_fd(nbr / 10, fd);
-// 		ft_putnbr_fd(nbr % 10, fd);
-// 	}
-// }
-
-void	ft_putnbr_hex_mini(unsigned long long nbr)
-{
-	
-	unsigned long long	nb;
-	char *base;
-
-	nb = nbr;
-    base = "0123456789abcdef";
-	if ((nb < 16))
-	{
-		write(1, &base[nb], 1);
-	}
-	else if ((nb >= 16))
-	{
-		ft_putnbr_hex_mini(nb /16);
-		ft_putnbr_hex_mini(nb %16);
-	}
-}
-void	ft_putnbr_hex_maj(unsigned long long nbr)
-{
-	
-	unsigned long long	nb;
-	char *base;
-
-	nb = nbr;
-    base = "0123456789ABCDEF";
-	if ((nb < 16))
-	{
-		write(1, &base[nb], 1);
-	}
-	else if ((nb >= 16))
-	{
-		ft_putnbr_hex_maj(nb /16);
-		ft_putnbr_hex_maj(nb %16);
-	}
-}
-void printpointer(unsigned long long p)
-{
-	write(1, "0x", 2);
-	ft_putnbr_hex_mini(p);
-}
-
-void printstr(char *str)
-{
-	ft_putstr_fd(str, 1);
-}
 
 int ft_printf(const char *stringparams, ...)
 {
     va_list ap;
 	int		i;
+	int		lenght;
 
 	i = 0;
+	lenght = 0;
     va_start(ap, stringparams);
 	while (stringparams[i] != '\0')
 	{
-		while (stringparams[i] == '%')
+		while ((stringparams[i] == '%')  && (stringparams[i] != '\0') )
 		{
 			i++;
-			if ( (stringparams[i] == '%' ) && ( (stringparams[i + 1] == '%') || (stringparams[i - 1] == '%') ) ) 
+			if ( (stringparams[i] == '%' ) && ( (stringparams[i + 1] == '%') || (stringparams[i - 1] == '%') ) && (stringparams[i] != '\0') ) 
 			{
 				//affiche un signe pourcentage
 				write(1, "%", 1);
+				lenght++;
 				i++;
 			}
-			if (stringparams[i] == 'c')
+			if ((stringparams[i] == 'c')  && (stringparams[i] != '\0') )
 			{
 				//Affiche un seul caractère
 				ft_putchar_fd((char)va_arg(ap, int), 1);
+				lenght++;
 				i++;
 			}
-			if (stringparams[i] == 's')
+			if ((stringparams[i] == 's')  && (stringparams[i] != '\0') )
 			{
 				//Affiche une chaîne de caractères (telle que définie par la convention C).
-				printstr(va_arg(ap, char *));
+				lenght = lenght + printstr(va_arg(ap, char *));
 				i++;
 			}
-			if (stringparams[i] == 'p')
+			if ((stringparams[i] == 'p')  && (stringparams[i] != '\0') )
 			{
 				//L’argument de pointeur void * doit être affiché en hexadécimal.
-				printpointer((unsigned long long)va_arg(ap, unsigned long long));
+				lenght = lenght + printpointer((unsigned long long)va_arg(ap, unsigned long long));
 				i++;
 			}
-			if (stringparams[i] == 'd')
+			if ((stringparams[i] == 'd')  && (stringparams[i] != '\0') )
 			{
 				//Affiche un nombre décimal (base 10).
-				// ft_putnbr_dec_fd(va_arg(ap, double));
+				lenght = lenght + ft_putnbr_spe_fd(va_arg(ap, int), 1);
 				i++;
 			}
-			if (stringparams[i] == 'i')
+			if ((stringparams[i] == 'i')  && (stringparams[i] != '\0') )
 			{
 				//Affiche un entier en base 10.
-				ft_putnbr_fd(va_arg(ap, int), 1);
+				lenght = lenght + ft_putnbr_spe_fd(va_arg(ap, int), 1);
 				i++;
 			}
-			if (stringparams[i] == 'u')
+			if ((stringparams[i] == 'u')  && (stringparams[i] != '\0') )
 			{
 				//Affiche un nombre décimal non signé (base 10).
+				lenght = lenght + ft_putnbr_unsigned_fd(va_arg(ap, unsigned int), 1);
 				i++;
 			}
-			if (stringparams[i] == 'x')
+			if ((stringparams[i] == 'x')  && (stringparams[i] != '\0') )
 			{
 				// Affiche un nombre en hexadécimal (base 16) avec des lettres minuscules
-				ft_putnbr_hex_mini(va_arg(ap, int));
+				lenght = lenght + ft_putnbr_hex_mini(va_arg(ap, int));
+				//printf("\nnumber is %d\n", count_hex_spe(va_arg(ap, int)));
 				i++;
 			}
-			if (stringparams[i] == 'X')
+			if ((stringparams[i] == 'X')  && (stringparams[i] != '\0') )
 			{
 				// Affiche un nombre en hexadécimal (base 16) avec des lettres majuscules
-				ft_putnbr_hex_maj(va_arg(ap, int));
+				lenght = lenght + ft_putnbr_hex_maj(va_arg(ap, int));
 				i++;
-			}	
+			}			
 		}
 		ft_putchar_fd(stringparams[i], 1);
-		i++;
+		if (stringparams[i] != '\0')
+		{
+			i++;
+			lenght++;
+		}
 	}
-	printf("\n\n%d", i);
     va_end(ap);
+	return (lenght);
 }
 
-int	main(void)
-{
-	int bob = 3568;
-	int *p = &bob;
-	//printf("X\n", bob);
-	ft_printf("bob%%%%%%%%X%\n%",bob);	
-}
+// int	main(void)
+// {
+// 	char * bob = "ueue92";
+// 	//int ali = 3;
+// 	//int *p = &ali;
+// 	//int *p = &bob;
+// 	//printf("X\n", bob);
+// 	printf("\n%d", ft_printf("b%cob%%%%%%%%s%x",'l', bob, 325));	
+// }

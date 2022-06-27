@@ -1,21 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_spe_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imoumini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/08 19:22:24 by imoumini          #+#    #+#             */
-/*   Updated: 2022/05/08 19:56:48 by imoumini         ###   ########.fr       */
+/*   Created: 2022/06/27 22:36:57 by imoumini          #+#    #+#             */
+/*   Updated: 2022/06/27 22:37:00 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
-int	ft_isascii(int c)
+#include "ft_printf.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <stdio.h>
+
+int	ft_putnbr_spe_fd(int n, int fd)
 {
-	if (c >= 0 && c <= 127)
+	long long	nbr;
+	char		c;
+	int 		i;
+	nbr = n;
+	if (n < 0)
 	{
-		return (1);
+		nbr = nbr * -1;
+		write(fd, "-", 1);
 	}
-	return (0);
+	if (nbr < 10)
+	{
+		c = nbr + '0';
+		write(fd, &c, 1);
+	}
+	else
+	{
+		ft_putnbr_fd(nbr / 10, fd);
+		ft_putnbr_fd(nbr % 10, fd);
+	}
+	i = count_int_spe(nbr);
+	return (i);
 }

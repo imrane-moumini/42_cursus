@@ -1,42 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   printpointer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imoumini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/22 15:59:57 by imoumini          #+#    #+#             */
-/*   Updated: 2022/05/22 17:29:13 by imoumini         ###   ########.fr       */
+/*   Created: 2022/06/27 22:41:57 by imoumini          #+#    #+#             */
+/*   Updated: 2022/06/27 22:42:00 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <string.h>
-#include "libft.h"
-#include <stdio.h>
+#include "ft_printf.h"
+#include <unistd.h>
 #include <stdlib.h>
+#include <stdarg.h>
+#include <stdio.h>
 
-char	*ft_strdup(const char *s)
+int printpointer(unsigned long long p)
 {
-	size_t	i;
-	char	*p;
-	int		lenght;
-
-	i = 0;
-	lenght = ft_strlen(s);
-	p = malloc(sizeof(char) * lenght + 1);
-	if (p == NULL)
-	{
-		return (NULL);
-	}
-	while (s[i] != '\0')
-	{
-		p[i] = s[i];
-		i++;
-	}
-	p[i] = '\0';
-	return (p);
+	int	i;
+	write(1, "0x", 2);
+	ft_putnbr_hex_mini(p);
+	i = count_hex_spe(p);
+	return (i);
 }
-/*int	main(void)
-{
-	const char c[] = "je suis une star";
-	printf("%s", ft_strdup(c));
-}*/

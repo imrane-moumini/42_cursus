@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_hex_maj.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imoumini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 21:56:16 by imoumini          #+#    #+#             */
-/*   Updated: 2022/05/08 19:58:28 by imoumini         ###   ########.fr       */
+/*   Created: 2022/06/27 22:39:43 by imoumini          #+#    #+#             */
+/*   Updated: 2022/06/27 22:39:45 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
-#include "libft.h"
 
-int	ft_isalnum(int c)
+#include "ft_printf.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <stdio.h>
+
+int	ft_putnbr_hex_maj(unsigned long long nbr)
 {
-	if (((c >= 65 && c <= 90) || (c >= 97 && c <= 122)) || (c >= 48 && c <= 57))
+	
+	unsigned long long	nb;
+	char *base;
+	int		i;
+
+	nb = nbr;
+    base = "0123456789ABCDEF";
+	if ((nb < 16))
 	{
-		return (1);
+		write(1, &base[nb], 1);
 	}
-	return (0);
+	else if ((nb >= 16))
+	{
+		ft_putnbr_hex_maj(nb /16);
+		ft_putnbr_hex_maj(nb %16);
+	}
+	i = count_hex_spe(nb);
+	return (i);
 }
-/*int	main(void)
-{
-	int a = '9';
-	int b = 'a';
-	int c = '+';
-	printf("%i \n", ft_isalnum(a));
-	printf("%i \n", ft_isalnum(b));
-	printf("%i \n", ft_isalnum(c));
-}*/

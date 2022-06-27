@@ -1,20 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_putnbr_hex_mini.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imoumini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/13 20:32:36 by imoumini          #+#    #+#             */
-/*   Updated: 2022/05/13 20:57:11 by imoumini         ###   ########.fr       */
+/*   Created: 2022/06/27 22:39:10 by imoumini          #+#    #+#             */
+/*   Updated: 2022/06/27 22:39:12 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_toupper(int c)
+#include "ft_printf.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <stdio.h>
+
+int	ft_putnbr_hex_mini(unsigned long long nbr)
 {
-	if (c >= 97 && c <= 122)
+	
+	unsigned long long	nb;
+	char *base;
+	int	i;
+
+	nb = nbr;
+	
+    base = "0123456789abcdef";
+	if ((nb < 16))
 	{
-		c = c - 32;
+		write(1, &base[nb], 1);
 	}
-	return (c);
+	else if ((nb >= 16))
+	{
+		ft_putnbr_hex_mini(nb /16);
+		ft_putnbr_hex_mini(nb %16);
+	}
+	i = count_hex_spe(nb);
+	return (i);
 }

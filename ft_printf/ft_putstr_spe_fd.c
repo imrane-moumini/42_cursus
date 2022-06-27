@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_spe_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imoumini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/03 21:25:09 by imoumini          #+#    #+#             */
-/*   Updated: 2022/05/08 19:59:04 by imoumini         ###   ########.fr       */
+/*   Created: 2022/06/27 22:35:41 by imoumini          #+#    #+#             */
+/*   Updated: 2022/06/27 22:35:43 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
-#include "libft.h"
 
-int	ft_isdigit(int c)
+#include "ft_printf.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <stdio.h>
+
+int	ft_putstr_spe_fd(char *s, int fd)
 {
-	if ((c >= 48 && c <= 57))
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
 	{
-		return (1);
+		write(fd, &s[i], 1);
+		i++;
 	}
-	return (0);
+	return (i);
 }
-/*int	main(void)
-{
-	int c = 47;
-	printf("%i", ft_isdigit(c));
-}*/

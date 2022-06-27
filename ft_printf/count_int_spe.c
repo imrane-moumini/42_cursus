@@ -1,42 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   count_int_spe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imoumini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/14 16:53:30 by imoumini          #+#    #+#             */
-/*   Updated: 2022/05/22 17:42:21 by imoumini         ###   ########.fr       */
+/*   Created: 2022/06/27 22:34:17 by imoumini          #+#    #+#             */
+/*   Updated: 2022/06/27 22:34:20 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+
+#include "ft_printf.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdarg.h>
 #include <stdio.h>
 
-char	*ft_strrchr(const char *s, int c)
+int	count_int_spe(long long n)
 {
-	int	l;
+	int	power;
 
-	l = ft_strlen(s);
-	while (l >= 0)
+	power = 0;
+	if (n < 0)
 	{
-		if (s[l] == (const char)c)
-		{
-			return (&((char *)s)[l]);
-		}
-		l--;
+		n = n * -1;
 	}
-	if ((const char)c == '\0')
+	if (n < 10)
 	{
-		return (&((char *)s)[l]);
+		return (1);
 	}
-	return (NULL);
+	while (n > 9)
+	{
+		n = n / 10;
+		power++;
+	}
+	return (power + 1);
 }
-/*int     main(void)
-{
-	//int  c = 106;
-	//char d;
-	//d = c;
-	char s[] = "je suis jbg";
-        printf("%s", ft_strrchr(s, 106));
-	//printf("%c", d);
-}*/

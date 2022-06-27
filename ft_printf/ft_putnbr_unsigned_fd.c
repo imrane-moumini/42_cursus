@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_unsigned_fd.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imoumini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/04 20:54:40 by imoumini          #+#    #+#             */
-/*   Updated: 2022/05/08 22:26:18 by imoumini         ###   ########.fr       */
+/*   Created: 2022/06/27 22:37:42 by imoumini          #+#    #+#             */
+/*   Updated: 2022/06/27 22:37:45 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdarg.h>
 #include <stdio.h>
-#include <string.h>
-#include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_putnbr_unsigned_fd(unsigned int n, int fd)
 {
-	size_t	i;
+	unsigned long long int	nbr;
+	char		c;
+	int			i;
 
-	i = 0;
-	while (s[i] != '\0')
+	nbr = n;
+	if (nbr < 10)
 	{
-		i++;
+		c = nbr + '0';
+		write(fd, &c, 1);
 	}
+	else
+	{
+		ft_putnbr_unsigned_fd(nbr / 10, fd);
+		ft_putnbr_unsigned_fd(nbr % 10, fd);
+	}
+	i = count_int_spe(nbr);
 	return (i);
 }
-/*int	main(void)
-{
-	char bob[] = "bob";
-	printf("%zu \n", ft_strlen(bob));
-	printf("%zu", strlen(bob));
-}*/
