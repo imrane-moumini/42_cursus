@@ -14,7 +14,9 @@ SRC = ft_putchar_fd.c \
     ft_putnbr_unsigned_fd.c \
     ft_putstr_spe_fd.c \
     printpointer.c \
-    printstr.c
+    printstr.c \
+    countpointer.c \
+    ft_put_pointer.c
 
 OBJ = $(SRC:.c=.o)
 

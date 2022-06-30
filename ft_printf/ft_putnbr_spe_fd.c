@@ -25,7 +25,7 @@ int	ft_putnbr_spe_fd(int n, int fd)
 	if (n < 0)
 	{
 		nbr = nbr * -1;
-		write(fd, "-", 1);
+		write(1, "-", 1);
 	}
 	if (nbr < 10)
 	{
@@ -37,6 +37,6 @@ int	ft_putnbr_spe_fd(int n, int fd)
 		ft_putnbr_fd(nbr / 10, fd);
 		ft_putnbr_fd(nbr % 10, fd);
 	}
-	i = count_int_spe(nbr);
+	i = count_int_spe(n);
 	return (i);
 }

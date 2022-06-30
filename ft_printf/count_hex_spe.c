@@ -17,25 +17,36 @@
 #include <stdio.h>
 
 
-int	count_hex_spe(long long n)
+int	count_hex_spe(unsigned int n)
 {
 	int	power;
+	unsigned int	nbr;
 	//printf("\nn is %lld\n", n);
 	power = 0;
-	if (n < 0)
-	{
-		n = n * -1;
-	}
-	if (n < 16)
+	nbr = n;
+	// if (n < 0)
+	// {
+	// 	nbr = nbr * -1;
+	// 	power++;
+	// }
+	if ((n < 16) && (n > 0))
 	{
 		return (1);
 	}
-	while (n >= 16)
+	//printf("%u\n",n);
+	while (nbr >= 16)
 	{
 		//printf("\nim here\n");
-		n = n / 16;
+		nbr = nbr / 16;
 		power++;
 		//printf("\npower after division is %d\n", power);
 	}
 	return (power + 1);
 }
+
+// int	main(void)
+// {
+// 	int h;
+// 	h = count_hex_spe(-9);
+// 	printf("%d", h);
+// }

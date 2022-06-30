@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_hex_maj.c                                :+:      :+:    :+:   */
+/*   countpointer.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imoumini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/27 22:39:43 by imoumini          #+#    #+#             */
-/*   Updated: 2022/06/27 22:39:45 by imoumini         ###   ########.fr       */
+/*   Created: 2022/06/30 23:23:49 by imoumini          #+#    #+#             */
+/*   Updated: 2022/06/30 23:23:52 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "ft_printf.h"
 #include <unistd.h>
@@ -16,24 +17,30 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-int	ft_putnbr_hex_maj(unsigned int nbr)
-{
-	
-	unsigned int	nb;
-	char *base;
-	int		i;
 
-	nb = nbr;
-    base = "0123456789ABCDEF";
-	if ((nb < 16))
+int	countpointer(unsigned long long int n)
+{
+	int	power;
+	unsigned long  long int	nbr;
+	//printf("\nn is %lld\n", n);
+	power = 0;
+	nbr = n;
+	// if (n < 0)
+	// {
+	// 	nbr = nbr * -1;
+	// 	power++;
+	// }
+	if ((n < 16) && (n > 0))
 	{
-		write(1, &base[nb], 1);
+		return (1);
 	}
-	else if ((nb >= 16))
+	//printf("%u\n",n);
+	while (nbr >= 16)
 	{
-		ft_putnbr_hex_maj(nb /16);
-		ft_putnbr_hex_maj(nb %16);
+		//printf("\nim here\n");
+		nbr = nbr / 16;
+		power++;
+		//printf("\npower after division is %d\n", power);
 	}
-	i = count_hex_spe(nbr);
-	return (i);
+	return (power + 1);
 }

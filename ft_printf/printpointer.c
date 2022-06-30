@@ -19,7 +19,12 @@ int printpointer(unsigned long long p)
 {
 	int	i;
 	write(1, "0x", 2);
-	ft_putnbr_hex_mini(p);
-	i = count_hex_spe(p);
+	ft_put_pointer(p);
+	i = countpointer(p);
 	return (i);
 }
+
+// int main(void)
+// {
+// 	printpointer(-9223372036854775808);
+// }

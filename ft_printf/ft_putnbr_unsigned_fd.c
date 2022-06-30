@@ -23,6 +23,7 @@ int	ft_putnbr_unsigned_fd(unsigned int n, int fd)
 	int			i;
 
 	nbr = n;
+	i = count_int_spe(nbr);
 	if (nbr < 10)
 	{
 		c = nbr + '0';
@@ -33,6 +34,11 @@ int	ft_putnbr_unsigned_fd(unsigned int n, int fd)
 		ft_putnbr_unsigned_fd(nbr / 10, fd);
 		ft_putnbr_unsigned_fd(nbr % 10, fd);
 	}
-	i = count_int_spe(nbr);
 	return (i);
 }
+
+// int main(void)
+// {
+// 	int bob = 4294967287;
+// 	printf("\n%d",ft_putnbr_unsigned_fd(bob, 1));
+// }

@@ -16,10 +16,10 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-int	ft_putnbr_hex_mini(unsigned long long nbr)
+int	ft_putnbr_hex_mini(unsigned int nbr)
 {
 	
-	unsigned long long	nb;
+	unsigned  int	nb;
 	char *base;
 	int	i;
 
@@ -35,6 +35,6 @@ int	ft_putnbr_hex_mini(unsigned long long nbr)
 		ft_putnbr_hex_mini(nb /16);
 		ft_putnbr_hex_mini(nb %16);
 	}
-	i = count_hex_spe(nb);
+	i = count_hex_spe(nbr);
 	return (i);
 }

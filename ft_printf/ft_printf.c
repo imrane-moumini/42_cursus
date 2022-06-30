@@ -20,6 +20,7 @@ int ft_printf(const char *stringparams, ...)
 {
     va_list ap;
 	int		i;
+	int		p;
 	int		lenght;
 
 	i = 0;
@@ -53,13 +54,23 @@ int ft_printf(const char *stringparams, ...)
 			if ((stringparams[i] == 'p')  && (stringparams[i] != '\0') )
 			{
 				//L’argument de pointeur void * doit être affiché en hexadécimal.
-				lenght = lenght + printpointer((unsigned long long)va_arg(ap, unsigned long long));
+				p = (long long)va_arg(ap, long long);
+				if (p == 0)
+				{
+					lenght = lenght + (write(1, "(nil)", 5));	
+				}
+				if (p != 0)
+				{
+					lenght = 2 + lenght + printpointer(p);
+				}
 				i++;
 			}
 			if ((stringparams[i] == 'd')  && (stringparams[i] != '\0') )
 			{
 				//Affiche un nombre décimal (base 10).
+				//printf("\nin D before function l = %d\n", lenght);
 				lenght = lenght + ft_putnbr_spe_fd(va_arg(ap, int), 1);
+				//printf("\nin D l = %d\n", lenght);
 				i++;
 			}
 			if ((stringparams[i] == 'i')  && (stringparams[i] != '\0') )
@@ -96,15 +107,16 @@ int ft_printf(const char *stringparams, ...)
 		}
 	}
     va_end(ap);
+	//printf("\nin the end l = %d\n", lenght);
 	return (lenght);
 }
 
 // int	main(void)
 // {
-// 	char * bob = "ueue92";
+// 	//char * bob = "ueue92";
 // 	//int ali = 3;
 // 	//int *p = &ali;
 // 	//int *p = &bob;
 // 	//printf("X\n", bob);
-// 	printf("\n%d", ft_printf("b%cob%%%%%%%%s%x",'l', bob, 325));	
+// 	printf("\n%d", ft_printf("%u", -9));	
 // }
