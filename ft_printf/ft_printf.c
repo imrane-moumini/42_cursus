@@ -34,7 +34,7 @@ int ft_printf(const char *stringparams, ...)
 			if ( (stringparams[i] == '%' ) && ( (stringparams[i + 1] == '%') || (stringparams[i - 1] == '%') ) && (stringparams[i] != '\0') ) 
 			{
 				//affiche un signe pourcentage
-				write(1, "%", 1);
+				ft_putchar_fd('%', 1);
 				lenght++;
 				i++;
 			}
@@ -61,6 +61,7 @@ int ft_printf(const char *stringparams, ...)
 				}
 				if (p != 0)
 				{
+					write(1, "0x", 2);
 					lenght = 2 + lenght + printpointer(p);
 				}
 				i++;
@@ -99,9 +100,9 @@ int ft_printf(const char *stringparams, ...)
 				i++;
 			}			
 		}
-		ft_putchar_fd(stringparams[i], 1);
 		if (stringparams[i] != '\0')
 		{
+			ft_putchar_fd(stringparams[i], 1);
 			i++;
 			lenght++;
 		}

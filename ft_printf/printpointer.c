@@ -18,7 +18,7 @@
 int printpointer(unsigned long long p)
 {
 	int	i;
-	write(1, "0x", 2);
+	
 	ft_put_pointer(p);
 	i = countpointer(p);
 	return (i);
