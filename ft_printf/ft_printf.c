@@ -20,7 +20,7 @@ int ft_printf(const char *stringparams, ...)
 {
     va_list ap;
 	int		i;
-	int		p;
+	unsigned long long 		p;
 	int		lenght;
 
 	i = 0;
@@ -54,7 +54,7 @@ int ft_printf(const char *stringparams, ...)
 			if ((stringparams[i] == 'p')  && (stringparams[i] != '\0') )
 			{
 				//L’argument de pointeur void * doit être affiché en hexadécimal.
-				p = (long long)va_arg(ap, long long);
+				p = va_arg(ap, unsigned long long);
 				if (p == 0)
 				{
 					lenght = lenght + (write(1, "(nil)", 5));	

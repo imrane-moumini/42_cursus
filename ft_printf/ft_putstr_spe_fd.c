@@ -21,6 +21,10 @@ int	ft_putstr_spe_fd(char *s, int fd)
 	int	i;
 
 	i = 0;
+	if (s == NULL)
+	{
+		 return(write(1, "(null)", 6));
+	}
 	while (s[i] != '\0')
 	{
 		write(fd, &s[i], 1);

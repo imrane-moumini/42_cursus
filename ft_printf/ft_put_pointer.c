@@ -26,6 +26,7 @@ int	ft_put_pointer(unsigned long long int nbr)
 	nb = nbr;
 	
     base = "0123456789abcdef";
+	
 	if ((nb < 16))
 	{
 		write(1, &base[nb], 1);
