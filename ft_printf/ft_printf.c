@@ -14,103 +14,95 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
-
-
-int ft_printf(const char *stringparams, ...)
+int	ft_function_p(va_list ap)
 {
-    va_list ap;
+	int	lenght;
+	lenght = 0;
+	unsigned long long p;
+	p = va_arg(ap, unsigned long long);
+	if (p == 0)
+	{
+		lenght = lenght + (write(1, "(nil)", 5));	
+	}
+	else
+	{
+		write(1, "0x", 2);
+		lenght = 2 + lenght + printpointer(p);
+	}
+	return (lenght);
+}
+int	ft_function_c_and_pourcentage(va_list ap, char c)
+{
+	int	lenght;
+	lenght = 0;
+
+	if (c == '%')
+	{
+		ft_putchar_fd('%', 1);
+		lenght++;
+	}
+	if (c == 'c')
+	{
+		ft_putchar_fd((char)va_arg(ap, int), 1);
+		lenght++;
+	}
+
+	return (lenght);
+}
+int	ft_all_functions(va_list ap, char c)
+{
+	int	lenght;
+	lenght = 0;
+
+	if (c == '%' || c == 'c')
+		lenght = lenght + ft_function_c_and_pourcentage(ap, c);
+	if (c == 's')
+		lenght = lenght + printstr(va_arg(ap, char *));
+	if (c == 'p' )
+		lenght = lenght + ft_function_p(ap);
+	if (c == 'd')
+		lenght = lenght + ft_putnbr_spe_fd(va_arg(ap, int), 1);
+	if (c == 'i')
+		lenght = lenght + ft_putnbr_spe_fd(va_arg(ap, int), 1);
+	if (c == 'u')
+		lenght = lenght + ft_putnbr_unsigned_fd(va_arg(ap, unsigned int), 1);
+	if (c == 'x')
+		lenght = lenght + ft_putnbr_hex_mini(va_arg(ap, int));
+	if ((c == 'X'))
+		lenght = lenght + ft_putnbr_hex_maj(va_arg(ap, int));
+	return (lenght);
+}
+
+int	ft_printf(const char *stringparams, ...)
+{
+	va_list ap;
 	int		i;
-	unsigned long long 		p;
 	int		lenght;
 
 	i = 0;
 	lenght = 0;
-    va_start(ap, stringparams);
+	va_start (ap, stringparams);
 	while (stringparams[i] != '\0')
 	{
-		while ((stringparams[i] == '%')  && (stringparams[i] != '\0') )
+		if (stringparams[i] == '%')
 		{
 			i++;
-			if ( (stringparams[i] == '%' ) && ( (stringparams[i + 1] == '%') || (stringparams[i - 1] == '%') ) && (stringparams[i] != '\0') ) 
-			{
-				//affiche un signe pourcentage
-				ft_putchar_fd('%', 1);
-				lenght++;
-				i++;
-			}
-			if ((stringparams[i] == 'c')  && (stringparams[i] != '\0') )
-			{
-				//Affiche un seul caractère
-				ft_putchar_fd((char)va_arg(ap, int), 1);
-				lenght++;
-				i++;
-			}
-			if ((stringparams[i] == 's')  && (stringparams[i] != '\0') )
-			{
-				//Affiche une chaîne de caractères (telle que définie par la convention C).
-				lenght = lenght + printstr(va_arg(ap, char *));
-				i++;
-			}
-			if ((stringparams[i] == 'p')  && (stringparams[i] != '\0') )
-			{
-				//L’argument de pointeur void * doit être affiché en hexadécimal.
-				p = va_arg(ap, unsigned long long);
-				if (p == 0)
-				{
-					lenght = lenght + (write(1, "(nil)", 5));	
-				}
-				if (p != 0)
-				{
-					write(1, "0x", 2);
-					lenght = 2 + lenght + printpointer(p);
-				}
-				i++;
-			}
-			if ((stringparams[i] == 'd')  && (stringparams[i] != '\0') )
-			{
-				//Affiche un nombre décimal (base 10).
-				//printf("\nin D before function l = %d\n", lenght);
-				lenght = lenght + ft_putnbr_spe_fd(va_arg(ap, int), 1);
-				//printf("\nin D l = %d\n", lenght);
-				i++;
-			}
-			if ((stringparams[i] == 'i')  && (stringparams[i] != '\0') )
-			{
-				//Affiche un entier en base 10.
-				lenght = lenght + ft_putnbr_spe_fd(va_arg(ap, int), 1);
-				i++;
-			}
-			if ((stringparams[i] == 'u')  && (stringparams[i] != '\0') )
-			{
-				//Affiche un nombre décimal non signé (base 10).
-				lenght = lenght + ft_putnbr_unsigned_fd(va_arg(ap, unsigned int), 1);
-				i++;
-			}
-			if ((stringparams[i] == 'x')  && (stringparams[i] != '\0') )
-			{
-				// Affiche un nombre en hexadécimal (base 16) avec des lettres minuscules
-				lenght = lenght + ft_putnbr_hex_mini(va_arg(ap, int));
-				//printf("\nnumber is %d\n", count_hex_spe(va_arg(ap, int)));
-				i++;
-			}
-			if ((stringparams[i] == 'X')  && (stringparams[i] != '\0') )
-			{
-				// Affiche un nombre en hexadécimal (base 16) avec des lettres majuscules
-				lenght = lenght + ft_putnbr_hex_maj(va_arg(ap, int));
-				i++;
-			}			
+			lenght = lenght + ft_all_functions(ap, stringparams[i]);
+			i++;
 		}
-		if (stringparams[i] != '\0')
+		else if ((stringparams[i] != '\0') && (stringparams[i] != '%'))
 		{
 			ft_putchar_fd(stringparams[i], 1);
 			i++;
 			lenght++;
 		}
+	
 	}
-    va_end(ap);
-	//printf("\nin the end l = %d\n", lenght);
-	return (lenght);
+	va_end(ap);
+	return(lenght);
+	
 }
+
 
 // int	main(void)
 // {
