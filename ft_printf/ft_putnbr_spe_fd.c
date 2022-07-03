@@ -20,7 +20,8 @@ int	ft_putnbr_spe_fd(int n, int fd)
 {
 	long long	nbr;
 	char		c;
-	int 		i;
+	int			i;
+
 	nbr = n;
 	if (n < 0)
 	{

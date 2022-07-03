@@ -19,8 +19,8 @@
 int	ft_putnbr_unsigned_fd(unsigned int n, int fd)
 {
 	unsigned long long int	nbr;
-	char		c;
-	int			i;
+	char					c;
+	int						i;
 
 	nbr = n;
 	i = count_int_spe(nbr);
@@ -36,9 +36,3 @@ int	ft_putnbr_unsigned_fd(unsigned int n, int fd)
 	}
 	return (i);
 }
-
-// int main(void)
-// {
-// 	int bob = 4294967287;
-// 	printf("\n%d",ft_putnbr_unsigned_fd(bob, 1));
-// }

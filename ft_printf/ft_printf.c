@@ -14,15 +14,17 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
+
 int	ft_function_p(va_list ap)
 {
-	int	lenght;
+	int					lenght;
+	unsigned long long	p;
+
 	lenght = 0;
-	unsigned long long p;
 	p = va_arg(ap, unsigned long long);
 	if (p == 0)
 	{
-		lenght = lenght + (write(1, "(nil)", 5));	
+		lenght = lenght + (write(1, "(nil)", 5));
 	}
 	else
 	{
@@ -31,11 +33,12 @@ int	ft_function_p(va_list ap)
 	}
 	return (lenght);
 }
+
 int	ft_function_c_and_pourcentage(va_list ap, char c)
 {
 	int	lenght;
-	lenght = 0;
 
+	lenght = 0;
 	if (c == '%')
 	{
 		ft_putchar_fd('%', 1);
@@ -46,14 +49,14 @@ int	ft_function_c_and_pourcentage(va_list ap, char c)
 		ft_putchar_fd((char)va_arg(ap, int), 1);
 		lenght++;
 	}
-
 	return (lenght);
 }
+
 int	ft_all_functions(va_list ap, char c)
 {
 	int	lenght;
-	lenght = 0;
 
+	lenght = 0;
 	if (c == '%' || c == 'c')
 		lenght = lenght + ft_function_c_and_pourcentage(ap, c);
 	if (c == 's')
@@ -75,7 +78,7 @@ int	ft_all_functions(va_list ap, char c)
 
 int	ft_printf(const char *stringparams, ...)
 {
-	va_list ap;
+	va_list	ap;
 	int		i;
 	int		lenght;
 
@@ -96,20 +99,7 @@ int	ft_printf(const char *stringparams, ...)
 			i++;
 			lenght++;
 		}
-	
 	}
 	va_end(ap);
-	return(lenght);
-	
+	return (lenght);
 }
-
-
-// int	main(void)
-// {
-// 	//char * bob = "ueue92";
-// 	//int ali = 3;
-// 	//int *p = &ali;
-// 	//int *p = &bob;
-// 	//printf("X\n", bob);
-// 	printf("\n%d", ft_printf("%u", -9));	
-// }

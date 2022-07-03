@@ -15,9 +15,9 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-int printstr(char *str)
+int	printstr(char *str)
 {
-	int len;
+	int	len;
 
 	len = ft_putstr_spe_fd(str, 1);
 	return (len);

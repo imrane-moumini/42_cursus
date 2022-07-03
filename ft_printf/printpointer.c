@@ -15,16 +15,11 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-int printpointer(unsigned long long p)
+int	printpointer(unsigned long long p)
 {
 	int	i;
-	
+
 	ft_put_pointer(p);
 	i = countpointer(p);
 	return (i);
 }
-
-// int main(void)
-// {
-// 	printpointer(-9223372036854775808);
-// }

@@ -18,12 +18,11 @@
 
 int	count_int_spe(long long n)
 {
-	int	power;
+	int			power;
 	long long	nbr;
 
 	nbr = n;
 	power = 0;
-	//printf("\n n %lld is \n", n);
 	if (n < 0)
 	{
 		nbr = nbr * -1;
@@ -35,17 +34,8 @@ int	count_int_spe(long long n)
 	}
 	while (nbr > 9)
 	{
-		//printf("im here");
 		nbr = nbr / 10;
 		power++;
 	}
-	//printf("\npower is %d\n", power);
 	return (power + 1);
 }
-
-// int	main(void)
-// {
-// 	int h;
-// 	h = count_int_spe(4294967287);
-// 	printf("%d", h);
-// }

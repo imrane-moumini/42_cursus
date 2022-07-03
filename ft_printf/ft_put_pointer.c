@@ -18,23 +18,20 @@
 
 int	ft_put_pointer(unsigned long long int nbr)
 {
-	
 	unsigned long long int	nb;
-	char *base;
-	int	i;
+	char					*base;
+	int						i;
 
 	nb = nbr;
-	
-    base = "0123456789abcdef";
-	
+	base = "0123456789abcdef";
 	if ((nb < 16))
 	{
 		write(1, &base[nb], 1);
 	}
 	else if ((nb >= 16))
 	{
-		ft_put_pointer(nb /16);
-		ft_put_pointer(nb %16);
+		ft_put_pointer(nb / 16);
+		ft_put_pointer(nb % 16);
 	}
 	i = countpointer(nbr);
 	return (i);

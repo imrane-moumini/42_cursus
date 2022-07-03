@@ -18,22 +18,20 @@
 
 int	ft_putnbr_hex_mini(unsigned int nbr)
 {
-	
-	unsigned  int	nb;
-	char *base;
-	int	i;
+	unsigned int	nb;
+	char			*base;
+	int				i;
 
 	nb = nbr;
-	
-    base = "0123456789abcdef";
+	base = "0123456789abcdef";
 	if ((nb < 16))
 	{
 		write(1, &base[nb], 1);
 	}
 	else if ((nb >= 16))
 	{
-		ft_putnbr_hex_mini(nb /16);
-		ft_putnbr_hex_mini(nb %16);
+		ft_putnbr_hex_mini(nb / 16);
+		ft_putnbr_hex_mini(nb % 16);
 	}
 	i = count_hex_spe(nbr);
 	return (i);
