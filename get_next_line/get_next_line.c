@@ -14,7 +14,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 char	*get_next_line(int fd)
+{  
+    int nbr_bytes_read;
+	char	*buff;
+	buff = malloc(sizeof(char)*BUFFER_SIZE + 1);
+    nbr_bytes_read = read(fd, buff, BUFFER_SIZE);
+	printf("%s",buff);
+}
+
+int main(void)
 {
-	
+    int fd;
+    fd = open("text.txt", O_RDONLY);
+    get_next_line(fd);
 }
