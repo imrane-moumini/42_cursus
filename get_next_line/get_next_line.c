@@ -35,7 +35,8 @@ int	is_end_of_line(char	*str)
 char	*get_next_line(int fd)
 {  
 	char	*buff;
-	char	*entireline;
+	char	*curentline;
+	char	*nextline;
 	int		nbr_of_bytes_read;
 	static int		begin_of_new_line;
 
@@ -48,10 +49,17 @@ char	*get_next_line(int fd)
 			return (NULL);
 		}
 		begin_of_new_line = begin_of_new_line + nbr_of_bytes_read;
-		entireline = ft_strjoin(entireline, buff); // have to free
+		curentline = ft_strjoin(entireline, buff); // have to free
 	}
+	// je peux savoir cb de fois g iterer avnt dobtenir la ligne entiere
+	// du coup je peux rappeler la fonction en bouclant ce nbr de fois + jusqua
+	// ateindre a nouveau une nouvelle ligne
 	begin_of_new_line = begin_of_new_line + 1;
-	return (entireline);
+	while ()
+	{
+		// boucle pour enregister la ligne suivante avec la logique precedente
+	}
+	return (curentline);
 }
 
 int main(void)
@@ -61,16 +69,5 @@ int main(void)
 	char *p;
     fd = open("text.txt", O_RDONLY);
     p = get_next_line(fd);
-	int i = 0;
-	while (p[i] != '\0')
-	{
-		printf("im here\n");
-		if (p[i] == 'e')
-		{
-			printf("im here 92\n");
-			p[i] = 'a';
-		}
-		i++;
-	}
 	printf("%s", p);
 }
