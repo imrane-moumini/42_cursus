@@ -31,6 +31,24 @@ int	is_end_of_line(char	*str)
 	}
 	return (0);
 }
+char	*cutbuff(char	*str)
+{
+	int	i;
+	i = 0;
+
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\n')
+		{
+			while (str[i] != '\0')
+			{
+				str[i] = '\0';
+				i++;
+			}
+		}
+		i++;
+	}
+}
 
 char	*get_next_line(int fd)
 {  
@@ -41,25 +59,34 @@ char	*get_next_line(int fd)
 	static int		begin_of_new_line;
 
 	buff = malloc(sizeof(char) * BUFFER_SIZE + 1); //have to free
+	// je dois gerer le cas ou ya pas de \n et du coup ca va juska la fin du doc et ca sarrette
+	// ya 2 cas
+		// le cas oou g lu lentiereter du doc et ya pas de \n 
+			// je sais que c la fin du doc quand read return 0
+			// du couil retourne le nbr delement puis je lance une deuxieme fois
+			// c la deuxieme fois quil etourne 0
+		// le cas ou g lun petit morceau et du coup ya pas de \n
     while (is_end_of_line(buff) != 1)
     {
+	
 		nbr_of_bytes_read = read(fd, buff, BUFFER_SIZE);
 		if (nbr_of_bytes_read == -1)
 		{
 			return (NULL);
 		}
+
 		begin_of_new_line = begin_of_new_line + nbr_of_bytes_read;
-		curentline = ft_strjoin(entireline, buff); // have to free
+		if (is_end_of_line(buff) == 1)
+		{
+			// supprimer la partie de buff qui depasse
+			cutbuff(buff);
+			curentline = ft_strjoin(curentline, buff); // have to free
+			break; 
+		}
+		curentline = ft_strjoin(curentline, buff); // have to free
 	}
-	// je peux savoir cb de fois g iterer avnt dobtenir la ligne entiere
-	// du coup je peux rappeler la fonction en bouclant ce nbr de fois + jusqua
-	// ateindre a nouveau une nouvelle ligne
 	begin_of_new_line = begin_of_new_line + 1;
-	while ()
-	{
-		// boucle pour enregister la ligne suivante avec la logique precedente
-	}
-	return (curentline);
+	 return (curentline);
 }
 
 int main(void)
