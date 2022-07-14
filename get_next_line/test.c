@@ -4,23 +4,68 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-
-int main(void)
+char	*cutbuff(char	*str)
 {
-    int fd;
+	int	i;
+	i = 0;
+
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\n')
+		{
+			while (str[i] != '\0')
+			{
+				str[i] = '\0';
+				i++;
+			}
+		}
+		i++;
+	}
+}
+int	is_end_of_line(char	*str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\n')
+		{
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+void    test(int fd)
+{
     int i;
 	char *p;
     char *buff;
-    
+
     buff = malloc(sizeof(char) * BUFFER_SIZE);
-    
     i = 1;
+    i = read(fd, buff, BUFFER_SIZE);
+    printf("%i =>%s\n", i, buff);
+
+}
+void    testb(int fd)
+{
+    int i;
+	char *p;
+    char *buff;
+
+    buff = malloc(sizeof(char) * BUFFER_SIZE);
+    i = 1;
+    i = read(fd, buff, BUFFER_SIZE);
+    printf("%i =>%s\n", i, buff);
+
+}
+int main(void)
+{
+    int fd;
+
     fd = open("text.txt", O_RDONLY);
-    
-    while (i != 0)
-    {
-        i = read(fd, buff, BUFFER_SIZE);
-        printf("%i\n", i);
-	    printf("%s", buff);
-    }
+    test(fd);
+    test(fd);
 }
