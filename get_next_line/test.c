@@ -21,6 +21,7 @@ char	*cutbuff(char	*str)
 		}
 		i++;
 	}
+	return(str);
 }
 int	is_end_of_line(char	*str)
 {
@@ -63,9 +64,11 @@ void    testb(int fd)
 }
 int main(void)
 {
-    int fd;
+    //int fd;
 
-    fd = open("text.txt", O_RDONLY);
-    test(fd);
-    test(fd);
+    //fd = open("text.txt", O_RDONLY);
+    //test(fd);
+    //test(fd);
+	char *str;
+	printf("%c",str[0]);
 }
