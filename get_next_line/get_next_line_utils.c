@@ -19,6 +19,8 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
+	if (s == NULL)
+		return (0);
 	while (s[i] != '\0')
 	{
 		i++;
@@ -26,7 +28,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		lenght_of_s1;
 	int		lenght_of_s2;
@@ -51,6 +53,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		p[i++] = s2[j++];
 	}
 	p[i] = '\0';
+	free(s1);
 	return (p);
 }
 
