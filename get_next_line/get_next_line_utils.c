@@ -38,8 +38,14 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
-	lenght_of_s1 = ft_strlen(s1);
-	lenght_of_s2 = ft_strlen(s2);
+	if (s1)
+		lenght_of_s1 = ft_strlen(s1);
+	if (s2)
+		lenght_of_s2 = ft_strlen(s2);
+	if (!s1)
+		lenght_of_s1 = 0;
+	if (!s2)
+		lenght_of_s2 = 0;
 	p = (char *)malloc(sizeof(char) * lenght_of_s1 + lenght_of_s2 + 1);
 	if (p == NULL)
 		return (NULL);
@@ -53,7 +59,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		p[i++] = s2[j++];
 	}
 	p[i] = '\0';
-	free(s1);
+	ft_free_str(&s1);
 	return (p);
 }
 
