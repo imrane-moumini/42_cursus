@@ -87,12 +87,19 @@ void	line_to_return(char *buff)
 	i = 0;
 	while(buff[i] != '\0')
 	{
-		while((buff[i] != '\n') && (buff[i] != '\0'))
+		if((buff[i] == '\n')) 
 		{
-			buff[i] = '\0';
+			i++;
+			while(buff[i] != '\0')
+			{
+				buff[i] = '\0';
+				i++;
+			}
+		}
+		if (buff[i] != '\0')
+		{
 			i++;
 		}
-		i++;
 	}
 }
 
@@ -152,7 +159,9 @@ char	*get_next_line(int fd)
 	static char	buff[BUFFER_SIZE + 1];
 	char	*savetext;
 	int		nbr_of_bytes_read;
+	static	int	nbr_of_call;
 
+	nbr_of_call++;
 	savetext = NULL;
 	if (is_empty(buff) == 0)
 	{
@@ -179,34 +188,28 @@ char	*get_next_line(int fd)
 		}
 		savetext = ft_strjoin(savetext, buff); // have to free
 	}
-	// vider buff
 	erase_buff(buff);
-	// prendre la partie de save text apres le \n et le mettre dans buff
 	put_extra_in_buff(savetext, buff);
-	// mettre des \0 apres le \n
 	line_to_return(savetext); // have to free
 	return (savetext);
 }
-// enfqit c4est savetext que je ne free jamais
-int main(void)
-{
-    int fd;
-	char *p;
-	char c = 'c';
-    fd = open("text.txt", O_RDONLY);
-	p = &c;
-	while (p != NULL)
-    {
-		p = get_next_line(fd);
-		if (p != NULL)
-		{
-			printf("%s", p);
-		}
-		free(p);
-	}
-	close(fd);
-}
 
-// si j'affiche pas tout le text je dois free
-// si tout le text a fini dêtre affiché je dois free
-// utiliser valgrind pour savoir
+// int main(void)
+// {
+//     int fd;
+// 	char *p;
+// 	char c = 'c';
+//     fd = open("text.txt", O_RDONLY);
+// 	p = &c;
+// 	while (p != NULL)
+//     {
+// 		p = get_next_line(fd);
+// 		if (p != NULL)
+// 		{
+// 			printf("%s", p);
+// 		}
+// 		free(p);
+// 	}
+// 	close(fd);
+// }
+
