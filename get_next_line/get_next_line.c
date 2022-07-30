@@ -57,7 +57,10 @@ void put_extra_in_buff(char *savetext,char *buff)
 				i++;
 			}
 		}
-		i++;
+		if (buff[i] != '\0')
+		{
+			i++;
+		}
 	}
 }
 int	count_lenght_of_line_to_return(char *buff)
