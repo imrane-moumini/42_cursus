@@ -57,7 +57,7 @@ void put_extra_in_buff(char *savetext,char *buff)
 				i++;
 			}
 		}
-		if (buff[i] != '\0')
+		if (buff[j] != '\0')
 		{
 			i++;
 		}
@@ -165,24 +165,39 @@ char	*get_next_line(int fd)
 	static	int	nbr_of_call;
 
 	nbr_of_call++;
+	// printf("----------------------------------------\n");
+	// printf("number of call is %i\n", nbr_of_call);
+	// printf("buff before while is     =>%s||\n", buff);
 	savetext = NULL;
+	// printf("savetext before while is =>%s||\n", savetext);
 	if (is_empty(buff) == 0)
 	{
 		savetext = ft_strjoin(savetext, buff);
+		// printf("savetext before while after join is =>%s||\n", savetext);
 	}
 	if	(fd == -1)
 		return (NULL);
 	if (BUFFER_SIZE == 0)
 		return (NULL);
+	// printf("------------------------------------------------------\n");
     while (is_end_of_line(buff) != 1)
     {
+		// printf("i am in while \n");
 		nbr_of_bytes_read = read(fd, buff, BUFFER_SIZE);
+		buff[nbr_of_bytes_read] = '\0';
+		// printf("buff after read is =>%s||\n", buff);
+		// printf("nbr of bytes read is =>%i\n", nbr_of_bytes_read);
 		if (nbr_of_bytes_read == 0)
 		{	
-			if (is_empty(buff) == 1)
-				return (NULL);
-			if (is_empty(buff) == 0)
-				erase_buff(buff);
+			// printf("i am in nbr of read bytes is 0\n");
+			// if (is_empty(buff) == 1)
+			// {
+			// 	printf("i am in the case where buff is empty\n");
+			// 	return (NULL);
+			// }
+			// if (is_empty(buff) == 0)
+			// 	erase_buff(buff);
+			// printf("savetext to return if nbr of bytes reqd is 0 is =>%s||\n", savetext);
 			return(savetext);
 		}
 		if (nbr_of_bytes_read == -1)
@@ -190,10 +205,17 @@ char	*get_next_line(int fd)
 			return (NULL);
 		}
 		savetext = ft_strjoin(savetext, buff); // have to free
+		// printf("savetext in while is =>%s||\n", savetext);
 	}
+	// printf("-----------------------------------------------------------\n");
+	// printf("buff after while is     =>%s||\n", buff);
+	// printf("savetext after while is =>%s||\n", savetext);
 	erase_buff(buff);
+	// printf("buff after erase is     =>%s||\n", buff);
 	put_extra_in_buff(savetext, buff);
+	// printf("buff after put extra is =>%s||\n", buff);
 	line_to_return(savetext); // have to free
+	// printf("savetext to return is   =>%s||\n", savetext);
 	return (savetext);
 }
 
