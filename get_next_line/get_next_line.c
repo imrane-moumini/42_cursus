@@ -105,9 +105,7 @@ char	*get_next_line(int fd)
 	savetext = NULL;
 	if (is_empty(buff) == 0)
 		savetext = ft_strjoin(savetext, buff);
-	if (fd == -1)
-		return (NULL);
-	if (BUFFER_SIZE == 0)
+	if ((fd < 0) || (BUFFER_SIZE <= 0) || (fd > 1024))
 		return (NULL);
 	while (is_end_of_line(buff) != 1)
 	{
@@ -116,9 +114,11 @@ char	*get_next_line(int fd)
 		if (nbr_of_bytes_read == 0)
 			return (savetext);
 		if (nbr_of_bytes_read == -1)
-			return (NULL);
+			return (free(savetext), NULL);
 		savetext = ft_strjoin(savetext, buff);
 	}
+	if (!savetext)
+		return (NULL);
 	erase_buff(buff);
 	put_extra_in_buff(savetext, buff);
 	line_to_return(savetext);

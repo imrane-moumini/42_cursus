@@ -54,50 +54,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (p);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	void	*p;
-	size_t	i;
-
-	if (nmemb && ((nmemb * size / nmemb) != size))
-		return (NULL);
-	if (nmemb == 0 || size == 0)
-	{
-		nmemb = 1;
-		size = 1;
-	}
-	i = 0;
-	p = malloc(nmemb * size);
-	if (p == NULL)
-		return (NULL);
-	while (i < nmemb * size)
-	{
-		((char *)p)[i] = '\0';
-		i++;
-	}
-	return (p);
-}
-
-char	*ft_strcpy(char *src)
-{
-	int		i;
-	char	*dest;
-	int		lenght;
-
-	lenght = ft_strlen(src);
-	dest = ft_calloc((lenght + 1), (sizeof(char)));
-	if (dest == NULL)
-		return (NULL);
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
 void	erase_buff(char *buff)
 {
 	int	i;
