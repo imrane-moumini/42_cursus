@@ -14,17 +14,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
 	i = 0;
-	if (s == NULL)
+	if (!s)
 		return (0);
 	while (s[i] != '\0')
-	{
 		i++;
-	}
 	return (i);
 }
 
@@ -38,14 +37,8 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
-	if (s1)
-		lenght_of_s1 = ft_strlen(s1);
-	if (s2)
-		lenght_of_s2 = ft_strlen(s2);
-	if (!s1)
-		lenght_of_s1 = 0;
-	if (!s2)
-		lenght_of_s2 = 0;
+	lenght_of_s1 = ft_strlen(s1);
+	lenght_of_s2 = ft_strlen(s2);
 	p = (char *)malloc(sizeof(char) * lenght_of_s1 + lenght_of_s2 + 1);
 	if (p == NULL)
 		return (NULL);
@@ -55,11 +48,9 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 	}
 	while (j < lenght_of_s2)
-	{
 		p[i++] = s2[j++];
-	}
 	p[i] = '\0';
-	ft_free_str(&s1);
+	free(s1);
 	return (p);
 }
 
@@ -87,4 +78,34 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (p);
 }
 
+char	*ft_strcpy(char *src)
+{
+	int		i;
+	char	*dest;
+	int		lenght;
 
+	lenght = ft_strlen(src);
+	dest = ft_calloc((lenght + 1), (sizeof(char)));
+	if (dest == NULL)
+		return (NULL);
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+void	erase_buff(char *buff)
+{
+	int	i;
+
+	i = 0;
+	while (buff[i] != '\0')
+	{
+		buff[i] = '\0';
+		i++;
+	}
+}

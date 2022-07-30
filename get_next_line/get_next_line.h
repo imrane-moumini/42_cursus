@@ -11,11 +11,16 @@
 /* ************************************************************************** */
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-#include <stddef.h>
+# include <stddef.h>
+
 char	*get_next_line(int fd);
-char	*ft_strjoin(char  *s1, char *s2);
+int		is_end_of_line(char *str);
+void	put_extra_in_buff(char *savetext, char *buff);
+void	line_to_return(char *buff);
+int		is_empty(char *buff);
+char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *s);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strcpy(char *src);
-void	ft_free_str(char **str);
+void	erase_buff(char *buff);
 #endif
