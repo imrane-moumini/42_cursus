@@ -1,0 +1,123 @@
+
+*****************************************************************
+                          REBOOT/POWEROFF
+*****************************************************************
+reboot : sudo systemctl reboot
+poweroff : sudo system poweroff
+
+
+
+*****************************************************************
+                          SET UP
+*****************************************************************
+
+
+_ UFW service : sudo ufw status
+
+_ SSH service : systemctl status ssh
+
+- Operating system : uname -a
+
+
+
+	
+*****************************************************************
+                          USER
+*****************************************************************
+User : users
+
+User's group : groups imoumini
+
+Add user : sudo useradd [username]
+Delete user : sudo userdel [username]
+Add user password : sudo passwd [username]
+Add group : sudo groupadd [groupname]
+Delete group : sudo groupdel [groupname]
+Add a user to a group : sudo usermod -a -G [groupname] [username]
+
+*/etc/login.defs*
+
+PASS_MAX_DAYS	30
+PASS_MIN_DAYS	2
+PASS_WARN_AGE	7
+
+
+*/etc/pam.d/common-password*
+
+# here are the per-package modules (the "Primary" block)
+password	requisite			pam_pwquality.so retry=3 dcredit=-1 difok=7 enforce_for_root maxrepeat=3 minlen=10 reject_username ucredit=-1 usercheck=1
+
+
+
+
+
+*****************************************************************
+                          HOST NAME AND PARTION
+*****************************************************************
+
+change host name : sudo hostnamectl set-hostname [newname]
+view partition : lsblk
+
+	
+*****************************************************************
+                          SUDO
+*****************************************************************
+
+sudo install : sudo --version
+add user to sudo group : sudo usermod -aG sudo [login of the user]
+
+see who as the sudo privilege : sudo whoami
+
+file where sudo info is ans if you want to modify configuration => */etc*sudoers*, to modify it => sudo visido
+implementation of the strict rules :
+
+Defaults        passwd_tries=3
+Defaults        badpass_message="Wrong password, try again!"
+Defaults        logfile="/var/log/sudo/sudo.log"
+Defaults        log_input, log_output
+Defaults        requiretty
+
+
+
+*****************************************************************
+                          UFW
+*****************************************************************
+
+ufw installed, work proprely & the rules : sudo ufw status verbose
+add a new rule : sudo ufw allow [portnumber]]
+delete a rule : sudo ufw delete allow [portnumber]
+
+
+*****************************************************************
+                             SSH                                 
+*****************************************************************
+
+
+file with ssh config : etc/ssh/sshd_config
+
+
+
+command :
+
+allow a port : sudo ufw allow [portnumber]
+delete a port added : sudo ufw delete allow [portnumber]
+
+
+SSH installed & working :$(sudo systemctl status ssh)
+connect remotly : ssh imoumini@localhost -p 4343
+logout remotly : exit
+
+
+
+**********************************************************************
+	                       SCRIPT MONITORING
+**********************************************************************
+stop running jut have to erase the crontab -e
+*sudo crontab -e*
+
+*/10 * * * * bash /home/imoumini/monitoring.sh
+
+cf. monitoring.sh
+
+	
+
