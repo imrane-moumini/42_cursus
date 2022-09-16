@@ -42,7 +42,7 @@ PASS_MIN_DAYS	2
 PASS_WARN_AGE	7
 
 
-*/etc/pam.d/common-password*
+*/etc/security/pwquality.conf*
 
 # here are the per-package modules (the "Primary" block)
 password	requisite			pam_pwquality.so retry=3 dcredit=-1 difok=7 enforce_for_root maxrepeat=3 minlen=10 reject_username ucredit=-1 usercheck=1
