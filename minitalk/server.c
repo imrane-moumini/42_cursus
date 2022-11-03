@@ -14,24 +14,66 @@ int count;
 
 count = 0;
 nbr = 0;
+int multiplicateur = 1;
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
 
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+}
+void	ft_putnbr_fd(int n, int fd)
+{
+	long long	nbr;
+	char		c;
+
+	nbr = n;
+	if (n < 0)
+	{
+		nbr = nbr * -1;
+		write(fd, "-", 1);
+	}
+	if (nbr < 10)
+	{
+		c = nbr + '0';
+		write(fd, &c, 1);
+	}
+	else
+	{
+		ft_putnbr_fd(nbr / 10, fd);
+		ft_putnbr_fd(nbr % 10, fd);
+	}
+}
+
+void print_bits(unsigned char octet)
+{
+	int	i = 8;
+	unsigned char 	bit;
+
+	while (i--)
+	{
+		bit = (octet >> i & 1) + '0';
+		write(1, &bit, 1);
+	}
+}
 void handlerSIGUSR1(int signum)
 {
     char letter;
-    nbr = 1  + (2 * nbr);
-    printf(" SUGUSR1 value of nbr is %i\n",nbr);
-    
+    if (count > 0)
+        multiplicateur = multiplicateur * 2;
+    nbr = 1*multiplicateur + nbr;
     count++;
-    
-    printf("value of count is %i\n", count);
-    if (count == 7)
+    if (count == 8)
     {
-        printf("im here\n");
-        printf("value of letter is %i\n", nbr);
         letter = nbr;
         write(1,&letter,1);
         count = 0;
         nbr = 0;
+        multiplicateur = 1;
      
     }
 }
@@ -40,21 +82,21 @@ void handlerSIGUSR2(int signum)
 {
 
     char letter;
-    
-    nbr = 0  + (2 * nbr);
+    if (count > 0)
+        multiplicateur = multiplicateur * 2;
+    nbr = 0*multiplicateur + nbr;
 
-    printf("SUGUSR2 value of nbr is %i\n",nbr);
-    
+
     count++;
-    printf("value of count is %i\n", count);
-    if (count == 7)
+ 
+    if (count == 8)
     {
-        printf("im here\n");
-        printf("value of letter is %i\n", nbr);
+    
         letter = nbr;
         write(1,&letter,1);
         count = 0;
         nbr = 0;
+        multiplicateur = 1;
     }
 }
 int main(int argc, char*argv[])
@@ -74,7 +116,7 @@ int main(int argc, char*argv[])
     action2.sa_mask = sigmask;
 
     pid = getpid();
-    printf("%i\n", pid);
+    ft_putnbr_fd(pid,1);
     sigaction(SIGUSR1, &action1,NULL);
     sigaction(SIGUSR2, &action2,NULL);
     while (1)
