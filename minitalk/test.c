@@ -1,4 +1,10 @@
-void test(int nb)
+#include <stdio.h>
+
+int main(void)
 {
-    if nb == 2
+   int ok;
+    ok = 0;
+    printf("t1 : %i\n", !ok);
+    if (!ok)
+        printf("t2\n");
 }

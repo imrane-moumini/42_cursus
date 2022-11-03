@@ -66,14 +66,9 @@ void send_data(int pid, char c)
 {
     int i;
     i = 0;
-    write(1,"c is ",5);
-    write(1,&c,1);
-    write(1,"\n",1);
     while (i < 8)
     {
         ok = 0;
-        print_bits(c);
-        write(1,"\n",1);
         if (c & 1 == 1)
         {
             write(1,"SUGUSR1\n",8);
@@ -84,21 +79,14 @@ void send_data(int pid, char c)
             write(1,"SUGUSR2\n",8);
             kill(pid,SIGUSR2); 
         }
-        usleep(1000);
         c = c >> 1;
         count++;
         i++;
-        while (!ok) 
+        while (ok == 0) 
         {
-            ft_putnbr_fd(ok, 1); 
             pause();
-            write(1, "c2\n", 3);
         }
-        
     }
-    ft_putstr_fd("count is ",1);
-    ft_putnbr_fd(i,1);
-    write(1,"\n",1);
 }
 
 int main(int argc, char*argv[])

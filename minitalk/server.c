@@ -131,6 +131,7 @@ int main(int argc, char*argv[])
     sigaction(SIGUSR2, &action2,NULL);
     while (1)
     {
+        // write(1, "c1\n", 3);
         pause();
     }
 }
