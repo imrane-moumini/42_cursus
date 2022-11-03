@@ -1,0 +1,324 @@
+c is k
+01101011
+SUGUSR1
+well receive00110101
+SUGUSR1
+well receive00011010
+SUGUSR2
+well receive00001101
+SUGUSR1
+well receive00000110
+SUGUSR2
+well receive00000011
+SUGUSR1
+well receive00000001
+SUGUSR1
+well receive00000000
+SUGUSR2
+well receivecount is 8
+c is f
+01100110
+SUGUSR2
+well receive00110011
+SUGUSR1
+well receive00011001
+SUGUSR1
+well receive00001100
+SUGUSR2
+well receive00000110
+SUGUSR2
+well receive00000011
+SUGUSR1
+well receive00000001
+SUGUSR1
+well receive00000000
+SUGUSR2
+well receivecount is 8
+c is g
+01100111
+SUGUSR1
+well receive00110011
+SUGUSR1
+well receive00011001
+SUGUSR1
+well receive00001100
+SUGUSR2
+well receive00000110
+SUGUSR2
+well receive00000011
+SUGUSR1
+well receive00000001
+SUGUSR1
+well receive00000000
+SUGUSR2
+well receivecount is 8
+c is m
+01101101
+SUGUSR1
+well receive00110110
+SUGUSR2
+well receive00011011
+SUGUSR1
+well receive00001101
+SUGUSR1
+well receive00000110
+SUGUSR2
+well receive00000011
+SUGUSR1
+well receive00000001
+SUGUSR1
+well receive00000000
+SUGUSR2
+well receivecount is 8
+c is '
+00100111
+SUGUSR1
+well receive00010011
+SUGUSR1
+well receive00001001
+SUGUSR1
+well receive00000100
+SUGUSR2
+well receive00000010
+SUGUSR2
+well receive00000001
+SUGUSR1
+well receive00000000
+SUGUSR2
+well receive00000000
+SUGUSR2
+well receivecount is 8
+c is m
+01101101
+SUGUSR1
+well receive00110110
+SUGUSR2
+well receive00011011
+SUGUSR1
+well receive00001101
+SUGUSR1
+well receive00000110
+SUGUSR2
+well receive00000011
+SUGUSR1
+well receive00000001
+SUGUSR1
+well receive00000000
+SUGUSR2
+well receivecount is 8
+c is g
+01100111
+SUGUSR1
+well receive00110011
+SUGUSR1
+well receive00011001
+SUGUSR1
+well receive00001100
+SUGUSR2
+well receive00000110
+SUGUSR2
+well receive00000011
+SUGUSR1
+well receive00000001
+SUGUSR1
+well receive00000000
+SUGUSR2
+well receivecount is 8
+c is '
+00100111
+SUGUSR1
+well receive00010011
+SUGUSR1
+well receive00001001
+SUGUSR1
+well receive00000100
+SUGUSR2
+well receive00000010
+SUGUSR2
+well receive00000001
+SUGUSR1
+well receive00000000
+SUGUSR2
+well receive00000000
+SUGUSR2
+well receivecount is 8
+c is o
+01101111
+SUGUSR1
+well receive00110111
+SUGUSR1
+well receive00011011
+SUGUSR1
+well receive00001101
+SUGUSR1
+well receive00000110
+SUGUSR2
+well receive00000011
+SUGUSR1
+well receive00000001
+SUGUSR1
+well receive00000000
+SUGUSR2
+well receivecount is 8
+c is s
+01110011
+SUGUSR1
+well receive00111001
+SUGUSR1
+well receive00011100
+SUGUSR2
+well receive00001110
+SUGUSR2
+well receive00000111
+SUGUSR1
+well receive00000011
+SUGUSR1
+well receive00000001
+SUGUSR1
+well receive00000000
+SUGUSR2
+well receivecount is 8
+c is e
+01100101
+SUGUSR1
+well receive00110010
+SUGUSR2
+well receive00011001
+SUGUSR1
+well receive00001100
+SUGUSR2
+well receive00000110
+SUGUSR2
+well receive00000011
+SUGUSR1
+well receive00000001
+SUGUSR1
+well receive00000000
+SUGUSR2
+well receivecount is 8
+c is m
+01101101
+SUGUSR1
+well receive00110110
+SUGUSR2
+well receive00011011
+SUGUSR1
+well receive00001101
+SUGUSR1
+well receive00000110
+SUGUSR2
+well receive00000011
+SUGUSR1
+well receive00000001
+SUGUSR1
+well receive00000000
+SUGUSR2
+well receivecount is 8
+c is a
+01100001
+SUGUSR1
+well receive00110000
+SUGUSR2
+well receive00011000
+SUGUSR2
+well receive00001100
+SUGUSR2
+well receive00000110
+SUGUSR2
+well receive00000011
+SUGUSR1
+well receive00000001
+SUGUSR1
+well receive00000000
+SUGUSR2
+well receivecount is 8
+c is '
+00100111
+SUGUSR1
+well receive00010011
+SUGUSR1
+well receive00001001
+SUGUSR1
+well receive00000100
+SUGUSR2
+well receive00000010
+SUGUSR2
+well receive00000001
+SUGUSR1
+well receive00000000
+SUGUSR2
+well receive00000000
+SUGUSR2
+well receivecount is 8
+c is p
+01110000
+SUGUSR2
+well receive00111000
+SUGUSR2
+well receive00011100
+SUGUSR2
+well receive00001110
+SUGUSR2
+well receive00000111
+SUGUSR1
+well receive00000011
+SUGUSR1
+well receive00000001
+SUGUSR1
+well receive00000000
+SUGUSR2
+well receivecount is 8
+c is e
+01100101
+SUGUSR1
+well receive00110010
+SUGUSR2
+well receive00011001
+SUGUSR1
+well receive00001100
+SUGUSR2
+well receive00000110
+SUGUSR2
+well receive00000011
+SUGUSR1
+well receive00000001
+SUGUSR1
+well receive00000000
+SUGUSR2
+well receivecount is 8
+c is m
+01101101
+SUGUSR1
+well receive00110110
+SUGUSR2
+well receive00011011
+SUGUSR1
+well receive00001101
+SUGUSR1
+well receive00000110
+SUGUSR2
+well receive00000011
+SUGUSR1
+well receive00000001
+SUGUSR1
+well receive00000000
+SUGUSR2
+well receivecount is 8
+c is r
+01110010
+SUGUSR2
+well receive00111001
+SUGUSR1
+well receive00011100
+SUGUSR2
+well receive00001110
+SUGUSR2
+well receive00000111
+SUGUSR1
+well receive00000011
+SUGUSR1
+well receive00000001
+SUGUSR1
+well receive00000000
+SUGUSR2
+well receivecount is 8

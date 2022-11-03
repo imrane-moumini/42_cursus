@@ -8,6 +8,8 @@
 // si le caractere c 0 envoyer sigusr1
 // si le caractere c 1 envoyer sigusr1
 int count;
+int ok;
+ok = 1;
 void print_bits(unsigned char octet)
 {
 	int	i = 8;
@@ -53,6 +55,12 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 }
 
+void handlerSIGUSR(int signum)
+{
+    if (signum == SIGUSR1 || signum == SIGUSR2)
+    ok = 1;
+    write(1,"well receive",12);
+}
 
 void send_data(int pid, char c)
 {
@@ -63,13 +71,13 @@ void send_data(int pid, char c)
     write(1,"\n",1);
     while (i < 8)
     {
+        ok = 0;
         print_bits(c);
         write(1,"\n",1);
         if (c & 1 == 1)
         {
             write(1,"SUGUSR1\n",8);
             kill(pid,SIGUSR1);
-            
         }
         else
         {
@@ -80,6 +88,13 @@ void send_data(int pid, char c)
         c = c >> 1;
         count++;
         i++;
+        while (!ok) 
+        {
+            ft_putnbr_fd(ok, 1); 
+            pause();
+            write(1, "c2\n", 3);
+        }
+        
     }
     ft_putstr_fd("count is ",1);
     ft_putnbr_fd(i,1);
@@ -91,11 +106,13 @@ int main(int argc, char*argv[])
     int pid;
     int i;
 
+    signal(SIGUSR2, handlerSIGUSR);
     i = 0;
     pid = atoi(argv[1]);
+
     while (argv[2][i] != '\0')
     {
-        send_data(pid,argv[2][i]);
+         send_data(pid,argv[2][i]);
         i++;
     }
 }
