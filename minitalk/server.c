@@ -4,16 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-// si c sigusr1 c 0
-// si c sigusr2 c 1
-// transformer les 0 et 1 en byte
-// traduire le byte en char 
 
-int nbr;
-int count;
-
-count = 0;
-nbr = 0;
 int multiplicateur = 1;
 void	ft_putstr_fd(char *s, int fd)
 {
@@ -48,26 +39,64 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putnbr_fd(nbr % 10, fd);
 	}
 }
-
-void print_bits(unsigned char octet)
+size_t	ft_strlen(const char *s)
 {
-	int	i = 8;
-	unsigned char 	bit;
+	size_t	i;
 
-	while (i--)
+	i = 0;
+	while (s[i] != '\0')
 	{
-		bit = (octet >> i & 1) + '0';
-		write(1, &bit, 1);
+		i++;
 	}
+	return (i);
 }
-void handlerSIGUSR1(int signum, siginfo_t *pid, void *idontknow)
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	int		lenght_of_s1;
+	int		lenght_of_s2;
+	int		i;
+	int		j;
+	char	*p;
+
+	i = 0;
+	j = 0;
+	lenght_of_s1 = ft_strlen(s1);
+	lenght_of_s2 = ft_strlen(s2);
+	p = (char *)malloc(sizeof(char) * lenght_of_s1 + lenght_of_s2 + 1);
+	if (p == NULL)
+		return (NULL);
+	while (i < lenght_of_s1)
+	{
+		p[i] = s1[i];
+		i++;
+	}
+	while (j < lenght_of_s2)
+	{
+		p[i++] = s2[j++];
+	}
+	p[i] = '\0';
+	return (p);
+}
+void handlerSIGUSR(int signum, siginfo_t *pid, void *idontknow)
 {
     char letter;
+    static int nbr;
+    static int count;
     //void(idontknow);
-    if (count > 0)
-        multiplicateur = multiplicateur * 2;
-    nbr = 1*multiplicateur + nbr;
-    count++;
+    if (signum == SIGUSR1)
+    {
+        if (count > 0)
+            multiplicateur = multiplicateur * 2;
+        nbr = 1*multiplicateur + nbr;
+        count++;
+    }
+    if (signum == SIGUSR2)
+    {
+        if (count > 0)
+            multiplicateur = multiplicateur * 2;
+        nbr = 0*multiplicateur + nbr;
+        count++;
+    }
     if (count == 8)
     {
         letter = nbr;
@@ -76,32 +105,9 @@ void handlerSIGUSR1(int signum, siginfo_t *pid, void *idontknow)
         nbr = 0;
         multiplicateur = 1;
     }
-    kill(pid->si_pid, SIGUSR2);
-        // write(1, "c2\n", 3);    
+    kill(pid->si_pid, SIGUSR2);  
 }
 
-void handlerSIGUSR2(int signum, siginfo_t *pid, void *idontknow)
-{
-
-    char letter;
-
-    //void(idontknow);
-    if (count > 0)
-        multiplicateur = multiplicateur * 2;
-    nbr = 0*multiplicateur + nbr;
-    count++;
-    if (count == 8)
-    {
-        letter = nbr;
-        write(1,&letter,1);
-        count = 0;
-        nbr = 0;
-        multiplicateur = 1;
-
-    }
-    kill(pid->si_pid, SIGUSR2);
-    // write(1, "c1\n", 3);
-}
 int main(int argc, char*argv[])
 {
     int pid;
@@ -109,29 +115,22 @@ int main(int argc, char*argv[])
     struct sigaction action2;
     sigset_t sigmask;
 
-    // sigemptyset(&action1.sa_mask);
-    // sigemptyset(&action2.sa_mask);
-	// sigaddset(&sigmask, SIGUSR1);
-	// sigaddset(&sigmask, SIGUSR2);
     sigemptyset(&sigmask);
-    action1.sa_handler = handlerSIGUSR1;
+    action1.sa_handler = handlerSIGUSR;
     action1.sa_flags = SA_SIGINFO;
     action1.sa_mask = sigmask;
-    action1.sa_sigaction = handlerSIGUSR1;
+    action1.sa_sigaction = handlerSIGUSR;
     
-    action2.sa_handler = handlerSIGUSR2;
+    action2.sa_handler = handlerSIGUSR;
     action2.sa_flags = SA_SIGINFO;
     action2.sa_mask = sigmask;
-    action2.sa_sigaction = handlerSIGUSR2;
-	// sigaddset(&simask, SIGUSR1);
-	// sigaddset(&sigmask, SIGUSR2);
+    action2.sa_sigaction = handlerSIGUSR;
     pid = getpid();
     ft_putnbr_fd(pid,1);
     sigaction(SIGUSR1, &action1,NULL);
     sigaction(SIGUSR2, &action2,NULL);
     while (1)
     {
-        // write(1, "c1\n", 3);
         pause();
     }
 }

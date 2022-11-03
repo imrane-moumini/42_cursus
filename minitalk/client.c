@@ -4,23 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-// transformer ce que jecris en binaire 0 et 1 
-// si le caractere c 0 envoyer sigusr1
-// si le caractere c 1 envoyer sigusr1
-int count;
 int ok;
 ok = 1;
-void print_bits(unsigned char octet)
-{
-	int	i = 8;
-	unsigned char 	bit;
 
-	while (i--)
-	{
-		bit = (octet >> i & 1) + '0';
-		write(1, &bit, 1);
-	}
-}
 void	ft_putstr_fd(char *s, int fd)
 {
 	int	i;
@@ -32,6 +18,7 @@ void	ft_putstr_fd(char *s, int fd)
 		i++;
 	}
 }
+
 void	ft_putnbr_fd(int n, int fd)
 {
 	long long	nbr;
@@ -80,7 +67,6 @@ void send_data(int pid, char c)
             kill(pid,SIGUSR2); 
         }
         c = c >> 1;
-        count++;
         i++;
         while (ok == 0) 
         {
