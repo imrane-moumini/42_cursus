@@ -52,7 +52,7 @@ size_t	ft_strlen(const char *s)
 	}
 	return (i);
 }
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		lenght_of_s1;
 	int		lenght_of_s2;
@@ -87,7 +87,7 @@ void handlerSIGUSR(int signum, siginfo_t *pid, void *idontknow)
     static int nbr;
     static int count;
 	static char *p;
-    //void(idontknow);
+    (void) idontknow;
     if (signum == SIGUSR1)
     {
         if (count > 0)
@@ -121,7 +121,7 @@ void handlerSIGUSR(int signum, siginfo_t *pid, void *idontknow)
     kill(pid->si_pid, SIGUSR2);  
 }
 
-int main(int argc, char*argv[])
+int main(void)
 {
     int pid;
     struct sigaction action1;
@@ -129,12 +129,12 @@ int main(int argc, char*argv[])
     sigset_t sigmask;
 
     sigemptyset(&sigmask);
-    action1.sa_handler = handlerSIGUSR;
+
     action1.sa_flags = SA_SIGINFO;
     action1.sa_mask = sigmask;
     action1.sa_sigaction = handlerSIGUSR;
     
-    action2.sa_handler = handlerSIGUSR;
+
     action2.sa_flags = SA_SIGINFO;
     action2.sa_mask = sigmask;
     action2.sa_sigaction = handlerSIGUSR;

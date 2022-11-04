@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-int ok;
-ok = 1;
+int	g_ok;
+
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
@@ -19,6 +19,7 @@ size_t	ft_strlen(const char *s)
 	}
 	return (i);
 }
+
 void	ft_putstr_fd(char *s, int fd)
 {
 	int	i;
@@ -53,53 +54,52 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putnbr_fd(nbr % 10, fd);
 	}
 }
-void handlerSIGUSR1(int signum)
+
+void	handlersigusr1(int signum)
 {
-        ft_putstr_fd("the server just told me that he received the entire message\n",1);
-}
-void handlerSIGUSR2(int signum)
-{
-        ok = 1;
+	(void)signum;
+	ft_putstr_fd("the server just told me that he received the entire message\n", 1);
 }
 
-void send_data(int pid, char c)
+void	handlersigusr2(int signum)
+{
+	(void)signum;
+	g_ok = 1;
+}
+
+void	send_data(int pid, char c)
 {
     int i;
     i = 0;
     while (i < 8)
     {
-        ok = 0;
-        if (c & 1 == 1)
-        {
-            kill(pid,SIGUSR1);
-        }
+		g_ok = 0;
+        if (((c) & (1)) == 1)
+			kill(pid,SIGUSR1);
         else
-        {
-            kill(pid,SIGUSR2); 
-        }
-        c = c >> 1;
-        i++;
+			kill(pid,SIGUSR2);
+		c = c >> 1;
+		i++;
         while (ok == 0) 
-        {
-            pause();
-        }
+		pause();
     }
 }
 
 int main(int argc, char*argv[])
 {
-    int pid;
-    int length;
-    int i;
+    int	pid;
+    int	length;
+    int	i;
 
-    signal(SIGUSR1, handlerSIGUSR1);
-    signal(SIGUSR2, handlerSIGUSR2);
-    i = 0;
-    pid = atoi(argv[1]);
-    length= ft_strlen(argv[2]);
+    (void) argc;
+	signal(SIGUSR1, handlersigusr1);
+	signal(SIGUSR2, handlersigusr2);
+	i = 0;
+	pid = atoi(argv[1]);
+	length= ft_strlen(argv[2]);
     while (i <= length)
     {
-         send_data(pid,argv[2][i]);
-        i++;
+		send_data(pid,argv[2][i]);
+		i++;
     }
 }
