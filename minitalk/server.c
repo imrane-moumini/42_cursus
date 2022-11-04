@@ -44,6 +44,8 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i] != '\0')
 	{
 		i++;
@@ -60,6 +62,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	i = 0;
 	j = 0;
+	
 	lenght_of_s1 = ft_strlen(s1);
 	lenght_of_s2 = ft_strlen(s2);
 	p = (char *)malloc(sizeof(char) * lenght_of_s1 + lenght_of_s2 + 1);
@@ -75,6 +78,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		p[i++] = s2[j++];
 	}
 	p[i] = '\0';
+	free(s1);
 	return (p);
 }
 void handlerSIGUSR(int signum, siginfo_t *pid, void *idontknow)
@@ -82,6 +86,7 @@ void handlerSIGUSR(int signum, siginfo_t *pid, void *idontknow)
     char letter;
     static int nbr;
     static int count;
+	static char *p;
     //void(idontknow);
     if (signum == SIGUSR1)
     {
@@ -100,7 +105,15 @@ void handlerSIGUSR(int signum, siginfo_t *pid, void *idontknow)
     if (count == 8)
     {
         letter = nbr;
-        write(1,&letter,1);
+        p = ft_strjoin(p,&letter);
+		if (letter == '\0')
+		{	
+			kill(pid->si_pid, SIGUSR1);
+			ft_putstr_fd(p,1);
+			write(1,"\n",1);
+			free(p);
+			p = NULL;
+		}
         count = 0;
         nbr = 0;
         multiplicateur = 1;
@@ -127,6 +140,7 @@ int main(int argc, char*argv[])
     action2.sa_sigaction = handlerSIGUSR;
     pid = getpid();
     ft_putnbr_fd(pid,1);
+	write(1,"\n",1);
     sigaction(SIGUSR1, &action1,NULL);
     sigaction(SIGUSR2, &action2,NULL);
     while (1)

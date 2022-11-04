@@ -6,7 +6,19 @@
 
 int ok;
 ok = 1;
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
 
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
 void	ft_putstr_fd(char *s, int fd)
 {
 	int	i;
@@ -41,12 +53,13 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putnbr_fd(nbr % 10, fd);
 	}
 }
-
-void handlerSIGUSR(int signum)
+void handlerSIGUSR1(int signum)
 {
-    if (signum == SIGUSR1 || signum == SIGUSR2)
-    ok = 1;
-    write(1,"well receive",12);
+        ft_putstr_fd("the server just told me that he received the entire message\n",1);
+}
+void handlerSIGUSR2(int signum)
+{
+        ok = 1;
 }
 
 void send_data(int pid, char c)
@@ -58,12 +71,10 @@ void send_data(int pid, char c)
         ok = 0;
         if (c & 1 == 1)
         {
-            write(1,"SUGUSR1\n",8);
             kill(pid,SIGUSR1);
         }
         else
         {
-            write(1,"SUGUSR2\n",8);
             kill(pid,SIGUSR2); 
         }
         c = c >> 1;
@@ -78,13 +89,15 @@ void send_data(int pid, char c)
 int main(int argc, char*argv[])
 {
     int pid;
+    int length;
     int i;
 
-    signal(SIGUSR2, handlerSIGUSR);
+    signal(SIGUSR1, handlerSIGUSR1);
+    signal(SIGUSR2, handlerSIGUSR2);
     i = 0;
     pid = atoi(argv[1]);
-
-    while (argv[2][i] != '\0')
+    length= ft_strlen(argv[2]);
+    while (i <= length)
     {
          send_data(pid,argv[2][i]);
         i++;
