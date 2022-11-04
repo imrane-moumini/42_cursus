@@ -6,27 +6,42 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:50:03 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/04 20:30:30 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/04 21:05:47 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
 int	g_multiplicateur = 1;
-
+char * send_message(char *p, siginfo_t *pid, int nbr)
+{
+	char letter;
+	letter = nbr;
+	
+	p = ft_strjoin(p,&letter);
+	if (letter == '\0')
+	{
+		kill(pid->si_pid, SIGUSR1);
+		ft_putstr_fd(p,1);
+		write(1,"\n",1);
+		free(p);
+		p = NULL;
+	}
+	return (p);
+}
 void	handlersiguser(int signum, siginfo_t *pid, void *idontknow)
 {
-	char	letter;
 	static int	nbr;
 	static int	count;
 	static char	*p;
+	
 	(void) idontknow;
 	if (signum == SIGUSR1)
     {
 		if (count > 0)
 			g_multiplicateur = g_multiplicateur * 2;
-			nbr = 1 * g_multiplicateur + nbr;
-			count++;
+		nbr = 1 * g_multiplicateur + nbr;
+		count++;
     }
     if (signum == SIGUSR2)
     {
@@ -37,16 +52,7 @@ void	handlersiguser(int signum, siginfo_t *pid, void *idontknow)
     }
     if (count == 8)
     {
-		letter = nbr;
-		p = ft_strjoin(p,&letter);
-		if (letter == '\0')
-		{	
-			kill(pid->si_pid, SIGUSR1);
-			ft_putstr_fd(p,1);
-			write(1,"\n",1);
-			free(p);
-			p = NULL;
-		}
+		p = send_message(p,pid, nbr);
 		count = 0;
 		nbr = 0;
 		g_multiplicateur = 1;
@@ -64,10 +70,10 @@ int	main(void)
 	sigemptyset(&sigmask);
 	action1.sa_flags = SA_SIGINFO;
 	action1.sa_mask = sigmask;
-	action1.sa_sigaction = handlersigusr;
+	action1.sa_sigaction = handlersiguser;
 	action2.sa_flags = SA_SIGINFO;
 	action2.sa_mask = sigmask;
-	action2.sa_sigaction = handlersigusr;
+	action2.sa_sigaction = handlersiguser;
 	pid = getpid();
 	ft_putnbr_fd(pid, 1);
 	write(1, "\n", 1);
