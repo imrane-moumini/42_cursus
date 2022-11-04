@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imoumini <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 19:03:02 by imoumini          #+#    #+#             */
-/*   Updated: 2022/05/26 17:40:48 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/04 21:42:08 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
-
-# include<stddef.h>
+# include <stddef.h>
 
 int		ft_isalpha(int c);
 int		ft_isprint(int c);
@@ -62,5 +62,5 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-int 	ft_printf(const char *, ...);
+int		ft_printf(const char *str, ...);
 #endif
