@@ -13,7 +13,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		lenght_of_s1;
 	int		lenght_of_s2;
@@ -38,7 +38,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		p[i++] = s2[j++];
 	}
 	p[i] = '\0';
-	free(s1;
+	free(s1);
 	return (p);
 }
 /*int main(void)
