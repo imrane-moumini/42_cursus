@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imoumini <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/08 19:03:02 by imoumini          #+#    #+#             */
-/*   Updated: 2022/05/26 17:40:48 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/06 16:13:28 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include<stddef.h>
+# include <stddef.h>
+# include "ft_printf/ft_printf.h"
+# include "get_next_line/get_next_line.h" 
 
 int		ft_isalpha(int c);
 int		ft_isprint(int c);
