@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/10 22:40:03 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/10 23:26:23 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,14 +112,87 @@ char **fill_tab(char **tab, char *file)
 	close(fd);
 	return (tab);
 }
+
+int is_car_ok(char **tab)
+{
+	int i;
+	int j;
+	int c = 0;
+	int zero = 0;
+	int one = 0;
+	int e = 0;
+	int p = 0;
+
+	i = 0;
+	j = 0;
+	while (tab[i] != NULL)
+	{
+			while(tab[i][j] != '\0')
+			{
+				if (tab[i][j] != '0' && tab[i][j] != '1' && tab[i][j] != 'C' && tab[i][j] != 'E' && tab[i][j] != 'P'  )
+					return (0);
+				j++;	
+			}
+			j = 0;
+			i++;
+	}
+	i = 0;
+	j = 0;
+	while (tab[i] != NULL)
+	{
+			while(tab[i][j] != '\0')
+			{
+				if (tab[i][j] == '0')
+					zero = 1;
+				if (tab[i][j] == '1')
+					one = 1;
+				if (tab[i][j] == 'C')
+					c = 1;
+				if (tab[i][j] == 'E')
+					e = 1;
+				if (tab[i][j] == 'P')
+					p = 1;
+				j++;	
+			}
+			j = 0;
+			i++;
+	}
+	if (zero == 0 || one == 0 || c == 0 || e == 0 || p == 0)
+		return (0);
+	return (1);
+}
+
+int is_car_close(char **tab)
+{
+	(void)tab;
+	return (1);
+}
+
+int is_car_rect(char **tab)
+{
+	(void)tab;
+	return (1);	
+}
+
+int is_car_path_valid(char **tab)
+{
+	(void)tab;
+	return (1);
+}
 int main(int argc, char *argv[])
 {
 	char **tab;
 	int i;
-	if (argc != 2)
-		return(1);
+	int testcar;
+	int testrect;
+	int testclose;
+	int testvalidpath;
+	
 	tab = NULL;
 	i = 0;
+	if (argc != 2)
+		return(1);
+
 	tab = allocate_line(tab, argv[1]);
 	if (tab == NULL)
 		return (1);
@@ -127,6 +200,16 @@ int main(int argc, char *argv[])
 	if (tab == NULL)
 		return (1);
 	tab = fill_tab(tab, argv[1]);
+	// verifier si carte bonne
+	testcar = is_car_ok(tab);
+	testrect = is_car_rect(tab);
+	testclose = is_car_close(tab);
+	testvalidpath = is_car_path_valid(tab);
+	if (testcar == 0 || testrect == 0 || testclose == 0 || testvalidpath == 0)
+	{
+		ft_printf("Error\n");
+		return (1);
+	}
 	while (tab[i] != NULL)
 	{
 		ft_printf("%s\n", tab[i]);
