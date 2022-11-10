@@ -6,45 +6,38 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/10 19:03:03 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/10 22:40:03 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void allocate_line(char **tab, char *file)
+char **allocate_line(char **tab, char *file)
 {
 	char *p;
 	int fd;
 	int counter;
-	int i;
 
 	counter = 0;
-	i = 0;
 
 	fd = open(file,O_RDONLY);
 	p = get_next_line(fd);
 		if (p == NULL)
-			return;
+			return(NULL);
 	while (p != NULL)
 	{
-		while (p[i] != '\0')
-		{
-			if (p[i] == '\n')
-				counter++;
-			i++;
-		}
 		p = get_next_line(fd);
+		counter++;
 	}
 	free(p);
 	close(fd);
-	counter++;
-	tab = malloc(sizeof(char *) * counter + 1);
+	tab = malloc(sizeof(char *) * (counter + 1));
 	if (tab == NULL)
-		return;
-	tab[counter + 1] = NULL;
+		return(NULL);
+	tab[counter] = NULL;
+	return (tab);
 }
-void allocate_column(char **tab, char *file)
+char **allocate_column(char **tab, char *file)
 {
 	int counter;
 	int i;
@@ -58,10 +51,10 @@ void allocate_column(char **tab, char *file)
 	fd = open(file,O_RDONLY);
 	p = get_next_line(fd);
 		if (p == NULL)
-			return;
-	while (p != NULL && tab[j] != NULL)
+			return(NULL);
+	while (p != NULL)
 	{
-		while (p[i] != '\0')
+		while (p && p[i] != '\0')
 		{
 			while (p[i] != '\n' && p[i] != '\0')
 			{
@@ -72,29 +65,32 @@ void allocate_column(char **tab, char *file)
 			{
 				tab[j] = malloc(sizeof(char) * counter + 1);
 				if (tab[j] == NULL)
-					return;
+					return(NULL);
 				counter = 0;
 				j++;
+				i = 0;
+				p = get_next_line(fd);
 			}
-			i++;
 		}
-		p = get_next_line(fd);
 	}
 	free(p);
 	close(fd);
+	return (tab);
 }
-void fill_tab(char **tab, char *file)
+char **fill_tab(char **tab, char *file)
 {
 	int i;
 	int j;
 	int k;
 	int fd;
 	char *p;
+	i = 0;
+	k = 0;
 	
 	fd = open(file,O_RDONLY);
 	p = get_next_line(fd);
 		if (p == NULL)
-			return;
+			return(NULL);
 	while (p != NULL && tab[j] != NULL)
 	{
 		while (p[i] != '\0' && tab[j] != NULL)
@@ -109,29 +105,31 @@ void fill_tab(char **tab, char *file)
 			j++;
 			i++;
 		}
+		i = 0;
 		p = get_next_line(fd);
 	}
 	free(p);
 	close(fd);
+	return (tab);
 }
 int main(int argc, char *argv[])
 {
 	char **tab;
-    (void) argc;
 	int i;
-
+	if (argc != 2)
+		return(1);
 	tab = NULL;
 	i = 0;
-	allocate_line(tab, argv[1]);
+	tab = allocate_line(tab, argv[1]);
 	if (tab == NULL)
 		return (1);
-	allocate_column(tab, argv[1]);
+	tab = allocate_column(tab, argv[1]);
 	if (tab == NULL)
 		return (1);
-	fill_tab(tab, argv[1]);
-	while (tab != NULL)
+	tab = fill_tab(tab, argv[1]);
+	while (tab[i] != NULL)
 	{
-		ft_printf("%s", tab[i]);
+		ft_printf("%s\n", tab[i]);
 		i++;
 	}
 }
