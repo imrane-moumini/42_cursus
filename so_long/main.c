@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/10 23:26:23 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/11 16:20:16 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,15 +162,91 @@ int is_car_ok(char **tab)
 	return (1);
 }
 
-int is_car_close(char **tab)
+int is_car_close(char **tab, int number_of_ligne, int number_of_column)
 {
-	(void)tab;
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	if (tab[1] != NULL)
+	{
+		while (tab[0][j] != '\0')
+		{
+			if (tab[0][j] != '1')
+			{
+				return 0;
+			}
+			j++;
+		}	
+	}
+	j = 0;
+	if (tab[number_of_ligne -1] != NULL)
+	{
+		while (tab[number_of_ligne -1][j] != '\0' )
+		{
+			if (tab[number_of_ligne -1][j] != '1')
+			{
+				return 0;
+			}
+			j++;
+		}	
+	}
+	i = 0;
+	j = 0;
+	while (tab[i] != NULL)
+	{
+		while (tab[i][j] != '\0')
+		{
+			if (j == 0)
+			{
+				if (tab[i][j] != '1')
+				{
+					return (0);
+				}	
+			}
+			if (j == number_of_column - 1)
+			{
+				if (tab[i][j] != '1')
+				{
+						return (0);
+				}	
+			}
+			j++;
+		}
+		j = 0;
+		i++;
+	}
 	return (1);
 }
 
-int is_car_rect(char **tab)
+int is_car_rect(char **tab, int number_of_ligne, int number_of_column)
 {
-	(void)tab;
+	int i;
+	int j;
+	
+
+	i = 0;
+	j = 0;
+	if (number_of_column == number_of_ligne)
+		return (0);
+	while (tab[i] != NULL)
+	{
+		while (tab[i][j] != '\0')
+		{
+			j++;
+		}
+		if (j != number_of_column)
+		{
+				return (0);
+		}
+		j = 0;
+		i++;
+	}
+	if (i != number_of_ligne)
+	{
+			return (0);
+	}
 	return (1);	
 }
 
@@ -179,10 +255,59 @@ int is_car_path_valid(char **tab)
 	(void)tab;
 	return (1);
 }
+
+int nb_column(char **tab)
+{
+	int i;
+	int j;
+	int counter;
+
+	i = 0;
+	j = 0;
+	counter = 0;
+	while (tab[i] != NULL)
+	{
+		while (tab[i][j] != '\0')
+		{
+			if (tab[i][j] == '\0')
+				return (counter);
+			counter++;
+			j++;
+		}
+		i++;	
+	}
+	return(counter);
+}
+
+int nb_ligne(char *file)
+{
+	char *p;
+	int fd;
+	int counter;
+
+	counter = 0;
+
+	fd = open(file,O_RDONLY);
+	p = get_next_line(fd);
+		if (p == NULL)
+			return(0);
+	while (p != NULL)
+	{
+		p = get_next_line(fd);
+		counter++;
+	}
+	free(p);
+	close(fd);
+	return (counter);
+}
+
+
 int main(int argc, char *argv[])
 {
 	char **tab;
 	int i;
+	int number_of_ligne;
+	int number_of_column;
 	int testcar;
 	int testrect;
 	int testclose;
@@ -202,8 +327,10 @@ int main(int argc, char *argv[])
 	tab = fill_tab(tab, argv[1]);
 	// verifier si carte bonne
 	testcar = is_car_ok(tab);
-	testrect = is_car_rect(tab);
-	testclose = is_car_close(tab);
+	number_of_column = nb_column(tab);
+	number_of_ligne = nb_ligne(argv[1]);
+	testrect = is_car_rect(tab, number_of_ligne, number_of_column);
+	testclose = is_car_close(tab, number_of_ligne, number_of_column);
 	testvalidpath = is_car_path_valid(tab);
 	if (testcar == 0 || testrect == 0 || testclose == 0 || testvalidpath == 0)
 	{
