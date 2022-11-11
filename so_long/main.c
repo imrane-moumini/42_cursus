@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/11 18:29:01 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/11 21:26:39 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -319,53 +319,182 @@ int nb_ligne(char *file)
 	return (counter);
 }
 
+void find_start_position(char **tab, s_game *game)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (tab[i] != NULL)
+	{
+		while (tab[i][j] != '\0')
+		{
+			if (tab[i][j] == 'P')
+			{
+				game -> position_x = j;
+				game -> position_y = i;
+				return;
+			}
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+}
+
+void nbr_of_collectible(char **tab, s_game *game)
+{
+	int i;
+	int j;
+	int counter;
+	
+	counter = 0;
+	i = 0;
+	j = 0;
+	while (tab[i] != NULL)
+	{
+		while (tab[i][j] != '\0')
+		{
+			if (tab[i][j] == 'C')
+			{
+				counter++;
+			}
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	game -> number_of_c = counter;
+}
+
+int is_path_valid(char **tab, s_game game)
+{
+	static int count_c;
+	static int result;
+	s_game flood;
+	
+	if (tab[game.position_y][game.position_x] == 'C')
+		count_c++;
+	printf("count_c : %i, total collect : %i, car : %c\n", count_c, game.number_of_c, tab[game.position_y][game.position_x]);
+	if (tab[game.position_y][game.position_x] == 'E')
+	{
+		printf("im here\n");
+		if (count_c == game.number_of_c)
+			result = 1;
+	}
+	tab[game.position_y][game.position_x]= '1';
+	// aller en haut
+	if (game.position_y - 1 >= 0 && tab[game.position_y - 1][game.position_x] != '1')
+	{
+		printf("en haut\n");
+		flood.position_y = game.position_y - 1;
+		flood.position_x = game.position_x;
+		flood.tab_number_of_ligne = game.tab_number_of_ligne;
+		flood.tab_number_of_column = game.tab_number_of_column;
+		flood.number_of_c = game.number_of_c;
+		is_path_valid(tab, flood);
+	}
+	// aller en bas 
+	if (game.position_y + 1 < game.tab_number_of_ligne && tab[game.position_y + 1][game.position_x] != '1')
+	{
+		printf("en bas\n");
+		flood.position_y = game.position_y + 1;
+		flood.position_x = game.position_x;
+		flood.tab_number_of_ligne = game.tab_number_of_ligne;
+		flood.tab_number_of_column = game.tab_number_of_column;
+		flood.number_of_c = game.number_of_c;
+		is_path_valid(tab, flood);
+	}
+	// aller a gauche
+	if (game.position_x - 1 >= 0 && tab[game.position_y][game.position_x - 1] != '1')
+	{
+		printf("a gauche\n");
+		flood.position_y = game.position_y;
+		flood.position_x = game.position_x - 1;
+		flood.tab_number_of_ligne = game.tab_number_of_ligne;
+		flood.tab_number_of_column = game.tab_number_of_column;
+		flood.number_of_c = game.number_of_c;
+		is_path_valid(tab, flood);
+	}
+	// aller a droite
+	if (game.position_x + 1 < game.tab_number_of_column && tab[game.position_y][game.position_x + 1] != '1')
+	{
+		printf("a droite\n");
+		flood.position_y = game.position_y;
+		flood.position_x = game.position_x + 1;
+		flood.tab_number_of_ligne = game.tab_number_of_ligne;
+		flood.tab_number_of_column = game.tab_number_of_column;
+		flood.number_of_c = game.number_of_c;
+		is_path_valid(tab, flood);
+	}
+	if (result == 1)
+		return(1);
+	else
+		return (0);
+}
 
 int main(int argc, char *argv[])
 {
-	char **tab;
 	int i;
+	char **tab;
 	int number_of_ligne;
 	int number_of_column;
 	int testcar;
 	int testrect;
 	int testclose;
 	int testvalidpath;
+	s_game	game;
 	
-	tab = NULL;
+	game.tab = NULL;
 	i = 0;
 	if (argc != 2)
 		return(1);
 
-	tab = allocate_line(tab, argv[1]);
-	if (tab == NULL)
+	game.tab = allocate_line(game.tab, argv[1]);
+	if (game.tab == NULL)
 		return (1);
-	tab = allocate_column(tab, argv[1]);
-	if (tab == NULL)
+	game.tab = allocate_column(game.tab, argv[1]);
+	if (game.tab == NULL)
 		return (1);
-	tab = fill_tab(tab, argv[1]);
-
-	testcar = is_car_ok(tab);
-	number_of_column = nb_column(tab);
+	game.tab = fill_tab(game.tab, argv[1]);
+	
+	
+	testcar = is_car_ok(game.tab);
+	number_of_column = nb_column(game.tab);
 	number_of_ligne = nb_ligne(argv[1]);
-	testrect = is_car_rect(tab, number_of_ligne, number_of_column);
-	testclose = is_car_close(tab, number_of_ligne, number_of_column);
-	testvalidpath = is_car_path_valid(tab);
+	game.tab_number_of_column = number_of_column;
+	game.tab_number_of_ligne = number_of_ligne;
+	testrect = is_car_rect(game.tab, number_of_ligne, number_of_column);
+	testclose = is_car_close(game.tab, number_of_ligne, number_of_column);
+	// trouver la position initiale du p
+	find_start_position(game.tab, &game);
+	nbr_of_collectible(game.tab, &game);
+	tab = tab_copy(game.tab);
+	testvalidpath = is_path_valid(tab, game);
 	if (testcar == 0 || testrect == 0 || testclose == 0 || testvalidpath == 0)
 	{
 		ft_printf("Error\n");
 		return (1);
 	}
-	while (tab[i] != NULL)
+	while (game.tab[i] != NULL)
 	{
-		ft_printf("%s\n", tab[i]);
+		ft_printf("%s\n", game.tab[i]);
 		i++;
 	}
-
-
-
-
-
+	// faire copy de tab
+	// gere si e est direct a cote
+		// remplace a chaque fois tout par 1 et a la fin tu peux plus avancer, tu regarde ce au'il reste et si il reste des C c que c cuit
+		// tant que ya un c dans la map je remplace pas le E
+			
 	// free
+	while (number_of_ligne  >= 0)
+	{
+		free(game.tab[number_of_ligne]);
+		number_of_ligne--;
+	}
+	free(game.tab);
+
 	while (number_of_ligne  >= 0)
 	{
 		free(tab[number_of_ligne]);
