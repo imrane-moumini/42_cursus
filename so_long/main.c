@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/11 16:20:16 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/11 17:14:40 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,14 @@ char **allocate_line(char **tab, char *file)
 
 	fd = open(file,O_RDONLY);
 	p = get_next_line(fd);
-		if (p == NULL)
-			return(NULL);
+	if (p == NULL)
+	{
+		free(p);
+		return(NULL);
+	}
 	while (p != NULL)
 	{
+		free(p);
 		p = get_next_line(fd);
 		counter++;
 	}
@@ -50,8 +54,11 @@ char **allocate_column(char **tab, char *file)
 	j = 0;
 	fd = open(file,O_RDONLY);
 	p = get_next_line(fd);
-		if (p == NULL)
-			return(NULL);
+	if (p == NULL)
+	{
+		free(p);
+		return(NULL);
+	}
 	while (p != NULL)
 	{
 		while (p && p[i] != '\0')
@@ -69,6 +76,7 @@ char **allocate_column(char **tab, char *file)
 				counter = 0;
 				j++;
 				i = 0;
+				free(p);
 				p = get_next_line(fd);
 			}
 		}
@@ -89,8 +97,11 @@ char **fill_tab(char **tab, char *file)
 	
 	fd = open(file,O_RDONLY);
 	p = get_next_line(fd);
-		if (p == NULL)
-			return(NULL);
+	if (p == NULL)
+	{
+		free(p);
+		return(NULL);
+	}
 	while (p != NULL && tab[j] != NULL)
 	{
 		while (p[i] != '\0' && tab[j] != NULL)
@@ -106,6 +117,7 @@ char **fill_tab(char **tab, char *file)
 			i++;
 		}
 		i = 0;
+		free(p);
 		p = get_next_line(fd);
 	}
 	free(p);
@@ -290,9 +302,13 @@ int nb_ligne(char *file)
 	fd = open(file,O_RDONLY);
 	p = get_next_line(fd);
 		if (p == NULL)
+		{
+			free(p);
 			return(0);
+		}
 	while (p != NULL)
 	{
+		free(p);
 		p = get_next_line(fd);
 		counter++;
 	}
@@ -342,4 +358,16 @@ int main(int argc, char *argv[])
 		ft_printf("%s\n", tab[i]);
 		i++;
 	}
+
+
+
+
+
+	// free
+	while (number_of_ligne  >= 0)
+	{
+		free(tab[number_of_ligne]);
+		number_of_ligne--;
+	}
+	free(tab);
 }
