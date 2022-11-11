@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/11 17:14:40 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/11 18:29:01 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char **allocate_line(char **tab, char *file)
 	}
 	free(p);
 	close(fd);
-	tab = malloc(sizeof(char *) * (counter + 1));
+	tab = ft_calloc((counter + 1),sizeof(char *));
 	if (tab == NULL)
 		return(NULL);
 	tab[counter] = NULL;
@@ -70,7 +70,7 @@ char **allocate_column(char **tab, char *file)
 			}
 			if (p[i] == '\n' || p[i] == '\0')
 			{
-				tab[j] = malloc(sizeof(char) * counter + 1);
+				tab[j] = ft_calloc(counter + 1, sizeof(char));
 				if (tab[j] == NULL)
 					return(NULL);
 				counter = 0;
@@ -92,6 +92,7 @@ char **fill_tab(char **tab, char *file)
 	int k;
 	int fd;
 	char *p;
+	j = 0;
 	i = 0;
 	k = 0;
 	
@@ -102,11 +103,11 @@ char **fill_tab(char **tab, char *file)
 		free(p);
 		return(NULL);
 	}
-	while (p != NULL && tab[j] != NULL)
+	while (p != NULL && tab[j] != NULL )
 	{
-		while (p[i] != '\0' && tab[j] != NULL)
+		while (p[i] != '\0' && tab[j] != NULL )
 		{
-			while (p[i] != '\n' && p[i] != '\0')
+			while (p[i] != '\n' && p[i] != '\0' && tab[j] != NULL)
 			{
 				tab[j][k] = p[i];
 				i++;
@@ -114,7 +115,8 @@ char **fill_tab(char **tab, char *file)
 			}
 			k = 0;
 			j++;
-			i++;
+			if (p[i] != '\0')
+				i++;
 		}
 		i = 0;
 		free(p);
@@ -341,7 +343,7 @@ int main(int argc, char *argv[])
 	if (tab == NULL)
 		return (1);
 	tab = fill_tab(tab, argv[1]);
-	// verifier si carte bonne
+
 	testcar = is_car_ok(tab);
 	number_of_column = nb_column(tab);
 	number_of_ligne = nb_ligne(argv[1]);
