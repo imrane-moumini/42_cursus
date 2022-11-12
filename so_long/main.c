@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/12 16:59:24 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/12 17:04:55 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -374,6 +374,9 @@ int is_path_valid(char **tab, s_game game)
 	static int result;
 	s_game flood;
 	
+	flood.tab_number_of_ligne = game.tab_number_of_ligne;
+	flood.tab_number_of_column = game.tab_number_of_column;
+	flood.number_of_c = game.number_of_c;
 	if (tab[game.position_y][game.position_x] == 'C')
 		count_c++;
 	if (tab[game.position_y][game.position_x] == 'E')
@@ -383,42 +386,29 @@ int is_path_valid(char **tab, s_game game)
 	{
 		flood.position_y = game.position_y - 1;
 		flood.position_x = game.position_x;
-		flood.tab_number_of_ligne = game.tab_number_of_ligne;
-		flood.tab_number_of_column = game.tab_number_of_column;
-		flood.number_of_c = game.number_of_c;
 		is_path_valid(tab, flood);
 	}
 	if (game.position_y + 1 < game.tab_number_of_ligne && tab[game.position_y + 1][game.position_x] != '1')
 	{
 		flood.position_y = game.position_y + 1;
 		flood.position_x = game.position_x;
-		flood.tab_number_of_ligne = game.tab_number_of_ligne;
-		flood.tab_number_of_column = game.tab_number_of_column;
-		flood.number_of_c = game.number_of_c;
 		is_path_valid(tab, flood);
 	}
 	if (game.position_x - 1 >= 0 && tab[game.position_y][game.position_x - 1] != '1')
 	{
 		flood.position_y = game.position_y;
 		flood.position_x = game.position_x - 1;
-		flood.tab_number_of_ligne = game.tab_number_of_ligne;
-		flood.tab_number_of_column = game.tab_number_of_column;
-		flood.number_of_c = game.number_of_c;
 		is_path_valid(tab, flood);
 	}
 	if (game.position_x + 1 < game.tab_number_of_column && tab[game.position_y][game.position_x + 1] != '1')
 	{
 		flood.position_y = game.position_y;
 		flood.position_x = game.position_x + 1;
-		flood.tab_number_of_ligne = game.tab_number_of_ligne;
-		flood.tab_number_of_column = game.tab_number_of_column;
-		flood.number_of_c = game.number_of_c;
 		is_path_valid(tab, flood);
 	}
 	if (result == 1 && count_c == game.number_of_c)
 		return(1);
-	else
-		return (0);
+	return (0);
 }
 
 char **tab_copy(char **tab, int number_of_column, int number_of_ligne)
