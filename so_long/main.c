@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/12 17:31:05 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/12 18:27:09 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 int main(int argc, char *argv[])
 {
+	void *mlx_ptr;
+	void *win_ptr;
 	int i;
 	int save;
 	char **tab;
@@ -30,6 +32,7 @@ int main(int argc, char *argv[])
 	int testvalidpath;
 	s_game	game;
 	
+	// gerer la map
 	game.tab = NULL;
 	i = 0;
 	if (argc != 2)
@@ -75,6 +78,41 @@ int main(int argc, char *argv[])
 		ft_printf("%s\n", tab[i]);
 		i++;
 	}
+
+	// gerer la fenettre 
+	mlx_ptr = mlx_init();
+	if (mlx_ptr == NULL)
+		return (1);
+	win_ptr = mlx_new_window(mlx_ptr, 500, 500, "so_long"); 
+	if (win_ptr == NULL)
+	{
+		free(win_ptr);
+		return (1);
+	}
+
+	// empecher les leaks de la bibliotheque
+	mlx_destroy_display(mlx_ptr);
+	mlx_destroy_window(mlx_ptr, win_ptr);
+	free(mlx_ptr);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	save = number_of_ligne;
 	while (number_of_ligne  >= 0)
