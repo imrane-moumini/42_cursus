@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/14 20:43:06 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/14 21:24:46 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -382,58 +382,41 @@ void nbr_of_collectible(char **tab, s_game *game)
 int is_path_valid(char **tab, s_game game)
 {
 	static int count_c;
-	//static int result;
 	s_game flood;
 	
+	flood.tab_number_of_ligne = game.tab_number_of_ligne;
+	flood.tab_number_of_column = game.tab_number_of_column;
+	flood.number_of_c = game.number_of_c;
 	if (tab[game.position_y][game.position_x] == 'C')
 		count_c++;
-	// if (tab[game.position_y][game.position_x] == 'E')
-	// 	result = 1;
 	tab[game.position_y][game.position_x] = '1';
 	if (game.position_y - 1 >= 0 && tab[game.position_y - 1][game.position_x] != '1' && tab[game.position_y - 1][game.position_x] != 'E' )
 	{
 		flood.position_y = game.position_y - 1;
 		flood.position_x = game.position_x;
-		flood.tab_number_of_ligne = game.tab_number_of_ligne;
-		flood.tab_number_of_column = game.tab_number_of_column;
-		flood.number_of_c = game.number_of_c;
 		is_path_valid(tab, flood);
 	}
 	if (game.position_y + 1 < game.tab_number_of_ligne && tab[game.position_y + 1][game.position_x] != '1' && tab[game.position_y + 1][game.position_x] != 'E')
 	{
 		flood.position_y = game.position_y + 1;
 		flood.position_x = game.position_x;
-		flood.tab_number_of_ligne = game.tab_number_of_ligne;
-		flood.tab_number_of_column = game.tab_number_of_column;
-		flood.number_of_c = game.number_of_c;
 		is_path_valid(tab, flood);
 	}
 	if (game.position_x - 1 >= 0 && tab[game.position_y][game.position_x - 1] != '1' && tab[game.position_y][game.position_x - 1] != 'E')
 	{
 		flood.position_y = game.position_y;
 		flood.position_x = game.position_x - 1;
-		flood.tab_number_of_ligne = game.tab_number_of_ligne;
-		flood.tab_number_of_column = game.tab_number_of_column;
-		flood.number_of_c = game.number_of_c;
 		is_path_valid(tab, flood);
 	}
 	if (game.position_x + 1 < game.tab_number_of_column && tab[game.position_y][game.position_x + 1] != '1' && tab[game.position_y][game.position_x + 1] != 'E')
 	{
 		flood.position_y = game.position_y;
 		flood.position_x = game.position_x + 1;
-		flood.tab_number_of_ligne = game.tab_number_of_ligne;
-		flood.tab_number_of_column = game.tab_number_of_column;
-		flood.number_of_c = game.number_of_c;
 		is_path_valid(tab, flood);
 	}
 	if (count_c == game.number_of_c)
-	{
-		// ft_printf("ft c : %i\n", count_c);
-		// ft_printf("game c : %i\n", game.number_of_c);
 		return(1);
-	}
-	else
-		return (0);
+	return (0);
 }
 
 char **tab_copy(char **tab, int number_of_column, int number_of_ligne)
@@ -525,12 +508,7 @@ int main(int argc, char *argv[])
 		ft_printf("%s\n", tab[i]);
 		i++;
 	}
-	// faire copy de tab
-	// gere si e est direct a cote
-		// remplace a chaque fois tout par 1 et a la fin tu peux plus avancer, tu regarde ce au'il reste et si il reste des C c que c cuit
-		// tant que ya un c dans la map je remplace pas le E
-			
-	// free
+	
 	save = number_of_ligne;
 	while (number_of_ligne  >= 0)
 	{
