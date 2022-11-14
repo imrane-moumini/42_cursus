@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:37:49 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/12 18:15:44 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/11 20:25:52 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include "minilibx/mlx.h"
-# include <X11/X.h>
-# include <X11/keysym.h>
+
 
 
 typedef struct	s_point
@@ -36,17 +34,4 @@ typedef struct	s_point
 	int 		tab_number_of_column;
 	char **		tab;
 }				s_game;
-
-char **tab_copy(char **tab, int tab_number_of_column, int tab_number_of_ligne);
-int is_path_valid(char **tab, s_game game);
-void nbr_of_collectible(char **tab, s_game *game);
-void find_start_position(char **tab, s_game *game);
-int nb_ligne(char *file);
-int nb_column(char **tab);
-int is_car_rect(char **tab, int number_of_ligne, int number_of_column);
-int is_car_close(char **tab, int number_of_ligne, int number_of_column);
-int is_car_ok(char **tab);
-char **fill_tab(char **tab, char *file);
-char **allocate_column(char **tab, char *file);
-char **allocate_line(char **tab, char *file);
 #endif 
