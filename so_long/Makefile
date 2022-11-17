@@ -1,6 +1,10 @@
 NAME = so_long
 CC = gcc -Wall -Werror -Wextra
-SRC = main.c
+SRC = main.c \
+	map_gestion/find_path.c \
+	map_gestion/find_path2.c \
+	map_gestion/create_and_fill_tab.c \
+	map_gestion/checks.c \
 
 OBJ_SO_LONG = *.o
 
