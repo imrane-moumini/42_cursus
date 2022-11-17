@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/14 21:24:46 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/17 22:35:56 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -379,45 +379,98 @@ void nbr_of_collectible(char **tab, s_game *game)
 	game -> number_of_c = counter;
 }
 
+
+s_game ft_up(s_game flood, s_game game)
+{
+	s_game copy;
+	
+	copy = flood;
+	
+	copy.position_y = game.position_y - 1;
+	copy.position_x = game.position_x;
+	return(copy);
+}
+
+s_game ft_down(s_game flood, s_game game)
+{
+	s_game copy;
+	
+	copy = flood;
+	
+	copy.position_y = game.position_y + 1;
+	copy.position_x = game.position_x;
+	return(copy);
+}
+
+s_game ft_left(s_game flood, s_game game)
+{
+	s_game copy;
+	
+	copy = flood;
+	
+	copy.position_y = game.position_y;
+	copy.position_x = game.position_x - 1;
+	return(copy);
+}
+
+s_game ft_right(s_game flood, s_game game)
+{
+	s_game copy;
+	
+	copy = flood;
+	
+	copy.position_y = game.position_y;
+	copy.position_x = game.position_x + 1;
+	return(copy);
+}
+void initialize_position(char **tab, s_game game, int *count_c)
+{
+	if (tab[game.position_y][game.position_x] == 'C')
+		*count_c = *count_c +1 ;
+	tab[game.position_y][game.position_x] = '1';
+}
+s_game initialize_flood_and_position_and_count(char **tab, s_game game, int *count_c)
+{
+	s_game flood;
+	
+	
+	flood.tab_number_of_ligne = game.tab_number_of_ligne;
+	flood.tab_number_of_column = game.tab_number_of_column;
+	flood.number_of_c = game.number_of_c;
+	initialize_position(tab,game,count_c);
+	return(flood);
+}
+
+
 int is_path_valid(char **tab, s_game game)
 {
 	static int count_c;
 	s_game flood;
 	
-	flood.tab_number_of_ligne = game.tab_number_of_ligne;
-	flood.tab_number_of_column = game.tab_number_of_column;
-	flood.number_of_c = game.number_of_c;
-	if (tab[game.position_y][game.position_x] == 'C')
-		count_c++;
-	tab[game.position_y][game.position_x] = '1';
+	flood = initialize_flood_and_position_and_count(tab,game, &count_c);
 	if (game.position_y - 1 >= 0 && tab[game.position_y - 1][game.position_x] != '1' && tab[game.position_y - 1][game.position_x] != 'E' )
 	{
-		flood.position_y = game.position_y - 1;
-		flood.position_x = game.position_x;
+		flood = ft_up(flood, game);
 		is_path_valid(tab, flood);
 	}
 	if (game.position_y + 1 < game.tab_number_of_ligne && tab[game.position_y + 1][game.position_x] != '1' && tab[game.position_y + 1][game.position_x] != 'E')
 	{
-		flood.position_y = game.position_y + 1;
-		flood.position_x = game.position_x;
+		flood = ft_down(flood, game);
 		is_path_valid(tab, flood);
 	}
 	if (game.position_x - 1 >= 0 && tab[game.position_y][game.position_x - 1] != '1' && tab[game.position_y][game.position_x - 1] != 'E')
 	{
-		flood.position_y = game.position_y;
-		flood.position_x = game.position_x - 1;
+		flood = ft_left(flood, game);
 		is_path_valid(tab, flood);
 	}
 	if (game.position_x + 1 < game.tab_number_of_column && tab[game.position_y][game.position_x + 1] != '1' && tab[game.position_y][game.position_x + 1] != 'E')
 	{
-		flood.position_y = game.position_y;
-		flood.position_x = game.position_x + 1;
+		flood = ft_right(flood, game);
 		is_path_valid(tab, flood);
 	}
-	if (count_c == game.number_of_c)
-		return(1);
-	return (0);
+	return (count_c);
 }
+
 
 char **tab_copy(char **tab, int number_of_column, int number_of_ligne)
 {
@@ -448,6 +501,7 @@ char **tab_copy(char **tab, int number_of_column, int number_of_ligne)
 	}
 	return (tab_copy);
 }
+
 int main(int argc, char *argv[])
 {
 	int i;
@@ -488,7 +542,7 @@ int main(int argc, char *argv[])
 	tab = tab_copy(game.tab, number_of_column, number_of_ligne);
 	testvalidpath = is_path_valid(tab, game);
 
-	if (testcar == 0 || testrect == 0 || testclose == 0 || testvalidpath == 0)
+	if (testcar == 0 || testrect == 0 || testclose == 0 || testvalidpath != game.number_of_c)
 	{
 		ft_printf("Error\n");
 		return (1);
