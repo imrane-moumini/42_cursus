@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:37:49 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/18 21:06:45 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/18 21:51:56 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,6 @@ int		ft_e(char **tab);
 int		ft_one(char **tab);
 int		ft_zero(char **tab);
 int		right_car(char **tab);
+char 	*fill_tab_while(char **tab, char *p, int fd);
+char	*allocate_column_while(char **tab, char *p, int fd);
 #endif 
