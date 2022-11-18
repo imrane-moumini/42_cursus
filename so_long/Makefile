@@ -5,6 +5,9 @@ SRC = main.c \
 	map_gestion/find_path2.c \
 	map_gestion/create_and_fill_tab.c \
 	map_gestion/checks.c \
+	map_gestion/checks2.c \
+	map_gestion/checks3.c \
+	map_gestion/checks4.c \
 
 OBJ_SO_LONG = *.o
 

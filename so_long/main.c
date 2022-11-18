@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/17 23:32:51 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/18 20:53:13 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	int testrect;
 	int testclose;
 	int testvalidpath;
-	s_game	game;
+	t_game	game;
 	
 	game.tab = NULL;
 	i = 0;
@@ -50,8 +50,8 @@ int main(int argc, char *argv[])
 	testcar = is_car_ok(game.tab);
 	number_of_column = nb_column(game.tab);
 	number_of_ligne = nb_ligne(argv[1]);
-	game.tab_nbcolumn = number_of_column;
-	game.tab_nbligne = number_of_ligne;
+	game.column = number_of_column;
+	game.ligne = number_of_ligne;
 	testrect = is_car_rect(game.tab, number_of_ligne, number_of_column);
 	testclose = is_car_close(game.tab, number_of_ligne, number_of_column);
 	find_start_position(game.tab, &game);

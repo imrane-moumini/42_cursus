@@ -6,28 +6,25 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 23:34:21 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/17 23:34:40 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/18 21:14:32 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-
-
-char **allocate_line(char **tab, char *file)
+char	**allocate_line(char **tab, char *file)
 {
-	char *p;
-	int fd;
-	int counter;
+	char	*p;
+	int		fd;
+	int		counter;
 
 	counter = 0;
-
-	fd = open(file,O_RDONLY);
+	fd = open(file, O_RDONLY);
 	p = get_next_line(fd);
 	if (p == NULL)
 	{
 		free(p);
-		return(NULL);
+		return (NULL);
 	}
 	while (p != NULL)
 	{
@@ -37,29 +34,30 @@ char **allocate_line(char **tab, char *file)
 	}
 	free(p);
 	close(fd);
-	tab = ft_calloc((counter + 1),sizeof(char *));
+	tab = ft_calloc((counter + 1), sizeof(char *));
 	if (tab == NULL)
-		return(NULL);
+		return (NULL);
 	tab[counter] = NULL;
 	return (tab);
 }
-char **allocate_column(char **tab, char *file)
+
+char	**allocate_column(char **tab, char *file)
 {
-	int counter;
-	int i;
-	int j;
-	char *p;
-	int fd;
-	
+	int		counter;
+	int		i;
+	int		j;
+	char	*p;
+	int		fd;
+
 	counter = 0;
 	i = 0;
 	j = 0;
-	fd = open(file,O_RDONLY);
+	fd = open(file, O_RDONLY);
 	p = get_next_line(fd);
 	if (p == NULL)
 	{
 		free(p);
-		return(NULL);
+		return (NULL);
 	}
 	while (p != NULL)
 	{
@@ -74,7 +72,7 @@ char **allocate_column(char **tab, char *file)
 			{
 				tab[j] = ft_calloc(counter + 1, sizeof(char));
 				if (tab[j] == NULL)
-					return(NULL);
+					return (NULL);
 				counter = 0;
 				j++;
 				i = 0;
@@ -87,23 +85,24 @@ char **allocate_column(char **tab, char *file)
 	close(fd);
 	return (tab);
 }
-char **fill_tab(char **tab, char *file)
+
+char	**fill_tab(char **tab, char *file)
 {
-	int i;
-	int j;
-	int k;
-	int fd;
-	char *p;
+	int		i;
+	int		j;
+	int		k;
+	int		fd;
+	char	*p;
+
 	j = 0;
 	i = 0;
 	k = 0;
-	
-	fd = open(file,O_RDONLY);
+	fd = open(file, O_RDONLY);
 	p = get_next_line(fd);
 	if (p == NULL)
 	{
 		free(p);
-		return(NULL);
+		return (NULL);
 	}
 	while (p != NULL && tab[j] != NULL )
 	{
