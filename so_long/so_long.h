@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:37:49 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/19 17:49:20 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/19 18:31:42 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ typedef struct s_point
 	int		is_an_exit;
 	int		ligne;
 	int		column;
+	int		testcar;
+	int		testrect;
+	int		testclose;
 	char	**tab;
 }				t_game;
 

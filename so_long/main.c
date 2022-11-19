@@ -6,95 +6,48 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/19 18:13:44 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/19 19:34:34 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+// check maps in main
+void ft_free_map(t_game game, char **tab)
+{
+	int save;
+	
+	save = game.ligne;
+	while (game.ligne  >= 0)
+	{
+		free(game.tab[game.ligne]);
+		game.ligne--;
+	}
+	free(game.tab);
+ 	while (save  >= 0)
+ 	{
+ 		free(tab[save]);
+ 		save--;
+ 	}
+ 	free(tab);
+} 
+int ft_result_false(t_game game, char** tab, t_game testvalidpath)
+{
+	if (game.testcar == 0 || game.testrect == 0 || game.testclose == 0 
+		|| testvalidpath.map_nb_of_c != game.nb_of_c || testvalidpath.is_an_exit != 1 )
+	{
+		ft_printf("error\n");
+		ft_free_map(game, tab);
+		return (0);
+	}
+	return (1);
+	
+}
 
-int main(int argc, char *argv[])
+void ft_test(t_game game, char **tab)
 {
 	int i;
-	int save;
-	char **tab;
-	int number_of_ligne;
-	int number_of_column;
-	int testcar;
-	int testrect;
-	int testclose;
-	t_game testvalidpath;
-	t_game	game;
-	
-	game.tab = NULL;
+
 	i = 0;
-	if (argc != 2)
-		return(1);
-
-	game.tab = allocate_line(game.tab, argv[1]);
-	if (game.tab == NULL)
-	{
-		free(game.tab);	
-		return (1);
-	}
-	game.tab = allocate_column(game.tab, argv[1]);
-	if (game.tab == NULL)
-	{
-		free(game.tab);	
-		return (1);
-	}
-	game.tab = fill_tab(game.tab, argv[1]);
-	
-	
-	testcar = is_car_ok(game.tab);
-	number_of_column = nb_column(game.tab);
-	number_of_ligne = nb_ligne(argv[1]);
-	game.column = number_of_column;
-	game.ligne = number_of_ligne;
-	testrect = is_car_rect(game.tab, number_of_ligne, number_of_column);
-	testclose = is_car_close(game.tab, number_of_ligne, number_of_column);
-	find_start_position(game.tab, &game);
-	nbr_of_collectible(game.tab, &game);
-	tab = tab_copy(game.tab, number_of_column, number_of_ligne);
-	testvalidpath = is_path_valid(tab, game);
-
-	if (testcar == 0 || testrect == 0 || testclose == 0)
-	{
-		ft_printf("Error\n");
-		//save = number_of_ligne;
-		while (number_of_ligne  >= 0)
-		{
-			free(game.tab[number_of_ligne]);
-			number_of_ligne--;
-		}
-		free(game.tab);
-
- 		while (save  >= 0)
- 		{
- 			free(tab[save]);
- 			save--;
- 		}
- 		free(tab);
-		return (1);
-	}
-	if (testvalidpath.map_nb_of_c != game.nb_of_c || testvalidpath.is_an_exit != 1)
-	{
-		ft_printf("Error\n");
-		save = number_of_ligne;
-		while (number_of_ligne  >= 0)
-		{
-			free(game.tab[number_of_ligne]);
-			number_of_ligne--;
-		}
-		free(game.tab);
-
- 		while (save  >= 0)
- 		{
- 			free(tab[save]);
- 			save--;
- 		}
- 		free(tab);
-		return (1);
-	}
 	ft_printf("the real one is :\n");
 	while (game.tab[i] != NULL)
 	{
@@ -109,19 +62,43 @@ int main(int argc, char *argv[])
 		ft_printf("%s\n", tab[i]);
 		i++;
 	}
-	
-	save = number_of_ligne;
-	while (number_of_ligne  >= 0)
-	{
-		free(game.tab[number_of_ligne]);
-		number_of_ligne--;
-	}
-	free(game.tab);
+}
+// lancer le jeux in main
 
- 	while (save  >= 0)
- 	{
- 		free(tab[save]);
- 		save--;
- 	}
- 	free(tab);
+
+int main(int argc, char *argv[])
+{
+	char **tab;
+	t_game testvalidpath;
+	t_game	game;
+	
+	game.tab = NULL;
+	if (argc != 2)
+		return(1);
+	game.tab = allocate_line(game.tab, argv[1]);
+	if (game.tab == NULL)
+	{
+		free(game.tab);	
+		return (1);
+	}
+	game.tab = allocate_column(game.tab, argv[1]);
+	if (game.tab == NULL)
+	{
+		free(game.tab);	
+		return (1);
+	}
+	game.tab = fill_tab(game.tab, argv[1]);
+	game.testcar = is_car_ok(game.tab);
+	game.column = nb_column(game.tab);
+	game.ligne = nb_ligne(argv[1]);
+	game.testrect = is_car_rect(game.tab, game.ligne, game.column);
+	game.testclose = is_car_close(game.tab, game.ligne, game.column);
+	find_start_position(game.tab, &game);
+	nbr_of_collectible(game.tab, &game);
+	tab = tab_copy(game.tab, game.column, game.ligne);
+	testvalidpath = is_path_valid(tab, game);
+	if (ft_result_false(game, tab, testvalidpath) == 0)
+		return(1);
+	ft_test(game, tab);
+	ft_free_map(game, tab);
 }
