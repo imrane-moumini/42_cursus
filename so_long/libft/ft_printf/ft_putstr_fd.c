@@ -6,13 +6,13 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 23:42:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/06 16:58:59 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/19 16:51:55 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include <unistd.h>
 #include "ft_printf.h"
+
 void	ft_putstr_fd(char *s, int fd)
 {
 	int	i;

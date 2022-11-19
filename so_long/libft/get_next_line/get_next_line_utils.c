@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 16:28:58 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/07 21:26:55 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/19 16:50:26 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
-
 
 void	erase_buff(char *buff)
 {

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 23:34:21 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/18 22:22:49 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/19 16:39:34 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,24 @@ char	**allocate_line(char **tab, char *file)
 	return (tab);
 }
 
-char *allocate_column_while(char **tab, char *p, int fd)
+char	*allocate_column_while(char **tab, char *p, int fd)
 {
 	int		i;
 	int		j;
-	int		counter;
-	
-	counter = 0;
+
 	j = 0;
 	i = 0;
 	while (p != NULL)
 	{
 		while (p && p[i] != '\0')
 		{
-			while (p[i++] != '\n' && p[i] != '\0')
-				counter++;
+			while (p[i] != '\n' && p[i] != '\0')
+				i++;
 			if (p[i] == '\n' || p[i] == '\0')
 			{
-				tab[j] = ft_calloc(counter + 1, sizeof(char));
+				tab[j] = ft_calloc(i + 1, sizeof(char));
 				if (tab[j] == NULL)
 					return (NULL);
-				counter = 0;
 				j++;
 				i = 0;
 				free(p);
@@ -71,6 +68,7 @@ char *allocate_column_while(char **tab, char *p, int fd)
 	}
 	return (p);
 }
+
 char	**allocate_column(char **tab, char *file)
 {
 	char	*p;
@@ -88,12 +86,13 @@ char	**allocate_column(char **tab, char *file)
 	close(fd);
 	return (tab);
 }
-char *fill_tab_while(char **tab, char *p, int fd)
+
+char	*fill_tab_while(char **tab, char *p, int fd)
 {
 	int		i;
 	int		j;
 	int		k;
-	
+
 	j = 0;
 	i = 0;
 	k = 0;

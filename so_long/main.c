@@ -6,19 +6,11 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/18 20:53:13 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/19 16:56:43 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-
-
-
-
-
-
-
 
 int main(int argc, char *argv[])
 {

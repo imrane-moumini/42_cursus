@@ -6,10 +6,9 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 21:04:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/06 16:58:35 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/19 16:51:40 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "ft_printf.h"
 #include <unistd.h>
