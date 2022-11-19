@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/19 19:58:52 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/19 20:52:23 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void ft_free_map(t_game game, char **tab)
  		save--;
  	}
  	free(tab);
-} 
+}
+
 int ft_result_false(t_game game, char** tab, t_game testvalidpath)
 {
 	if (game.testcar == 0 || game.testrect == 0 || game.testclose == 0 
@@ -90,7 +91,11 @@ t_game check_map_part(char *argv)
 	return (game);
 }
 // lancer le jeux in main
-
+void ft_free_mlx_error(void *ptr)
+{
+	free(ptr);
+	exit(1);
+}
 
 int main(int argc, char *argv[])
 {
@@ -108,5 +113,16 @@ int main(int argc, char *argv[])
 	if (ft_result_false(game, tab, testvalidpath) == 0)
 		return(1);
 	ft_test(game, tab);
+	game.mlx_ptr = mlx_init();
+	if (game.mlx_ptr == NULL)
+		ft_free_mlx_error(game.mlx_ptr);
+	game.win_ptr = mlx_new_window(game.mlx_ptr, 500, 500, "Medieval combat");
+	if (game.win_ptr == NULL)
+		ft_free_mlx_error(game.win_ptr);
+	while (1)
+		;
+	mlx_destroy_window(game.mlx_ptr, game.win_ptr);
+	mlx_destroy_display(game.mlx_ptr);
+	free(game.mlx_ptr);
 	ft_free_map(game, tab);
 }

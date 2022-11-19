@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:37:49 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/19 19:49:15 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/19 20:43:00 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include "minilibx/mlx.h"
 
 typedef struct s_point
 {
@@ -33,8 +34,10 @@ typedef struct s_point
 	int		testcar;
 	int		testrect;
 	int		testclose;
+	void	*mlx_ptr;
+	void	*win_ptr;
 	char	**tab;
-}				t_game;
+}			t_game;
 
 char	**tab_copy(char **tab, int number_of_column, int number_of_ligne);
 t_game	is_path_valid(char **t, t_game g);
@@ -68,7 +71,8 @@ int		ft_zero(char **tab);
 int		right_car(char **tab);
 char 	*fill_tab_while(char **tab, char *p, int fd);
 char	*allocate_column_while(char **tab, char *p, int fd);
-void ft_free_map(t_game game, char **tab);
-int ft_result_false(t_game game, char** tab, t_game testvalidpath);
-void ft_test(t_game game, char **tab);
+void	ft_free_map(t_game game, char **tab);
+int		ft_result_false(t_game game, char** tab, t_game testvalidpath);
+void	ft_test(t_game game, char **tab);
+t_game	check_map_part(char *argv);
 #endif 
