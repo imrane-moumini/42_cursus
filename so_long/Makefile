@@ -27,6 +27,7 @@ $(OBJ_SO_LONG) : $(SRC)
 clean :
 	rm -f $(OBJ_SO_LONG)
 	rm -f ./libft/*.o
+	rm so_long
 
 fclean : clean
 	rm -f $(NAME)

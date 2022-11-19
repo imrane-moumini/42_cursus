@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/19 19:34:34 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/19 19:58:52 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,32 @@ void ft_test(t_game game, char **tab)
 		i++;
 	}
 }
+
+t_game check_map_part(char *argv)
+{
+	t_game game;
+
+	game.tab = NULL;
+	game.tab = allocate_line(game.tab, argv);
+	if (game.tab == NULL)
+	{
+		free(game.tab);	
+		exit(1);
+	}
+	game.tab = allocate_column(game.tab, argv);
+	if (game.tab == NULL)
+	{
+		free(game.tab);	
+		exit(1);
+	}
+	game.tab = fill_tab(game.tab, argv);
+	game.testcar = is_car_ok(game.tab);
+	game.column = nb_column(game.tab);
+	game.ligne = nb_ligne(argv);
+	game.testrect = is_car_rect(game.tab, game.ligne, game.column);
+	game.testclose = is_car_close(game.tab, game.ligne, game.column);
+	return (game);
+}
 // lancer le jeux in main
 
 
@@ -72,27 +98,9 @@ int main(int argc, char *argv[])
 	t_game testvalidpath;
 	t_game	game;
 	
-	game.tab = NULL;
 	if (argc != 2)
 		return(1);
-	game.tab = allocate_line(game.tab, argv[1]);
-	if (game.tab == NULL)
-	{
-		free(game.tab);	
-		return (1);
-	}
-	game.tab = allocate_column(game.tab, argv[1]);
-	if (game.tab == NULL)
-	{
-		free(game.tab);	
-		return (1);
-	}
-	game.tab = fill_tab(game.tab, argv[1]);
-	game.testcar = is_car_ok(game.tab);
-	game.column = nb_column(game.tab);
-	game.ligne = nb_ligne(argv[1]);
-	game.testrect = is_car_rect(game.tab, game.ligne, game.column);
-	game.testclose = is_car_close(game.tab, game.ligne, game.column);
+	game = check_map_part(argv[1]);
 	find_start_position(game.tab, &game);
 	nbr_of_collectible(game.tab, &game);
 	tab = tab_copy(game.tab, game.column, game.ligne);

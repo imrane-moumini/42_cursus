@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:37:49 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/19 18:31:42 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/19 19:49:15 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,7 @@ int		ft_zero(char **tab);
 int		right_car(char **tab);
 char 	*fill_tab_while(char **tab, char *p, int fd);
 char	*allocate_column_while(char **tab, char *p, int fd);
+void ft_free_map(t_game game, char **tab);
+int ft_result_false(t_game game, char** tab, t_game testvalidpath);
+void ft_test(t_game game, char **tab);
 #endif 
