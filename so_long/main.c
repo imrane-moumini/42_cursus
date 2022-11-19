@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/19 17:50:05 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/19 18:13:44 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,16 @@ int main(int argc, char *argv[])
 
 	game.tab = allocate_line(game.tab, argv[1]);
 	if (game.tab == NULL)
+	{
+		free(game.tab);	
 		return (1);
+	}
 	game.tab = allocate_column(game.tab, argv[1]);
 	if (game.tab == NULL)
+	{
+		free(game.tab);	
 		return (1);
+	}
 	game.tab = fill_tab(game.tab, argv[1]);
 	
 	
@@ -54,11 +60,39 @@ int main(int argc, char *argv[])
 	if (testcar == 0 || testrect == 0 || testclose == 0)
 	{
 		ft_printf("Error\n");
+		//save = number_of_ligne;
+		while (number_of_ligne  >= 0)
+		{
+			free(game.tab[number_of_ligne]);
+			number_of_ligne--;
+		}
+		free(game.tab);
+
+ 		while (save  >= 0)
+ 		{
+ 			free(tab[save]);
+ 			save--;
+ 		}
+ 		free(tab);
 		return (1);
 	}
 	if (testvalidpath.map_nb_of_c != game.nb_of_c || testvalidpath.is_an_exit != 1)
 	{
 		ft_printf("Error\n");
+		save = number_of_ligne;
+		while (number_of_ligne  >= 0)
+		{
+			free(game.tab[number_of_ligne]);
+			number_of_ligne--;
+		}
+		free(game.tab);
+
+ 		while (save  >= 0)
+ 		{
+ 			free(tab[save]);
+ 			save--;
+ 		}
+ 		free(tab);
 		return (1);
 	}
 	ft_printf("the real one is :\n");
