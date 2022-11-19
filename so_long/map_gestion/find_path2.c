@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 23:33:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/18 20:52:44 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/19 17:50:52 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ t_game	ft_right(t_game flood, t_game game)
 	return (copy);
 }
 
-int	is_path_valid(char **t, t_game g)
+t_game	is_path_valid(char **t, t_game g)
 {
-	static int	count_c;
-	t_game		flood;
+	static t_game	result;
+	t_game			flood;
 
-	flood = initialize_flood_position_count(t, g, &count_c);
+	flood = initialize_flood_position_count(t, g, &result);
 	if (g.y - 1 >= 0 && t[g.y - 1][g.x] != '1' && t[g.y - 1][g.x] != 'E')
 	{
 		flood = ft_up(flood, g);
@@ -78,5 +78,5 @@ int	is_path_valid(char **t, t_game g)
 		flood = ft_right(flood, g);
 		is_path_valid(t, flood);
 	}
-	return (count_c);
+	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:37:49 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/18 21:51:56 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/19 17:49:20 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_point
 	int		x;
 	int		y;
 	int		nb_of_c;
+	int		map_nb_of_c;
 	int		is_an_exit;
 	int		ligne;
 	int		column;
@@ -33,9 +34,8 @@ typedef struct s_point
 }				t_game;
 
 char	**tab_copy(char **tab, int number_of_column, int number_of_ligne);
-int		is_path_valid(char **t, t_game g);
-t_game	initialize_flood_position_count(char **tab, t_game game, int *count_c);
-void	initialize_position(char **tab, t_game game, int *count_c);
+t_game	is_path_valid(char **t, t_game g);
+t_game	initialize_flood_position_count(char **t, t_game g, t_game *result);
 t_game	ft_right(t_game flood, t_game game);
 t_game	ft_left(t_game flood, t_game game);
 t_game	ft_down(t_game flood, t_game game);

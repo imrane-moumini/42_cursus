@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 23:33:51 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/18 20:53:46 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/19 17:51:40 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,24 @@ void	nbr_of_collectible(char **tab, t_game *game)
 	game -> nb_of_c = counter;
 }
 
-void	initialize_position(char **tab, t_game game, int *count_c)
-{
-	if (tab[game.y][game.x] == 'C')
-		*count_c = *count_c +1;
-	tab[game.y][game.x] = '1';
-}
-
-t_game	initialize_flood_position_count(char **tab, t_game game, int *count_c)
+t_game	initialize_flood_position_count(char **t, t_game g, t_game *result)
 {
 	t_game	flood;
 
-	flood.ligne = game.ligne;
-	flood.column = game.column;
-	flood.nb_of_c = game.nb_of_c;
-	initialize_position(tab, game, count_c);
+	flood.ligne = g.ligne;
+	flood.column = g.column;
+	flood.nb_of_c = g.nb_of_c;
+	if (g.y - 1 >= 0 && t[g.y - 1][g.x] == 'E')
+		result -> is_an_exit = 1;
+	if (g.y + 1 < g.ligne && t[g.y + 1][g.x] == 'E')
+		result -> is_an_exit = 1;
+	if (g.x - 1 >= 0 && t[g.y][g.x - 1] == 'E')
+		result -> is_an_exit = 1;
+	if (g.x + 1 < g.column && t[g.y][g.x + 1] == 'E')
+		result -> is_an_exit = 1;
+	if (t[g.y][g.x] == 'C')
+		result -> map_nb_of_c = result -> map_nb_of_c + 1;
+	t[g.y][g.x] = '1';
 	return (flood);
 }
 

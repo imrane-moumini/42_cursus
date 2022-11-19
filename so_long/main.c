@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/19 16:56:43 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/19 17:50:05 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 	int testcar;
 	int testrect;
 	int testclose;
-	int testvalidpath;
+	t_game testvalidpath;
 	t_game	game;
 	
 	game.tab = NULL;
@@ -51,12 +51,16 @@ int main(int argc, char *argv[])
 	tab = tab_copy(game.tab, number_of_column, number_of_ligne);
 	testvalidpath = is_path_valid(tab, game);
 
-	if (testcar == 0 || testrect == 0 || testclose == 0 || testvalidpath != game.nb_of_c)
+	if (testcar == 0 || testrect == 0 || testclose == 0)
 	{
 		ft_printf("Error\n");
 		return (1);
 	}
-	
+	if (testvalidpath.map_nb_of_c != game.nb_of_c || testvalidpath.is_an_exit != 1)
+	{
+		ft_printf("Error\n");
+		return (1);
+	}
 	ft_printf("the real one is :\n");
 	while (game.tab[i] != NULL)
 	{
