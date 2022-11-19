@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:37:49 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/19 20:43:00 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/19 21:41:49 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include "minilibx/mlx.h"
+# include <X11/keysym.h>
+# include <X11/X.h>
 
 typedef struct s_point
 {

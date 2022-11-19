@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/19 20:52:23 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/19 21:48:52 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,19 @@ void ft_free_mlx_error(void *ptr)
 	exit(1);
 }
 
+int	handle_no_event(void *game)
+{
+	(void)game;
+	return (0);
+}
+
+int	handle_input(int keysym, t_game *game)
+{
+	if (keysym == XK_Escape)
+		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	return (0);
+}
+
 int main(int argc, char *argv[])
 {
 	char **tab;
@@ -119,9 +132,9 @@ int main(int argc, char *argv[])
 	game.win_ptr = mlx_new_window(game.mlx_ptr, 500, 500, "Medieval combat");
 	if (game.win_ptr == NULL)
 		ft_free_mlx_error(game.win_ptr);
-	while (1)
-		;
-	mlx_destroy_window(game.mlx_ptr, game.win_ptr);
+	mlx_loop_hook(game.mlx_ptr, &handle_no_event, &game);
+	mlx_key_hook(game.win_ptr, &handle_input, &game);
+	mlx_loop(game.mlx_ptr);
 	mlx_destroy_display(game.mlx_ptr);
 	free(game.mlx_ptr);
 	ft_free_map(game, tab);
