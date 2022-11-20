@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/20 20:18:09 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/20 20:43:15 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,39 @@ int	handle_no_event(void *game)
 	(void)game;
 	return (0);
 }
+void move_w(t_game *game)
+{
+	// juste deplacer mon personnage de 1 en remplacant le truc suivant par lui et la ou il etait par de lherbe
+	// si le truc den face c un 1 non tu bouge pas
+	// si le truc den face c le tu bouge pas sauf si tas tous les collectible
+	// si tas tous les collectible et que c e en face tu kill le jeu
+	(void)game;
+}
+void move_a(t_game *game)
+{
+	(void)game;
+}
+void move_s(t_game *game)
+{
+	(void)game;
+}
+void move_d(t_game *game)
+{
+	(void)game;
+}
 
 int	handle_input(int key, t_game *game)
 {
 	if (key == XK_Escape)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	if (key == XK_W)
+		move_w(game);
+	if (key == XK_A)
+		move_a(game);
+	if (key == XK_S)
+		move_s(game);
+	if (key == XK_D)
+		move_d(game);
 	return (0);
 }
 
@@ -137,6 +165,7 @@ void ft_put_img_to_window(t_game game)
 		i++;
 	}
 }
+
 int main(int argc, char *argv[])
 {
 	char **tab;
@@ -167,12 +196,8 @@ int main(int argc, char *argv[])
 	game.img_tree = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Tree.xpm", &game.img_width, &game.img_height);
 	game.img_warrior = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Warrior.xpm", &game.img_width, &game.img_height);
 	game.img_mushroom = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Mushroom_01.xpm", &game.img_width, &game.img_height);
-	// mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_grass, 0, 0);
-	// mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_house, 64, 0);
-	// mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_tree, 128, 0);
-	// mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_warrior, 192, 64);
-	// mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_mushroom, 256, 64);
 	ft_put_img_to_window(game);
+	
 	mlx_loop(game.mlx_ptr);
 	mlx_destroy_display(game.mlx_ptr);
 	free(game.img_house);
