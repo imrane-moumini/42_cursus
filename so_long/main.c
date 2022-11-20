@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/20 19:25:58 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/20 20:18:09 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ int main(int argc, char *argv[])
 	game.mlx_ptr = mlx_init();
 	if (game.mlx_ptr == NULL)
 		ft_free_mlx_error(game.mlx_ptr);
-	game.win_ptr = mlx_new_window(game.mlx_ptr, 500, 500, "Medieval combat");
+	game.win_ptr = mlx_new_window(game.mlx_ptr, 64 * game.ligne, 64 * game.column, "Medieval combat");
 	if (game.win_ptr == NULL)
 		ft_free_mlx_error(game.win_ptr);
 	mlx_loop_hook(game.mlx_ptr, &handle_no_event, &game);
