@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/20 18:09:59 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/20 18:53:07 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,19 +135,21 @@ int main(int argc, char *argv[])
 	mlx_loop_hook(game.mlx_ptr, &handle_no_event, &game);
 	mlx_key_hook(game.win_ptr, &handle_input, &game);
 	
-	game.img_bush = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Bush_03.xpm", &game.img_width, &game.img_height);
+	game.img_grass = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Grass_Flat.xpm", &game.img_width, &game.img_height);
 	game.img_house = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Knight_House.xpm", &game.img_width, &game.img_height);
 	game.img_tree = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Tree.xpm", &game.img_width, &game.img_height);
 	game.img_warrior = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Warrior.xpm", &game.img_width, &game.img_height);
-	mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_bush, 0, 0);
+	game.img_mushroom = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Mushroom_01.xpm", &game.img_width, &game.img_height);
+	mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_grass, 0, 0);
 	mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_house, 64, 0);
 	mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_tree, 128, 0);
 	mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_warrior, 192, 64);
-
+	mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_mushroom, 256, 64);
+	
 	mlx_loop(game.mlx_ptr);
 	mlx_destroy_display(game.mlx_ptr);
 	free(game.img_house);
-	free(game.img_bush);
+	free(game.img_grass);
 	free(game.img_tree);
 	free(game.img_warrior);
 	free(game.mlx_ptr);
