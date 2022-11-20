@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:37:49 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/19 21:41:49 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/20 17:21:11 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ typedef struct s_point
 	void	*mlx_ptr;
 	void	*win_ptr;
 	char	**tab;
+	void	*img_bush;
+	void	*img_house;
+	void	*img_tree;
+	void	*img_warrior;
+	int		img_width;
+	int		img_height;
 }			t_game;
 
 char	**tab_copy(char **tab, int number_of_column, int number_of_ligne);
