@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/20 18:53:07 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/20 19:25:58 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,33 @@ int	handle_input(int key, t_game *game)
 	return (0);
 }
 
+void ft_put_img_to_window(t_game game)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (game.tab[i] != NULL)
+	{
+		while (game.tab[i][j] != '\0')
+		{
+			if (game.tab[i][j] == '1')
+				mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_tree, i * 64, j * 64);
+			if (game.tab[i][j] == '0')
+				mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_grass, i * 64, j * 64);
+			if (game.tab[i][j] == 'P')
+				mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_warrior, i * 64, j * 64);
+			if (game.tab[i][j] == 'E')
+				mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_house, i * 64, j * 64);
+			if (game.tab[i][j] == 'C')
+				mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_mushroom, i * 64, j * 64);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+}
 int main(int argc, char *argv[])
 {
 	char **tab;
@@ -140,12 +167,12 @@ int main(int argc, char *argv[])
 	game.img_tree = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Tree.xpm", &game.img_width, &game.img_height);
 	game.img_warrior = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Warrior.xpm", &game.img_width, &game.img_height);
 	game.img_mushroom = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Mushroom_01.xpm", &game.img_width, &game.img_height);
-	mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_grass, 0, 0);
-	mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_house, 64, 0);
-	mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_tree, 128, 0);
-	mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_warrior, 192, 64);
-	mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_mushroom, 256, 64);
-	
+	// mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_grass, 0, 0);
+	// mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_house, 64, 0);
+	// mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_tree, 128, 0);
+	// mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_warrior, 192, 64);
+	// mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_mushroom, 256, 64);
+	ft_put_img_to_window(game);
 	mlx_loop(game.mlx_ptr);
 	mlx_destroy_display(game.mlx_ptr);
 	free(game.img_house);
