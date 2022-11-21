@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/20 20:43:15 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/21 21:04:16 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,36 +104,93 @@ int	handle_no_event(void *game)
 }
 void move_w(t_game *game)
 {
-	// juste deplacer mon personnage de 1 en remplacant le truc suivant par lui et la ou il etait par de lherbe
-	// si le truc den face c un 1 non tu bouge pas
-	// si le truc den face c le tu bouge pas sauf si tas tous les collectible
-	// si tas tous les collectible et que c e en face tu kill le jeu
-	(void)game;
+	find_start_position(game -> tab, game);
+	if (game -> x - 1 >= 0 &&  game -> tab[game -> y][game -> x - 1] == 'E' && game -> nb_of_c == 0)
+		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	if(game -> x - 1 >= 0 && game -> tab[game -> y][game -> x - 1] != '1' && game -> tab[game -> y][game -> x - 1] != 'E' &&  game -> tab[game -> y][game -> x - 1] == 'C')
+	{
+				game -> nb_of_c = game -> nb_of_c - 1;
+				ft_printf("c : %i\n", game -> nb_of_c);
+	}	
+	if (game -> x - 1 >= 0 && game -> tab[game -> y][game -> x - 1] != '1' && game -> tab[game -> y][game -> x - 1] != 'E')
+	{
+		
+		game -> tab[game -> y][game -> x -1 ] = 'P';
+		game -> tab[game -> y][game -> x] = '0';
+		game -> walk = game -> walk + 1;
+		ft_printf("Tu as fait %i coups\n", game -> walk);
+		ft_put_img_to_window(*game);	
+	}
 }
 void move_a(t_game *game)
 {
-	(void)game;
+	find_start_position(game -> tab, game);
+	if (game -> y - 1 >= 0 && game -> tab[game -> y - 1][game -> x] == 'E' && game -> nb_of_c == 0)
+		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	if (game -> y - 1 >= 0 && game -> tab[game -> y - 1][game -> x] != '1' && game -> tab[game -> y - 1][game -> x] != 'E' && game -> tab[game -> y - 1][game -> x] == 'C')
+	{
+				game -> nb_of_c = game -> nb_of_c - 1;
+				ft_printf("c : %i\n", game -> nb_of_c);
+	}
+	if (game -> y - 1 >= 0 && game -> tab[game -> y - 1][game -> x] != '1' && game -> tab[game -> y - 1][game -> x] != 'E')
+	{
+			game -> tab[game -> y - 1][game -> x] = 'P';
+			game -> tab[game -> y][game -> x] = '0';
+			game -> walk = game -> walk + 1;
+			ft_printf("Tu as fait %i coups\n", game -> walk);
+			ft_put_img_to_window(*game);	
+	}
 }
 void move_s(t_game *game)
 {
-	(void)game;
+	find_start_position(game -> tab, game);
+	if (game -> x + 1 < game -> column && game -> tab[game -> y][game -> x + 1] == 'E' && game -> nb_of_c == 0)
+		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	if (game -> x + 1 < game -> column && game -> tab[game -> y][game -> x + 1] != '1' && game -> tab[game -> y][game -> x + 1] != 'E' && game -> tab[game -> y][game -> x + 1] == 'C')
+	{
+				game -> nb_of_c = game -> nb_of_c - 1;
+				ft_printf("c : %i\n", game -> nb_of_c);
+	}
+	if (game -> x + 1 < game -> column && game -> tab[game -> y][game -> x + 1] != '1' && game -> tab[game -> y][game -> x + 1] != 'E')
+	{
+		game -> tab[game -> y][game -> x + 1 ] = 'P';
+		game -> tab[game -> y][game -> x] = '0';
+		game -> walk = game -> walk + 1;
+		ft_printf("Tu as fait %i coups\n", game -> walk);
+		ft_put_img_to_window(*game);
+	}
 }
 void move_d(t_game *game)
 {
-	(void)game;
+	find_start_position(game -> tab, game);
+	if(game -> y + 1 < game -> ligne && game -> tab[game -> y + 1][game -> x] == 'E' && game -> nb_of_c == 0 )
+		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	if(game -> y + 1 < game -> ligne && game -> tab[game -> y + 1][game -> x] != '1' && game -> tab[game -> y + 1][game -> x] != 'E' && game -> tab[game -> y + 1][game -> x] != 'C')
+	{
+				game -> nb_of_c = game -> nb_of_c - 1;
+				ft_printf("c : %i\n", game -> nb_of_c);
+	}
+	if(game -> y + 1 < game -> ligne && game -> tab[game -> y + 1][game -> x] != '1' && game -> tab[game -> y + 1][game -> x] != 'E')
+	{
+		game -> tab[game -> y + 1][game -> x] = 'P';
+		game -> tab[game -> y][game -> x] = '0';
+		game -> walk = game -> walk + 1;
+		ft_printf("Tu as fait %i coups\n", game -> walk);
+		ft_put_img_to_window(*game);	
+	}
 }
 
 int	handle_input(int key, t_game *game)
 {
 	if (key == XK_Escape)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	if (key == XK_W)
+	if (key == XK_w)
 		move_w(game);
-	if (key == XK_A)
+	if (key == XK_a)
 		move_a(game);
-	if (key == XK_S)
+	if (key == XK_s)
 		move_s(game);
-	if (key == XK_D)
+	if (key == XK_d)
 		move_d(game);
 	return (0);
 }
@@ -188,6 +245,7 @@ int main(int argc, char *argv[])
 	game.win_ptr = mlx_new_window(game.mlx_ptr, 64 * game.ligne, 64 * game.column, "Medieval combat");
 	if (game.win_ptr == NULL)
 		ft_free_mlx_error(game.win_ptr);
+	game.walk = 0;
 	mlx_loop_hook(game.mlx_ptr, &handle_no_event, &game);
 	mlx_key_hook(game.win_ptr, &handle_input, &game);
 	
@@ -200,10 +258,9 @@ int main(int argc, char *argv[])
 	
 	mlx_loop(game.mlx_ptr);
 	mlx_destroy_display(game.mlx_ptr);
-	free(game.img_house);
-	free(game.img_grass);
-	free(game.img_tree);
-	free(game.img_warrior);
-	free(game.mlx_ptr);
+	// mlx_destroy_image(game.mlx_ptr, game.img_house);
+	// mlx_destroy_image(game.mlx_ptr, game.img_grass);
+	// mlx_destroy_image(game.mlx_ptr, game.img_tree);
+	// mlx_destroy_image(game.mlx_ptr, game.img_warrior);
 	ft_free_map(game, tab);
 }

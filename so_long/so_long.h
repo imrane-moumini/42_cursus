@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:37:49 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/20 18:52:03 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/21 19:56:04 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_point
 	void	*img_mushroom;
 	int		img_width;
 	int		img_height;
+	int		walk;
 }			t_game;
 
 char	**tab_copy(char **tab, int number_of_column, int number_of_ligne);
@@ -84,4 +85,12 @@ void	ft_free_map(t_game game, char **tab);
 int		ft_result_false(t_game game, char** tab, t_game testvalidpath);
 void	ft_test(t_game game, char **tab);
 t_game	check_map_part(char *argv);
+void ft_put_img_to_window(t_game game);
+int	handle_input(int key, t_game *game);
+void move_d(t_game *game);
+void move_s(t_game *game);
+void move_a(t_game *game);
+void move_w(t_game *game);
+int	handle_no_event(void *game);
+void ft_free_mlx_error(void *ptr);
 #endif 
