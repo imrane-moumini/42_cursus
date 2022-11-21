@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/21 21:30:45 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/21 21:48:09 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,10 +258,12 @@ int main(int argc, char *argv[])
 	ft_put_img_to_window(game);
 	
 	mlx_loop(game.mlx_ptr);
+	mlx_destroy_image(game.mlx_ptr, game.img_house);
+	mlx_destroy_image(game.mlx_ptr, game.img_grass);
+	mlx_destroy_image(game.mlx_ptr, game.img_tree);
+	mlx_destroy_image(game.mlx_ptr, game.img_warrior);
+	mlx_destroy_image(game.mlx_ptr, game.img_mushroom);
 	mlx_destroy_display(game.mlx_ptr);
-	// mlx_destroy_image(game.mlx_ptr, game.img_house);
-	// mlx_destroy_image(game.mlx_ptr, game.img_grass);
-	// mlx_destroy_image(game.mlx_ptr, game.img_tree);
-	// mlx_destroy_image(game.mlx_ptr, game.img_warrior);
 	ft_free_map(game, tab);
+	free(game.mlx_ptr);
 }
