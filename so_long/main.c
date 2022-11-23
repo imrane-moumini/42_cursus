@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/23 20:15:25 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/23 21:12:56 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,10 +197,32 @@ void move_d(t_game *game)
 	}
 }
 
+int handle_click(t_game *game)
+{
+	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	ft_destroy_map(game);
+	return (0);
+}
+
+void ft_destroy_map(t_game *game)
+{
+	mlx_destroy_image(game -> mlx_ptr, game -> img_house);
+	mlx_destroy_image(game -> mlx_ptr, game -> img_grass);
+	mlx_destroy_image(game -> mlx_ptr, game -> img_tree);
+	mlx_destroy_image(game -> mlx_ptr, game -> img_warrior);
+	mlx_destroy_image(game -> mlx_ptr, game -> img_mushroom);
+	mlx_destroy_display(game -> mlx_ptr);
+	ft_free_map(*game, game -> tab_copy);
+	free(game -> mlx_ptr);
+	exit(1);
+}
 int	handle_input(int key, t_game *game)
 {
 	if (key == XK_Escape)
+	{
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+		ft_destroy_map(game);
+	}
 	if (key == XK_w)
 		move_w(game);
 	if (key == XK_a)
@@ -211,6 +233,7 @@ int	handle_input(int key, t_game *game)
 		move_d(game);
 	return (0);
 }
+
 
 void ft_put_img_to_window(t_game game)
 {
@@ -302,6 +325,7 @@ int main(int argc, char *argv[])
 	find_start_position(game.tab, &game);
 	nbr_of_collectible(game.tab, &game);
 	tab = tab_copy(game.tab, game.column, game.ligne);
+	game.tab_copy = tab;
 	testvalidpath = is_path_valid(tab, game);
 	if (ft_result_false(game, tab, testvalidpath) == 0)
 		return(1);
@@ -314,6 +338,8 @@ int main(int argc, char *argv[])
 		ft_free_mlx_error(game.win_ptr);
 	game.walk = 0;
 	mlx_loop_hook(game.mlx_ptr, &handle_no_event, &game);
+	//mlx_mouse_hook (game.win_ptr, &handle_click, &game);
+	//mlx_hook(game.mlx_ptr, DestroyNotify, StructureNotifyMask, &handle_click, &game);
 	mlx_hook(game.win_ptr,  KeyPress, KeyPressMask, &handle_input, &game);
 	//mlx_key_hook(game.win_ptr, &handle_input, &game);
 	
@@ -323,14 +349,5 @@ int main(int argc, char *argv[])
 	game.img_warrior = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Warrior.xpm", &game.img_width, &game.img_height);
 	game.img_mushroom = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Mushroom_01.xpm", &game.img_width, &game.img_height);
 	ft_put_img_to_window(game);
-	
 	mlx_loop(game.mlx_ptr);
-	mlx_destroy_image(game.mlx_ptr, game.img_house);
-	mlx_destroy_image(game.mlx_ptr, game.img_grass);
-	mlx_destroy_image(game.mlx_ptr, game.img_tree);
-	mlx_destroy_image(game.mlx_ptr, game.img_warrior);
-	mlx_destroy_image(game.mlx_ptr, game.img_mushroom);
-	mlx_destroy_display(game.mlx_ptr);
-	ft_free_map(game, tab);
-	free(game.mlx_ptr);
 }

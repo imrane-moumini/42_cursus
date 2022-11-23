@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:37:49 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/23 19:45:05 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/23 21:09:26 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ typedef struct s_point
 	int		img_width;
 	int		img_height;
 	int		walk;
-}			t_game;
+	char	**tab_copy;
+}				t_game;
 
 char	**tab_copy(char **tab, int number_of_column, int number_of_ligne);
 t_game	is_path_valid(char **t, t_game g);
@@ -95,4 +96,5 @@ void ft_free_mlx_error(void *ptr);
 int	check_dot(char *str);
 int check_ber(char *str);
 int	ft_strcmp(char *s1, char *s2);
+void ft_destroy_map(t_game *game);
 #endif 
