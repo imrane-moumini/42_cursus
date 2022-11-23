@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/23 18:21:46 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/23 19:34:55 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,55 @@ void ft_put_img_to_window(t_game game)
 		i++;
 	}
 }
+int	check_dot(char *str)
+{
+	int i;
 
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '.')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+int	ft_strcmp(char *s1, char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	while ((s1[i] != '\0') || (s2[i] != '\0'))
+	{
+		if (s1[i] != s2[i])
+		{
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		}
+		i++;
+	}
+	return (0);
+}
+int check_ber(char *str)
+{
+	char	*ber;
+	int		i;
+		
+	i = 0;	
+	ber = ".ber";
+	if (check_dot(str) == 0)
+		return (0);
+	while (str[i] != '\0')
+	{
+		if (str[i] == '.')
+		{
+			if (ft_strcmp(str+i, ber) != 0)
+				return (0);
+		}
+		i++;
+	}
+	return (1);
+	 	
+}
 int main(int argc, char *argv[])
 {
 	char **tab;
@@ -231,6 +279,8 @@ int main(int argc, char *argv[])
 	
 	if (argc != 2)
 		return(1);
+	if(check_ber(argv[1]) == 0)
+		return (1);
 	game = check_map_part(argv[1]);
 	find_start_position(game.tab, &game);
 	nbr_of_collectible(game.tab, &game);
