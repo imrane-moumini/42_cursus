@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/21 21:48:09 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/23 18:21:46 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void move_w(t_game *game)
 	find_start_position(game -> tab, game);
 	if (game -> x - 1 >= 0 &&  game -> tab[game -> y][game -> x - 1] == 'E' && game -> nb_of_c == 0)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	if(game -> x - 1 >= 0 && game -> tab[game -> y][game -> x - 1] != '1' && game -> tab[game -> y][game -> x - 1] != 'E' &&  game -> tab[game -> y][game -> x - 1] == 'C')
+	if(game -> x - 1 >= 0 && game -> tab[game -> y][game -> x - 1] == 'C')
 	{
 				game -> nb_of_c = game -> nb_of_c - 1;
 				ft_printf("c : %i\n", game -> nb_of_c);
@@ -127,7 +127,7 @@ void move_a(t_game *game)
 	find_start_position(game -> tab, game);
 	if (game -> y - 1 >= 0 && game -> tab[game -> y - 1][game -> x] == 'E' && game -> nb_of_c == 0)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	if (game -> y - 1 >= 0 && game -> tab[game -> y - 1][game -> x] != '1' && game -> tab[game -> y - 1][game -> x] != 'E' && game -> tab[game -> y - 1][game -> x] == 'C')
+	if (game -> y - 1 >= 0 && game -> tab[game -> y - 1][game -> x] == 'C')
 	{
 				game -> nb_of_c = game -> nb_of_c - 1;
 				ft_printf("c : %i\n", game -> nb_of_c);
@@ -146,7 +146,7 @@ void move_s(t_game *game)
 	find_start_position(game -> tab, game);
 	if (game -> x + 1 < game -> column && game -> tab[game -> y][game -> x + 1] == 'E' && game -> nb_of_c == 0)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	if (game -> x + 1 < game -> column && game -> tab[game -> y][game -> x + 1] != '1' && game -> tab[game -> y][game -> x + 1] != 'E' && game -> tab[game -> y][game -> x + 1] == 'C')
+	if (game -> x + 1 < game -> column  && game -> tab[game -> y][game -> x + 1] == 'C')
 	{
 				game -> nb_of_c = game -> nb_of_c - 1;
 				ft_printf("c : %i\n", game -> nb_of_c);
@@ -165,7 +165,7 @@ void move_d(t_game *game)
 	find_start_position(game -> tab, game);
 	if(game -> y + 1 < game -> ligne && game -> tab[game -> y + 1][game -> x] == 'E' && game -> nb_of_c == 0 )
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	if(game -> y + 1 < game -> ligne && game -> tab[game -> y + 1][game -> x] != '1' && game -> tab[game -> y + 1][game -> x] != 'E' && game -> tab[game -> y + 1][game -> x] != 'C')
+	if(game -> y + 1 < game -> ligne && game -> tab[game -> y + 1][game -> x] == 'C')
 	{
 				game -> nb_of_c = game -> nb_of_c - 1;
 				ft_printf("c : %i\n", game -> nb_of_c);

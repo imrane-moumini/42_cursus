@@ -6,32 +6,13 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 23:34:05 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/18 20:22:21 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/23 18:32:13 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	ft_zero(char **tab)
-{
-	int	i;
-	int	j;
 
-	i = 0;
-	j = 0;
-	while (tab[i] != NULL)
-	{
-		while (tab[i][j] != '\0')
-		{
-			if (tab[i][j] == '0')
-				return (1);
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-	return (0);
-}
 
 int	ft_one(char **tab)
 {

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 20:14:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/18 20:34:26 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/23 18:32:03 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	car_is_here(char **tab)
 {
-	if (ft_zero(tab) == 0 || ft_one(tab) == 0)
+	if (ft_one(tab) == 0)
 		return (0);
 	if (ft_c(tab) == 0 || ft_e(tab) == 0 || ft_p(tab) == 0)
 		return (0);
