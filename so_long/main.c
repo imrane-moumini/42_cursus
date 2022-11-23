@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/23 21:35:29 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/23 21:54:28 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,35 +31,6 @@ void ft_free_map(t_game game, char **tab)
  	free(tab);
 }
 
-int ft_result_false(t_game game, char** tab, t_game testvalidpath)
-{
-	if (game.testcar == 0 )
-	{
-		ft_printf("error false caracter\n");
-		ft_free_map(game, tab);
-		return (0);
-	}
-	if ( game.testrect == 0)
-	{
-		ft_printf("error map is not a rectangle\n");
-		ft_free_map(game, tab);
-		return (0);
-	}
-	if (game.testclose == 0  )
-	{
-		ft_printf("error map is not close\n");
-		ft_free_map(game, tab);
-		return (0);
-	}
-	if (testvalidpath.map_nb_of_c != game.nb_of_c || testvalidpath.is_an_exit != 1 )
-	{
-		ft_printf("error no valid path\n");
-		ft_free_map(game, tab);
-		return (0);
-	}
-	return (1);
-	
-}
 
 void ft_test(t_game game, char **tab)
 {
@@ -311,6 +282,43 @@ int check_ber(char *str)
 	return (1);
 	 	
 }
+
+int ft_result_false_before_path(t_game game, char** tab)
+{
+	if (game.testcar == 0 )
+	{
+		ft_printf("error false caracter\n");
+		ft_free_map(game, tab);
+		return (0);
+	}
+	if ( game.testrect == 0)
+	{
+		ft_printf("error map is not a rectangle\n");
+		ft_free_map(game, tab);
+		return (0);
+	}
+	if (game.testclose == 0  )
+	{
+		ft_printf("error map is not close\n");
+		ft_free_map(game, tab);
+		return (0);
+	}
+	return (1);
+	
+}
+
+int ft_result_false_after_path(t_game game, char** tab, t_game testvalidpath)
+{
+	if (testvalidpath.map_nb_of_c != game.nb_of_c || testvalidpath.is_an_exit != 1 )
+	{
+		ft_printf("error no valid path\n");
+		ft_free_map(game, tab);
+		return (0);
+	}
+	return (1);
+	
+}
+	
 int main(int argc, char *argv[])
 {
 	char **tab;
@@ -326,8 +334,10 @@ int main(int argc, char *argv[])
 	nbr_of_collectible(game.tab, &game);
 	tab = tab_copy(game.tab, game.column, game.ligne);
 	game.tab_copy = tab;
+	if (ft_result_false_before_path(game, tab) == 0)
+		return(1);
 	testvalidpath = is_path_valid(tab, game);
-	if (ft_result_false(game, tab, testvalidpath) == 0)
+	if (ft_result_false_after_path(game, tab, testvalidpath) == 0)
 		return(1);
 	ft_test(game, tab);
 	game.mlx_ptr = mlx_init();
@@ -341,7 +351,6 @@ int main(int argc, char *argv[])
 	mlx_mouse_hook (game.win_ptr, &handle_click, &game);
 	mlx_hook(game.win_ptr,  KeyPress, KeyPressMask, &handle_input, &game);
 	mlx_hook(game.win_ptr, DestroyNotify, StructureNotifyMask, &handle_click, &game);
-	//mlx_key_hook(game.win_ptr, &handle_input, &game);
 	
 	game.img_grass = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Grass_Flat.xpm", &game.img_width, &game.img_height);
 	game.img_house = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Knight_House.xpm", &game.img_width, &game.img_height);
