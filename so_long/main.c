@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/23 19:34:55 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/23 19:58:02 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,27 @@ void ft_free_map(t_game game, char **tab)
 
 int ft_result_false(t_game game, char** tab, t_game testvalidpath)
 {
-	if (game.testcar == 0 || game.testrect == 0 || game.testclose == 0 
-		|| testvalidpath.map_nb_of_c != game.nb_of_c || testvalidpath.is_an_exit != 1 )
+	if (game.testcar == 0 )
 	{
-		ft_printf("error\n");
+		ft_printf("error false caracter\n");
+		ft_free_map(game, tab);
+		return (0);
+	}
+	if ( game.testrect == 0)
+	{
+		ft_printf("error map is not a rectangle\n");
+		ft_free_map(game, tab);
+		return (0);
+	}
+	if (game.testclose == 0  )
+	{
+		ft_printf("error map is not close\n");
+		ft_free_map(game, tab);
+		return (0);
+	}
+	if (testvalidpath.map_nb_of_c != game.nb_of_c || testvalidpath.is_an_exit != 1 )
+	{
+		ft_printf("error no valid path\n");
 		ft_free_map(game, tab);
 		return (0);
 	}

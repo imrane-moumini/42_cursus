@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:37:49 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/23 18:32:22 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/23 19:45:05 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,7 @@ void move_a(t_game *game);
 void move_w(t_game *game);
 int	handle_no_event(void *game);
 void ft_free_mlx_error(void *ptr);
+int	check_dot(char *str);
+int check_ber(char *str);
+int	ft_strcmp(char *s1, char *s2);
 #endif 
