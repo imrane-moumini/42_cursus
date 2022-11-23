@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/23 21:12:56 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/23 21:35:29 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,9 +338,9 @@ int main(int argc, char *argv[])
 		ft_free_mlx_error(game.win_ptr);
 	game.walk = 0;
 	mlx_loop_hook(game.mlx_ptr, &handle_no_event, &game);
-	//mlx_mouse_hook (game.win_ptr, &handle_click, &game);
-	//mlx_hook(game.mlx_ptr, DestroyNotify, StructureNotifyMask, &handle_click, &game);
+	mlx_mouse_hook (game.win_ptr, &handle_click, &game);
 	mlx_hook(game.win_ptr,  KeyPress, KeyPressMask, &handle_input, &game);
+	mlx_hook(game.win_ptr, DestroyNotify, StructureNotifyMask, &handle_click, &game);
 	//mlx_key_hook(game.win_ptr, &handle_input, &game);
 	
 	game.img_grass = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Grass_Flat.xpm", &game.img_width, &game.img_height);
