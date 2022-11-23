@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/23 19:58:02 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/23 20:15:25 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,20 +219,20 @@ void ft_put_img_to_window(t_game game)
 
 	i = 0;
 	j = 0;
-	while (game.tab[i] != NULL)
+	while (game.tab[i] != NULL )
 	{
 		while (game.tab[i][j] != '\0')
 		{
 			if (game.tab[i][j] == '1')
-				mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_tree, i * 64, j * 64);
+				mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_tree, j * 64, i * 64);
 			if (game.tab[i][j] == '0')
-				mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_grass, i * 64, j * 64);
+				mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_grass, j * 64, i * 64);
 			if (game.tab[i][j] == 'P')
-				mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_warrior, i * 64, j * 64);
+				mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_warrior, j * 64, i * 64);
 			if (game.tab[i][j] == 'E')
-				mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_house, i * 64, j * 64);
+				mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_house, j * 64, i * 64);
 			if (game.tab[i][j] == 'C')
-				mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_mushroom, i * 64, j * 64);
+				mlx_put_image_to_window(game.mlx_ptr, game.win_ptr, game.img_mushroom, j * 64, i * 64);
 			j++;
 		}
 		j = 0;
@@ -309,7 +309,7 @@ int main(int argc, char *argv[])
 	game.mlx_ptr = mlx_init();
 	if (game.mlx_ptr == NULL)
 		ft_free_mlx_error(game.mlx_ptr);
-	game.win_ptr = mlx_new_window(game.mlx_ptr, 64 * game.ligne, 64 * game.column, "Medieval combat");
+	game.win_ptr = mlx_new_window(game.mlx_ptr, 64 * game.column, 64 * game.ligne, "Medieval combat");
 	if (game.win_ptr == NULL)
 		ft_free_mlx_error(game.win_ptr);
 	game.walk = 0;
