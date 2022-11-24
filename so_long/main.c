@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/23 23:28:44 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/24 19:09:43 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,26 +93,6 @@ int	handle_no_event(void *game)
 void move_w(t_game *game)
 {
 	find_start_position(game -> tab, game);
-	if (game -> x - 1 >= 0 &&  game -> tab[game -> y][game -> x - 1] == 'E' && game -> nb_of_c == 0)
-		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	if(game -> x - 1 >= 0 && game -> tab[game -> y][game -> x - 1] == 'C')
-	{
-				game -> nb_of_c = game -> nb_of_c - 1;
-				ft_printf("c : %i\n", game -> nb_of_c);
-	}	
-	if (game -> x - 1 >= 0 && game -> tab[game -> y][game -> x - 1] != '1' && game -> tab[game -> y][game -> x - 1] != 'E')
-	{
-		
-		game -> tab[game -> y][game -> x -1 ] = 'P';
-		game -> tab[game -> y][game -> x] = '0';
-		game -> walk = game -> walk + 1;
-		ft_printf("Tu as fait %i coups\n", game -> walk);
-		ft_put_img_to_window(*game);	
-	}
-}
-void move_a(t_game *game)
-{
-	find_start_position(game -> tab, game);
 	if (game -> y - 1 >= 0 && game -> tab[game -> y - 1][game -> x] == 'E' && game -> nb_of_c == 0)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	if (game -> y - 1 >= 0 && game -> tab[game -> y - 1][game -> x] == 'C')
@@ -129,26 +109,28 @@ void move_a(t_game *game)
 			ft_put_img_to_window(*game);	
 	}
 }
-void move_s(t_game *game)
+void move_a(t_game *game)
 {
 	find_start_position(game -> tab, game);
-	if (game -> x + 1 < game -> column && game -> tab[game -> y][game -> x + 1] == 'E' && game -> nb_of_c == 0)
+	if (game -> x - 1 >= 0 &&  game -> tab[game -> y][game -> x - 1] == 'E' && game -> nb_of_c == 0)
 		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	if (game -> x + 1 < game -> column  && game -> tab[game -> y][game -> x + 1] == 'C')
+	if(game -> x - 1 >= 0 && game -> tab[game -> y][game -> x - 1] == 'C')
 	{
 				game -> nb_of_c = game -> nb_of_c - 1;
 				ft_printf("c : %i\n", game -> nb_of_c);
-	}
-	if (game -> x + 1 < game -> column && game -> tab[game -> y][game -> x + 1] != '1' && game -> tab[game -> y][game -> x + 1] != 'E')
+	}	
+	if (game -> x - 1 >= 0 && game -> tab[game -> y][game -> x - 1] != '1' && game -> tab[game -> y][game -> x - 1] != 'E')
 	{
-		game -> tab[game -> y][game -> x + 1 ] = 'P';
+		
+		game -> tab[game -> y][game -> x -1 ] = 'P';
 		game -> tab[game -> y][game -> x] = '0';
 		game -> walk = game -> walk + 1;
 		ft_printf("Tu as fait %i coups\n", game -> walk);
-		ft_put_img_to_window(*game);
+		ft_put_img_to_window(*game);	
 	}
+	
 }
-void move_d(t_game *game)
+void move_s(t_game *game)
 {
 	find_start_position(game -> tab, game);
 	if(game -> y + 1 < game -> ligne && game -> tab[game -> y + 1][game -> x] == 'E' && game -> nb_of_c == 0 )
@@ -166,6 +148,26 @@ void move_d(t_game *game)
 		ft_printf("Tu as fait %i coups\n", game -> walk);
 		ft_put_img_to_window(*game);	
 	}
+}
+void move_d(t_game *game)
+{
+	find_start_position(game -> tab, game);
+	if (game -> x + 1 < game -> column && game -> tab[game -> y][game -> x + 1] == 'E' && game -> nb_of_c == 0)
+		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+	if (game -> x + 1 < game -> column  && game -> tab[game -> y][game -> x + 1] == 'C')
+	{
+				game -> nb_of_c = game -> nb_of_c - 1;
+				ft_printf("c : %i\n", game -> nb_of_c);
+	}
+	if (game -> x + 1 < game -> column && game -> tab[game -> y][game -> x + 1] != '1' && game -> tab[game -> y][game -> x + 1] != 'E')
+	{
+		game -> tab[game -> y][game -> x + 1 ] = 'P';
+		game -> tab[game -> y][game -> x] = '0';
+		game -> walk = game -> walk + 1;
+		ft_printf("Tu as fait %i coups\n", game -> walk);
+		ft_put_img_to_window(*game);
+	}
+
 }
 
 int handle_click(t_game *game)
