@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/24 19:09:43 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/25 17:55:45 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void move_w(t_game *game)
 {
 	find_start_position(game -> tab, game);
 	if (game -> y - 1 >= 0 && game -> tab[game -> y - 1][game -> x] == 'E' && game -> nb_of_c == 0)
-		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+		handle_click(game);
 	if (game -> y - 1 >= 0 && game -> tab[game -> y - 1][game -> x] == 'C')
 	{
 				game -> nb_of_c = game -> nb_of_c - 1;
@@ -113,7 +113,7 @@ void move_a(t_game *game)
 {
 	find_start_position(game -> tab, game);
 	if (game -> x - 1 >= 0 &&  game -> tab[game -> y][game -> x - 1] == 'E' && game -> nb_of_c == 0)
-		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+		handle_click(game);
 	if(game -> x - 1 >= 0 && game -> tab[game -> y][game -> x - 1] == 'C')
 	{
 				game -> nb_of_c = game -> nb_of_c - 1;
@@ -134,7 +134,7 @@ void move_s(t_game *game)
 {
 	find_start_position(game -> tab, game);
 	if(game -> y + 1 < game -> ligne && game -> tab[game -> y + 1][game -> x] == 'E' && game -> nb_of_c == 0 )
-		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+		handle_click(game);
 	if(game -> y + 1 < game -> ligne && game -> tab[game -> y + 1][game -> x] == 'C')
 	{
 				game -> nb_of_c = game -> nb_of_c - 1;
@@ -153,7 +153,7 @@ void move_d(t_game *game)
 {
 	find_start_position(game -> tab, game);
 	if (game -> x + 1 < game -> column && game -> tab[game -> y][game -> x + 1] == 'E' && game -> nb_of_c == 0)
-		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+		handle_click(game);
 	if (game -> x + 1 < game -> column  && game -> tab[game -> y][game -> x + 1] == 'C')
 	{
 				game -> nb_of_c = game -> nb_of_c - 1;
@@ -370,8 +370,6 @@ int main(int argc, char *argv[])
 	if (game.win_ptr == NULL)
 		ft_free_mlx_error(game.win_ptr);
 	game.walk = 0;
-	mlx_loop_hook(game.mlx_ptr, &handle_no_event, &game);
-	mlx_mouse_hook (game.win_ptr, &handle_click, &game);
 	mlx_hook(game.win_ptr,  KeyPress, KeyPressMask, &handle_input, &game);
 	mlx_hook(game.win_ptr, DestroyNotify, StructureNotifyMask, &handle_click, &game);
 	game.img_grass = NULL;

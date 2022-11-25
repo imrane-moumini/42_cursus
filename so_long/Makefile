@@ -9,25 +9,25 @@ SRC = main.c \
 	map_gestion/checks3.c \
 	map_gestion/checks4.c \
 
-OBJ_SO_LONG = *.o
+OBJ_SO_LONG = $(SRC:%.c=%.o) 
 
-libx = -L minilibx -lmlx_Linux
-libxflags = -lmlx -lXext -lX11 -lmlx_Linux
+libx = -L minilibx/ 
+libxflags = -lmlx -lXext -lX11 -lz -lm
 
 all: $(NAME)
 
 $(NAME) : $(OBJ_SO_LONG)
 		$(MAKE) --no-print-directory -C libft
-		$(MAKE) --no-print-directory -C minilibx
-		$(CC) $(OBJ_SO_LONG) libft/libft.a $(libx) $(libxflags) -o $(NAME) -g
+		$(MAKE) --no-print-directory all -C minilibx
+		$(CC) $(OBJ_SO_LONG) minilibx/libmlx_Linux.a libft/libft.a $(libx) $(libxflags) -o $(NAME) -g
 
-$(OBJ_SO_LONG) : $(SRC)
-			$(CC) -c $(SRC)
+%.o : %.c
+			$(CC) $(libx) $(libxflags) -c $< -o $@
 
 clean :
 	rm -f $(OBJ_SO_LONG)
-	rm -f ./libft/*.o
-	rm so_long
+	make fclean -C libft
+	make clean -C minilibx
 
 fclean : clean
 	rm -f $(NAME)
