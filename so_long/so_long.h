@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:37:49 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/25 20:24:14 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/25 21:38:58 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # include "minilibx/mlx.h"
 # include <X11/keysym.h>
 # include <X11/X.h>
-
+# define WIDTH 64 * game.column
+# define LENGTH 64 * game.line
 typedef struct s_point
 {
 	int		x;
@@ -100,4 +101,8 @@ int ft_result_false_after_path(t_game game, char** tab, t_game testvalidpath);
 int ft_result_false_before_path(t_game game);
 void ft_destroy_map_image_error(t_game *game);
 int handle_click(t_game *game);
+void put_image_to_null(t_game *game);
+void ft_check_mlx_ptr(t_game *game);
+void ft_check_win_ptr(t_game *game);
+void ft_check_first(int argc, char *argv[]);
 #endif 

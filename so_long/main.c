@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/25 20:24:36 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/25 21:43:30 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,19 +301,19 @@ int ft_result_false_before_path(t_game game)
 	{
 		ft_printf("error false caracter\n");
 		ft_free_map_before_path(game);
-		return (0);
+		exit (1);
 	}
 	if ( game.testrect == 0)
 	{
 		ft_printf("error map is not a rectangle\n");
 		ft_free_map_before_path(game);
-		return (0);
+		exit (1);
 	}
 	if (game.testclose == 0  )
 	{
 		ft_printf("error map is not close\n");
 		ft_free_map_before_path(game);
-		return (0);
+		exit (1);
 	}
 	return (1);
 	
@@ -325,14 +325,14 @@ int ft_result_false_after_path(t_game game, char** tab, t_game testvalidpath)
 	{
 		ft_printf("error no valid path\n");
 		ft_free_map(game, tab);
-		return (0);
+		exit (1);
 	}
 	
 	if (testvalidpath.is_an_exit != 1)
 	{
 		ft_printf("error no valid path\n");
 		ft_free_map(game, tab);
-		return (0);
+		exit (1);
 	}
 	return (1);
 	
@@ -358,57 +358,82 @@ void ft_destroy_map_image_error(t_game *game)
 	free(game -> mlx_ptr);
 	exit(1);
 }
+void put_image_to_null(t_game *game)
+{
+	game -> img_grass = NULL;
+	game -> img_house = NULL;
+	game -> img_tree = NULL;
+	game -> img_warrior = NULL;
+	game -> img_mushroom = NULL;
+}
 
+void ft_image(t_game *game)
+{
+		game->img_grass = mlx_xpm_file_to_image(game->mlx_ptr, "./image/Grass.xpm", \
+		&game -> img_width, &game -> img_height);
+	if (!game->img_grass)
+		ft_destroy_map_image_error(game);
+	game->img_house = mlx_xpm_file_to_image(game->mlx_ptr, "./image/House.xpm", \
+		&game->img_width, &game->img_height);
+	if (!game->img_house)
+		ft_destroy_map_image_error(game);
+	game->img_tree = mlx_xpm_file_to_image(game->mlx_ptr, "./image/Tree.xpm", \
+		&game->img_width, &game->img_height);
+	if (!game->img_tree)
+		ft_destroy_map_image_error(game);
+	game->img_warrior = mlx_xpm_file_to_image(game->mlx_ptr, \
+		"./image/Warrior.xpm", &game->img_width, &game->img_height);
+	if (!game->img_warrior)
+		ft_destroy_map_image_error(game);
+	game->img_mushroom = mlx_xpm_file_to_image(game->mlx_ptr,\
+		 "./image/Mushroom_01.xpm", &game->img_width, &game->img_height);
+	if (!game->img_mushroom)
+		ft_destroy_map_image_error(game);
+}
+
+void ft_check_mlx_ptr(t_game *game)
+{
+	if (game -> mlx_ptr == NULL)
+		ft_free_mlx_error(game -> mlx_ptr);
+}
+void ft_check_win_ptr(t_game *game)
+{
+	if (game -> win_ptr == NULL)
+		ft_free_mlx_error(game -> win_ptr);
+}
+
+void ft_check_first(int argc, char *argv[])
+{
+	if (argc != 2)
+		exit (1);
+	if(check_ber(argv[1]) == 0)
+		exit (1);
+}
 int main(int argc, char *argv[])
 {
 	char **tab;
 	t_game testvalidpath;
-	t_game	game;
+	t_game	g;
 	
-	if (argc != 2)
-		return(1);
-	if(check_ber(argv[1]) == 0)
-		return (1);
-	game = check_map_part(argv[1]);
-	find_start_position(game.tab, &game);
-	nbr_of_collectible(game.tab, &game);
-	if (ft_result_false_before_path(game) == 0)
-		return(1);
-	tab = tab_copy(game.tab, game.column, game.ligne);
-	game.tab_copy = tab;
-	testvalidpath = is_path_valid(tab, game);
-	if (ft_result_false_after_path(game, tab, testvalidpath) == 0)
-		return(1);
-	ft_test(game, tab);
-	game.mlx_ptr = mlx_init();
-	if (game.mlx_ptr == NULL)
-		ft_free_mlx_error(game.mlx_ptr);
-	game.win_ptr = mlx_new_window(game.mlx_ptr, 64 * game.column, 64 * game.ligne, "Medieval combat");
-	if (game.win_ptr == NULL)
-		ft_free_mlx_error(game.win_ptr);
-	game.walk = 0;
-	mlx_hook(game.win_ptr,  KeyPress, KeyPressMask, &handle_input, &game);
-	mlx_hook(game.win_ptr, DestroyNotify, StructureNotifyMask, &handle_click, &game);
-	game.img_grass = NULL;
-	game.img_house = NULL;
-	game.img_tree = NULL;
-	game.img_warrior = NULL;
-	game.img_mushroom = NULL;
-	game.img_grass = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Grass_Flat.xpm", &game.img_width, &game.img_height);
-	if (!game.img_grass)
-		ft_destroy_map_image_error(&game);
-	game.img_house = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Knight_House.xpm", &game.img_width, &game.img_height);
-	if (!game.img_house)
-		ft_destroy_map_image_error(&game);
-	game.img_tree = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Tree.xpm", &game.img_width, &game.img_height);
-	if (!game.img_tree)
-		ft_destroy_map_image_error(&game);
-	game.img_warrior = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Warrior.xpm", &game.img_width, &game.img_height);
-	if (!game.img_warrior)
-		ft_destroy_map_image_error(&game);
-	game.img_mushroom = mlx_xpm_file_to_image(game.mlx_ptr, "./image/Mushroom_01.xpm", &game.img_width, &game.img_height);
-	if (!game.img_mushroom)
-		ft_destroy_map_image_error(&game);
-	ft_put_img_to_window(game);
-	mlx_loop(game.mlx_ptr);
+	ft_check_first(argc,argv);
+	g = check_map_part(argv[1]);
+	find_start_position(g.tab, &g);
+	nbr_of_collectible(g.tab, &g);
+	ft_result_false_before_path(g);
+	tab = tab_copy(g.tab, g.column, g.ligne);
+	g.tab_copy = tab;
+	testvalidpath = is_path_valid(tab, g);
+	ft_result_false_after_path(g, tab, testvalidpath);
+	ft_test(g, tab);
+	g.mlx_ptr = mlx_init();
+	ft_check_mlx_ptr(&g);
+	g.win_ptr = mlx_new_window(g.mlx_ptr, 64 * g.column, 64 * g.ligne, "M");
+	ft_check_win_ptr(&g);
+	g.walk = 0;
+	mlx_hook(g.win_ptr,  KeyPress, KeyPressMask, &handle_input, &g);
+	mlx_hook(g.win_ptr, DestroyNotify, StructureNotifyMask, &handle_click, &g);
+	put_image_to_null(&g);
+	ft_image(&g);
+	ft_put_img_to_window(g);
+	mlx_loop(g.mlx_ptr);
 }
