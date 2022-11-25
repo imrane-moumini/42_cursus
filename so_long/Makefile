@@ -8,6 +8,12 @@ SRC = main.c \
 	map_gestion/checks2.c \
 	map_gestion/checks3.c \
 	map_gestion/checks4.c \
+	game_gestion/check_error.c \
+	game_gestion/check_error2.c \
+	game_gestion/ft_free.c \
+	game_gestion/handle_game.c \
+	game_gestion/handle_game2.c \
+	game_gestion/handle_image.c
 
 OBJ_SO_LONG = $(SRC:%.c=%.o) 
 
