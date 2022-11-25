@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 23:34:21 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/19 16:39:34 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:39:35 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,22 +48,19 @@ char	*allocate_column_while(char **tab, char *p, int fd)
 
 	j = 0;
 	i = 0;
-	while (p != NULL)
+	while (p)
 	{
-		while (p && p[i] != '\0')
+		while (p[i] != '\n' && p[i] != '\0')
+			i++;
+		if (p[i] == '\n' || p[i] == '\0')
 		{
-			while (p[i] != '\n' && p[i] != '\0')
-				i++;
-			if (p[i] == '\n' || p[i] == '\0')
-			{
-				tab[j] = ft_calloc(i + 1, sizeof(char));
-				if (tab[j] == NULL)
-					return (NULL);
-				j++;
-				i = 0;
-				free(p);
-				p = get_next_line(fd);
-			}
+			tab[j] = ft_calloc(i + 1, sizeof(char));
+			if (tab[j] == NULL)
+				return (NULL);
+			j++;
+			i = 0;
+			free(p);
+			p = get_next_line(fd);
 		}
 	}
 	return (p);

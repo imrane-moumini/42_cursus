@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 20:13:29 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/18 20:34:48 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:56:25 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,17 +84,13 @@ int	nb_column(char **tab)
 	i = 0;
 	j = 0;
 	counter = 0;
-	while (tab[i] != NULL)
-	{
 		while (tab[i][j] != '\0')
 		{
-			if (tab[i][j] == '\0')
+			if (tab[i][j] == '\n')
 				return (counter);
 			counter++;
 			j++;
 		}
-		i++;
-	}
 	return (counter);
 }
 

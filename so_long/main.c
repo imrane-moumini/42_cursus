@@ -6,12 +6,22 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:41:37 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/25 17:55:45 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/25 20:24:36 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 // check maps in main
+
+void ft_free_map_before_path(t_game game)
+{
+	while (game.ligne  >= 0)
+	{
+		free(game.tab[game.ligne]);
+		game.ligne--;
+	}
+	free(game.tab);
+}
 void ft_free_map(t_game game, char **tab)
 {
 	int save;
@@ -285,24 +295,24 @@ int check_ber(char *str)
 	 	
 }
 
-int ft_result_false_before_path(t_game game, char** tab)
+int ft_result_false_before_path(t_game game)
 {
 	if (game.testcar == 0 )
 	{
 		ft_printf("error false caracter\n");
-		ft_free_map(game, tab);
+		ft_free_map_before_path(game);
 		return (0);
 	}
 	if ( game.testrect == 0)
 	{
 		ft_printf("error map is not a rectangle\n");
-		ft_free_map(game, tab);
+		ft_free_map_before_path(game);
 		return (0);
 	}
 	if (game.testclose == 0  )
 	{
 		ft_printf("error map is not close\n");
-		ft_free_map(game, tab);
+		ft_free_map_before_path(game);
 		return (0);
 	}
 	return (1);
@@ -311,7 +321,14 @@ int ft_result_false_before_path(t_game game, char** tab)
 
 int ft_result_false_after_path(t_game game, char** tab, t_game testvalidpath)
 {
-	if (testvalidpath.map_nb_of_c != game.nb_of_c || testvalidpath.is_an_exit != 1 )
+	if (testvalidpath.map_nb_of_c != game.nb_of_c)
+	{
+		ft_printf("error no valid path\n");
+		ft_free_map(game, tab);
+		return (0);
+	}
+	
+	if (testvalidpath.is_an_exit != 1)
 	{
 		ft_printf("error no valid path\n");
 		ft_free_map(game, tab);
@@ -355,10 +372,10 @@ int main(int argc, char *argv[])
 	game = check_map_part(argv[1]);
 	find_start_position(game.tab, &game);
 	nbr_of_collectible(game.tab, &game);
+	if (ft_result_false_before_path(game) == 0)
+		return(1);
 	tab = tab_copy(game.tab, game.column, game.ligne);
 	game.tab_copy = tab;
-	if (ft_result_false_before_path(game, tab) == 0)
-		return(1);
 	testvalidpath = is_path_valid(tab, game);
 	if (ft_result_false_after_path(game, tab, testvalidpath) == 0)
 		return(1);
