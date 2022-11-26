@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:37:49 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/25 22:07:32 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/26 15:06:39 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@
 # include "minilibx/mlx.h"
 # include <X11/keysym.h>
 # include <X11/X.h>
-# define WIDTH 64 * game.column
-# define LENGTH 64 * game.line
+
 typedef struct s_point
 {
 	int		x;
@@ -40,11 +39,11 @@ typedef struct s_point
 	void	*mlx_ptr;
 	void	*win_ptr;
 	char	**tab;
-	void	*img_grass;
-	void	*img_house;
-	void	*img_tree;
-	void	*img_warrior;
-	void	*img_mushroom;
+	void	*grass;
+	void	*house;
+	void	*tree;
+	void	*warrior;
+	void	*mushroom;
 	int		img_width;
 	int		img_height;
 	int		walk;
@@ -80,30 +79,31 @@ int		ft_p(char **tab);
 int		ft_e(char **tab);
 int		ft_one(char **tab);
 int		right_car(char **tab);
-char 	*fill_tab_while(char **tab, char *p, int fd);
+char	*fill_tab_while(char **tab, char *p, int fd);
 char	*allocate_column_while(char **tab, char *p, int fd);
 void	ft_free_map(t_game game, char **tab);
 void	ft_test(t_game game, char **tab);
 t_game	check_map_part(char *argv);
-void ft_put_img_to_window(t_game game);
-int	handle_input(int key, t_game *game);
-void move_d(t_game *game);
-void move_s(t_game *game);
-void move_a(t_game *game);
-void move_w(t_game *game);
-void ft_free_mlx_error(void *ptr);
-int	check_dot(char *str);
-int check_ber(char *str);
-int	ft_strcmp(char *s1, char *s2);
-void ft_destroy_map(t_game *game);
-int ft_result_false_after_path(t_game game, char** tab, t_game testvalidpath);
-int ft_result_false_before_path(t_game game);
-void ft_destroy_map_image_error(t_game *game);
-int handle_click(t_game *game);
-void put_image_to_null(t_game *game);
-void ft_check_mlx_ptr(t_game *game);
-void ft_check_win_ptr(t_game *game);
-void ft_check_first(int argc, char *argv[]);
-void ft_image(t_game *game);
-void ft_free_map_before_path(t_game game);
+void	ft_put_img_to_window(t_game game);
+int		handle_input(int key, t_game *game);
+void	move_d(t_game *game);
+void	move_s(t_game *game);
+void	move_a(t_game *game);
+void	move_w(t_game *game);
+void	ft_free_mlx_error(void *ptr);
+int		check_dot(char *str);
+int		check_ber(char *str);
+int		ft_strcmp(char *s1, char *s2);
+void	ft_destroy_map(t_game *game);
+int		ft_result_false_after_path(t_game game, char **tab, t_game t);
+int		ft_result_false_before_path(t_game game);
+void	ft_destroy_map_image_error(t_game *game);
+int		handle_click(t_game *game);
+void	put_image_to_null(t_game *game);
+void	ft_check_mlx_ptr(t_game *game);
+void	ft_check_win_ptr(t_game *game);
+void	ft_check_first(int argc, char *argv[]);
+void	ft_image(t_game *game);
+void	ft_free_map_before_path(t_game game);
+void	ft_put_img_to_window_while(t_game g, int i, int j);
 #endif 

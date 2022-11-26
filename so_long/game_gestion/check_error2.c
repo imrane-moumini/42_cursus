@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 21:59:01 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/25 22:07:55 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/26 13:56:57 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_dot(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -26,15 +26,15 @@ int	check_dot(char *str)
 	return (0);
 }
 
-void ft_free_mlx_error(void *ptr)
+void	ft_free_mlx_error(void *ptr)
 {
 	free(ptr);
 	exit(1);
 }
 
-void ft_test(t_game game, char **tab)
+void	ft_test(t_game game, char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	ft_printf("the real one is :\n");

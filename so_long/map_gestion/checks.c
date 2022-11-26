@@ -6,13 +6,11 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 23:34:05 by imoumini          #+#    #+#             */
-/*   Updated: 2022/11/23 18:32:13 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/11/26 15:01:43 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-
 
 int	ft_one(char **tab)
 {
