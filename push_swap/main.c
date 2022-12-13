@@ -24,9 +24,16 @@ int main(int argc, char *argv[])
     ft_printf("---------------------------\n");
     while (ptr != NULL)
     {
-        ft_printf("in stack is %i\n",ptr -> data);
+        ft_printf(" %i\n",ptr -> data);
         ptr = ptr -> next;
-
     }
-    
+
+    ft_reverse_rotate(&head_stack_a, ft_last_node(head_stack_a), ft_before_last_node(head_stack_a));
+    ptr = head_stack_a;
+    ft_printf("---------------------------\n");
+    while (ptr != NULL)
+    {
+        ft_printf(" %i\n",ptr -> data);
+        ptr = ptr -> next;
+    }
 }

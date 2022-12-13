@@ -1,7 +1,8 @@
 NAME = push_swap
 CC = gcc -Wall -Werror -Wextra
 SRC = main.c \
-	stack/handle_stack.c
+	stack/handle_stack.c \
+	stack/handle_stack2.c
 	
 
 OBJ_PUSH_SWAP = $(SRC:%.c=%.o) 
