@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:59:30 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/15 17:19:07 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/15 18:42:12 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,32 @@ void	rrr(t_node **head_stack_a, t_node **head_stack_b)
 {
 	rra(head_stack_a);
 	rrb(head_stack_b);
+}
+
+void	pb(t_node **head_stack_a, t_node **head_stack_b)
+{
+	t_node	*ptr;
+
+	ptr = *head_stack_a;
+	if (head_stack_a == NULL)
+		return ;
+	else
+	{
+		add_beg(ptr -> data, head_stack_b);
+		del_first_node(head_stack_a);
+	}
+}
+
+void	pa(t_node **head_stack_a, t_node **head_stack_b)
+{
+	t_node	*ptr;
+
+	ptr = *head_stack_b;
+	if (head_stack_b == NULL)
+		return ;
+	else
+	{
+		add_beg(ptr -> data, head_stack_a);
+		del_first_node(head_stack_b);
+	}
 }
