@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:58 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/15 18:27:51 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/15 21:02:10 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int main(int argc, char *argv[])
     t_node *head_stack_a;
     t_node *save_head_a;
     t_node *save_head_b;
+    t_node *ptr;
     head_stack_a = NULL;
 
     // creer stack_a
@@ -35,11 +36,30 @@ int main(int argc, char *argv[])
         i++;
     }
     i = 0;
+    // check stack a
+    if (check_doublon_list(head_stack_a))
+    {
+        ptr = head_stack_a;
+        save_head_a = ptr;
+        while (save_head_a != NULL)
+        {
+            head_stack_a = save_head_a;
+            save_head_a = save_head_a -> next;
+            free(head_stack_a);
+        }
+        while (str[i])
+        {
+            free(str[i]);
+            i++;
+        }
+        free(str);
+        ft_printf("error : list has double\n");
+        exit(1);
+    }
     // creer stack_b vide
     t_node *head_stack_b;
     head_stack_b = NULL;
     // affiche stack_a et b
-    t_node *ptr;
     ptr = head_stack_a;
     ft_printf("---------------------------\n");
     ft_printf("stack a :\n");
