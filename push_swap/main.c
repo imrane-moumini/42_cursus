@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:58 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/16 22:23:40 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/16 22:47:55 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int main(int argc, char *argv[])
         exit(1);
     }
     add_index_to_stack(&head_stack_a, tab, nbr);
+    ft_printf("has to tri %i\n",has_to_tri(&head_stack_a));
     // creer stack_b vide
     t_node *head_stack_b;
     head_stack_b = NULL;

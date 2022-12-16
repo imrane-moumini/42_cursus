@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/16 22:09:14 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/16 22:48:17 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,5 @@ int nbr_tab(char **str);
 void tri_tab(int nbr, int *tab);
 void check_data_in_stack(t_node **head, int nb, int i);
 void add_index_to_stack(t_node **head, int *tab, int max);
-
+int has_to_tri(t_node **head);
 #endif
