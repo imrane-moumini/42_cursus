@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:49 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/15 18:40:10 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/16 17:44:46 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ void	ft_reverse_rotate(t_node **head)
 		return ;
 	if (ptr -> next == NULL)
 		return ;
+	if (ptr -> next -> next == NULL)
+	{
+		*head = last_node;
+		last_node -> next = ptr;
+		ptr -> next = NULL;
+	}
 	else
 	{
 		tmp = ptr -> next;

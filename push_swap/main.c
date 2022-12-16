@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:58 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/16 17:19:05 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/16 17:52:32 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,18 @@ int main(int argc, char *argv[])
         ptr = ptr -> next;
     }
      // test fonctions
-    pb(&head_stack_a, &head_stack_b);
-    pb(&head_stack_a, &head_stack_b);
-    pb(&head_stack_a, &head_stack_b);
-    pb(&head_stack_a, &head_stack_b);
-    pa(&head_stack_a, &head_stack_b);
+    pb( &head_stack_a,  &head_stack_b);
+    pb( &head_stack_a,  &head_stack_b);
+    pb( &head_stack_a,  &head_stack_b);
+    sa( &head_stack_a);
+    sb( &head_stack_b);
+    ss( &head_stack_a,  &head_stack_b);
+    ra( &head_stack_a);
+    rb( &head_stack_b);
+    rr( &head_stack_a,  &head_stack_b);
+    rra( &head_stack_a);
+    rrb( &head_stack_b);
+    rrr( &head_stack_a,  &head_stack_b);
     ptr = head_stack_a;
     save_head_a = ptr;
     ft_printf("---------------------------\n");
