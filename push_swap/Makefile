@@ -6,8 +6,8 @@ SRC = main.c \
 	stack/handle_stack3.c \
 	stack/handle_stack4.c \
 	stack/check_error.c \
-	algorithm/algorithm.c
-	
+	algorithm/algorithm.c \
+	algorithm/algorithm2.c \
 
 OBJ_PUSH_SWAP = $(SRC:%.c=%.o) 
 

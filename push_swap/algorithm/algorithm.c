@@ -6,20 +6,11 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:11:27 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/16 19:40:13 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/16 22:29:55 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-// trouver un moyen de mettre les bon idex tsa au debut
-	// je le trie en tant que tableau, j'i le bon ordre
-	// mais du coup faut compter cb ya de chiffre
-	// creer un autre tab de chiffre avec le nombre delement
-		// utiliser le tab de split
-	// lindex du chiffre = lindex a donner dans la linked list
-	// genre dans un prmier temps je rempli
-	// puis je comparele chiffe et je dit si chiffre = bah index aussi
-	// le haut de la stack doit etre le plus petit
 
 int nbr_tab(char **str)
 {
@@ -67,18 +58,28 @@ int *create_tab_nbr(char **str)
 	}
  }
 
-//  void add_index_to_stack(t_node **head, i)
-
-// faire fonction qui attribue les index
-// faire fonction qui regqrde si ya besoin de trier ou pas
-// faire fonction qui conte le nbr delemen de la liste 
-
-// 2 nb
-	// sa
-// 3 nb
-	// 6 cas (3 actions : ra rra sa)
-	// si 'l'index du premier nb est le plus grand => ra
-	// si l'index du deuxieme nb est plus grand => rra
-	// si l'index du premier nb > lindex du deuxieme nb => sa
-// plu de 3 nb
-	// calculer la liste daction la moins longue
+void check_data_in_stack(t_node **head, int nb, int i)
+{
+	t_node *ptr;
+	ptr = *head;
+	
+	while (ptr != NULL)
+	{
+		ft_printf("c3\n");
+		if (ptr -> data == nb)
+			ptr -> index = i;
+		ptr = ptr -> next;
+	}
+	ft_printf("c4\n");
+}
+void add_index_to_stack(t_node **head, int *tab, int max)
+{
+	int i;
+	
+	i = 0;
+	while (i < max)
+	{
+		check_data_in_stack(head, tab[i], i);
+		i++;
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:58 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/16 19:35:47 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/16 22:23:40 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int main(int argc, char *argv[])
     t_node *save_head_b;
     t_node *ptr;
     head_stack_a = NULL;
-    tab = NULL;
     while (str[i])
     {
         add_beg(ft_atoi(str[i]), &head_stack_a);
@@ -82,6 +81,7 @@ int main(int argc, char *argv[])
         ft_printf("error : list has double\n");
         exit(1);
     }
+    add_index_to_stack(&head_stack_a, tab, nbr);
     // creer stack_b vide
     t_node *head_stack_b;
     head_stack_b = NULL;
@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
     ft_printf("stack a :\n");
     while (ptr != NULL)
     {
-        ft_printf(" %i\n",ptr -> data);
+        ft_printf(" nb : %i, index: %i\n",ptr -> data, ptr -> index);
         ptr = ptr -> next;
     }
     ptr = head_stack_b;
