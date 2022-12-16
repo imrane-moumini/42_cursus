@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:58 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/15 21:02:10 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/16 17:19:05 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,24 @@ int main(int argc, char *argv[])
     char **str;
     int i;
     i = 0;
+    // check error tab
+    if (check_empty_stack(argv[1]) == 1)
+    {
+        ft_printf("empty stack \n");
+        exit (1);
+    }
+    if (check_ony_number(argv[1]) == 0)
+    {
+        ft_printf("not only number \n");
+        exit(1);
+    }
+    // creer stack_a
     str = ft_split(argv[1], ' ');
     t_node *head_stack_a;
     t_node *save_head_a;
     t_node *save_head_b;
     t_node *ptr;
     head_stack_a = NULL;
-
-    // creer stack_a
     while (str[i])
     {
         add_beg(ft_atoi(str[i]), &head_stack_a);
