@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/16 16:48:16 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/16 19:34:58 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 
 typedef struct s_stack_node {
 	int					data;
+	int					index;
+	int					pos;
+	int					target_pos;
+	int					cost_a;
+	int					cost_b;
 	struct s_stack_node	*next;
 }	t_node;
 
@@ -42,4 +47,7 @@ void	pa(t_node **head_stack_a, t_node **head_stack_b);
 int		check_doublon_list(t_node *head);
 int		check_ony_number(char *str);
 int		check_empty_stack(char *str);
+int *create_tab_nbr(char **str);
+int nbr_tab(char **str);
+ void tri_tab(int nbr, int *tab);
 #endif

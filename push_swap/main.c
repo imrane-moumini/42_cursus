@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:58 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/16 17:52:32 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/16 19:35:47 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int main(int argc, char *argv[])
     }
     char **str;
     int i;
+    int *tab;
+    int nbr;
     i = 0;
     // check error tab
     if (check_empty_stack(argv[1]) == 1)
@@ -33,13 +35,26 @@ int main(int argc, char *argv[])
         ft_printf("not only number \n");
         exit(1);
     }
-    // creer stack_a
+    
+    // creer stack_a and tab
     str = ft_split(argv[1], ' ');
+    nbr = nbr_tab(str);
+    tab = create_tab_nbr(str);
+    tri_tab(nbr, tab);
+    ft_printf("-------------------\n");
+    ft_printf("tab \n");
+    while (i < nbr)
+    {
+        ft_printf("%i\n",tab[i]);
+        i++;
+    }
+    i = 0;
     t_node *head_stack_a;
     t_node *save_head_a;
     t_node *save_head_b;
     t_node *ptr;
     head_stack_a = NULL;
+    tab = NULL;
     while (str[i])
     {
         add_beg(ft_atoi(str[i]), &head_stack_a);
@@ -62,6 +77,7 @@ int main(int argc, char *argv[])
             free(str[i]);
             i++;
         }
+        free(tab);
         free(str);
         ft_printf("error : list has double\n");
         exit(1);
@@ -134,4 +150,5 @@ int main(int argc, char *argv[])
         i++;
     }
     free(str);
+    free(tab);
 }
