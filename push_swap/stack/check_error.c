@@ -6,18 +6,15 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 19:01:34 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/16 16:53:19 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/17 20:58:43 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int check_ony_number(char *str)
+int	check_ony_number(char *str)
 {
-	// regarder ttes les erreurs possible
-	// faire norminette
-	// faire algo de trie
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -31,12 +28,11 @@ int check_ony_number(char *str)
 	}
 	return (1);
 }
-int check_empty_stack(char *str)
+
+int	check_empty_stack(char *str)
 {
-	// vide = nul car
-	// vide = aucun chiffre
-	int i;
-	int counter;
+	int	i;
+	int	counter;
 
 	i = 0;
 	counter = 0;
@@ -52,38 +48,49 @@ int check_empty_stack(char *str)
 		return (1);
 	return (0);
 }
-int	check_doublon_list(t_node *head)
+
+int	boucle_check_doublon_list(t_node *head, t_node *ptr_data, t_node *adress)
 {
 	t_node	*ptr;
 	t_node	*save_head;
-	t_node	*ptr_data;
-	t_node	*save_adress_data;
-	int		doublon_data;
-	
+	int		doublon;
+
 	ptr = head;
 	save_head = head;
-	ptr_data = head;
-	if (ptr == NULL)
-		return (0);
-	if (ptr -> next == NULL)
-		return (0);
-	doublon_data = ptr_data -> data;
-	save_adress_data = ptr_data;
+	doublon = ptr_data -> data;
 	while (ptr != NULL && ptr_data != NULL)
 	{
 		while (ptr != NULL)
 		{
-			if (doublon_data == ptr -> data && save_adress_data != ptr)
+			if (doublon == ptr -> data && adress != ptr)
 				return (1);
 			ptr = ptr -> next;
 		}
 		ptr_data = ptr_data -> next;
 		if (ptr_data != NULL)
 		{
-			doublon_data = ptr_data -> data;
-			save_adress_data = ptr_data;
+			doublon = ptr_data -> data;
+			adress = ptr_data;
 		}
 		ptr = save_head;
 	}
+	return (0);
+}
+
+int	check_doublon_list(t_node *head)
+{
+	t_node	*ptr;
+	t_node	*ptr_data;
+	t_node	*data_adress;
+
+	ptr = head;
+	ptr_data = head;
+	data_adress = ptr_data;
+	if (ptr == NULL)
+		return (0);
+	if (ptr -> next == NULL)
+		return (0);
+	if (boucle_check_doublon_list(head, ptr_data, data_adress) == 1)
+		return (1);
 	return (0);
 }

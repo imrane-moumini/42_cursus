@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/17 20:16:19 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/17 20:19:36 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void	pa(t_node **head_stack_a, t_node **head_stack_b);
 int		check_doublon_list(t_node *head);
 int		check_ony_number(char *str);
 int		check_empty_stack(char *str);
-int *create_tab_nbr(char **str);
-int nbr_tab(char **str);
-void tri_tab(int nbr, int *tab);
-void check_data_in_stack(t_node **head, int nb, int i);
-void add_index_to_stack(t_node **head, int *tab, int max);
-int has_to_tri(t_node **head);
-void ft_tri(t_node **head_stack_a, t_node **head_stack_b, int nbr);
-int which_three_index_is_max(t_node **head_stack_a);
-void ft_tri_three(t_node **head_stack_a);
-void have_to_do_sa(t_node **head_stack_a);
+int		*create_tab_nbr(char **str);
+int		nbr_tab(char **str);
+void	tri_tab(int nbr, int *tab);
+void	check_data_in_stack(t_node **head, int nb, int i);
+void	add_index_to_stack(t_node **head, int *tab, int max);
+int		has_to_tri(t_node **head);
+void	ft_tri(t_node **head_stack_a, t_node **head_stack_b, int nbr);
+int		which_three_index_is_max(t_node **head_stack_a);
+void	ft_tri_three(t_node **head_stack_a);
+void	have_to_do_sa(t_node **head_stack_a);
 #endif
