@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 22:27:32 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/17 21:12:42 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/17 22:33:27 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ void ft_tri(t_node **head_stack_a, t_node **head_stack_b, int nbr)
     }
     if (nbr == 3)
         ft_tri_three(head_stack_a);
-    // else
-    //     ft_tri_more_than_three(head);
+    else
+        ft_tri_more_than_three(head_stack_a, head_stack_b, nbr);
 }
