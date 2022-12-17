@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:11:27 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/16 22:29:55 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/17 12:59:57 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,10 @@ void check_data_in_stack(t_node **head, int nb, int i)
 	
 	while (ptr != NULL)
 	{
-		ft_printf("c3\n");
 		if (ptr -> data == nb)
 			ptr -> index = i;
 		ptr = ptr -> next;
 	}
-	ft_printf("c4\n");
 }
 void add_index_to_stack(t_node **head, int *tab, int max)
 {

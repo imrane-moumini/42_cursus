@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:58 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/16 23:21:43 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/17 14:50:47 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int main(int argc, char *argv[])
         exit(1);
     }
     add_index_to_stack(&head_stack_a, tab, nbr);
-    ft_printf("has to tri %i\n",has_to_tri(&head_stack_a));
     // creer stack_b vide
     t_node *head_stack_b;
     head_stack_b = NULL;
@@ -105,6 +104,9 @@ int main(int argc, char *argv[])
      // test fonctions
     if (has_to_tri(&head_stack_a) == 1)
         ft_tri(&head_stack_a, &head_stack_b, nbr);
+	else
+		ft_printf("stack deja trie\n");
+	//rra(&head_stack_a);
     ft_printf("---------------------------\n");
     ft_printf("stack a after function :\n");
     ptr = head_stack_a;
