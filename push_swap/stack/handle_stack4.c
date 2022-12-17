@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:59:30 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/16 17:19:14 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/17 21:44:29 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,14 @@ void	pa(t_node **head_stack_a, t_node **head_stack_b)
 		add_beg(ptr -> data, head_stack_a);
 		del_first_node(head_stack_b);
 	}
+}
+
+int	is_empty(t_node **head_stack_a)
+{
+	t_node	*ptr;
+
+	ptr = *head_stack_a;
+	if (ptr == NULL)
+		return (1);
+	return (0);
 }

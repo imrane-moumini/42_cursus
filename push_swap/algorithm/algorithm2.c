@@ -6,23 +6,11 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 22:27:32 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/17 20:13:05 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/17 21:12:42 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
-// faire fonction qui regqrde si ya besoin de trier ou pas
-
-// 2 nb
-	// sa
-// 3 nb
-	// 6 cas (3 actions : ra rra sa)
-	// si 'l'index du premier nb est le plus grand => ra
-	// si l'index du deuxieme nb est plus grand => rra
-	// si l'index du premier nb > lindex du deuxieme nb => sa
-// plu de 3 nb
-	// calculer la liste daction la moins longue
 
 int has_to_tri(t_node **head)
 {
@@ -64,8 +52,6 @@ void have_to_do_sa(t_node **head_stack_a)
     }
 }
 
-// je regrad qui a le plus grand index puis je fais la commande
-// puis je regarde a nouveau si je dois trier puis je fais index + commande
 void ft_tri_three(t_node **head_stack_a)
 {
     while (has_to_tri(head_stack_a) == 1)
