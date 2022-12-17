@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/17 12:54:24 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/17 20:16:19 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,5 @@ int has_to_tri(t_node **head);
 void ft_tri(t_node **head_stack_a, t_node **head_stack_b, int nbr);
 int which_three_index_is_max(t_node **head_stack_a);
 void ft_tri_three(t_node **head_stack_a);
+void have_to_do_sa(t_node **head_stack_a);
 #endif

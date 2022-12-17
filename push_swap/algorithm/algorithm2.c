@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 22:27:32 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/17 14:51:21 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/17 20:13:05 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,47 +55,32 @@ int which_three_index_is_max(t_node **head_stack_a)
         return (2);
     return (0);
 }
-
+void have_to_do_sa(t_node **head_stack_a)
+{
+    if (has_to_tri(head_stack_a) == 1 &&  (*head_stack_a) -> index > (*head_stack_a) -> next -> index)
+    {
+        ft_printf("sa\n");
+        sa(head_stack_a);
+    }
+}
 
 // je regrad qui a le plus grand index puis je fais la commande
 // puis je regarde a nouveau si je dois trier puis je fais index + commande
 void ft_tri_three(t_node **head_stack_a)
 {
-
     while (has_to_tri(head_stack_a) == 1)
     {
-        t_node *first;
-        t_node *second;
-        t_node *ptr;
-        
-        ptr = *head_stack_a;
-        first = ptr;
-        second = ptr -> next;
         if (has_to_tri(head_stack_a) == 1 && which_three_index_is_max(head_stack_a) == 1)
         {
             ft_printf("ra\n");
             ra(head_stack_a);
-            ptr = *head_stack_a;
-            first = ptr;
-            second = ptr -> next;
-            if (has_to_tri(head_stack_a) == 1 && first -> index > second -> index)
-            {
-                ft_printf("sa\n");
-                sa(head_stack_a);
-            }
+            have_to_do_sa(head_stack_a);
         }
         if (has_to_tri(head_stack_a) == 1 && which_three_index_is_max(head_stack_a) == 2)
         {
             ft_printf("rra\n");
             rra(head_stack_a);
-            ptr = *head_stack_a;
-            first = ptr;
-            second = ptr -> next;
-            if (has_to_tri(head_stack_a) == 1 && first -> index > second -> index)
-            {
-                ft_printf("sa\n");
-                sa(head_stack_a);
-            }
+            have_to_do_sa(head_stack_a);
         }
         if (has_to_tri(head_stack_a) == 1 && which_three_index_is_max(head_stack_a) == 0)
         {
