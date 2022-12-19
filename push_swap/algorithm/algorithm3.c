@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 21:14:05 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/17 22:35:30 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:21:30 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@
 //etape 4 : si la pile a nest pas trie, alterner entre ra et rra jusquq quelle soit dans lordre
 void	ft_tri_more_than_three(t_node **head_stack_a, t_node **head_stack_b, int nbr)
 {
+	// Etape 1
 	send_element_to_b_unless_three(head_stack_a, head_stack_b, nbr/2);
+	// Etape 2
+	ft_tri_three(head_stack_a);
 }
 int	nbr_element_in_stack(t_node *head)
 {
@@ -38,6 +41,22 @@ int	nbr_element_in_stack(t_node *head)
 	return (counter);
 }
 
+// Etape 1 :
+
+int is_index_smaller_than_mediane(t_node **head_stack_a, int mediane)
+{
+	t_node *ptr;
+
+	ptr = *head_stack_a;
+	
+	while (ptr != NULL)
+	{
+		if (ptr -> index < mediane)
+			return (1);
+		ptr = ptr -> next;
+	}
+	return (0);
+}
 void	send_element_to_b_unless_three(t_node **head_stack_a, t_node **head_stack_b, int mediane)
 {
 	// tri 1 de b (savoir quoi envoyer de a vers b):
@@ -45,17 +64,21 @@ void	send_element_to_b_unless_three(t_node **head_stack_a, t_node **head_stack_b
 	t_node	*ptr_a;
 
 	ptr_a = *head_stack_a;
-	while (ptr_a != NULL)
+	while (is_index_smaller_than_mediane(head_stack_a, mediane) == 1) // jusqua ce qu'il y ait plus delement en dessous de la mediane
 	{
 		if (ptr_a -> index < mediane)
+		{
+			ft_printf("pb\n");
 			pb(head_stack_a, head_stack_b);
+		}
 		else
 		{
+			ft_printf("ra\n");
 			ra(head_stack_a);
 			ptr_a = *head_stack_a;
 		}
 	}
 	// tri 2 de b : pb tout le reste des éléments sauf les trois derniers qui restent dans la pile A.
-	while (nbr_element_in_stack(ptr_a) != 3)
+	while (nbr_element_in_stack(*head_stack_a) > 3)
 		pb(head_stack_a, head_stack_b);
 }
