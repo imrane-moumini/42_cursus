@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 21:14:05 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/19 12:21:30 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:29:18 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,9 @@ void	send_element_to_b_unless_three(t_node **head_stack_a, t_node **head_stack_b
 {
 	// tri 1 de b (savoir quoi envoyer de a vers b):
 		// si un element a un index plus petit que la médiane de tous les éléments, on l’envoie à la pile B, sinon, on rotate A
-	t_node	*ptr_a;
-
-	ptr_a = *head_stack_a;
 	while (is_index_smaller_than_mediane(head_stack_a, mediane) == 1) // jusqua ce qu'il y ait plus delement en dessous de la mediane
 	{
-		if (ptr_a -> index < mediane)
+		if ((*head_stack_a) -> index < mediane)
 		{
 			ft_printf("pb\n");
 			pb(head_stack_a, head_stack_b);
@@ -75,7 +72,6 @@ void	send_element_to_b_unless_three(t_node **head_stack_a, t_node **head_stack_b
 		{
 			ft_printf("ra\n");
 			ra(head_stack_a);
-			ptr_a = *head_stack_a;
 		}
 	}
 	// tri 2 de b : pb tout le reste des éléments sauf les trois derniers qui restent dans la pile A.
