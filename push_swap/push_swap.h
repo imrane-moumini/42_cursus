@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/19 12:24:54 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:53:33 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,7 @@ int		nbr_element_in_stack(t_node *head);
 void	ft_tri_more_than_three(t_node **head_stack_a, t_node **head_stack_b, int nbr);
 void	send_element_to_b_unless_three(t_node **head_stack_a, t_node **head_stack_b, int mediane);
 int 	is_index_smaller_than_mediane(t_node **head_stack_a, int mediane);
+void ft_calculate_pos(t_node **head_stack_a, t_node **head_stack_b);
+void ft_calculate_target_pos(t_node **head_stack_a, t_node **head_stack_b);
+void ft_calculate_positions(t_node **head_stack_a, t_node **head_stack_b);
 #endif
