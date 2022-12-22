@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:44 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/15 18:41:18 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/22 15:58:11 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ra(t_node **head_stack_a)
 
 	last_node = ft_last_node(*head_stack_a);
 	ft_rotate(head_stack_a, last_node);
+	ft_calculate_positions(head_stack_a, NULL);
 }
 
 void	rb(t_node **head_stack_b)
@@ -26,6 +27,7 @@ void	rb(t_node **head_stack_b)
 
 	last_node = ft_last_node(*head_stack_b);
 	ft_rotate(head_stack_b, last_node);
+	ft_calculate_positions(NULL, head_stack_b);
 }
 
 void	rr(t_node **head_stack_a, t_node **head_stack_b)
@@ -37,14 +39,17 @@ void	rr(t_node **head_stack_a, t_node **head_stack_b)
 	last_node_b = ft_last_node(*head_stack_b);
 	ft_rotate(head_stack_a, last_node_a);
 	ft_rotate(head_stack_b, last_node_b);
+	ft_calculate_positions(head_stack_a, head_stack_b);
 }
 
 void	rra(t_node **head_stack_a)
 {
 	ft_reverse_rotate(head_stack_a);
+	ft_calculate_positions(head_stack_a, NULL);
 }
 
 void	rrb(t_node **head_stack_b)
 {
 	ft_reverse_rotate(head_stack_b);
+	ft_calculate_positions(NULL, head_stack_b);
 }

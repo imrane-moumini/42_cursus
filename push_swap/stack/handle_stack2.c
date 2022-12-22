@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:49 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/17 20:21:09 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/22 15:58:15 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,18 @@ void	ft_reverse_rotate(t_node **head)
 void	sa(t_node **head_stack_a)
 {
 	ft_swap(head_stack_a);
+	ft_calculate_positions(head_stack_a, NULL);
 }
 
 void	sb(t_node **head_stack_b)
 {
 	ft_swap(head_stack_b);
+	ft_calculate_positions(NULL, head_stack_b);
 }
 
 void	ss(t_node **head_stack_a, t_node **head_stack_b)
 {
 	ft_swap(head_stack_a);
 	ft_swap(head_stack_b);
+	ft_calculate_positions(head_stack_a, head_stack_b);
 }
