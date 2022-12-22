@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:34:11 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/19 12:54:32 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/22 13:34:55 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ void ft_calculate_pos(t_node **head_stack_a, t_node **head_stack_b)
         ptr_b = ptr_b -> next;
     }
 }
+
+
+
+// faire position cible
 // void ft_calculate_target_pos(t_node **head_stack_a, t_node **head_stack_b)
 // {
     

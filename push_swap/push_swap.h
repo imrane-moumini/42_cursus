@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/19 12:53:33 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/22 13:32:36 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,6 @@ int 	is_index_smaller_than_mediane(t_node **head_stack_a, int mediane);
 void ft_calculate_pos(t_node **head_stack_a, t_node **head_stack_b);
 void ft_calculate_target_pos(t_node **head_stack_a, t_node **head_stack_b);
 void ft_calculate_positions(t_node **head_stack_a, t_node **head_stack_b);
+void	add_beg_pb(t_node **head_stack_a, t_node **head_stack_b);
+void	add_beg_pa(t_node **head_stack_a, t_node **head_stack_b);
 #endif
