@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:34:11 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/22 16:43:09 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/22 17:37:16 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,30 @@ void ft_calculate_pos(t_node **head_stack_a, t_node **head_stack_b)
 }
 
 
+// void find_target_pos(t_node *ptr_a, t_node *ptr_b)
+// {
+    
+//    // ne conserver que les index les plus grands
+//     // se souvenir de tous ces elements
+//    // comparer ses index et voir le plus proche
+//     // soustrire lindex de lelement de la pile A et celui de la pile B c comme ca que je vais savoir
+//     // celui qui a lecat le plus petit gagne et si c egal je choisi au hasard
+// // je peux pas le sauvgarder dans la struct parce que je dois assisgner la vaeur a a stuct
+// // je dois en fait vraimemebt me souvenir de toutes le infos de la stack a et comarer
 
-// faire position cible
+// // si c le plus grand, prendre comme target pos, la pos de lindex le plus petit
+
+    
+//     while (ptr_a != NULL)
+//     {
+//         if (ptr_a -> index > ptr_b -> index)
+//         {
+            
+//         }
+//     }
+    
+// }
+// // faire position cible
 // void ft_calculate_target_pos(t_node **head_stack_a, t_node **head_stack_b)
 // {
 //     t_node *ptr_a;
@@ -67,5 +89,9 @@ void ft_calculate_pos(t_node **head_stack_a, t_node **head_stack_b)
 //         ptr_b = NULL;
 //     else
 //         ptr_b = *head_stack_b;
-    
+//     while (ptr_b != NULL)
+//     {
+//         find_target_pos(ptr_a, ptr_b);
+//         ptr_b = ptr_b -> next;
+//     }
 // }
