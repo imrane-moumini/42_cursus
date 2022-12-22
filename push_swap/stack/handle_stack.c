@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:53 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/15 17:59:19 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:48:25 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ void	add_beg(int stack_data, t_node **head)
 {
 	t_node	*ptr;
 	t_node	*tmp;
-
+	
+	if (head == NULL)
+		return ;
 	ptr = malloc(sizeof(t_node));
 	ptr -> data = stack_data;
 	ptr -> next = NULL;
@@ -35,6 +37,8 @@ void	del_first_node(t_node **head)
 	t_node	*ptr;
 	t_node	*tmp;
 
+	if (head == NULL)
+		return ;
 	ptr = *head;
 	if (ptr == NULL)
 		return ;
@@ -60,6 +64,8 @@ void	ft_swap(t_node **head)
 	t_node	*ptr;
 	int		nbr;
 
+	if (head == NULL)
+		return ;
 	ptr = *head;
 	if (ptr == NULL)
 		return ;
@@ -92,6 +98,8 @@ void	ft_rotate(t_node **head, t_node *last_node)
 	t_node	*ptr;
 	t_node	*tmp;
 
+	if (head == NULL)
+		return ;
 	ptr = *head;
 	if (ptr == NULL)
 		return ;

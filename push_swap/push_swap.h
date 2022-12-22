@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/22 13:32:36 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:37:44 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ t_node	*ft_last_node(t_node *head);
 void	ft_rotate(t_node **head, t_node *last_node);
 t_node	*ft_before_last_node(t_node *head);
 void	ft_reverse_rotate(t_node **head);
-void	sa(t_node **head_stack_a);
-void	sb(t_node **head_stack_b);
+void	sa(t_node **head_stack_a, t_node **head_stack_b);
+void	sb(t_node **head_stack_a, t_node **head_stack_b);
 void	ss(t_node **head_stack_a, t_node **head_stack_b);
-void	ra(t_node **head_stack_a);
-void	rb(t_node **head_stack_b);
+void	ra(t_node **head_stack_a, t_node **head_stack_b);
+void	rb(t_node **head_stack_a, t_node **head_stack_b);
 void	rr(t_node **head_stack_a, t_node **head_stack_b);
-void	rra(t_node **head_stack_a);
-void	rrb(t_node **head_stack_b);
+void	rra(t_node **head_stack_a, t_node **head_stack_b);
+void	rrb(t_node **head_stack_a, t_node **head_stack_b);
 void	rrr(t_node **head_stack_a, t_node **head_stack_b);
 void	pb(t_node **head_stack_a, t_node **head_stack_b);
 void	pa(t_node **head_stack_a, t_node **head_stack_b);

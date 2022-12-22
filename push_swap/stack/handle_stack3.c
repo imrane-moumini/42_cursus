@@ -6,28 +6,28 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:44 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/22 15:58:11 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:41:46 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ra(t_node **head_stack_a)
+void	ra(t_node **head_stack_a, t_node **head_stack_b)
 {
 	t_node	*last_node;
 
 	last_node = ft_last_node(*head_stack_a);
 	ft_rotate(head_stack_a, last_node);
-	ft_calculate_positions(head_stack_a, NULL);
+	ft_calculate_positions(head_stack_a, head_stack_b);
 }
 
-void	rb(t_node **head_stack_b)
+void	rb(t_node **head_stack_a, t_node **head_stack_b)
 {
 	t_node	*last_node;
 
 	last_node = ft_last_node(*head_stack_b);
 	ft_rotate(head_stack_b, last_node);
-	ft_calculate_positions(NULL, head_stack_b);
+	ft_calculate_positions(head_stack_a, head_stack_b);
 }
 
 void	rr(t_node **head_stack_a, t_node **head_stack_b)
@@ -42,14 +42,14 @@ void	rr(t_node **head_stack_a, t_node **head_stack_b)
 	ft_calculate_positions(head_stack_a, head_stack_b);
 }
 
-void	rra(t_node **head_stack_a)
+void	rra(t_node **head_stack_a, t_node **head_stack_b)
 {
 	ft_reverse_rotate(head_stack_a);
-	ft_calculate_positions(head_stack_a, NULL);
+	ft_calculate_positions(head_stack_a, head_stack_b);
 }
 
-void	rrb(t_node **head_stack_b)
+void	rrb(t_node **head_stack_a, t_node **head_stack_b)
 {
 	ft_reverse_rotate(head_stack_b);
-	ft_calculate_positions(NULL, head_stack_b);
+	ft_calculate_positions(head_stack_a, head_stack_b);
 }

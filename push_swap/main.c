@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:58 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/19 12:50:18 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:09:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int main(int argc, char *argv[])
     ft_printf("stack b after function :\n");
     while (ptr != NULL)
     {
-        ft_printf(" data : %i, index : %i, pos : %i\n",ptr -> data, ptr -> index, ptr -> pos);
+        ft_printf(" data : %i, index : %i, pos : %i, target_pos : %i\n",ptr -> data, ptr -> index, ptr -> pos, ptr -> target_pos);
         ptr = ptr -> next;
     }
     // free

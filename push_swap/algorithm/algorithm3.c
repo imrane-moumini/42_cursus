@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 21:14:05 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/19 12:52:57 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:52:13 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	send_element_to_b_unless_three(t_node **head_stack_a, t_node **head_stack_b
 		else
 		{
 			ft_printf("ra\n");
-			ra(head_stack_a);
+			ra(head_stack_a, head_stack_b);
 		}
 	}
 	// tri 2 de b : pb tout le reste des éléments sauf les trois derniers qui restent dans la pile A.
