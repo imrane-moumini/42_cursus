@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/22 17:35:00 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/24 15:02:31 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_stack_node {
 	int					target_pos;
 	int					cost_a;
 	int					cost_b;
+	int					index_sup;
+	int					pos_diff;
 	struct s_stack_node	*next;
 }	t_node;
 
