@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:53 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/22 17:39:28 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/24 16:15:48 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	add_beg(int stack_data, t_node **head)
 	ptr -> target_pos = 0;
 	ptr -> cost_a = 0;
 	ptr -> cost_b = 0;
+	ptr -> index_sup = 0;
+	ptr -> pos_diff = 0;
 	ptr -> next = NULL;
 	if (*head == NULL)
 	{
