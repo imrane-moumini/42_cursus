@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/24 15:02:31 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/24 16:53:40 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ typedef struct s_stack_node {
 	int					pos_diff;
 	struct s_stack_node	*next;
 }	t_node;
+
+typedef struct s_calculate {
+	int		node_pos;
+	int		node_index_diff;
+	int		index_greater;
+	int		mini_index;
+} t_calculate;
 
 void	add_beg(int stack_data, t_node **head);
 void	del_first_node(t_node **head);

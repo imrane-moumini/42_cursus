@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:34:11 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/24 16:04:16 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/24 16:58:53 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,73 +49,60 @@ void ft_calculate_pos(t_node **head_stack_a, t_node **head_stack_b)
 }
 
 
+// index b le plus grand
+// index b pas le plus grand
 void find_target_pos(t_node *ptr_a, t_node *ptr_b)
 {
     t_node *save;
-	int		node_pos;
-	int		node_index_diff;
-	int		index_greater;
-	int		mini_index;
+	t_calculate cal;
 
-	index_greater = 1;
+	cal.index_greater = 1;
 	save = ptr_a;
-	ft_printf("im in target pos\n");
     while (ptr_a != NULL)
     {
-		ft_printf("c1\n");
         if (ptr_a -> index > ptr_b -> index)
         {
-			ft_printf("c2\n");
-			index_greater = 0;
+			cal.index_greater = 0;
 			ptr_a -> index_sup = 1;
 			ptr_a -> pos_diff = ptr_a -> index - ptr_b -> index;
-			node_pos = ptr_a -> pos;
-			node_index_diff = ptr_a -> pos_diff;
+			cal.node_pos = ptr_a -> pos;
+			cal.node_index_diff = ptr_a -> pos_diff;
         }
 		else
 		{
-			ft_printf("c3\n");
-			mini_index = ptr_a -> index;
-			node_pos = ptr_a -> pos;
+			cal.mini_index = ptr_a -> index;
+			cal.node_pos = ptr_a -> pos;
 		}
 		ptr_a = ptr_a -> next;
     }
 	ptr_a = save;
 	// si lindex de b est le plus grand
-	if (index_greater == 1)
+	if (cal.index_greater == 1)
 	{
-		ft_printf("c4\n");
 		while (ptr_a != NULL)
     	{
-			ft_printf("c5\n");
-        	if (ptr_a -> index < mini_index)
-			{
-				ft_printf("c6\n");
-				node_pos = ptr_a -> pos;
-			}
+        	if (ptr_a -> index < cal.mini_index)
+				cal.node_pos = ptr_a -> pos;
 			ptr_a = ptr_a -> next;
    		}
-		ptr_b -> target_pos = node_pos;
+		ptr_b -> target_pos = cal.node_pos;
 		return ;
 	}
 
 	// si lindex de b nest pas le plus grand
 	while (ptr_a != NULL)
     {
-		ft_printf("c7\n");
         if (ptr_a -> index_sup == 1)
         {
-			ft_printf("c8\n");
-			if (ptr_a -> pos_diff < node_index_diff)
+			if (ptr_a -> pos_diff < cal.node_index_diff)
 			{
-				ft_printf("c9\n");
-				node_pos = ptr_a -> pos;
-				node_index_diff = ptr_a -> pos_diff;
+				cal.node_pos = ptr_a -> pos;
+				cal.node_index_diff = ptr_a -> pos_diff;
 			}
         }
 		ptr_a = ptr_a -> next;
     }
-	ptr_b -> target_pos = node_pos;
+	ptr_b -> target_pos = cal.node_pos;
     
 }
 
@@ -138,7 +125,6 @@ void ft_calculate_target_pos(t_node **head_stack_a, t_node **head_stack_b)
         ptr_b = *head_stack_b;
     while (ptr_b != NULL)
     {
-		ft_printf("im here\n");
         find_target_pos(ptr_a, ptr_b);
         ptr_b = ptr_b -> next;
     }
