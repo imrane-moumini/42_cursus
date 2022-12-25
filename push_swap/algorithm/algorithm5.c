@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 17:14:20 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/25 20:50:24 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/25 22:00:21 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,18 @@ void ft_calculate_cost(t_node **head_stack_a, t_node **head_stack_b)
 	}
 	
 }
+// comprendre pk  pas le bon cos alors que normalement g le bon calcul
 // rra = lelemnt en ba de la pile au sommet
 // ra = lelement au sommet de la pile en bas
 void ft_pile_b_calculate(t_node *ptr)
 {
 	int nbr;
+	int lenght;
 	
-	nbr = nbr_element_in_stack(ptr);
+	nbr = nbr_element_in_stack(ptr)/2;
+	lenght = nbr_element_in_stack(ptr);
+	if (nbr % 2 == 1)
+		nbr = nbr + 1;
 	// choisir entre ra ou rra
 		// ra est preferable a rra du coup je prefere le prendre en compte dans le egal
 	// calculer
@@ -78,16 +83,20 @@ void ft_pile_b_calculate(t_node *ptr)
 		return ;
 	}
 	if (ptr -> pos <= nbr)
-		ptr -> cost_b = nbr - ptr -> pos;
-	else
-		ptr -> cost_b = ((nbr - ptr -> pos) + 1) * -1;
+		ptr -> cost_b = lenght - ptr -> pos;
+	if (ptr -> pos > nbr)
+		ptr -> cost_b = ((lenght - ptr -> pos) + 1) * -1;
 }
 
 void ft_pile_a_calculate(t_node *ptr_a, t_node *ptr_b)
 {
 	int nbr;
+	int lenght;
 	
-	nbr = nbr_element_in_stack(ptr_a);
+	nbr = nbr_element_in_stack(ptr_a)/2;
+	lenght = nbr_element_in_stack(ptr_a);
+	if (nbr % 2 == 1)
+		nbr = nbr + 1;
 	// choisir entre ra ou rra
 		// ra est preferable a rra du coup je prefere le prendre en compte dans le egal
 	// calculer
@@ -97,9 +106,9 @@ void ft_pile_a_calculate(t_node *ptr_a, t_node *ptr_b)
 		return ;
 	}
 	if (ptr_b -> target_pos <= nbr)
-		ptr_b -> cost_a = nbr - ptr_b -> target_pos;
-	else
-		ptr_b -> cost_a = ((nbr - ptr_b -> target_pos) + 1) * -1;
+		ptr_b -> cost_a = lenght - ptr_b -> target_pos;
+	if (ptr_b -> target_pos > nbr)
+		ptr_b -> cost_a = ((lenght - ptr_b -> target_pos) + 1) * -1;
 }
 
 void ft_final_cost_calculate(t_node *ptr_b)
@@ -107,14 +116,22 @@ void ft_final_cost_calculate(t_node *ptr_b)
 	// cost_a + cost_b
 	// cost_a peut etre negatif ou cots_b ou les 2
 	if (ptr_b -> cost_b < 0 && ptr_b -> cost_a < 0)
+	{
 		ptr_b -> total_cost = ((ptr_b -> cost_b) * -1) + ((ptr_b -> cost_a < 0) * -1);
+		return ;
+	}
 	if (ptr_b -> cost_b < 0 || ptr_b -> cost_a < 0)
 	{
 		if (ptr_b -> cost_b < 0)
+		{
 			ptr_b -> total_cost = ((ptr_b -> cost_b) * -1) + ((ptr_b -> cost_a < 0));
+			return ;
+		}
 		else
+		{
 			ptr_b -> total_cost = ((ptr_b -> cost_b)) + ((ptr_b -> cost_a < 0) * -1);
+			return ;
+		}
 	}
-	if (ptr_b -> cost_b > 0 && ptr_b -> cost_a > 0)
-		ptr_b -> total_cost = ((ptr_b -> cost_b)) + ((ptr_b -> cost_a < 0));
+	ptr_b -> total_cost = ((ptr_b -> cost_b)) + ((ptr_b -> cost_a));
 }
