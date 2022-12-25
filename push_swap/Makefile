@@ -9,7 +9,8 @@ SRC = main.c \
 	algorithm/algorithm.c \
 	algorithm/algorithm2.c \
 	algorithm/algorithm3.c \
-	algorithm/algorithm4.c
+	algorithm/algorithm4.c \
+	algorithm/algorithm5.c
 	
 OBJ_PUSH_SWAP = $(SRC:%.c=%.o) 
 

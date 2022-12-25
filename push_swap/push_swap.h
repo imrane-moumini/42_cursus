@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/25 17:02:15 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/25 20:33:25 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_stack_node {
 	int					target_pos;
 	int					cost_a;
 	int					cost_b;
+	int					total_cost;
 	int					index_sup;
 	int					pos_diff;
 	struct s_stack_node	*next;
@@ -78,4 +79,8 @@ void	add_beg_pb(t_node **head_stack_a, t_node **head_stack_b);
 void	add_beg_pa(t_node **head_stack_a, t_node **head_stack_b);
 void first_passage(t_node *ptr_a, t_node *ptr_b, t_calculate *cal);
 void b_index_not_greater(t_node *ptr_a, t_node *ptr_b, t_calculate *cal);
+void ft_calculate_cost(t_node **head_stack_a, t_node **head_stack_b);
+void ft_pile_b_calculate(t_node *ptr);
+void ft_pile_a_calculate(t_node *ptr_a, t_node *ptr_b);
+void ft_final_cost_calculate(t_node *ptr_b);
 #endif
