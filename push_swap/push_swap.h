@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/24 16:53:40 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/25 17:02:15 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,6 @@ void ft_calculate_target_pos(t_node **head_stack_a, t_node **head_stack_b);
 void ft_calculate_positions(t_node **head_stack_a, t_node **head_stack_b);
 void	add_beg_pb(t_node **head_stack_a, t_node **head_stack_b);
 void	add_beg_pa(t_node **head_stack_a, t_node **head_stack_b);
+void first_passage(t_node *ptr_a, t_node *ptr_b, t_calculate *cal);
+void b_index_not_greater(t_node *ptr_a, t_node *ptr_b, t_calculate *cal);
 #endif

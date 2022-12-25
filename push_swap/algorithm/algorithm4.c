@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:34:11 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/24 16:58:53 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/25 17:01:40 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,47 @@ void ft_calculate_pos(t_node **head_stack_a, t_node **head_stack_b)
     }
 }
 
+// first passage
 
+void first_passage(t_node *ptr_a, t_node *ptr_b, t_calculate *cal)
+{
+    while (ptr_a != NULL)
+    {
+        if (ptr_a -> index > ptr_b -> index)
+        {
+			cal -> index_greater = 0;
+			ptr_a -> index_sup = 1;
+			ptr_a -> pos_diff = ptr_a -> index - ptr_b -> index;
+			cal -> node_pos = ptr_a -> pos;
+			cal -> node_index_diff = ptr_a -> pos_diff;
+        }
+		else
+		{
+			cal -> mini_index = ptr_a -> index;
+			cal -> node_pos = ptr_a -> pos;
+		}
+		ptr_a = ptr_a -> next;
+    }
+}
 // index b le plus grand
 // index b pas le plus grand
+
+void b_index_not_greater(t_node *ptr_a, t_node *ptr_b, t_calculate *cal)
+{
+    while (ptr_a != NULL)
+    {
+        if (ptr_a -> index_sup == 1)
+        {
+			if (ptr_a -> pos_diff < cal -> node_index_diff)
+			{
+				cal -> node_pos = ptr_a -> pos;
+				cal -> node_index_diff = ptr_a -> pos_diff;
+			}
+        }
+		ptr_a = ptr_a -> next;
+    }
+	ptr_b -> target_pos = cal -> node_pos;
+}
 void find_target_pos(t_node *ptr_a, t_node *ptr_b)
 {
     t_node *save;
@@ -58,23 +96,7 @@ void find_target_pos(t_node *ptr_a, t_node *ptr_b)
 
 	cal.index_greater = 1;
 	save = ptr_a;
-    while (ptr_a != NULL)
-    {
-        if (ptr_a -> index > ptr_b -> index)
-        {
-			cal.index_greater = 0;
-			ptr_a -> index_sup = 1;
-			ptr_a -> pos_diff = ptr_a -> index - ptr_b -> index;
-			cal.node_pos = ptr_a -> pos;
-			cal.node_index_diff = ptr_a -> pos_diff;
-        }
-		else
-		{
-			cal.mini_index = ptr_a -> index;
-			cal.node_pos = ptr_a -> pos;
-		}
-		ptr_a = ptr_a -> next;
-    }
+    first_passage(ptr_a, ptr_b, &cal);
 	ptr_a = save;
 	// si lindex de b est le plus grand
 	if (cal.index_greater == 1)
@@ -90,19 +112,7 @@ void find_target_pos(t_node *ptr_a, t_node *ptr_b)
 	}
 
 	// si lindex de b nest pas le plus grand
-	while (ptr_a != NULL)
-    {
-        if (ptr_a -> index_sup == 1)
-        {
-			if (ptr_a -> pos_diff < cal.node_index_diff)
-			{
-				cal.node_pos = ptr_a -> pos;
-				cal.node_index_diff = ptr_a -> pos_diff;
-			}
-        }
-		ptr_a = ptr_a -> next;
-    }
-	ptr_b -> target_pos = cal.node_pos;
+	b_index_not_greater(ptr_a, ptr_b, &cal);
     
 }
 
