@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/26 17:38:40 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/26 19:15:14 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ typedef struct s_calculate {
 	int		index_greater;
 	int		mini_index;
 } t_calculate;
+
+typedef struct s_instructions{
+	int					cost_a;
+	int					cost_b;
+} t_instructions;
 
 void	add_beg(int stack_data, t_node **head);
 void	del_first_node(t_node **head);
@@ -83,4 +88,6 @@ void ft_calculate_cost(t_node **head_stack_a, t_node **head_stack_b);
 void ft_pile_b_calculate(t_node **head_stack_b, t_node *ptr);
 void ft_pile_a_calculate(t_node **head_stack_a,t_node *ptr_b);
 void ft_final_cost_calculate(t_node *ptr_b);
+void ft_execute_instructions(t_node **head_stack_a, t_node **head_stack_b,t_instructions instructions);
+t_instructions ft_min_cost(t_node **head_stack_b);
 #endif

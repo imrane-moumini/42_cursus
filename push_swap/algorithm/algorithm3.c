@@ -6,19 +6,12 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 21:14:05 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/25 17:16:21 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/26 19:15:50 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-// etape 1 : pb tout sauf 3
-// etape 2 : trier la pile a
-// etape 3 : boucle tant que b nest pas vide
-	// trouver la position des element de a et b
-	// calculer la position cible dans la pile a ou chaque element de la pile b devrait etre
-	// Calculer le nombre d’actions (le coût) pour mettre chaque élément de la pile B à sa position cible dans la pile A et choisir l’élément le moins coûteux.
-	// Effectuer la suite d’actions pour déplacer l’élément de la pile B vers la pile A.
-//etape 4 : si la pile a nest pas trie, alterner entre ra et rra jusquq quelle soit dans lordre
+
 void	ft_tri_more_than_three(t_node **head_stack_a, t_node **head_stack_b, int nbr)
 {
 	// Etape 1
@@ -27,8 +20,15 @@ void	ft_tri_more_than_three(t_node **head_stack_a, t_node **head_stack_b, int nb
 	ft_tri_three(head_stack_a);
 	// Etape 3
 	ft_calculate_positions(head_stack_a, head_stack_b);
-	// Etape 4
+	// Etape 4 et 5
+	// tant que b n'est pas vide
+	// je calcule les couts
 	ft_calculate_cost(head_stack_a, head_stack_b);
+		// je recupere lelement avec le cost le plus bas
+		// je fais les instructions de la pile A et B
+		// jenvoi lelement de B a A
+	ft_execute_instructions(head_stack_a, head_stack_b,ft_min_cost(head_stack_b));
+		
 }
 int	nbr_element_in_stack(t_node *head)
 {
@@ -63,9 +63,7 @@ int is_index_smaller_than_mediane(t_node **head_stack_a, int mediane)
 }
 void	send_element_to_b_unless_three(t_node **head_stack_a, t_node **head_stack_b, int mediane)
 {
-	// tri 1 de b (savoir quoi envoyer de a vers b):
-		// si un element a un index plus petit que la médiane de tous les éléments, on l’envoie à la pile B, sinon, on rotate A
-	while (is_index_smaller_than_mediane(head_stack_a, mediane) == 1) // jusqua ce qu'il y ait plus delement en dessous de la mediane
+	while (is_index_smaller_than_mediane(head_stack_a, mediane) == 1)
 	{
 		if ((*head_stack_a) -> index < mediane)
 		{
@@ -78,7 +76,6 @@ void	send_element_to_b_unless_three(t_node **head_stack_a, t_node **head_stack_b
 			ra(head_stack_a, head_stack_b);
 		}
 	}
-	// tri 2 de b : pb tout le reste des éléments sauf les trois derniers qui restent dans la pile A.
 	while (nbr_element_in_stack(*head_stack_a) > 3)
 		pb(head_stack_a, head_stack_b);
 }
