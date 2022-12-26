@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 17:14:20 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/25 22:00:21 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/26 17:45:30 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,11 @@ void ft_calculate_cost(t_node **head_stack_a, t_node **head_stack_b)
 	// pour connaitre le nbr de rra c taille de la stack - position de lement + 1
 
 	t_node *ptr_b;
-	t_node *ptr_a;
 	ptr_b = *head_stack_b;
-	ptr_a = *head_stack_a;
 	while (ptr_b != NULL)
 	{
-		ft_pile_b_calculate(ptr_b);
-		ft_pile_a_calculate(ptr_a, ptr_b);
+		ft_pile_b_calculate(head_stack_b,ptr_b);
+		ft_pile_a_calculate(head_stack_a,ptr_b);
 		ft_final_cost_calculate(ptr_b);
 		ptr_b = ptr_b -> next;
 	}
@@ -65,13 +63,13 @@ void ft_calculate_cost(t_node **head_stack_a, t_node **head_stack_b)
 // comprendre pk  pas le bon cos alors que normalement g le bon calcul
 // rra = lelemnt en ba de la pile au sommet
 // ra = lelement au sommet de la pile en bas
-void ft_pile_b_calculate(t_node *ptr)
+void ft_pile_b_calculate(t_node **head_stack_b, t_node *ptr)
 {
 	int nbr;
 	int lenght;
 	
-	nbr = nbr_element_in_stack(ptr)/2;
-	lenght = nbr_element_in_stack(ptr);
+	nbr = nbr_element_in_stack(*head_stack_b)/2;
+	lenght = nbr_element_in_stack(*head_stack_b);
 	if (nbr % 2 == 1)
 		nbr = nbr + 1;
 	// choisir entre ra ou rra
@@ -83,18 +81,20 @@ void ft_pile_b_calculate(t_node *ptr)
 		return ;
 	}
 	if (ptr -> pos <= nbr)
+	{
 		ptr -> cost_b = lenght - ptr -> pos;
+	}
 	if (ptr -> pos > nbr)
 		ptr -> cost_b = ((lenght - ptr -> pos) + 1) * -1;
 }
 
-void ft_pile_a_calculate(t_node *ptr_a, t_node *ptr_b)
+void ft_pile_a_calculate(t_node **head_stack_a,t_node *ptr_b)
 {
 	int nbr;
 	int lenght;
 	
-	nbr = nbr_element_in_stack(ptr_a)/2;
-	lenght = nbr_element_in_stack(ptr_a);
+	nbr = nbr_element_in_stack(*head_stack_a)/2;
+	lenght = nbr_element_in_stack(*head_stack_a);
 	if (nbr % 2 == 1)
 		nbr = nbr + 1;
 	// choisir entre ra ou rra
@@ -117,19 +117,19 @@ void ft_final_cost_calculate(t_node *ptr_b)
 	// cost_a peut etre negatif ou cots_b ou les 2
 	if (ptr_b -> cost_b < 0 && ptr_b -> cost_a < 0)
 	{
-		ptr_b -> total_cost = ((ptr_b -> cost_b) * -1) + ((ptr_b -> cost_a < 0) * -1);
+		ptr_b -> total_cost = ((ptr_b -> cost_b) * -1) + ((ptr_b -> cost_a) * -1);
 		return ;
 	}
 	if (ptr_b -> cost_b < 0 || ptr_b -> cost_a < 0)
 	{
 		if (ptr_b -> cost_b < 0)
 		{
-			ptr_b -> total_cost = ((ptr_b -> cost_b) * -1) + ((ptr_b -> cost_a < 0));
+			ptr_b -> total_cost = ((ptr_b -> cost_b) * -1) + ((ptr_b -> cost_a));
 			return ;
 		}
 		else
 		{
-			ptr_b -> total_cost = ((ptr_b -> cost_b)) + ((ptr_b -> cost_a < 0) * -1);
+			ptr_b -> total_cost = ((ptr_b -> cost_b)) + ((ptr_b -> cost_a) * -1);
 			return ;
 		}
 	}
