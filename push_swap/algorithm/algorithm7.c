@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:26:48 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/27 17:01:55 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/27 17:13:04 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,3 +163,5 @@ void	put_min_index_top(t_node **head_stack_a)
 // regarder lindex qui est le plus grand et le mettre tout en bas
     //reflechir au resonement a linverse pour etre tout en ba
 // regardder si ca a permis de trier
+
+// voir pk ca fonctionne pas mon truc pour mettre tout en haut

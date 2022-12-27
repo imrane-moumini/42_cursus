@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/27 17:01:31 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/27 17:20:43 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,5 @@ int is_index_max_on_bottom(t_node **head_stack_a, int max);
 void ft_calculate_coup_to_min(t_node **head_stack_a,t_node *ptr);
 void ft_execute_instruction_min(t_node **head_stack_a, t_node **head_stack_b,t_node *ptr);
 void	put_min_index_top(t_node **head_stack_a);
+void ft_printf_stack(t_node **head_stack_a, t_node **head_stack_b);
 #endif

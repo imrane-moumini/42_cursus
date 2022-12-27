@@ -6,21 +6,47 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 21:14:05 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/27 16:31:40 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/27 17:21:41 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
+void ft_printf_stack(t_node **head_stack_a, t_node **head_stack_b)
+{
+	t_node *ptr;
+	ptr = *head_stack_a;
+	ft_printf("stack a :\n");
+    while (ptr != NULL)
+    {
+        ft_printf(" data : %i, index : %i, pos : %i\n",ptr -> data, ptr -> index, ptr -> pos);
+        ptr = ptr -> next;
+    }
+    ptr = *head_stack_b;
+    ft_printf("stack b :\n");
+    while (ptr != NULL)
+    {
+        ft_printf(" data : %i, index : %i, pos : %i, target_pos : %i, cost_a : %i, cost_b : %i, final_cost : %i\n",ptr -> data, ptr -> index, ptr -> pos, ptr -> target_pos, ptr -> cost_a, ptr -> cost_b, ptr -> total_cost);
+        ptr = ptr -> next;
+    }
+}
 void	ft_tri_more_than_three(t_node **head_stack_a, t_node **head_stack_b, int nbr)
 {
 	// Etape 1
+	ft_printf("-----------------\n");
+	ft_printf("etape 1 \n");
 	send_element_to_b_unless_three(head_stack_a, head_stack_b, nbr/2);
+	ft_printf_stack(head_stack_a, head_stack_b);
 	// Etape 2
+	ft_printf("-----------------\n");
+	ft_printf("etape 2 \n");
 	ft_tri_three(head_stack_a);
+	ft_printf_stack(head_stack_a, head_stack_b);
 	// Etape 3
 	// Etape 4 et 5
 	// tant que b n'est pas vide
+	ft_printf("-----------------\n");
+	ft_printf("etape 3 4 5 \n");
 	while (is_stack_empty(head_stack_b) == 0)
 	{
 		// je calcule les couts
@@ -31,9 +57,12 @@ void	ft_tri_more_than_three(t_node **head_stack_a, t_node **head_stack_b, int nb
 			// jenvoi lelement de B a A
 		ft_execute_instructions(head_stack_a, head_stack_b,ft_min_cost(head_stack_b));
 	}
+	ft_printf_stack(head_stack_a, head_stack_b);
 	// etape 6
 	// tant que pile A nest pas trie
 	// avan de mettre la boucle mettre min index en haut et ax index en ba et voir si ca suffit
+	ft_printf("-----------------\n");
+	ft_printf("etape 6 \n");
 	put_min_index_top(head_stack_a);
 }
 int	nbr_element_in_stack(t_node *head)
