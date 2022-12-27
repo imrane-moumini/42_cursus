@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 21:14:05 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/27 15:16:08 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/27 16:31:40 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void	ft_tri_more_than_three(t_node **head_stack_a, t_node **head_stack_b, int nb
 			// jenvoi lelement de B a A
 		ft_execute_instructions(head_stack_a, head_stack_b,ft_min_cost(head_stack_b));
 	}
-		
+	// etape 6
+	// tant que pile A nest pas trie
+	// avan de mettre la boucle mettre min index en haut et ax index en ba et voir si ca suffit
+	put_min_index_top(head_stack_a);
 }
 int	nbr_element_in_stack(t_node *head)
 {

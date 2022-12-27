@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/26 19:15:14 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/27 17:01:31 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ typedef struct s_stack_node {
 	int					total_cost;
 	int					index_sup;
 	int					pos_diff;
+	int					min_index;
+	int					max_index;
 	struct s_stack_node	*next;
 }	t_node;
 
@@ -90,4 +92,11 @@ void ft_pile_a_calculate(t_node **head_stack_a,t_node *ptr_b);
 void ft_final_cost_calculate(t_node *ptr_b);
 void ft_execute_instructions(t_node **head_stack_a, t_node **head_stack_b,t_instructions instructions);
 t_instructions ft_min_cost(t_node **head_stack_b);
+int	find_index_max(t_node **head_stack_a);
+void mark_min_and_max_index(t_node **head_stack_a, int max);
+int is_index_zero_on_top(t_node **head_stack_a);
+int is_index_max_on_bottom(t_node **head_stack_a, int max);
+void ft_calculate_coup_to_min(t_node **head_stack_a,t_node *ptr);
+void ft_execute_instruction_min(t_node **head_stack_a, t_node **head_stack_b,t_node *ptr);
+void	put_min_index_top(t_node **head_stack_a);
 #endif
