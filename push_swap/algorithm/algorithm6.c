@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 17:56:38 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/26 19:20:50 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/27 14:43:31 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void ft_execute_instructions(t_node **head_stack_a, t_node **head_stack_b,t_inst
 			i++;
 		}
 	}
-	pb(head_stack_a, head_stack_b);
+	pa(head_stack_a, head_stack_b);
 }
 
 // pas derreur mais me semble pas fonctionner voir pk, c letape 5 
