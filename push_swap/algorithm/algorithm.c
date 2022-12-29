@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:11:27 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/24 15:45:27 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/29 16:44:15 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	check_data_in_stack(t_node **head, int nb, int i)
 	t_node	*ptr;
 
 	ptr = *head;
+	// printf("HFIHUBFBUWf\n");
 	while (ptr != NULL)
 	{
 		if (ptr -> data == nb)

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 22:27:32 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/27 14:51:52 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/29 16:44:35 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,11 @@ void have_to_do_sa(t_node **head_stack_a)
 {
     if (has_to_tri(head_stack_a) == 1 &&  (*head_stack_a) -> index > (*head_stack_a) -> next -> index)
     {
+	    // ft_printf("have to do SA 1\n");
+	    // ft_printf_stack(head_stack_a, NULL); 
         sa(head_stack_a, NULL);
+	    // ft_printf("have to do SA 2\n");
+	    // ft_printf_stack(head_stack_a, NULL); 
     }
 }
 
@@ -59,16 +63,22 @@ void ft_tri_three(t_node **head_stack_a)
         {
             ra(head_stack_a, NULL);
             have_to_do_sa(head_stack_a);
+	        // ft_printf("ft_tri_three RA\n");
+	        ft_printf_stack(head_stack_a, NULL); 
         }
-        if (has_to_tri(head_stack_a) == 1 && which_three_index_is_max(head_stack_a) == 2)
+        else if (has_to_tri(head_stack_a) == 1 && which_three_index_is_max(head_stack_a) == 2)
         {
             rra(head_stack_a, NULL);
             have_to_do_sa(head_stack_a);
         }
-        if (has_to_tri(head_stack_a) == 1 && which_three_index_is_max(head_stack_a) == 0)
+        else if (has_to_tri(head_stack_a) == 1 && which_three_index_is_max(head_stack_a) == 0)
         {
             sa(head_stack_a, NULL);
+            // ft_printf("ft_tri_three SA\n");
+	        // ft_printf_stack(head_stack_a, NULL); 
         }
+	    // ft_printf("ft_tri_three\n");
+	    // ft_printf_stack(head_stack_a, NULL);        
     }
 }
 

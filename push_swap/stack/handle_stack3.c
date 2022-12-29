@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:44 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/27 14:54:38 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/29 16:43:50 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	ra(t_node **head_stack_a, t_node **head_stack_b)
 	last_node = ft_last_node(*head_stack_a);
 	ft_rotate(head_stack_a, last_node);
 	ft_calculate_positions(head_stack_a, head_stack_b);
+	    // ft_printf("ra function\n");
+	    // ft_printf_stack(head_stack_a, NULL); 	
 }
 
 void	rb(t_node **head_stack_a, t_node **head_stack_b)

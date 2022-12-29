@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:59:30 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/27 14:55:09 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/29 16:44:05 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	add_beg_pa(t_node **head_stack_a, t_node **head_stack_b)
 	ptr = malloc(sizeof(t_node));
 	ptr -> data = first -> data;
 	ptr -> index = first -> index;
+	// printf("PA first -> data %i, first -> index %i, ptr -> index %i\n", first -> data, first -> index, ptr -> index);
 	ptr -> pos = first -> pos;
 	ptr -> target_pos = first -> target_pos;
 	ptr -> cost_a = first -> cost_a;
@@ -98,6 +99,7 @@ void	add_beg_pb(t_node **head_stack_a, t_node **head_stack_b)
 	ptr = malloc(sizeof(t_node));
 	ptr -> data = first -> data;
 	ptr -> index = first -> index;
+	// printf(" PB first -> data %i, first -> index %i, ptr -> index %i\n", first -> data, first -> index, ptr -> index);
 	ptr -> pos = first -> pos;
 	ptr -> target_pos = first -> target_pos;
 	ptr -> cost_a = first -> cost_a;

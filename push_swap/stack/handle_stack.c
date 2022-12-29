@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:53 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/27 15:56:33 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/29 16:43:09 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	add_beg(int stack_data, t_node **head)
 	ptr -> min_index = 0;
 	ptr -> max_index = 0;
 	ptr -> next = NULL;
+	// printf("FEFEFE\n");
 	if (*head == NULL)
 	{
 		*head = ptr;
@@ -71,7 +72,7 @@ void	del_first_node(t_node **head)
 void	ft_swap(t_node **head)
 {
 	t_node	*ptr;
-	int		nbr;
+	t_node	*tmp;
 
 	if (head == NULL)
 		return ;
@@ -82,10 +83,16 @@ void	ft_swap(t_node **head)
 		return ;
 	else
 	{
-		nbr = ptr -> next -> data;
-		ptr -> next -> data = ptr -> data;
-		ptr -> data = nbr;
+		// ft_printf("ft_swap 1\n");
+	    // ft_printf_stack(head, NULL);
+		tmp = ptr->next; // 2
+		ptr->next = tmp->next; //
+		tmp->next = ptr; // adresse du premier
+		*head = tmp;
+		// tmp -> next = ptr;
 		ptr = NULL;
+		// ft_printf("ft_swap 2\n");
+	    // ft_printf_stack(head, NULL); 
 	}
 }
 

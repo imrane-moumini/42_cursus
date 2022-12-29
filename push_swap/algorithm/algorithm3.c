@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 21:14:05 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/27 17:21:41 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/29 16:45:11 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,21 @@
 void ft_printf_stack(t_node **head_stack_a, t_node **head_stack_b)
 {
 	t_node *ptr;
-	ptr = *head_stack_a;
+	if (head_stack_a == NULL)
+		ptr = NULL;
+	else
+		ptr = *head_stack_a;
+
 	ft_printf("stack a :\n");
     while (ptr != NULL)
     {
         ft_printf(" data : %i, index : %i, pos : %i\n",ptr -> data, ptr -> index, ptr -> pos);
         ptr = ptr -> next;
     }
-    ptr = *head_stack_b;
+	if (head_stack_b == NULL)
+		ptr = NULL;
+	else
+    	ptr = *head_stack_b;
     ft_printf("stack b :\n");
     while (ptr != NULL)
     {
@@ -40,8 +47,10 @@ void	ft_tri_more_than_three(t_node **head_stack_a, t_node **head_stack_b, int nb
 	// Etape 2
 	ft_printf("-----------------\n");
 	ft_printf("etape 2 \n");
-	ft_tri_three(head_stack_a);
 	ft_printf_stack(head_stack_a, head_stack_b);
+	ft_tri_three(head_stack_a);
+	// ft_printf("etape 2 bis\n");
+	// ft_printf_stack(head_stack_a, head_stack_b);
 	// Etape 3
 	// Etape 4 et 5
 	// tant que b n'est pas vide
