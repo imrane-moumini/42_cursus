@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:34:11 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/29 19:36:39 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/29 19:59:38 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,10 @@ void b_index_not_greater(t_node *ptr_a, t_node *ptr_b, t_calculate *cal)
     {
         if (ptr_a -> index_sup == 1)
         {
-			if (ptr_a -> pos_diff < cal -> node_index_diff && ptr_a->index > ptr_b->index)
+            // printf("DATA %i\n", ptr_b->data);
+            // printf("INDEX NOT GREATER ptr_a->pos_diff %i, cal->node_index_diff %i, ptr_a->index %i, ptr_b->index %i\n", ptr_a -> pos_diff, cal -> node_index_diff, ptr_a->index, ptr_b->index);
+            // printf("INDEX NOT CAL cal->node_pos %i, cal->node_index_diff %i\n", cal -> node_pos, cal -> node_index_diff);
+            if (ptr_a -> pos_diff <= cal -> node_index_diff && ptr_a->index > ptr_b->index)
 			{
 				cal -> node_pos = ptr_a -> pos;
 				cal -> node_index_diff = ptr_a -> pos_diff;
@@ -94,16 +97,20 @@ void find_target_pos(t_node *ptr_a, t_node *ptr_b)
     first_passage(ptr_a, ptr_b, &cal);
 	ptr_a = save;
     int cmp = INT_MAX;
+    int position;
 	// si lindex de b est le plus grand
 	if (cal.index_greater == 1)
 	{
 		while (ptr_a != NULL)
     	{
-        	if (ptr_a->pos < cmp)
-                cmp = ptr_a->pos;
+        	if (ptr_a->index < cmp)
+            {    
+                cmp = ptr_a->index;
+                position = ptr_a->pos;
+            }    
 			ptr_a = ptr_a->next;
    		}
-        ptr_b -> target_pos = cmp;
+        ptr_b -> target_pos = position;
 		return ;
 	}
 
