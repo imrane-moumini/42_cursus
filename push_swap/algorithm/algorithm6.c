@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 17:56:38 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/27 14:43:31 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/29 18:33:56 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_instructions ft_min_cost(t_node **head_stack_b)
 		{
 			instructions.cost_a = ptr -> cost_a;
 			instructions.cost_b = ptr -> cost_b;
+			return (instructions);
 		}
 		ptr = ptr -> next;
 	}

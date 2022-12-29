@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:26:48 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/27 17:13:04 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/29 18:02:15 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void ft_calculate_coup_to_min(t_node **head_stack_a,t_node *ptr)
 		return ;
 	}
 	if (ptr -> pos <= nbr)
-		ptr -> cost_a = lenght - ptr -> target_pos;
+		ptr -> cost_a = ptr -> pos - 1;
 	if (ptr -> pos > nbr)
-		ptr -> cost_a = ((lenght - ptr -> target_pos) + 1) * -1;
+		ptr -> cost_a = ((lenght - ptr -> pos) + 1) * -1;
 }
 
 void ft_execute_instruction_min(t_node **head_stack_a, t_node **head_stack_b,t_node *ptr)
