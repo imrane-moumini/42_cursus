@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:34:11 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/25 17:15:00 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/29 17:12:40 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,16 +93,17 @@ void find_target_pos(t_node *ptr_a, t_node *ptr_b)
 	save = ptr_a;
     first_passage(ptr_a, ptr_b, &cal);
 	ptr_a = save;
+    int cmp = INT_MAX;
 	// si lindex de b est le plus grand
 	if (cal.index_greater == 1)
 	{
 		while (ptr_a != NULL)
     	{
-        	if (ptr_a -> index < cal.mini_index)
-				cal.node_pos = ptr_a -> pos;
-			ptr_a = ptr_a -> next;
+        	if (ptr_a->pos < cmp)
+                cmp = ptr_a->pos;
+			ptr_a = ptr_a->next;
    		}
-		ptr_b -> target_pos = cal.node_pos;
+        ptr_b -> target_pos = cmp;
 		return ;
 	}
 

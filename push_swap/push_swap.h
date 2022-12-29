@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/27 17:20:43 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/29 17:11:15 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
+#include <limits.h>
 
 typedef struct s_stack_node {
 	int					data;
