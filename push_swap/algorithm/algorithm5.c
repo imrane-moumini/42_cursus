@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 17:14:20 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/29 16:53:29 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/29 17:34:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void ft_pile_b_calculate(t_node **head_stack_b, t_node *ptr)
 	}
 	if (ptr -> pos <= nbr)
 	{
-		ptr -> cost_b = lenght - ptr -> pos;
+		ptr -> cost_b = ptr -> pos - 1;
 	}
 	if (ptr -> pos > nbr)
 		ptr -> cost_b = ((lenght - ptr -> pos) + 1) * -1;
@@ -77,9 +77,9 @@ void ft_pile_a_calculate(t_node **head_stack_a,t_node *ptr_b)
 		return ;
 	}
 	if (ptr_b -> target_pos <= nbr)
-		ptr_b -> cost_a = lenght - ptr_b -> target_pos;
+		ptr_b -> cost_a = ptr_b -> target_pos - 1;
 	if (ptr_b -> target_pos > nbr)
-		ptr_b -> cost_a = ((lenght - ptr_b -> target_pos) + 1) * -1;
+		ptr_b -> cost_a = ((lenght - ptr_b->target_pos) + 1) * -1;
 }
 
 void ft_final_cost_calculate(t_node *ptr_b)
