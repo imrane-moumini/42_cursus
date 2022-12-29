@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 12:34:11 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/29 17:12:40 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/29 19:36:39 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void b_index_not_greater(t_node *ptr_a, t_node *ptr_b, t_calculate *cal)
     {
         if (ptr_a -> index_sup == 1)
         {
-			if (ptr_a -> pos_diff < cal -> node_index_diff)
+			if (ptr_a -> pos_diff < cal -> node_index_diff && ptr_a->index > ptr_b->index)
 			{
 				cal -> node_pos = ptr_a -> pos;
 				cal -> node_index_diff = ptr_a -> pos_diff;
