@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 19:01:34 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/30 18:00:54 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/30 19:25:12 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	check_ony_number(char *str)
 	{
 		if (!(str[i] >= '0' && str[i] <= '9'))
 		{
+			if(str[i] != '-' && str[i] != '+')
 				return (0);
 		}
 		i++;

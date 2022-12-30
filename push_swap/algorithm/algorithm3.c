@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 21:14:05 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/30 18:46:09 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/30 19:01:42 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int is_index_smaller_than_mediane(t_node **head_stack_a, int mediane)
 	}
 	return (0);
 }
+
 void	send_element_to_b_unless_three(t_node **head_stack_a, t_node **head_stack_b, int mediane)
 {
 	while (is_index_smaller_than_mediane(head_stack_a, mediane) == 1)
