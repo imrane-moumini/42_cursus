@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/25 17:14:20 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/29 17:34:59 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/30 18:44:57 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void ft_calculate_cost(t_node **head_stack_a, t_node **head_stack_b)
 		ft_final_cost_calculate(ptr_b);
 		ptr_b = ptr_b -> next;
 	}
-	ft_printf("in calculate cost \n");
-	ft_printf_stack(head_stack_a, head_stack_b); 
+	//ft_printf("in calculate cost \n");
+	//ft_printf_stack(head_stack_a, head_stack_b); 
 	
 }
 

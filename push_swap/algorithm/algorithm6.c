@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 17:56:38 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/30 16:20:08 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/30 18:43:12 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_instructions ft_min_cost(t_node **head_stack_b)
 		{
 			instructions.cost_a = ptr -> cost_a;
 			instructions.cost_b = ptr -> cost_b;
-			ft_printf("min in fonction : %i\n", min);
+			//ft_printf("min in fonction : %i\n", min);
 			return (instructions);
 		}
 		ptr = ptr -> next;
@@ -53,7 +53,7 @@ void ft_execute_instructions(t_node **head_stack_a, t_node **head_stack_b,t_inst
 	int i;
 
 	i = 0;
-	ft_printf("instructions cost a : %i, instructions cost b : %i\n", instructions.cost_a, instructions.cost_b);
+	//ft_printf("instructions cost a : %i, instructions cost b : %i\n", instructions.cost_a, instructions.cost_b);
 	if (instructions.cost_a > 0)
 	{
 		while ((i < instructions.cost_a )&& instructions.cost_a != 0)

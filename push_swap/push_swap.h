@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/30 17:12:40 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/30 18:21:15 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,7 @@ void ft_calculate_coup_to_min(t_node **head_stack_a,t_node *ptr);
 void ft_execute_instruction_min(t_node **head_stack_a, t_node **head_stack_b,t_node *ptr);
 void	put_min_index_top(t_node **head_stack_a);
 void ft_printf_stack(t_node **head_stack_a, t_node **head_stack_b);
+void check_first_error(int argc, char *argv[]);
+void create_stack_a(int argc, t_node **head_stack_a, char *argv[]);
+void ft_free(t_node *save_head_a, t_node *save_head_b, int *tab);
 #endif
