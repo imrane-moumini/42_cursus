@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:11:27 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/29 16:44:15 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/30 17:16:18 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,20 @@ int	nbr_tab(char **str)
 	return (i);
 }
 
-int	*create_tab_nbr(char **str)
+int	*create_tab_nbr(int nbr, t_node **head_stack_a)
 {
-	int		nbr;
+	t_node	*ptr;;
 	int		*tab;
 	int		i;
 
 	i = 0;
-	nbr = nbr_tab(str);
 	tab = malloc(sizeof(int) * nbr);
-	while (str[i])
+	ptr = *head_stack_a;
+	while (ptr != NULL)
 	{
-		tab[i] = ft_atoi(str[i]);
+		tab[i] = ptr -> data;
 		i++;
+		ptr = ptr -> next;
 	}
 	return (tab);
 }

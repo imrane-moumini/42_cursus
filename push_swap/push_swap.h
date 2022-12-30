@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/29 17:11:15 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/30 17:12:40 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	pa(t_node **head_stack_a, t_node **head_stack_b);
 int		check_doublon_list(t_node *head);
 int		check_ony_number(char *str);
 int		check_empty_stack(char *str);
-int		*create_tab_nbr(char **str);
+int	*create_tab_nbr(int nbr, t_node **head_stack_a);
 int		nbr_tab(char **str);
 void	tri_tab(int nbr, int *tab);
 void	check_data_in_stack(t_node **head, int nb, int i);
