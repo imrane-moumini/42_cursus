@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 15:26:48 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/29 18:02:15 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/30 15:24:03 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,7 @@
 
 // index min == 0
 // fucntion max index
-int	find_index_max(t_node **head_stack_a)
-{
-	int max;
-	t_node *ptr;
-	
-	max = 0;
-	if (head_stack_a == NULL)
-		return (0);
-	if (*head_stack_a == NULL)
-		return (0);
-	ptr = *head_stack_a;
-	max = ptr -> index;
-	while (ptr != NULL)
-	{
-		if (max < ptr -> index)
-			max = ptr -> index;
-		ptr = ptr -> next;
-	}
-	return (max);
-}
+
 
 void mark_min_and_max_index(t_node **head_stack_a, int max)
 {
@@ -69,22 +50,7 @@ int is_index_zero_on_top(t_node **head_stack_a)
 		return (0);
 }
 
-int is_index_max_on_bottom(t_node **head_stack_a, int max)
-{
-	t_node *ptr;
-	
-	if (head_stack_a == NULL)
-		return (0);
-	if (*head_stack_a == NULL)
-		return (0);
-	ptr = *head_stack_a;
-	while (ptr -> next != NULL)
-		ptr = ptr -> next;
-	if (ptr -> index == max)
-		return (1);
-	else
-		return (0);
-}
+
 
 void ft_calculate_coup_to_min(t_node **head_stack_a,t_node *ptr)
 {

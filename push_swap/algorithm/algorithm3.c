@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 21:14:05 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/29 18:01:15 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/30 15:43:45 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	ft_tri_more_than_three(t_node **head_stack_a, t_node **head_stack_b, int nb
 	ft_printf("-----------------\n");
 	ft_printf("etape 6 \n");
 	put_min_index_top(head_stack_a);
+	// put_max_index_down(head_stack_a);
 }
 int	nbr_element_in_stack(t_node *head)
 {
