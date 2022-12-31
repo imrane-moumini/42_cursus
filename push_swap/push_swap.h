@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/30 18:21:15 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/31 16:49:18 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,6 @@ void ft_printf_stack(t_node **head_stack_a, t_node **head_stack_b);
 void check_first_error(int argc, char *argv[]);
 void create_stack_a(int argc, t_node **head_stack_a, char *argv[]);
 void ft_free(t_node *save_head_a, t_node *save_head_b, int *tab);
+void    check_int_limit(char **argv);
+long    ft_atoi_long(char *str);
 #endif

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:58 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/30 19:25:25 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/31 16:27:47 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,12 @@ int main(int argc, char *argv[])
     if (check_doublon_list(head_stack_a))
     {
         ft_free(head_stack_a, head_stack_b, tab);
-        ft_printf("error : list has double\n");
+        ft_printf("Error\n");
         exit(1);
     }
     add_index_to_stack(&head_stack_a, tab, nbr);
     if (has_to_tri(&head_stack_a) == 1)
         ft_tri(&head_stack_a, &head_stack_b, nbr);
-	else
-		ft_printf("stack deja trie\n");
     ft_printf_stack(&head_stack_a, &head_stack_b);
     ft_free(head_stack_a, head_stack_b, tab);
    

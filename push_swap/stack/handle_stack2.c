@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:49 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/29 16:43:38 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/31 16:06:44 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_reverse_rotate(t_node **head)
 
 void	sa(t_node **head_stack_a, t_node **head_stack_b)
 {
-	// ft_printf("sa\n");
+	ft_printf("sa\n");
 	// ft_printf("sa function 1\n");
 	// ft_printf_stack(head_stack_a, NULL); 
 	ft_swap(head_stack_a);
