@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:58 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/31 16:27:47 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/31 17:01:30 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     if (check_doublon_list(head_stack_a))
     {
         ft_free(head_stack_a, head_stack_b, tab);
-        ft_printf("Error\n");
+        write(2, "Error\n", 6);
         exit(1);
     }
     add_index_to_stack(&head_stack_a, tab, nbr);

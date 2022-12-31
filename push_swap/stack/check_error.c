@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 19:01:34 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/31 16:52:45 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/31 17:01:11 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void    check_int_limit(char **argv)
         content = ft_atoi_long(argv[i]);
         if (content < -2147483648 || content > 2147483647)
         {
-			ft_printf("Error\n");
+			write(2, "Error\n", 6);
 			exit(1);
 		}
         i++;
