@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algorithm8.c                                       :+:      :+:    :+:   */
+/*   check_error2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/30 15:20:46 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/31 21:52:06 by imoumini         ###   ########.fr       */
+/*   Created: 2022/12/31 19:10:13 by imoumini          #+#    #+#             */
+/*   Updated: 2022/12/31 20:34:42 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-int	find_index_max(t_node **head_stack_a)
+void	check_int_limit(char **argv)
 {
-	int		max;
-	t_node	*ptr;
+	long	content;
+	int		i;
 
-	max = 0;
-	if (head_stack_a == NULL)
-		return (0);
-	if (*head_stack_a == NULL)
-		return (0);
-	ptr = *head_stack_a;
-	max = ptr -> index;
-	while (ptr != NULL)
+	i = 1;
+	while (argv[i])
 	{
-		if (max < ptr -> index)
-			max = ptr -> index;
-		ptr = ptr -> next;
+		content = ft_atoi_long(argv[i]);
+		if (content < -2147483648 || content > 2147483647)
+		{
+			write(2, "Error\n", 6);
+			exit(1);
+		}
+		i++;
 	}
-	return (max);
 }

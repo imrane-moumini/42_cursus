@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 19:01:34 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/31 17:01:11 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/31 20:04:49 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_ony_number(char *str)
 	{
 		if (!(str[i] >= '0' && str[i] <= '9'))
 		{
-			if(str[i] != '-' && str[i] != '+')
+			if (str[i] != '-' && str[i] != '+' && str[i] != ' ')
 				return (0);
 		}
 		i++;
@@ -95,47 +95,29 @@ int	check_doublon_list(t_node *head)
 	return (0);
 }
 
-long    ft_atoi_long(char *str)
+long	ft_atoi_long(char *str)
 {
-    long    i;
-    int     sign;
-    long    nb;
+	long	i;
+	int		sign;
+	long	nb;
 
-    i = 0;
-    sign = 1;
-    nb = 0;
-    while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-    {
-        i++;
-    }
-    if (str[i] == '+' || str[i] == '-')
-    {
-        if (str[i] == '-')
-            sign = sign -1;
-        i++;
-    }
-    while (str[i] >= '0' && str[i] <= '9')
-    {
-        nb = nb * 10 + str[i] - 48;
-        i++;
-    }
-    return (sign * nb);
-}
-
-void    check_int_limit(char **argv)
-{
-    long    content;
-    int        i;
-
-    i = 1;
-    while (argv[i])
-    {
-        content = ft_atoi_long(argv[i]);
-        if (content < -2147483648 || content > 2147483647)
-        {
-			write(2, "Error\n", 6);
-			exit(1);
-		}
-        i++;
-    }
+	i = 0;
+	sign = 1;
+	nb = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+	{
+		i++;
+	}
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			sign = sign -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nb = nb * 10 + str[i] - 48;
+		i++;
+	}
+	return (sign * nb);
 }

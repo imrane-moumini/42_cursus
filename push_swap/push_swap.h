@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:03:14 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/31 17:07:44 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/31 22:07:17 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 # include "libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
-#include <limits.h>
-#include <unistd.h>
+# include <limits.h>
+# include <unistd.h>
 
 typedef struct s_stack_node {
 	int					data;
@@ -38,12 +38,12 @@ typedef struct s_calculate {
 	int		node_index_diff;
 	int		index_greater;
 	int		mini_index;
-} t_calculate;
+}	t_calculate;
 
 typedef struct s_instructions{
 	int					cost_a;
 	int					cost_b;
-} t_instructions;
+}	t_inst;
 
 void	add_beg(int stack_data, t_node **head);
 void	del_first_node(t_node **head);
@@ -66,7 +66,7 @@ void	pa(t_node **head_stack_a, t_node **head_stack_b);
 int		check_doublon_list(t_node *head);
 int		check_ony_number(char *str);
 int		check_empty_stack(char *str);
-int	*create_tab_nbr(int nbr, t_node **head_stack_a);
+int		*create_tab_nbr(int nbr, t_node **head_stack_a);
 int		nbr_tab(char **str);
 void	tri_tab(int nbr, int *tab);
 void	check_data_in_stack(t_node **head, int nb, int i);
@@ -78,33 +78,36 @@ void	ft_tri_three(t_node **head_stack_a);
 void	have_to_do_sa(t_node **head_stack_a);
 int		is_stack_empty(t_node **head_stack_a);
 int		nbr_element_in_stack(t_node *head);
-void	ft_tri_more_than_three(t_node **head_stack_a, t_node **head_stack_b, int nbr);
-void	send_element_to_b_unless_three(t_node **head_stack_a, t_node **head_stack_b, int mediane);
-int 	is_index_smaller_than_mediane(t_node **head_stack_a, int mediane);
-void ft_calculate_pos(t_node **head_stack_a, t_node **head_stack_b);
-void ft_calculate_target_pos(t_node **head_stack_a, t_node **head_stack_b);
-void ft_calculate_positions(t_node **head_stack_a, t_node **head_stack_b);
+void	ft_tri_more_than_three(t_node **head_a, t_node **head_b, int nbr);
+void	send_element_to_b(t_node **head_a, t_node **head_b, int mediane);
+int		is_index_smaller_than_mediane(t_node **head_stack_a, int mediane);
+void	ft_calculate_pos(t_node **head_stack_a, t_node **head_stack_b);
+void	ft_calculate_target_pos(t_node **head_stack_a, t_node **head_stack_b);
+void	ft_calculate_positions(t_node **head_stack_a, t_node **head_stack_b);
 void	add_beg_pb(t_node **head_stack_a, t_node **head_stack_b);
 void	add_beg_pa(t_node **head_stack_a, t_node **head_stack_b);
-void first_passage(t_node *ptr_a, t_node *ptr_b, t_calculate *cal);
-void b_index_not_greater(t_node *ptr_a, t_node *ptr_b, t_calculate *cal);
-void ft_calculate_cost(t_node **head_stack_a, t_node **head_stack_b);
-void ft_pile_b_calculate(t_node **head_stack_b, t_node *ptr);
-void ft_pile_a_calculate(t_node **head_stack_a,t_node *ptr_b);
-void ft_final_cost_calculate(t_node *ptr_b);
-void ft_execute_instructions(t_node **head_stack_a, t_node **head_stack_b,t_instructions instructions);
-t_instructions ft_min_cost(t_node **head_stack_b);
-int	find_index_max(t_node **head_stack_a);
-void mark_min_and_max_index(t_node **head_stack_a, int max);
-int is_index_zero_on_top(t_node **head_stack_a);
-int is_index_max_on_bottom(t_node **head_stack_a, int max);
-void ft_calculate_coup_to_min(t_node **head_stack_a,t_node *ptr);
-void ft_execute_instruction_min(t_node **head_stack_a, t_node **head_stack_b,t_node *ptr);
+void	first_passage(t_node *ptr_a, t_node *ptr_b, t_calculate *cal);
+void	b_index_not_greater(t_node *ptr_a, t_node *ptr_b, t_calculate *cal);
+void	ft_calculate_cost(t_node **head_stack_a, t_node **head_stack_b);
+void	ft_pile_b_calculate(t_node **head_stack_b, t_node *ptr);
+void	ft_pile_a_calculate(t_node **head_stack_a, t_node *ptr_b);
+void	ft_final_cost_calculate(t_node *ptr_b);
+void	ft_execute(t_node **head_a, t_node **head_b, t_inst ins);
+t_inst	ft_min_cost(t_node **head_stack_b);
+int		find_index_max(t_node **head_stack_a);
+void	mark_min_and_max_index(t_node **head_stack_a, int max);
+int		is_index_zero_on_top(t_node **head_stack_a);
+int		is_index_max_on_bottom(t_node **head_stack_a, int max);
+void	ft_calculate_coup_to_min(t_node **head_stack_a, t_node *ptr);
+void	ft_execute_instruction_min(t_node **head_a, t_node **head_b, t_node *p);
 void	put_min_index_top(t_node **head_stack_a);
-void ft_printf_stack(t_node **head_stack_a, t_node **head_stack_b);
-void check_first_error(int argc, char *argv[]);
-void create_stack_a(int argc, t_node **head_stack_a, char *argv[]);
-void ft_free(t_node *save_head_a, t_node *save_head_b, int *tab);
-void    check_int_limit(char **argv);
-long    ft_atoi_long(char *str);
+void	ft_printf_stack(t_node **head_stack_a, t_node **head_stack_b);
+void	check_first_error(int argc, char *argv[]);
+void	create_stack_a(int argc, t_node **head_stack_a, char *argv[]);
+void	ft_free(t_node *save_head_a, t_node *save_head_b, int *tab);
+void	check_int_limit(char **argv);
+long	ft_atoi_long(char *str);
+void	ft_execute_cost_b(t_node **head_a, t_node **head_b, t_inst ins);
+void	ft_execute_cost_a(t_node **head_a, t_node **head_b, t_inst ins);
+t_inst	ft_boucle_min_cost(t_node *ptr, int min);
 #endif

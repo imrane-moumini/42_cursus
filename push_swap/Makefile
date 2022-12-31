@@ -5,7 +5,9 @@ SRC = main.c \
 	stack/handle_stack2.c \
 	stack/handle_stack3.c \
 	stack/handle_stack4.c \
+	stack/handle_stack5.c \
 	stack/check_error.c \
+	stack/check_error2.c \
 	stack/handle_main.c \
 	algorithm/algorithm.c \
 	algorithm/algorithm2.c \

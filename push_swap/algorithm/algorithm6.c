@@ -6,19 +6,37 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 17:56:38 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/30 18:43:12 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/31 22:08:02 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-// etape 5
-t_instructions ft_min_cost(t_node **head_stack_b)
+t_inst	ft_boucle_min_cost(t_node *ptr, int min)
 {
-	t_node *ptr;
-	t_instructions instructions;
-	int min;
-	
+	t_inst	instructions;
+
+	instructions.cost_a = 0;
+	instructions.cost_b = 0;
+	while (ptr != NULL)
+	{
+		if (min == ptr -> total_cost)
+		{
+			instructions.cost_a = ptr -> cost_a;
+			instructions.cost_b = ptr -> cost_b;
+			return (instructions);
+		}
+		ptr = ptr -> next;
+	}
+	return (instructions);
+}
+
+t_inst	ft_min_cost(t_node **head_stack_b)
+{
+	t_node			*ptr;
+	t_inst			instructions;
+	int				min;
+
 	instructions.cost_a = 0;
 	instructions.cost_b = 0;
 	if (head_stack_b == NULL)
@@ -31,65 +49,64 @@ t_instructions ft_min_cost(t_node **head_stack_b)
 	{
 		if (min > ptr -> total_cost)
 			min = ptr -> total_cost;
-		ptr = ptr -> next;	
-	}
-	ptr = *head_stack_b;
-	while (ptr != NULL)
-	{
-		if (min == ptr -> total_cost)
-		{
-			instructions.cost_a = ptr -> cost_a;
-			instructions.cost_b = ptr -> cost_b;
-			//ft_printf("min in fonction : %i\n", min);
-			return (instructions);
-		}
 		ptr = ptr -> next;
 	}
+	ptr = *head_stack_b;
+	instructions = ft_boucle_min_cost(ptr, min);
 	return (instructions);
 }
 
-void ft_execute_instructions(t_node **head_stack_a, t_node **head_stack_b,t_instructions instructions)
+void	ft_execute_cost_a(t_node **head_a, t_node **head_b, t_inst ins)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	//ft_printf("instructions cost a : %i, instructions cost b : %i\n", instructions.cost_a, instructions.cost_b);
-	if (instructions.cost_a > 0)
+	if (ins.cost_a > 0)
 	{
-		while ((i < instructions.cost_a )&& instructions.cost_a != 0)
+		while ((i < ins.cost_a) && ins.cost_a != 0)
 		{
-			ra(head_stack_a, head_stack_b);
+			ra(head_a, head_b);
 			i++;
 		}
 	}
 	else
 	{
-		instructions.cost_a = instructions.cost_a * -1;
-		while ((i < instructions.cost_a ) && instructions.cost_a != 0)
+		ins.cost_a = ins.cost_a * -1;
+		while ((i < ins.cost_a) && ins.cost_a != 0)
 		{
-			rra(head_stack_a, head_stack_b);
+			rra(head_a, head_b);
 			i++;
 		}
 	}
-	i = 0;
-	if (instructions.cost_b > 0)
-	{
-		while (((i < instructions.cost_b) != 0 )&& instructions.cost_b > 0)
-		{
-			rb(head_stack_a, head_stack_b);
-			i++;
-		}
-	}
-	else
-	{
-		instructions.cost_b = instructions.cost_b * -1;
-		while (((i < instructions.cost_b) != 0) && instructions.cost_b > 0)
-		{
-			rrb(head_stack_a, head_stack_b);
-			i++;
-		}
-	}
-	pa(head_stack_a, head_stack_b);
 }
 
-// pas derreur mais me semble pas fonctionner voir pk, c letape 5 
+void	ft_execute_cost_b(t_node **head_a, t_node **head_b, t_inst ins)
+{
+	int	i;
+
+	i = 0;
+	if (ins.cost_b > 0)
+	{
+		while (((i < ins.cost_b) != 0) && ins.cost_b > 0)
+		{
+			rb(head_a, head_b);
+			i++;
+		}
+	}
+	else
+	{
+		ins.cost_b = ins.cost_b * -1;
+		while (((i < ins.cost_b) != 0) && ins.cost_b > 0)
+		{
+			rrb(head_a, head_b);
+			i++;
+		}
+	}
+}
+
+void	ft_execute(t_node **head_a, t_node **head_b, t_inst ins)
+{
+	ft_execute_cost_a(head_a, head_b, ins);
+	ft_execute_cost_b(head_a, head_b, ins);
+	pa(head_a, head_b);
+}

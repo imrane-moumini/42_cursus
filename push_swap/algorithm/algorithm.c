@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:11:27 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/30 17:16:18 by imoumini         ###   ########.fr       */
+/*   Updated: 2022/12/31 19:34:03 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	nbr_tab(char **str)
 
 int	*create_tab_nbr(int nbr, t_node **head_stack_a)
 {
-	t_node	*ptr;;
 	int		*tab;
 	int		i;
+	t_node	*ptr;
 
 	i = 0;
 	tab = malloc(sizeof(int) * nbr);
@@ -65,7 +65,6 @@ void	check_data_in_stack(t_node **head, int nb, int i)
 	t_node	*ptr;
 
 	ptr = *head;
-	// printf("HFIHUBFBUWf\n");
 	while (ptr != NULL)
 	{
 		if (ptr -> data == nb)
