@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 19:01:34 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/31 20:04:49 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/02 20:07:02 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ long	ft_atoi_long(char *str)
 	if (str[i] == '+' || str[i] == '-')
 	{
 		if (str[i] == '-')
-			sign = sign -1;
+			sign = (sign * -1);
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')

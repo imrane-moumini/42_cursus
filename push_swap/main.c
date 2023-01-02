@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:02:58 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/31 22:37:23 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/02 21:01:44 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ int	main(int argc, char *argv[])
 		return (write(2, "Error\n", 6), 1);
 	}
 	add_index_to_stack(&head_stack_a, tab, nbr);
-	ft_printf_stack(&head_stack_a, &head_stack_b);
 	if (has_to_tri(&head_stack_a) == 1)
 		ft_tri(&head_stack_a, &head_stack_b, nbr);
-	ft_printf_stack(&head_stack_a, &head_stack_b);
 	ft_free(head_stack_a, head_stack_b, tab);
 }

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 22:27:32 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/31 22:37:37 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/02 21:12:35 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	which_three_index_is_max(t_node **head_stack_a)
 	first = ptr;
 	second = ptr -> next;
 	third = ptr -> next -> next;
-	if (first -> index > second -> index && first -> index > third -> index)
+	if (first->index > second->index && first->index > third->index)
 		return (1);
 	if (second -> index > first -> index && second -> index > third -> index)
 		return (2);
@@ -86,5 +86,7 @@ void	ft_tri(t_node **head_stack_a, t_node **head_stack_b, int nbr)
 	if (nbr == 3)
 		ft_tri_three(head_stack_a);
 	else
+	{
 		ft_tri_more_than_three(head_stack_a, head_stack_b, nbr);
+	}
 }

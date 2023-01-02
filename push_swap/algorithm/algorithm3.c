@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 21:14:05 by imoumini          #+#    #+#             */
-/*   Updated: 2022/12/31 22:15:47 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/02 21:12:57 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int	is_index_smaller_than_mediane(t_node **head_stack_a, int mediane)
 
 void	send_element_to_b(t_node **head_a, t_node **head_b, int mediane)
 {
-	while (is_index_smaller_than_mediane(head_a, mediane) == 1)
+	while (is_index_smaller_than_mediane(head_a, mediane) == 1 \
+		&& nbr_element_in_stack(*head_a) > 3)
 	{
 		if ((*head_a)-> index < mediane)
 		{
@@ -94,5 +95,7 @@ void	send_element_to_b(t_node **head_a, t_node **head_b, int mediane)
 		}
 	}
 	while (nbr_element_in_stack(*head_a) > 3)
+	{
 		pb(head_a, head_b);
+	}
 }
