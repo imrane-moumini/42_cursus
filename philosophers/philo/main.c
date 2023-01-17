@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/17 20:47:30 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/17 21:22:01 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ void *action(void *arg)
 	
     get_time(&milliseconds);
     philo philosophe = *(philo *)arg;
+	// afficher texte seulement au changement d'etat
+	// connaitre position (qui est a cote)
+	// simuler la possession de fourchette
+		// un buffeur qui contient toutes les fourchettes
+		
 	printf("time : %lld ", milliseconds - philosophe.time_start);
     printf("my index is %i\n", philosophe.index);
     // passer le philo en param avec ttes ses infos
@@ -94,6 +99,17 @@ void fill_philo_tab(philo *philo_tab, info start)
         philo_tab[i].index = i + 1;
         i++;
     }
+	// 1 philo
+	// 2 philo
+	// 3 philo et plus
+	
+	// ca c dans le cas ou je suis au milieux
+	// mis si extremitite c pas vrai
+	// en 2 partie
+		// premiere partie je suis le numbr n
+		//philo_tab[0].acoter = philo_tab[start.nbr_philo - 1] 
+	//philo_tab[i].left_philo_index = index + 1;
+	//philo_tab[i].right_philo_index = index - 1;
 }
 int main(int argc, char *argv[])
 {
@@ -105,6 +121,7 @@ int main(int argc, char *argv[])
 
     // un thread = un philosophe
     // une fonction qui comtient toutes les actions
+	// faire en srte que ouche pas fourchette si pas dispo
     info start;
     pthread_t *ids;
     philo *philo_tab;

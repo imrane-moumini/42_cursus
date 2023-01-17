@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/17 20:47:18 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/17 21:13:50 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct philo{
 	int t_sleep;
 	int nbr_eat_allow;
 	int is_eating;
+	int left_philo_index;
+	int right_philo_index;
 } philo;
 
 typedef struct info{
