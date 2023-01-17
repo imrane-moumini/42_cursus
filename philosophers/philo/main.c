@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/17 20:33:45 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/17 20:47:30 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,18 @@ int handle_error(int argc, char *argv[])
     }
     return (1);   
 }
-
-void *action(void *arg)
+void get_time(long long *milliseconds)
 {
 	struct timeval tv;
+	if (gettimeofday(&tv, NULL) == -1)
+		return;
+	*milliseconds = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+}
+void *action(void *arg)
+{
 	long long milliseconds;
 	
-    if (gettimeofday(&tv, NULL) == -1)
-		return (NULL);
-	milliseconds = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+    get_time(&milliseconds);
     philo philosophe = *(philo *)arg;
 	printf("time : %lld ", milliseconds - philosophe.time_start);
     printf("my index is %i\n", philosophe.index);

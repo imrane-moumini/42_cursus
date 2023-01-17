@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/17 20:27:58 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/17 20:47:18 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,3 +42,4 @@ int ft_nbr(char c);
 info fill_info(int argc, char *argv[]);
 void *action(void *arg);
 void fill_philo_tab(philo *philo_tab, info start);
+void get_time(long long *milliseconds);
