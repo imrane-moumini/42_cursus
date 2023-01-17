@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/17 19:53:29 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/17 20:27:58 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/time.h>
 
 typedef struct philo{
 	int index;
+	long long time_start;
 	int t_die;
 	int t_eat;
 	int t_sleep;
@@ -31,6 +33,7 @@ typedef struct info{
 	int t_sleep;
 	int nbr_eat_allow;
 	int bonus;
+	long long time_start;
 } info;
 
 int ft_atoi(const char *nptr);

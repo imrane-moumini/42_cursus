@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/17 19:54:32 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/17 20:33:45 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 info fill_info(int argc, char *argv[])
 {
     info start;
-    (void) argc;
+	struct timeval tv;
+	long long milliseconds;
+	
+	(void) argc;
     start.nbr_philo = ft_atoi(argv[1]);
     start.t_die = ft_atoi(argv[2]);
     start.t_eat = ft_atoi(argv[3]);
@@ -26,6 +29,10 @@ info fill_info(int argc, char *argv[])
         start.nbr_eat_allow = ft_atoi(argv[5]);
         start.bonus = 1;
     }
+	if (gettimeofday(&tv, NULL) == -1)
+		return (start);
+	milliseconds = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	start.time_start = milliseconds;
     return (start);
 }
 
@@ -46,7 +53,14 @@ int handle_error(int argc, char *argv[])
 
 void *action(void *arg)
 {
+	struct timeval tv;
+	long long milliseconds;
+	
+    if (gettimeofday(&tv, NULL) == -1)
+		return (NULL);
+	milliseconds = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
     philo philosophe = *(philo *)arg;
+	printf("time : %lld ", milliseconds - philosophe.time_start);
     printf("my index is %i\n", philosophe.index);
     // passer le philo en param avec ttes ses infos
     // afficher l'index du philosophe
@@ -65,6 +79,7 @@ void fill_philo_tab(philo *philo_tab, info start)
     if (start.bonus == 1)
         philosophe.nbr_eat_allow = start.nbr_eat_allow;
     philosophe.is_eating = 0;
+	philosophe.time_start = start.time_start;
     while(i < start.nbr_philo)
     {
         philo_tab[i] = philosophe;
