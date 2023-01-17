@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/15 21:30:51 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:54:32 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,38 @@ int handle_error(int argc, char *argv[])
     return (1);   
 }
 
-void *action()
+void *action(void *arg)
 {
-    printf("well done\n");
+    philo philosophe = *(philo *)arg;
+    printf("my index is %i\n", philosophe.index);
+    // passer le philo en param avec ttes ses infos
+    // afficher l'index du philosophe
     return (NULL);
+}
+
+void fill_philo_tab(philo *philo_tab, info start)
+{
+    int i;
+    philo philosophe;
+    
+    i = 0;
+    philosophe.t_die = start.t_die;
+    philosophe.t_eat = start.t_eat;
+    philosophe.t_sleep = start.t_sleep;
+    if (start.bonus == 1)
+        philosophe.nbr_eat_allow = start.nbr_eat_allow;
+    philosophe.is_eating = 0;
+    while(i < start.nbr_philo)
+    {
+        philo_tab[i] = philosophe;
+        i++;
+    }
+    i = 0;
+    while(i < start.nbr_philo)
+    {
+        philo_tab[i].index = i + 1;
+        i++;
+    }
 }
 int main(int argc, char *argv[])
 {
@@ -61,6 +89,7 @@ int main(int argc, char *argv[])
     // une fonction qui comtient toutes les actions
     info start;
     pthread_t *ids;
+    philo *philo_tab;
     int i;
     i = 0;
     if (handle_error(argc, argv) == 0)
@@ -69,11 +98,14 @@ int main(int argc, char *argv[])
     if (start.bonus == 0)
     {
         ids = malloc(sizeof(pthread_t) * start.nbr_philo);
+        philo_tab = malloc(sizeof(philo) * start.nbr_philo);
+        fill_philo_tab(philo_tab, start);
         while (i < start.nbr_philo)
         {
-            if (pthread_create(ids + i, NULL, &action, NULL) != 0)
+            if (pthread_create(ids + i, NULL, &action, philo_tab + i) != 0)
             {
                 free(ids);
+                free(philo_tab);
                 printf("can't create threade nbr %i", i);
                 return (0);
             }
@@ -85,12 +117,14 @@ int main(int argc, char *argv[])
             if (pthread_join(ids[i], NULL) != 0)
             {
                 free(ids);
+                free(philo_tab);
                 printf("can't join threade nbr %i", i);
                 return (0);
             }
             i++;
         }
         free(ids);
+        free(philo_tab);
     }
 }
 

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/15 21:21:35 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:53:29 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ int ft_atoi(const char *nptr);
 int handle_error(int argc, char *argv[]);
 int ft_nbr(char c);
 info fill_info(int argc, char *argv[]);
-void *action();
+void *action(void *arg);
+void fill_philo_tab(philo *philo_tab, info start);
