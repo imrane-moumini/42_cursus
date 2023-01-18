@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/17 21:22:01 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/18 22:32:58 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ void *action(void *arg)
 		// un buffeur qui contient toutes les fourchettes
 		
 	printf("time : %lld ", milliseconds - philosophe.time_start);
-    printf("my index is %i\n", philosophe.index);
+    printf("my index is %i ", philosophe.index + 1);
+	printf("left philo is %i ", philosophe.left_philo_index + 1);
+	printf("right philo is %i\n", philosophe.right_philo_index + 1);
     // passer le philo en param avec ttes ses infos
     // afficher l'index du philosophe
     return (NULL);
@@ -88,6 +90,7 @@ void fill_philo_tab(philo *philo_tab, info start)
         philosophe.nbr_eat_allow = start.nbr_eat_allow;
     philosophe.is_eating = 0;
 	philosophe.time_start = start.time_start;
+	philosophe.last_time_eat = 0;
     while(i < start.nbr_philo)
     {
         philo_tab[i] = philosophe;
@@ -96,20 +99,45 @@ void fill_philo_tab(philo *philo_tab, info start)
     i = 0;
     while(i < start.nbr_philo)
     {
-        philo_tab[i].index = i + 1;
+        philo_tab[i].index = i;
         i++;
     }
-	// 1 philo
-	// 2 philo
-	// 3 philo et plus
-	
-	// ca c dans le cas ou je suis au milieux
-	// mis si extremitite c pas vrai
-	// en 2 partie
-		// premiere partie je suis le numbr n
-		//philo_tab[0].acoter = philo_tab[start.nbr_philo - 1] 
-	//philo_tab[i].left_philo_index = index + 1;
-	//philo_tab[i].right_philo_index = index - 1;
+}
+
+void add_pos_to_philo(philo *philo_tab, info start)
+{
+    int i;
+    i = 0;
+	if (start.nbr_philo > 2)
+    {
+		while (i < start.nbr_philo)
+    	{
+			if (i + 1 <= start.nbr_philo - 1)
+				philo_tab[i].left_philo_index = i + 1;
+			else
+				philo_tab[i].left_philo_index = 0;
+			if (i - 1 < 0)
+				philo_tab[i].right_philo_index = start.nbr_philo - 1;
+			else
+				philo_tab[i].right_philo_index =  i - 1;
+        	i++;
+    	}
+	}
+	if (start.nbr_philo  == 2)
+	{
+		while (i < start.nbr_philo)
+    	{
+			if (i + 1 <= start.nbr_philo - 1)
+				philo_tab[i].left_philo_index = i + 1;
+			else
+				philo_tab[i].left_philo_index = 1;
+			if (i - 1 < 0)
+				philo_tab[i].right_philo_index = start.nbr_philo - 1;
+			else
+				philo_tab[i].right_philo_index =  0;
+        	i++;
+    	}
+	}
 }
 int main(int argc, char *argv[])
 {
@@ -130,11 +158,18 @@ int main(int argc, char *argv[])
     if (handle_error(argc, argv) == 0)
         return (0);
     start = fill_info(argc, argv);
+	if (start.nbr_philo == 1)
+	{
+		printf("0 1 has taken a fork\n");
+		printf("0 died\n");
+		return (0);
+	}
     if (start.bonus == 0)
     {
         ids = malloc(sizeof(pthread_t) * start.nbr_philo);
         philo_tab = malloc(sizeof(philo) * start.nbr_philo);
         fill_philo_tab(philo_tab, start);
+        add_pos_to_philo(philo_tab, start);
         while (i < start.nbr_philo)
         {
             if (pthread_create(ids + i, NULL, &action, philo_tab + i) != 0)

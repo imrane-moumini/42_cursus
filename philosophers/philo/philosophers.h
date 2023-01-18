@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/17 21:13:50 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/18 20:49:56 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct philo{
 	int t_sleep;
 	int nbr_eat_allow;
 	int is_eating;
+	long long last_time_eat;
 	int left_philo_index;
 	int right_philo_index;
 } philo;
@@ -45,3 +46,4 @@ info fill_info(int argc, char *argv[]);
 void *action(void *arg);
 void fill_philo_tab(philo *philo_tab, info start);
 void get_time(long long *milliseconds);
+void add_pos_to_philo(philo *philo_tab, info start);
