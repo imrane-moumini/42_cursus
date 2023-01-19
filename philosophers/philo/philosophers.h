@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/18 20:49:56 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/19 21:29:03 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
+typedef struct info{
+	int nbr_philo;
+	int t_die;
+	int t_eat;
+	int t_sleep;
+	int nbr_eat_allow;
+	int bonus;
+	long long time_start;
+	pthread_mutex_t mutex_forks[300];
+	pthread_mutex_t mutex_printf;
+} info;
 
 typedef struct philo{
 	int index;
@@ -25,25 +36,23 @@ typedef struct philo{
 	int nbr_eat_allow;
 	int is_eating;
 	long long last_time_eat;
-	int left_philo_index;
-	int right_philo_index;
+	int left;
+	int right;
+	int as_eaten_one;
+	int am_i_die;
+	info *start;
 } philo;
 
-typedef struct info{
-	int nbr_philo;
-	int t_die;
-	int t_eat;
-	int t_sleep;
-	int nbr_eat_allow;
-	int bonus;
-	long long time_start;
-} info;
+
 
 int ft_atoi(const char *nptr);
 int handle_error(int argc, char *argv[]);
 int ft_nbr(char c);
 info fill_info(int argc, char *argv[]);
 void *action(void *arg);
-void fill_philo_tab(philo *philo_tab, info start);
-void get_time(long long *milliseconds);
+void fill_philo_tab(philo *philo_tab, info *start);
+long long get_time(long long *milliseconds);
 void add_pos_to_philo(philo *philo_tab, info start);
+void is_eating(philo philosophe);
+void printf_eating(lomg long milliseconds, philo philosophe);
+void am_i_die(philo *philosophe);
