@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/18 22:32:58 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/19 15:37:33 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void *action(void *arg)
 		// un buffeur qui contient toutes les fourchettes
 		
 	printf("time : %lld ", milliseconds - philosophe.time_start);
-    printf("my index is %i ", philosophe.index + 1);
-	printf("left philo is %i ", philosophe.left_philo_index + 1);
-	printf("right philo is %i\n", philosophe.right_philo_index + 1);
+    printf("my index is %i ", philosophe.index);
+	printf("left philo is %i ", philosophe.left_philo_index);
+	printf("right philo is %i\n", philosophe.right_philo_index);
     // passer le philo en param avec ttes ses infos
     // afficher l'index du philosophe
     return (NULL);
@@ -130,7 +130,7 @@ void add_pos_to_philo(philo *philo_tab, info start)
 			if (i + 1 <= start.nbr_philo - 1)
 				philo_tab[i].left_philo_index = i + 1;
 			else
-				philo_tab[i].left_philo_index = 1;
+				philo_tab[i].left_philo_index = 0;
 			if (i - 1 < 0)
 				philo_tab[i].right_philo_index = start.nbr_philo - 1;
 			else
@@ -150,6 +150,7 @@ int main(int argc, char *argv[])
     // un thread = un philosophe
     // une fonction qui comtient toutes les actions
 	// faire en srte que ouche pas fourchette si pas dispo
+	// commencer les histoires de ok de un tel prend une fourchette, un tel fait autre chose
     info start;
     pthread_t *ids;
     philo *philo_tab;
