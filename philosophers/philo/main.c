@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/20 20:57:01 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/20 21:33:57 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,26 +118,48 @@ int am_i_die(philo *philo_tab, int nbr_philo)
 void *action(void *arg)
 {
     philo philosophe = *(philo *)arg;
-	//pthread_t thread_id = pthread_self();
+	pthread_t thread_id = pthread_self();
 	while (1)
 	{
+		pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.left]));
+		pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.right]));
+		printf("thread nbr %lu, philo id : %i left is %i\n",thread_id , philosophe.index, philosophe.left);
+		printf("thread nbr %lu, philo id : %i right is %i\n",thread_id , philosophe.index, philosophe.right);
+		pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.right]));
+		pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.left]));
+		usleep(1000);
+		break;
+	}
+	// while (1)
+	// {
 			//printf("thread nbr %lu, philo id : %i left is %i\n",thread_id , philosophe.index, philosophe.left);
 			//printf("thread nbr %lu, philo id : %i right is %i\n",thread_id , philosophe.index, philosophe.right);
-			pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.left]));
-			pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.right]));
-			pthread_mutex_lock(&(philosophe.start -> mutex_printf));
-			printf_eating(philosophe);
-			is_eating(&philosophe);
-			i_am_sleeping(philosophe);
-			i_am_thinking(philosophe);
-			pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
-			pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.right]));
-			pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.left]));
+			// pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.left]));
+			// pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.right]));
+			// pthread_mutex_lock(&(philosophe.start -> mutex_printf));
+			// printf_eating(philosophe);
+			// is_eating(&philosophe);
+			// i_am_sleeping(philosophe);
+			// i_am_thinking(philosophe);
+			// pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
+			// pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.right]));
+			// pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.left]));
 			// seul le premier thread mange
 			// ca veut dire que je change pas de lock ou bien de philosophe a chaque thread
 			// commebeter code et aficher index ddes philo avec index thread et voir si ca change bien
 			// puis si ca change voir si index des left right change bien a chaque fois
-	}
+			// g vu que je change bien de left right et de philo
+			// voir si avec le mutex printf ca fonctionne quand meme
+			// ca fonctionne, voir avec mutex fork
+			// ca fonctionne avec mutex fork
+			// donc pk 1 ne meurt pas mais 2 ne mange jamais ?
+			// peut etre c a cause de la boucle while infini
+			// mettre dans une boucle while et mettre un usleep si temps break
+			// en plus ma maniere de finir de base cause des leak pasque elle fait pas finir les thread que le principal
+			// g essayer le while ca a quqnd meme fonctionner
+			// c pas un usleep le pb sinon jaurais vu mon truc laguer
+			// en gros la le pb c que 2 ne mange jamais alors quil a normalement acces a tout
+	// }
     return (NULL);
 }
 
@@ -241,12 +263,12 @@ int main(int argc, char *argv[])
             }
             i++;
         }
-		if (am_i_die(philo_tab, start.nbr_philo) == 1)
-		{
-			free(ids);
-            free(philo_tab);
-            return (0);
-		}
+		// if (am_i_die(philo_tab, start.nbr_philo) == 1)
+		// {
+		// 	free(ids);
+        //     free(philo_tab);
+        //     return (0);
+		// }
         i = 0;
         while (i < start.nbr_philo)
         {
