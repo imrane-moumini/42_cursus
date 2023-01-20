@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/20 20:17:53 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/20 20:39:40 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,10 @@ int am_i_die(philo *philo_tab, int nbr_philo)
 			if (get_time() - philo_tab[i].last_time_eat >= philo_tab[i].t_die)
 			{
 				philo_tab[i].am_i_die = 1;
+				pthread_mutex_lock(&(philo_tab[i].start -> mutex_printf));
 				printf("%lld ", (get_time() - philo_tab[i].time_start));
 				printf("%i died\n", philo_tab[i].index + 1);
+				pthread_mutex_unlock(&(philo_tab[i].start -> mutex_printf));
 				return (1);
 			}
 			i++;
@@ -114,11 +116,6 @@ int am_i_die(philo *philo_tab, int nbr_philo)
 	return (0);
 }
 
-void i_die(philo philosophe)
-{
-	printf("%lld ", (get_time() - philosophe.time_start));
-	printf("%i is die\n", philosophe.index + 1);
-}
 void *action(void *arg)
 {
     philo philosophe = *(philo *)arg;
@@ -132,22 +129,18 @@ void *action(void *arg)
 			pthread_mutex_lock(&(philosophe.start -> mutex_printf));
 			printf_eating(philosophe);
 			is_eating(&philosophe);
+			i_am_sleeping(philosophe);
+			i_am_thinking(philosophe);
 			pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
 			pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.right]));
 			pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.left]));
-			
-			pthread_mutex_lock(&(philosophe.start -> mutex_printf));
-			i_am_sleeping(philosophe);
-			pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
-			pthread_mutex_lock(&(philosophe.start -> mutex_printf));
-			i_am_thinking(philosophe);
-			pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
 			// meurt parce que narive pas a retourner manger alors quil peut
 			// ou meurt parce que met mal a jour quil a manger
 			// ou meurt parce que mal calculer le temps
 			// meurt parce que les valeurs du debut sont fausses
 			// sachant que les iam sleeping et thinking ne saffiche ja;ais
 			// sachnat aussi que parfois 1 meurt direct sans avoir meme manger
+			// peut etre je meurt avant daller a la ligne suivante mais bizzare
 	}
     return (NULL);
 }
