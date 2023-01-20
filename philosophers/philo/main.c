@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/19 21:41:38 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/20 18:21:33 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ long long get_time()
 	struct timeval tv;
 	
 	if (gettimeofday(&tv, NULL) == -1)
-		return;
-	*milliseconds = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+		return (0);
+	milliseconds = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	return (milliseconds);
 }
 
@@ -68,73 +68,77 @@ void is_eating(philo *philosophe)
 	philosophe -> as_eaten_one = 1;
 }
 
-void printf_eating(long long milliseconds, philo philosophe)
+void printf_eating(philo philosophe)
 {
-	printf("%i ", (get_time() - philosophe.time_start));
+	printf("%lld ", (get_time() - philosophe.time_start));
 	printf("%i has taken a fork\n", philosophe.index);
-	printf("%i ", (get_time() - philosophe.time_start));
+	printf("%lld ", (get_time() - philosophe.time_start));
 	printf("%i has taken a fork\n", philosophe.index);
-	printf("%i ", (get_time() - philosophe.time_start));
+	printf("%lld ", (get_time() - philosophe.time_start));
 	printf("%i is eating\n", philosophe.index);
 }
 
-void am_i_die(philo *philosophe)
+void i_am_sleeping(philo philosophe)
 {
+	
+	printf("%lld ", (get_time() - philosophe.time_start));
+	printf("%i is sleeping\n", philosophe.index);
+	usleep(philosophe.t_sleep * 1000);
+}
+
+void i_am_thinking(philo philosophe)
+{
+	printf("%lld ", (get_time() - philosophe.time_start));
+	printf("%i is thinkig\n", philosophe.index);
+}
+
+int am_i_die(philo *philo_tab, int nbr_philo)
+{
+	int i;
+	i = 0;
 	while (1)
 	{
-		if (last_time_eat - t_die == 0)
+		while (i < nbr_philo)
 		{
-			philosophe -> am_i_die = 1;
-			break;
+			if (philo_tab[i].last_time_eat - philo_tab[i].t_die <= 0)
+			{
+				philo_tab[i].am_i_die = 1;
+				printf("%lld ", (get_time() - philo_tab[i].time_start));
+				printf("%i died\n", philo_tab[i].index);
+				return (1);
+			}
+			i++;
 		}
+		i = 0;
 	}
+	return (0);
+}
+
+void i_die(philo philosophe)
+{
+	printf("%lld ", (get_time() - philosophe.time_start));
+	printf("%i is die\n", philosophe.index);
 }
 void *action(void *arg)
 {
-	long long milliseconds;
     philo philosophe = *(philo *)arg;
 	while (1)
 	{
-		// finir qund premiere fois je mange
-		// finir qund g deja mange une fois
-		if (philosophe_as_eaten_one == 0)
-		{
-			// utiliser un lock (mutex) different par fourchette
-			// cela permet de les differncier et de savoir si oui ou non on peut les toucher
-			// pour ne pas epnpecher les autre thread d'avancer leur excecuion
-			// il suffit de differencier les locks 
-			// un lock par resssource qu'on souhaite proteger
-			pthread_mutex_lock(&(philosophe.start -> mutex_fork[philosophe.left]));
-			pthread_mutex_lock(&(philosophe.start -> mutex_fork[philosophe.right]));
+			pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.left]));
+			pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.right]));
 			pthread_mutex_lock(&(philosophe.start -> mutex_printf));
-			printf_eating(milliseconds ,philosophe);
+			printf_eating(philosophe);
 			is_eating(&philosophe);
 			pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
-			pthread_mutex_unlock(philosophe.start -> mutex_fork[philosophe.right]);
-			pthread_mutex_unlock(philosophe.start -> mutex_fork[philosophe.left]);
-			//philo_printf(arg, philo->id, "is sleeping");
-			//pass_time((long long)arg->sleep_time, arg);
-			//philo_printf(arg, philo->id, "is thinking");
+			pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.right]));
+			pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.left]));
 			
-		}
-		if (philosophe.am_i_die == 1)
-			return ((void *)&philosophe.am_i_die)
-		if (philosophe_as_eaten_one == 1)
-		{
-			// utiliser un lock (mutex) different par fourchette
-			// cela permet de les differncier et de savoir si oui ou non on peut les toucher
-			// pour ne pas epnpecher les autre thread d'avancer leur excecuion
-			// il suffit de differencier les locks 
-			// un lock par resssource qu'on souhaite proteger
-			pthread_mutex_lock(&(philosophe.start -> mutex_fork[philosophe.left]));
-			pthread_mutex_lock(&(philosophe.start -> mutex_fork[philosophe.right]));
 			pthread_mutex_lock(&(philosophe.start -> mutex_printf));
-			printf_eating(milliseconds ,philosophe);
-			is_eating(&philosophe);
+			i_am_sleeping(philosophe);
 			pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
-			pthread_mutex_unlock(philosophe.start -> mutex_fork[philosophe.right]);
-			pthread_mutex_unlock(philosophe.start -> mutex_fork[philosophe.left]);
-		}
+			pthread_mutex_lock(&(philosophe.start -> mutex_printf));
+			i_am_thinking(philosophe);
+			pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
 	}
     return (NULL);
 }
@@ -209,25 +213,31 @@ int main(int argc, char *argv[])
 	
     info start;
     pthread_t *ids;
-	pthread_mutex_t mutex;
     philo *philo_tab;
-	void *result;
     int i;
+	
     i = 0;
     if (handle_error(argc, argv) == 0)
         return (0);
     start = fill_info(argc, argv);
-	start.mutex = &mutex;
 	if (start.nbr_philo == 1)
 	{
 		printf("0 1 has taken a fork\n");
 		printf("0 died\n");
 		return (0);
 	}
+	pthread_mutex_init(&start.mutex_printf,NULL);
+	while (i < start.nbr_philo)
+	{
+			pthread_mutex_init(&(start.mutex_forks[i]),NULL);
+			i++;
+
+	}
+	i = 0;
     if (start.bonus == 0)
     {
         ids = malloc(sizeof(pthread_t) * start.nbr_philo);
-        philo_tab = malloc(sizeof(philo) * start.nbr_philo);
+        philo_tab = malloc((sizeof(philo) + 1 )* start.nbr_philo);
         fill_philo_tab(philo_tab, &start);
         add_pos_to_philo(philo_tab, start);
         while (i < start.nbr_philo)
@@ -241,11 +251,16 @@ int main(int argc, char *argv[])
             }
             i++;
         }
-		am_i_die()
+		if (am_i_die(philo_tab, start.nbr_philo) == 1)
+		{
+			free(ids);
+            free(philo_tab);
+            return (0);
+		}
         i = 0;
         while (i < start.nbr_philo)
         {
-            if (pthread_join(ids[i], &result) != 0)
+            if (pthread_join(ids[i], NULL) != 0)
             {
                 free(ids);
                 free(philo_tab);
@@ -254,12 +269,6 @@ int main(int argc, char *argv[])
             }
             i++;
         }
-		if ((int)result == 1)
-		{
-			free(ids);
-			free(philo_tab);
-			return (0);
-		}
         free(ids);
         free(philo_tab);
     }

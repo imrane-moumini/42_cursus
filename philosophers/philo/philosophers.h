@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/19 21:29:03 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/20 18:22:05 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
+#include <unistd.h>
 typedef struct info{
 	int nbr_philo;
 	int t_die;
@@ -51,8 +52,11 @@ int ft_nbr(char c);
 info fill_info(int argc, char *argv[]);
 void *action(void *arg);
 void fill_philo_tab(philo *philo_tab, info *start);
-long long get_time(long long *milliseconds);
+long long get_time();
 void add_pos_to_philo(philo *philo_tab, info start);
-void is_eating(philo philosophe);
-void printf_eating(lomg long milliseconds, philo philosophe);
-void am_i_die(philo *philosophe);
+void is_eating(philo *philosophe);
+void printf_eating(philo philosophe);
+int am_i_die(philo *philo_tab, int nbr_philo);
+void i_am_sleeping(philo philosophe);
+void i_am_thinking(philo philosophe);
+void i_die(philo philosophe);
