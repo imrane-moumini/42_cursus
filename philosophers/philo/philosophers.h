@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/20 18:22:05 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/20 18:57:40 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <string.h>
 #include <sys/time.h>
 #include <unistd.h>
+
 typedef struct info{
 	int nbr_philo;
 	int t_die;

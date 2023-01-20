@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/20 18:21:33 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/20 20:17:53 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,25 +71,25 @@ void is_eating(philo *philosophe)
 void printf_eating(philo philosophe)
 {
 	printf("%lld ", (get_time() - philosophe.time_start));
-	printf("%i has taken a fork\n", philosophe.index);
+	printf("%i has taken a fork\n", philosophe.index + 1);
 	printf("%lld ", (get_time() - philosophe.time_start));
-	printf("%i has taken a fork\n", philosophe.index);
+	printf("%i has taken a fork\n", philosophe.index + 1);
 	printf("%lld ", (get_time() - philosophe.time_start));
-	printf("%i is eating\n", philosophe.index);
+	printf("%i is eating\n", philosophe.index + 1);
 }
 
 void i_am_sleeping(philo philosophe)
 {
 	
 	printf("%lld ", (get_time() - philosophe.time_start));
-	printf("%i is sleeping\n", philosophe.index);
+	printf("%i is sleeping\n", philosophe.index + 1);
 	usleep(philosophe.t_sleep * 1000);
 }
 
 void i_am_thinking(philo philosophe)
 {
 	printf("%lld ", (get_time() - philosophe.time_start));
-	printf("%i is thinkig\n", philosophe.index);
+	printf("%i is thinkig\n", philosophe.index + 1);
 }
 
 int am_i_die(philo *philo_tab, int nbr_philo)
@@ -100,11 +100,11 @@ int am_i_die(philo *philo_tab, int nbr_philo)
 	{
 		while (i < nbr_philo)
 		{
-			if (philo_tab[i].last_time_eat - philo_tab[i].t_die <= 0)
+			if (get_time() - philo_tab[i].last_time_eat >= philo_tab[i].t_die)
 			{
 				philo_tab[i].am_i_die = 1;
 				printf("%lld ", (get_time() - philo_tab[i].time_start));
-				printf("%i died\n", philo_tab[i].index);
+				printf("%i died\n", philo_tab[i].index + 1);
 				return (1);
 			}
 			i++;
@@ -117,13 +117,16 @@ int am_i_die(philo *philo_tab, int nbr_philo)
 void i_die(philo philosophe)
 {
 	printf("%lld ", (get_time() - philosophe.time_start));
-	printf("%i is die\n", philosophe.index);
+	printf("%i is die\n", philosophe.index + 1);
 }
 void *action(void *arg)
 {
     philo philosophe = *(philo *)arg;
+	//pthread_t thread_id = pthread_self();
 	while (1)
 	{
+			//printf("thread nbr %lu, philo id : %i left is %i\n",thread_id , philosophe.index, philosophe.left);
+			//printf("thread nbr %lu, philo id : %i right is %i\n",thread_id , philosophe.index, philosophe.right);
 			pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.left]));
 			pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.right]));
 			pthread_mutex_lock(&(philosophe.start -> mutex_printf));
@@ -139,6 +142,12 @@ void *action(void *arg)
 			pthread_mutex_lock(&(philosophe.start -> mutex_printf));
 			i_am_thinking(philosophe);
 			pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
+			// meurt parce que narive pas a retourner manger alors quil peut
+			// ou meurt parce que met mal a jour quil a manger
+			// ou meurt parce que mal calculer le temps
+			// meurt parce que les valeurs du debut sont fausses
+			// sachant que les iam sleeping et thinking ne saffiche ja;ais
+			// sachnat aussi que parfois 1 meurt direct sans avoir meme manger
 	}
     return (NULL);
 }
@@ -194,18 +203,10 @@ void add_pos_to_philo(philo *philo_tab, info start)
 	}
 	if (start.nbr_philo  == 2)
 	{
-		while (i < start.nbr_philo)
-    	{
-			if (i + 1 <= start.nbr_philo - 1)
-				philo_tab[i].left = i + 1;
-			else
-				philo_tab[i].left = 0;
-			if (i - 1 < 0)
-				philo_tab[i].right = start.nbr_philo - 1;
-			else
-				philo_tab[i].right =  0;
-        	i++;
-    	}
+		philo_tab[0].left = 1;
+		philo_tab[0].right = 0;
+		philo_tab[1].left = 0;
+		philo_tab[1].right = 1;
 	}
 }
 int main(int argc, char *argv[])
@@ -223,7 +224,7 @@ int main(int argc, char *argv[])
 	if (start.nbr_philo == 1)
 	{
 		printf("0 1 has taken a fork\n");
-		printf("0 died\n");
+		printf("0 1 died\n");
 		return (0);
 	}
 	pthread_mutex_init(&start.mutex_printf,NULL);
