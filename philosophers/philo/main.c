@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/20 20:39:40 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/20 20:57:01 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void printf_eating(philo philosophe)
 
 void i_am_sleeping(philo philosophe)
 {
-	
 	printf("%lld ", (get_time() - philosophe.time_start));
 	printf("%i is sleeping\n", philosophe.index + 1);
 	usleep(philosophe.t_sleep * 1000);
@@ -134,13 +133,10 @@ void *action(void *arg)
 			pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
 			pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.right]));
 			pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.left]));
-			// meurt parce que narive pas a retourner manger alors quil peut
-			// ou meurt parce que met mal a jour quil a manger
-			// ou meurt parce que mal calculer le temps
-			// meurt parce que les valeurs du debut sont fausses
-			// sachant que les iam sleeping et thinking ne saffiche ja;ais
-			// sachnat aussi que parfois 1 meurt direct sans avoir meme manger
-			// peut etre je meurt avant daller a la ligne suivante mais bizzare
+			// seul le premier thread mange
+			// ca veut dire que je change pas de lock ou bien de philosophe a chaque thread
+			// commebeter code et aficher index ddes philo avec index thread et voir si ca change bien
+			// puis si ca change voir si index des left right change bien a chaque fois
 	}
     return (NULL);
 }
@@ -231,7 +227,7 @@ int main(int argc, char *argv[])
     if (start.bonus == 0)
     {
         ids = malloc(sizeof(pthread_t) * start.nbr_philo);
-        philo_tab = malloc((sizeof(philo) + 1 )* start.nbr_philo);
+        philo_tab = malloc(sizeof(philo)* start.nbr_philo);
         fill_philo_tab(philo_tab, &start);
         add_pos_to_philo(philo_tab, start);
         while (i < start.nbr_philo)
