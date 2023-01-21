@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/20 21:33:57 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/21 18:03:49 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,48 +118,46 @@ int am_i_die(philo *philo_tab, int nbr_philo)
 void *action(void *arg)
 {
     philo philosophe = *(philo *)arg;
-	pthread_t thread_id = pthread_self();
-	while (1)
-	{
-		pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.left]));
-		pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.right]));
-		printf("thread nbr %lu, philo id : %i left is %i\n",thread_id , philosophe.index, philosophe.left);
-		printf("thread nbr %lu, philo id : %i right is %i\n",thread_id , philosophe.index, philosophe.right);
-		pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.right]));
-		pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.left]));
-		usleep(1000);
-		break;
-	}
+
+	//pthread_t thread_id = pthread_self();
 	// while (1)
 	// {
+		// pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.left]));
+		// pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.right]));
+		// pthread_mutex_lock(&(philosophe.start -> mutex_printf));
+		// printf("philo id : %i left is %i\n", philosophe.index + 1, philosophe.left);
+		// printf("philo id : %i right is %i\n", philosophe.index + 1, philosophe.right);
+		// pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
+		// pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.right]));
+		// pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.left]));
+	// 	usleep(1000);
+	// 	break;
+	// }
+	while (1)
+	{
 			//printf("thread nbr %lu, philo id : %i left is %i\n",thread_id , philosophe.index, philosophe.left);
 			//printf("thread nbr %lu, philo id : %i right is %i\n",thread_id , philosophe.index, philosophe.right);
-			// pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.left]));
-			// pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.right]));
-			// pthread_mutex_lock(&(philosophe.start -> mutex_printf));
-			// printf_eating(philosophe);
-			// is_eating(&philosophe);
-			// i_am_sleeping(philosophe);
-			// i_am_thinking(philosophe);
-			// pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
-			// pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.right]));
-			// pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.left]));
-			// seul le premier thread mange
-			// ca veut dire que je change pas de lock ou bien de philosophe a chaque thread
-			// commebeter code et aficher index ddes philo avec index thread et voir si ca change bien
-			// puis si ca change voir si index des left right change bien a chaque fois
-			// g vu que je change bien de left right et de philo
-			// voir si avec le mutex printf ca fonctionne quand meme
-			// ca fonctionne, voir avec mutex fork
-			// ca fonctionne avec mutex fork
-			// donc pk 1 ne meurt pas mais 2 ne mange jamais ?
-			// peut etre c a cause de la boucle while infini
-			// mettre dans une boucle while et mettre un usleep si temps break
-			// en plus ma maniere de finir de base cause des leak pasque elle fait pas finir les thread que le principal
-			// g essayer le while ca a quqnd meme fonctionner
-			// c pas un usleep le pb sinon jaurais vu mon truc laguer
-			// en gros la le pb c que 2 ne mange jamais alors quil a normalement acces a tout
-	// }
+			pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.left]));
+			pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.right]));
+			pthread_mutex_lock(&(philosophe.start -> mutex_printf));
+			printf_eating(philosophe);
+			is_eating(&philosophe);
+			pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
+			pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.left]));
+			pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.right]));
+			pthread_mutex_lock(&(philosophe.start -> mutex_printf));
+			i_am_sleeping(philosophe);
+			pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
+			pthread_mutex_lock(&(philosophe.start -> mutex_printf));
+			i_am_thinking(philosophe);
+			pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
+			// la le pb c que certain hilo ne mangent pas en meme temps et du coup
+			// avec certains argument certains vont mourrir alors quils ne devrient pas
+			// doit y avoir un pb hrs de actions
+			// les fourchettes semblent bien allouer du coup bizzare
+			// ca rejoins le pb davant paske normalement certains auraient pun a accder a un element car il etait dispo
+			// c comme si certain truc sont considerer comme indispo alors que normalement si
+	}
     return (NULL);
 }
 
@@ -195,27 +193,34 @@ void fill_philo_tab(philo *philo_tab, info *start)
 
 void add_pos_to_philo(philo *philo_tab, info start)
 {
-    int i;
+     int i;
     i = 0;
 	if (start.nbr_philo > 2)
     {
 		while (i < start.nbr_philo)
     	{
-			if (i + 1 <= start.nbr_philo - 1)
-				philo_tab[i].left = i + 1;
+			if (i == 0)
+			{
+				philo_tab[i].left = i;
+				philo_tab[i].right = i + 1;
+			}
+			else if (i == start.nbr_philo - 1)
+			{
+				philo_tab[i].left = i;
+				philo_tab[i].right = 0;
+			}
 			else
-				philo_tab[i].left = 0;
-			if (i - 1 < 0)
-				philo_tab[i].right = start.nbr_philo - 1;
-			else
-				philo_tab[i].right =  i - 1;
+			{
+				philo_tab[i].left = i;
+				philo_tab[i].right = i + 1;
+			}
         	i++;
     	}
 	}
 	if (start.nbr_philo  == 2)
 	{
-		philo_tab[0].left = 1;
-		philo_tab[0].right = 0;
+		philo_tab[0].left = 0;
+		philo_tab[0].right = 1;
 		philo_tab[1].left = 0;
 		philo_tab[1].right = 1;
 	}
@@ -286,3 +291,5 @@ int main(int argc, char *argv[])
     }
 }
 
+// comment t'as fait pour quil attendent pas touos en meme temps la meme fourchette
+// comment ca se fait que meme si ils attendent la meme foruchette ils on t pas le temps de la prendre qudn c release ?
