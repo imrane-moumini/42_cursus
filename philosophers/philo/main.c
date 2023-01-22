@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/22 16:42:22 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/22 17:33:03 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ void *action(void *arg)
 	// 	usleep(1000);
 	// 	break;
 	// }
+	philo_wait_to_avoid_deadlock(philosophe);
 	while (1)
 	{
 			//printf("thread nbr %lu, philo id : %i left is %i\n",thread_id , philosophe.index, philosophe.left);
@@ -204,37 +205,27 @@ void fill_philo_tab(philo *philo_tab, info *start)
 
 void add_pos_to_philo(philo *philo_tab, info start)
 {
-     int i;
+    int i;
     i = 0;
-	if (start.nbr_philo > 2)
-    {
-		while (i < start.nbr_philo)
-    	{
-			if (i == 0)
-			{
-				philo_tab[i].left = i;
-				philo_tab[i].right = i + 1;
-			}
-			else if (i == start.nbr_philo - 1)
-			{
-				philo_tab[i].left = i;
-				philo_tab[i].right = 0;
-			}
-			else
-			{
-				philo_tab[i].left = i;
-				philo_tab[i].right = i + 1;
-			}
-        	i++;
-    	}
-	}
-	if (start.nbr_philo  == 2)
+	while (i < start.nbr_philo)
 	{
-		philo_tab[0].left = 0;
-		philo_tab[0].right = 1;
-		philo_tab[1].left = 0;
-		philo_tab[1].right = 1;
+		philo_tab[i].left = i;
+		philo_tab[i].right = (i + 1) % start.nbr_philo;
+		if (philo_tab[i].index % 2)
+		{
+			philo_tab[i].left = (philo_tab[i].index + 1) % start.nbr_philo;
+			philo_tab[i].right = philo_tab[i].index;
+		}
+		i++;
 	}
+}
+
+void	philo_wait_to_avoid_deadlock(philo philo)
+{
+	if (philo.index % 2)
+		usleep(1000);
+	else
+		usleep(500);
 }
 int main(int argc, char *argv[])
 {
