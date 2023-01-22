@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/22 19:51:00 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/22 20:55:10 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,19 @@ int am_i_die(philo *philo_tab, int nbr_philo)
 		{
 			if (get_time() - philo_tab[i].last_time_eat >= philo_tab[i].t_die)
 			{
+				// pthread_mutex_lock(&(philo_tab[i].start -> mutex_printf));
+				// printf("IN AM I DIE philo %i, last eat time %lld, time do die %i\n", i+1, (get_time() - philo_tab[i].last_time_eat), philo_tab[i].t_die);
+				// printf("IN AM I DIE get time %lld, last time eat %lld\n", get_time(), philo_tab[i].last_time_eat);
+				// pthread_mutex_unlock(&(philo_tab[i].start -> mutex_printf));
 				philo_tab[i].am_i_die = 1;
 				pthread_mutex_lock(&(philo_tab[i].start -> mutex_printf));
 				printf("%lld ", (get_time() - philo_tab[i].time_start));
 				printf("%i died\n", philo_tab[i].index + 1);
 				pthread_mutex_unlock(&(philo_tab[i].start -> mutex_printf));
+				// qudn c ipaire 4 meurt alor quildevrait pas
+				// ya effectivement 800s qui ce sont ecoule
+				// voir pk il a pas le temps de remangeralors que normalement oui
+				// potentiellemt il attend trop a un moment
 				return (1);
 			}
 			i++;
@@ -115,6 +123,20 @@ int am_i_die(philo *philo_tab, int nbr_philo)
 	return (0);
 }
 
+void time_to_think(philo *philosophe)
+{
+	int time;
+    pthread_mutex_lock(&(philosophe -> start -> mutex_eat_time));
+	time = (philosophe -> t_die - ((get_time() *1000) - philosophe->last_time_eat) - philosophe -> t_eat) / 2;
+	pthread_mutex_unlock(&(philosophe -> start -> mutex_eat_time));
+	if (time < 0)
+		time = 0;
+	if (time == 0 )
+		time = 1;
+	if (time > 600)
+		time = 200;
+	usleep(time * 1000);
+}
 void *action(void *arg)
 {
     philo *philosophe = (philo *)arg;
@@ -130,6 +152,10 @@ void *action(void *arg)
 			pthread_mutex_unlock(&(philosophe -> start -> mutex_forks[philosophe -> left]));
 			i_am_sleeping(*philosophe);
 			i_am_thinking(*philosophe);
+			// 1 remange direct apres et laisse pas l temps
+			// a 4 de prendre fourchette alos quil avait fini
+			// ajouter un time to think
+			time_to_think(philosophe);
 	}
     return (NULL);
 }
@@ -208,6 +234,7 @@ int main(int argc, char *argv[])
 	}
 	pthread_mutex_init(&start.mutex_printf,NULL);
 	pthread_mutex_init(&start.mutex_eat,NULL);
+	pthread_mutex_init(&start.mutex_eat_time,NULL);
 	while (i < start.nbr_philo)
 	{
 			pthread_mutex_init(&(start.mutex_forks[i]),NULL);
@@ -234,6 +261,7 @@ int main(int argc, char *argv[])
 				}
 				pthread_mutex_destroy(&start.mutex_printf);
 				pthread_mutex_destroy(&start.mutex_eat);
+				pthread_mutex_destroy(&start.mutex_eat_time);
                 return (0);
             }
             i++;
@@ -250,6 +278,7 @@ int main(int argc, char *argv[])
 			}
 			pthread_mutex_destroy(&start.mutex_printf);
 			pthread_mutex_destroy(&start.mutex_eat);
+			pthread_mutex_destroy(&start.mutex_eat_time);
             return (0);
 		}
         i = 0;
@@ -268,6 +297,7 @@ int main(int argc, char *argv[])
 				}
 				pthread_mutex_destroy(&start.mutex_printf);
 				pthread_mutex_destroy(&start.mutex_eat);
+				pthread_mutex_destroy(&start.mutex_eat_time);
                 return (0);
             }
             i++;

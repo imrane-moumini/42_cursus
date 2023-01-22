@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/22 18:35:04 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/22 20:48:17 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct info{
 	pthread_mutex_t mutex_forks[300];
 	pthread_mutex_t mutex_printf;
 	pthread_mutex_t mutex_eat;
+	pthread_mutex_t mutex_eat_time;
 } info;
 
 typedef struct philo{
