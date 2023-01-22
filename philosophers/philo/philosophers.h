@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/22 17:32:42 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/22 18:35:04 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct info{
 	long long time_start;
 	pthread_mutex_t mutex_forks[300];
 	pthread_mutex_t mutex_printf;
+	pthread_mutex_t mutex_eat;
 } info;
 
 typedef struct philo{
@@ -55,8 +56,7 @@ void *action(void *arg);
 void fill_philo_tab(philo *philo_tab, info *start);
 long long get_time();
 void add_pos_to_philo(philo *philo_tab, info start);
-void is_eating(philo *philosophe);
-void printf_eating(philo philosophe);
+void printf_eating(philo *philosophe);
 int am_i_die(philo *philo_tab, int nbr_philo);
 void i_am_sleeping(philo philosophe);
 void i_am_thinking(philo philosophe);
