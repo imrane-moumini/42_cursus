@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/21 18:03:49 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/22 16:42:22 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ long long get_time()
 
 void is_eating(philo *philosophe)
 {
+	philosophe->last_time_eat = get_time();
 	usleep(philosophe -> t_eat * 1000);
-	philosophe -> last_time_eat = get_time();
 	philosophe -> as_eaten_one = 1;
 }
 
@@ -80,8 +80,10 @@ void printf_eating(philo philosophe)
 
 void i_am_sleeping(philo philosophe)
 {
+	pthread_mutex_lock(&(philosophe.start -> mutex_printf));	
 	printf("%lld ", (get_time() - philosophe.time_start));
 	printf("%i is sleeping\n", philosophe.index + 1);
+	pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
 	usleep(philosophe.t_sleep * 1000);
 }
 
@@ -101,6 +103,10 @@ int am_i_die(philo *philo_tab, int nbr_philo)
 		{
 			if (get_time() - philo_tab[i].last_time_eat >= philo_tab[i].t_die)
 			{
+				// pthread_mutex_lock(&(philo_tab[i].start -> mutex_printf));
+				// printf("philo %i, last eat time %lld, time do die %i\n", i+1, (get_time() - philo_tab[i].last_time_eat), philo_tab[i].t_die);
+				// printf("get time %lld, last time eat %lld\n", get_time(), philo_tab[i].last_time_eat);
+				// pthread_mutex_unlock(&(philo_tab[i].start -> mutex_printf));
 				philo_tab[i].am_i_die = 1;
 				pthread_mutex_lock(&(philo_tab[i].start -> mutex_printf));
 				printf("%lld ", (get_time() - philo_tab[i].time_start));
@@ -141,13 +147,14 @@ void *action(void *arg)
 			pthread_mutex_lock(&(philosophe.start -> mutex_forks[philosophe.right]));
 			pthread_mutex_lock(&(philosophe.start -> mutex_printf));
 			printf_eating(philosophe);
+			pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
 			is_eating(&philosophe);
 			pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
-			pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.left]));
 			pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.right]));
-			pthread_mutex_lock(&(philosophe.start -> mutex_printf));
+			pthread_mutex_unlock(&(philosophe.start -> mutex_forks[philosophe.left]));
+			// pthread_mutex_lock(&(philosophe.start -> mutex_printf));
 			i_am_sleeping(philosophe);
-			pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
+			// pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
 			pthread_mutex_lock(&(philosophe.start -> mutex_printf));
 			i_am_thinking(philosophe);
 			pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
@@ -157,6 +164,10 @@ void *action(void *arg)
 			// les fourchettes semblent bien allouer du coup bizzare
 			// ca rejoins le pb davant paske normalement certains auraient pun a accder a un element car il etait dispo
 			// c comme si certain truc sont considerer comme indispo alors que normalement si
+			
+			// deadlock
+				// soit jattend la ressource dun mec qui qttend la mienne et y spasse rien
+				// soit jattend une ressource que g moi meme bloquer juste avant et du coup y spasse rien
 	}
     return (NULL);
 }
@@ -174,7 +185,7 @@ void fill_philo_tab(philo *philo_tab, info *start)
         philosophe.nbr_eat_allow = start -> nbr_eat_allow;
     philosophe.is_eating = 0;
 	philosophe.time_start = start -> time_start;
-	philosophe.last_time_eat = 0;
+	philosophe.last_time_eat = get_time();
 	philosophe.as_eaten_one = 0;
 	philosophe.am_i_die = 0;
     while(i < start -> nbr_philo)
@@ -248,7 +259,6 @@ int main(int argc, char *argv[])
 	{
 			pthread_mutex_init(&(start.mutex_forks[i]),NULL);
 			i++;
-
 	}
 	i = 0;
     if (start.bonus == 0)
@@ -264,24 +274,44 @@ int main(int argc, char *argv[])
                 free(ids);
                 free(philo_tab);
                 printf("can't create threade nbr %i", i);
+				while (i < start.nbr_philo)
+				{
+					pthread_mutex_destroy(&(start.mutex_forks[i]));
+					i++;
+				}
+				pthread_mutex_destroy(&start.mutex_printf);
                 return (0);
             }
             i++;
         }
-		// if (am_i_die(philo_tab, start.nbr_philo) == 1)
-		// {
-		// 	free(ids);
-        //     free(philo_tab);
-        //     return (0);
-		// }
+		if (am_i_die(philo_tab, start.nbr_philo) == 1)
+		{
+			i = 0;
+			free(ids);
+            free(philo_tab);
+			while (i < start.nbr_philo)
+			{
+				pthread_mutex_destroy(&(start.mutex_forks[i]));
+				i++;
+			}
+			pthread_mutex_destroy(&start.mutex_printf);
+            return (0);
+		}
         i = 0;
         while (i < start.nbr_philo)
         {
             if (pthread_join(ids[i], NULL) != 0)
             {
+				i = 0;
                 free(ids);
                 free(philo_tab);
                 printf("can't join threade nbr %i", i);
+				while (i < start.nbr_philo)
+				{
+					pthread_mutex_destroy(&(start.mutex_forks[i]));
+					i++;
+				}
+				pthread_mutex_destroy(&start.mutex_printf);
                 return (0);
             }
             i++;
