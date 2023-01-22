@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/22 21:15:48 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/22 21:28:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,6 @@ int am_i_die(philo *philo_tab, int nbr_philo)
 				printf("%lld ", (get_time() - philo_tab[i].time_start));
 				printf("%i died\n", philo_tab[i].index + 1);
 				pthread_mutex_unlock(&(philo_tab[i].start -> mutex_printf));
-				// qudn c ipaire 4 meurt alor quildevrait pas
-				// ya effectivement 800s qui ce sont ecoule
-				// voir pk il a pas le temps de remangeralors que normalement oui
-				// potentiellemt il attend trop a un moment
 				return (1);
 			}
 			i++;
@@ -143,8 +139,6 @@ void *action(void *arg)
 	philo_wait_to_avoid_deadlock(*philosophe);
 	while (1)
 	{
-			//printf("thread nbr %lu, philo id : %i left is %i\n",thread_id , philosophe.index, philosophe.left);
-			//printf("thread nbr %lu, philo id : %i right is %i\n",thread_id , philosophe.index, philosophe.right);
 			pthread_mutex_lock(&(philosophe -> start -> mutex_forks[philosophe -> left]));
 			pthread_mutex_lock(&(philosophe -> start -> mutex_forks[philosophe -> right]));
 			printf_eating(philosophe);
@@ -152,10 +146,12 @@ void *action(void *arg)
 			pthread_mutex_unlock(&(philosophe -> start -> mutex_forks[philosophe -> left]));
 			i_am_sleeping(*philosophe);
 			i_am_thinking(*philosophe);
-			// 1 remange direct apres et laisse pas l temps
-			// a 4 de prendre fourchette alos quil avait fini
-			// ajouter un time to think
 			time_to_think(philosophe);
+			// ya 2 cas qui passe pas
+			// faire valgrind
+			// faire dernier arg
+			// faire fsanithise
+			// faire norminette
 	}
     return (NULL);
 }
