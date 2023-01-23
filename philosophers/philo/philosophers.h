@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/23 21:53:59 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/23 22:04:57 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ void fill_philo_tab(philo *philo_tab, info *start);
 long long get_time();
 void add_pos_to_philo(philo *philo_tab, info start);
 void printf_eating(philo *philosophe);
-int am_i_die(philo *philo_tab, int nbr_philo);
+int am_i_die(philo *philo_tab, int nbr_philo, info *start);
 void i_am_sleeping(philo philosophe);
 void i_am_thinking(philo philosophe);
 void	philo_wait_to_avoid_deadlock(philo philo);
 void init_mutex(info *start);
-philo *create_threads_no_bonus(info *start);
+philo *create_threads(info *start);
 int join_threads(info *start, philo *philo_tab);
 void destroy_element(philo *philo_tab, info *start);

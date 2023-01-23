@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/23 21:56:21 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/23 22:10:58 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,20 @@ void i_am_thinking(philo philosophe)
 	pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
 }
 
-int am_i_die(philo *philo_tab, int nbr_philo)
+int am_i_die(philo *philo_tab, int nbr_philo, info *start)
 {
 	int i;
 	i = 0;
 	while (1)
 	{
+		if (start -> bonus == 1)
+		{
+			while (i < nbr_philo)
+			{
+				// regarder nbr de fois manger
+			}	
+		}
+		i = 0;
 		while (i < nbr_philo)
 		{
 			if (get_time() - philo_tab[i].last_time_eat >= philo_tab[i].t_die)
@@ -222,7 +230,7 @@ void init_mutex(info *start)
 	}
 }
 
-philo *create_threads_no_bonus(info *start)
+philo *create_threads(info *start)
 {
 	int i;
 	philo *philo_tab;
@@ -282,17 +290,19 @@ int main(int argc, char *argv[])
     info start;
 	philo *philo_tab;
 
+	// ajouter nbr e fois eat quand c ya le 5 arg
+	// finir am i die
+	// faire ++ sur nbr de fois eat allow
+	// creer une static pour se souvenir de letat general
+	// faire mutex pour checker mort comme sur enoncer
     if (handle_error(argc, argv) == 0)
         return (0);
     start = fill_info(argc, argv);
 	init_mutex(&start);
-    if (start.bonus == 0)
-    {
-        philo_tab = create_threads_no_bonus(&start);
-		if (philo_tab == NULL)
-			return (0);
-    }
-	if (am_i_die(philo_tab, start.nbr_philo) == 1)
+    philo_tab = create_threads(&start);
+	if (philo_tab == NULL)
+		return (0);
+	if (am_i_die(philo_tab, start.nbr_philo, &start) == 1)
 	{
 		destroy_element(philo_tab, &start);
         return (0);
