@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/23 19:25:12 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/23 19:49:04 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void time_to_think(philo *philosophe)
 {
 	int time;
     pthread_mutex_lock(&(philosophe -> start -> mutex_eat_time));
-	time = (philosophe -> t_die - (get_time() - philosophe->last_time_eat) - philosophe -> t_eat) / 2;
+	time = ((philosophe -> t_die - (philosophe -> t_eat + philosophe -> t_sleep)) / 2);
 	pthread_mutex_unlock(&(philosophe -> start -> mutex_eat_time));
 	if (time < 0)
 		time = 0;
@@ -153,7 +153,8 @@ void *action(void *arg)
 			// faire fsanithise
 			// faire norminette
 
-			// 2 meurt car 1 remange alors que ca aurait du etre 2
+			// 2 meurt car 1 mange trop
+			// normalement c 3 2 1, 321 , la c 321 312
 	}
     return (NULL);
 }
