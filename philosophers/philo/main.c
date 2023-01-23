@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/23 21:14:24 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/23 21:33:46 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ info fill_info(int argc, char *argv[])
 
 int handle_error(int argc, char *argv[])
 {
+	if (ft_atoi(argv[1]) == 1)
+	{
+		printf("0 1 has taken a fork\n");
+		printf("0 1 died\n");
+		return (0);
+	}
     if (argc < 5)
     {
         printf("wrong nummber of arguments\n");
@@ -250,10 +256,33 @@ philo *create_threads_no_bonus(info *start)
 	return (philo_tab);
 }
 
-// void join_threads()
-// {
-	
-// }
+int join_threads(info *start, philo *philo_tab)
+{
+	int i;
+
+	i = 0;
+	while (i < start -> nbr_philo)
+    {
+        if (pthread_join(start -> ids[i], NULL) != 0)
+        {
+			i = 0;
+            free(philo_tab);
+            printf("can't join threade nbr %i", i);
+			while (i < start -> nbr_philo)
+			{
+				pthread_mutex_destroy(&(start -> mutex_forks[i]));
+				i++;
+			}
+			pthread_mutex_destroy(&start -> mutex_printf);
+			pthread_mutex_destroy(&start -> mutex_eat);
+			pthread_mutex_destroy(&start -> mutex_eat_time);
+            return (0);
+        }
+        i++;
+    }
+	return (1);
+}
+
 int main(int argc, char *argv[])
 {
 	
@@ -265,13 +294,6 @@ int main(int argc, char *argv[])
     if (handle_error(argc, argv) == 0)
         return (0);
     start = fill_info(argc, argv);
-	if (start.nbr_philo == 1)
-	{
-		printf("0 1 has taken a fork\n");
-		printf("0 1 died\n");
-		return (0);
-	}
-	
 	init_mutex(&start);
     if (start.bonus == 0)
     {
@@ -293,25 +315,7 @@ int main(int argc, char *argv[])
 		pthread_mutex_destroy(&start.mutex_eat_time);
         return (0);
 	}
-    i = 0;
-    while (i < start.nbr_philo)
-    {
-        if (pthread_join(start.ids[i], NULL) != 0)
-        {
-			i = 0;
-            free(philo_tab);
-            printf("can't join threade nbr %i", i);
-			while (i < start.nbr_philo)
-			{
-				pthread_mutex_destroy(&(start.mutex_forks[i]));
-				i++;
-			}
-			pthread_mutex_destroy(&start.mutex_printf);
-			pthread_mutex_destroy(&start.mutex_eat);
-			pthread_mutex_destroy(&start.mutex_eat_time);
-            return (0);
-        }
-        i++;
-    }
+    if (join_threads(&start, philo_tab) == 0)
+		return (0);
     free(philo_tab);
 }
