@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/23 20:13:02 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/23 21:12:06 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct info{
 	int nbr_eat_allow;
 	int bonus;
 	long long time_start;
+	pthread_t ids[300];
+    
 	pthread_mutex_t mutex_forks[300];
 	pthread_mutex_t mutex_printf;
 	pthread_mutex_t mutex_eat;
@@ -63,3 +65,4 @@ void i_am_sleeping(philo philosophe);
 void i_am_thinking(philo philosophe);
 void	philo_wait_to_avoid_deadlock(philo philo);
 void init_mutex(info *start);
+philo *create_threads_no_bonus(info *start);

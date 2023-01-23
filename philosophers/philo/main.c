@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/23 20:14:23 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/23 21:14:24 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,14 +219,48 @@ void init_mutex(info *start)
 		i++;
 	}
 }
+
+philo *create_threads_no_bonus(info *start)
+{
+	int i;
+	philo *philo_tab;
+	
+	i = 0;
+    philo_tab = malloc(sizeof(philo)* start -> nbr_philo);
+    fill_philo_tab(philo_tab, start);
+    add_pos_to_philo(philo_tab, *start);
+    while (i < start -> nbr_philo)
+    {
+        if (pthread_create(start -> ids + i, NULL, &action, philo_tab + i) != 0)
+        {
+            free(philo_tab);
+            printf("can't create threade nbr %i", i);
+			while (i < start ->nbr_philo)
+			{
+				pthread_mutex_destroy(&(start -> mutex_forks[i]));
+				i++;
+			}
+			pthread_mutex_destroy(&start -> mutex_printf);
+			pthread_mutex_destroy(&start -> mutex_eat);
+			pthread_mutex_destroy(&start -> mutex_eat_time);
+            return (NULL);
+        }
+        i++;
+	}
+	return (philo_tab);
+}
+
+// void join_threads()
+// {
+	
+// }
 int main(int argc, char *argv[])
 {
 	
     info start;
-    pthread_t *ids;
-    philo *philo_tab;
     int i;
-	
+	philo *philo_tab;
+
     i = 0;
     if (handle_error(argc, argv) == 0)
         return (0);
@@ -241,34 +275,32 @@ int main(int argc, char *argv[])
 	init_mutex(&start);
     if (start.bonus == 0)
     {
-        ids = malloc(sizeof(pthread_t) * start.nbr_philo);
-        philo_tab = malloc(sizeof(philo)* start.nbr_philo);
-        fill_philo_tab(philo_tab, &start);
-        add_pos_to_philo(philo_tab, start);
-        while (i < start.nbr_philo)
-        {
-            if (pthread_create(ids + i, NULL, &action, philo_tab + i) != 0)
-            {
-                free(ids);
-                free(philo_tab);
-                printf("can't create threade nbr %i", i);
-				while (i < start.nbr_philo)
-				{
-					pthread_mutex_destroy(&(start.mutex_forks[i]));
-					i++;
-				}
-				pthread_mutex_destroy(&start.mutex_printf);
-				pthread_mutex_destroy(&start.mutex_eat);
-				pthread_mutex_destroy(&start.mutex_eat_time);
-                return (0);
-            }
-            i++;
-        }
-		if (am_i_die(philo_tab, start.nbr_philo) == 1)
+        philo_tab = create_threads_no_bonus(&start);
+		if (philo_tab == NULL)
+			return (0);
+    }
+	if (am_i_die(philo_tab, start.nbr_philo) == 1)
+	{
+		i = 0;
+        free(philo_tab);
+		while (i < start.nbr_philo)
 		{
+			pthread_mutex_destroy(&(start.mutex_forks[i]));
+			i++;
+		}
+		pthread_mutex_destroy(&start.mutex_printf);
+		pthread_mutex_destroy(&start.mutex_eat);
+		pthread_mutex_destroy(&start.mutex_eat_time);
+        return (0);
+	}
+    i = 0;
+    while (i < start.nbr_philo)
+    {
+        if (pthread_join(start.ids[i], NULL) != 0)
+        {
 			i = 0;
-			free(ids);
             free(philo_tab);
+            printf("can't join threade nbr %i", i);
 			while (i < start.nbr_philo)
 			{
 				pthread_mutex_destroy(&(start.mutex_forks[i]));
@@ -278,29 +310,8 @@ int main(int argc, char *argv[])
 			pthread_mutex_destroy(&start.mutex_eat);
 			pthread_mutex_destroy(&start.mutex_eat_time);
             return (0);
-		}
-        i = 0;
-        while (i < start.nbr_philo)
-        {
-            if (pthread_join(ids[i], NULL) != 0)
-            {
-				i = 0;
-                free(ids);
-                free(philo_tab);
-                printf("can't join threade nbr %i", i);
-				while (i < start.nbr_philo)
-				{
-					pthread_mutex_destroy(&(start.mutex_forks[i]));
-					i++;
-				}
-				pthread_mutex_destroy(&start.mutex_printf);
-				pthread_mutex_destroy(&start.mutex_eat);
-				pthread_mutex_destroy(&start.mutex_eat_time);
-                return (0);
-            }
-            i++;
         }
-        free(ids);
-        free(philo_tab);
+        i++;
     }
+    free(philo_tab);
 }
