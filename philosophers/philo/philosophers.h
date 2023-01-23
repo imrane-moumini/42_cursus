@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/23 21:27:15 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/23 21:53:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,3 +67,4 @@ void	philo_wait_to_avoid_deadlock(philo philo);
 void init_mutex(info *start);
 philo *create_threads_no_bonus(info *start);
 int join_threads(info *start, philo *philo_tab);
+void destroy_element(philo *philo_tab, info *start);

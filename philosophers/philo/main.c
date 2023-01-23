@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/23 21:33:46 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/23 21:56:21 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,6 @@ int am_i_die(philo *philo_tab, int nbr_philo)
 		{
 			if (get_time() - philo_tab[i].last_time_eat >= philo_tab[i].t_die)
 			{
-				// pthread_mutex_lock(&(philo_tab[i].start -> mutex_printf));
-				// printf("IN AM I DIE philo %i, last eat time %lld, time do die %i\n", i+1, (get_time() - philo_tab[i].last_time_eat), philo_tab[i].t_die);
-				// printf("IN AM I DIE get time %lld, last time eat %lld\n", get_time(), philo_tab[i].last_time_eat);
-				// pthread_mutex_unlock(&(philo_tab[i].start -> mutex_printf));
 				philo_tab[i].am_i_die = 1;
 				pthread_mutex_lock(&(philo_tab[i].start -> mutex_printf));
 				printf("%lld ", (get_time() - philo_tab[i].time_start));
@@ -239,16 +235,8 @@ philo *create_threads_no_bonus(info *start)
     {
         if (pthread_create(start -> ids + i, NULL, &action, philo_tab + i) != 0)
         {
-            free(philo_tab);
             printf("can't create threade nbr %i", i);
-			while (i < start ->nbr_philo)
-			{
-				pthread_mutex_destroy(&(start -> mutex_forks[i]));
-				i++;
-			}
-			pthread_mutex_destroy(&start -> mutex_printf);
-			pthread_mutex_destroy(&start -> mutex_eat);
-			pthread_mutex_destroy(&start -> mutex_eat_time);
+			destroy_element(philo_tab, start);
             return (NULL);
         }
         i++;
@@ -266,16 +254,8 @@ int join_threads(info *start, philo *philo_tab)
         if (pthread_join(start -> ids[i], NULL) != 0)
         {
 			i = 0;
-            free(philo_tab);
             printf("can't join threade nbr %i", i);
-			while (i < start -> nbr_philo)
-			{
-				pthread_mutex_destroy(&(start -> mutex_forks[i]));
-				i++;
-			}
-			pthread_mutex_destroy(&start -> mutex_printf);
-			pthread_mutex_destroy(&start -> mutex_eat);
-			pthread_mutex_destroy(&start -> mutex_eat_time);
+			destroy_element(philo_tab, start);
             return (0);
         }
         i++;
@@ -283,14 +263,25 @@ int join_threads(info *start, philo *philo_tab)
 	return (1);
 }
 
+void destroy_element(philo *philo_tab, info *start)
+{
+	int i;
+	i = 0;
+    free(philo_tab);
+	while (i < start -> nbr_philo)
+	{
+		pthread_mutex_destroy(&(start -> mutex_forks[i]));
+		i++;
+	}
+	pthread_mutex_destroy(&start -> mutex_printf);
+	pthread_mutex_destroy(&start -> mutex_eat);
+	pthread_mutex_destroy(&start -> mutex_eat_time);
+}
 int main(int argc, char *argv[])
 {
-	
     info start;
-    int i;
 	philo *philo_tab;
 
-    i = 0;
     if (handle_error(argc, argv) == 0)
         return (0);
     start = fill_info(argc, argv);
@@ -303,16 +294,7 @@ int main(int argc, char *argv[])
     }
 	if (am_i_die(philo_tab, start.nbr_philo) == 1)
 	{
-		i = 0;
-        free(philo_tab);
-		while (i < start.nbr_philo)
-		{
-			pthread_mutex_destroy(&(start.mutex_forks[i]));
-			i++;
-		}
-		pthread_mutex_destroy(&start.mutex_printf);
-		pthread_mutex_destroy(&start.mutex_eat);
-		pthread_mutex_destroy(&start.mutex_eat_time);
+		destroy_element(philo_tab, &start);
         return (0);
 	}
     if (join_threads(&start, philo_tab) == 0)
