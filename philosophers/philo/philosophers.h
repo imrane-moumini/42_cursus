@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/22 20:48:17 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/23 20:13:02 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,3 +62,4 @@ int am_i_die(philo *philo_tab, int nbr_philo);
 void i_am_sleeping(philo philosophe);
 void i_am_thinking(philo philosophe);
 void	philo_wait_to_avoid_deadlock(philo philo);
+void init_mutex(info *start);

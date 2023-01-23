@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/23 19:49:04 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/23 20:14:23 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,14 +147,6 @@ void *action(void *arg)
 			i_am_sleeping(*philosophe);
 			i_am_thinking(*philosophe);
 			time_to_think(philosophe);
-			// ya 2 cas qui passe pas
-			// faire valgrind
-			// faire dernier arg
-			// faire fsanithise
-			// faire norminette
-
-			// 2 meurt car 1 mange trop
-			// normalement c 3 2 1, 321 , la c 321 312
 	}
     return (NULL);
 }
@@ -213,6 +205,20 @@ void	philo_wait_to_avoid_deadlock(philo philo)
 	else
 		usleep(500);
 }
+
+void init_mutex(info *start)
+{
+	int i;
+	i = 0;
+	pthread_mutex_init(&start -> mutex_printf,NULL);
+	pthread_mutex_init(&start -> mutex_eat,NULL);
+	pthread_mutex_init(&start -> mutex_eat_time,NULL);
+	while (i < start -> nbr_philo)
+	{
+		pthread_mutex_init(&(start -> mutex_forks[i]),NULL);
+		i++;
+	}
+}
 int main(int argc, char *argv[])
 {
 	
@@ -231,15 +237,8 @@ int main(int argc, char *argv[])
 		printf("0 1 died\n");
 		return (0);
 	}
-	pthread_mutex_init(&start.mutex_printf,NULL);
-	pthread_mutex_init(&start.mutex_eat,NULL);
-	pthread_mutex_init(&start.mutex_eat_time,NULL);
-	while (i < start.nbr_philo)
-	{
-			pthread_mutex_init(&(start.mutex_forks[i]),NULL);
-			i++;
-	}
-	i = 0;
+	
+	init_mutex(&start);
     if (start.bonus == 0)
     {
         ids = malloc(sizeof(pthread_t) * start.nbr_philo);
