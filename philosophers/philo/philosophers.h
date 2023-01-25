@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/25 19:36:32 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/25 23:29:45 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ typedef struct info{
 	int t_die;
 	int t_eat;
 	int t_sleep;
+	int end_of_eat;
 	int nbr_eat_allow;
+	int stop;
 	int bonus;
 	long long time_start;
 	pthread_t ids[300];
@@ -31,7 +33,9 @@ typedef struct info{
 	pthread_mutex_t mutex_printf;
 	pthread_mutex_t mutex_eat;
 	pthread_mutex_t mutex_eat_time;
-	pthread_mutex_t mutex_end_of_eat[300];
+	pthread_mutex_t mutex_end_of_eat;
+	pthread_mutex_t mutex_finish;
+	
 } info;
 
 typedef struct philo{
@@ -42,7 +46,6 @@ typedef struct philo{
 	int t_sleep;
 	int nbr_eat_allow;
 	long long last_time_eat;
-	int end_of_eat;
 	int left;
 	int right;
 	info *start;
@@ -59,7 +62,7 @@ void fill_philo_tab(philo *philo_tab, info *start);
 long long get_time();
 void add_pos_to_philo(philo *philo_tab, info start);
 void printf_eating(philo *philosophe);
-int am_i_die(philo *philo_tab, int nbr_philo);
+int am_i_die(philo *philo_tab, int nbr_philo, info *start);
 void i_am_sleeping(philo philosophe);
 void i_am_thinking(philo philosophe);
 void	philo_wait_to_avoid_deadlock(philo philo);
