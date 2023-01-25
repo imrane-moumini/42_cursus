@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/25 20:29:21 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/25 22:16:43 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ void end_of_eat(philo *philo_tab, int nbr_philo)
 	{
 		pthread_mutex_lock(&(philo_tab[i].start -> mutex_end_of_eat[i]));
 		philo_tab[i].end_of_eat = 1;
-		i++;
 		pthread_mutex_unlock(&(philo_tab[i].start -> mutex_end_of_eat[i]));
+		i++;
 	}
 }
 int am_i_die(philo *philo_tab, int nbr_philo)
@@ -346,6 +346,7 @@ int main(int argc, char *argv[])
 	// quqnd un treqd mort quitter tous les thread
 	// mais g pas le droit de prevenir les autes que quelquun est mort c de la communication
 	// verifier que yq bien le join avant la fin du programme pas quitter brusquement
+	//seg faut + truc qui secrit en trop = les 2 qrrivent qund mon progrqmme se fini ()meurt ou tout le monde a manger)
     if (handle_error(argc, argv) == 0)
         return (0);
     start = fill_info(argc, argv);
@@ -357,9 +358,9 @@ int main(int argc, char *argv[])
 	{
 		if (am_i_die(philo_tab, start.nbr_philo) == 1 || finish_eat(0) == start.nbr_philo)
 		{
-			destroy_element(philo_tab, &start);
         	if (join_threads(&start, philo_tab) == 0)
 				return (0);
+			destroy_element(philo_tab, &start);
 			return (0);
 		}
 	}
