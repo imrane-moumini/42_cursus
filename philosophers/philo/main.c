@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/24 21:23:36 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/25 20:29:21 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void printf_eating(philo *philosophe)
 	philosophe->last_time_eat = get_time();
 	philosophe->nbr_eat_allow--;
 	pthread_mutex_unlock(&(philosophe -> start -> mutex_eat));
-	philosophe -> as_eaten_one = 1;
 	pthread_mutex_lock(&(philosophe -> start -> mutex_printf));
 	printf("%lld ", (get_time() - philosophe ->time_start));
 	printf("%i has taken a fork\n", philosophe ->index + 1);
@@ -110,36 +109,47 @@ void i_am_thinking(philo philosophe)
 	pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
 }
 
+void end_of_eat(philo *philo_tab, int nbr_philo)
+{
+	int i;
+	i = 0;
+	
+	
+	while (i < nbr_philo)
+	{
+		pthread_mutex_lock(&(philo_tab[i].start -> mutex_end_of_eat[i]));
+		philo_tab[i].end_of_eat = 1;
+		i++;
+		pthread_mutex_unlock(&(philo_tab[i].start -> mutex_end_of_eat[i]));
+	}
+}
 int am_i_die(philo *philo_tab, int nbr_philo)
 {
 	int i;
-	int finish = 0;
-	i = 0;
+	int finish;
 
-	while (1)
+	finish = 0;
+	i = 0;
+	while (i < nbr_philo)
 	{
-		i = 0;
-		while (i < nbr_philo)
+		if ((get_time() - philo_tab[i].last_time_eat >= philo_tab[i].t_die) && philo_tab[i].nbr_eat_allow != 0)
 		{
-			if ((get_time() - philo_tab[i].last_time_eat >= philo_tab[i].t_die) && philo_tab[i].nbr_eat_allow != 0)
-			{
-				philo_tab[i].am_i_die = 1;
-				pthread_mutex_lock(&(philo_tab[i].start -> mutex_printf));
-				printf("%lld ", (get_time() - philo_tab[i].time_start));
-				printf("%i died\n", philo_tab[i].index + 1);
-				pthread_mutex_unlock(&(philo_tab[i].start -> mutex_printf));
-				return (1);
-			}
-			if (philo_tab[i].nbr_eat_allow == 0)
-				finish++;
-			if (philo_tab[i].nbr_eat_allow != 0)
-				finish = 0;
-			if (finish == nbr_philo)
-				return (1);
-			i++;
+			pthread_mutex_lock(&(philo_tab[i].start -> mutex_printf));
+			printf("%lld ", (get_time() - philo_tab[i].time_start));
+			printf("%i died\n", philo_tab[i].index + 1);
+			pthread_mutex_unlock(&(philo_tab[i].start -> mutex_printf));
+			end_of_eat(philo_tab, nbr_philo);
+			return (1);
 		}
-		i = 0;
+		if (philo_tab[i].nbr_eat_allow == 0)
+			finish++;
+		if (philo_tab[i].nbr_eat_allow != 0)
+			finish = 0;
+		if (finish == nbr_philo)
+			return (1);
+		i++;
 	}
+	i = 0;
 	return (0);
 }
 
@@ -177,7 +187,9 @@ void *action(void *arg)
 				// printf("%s", "\033[0m");
 				// pthread_mutex_unlock(&(philosophe -> start -> mutex_printf));
 				return (NULL);
-			}	
+			}
+			if (philosophe -> end_of_eat == 1)
+				return (NULL);	
 			pthread_mutex_lock(&(philosophe -> start -> mutex_forks[philosophe -> left]));
 			pthread_mutex_lock(&(philosophe -> start -> mutex_forks[philosophe -> right]));
 			printf_eating(philosophe);
@@ -199,15 +211,13 @@ void fill_philo_tab(philo *philo_tab, info *start)
     philosophe.t_die = start -> t_die;
     philosophe.t_eat = start -> t_eat;
     philosophe.t_sleep = start -> t_sleep;
+	philosophe.end_of_eat = 0;
     if (start -> bonus == 1)
         philosophe.nbr_eat_allow = start -> nbr_eat_allow;
 	else
 		philosophe.nbr_eat_allow = -1;
-    philosophe.is_eating = 0;
 	philosophe.time_start = start -> time_start;
 	philosophe.last_time_eat = get_time();
-	philosophe.as_eaten_one = 0;
-	philosophe.am_i_die = 0;
     while(i < start -> nbr_philo)
     {
         philo_tab[i] = philosophe;
@@ -257,6 +267,7 @@ void init_mutex(info *start)
 	while (i < start -> nbr_philo)
 	{
 		pthread_mutex_init(&(start -> mutex_forks[i]),NULL);
+		pthread_mutex_init(&(start -> mutex_end_of_eat[i]),NULL);
 		i++;
 	}
 }
@@ -318,12 +329,14 @@ void destroy_element(philo *philo_tab, info *start)
 	while (i < start -> nbr_philo)
 	{
 		pthread_mutex_destroy(&(start -> mutex_forks[i]));
+		pthread_mutex_destroy(&(start -> mutex_end_of_eat[i]));
 		i++;
 	}
 	pthread_mutex_destroy(&start -> mutex_printf);
 	pthread_mutex_destroy(&start -> mutex_eat);
 	pthread_mutex_destroy(&start -> mutex_eat_time);
 }
+
 int main(int argc, char *argv[])
 {
     info start;
@@ -331,6 +344,7 @@ int main(int argc, char *argv[])
 
 	// faire mutex pour checker mort comme sur enoncer
 	// quqnd un treqd mort quitter tous les thread
+	// mais g pas le droit de prevenir les autes que quelquun est mort c de la communication
 	// verifier que yq bien le join avant la fin du programme pas quitter brusquement
     if (handle_error(argc, argv) == 0)
         return (0);
@@ -339,20 +353,14 @@ int main(int argc, char *argv[])
     philo_tab = create_threads(&start);
 	if (philo_tab == NULL)
 		return (0);
-	if (am_i_die(philo_tab, start.nbr_philo) == 1)
-	{
-		destroy_element(philo_tab, &start);
-        return (0);
-	}
-	if (join_threads(&start, philo_tab) == 0)
-		return (0);
 	while (1)
 	{
-		if (finish_eat(0) == start.nbr_philo)
+		if (am_i_die(philo_tab, start.nbr_philo) == 1 || finish_eat(0) == start.nbr_philo)
 		{
 			destroy_element(philo_tab, &start);
-        	return (0);
+        	if (join_threads(&start, philo_tab) == 0)
+				return (0);
+			return (0);
 		}
 	}
-    free(philo_tab);
 }

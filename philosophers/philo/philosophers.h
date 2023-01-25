@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/24 19:49:59 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/25 19:36:32 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct info{
 	pthread_mutex_t mutex_printf;
 	pthread_mutex_t mutex_eat;
 	pthread_mutex_t mutex_eat_time;
+	pthread_mutex_t mutex_end_of_eat[300];
 } info;
 
 typedef struct philo{
@@ -40,12 +41,10 @@ typedef struct philo{
 	int t_eat;
 	int t_sleep;
 	int nbr_eat_allow;
-	int is_eating;
 	long long last_time_eat;
+	int end_of_eat;
 	int left;
 	int right;
-	int as_eaten_one;
-	int am_i_die;
 	info *start;
 } philo;
 
