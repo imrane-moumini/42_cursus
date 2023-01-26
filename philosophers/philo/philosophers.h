@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/26 17:24:12 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/26 22:38:11 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ typedef struct philo{
 }	t_philo;
 
 int			ft_atoi(const char *nptr);
-int			handle_error(int argc, char *argv[]);
+int			ft_atoi_parsing(const char *nptr);
+long		ft_atoi_long_parsing(char *str);
+int			handle_first_error(int argc, char *argv[]);
+int			handle_second_error(int argc, char *argv[]);
 int			ft_nbr(char c);
 t_info		fill_info(int argc, char *argv[]);
 void		*action(void *arg);
@@ -72,4 +75,8 @@ int			finish_eat(int count);
 void		eating(t_philo *philo);
 void		time_to_think(t_philo *philo);
 void		died(t_philo philosophe, t_info *start);
+int			count_nbr_of_car(long nb);
+int			check_only_number(char *str);
+int			check_int_limit(char **argv);
+int			check_negative(int argc, char *argv[]);
 #endif

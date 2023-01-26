@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/26 17:06:12 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/26 22:12:10 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int	main(int argc, char *argv[])
 	t_info	start;
 	t_philo	*philo_tab;
 
-	if (handle_error(argc, argv) == 0)
+	if (handle_first_error(argc, argv) == 0)
+		return (0);
+	if (handle_second_error(argc, argv) == 0)
 		return (0);
 	start = fill_info(argc, argv);
 	init_mutex(&start);
