@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/25 23:52:20 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/26 15:20:28 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,13 @@ long long get_time()
 
 void printf_eating(philo *philosophe)
 {
-	// pthread_mutex_lock(&(philosophe -> start -> mutex_printf));
-	// printf("%lld ", (get_time() - philosophe -> time_start));
-	// printf("%i i am in printf eating\n", philosophe -> index + 1);
-	// pthread_mutex_unlock(&(philosophe -> start -> mutex_printf));
+	pthread_mutex_lock(&(philosophe -> start -> mutex_finish));
+	if (philosophe -> start -> end_of_eat == 1)
+	{
+		pthread_mutex_unlock(&(philosophe -> start -> mutex_finish));
+		return;
+	}
+	pthread_mutex_unlock(&(philosophe -> start -> mutex_finish));
 	pthread_mutex_lock(&(philosophe -> start -> mutex_eat));
 	philosophe->last_time_eat = get_time();
 	philosophe->nbr_eat_allow--;
@@ -87,10 +90,13 @@ void printf_eating(philo *philosophe)
 
 void i_am_sleeping(philo philosophe)
 {
-	// pthread_mutex_lock(&(philosophe.start -> mutex_printf));
-	// printf("%lld ", (get_time() - philosophe.time_start));
-	// printf("%i im in i am sleeping\n", philosophe.index + 1);
-	// pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
+	pthread_mutex_lock(&(philosophe.start -> mutex_finish));
+	if (philosophe.start -> end_of_eat == 1)
+	{
+		pthread_mutex_unlock(&(philosophe.start -> mutex_finish));
+		return;
+	}
+	pthread_mutex_unlock(&(philosophe.start -> mutex_finish));
 	pthread_mutex_lock(&(philosophe.start -> mutex_printf));	
 	printf("%lld ", (get_time() - philosophe.time_start));
 	printf("%i is sleeping\n", philosophe.index + 1);
@@ -100,10 +106,13 @@ void i_am_sleeping(philo philosophe)
 
 void i_am_thinking(philo philosophe)
 {
-	// pthread_mutex_lock(&(philosophe.start -> mutex_printf));
-	// printf("%lld ", (get_time() - philosophe.time_start));
-	// printf("%i fim in i an thinking\n", philosophe.index + 1);
-	// pthread_mutex_unlock(&(philosophe.start -> mutex_printf));
+	pthread_mutex_lock(&(philosophe.start -> mutex_finish));
+	if (philosophe.start -> end_of_eat == 1)
+	{
+		pthread_mutex_unlock(&(philosophe.start -> mutex_finish));
+		return;
+	}
+	pthread_mutex_unlock(&(philosophe.start -> mutex_finish));
 	pthread_mutex_lock(&(philosophe.start -> mutex_printf));
 	printf("%lld ", (get_time() - philosophe.time_start));
 	printf("%i is thinkig\n", philosophe.index + 1);
@@ -131,7 +140,6 @@ int am_i_die(philo *philo_tab, int nbr_philo, info *start)
 			printf("%lld ", (get_time() - philo_tab[i].time_start));
 			printf("%i died\n", philo_tab[i].index + 1);
 			end_of_eat(start);
-			printf("IN IM DEAD, END OF EAT IS %i\n", start -> end_of_eat);
 			pthread_mutex_unlock(&(philo_tab[i].start -> mutex_printf));
 			return (1);
 		}
@@ -150,10 +158,7 @@ int am_i_die(philo *philo_tab, int nbr_philo, info *start)
 void time_to_think(philo *philosophe)
 {
 	int time;
-	// pthread_mutex_lock(&(philosophe -> start -> mutex_printf));
-	// printf("%lld ", (get_time() - philosophe -> time_start));
-	// printf("%i im in time to think\n", philosophe -> index + 1);
-	// pthread_mutex_unlock(&(philosophe -> start -> mutex_printf));
+	
     pthread_mutex_lock(&(philosophe -> start -> mutex_eat_time));
 	time = ((philosophe -> t_die - (philosophe -> t_eat + philosophe -> t_sleep)) / 2);
 	pthread_mutex_unlock(&(philosophe -> start -> mutex_eat_time));
@@ -172,7 +177,6 @@ void *action(void *arg)
 	while (1)
 	{
 		pthread_mutex_lock(&(philosophe -> start -> mutex_finish));
-		printf("%i IN ACTION END OF EAT IS %i\n", philosophe -> index, philosophe -> start -> end_of_eat);
 		if (philosophe -> start -> end_of_eat != 1)
 		{
 			pthread_mutex_unlock(&(philosophe -> start -> mutex_finish));
