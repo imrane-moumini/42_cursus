@@ -1,7 +1,13 @@
 NAME = philo
 CC = gcc -Wall -Werror -Wextra -pthread #-fsanitize=thread
 SRC = main.c \
-	utile_fonction.c
+	utile_fonction.c \
+	dinner.c \
+	fill_philo.c \
+	mutex.c \
+	stop_dinner.c \
+	threads.c \
+	error.c
 	
 OBJ = $(SRC:%.c=%.o) 
 
