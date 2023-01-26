@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:58:03 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/26 17:31:49 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/26 23:25:21 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_philo	*create_threads(t_info *start)
 
 	i = 0;
 	philo_tab = malloc(sizeof(t_philo) * start -> nbr_philo);
+	if (!(philo_tab))
+		return (NULL);
 	fill_philo_tab(philo_tab, start);
 	add_pos_to_philo(philo_tab, *start);
 	while (i < start -> nbr_philo)

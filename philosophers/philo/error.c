@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:57:34 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/26 22:31:56 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/26 23:16:54 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	handle_second_error(int argc, char *argv[])
 	int	i;
 
 	i = 0;
+	if(handle_first_error(argc, argv) == 0)
+		return (0);
 	if (check_int_limit(argv) == 0)
 		return (0);
 	while (i + 1 < argc)
