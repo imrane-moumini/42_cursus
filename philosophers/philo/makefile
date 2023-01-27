@@ -1,5 +1,5 @@
 NAME = philo
-CC = gcc -Wall -Werror -Wextra -pthread #-fsanitize=thread
+CC = gcc -Wall -Werror -Wextra -pthread -g3 #-fsanitize=thread
 SRC = main.c \
 	utile_fonction.c \
 	dinner.c \

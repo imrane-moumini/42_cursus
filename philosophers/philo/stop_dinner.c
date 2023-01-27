@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:57:56 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/27 19:49:41 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/27 21:26:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ int	am_i_die(t_philo *philo_tab, int nbr_philo, t_info *start)
 		if ((get_time() - philo_tab[i].last_time_eat >= philo_tab[i].t_die) \
 			&& philo_tab[i].nbr_eat_allow != 0)
 		{
-			pthread_mutex_unlock(&(philo_tab[i].start -> mutex_eat));
+			
 			died(philo_tab[i], start);
+			pthread_mutex_unlock(&(philo_tab[i].start -> mutex_eat));
 			return (1);
 		}
 		pthread_mutex_unlock(&(philo_tab[i].start -> mutex_eat));
