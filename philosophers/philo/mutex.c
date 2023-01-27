@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:57:50 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/26 23:21:29 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/27 19:59:15 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	init_mutex(t_info *start)
 	if (pthread_mutex_init(&start -> mutex_finish, NULL))
 		return (-1);
 	if (pthread_mutex_init(&start -> mutex_end_of_eat, NULL))
+		return (-1);
+	if (pthread_mutex_init(&start -> mutex_finish_eat, NULL))
 		return (-1);
 	while (i < start -> nbr_philo)
 	{

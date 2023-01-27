@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/26 23:19:31 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/27 20:01:01 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,16 @@ int	main(int argc, char *argv[])
 		return (0);
 	while (1)
 	{
+		pthread_mutex_lock(&(philo_tab[0].start -> mutex_finish_eat));
 		if (am_i_die(philo_tab, start.nbr_philo, &start) == 1 \
 			|| finish_eat(0) == start.nbr_philo)
 		{
+			pthread_mutex_unlock(&(philo_tab[0].start -> mutex_finish_eat));
 			if (join_threads(&start, philo_tab) == 0)
 				return (0);
 			destroy_element(philo_tab, &start);
 			return (0);
 		}
+		pthread_mutex_unlock(&(philo_tab[0].start -> mutex_finish_eat));
 	}
 }

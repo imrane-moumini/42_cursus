@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:58:03 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/26 23:25:21 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/27 20:00:28 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	destroy_element(t_philo *philo_tab, t_info *start)
 		pthread_mutex_destroy(&(start -> mutex_forks[i]));
 		i++;
 	}
+	pthread_mutex_destroy(&start -> mutex_finish_eat);
 	pthread_mutex_destroy(&start -> mutex_printf);
 	pthread_mutex_destroy(&start -> mutex_eat);
 	pthread_mutex_destroy(&start -> mutex_eat_time);
