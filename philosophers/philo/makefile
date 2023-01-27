@@ -8,7 +8,8 @@ SRC = main.c \
 	stop_dinner.c \
 	threads.c \
 	error.c \
-	error2.c
+	error2.c \
+	dinner2.c
 	
 OBJ = $(SRC:%.c=%.o) 
 

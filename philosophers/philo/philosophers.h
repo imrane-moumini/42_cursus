@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/27 19:58:54 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/27 21:56:31 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,5 @@ int			count_nbr_of_car(long nb);
 int			check_only_number(char *str);
 int			check_int_limit(char **argv);
 int			check_negative(int argc, char *argv[]);
+int			has_finished_eat(t_philo *philosophe);
 #endif

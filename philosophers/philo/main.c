@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 19:31:22 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/27 20:01:01 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/27 21:56:14 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ int	main(int argc, char *argv[])
 		return (0);
 	start = fill_info(argc, argv);
 	if (init_mutex(&start) == -1)
-	{
-		printf("init mutex failed\n");
-		return (0);
-	}
+		return (printf("init mutex failed\n"), 0);
 	philo_tab = create_threads(&start);
 	if (philo_tab == NULL)
 		return (0);

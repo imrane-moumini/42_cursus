@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:57:56 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/27 21:26:59 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/27 22:01:31 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,9 @@ int	am_i_die(t_philo *philo_tab, int nbr_philo, t_info *start)
 	{
 		pthread_mutex_lock(&(philo_tab[i].start -> mutex_eat));
 		if ((get_time() - philo_tab[i].last_time_eat >= philo_tab[i].t_die) \
-			&& philo_tab[i].nbr_eat_allow != 0)
-		{
-			
-			died(philo_tab[i], start);
-			pthread_mutex_unlock(&(philo_tab[i].start -> mutex_eat));
-			return (1);
-		}
+		&& philo_tab[i].nbr_eat_allow != 0)
+			return (died(philo_tab[i], start), \
+			pthread_mutex_unlock(&(philo_tab[i].start->mutex_eat)), 1);
 		pthread_mutex_unlock(&(philo_tab[i].start -> mutex_eat));
 		pthread_mutex_lock(&(philo_tab[i].start -> mutex_eat));
 		if (philo_tab[i].nbr_eat_allow == 0)
@@ -53,21 +49,17 @@ int	am_i_die(t_philo *philo_tab, int nbr_philo, t_info *start)
 		if (philo_tab[i].nbr_eat_allow != 0)
 			finish = 0;
 		if (finish == nbr_philo)
-		{
-			pthread_mutex_unlock(&(philo_tab[i].start -> mutex_eat));
-			return (1);
-		}
+			return (pthread_mutex_unlock(&(philo_tab[i].start->mutex_eat)), 1);
 		pthread_mutex_unlock(&(philo_tab[i].start -> mutex_eat));
 		i++;
 	}
-	i = 0;
 	return (0);
 }
 
 int	finish_eat(int count)
 {
 	static int	finish;
-	
+
 	finish = finish + count;
 	return (finish);
 }

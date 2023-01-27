@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:57:15 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/27 20:10:36 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/27 21:54:14 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,15 +99,10 @@ void	*action(void *arg)
 		pthread_mutex_lock(&(philosophe -> start -> mutex_end_of_eat));
 		if (philosophe -> start -> end_of_eat != 1)
 		{
-			pthread_mutex_unlock(&(philosophe -> start -> mutex_end_of_eat));
-			pthread_mutex_unlock(&(philosophe -> start -> mutex_finish));
-			if (philosophe -> nbr_eat_allow == 0)
-			{
-				pthread_mutex_lock(&(philosophe -> start ->mutex_finish_eat));
-				finish_eat(1);
-				pthread_mutex_unlock(&(philosophe -> start -> mutex_finish_eat));
+			pthread_mutex_unlock(&(philosophe->start->mutex_end_of_eat));
+			pthread_mutex_unlock(&(philosophe->start->mutex_finish));
+			if (has_finished_eat(philosophe) == 1)
 				return (NULL);
-			}
 			eating(philosophe);
 			time_to_think(philosophe);
 		}
