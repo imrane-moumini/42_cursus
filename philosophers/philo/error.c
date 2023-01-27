@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:57:34 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/27 15:17:21 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/27 19:02:21 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	handle_second_error(int argc, char *argv[])
 	if (ft_atoi_parsing(argv[1]) == 1)
 	{
 		printf("0 1 has taken a fork\n");
-		printf("0 1 died\n");
+		printf("%i 1 died\n", ft_atoi_parsing(argv[3]));
 		return (0);
 	}
 	return (1);
