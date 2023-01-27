@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:57:34 by imoumini          #+#    #+#             */
-/*   Updated: 2023/01/26 23:16:54 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/01/27 15:17:21 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	handle_first_error(int argc, char *argv[])
 	int	tmp;
 
 	tmp = argc;
-	if (argc < 5 || argc > 5)
+	if (argc < 5 || argc > 6)
 	{
 		printf("wrong nummber of arguments\n");
 		return (0);
@@ -46,7 +46,7 @@ int	handle_second_error(int argc, char *argv[])
 	int	i;
 
 	i = 0;
-	if(handle_first_error(argc, argv) == 0)
+	if (handle_first_error(argc, argv) == 0)
 		return (0);
 	if (check_int_limit(argv) == 0)
 		return (0);
