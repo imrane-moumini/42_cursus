@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:35:48 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/04 19:31:38 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/04 20:10:23 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ char next_char(t_source *src)
     char nc;
 
     nc = '\n';
-    if(!src || !src->buffer)
-        return (nc);
+    if (!src || !src->buffer)
+    {
+		return (nc);
+	}
     if (src -> buffer[src -> curpos])
     {
         nc = src -> buffer[src -> curpos + 1];

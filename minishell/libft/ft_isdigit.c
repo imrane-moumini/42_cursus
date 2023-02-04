@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/04 20:07:20 by imrane           ###   ########.fr       */
+/*   Created: 2022/05/03 21:25:09 by imoumini          #+#    #+#             */
+/*   Updated: 2022/05/08 19:59:04 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <stdio.h>
+#include "libft.h"
 
-#include "minishell.h"
-
-int main(void)
+int	ft_isdigit(int c)
 {
-	while (1)
-    {
-        char *input;
-        t_source src;
-		
-        input = readline("minishell> ");
-		init_src(&src, input);
-        printf("%c\n", next_char(&src));
-        free(input);
-    }
+	if ((c >= 48 && c <= 57))
+	{
+		return (1);
+	}
+	return (0);
 }
+/*int	main(void)
+{
+	int c = 47;
+	printf("%i", ft_isdigit(c));
+}*/

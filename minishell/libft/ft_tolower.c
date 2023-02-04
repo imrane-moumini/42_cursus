@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/04 20:07:20 by imrane           ###   ########.fr       */
+/*   Created: 2022/05/13 20:57:33 by imoumini          #+#    #+#             */
+/*   Updated: 2022/05/13 20:58:37 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-int main(void)
+int	ft_tolower(int c)
 {
-	while (1)
-    {
-        char *input;
-        t_source src;
-		
-        input = readline("minishell> ");
-		init_src(&src, input);
-        printf("%c\n", next_char(&src));
-        free(input);
-    }
+	if (c >= 65 && c <= 90)
+	{
+		c = c + 32;
+	}
+	return (c);
 }

@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/04 20:07:20 by imrane           ###   ########.fr       */
+/*   Created: 2022/06/13 22:19:13 by imoumini          #+#    #+#             */
+/*   Updated: 2022/06/13 22:19:16 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-#include "minishell.h"
-
-int main(void)
+void	ft_lstadd_front(t_list	**lst, t_list	*new)
 {
-	while (1)
-    {
-        char *input;
-        t_source src;
-		
-        input = readline("minishell> ");
-		init_src(&src, input);
-        printf("%c\n", next_char(&src));
-        free(input);
-    }
+	new -> next = *lst;
+	*lst = new;
 }

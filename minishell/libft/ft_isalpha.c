@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/04 20:07:20 by imrane           ###   ########.fr       */
+/*   Created: 2022/05/03 20:43:30 by imoumini          #+#    #+#             */
+/*   Updated: 2022/05/08 19:51:42 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <stdio.h>
+#include "libft.h"
 
-int main(void)
+int	ft_isalpha(int c)
 {
-	while (1)
-    {
-        char *input;
-        t_source src;
-		
-        input = readline("minishell> ");
-		init_src(&src, input);
-        printf("%c\n", next_char(&src));
-        free(input);
-    }
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+	{
+		return (1);
+	}
+	return (0);
 }
+/*int main(void)
+{
+	int d = 100;
+	printf("%i",ft_isalpha(d));
+}
+*/

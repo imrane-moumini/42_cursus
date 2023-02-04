@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_src_token.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/04 20:07:20 by imrane           ###   ########.fr       */
+/*   Created: 2023/02/04 20:00:16 by imrane            #+#    #+#             */
+/*   Updated: 2023/02/04 20:07:45 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int main(void)
+void	init_src(t_source *src, char *input)
 {
-	while (1)
-    {
-        char *input;
-        t_source src;
-		
-        input = readline("minishell> ");
-		init_src(&src, input);
-        printf("%c\n", next_char(&src));
-        free(input);
-    }
+	src -> buffer = input;
+	src -> bufsize = ft_strlen(input);
+	src -> curpos = 0;
 }
