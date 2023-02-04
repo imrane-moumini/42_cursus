@@ -6,11 +6,12 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/04 22:03:51 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/04 22:27:26 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
 void	add_to_buf(char c, t_info_tok *info)
 {
 	char *tmp;
@@ -28,4 +29,11 @@ void	add_to_buf(char c, t_info_tok *info)
 		info -> tok_bufsize = info -> tok_bufsize * 2;
 		
 	}
+}
+
+void	free_token(t_token *tok)
+{
+	if(tok->text)
+        free(tok->text);
+    free(tok);
 }
