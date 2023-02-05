@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/04 22:27:26 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/05 22:13:16 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	add_to_buf(char c, t_info_tok *info)
 {
 	char *tmp;
 	
-	info -> tok_buf[info -> tok_bufindex] = c;
-	info -> tok_bufindex++;
 	if (info -> tok_bufindex >= info -> tok_bufsize)
 	{
 		tmp = malloc(sizeof(char) * (info -> tok_bufsize *2));
@@ -27,8 +25,8 @@ void	add_to_buf(char c, t_info_tok *info)
 		free(info -> tok_buf);
 		info -> tok_buf = tmp;
 		info -> tok_bufsize = info -> tok_bufsize * 2;
-		
 	}
+	info -> tok_buf[info -> tok_bufindex] = c;
 }
 
 void	free_token(t_token *tok)
@@ -37,3 +35,58 @@ void	free_token(t_token *tok)
         free(tok->text);
     free(tok);
 }
+
+t_token	*tokenize(t_source *src, t_info_tok *info)
+{
+	char c;
+	t_token *tok;
+	
+	tok = NULL;
+	if(!src || !src->buffer || !src->bufsize)
+        return NULL;
+	if (!(info -> tok_buf))
+	{
+		info -> tok_bufsize = 1024;
+		info -> tok_buf = malloc(info -> tok_bufsize);
+		if (!(info -> tok_buf))
+			return NULL;
+	}
+    info -> tok_buf[0] = '\0';
+	c = src -> buffer[src -> curpos];
+	while (c)
+	{
+		if (c == ' ' || c == '\t')
+		{
+			if (info -> tok_bufindex != -1)
+			{
+				info -> tok_buf[info -> tok_bufindex] = '\0';
+				break;	
+			}
+		}
+		else
+		{
+			info -> tok_bufindex++;
+			add_to_buf(c, info);
+		}
+		src -> curpos++;
+		c = src -> buffer[src -> curpos];
+		
+	}
+	tok = create_token(info -> tok_buf, src, info);
+	return tok;
+}
+
+t_token *create_token(char *str, t_source *src, t_info_tok *info)
+{
+	t_token *tok;
+	
+	tok = malloc(sizeof(t_token));
+	if (!tok)
+		return NULL;
+	tok->text_len = ft_strlen(str);
+	tok->src = src;
+	tok->text = malloc(sizeof(char) * ((tok -> text_len) + 1));
+	ft_strlcpy(tok->text, info -> tok_buf, tok->text_len);
+	return (tok);
+}
+
