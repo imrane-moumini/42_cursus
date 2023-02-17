@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/17 20:14:10 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/17 20:39:41 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	init_node(t_node *node, t_token *tok)
 {
 	if (tok)
 		node -> txt = tok -> text;
-	children = 0;
-	first_child = NULL;
-	next_sibling = NULL;
-	prev_sibling = NULL;
+	node -> children = 0;
+	node -> first_child = NULL;
+	node -> next_sibling = NULL;
+	node -> prev_sibling = NULL;
 }
 
 void add_node(t_node *root, t_node *node)
@@ -56,9 +56,6 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 	t_token *tok;
 	t_node *node;
 	
-	root = NULL;
-	tok = NULL;
-	node = NULL;
 	if (!input)
 		return (NULL);
 	init_src(src, input);
@@ -66,10 +63,11 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 	root = new_node();
 	if (!root)
 		return (NULL);
-		init_node(root,NULL);
-	while (tok = tokenize(src, info))
+	init_node(root,NULL);
+	tok = tokenize(src, info);
+	while (tok)
 	{	
-		node = new_node()
+		node = new_node();
 		if (!node)
 		{
 			//free_node_tree(root);
@@ -83,6 +81,7 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 		}
 		free(info -> tok_buf);
 		init_global_info_token(info);
+		tok = tokenize(src, info);
 	}
 	return (root);	
 }

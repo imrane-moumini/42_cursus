@@ -54,7 +54,6 @@ t_token	*tokenize(t_source *src, t_info_tok *info);
 void	free_token(t_token *tok);
 void	add_to_buf(char c, t_info_tok *info);
 t_token	*create_token(char *str , t_source *src, t_info_tok *info);
-t_token *parse_simple_command(t_token *tok);
 
 /* parsing*/
 t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info);
