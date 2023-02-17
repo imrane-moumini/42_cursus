@@ -29,6 +29,18 @@ typedef struct info_tok_s
 	int   tok_bufsize; /*nbr of bytes of the token*/
 	int   tok_bufindex; // l'index où on doit ajouter le prochain car dans le buff
 } t_info_tok;
+
+/* structure of a node in AST*/
+typedef struct node_s
+{
+    char *txt;        /* value of this node */
+    int    children;            /* number of child nodes */
+    struct node_s *first_child; /* first child node */
+    struct node_s *next_sibling;
+	struct node_s *prev_sibling;
+} t_node;
+
+
 /* manipulate the input*/
 char	next_char(t_source *src); // return the next char et avance de 1 car dans linput (update pos)
 void	unget_char(t_source *src); // recule de 1 car dans linput
@@ -42,5 +54,11 @@ t_token	*tokenize(t_source *src, t_info_tok *info);
 void	free_token(t_token *tok);
 void	add_to_buf(char c, t_info_tok *info);
 t_token	*create_token(char *str , t_source *src, t_info_tok *info);
+t_token *parse_simple_command(t_token *tok);
 
+/* parsing*/
+t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info);
+t_node *new_node(void);
+void	init_node(t_node *node, t_token *tok);
+void	add_node(t_node *root, t_node *node);
 #endif

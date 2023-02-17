@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/05 22:25:59 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/17 20:15:01 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,21 @@ int main(void)
         char *input;
         t_source src;
         t_info_tok info;
-        t_token *tok;
+        t_node *root;
+        t_node *ptr;
 		
         input = readline("minishell> ");
-		init_src(&src, input);
-		init_global_info_token(&info);
-        tok = tokenize(&src, &info);
-		printf("%s\n", tok -> text);
-        // ya rien qui s'affiche mais au moins ya pas de segfault
+		root = parse_simple_command(input, &src, &info);
+        ptr = root -> first_child;
+        if (ptr)
+        {
+            while (ptr != NULL)
+            {
+                printf("%s ", ptr -> txt);
+                ptr = ptr -> next_sibling;
+            }
+        }
         free(input);
+        //free_node_tree(root);
     }
 }
