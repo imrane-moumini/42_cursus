@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/17 20:36:47 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/17 21:06:35 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 	c = src -> buffer[src -> curpos];
 	while (c)
 	{
-		if (c == ' ' || c == '\t')
+		if (c == ' ' || c == '\t' )
 		{
 			if (info -> tok_bufindex != -1)
 			{
@@ -63,6 +63,12 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 				info -> tok_buf[info -> tok_bufindex] = '\0';
 				break;	
 			}
+		}
+		else if (c =='\0' )
+		{
+			info -> tok_bufindex++;
+			info -> tok_buf[info -> tok_bufindex] = '\0';
+			break;
 		}
 		else
 		{

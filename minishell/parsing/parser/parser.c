@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/17 20:39:41 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/17 21:09:15 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,24 @@ void add_node(t_node *root, t_node *node)
 {
 	t_node *ptr;
 	t_node *prev;
+	printf("c1\n");
 	if (root -> first_child == NULL)
 		root -> first_child = node;
 	else
 	{
+		printf("c3 node = %s\n", node -> txt);
 		ptr = root -> first_child;
-		while (ptr -> next_sibling != NULL)
+		while (ptr != NULL)
 		{
+			printf("c4\n");
 			prev = ptr;
 			ptr = ptr -> next_sibling;
 		}
-		ptr -> next_sibling = node;
+		prev -> next_sibling = node;
 		node -> prev_sibling = prev;
 	}
+	printf("c5\n");
+
 }
 t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 {
@@ -84,4 +89,6 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 		tok = tokenize(src, info);
 	}
 	return (root);	
+	// si ya pas despace a la fin il ajoute pas dans le tree
+	// ou ptete il creerpas le token
 }

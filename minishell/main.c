@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/17 20:15:01 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/17 20:46:11 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int main(void)
         {
             while (ptr != NULL)
             {
-                printf("%s ", ptr -> txt);
+                printf("%s\n", ptr -> txt);
                 ptr = ptr -> next_sibling;
             }
         }
