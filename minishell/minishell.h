@@ -12,6 +12,8 @@ typedef struct source_s
     char	*buffer;       /* the input text */
     long	bufsize;       /* size of the input text */
     long	curpos;       /* index position in source */
+	int		end_input;
+	int		exit;
 } t_source;
 
 // structure of a token

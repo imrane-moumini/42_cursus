@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/17 21:06:35 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/18 16:43:41 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 	char c;
 	t_token *tok;
 	
+	if (src -> end_input == 1)
+		src -> exit = 1;
 	tok = NULL;
 	if(!src || !src->buffer || !src->bufsize)
         return NULL;
@@ -55,7 +57,8 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 	c = src -> buffer[src -> curpos];
 	while (c)
 	{
-		if (c == ' ' || c == '\t' )
+		printf("c is =%c\n", c);
+		if (c == ' ' || c == '\t' || c == '\n')
 		{
 			if (info -> tok_bufindex != -1)
 			{
@@ -63,12 +66,6 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 				info -> tok_buf[info -> tok_bufindex] = '\0';
 				break;	
 			}
-		}
-		else if (c =='\0' )
-		{
-			info -> tok_bufindex++;
-			info -> tok_buf[info -> tok_bufindex] = '\0';
-			break;
 		}
 		else
 		{
@@ -79,9 +76,15 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 		c = src -> buffer[src -> curpos];
 		
 	}
-	if (c == '\0')
-		return (NULL);
+	printf("c after loop is =%c\n", c);
+	if (c == '\0' || c == '\n')
+	{
+		info -> tok_bufindex++;
+		info -> tok_buf[info -> tok_bufindex] = '\0';
+		src -> end_input = 1;
+	}
 	tok = create_token(info -> tok_buf, src, info);
+	printf("tok in tokenize =>%s\n", tok -> text);
 	return tok;
 }
 

@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/17 21:09:15 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/18 16:44:01 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,21 @@ void add_node(t_node *root, t_node *node)
 {
 	t_node *ptr;
 	t_node *prev;
-	printf("c1\n");
+	printf("c1 node before if => %s\n", node -> txt);
 	if (root -> first_child == NULL)
 		root -> first_child = node;
 	else
 	{
-		printf("c3 node = %s\n", node -> txt);
+		printf("c2 node in else = %s\n", node -> txt);
 		ptr = root -> first_child;
 		while (ptr != NULL)
 		{
-			printf("c4\n");
 			prev = ptr;
 			ptr = ptr -> next_sibling;
 		}
 		prev -> next_sibling = node;
 		node -> prev_sibling = prev;
 	}
-	printf("c5\n");
-
 }
 t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 {
@@ -69,9 +66,11 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 	if (!root)
 		return (NULL);
 	init_node(root,NULL);
-	tok = tokenize(src, info);
-	while (tok)
+	if (src -> end_input != 1)
+		tok = tokenize(src, info);
+	while (src -> exit != 1)
 	{	
+		printf("token in pars =%s\n", tok -> text);
 		node = new_node();
 		if (!node)
 		{
@@ -82,6 +81,7 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 		if (tok)
 		{
 			init_node(node, tok);
+			printf("node in pars => %s\n", node -> txt);
 			add_node(root, node);
 		}
 		free(info -> tok_buf);
