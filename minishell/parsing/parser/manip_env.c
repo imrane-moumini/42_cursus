@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/19 22:16:59 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/19 22:23:27 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void    create_var_value(t_env *node)
 	if (node -> var_value == NULL)
 		return ;
 	i = 0;
+	equal++;
 	while(node -> txt[equal] != '\0')
 	{
 		node -> var_value[i] = node -> txt[equal];
@@ -185,6 +186,8 @@ void    print_env(t_env *head)
 	while (ptr != NULL)
 	{
 		ft_printf("%s\n", ptr -> txt);
+		//printf("var name :%s\n", ptr -> var_name);
+		//printf("var value :%s\n", ptr -> var_value);
 		ptr = ptr -> next;
 	}
 }
