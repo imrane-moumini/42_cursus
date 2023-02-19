@@ -6,16 +6,23 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/17 20:46:11 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/19 21:29:35 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(void)
+int main(int argc, char *argv[], char *env[])
 {
-	t_info_tok info;
+	//t_info_tok info;
+    t_env	*mini_env;
 	
+    (void)argc;
+    (void)argv;
+	mini_env = copy_env(env);
+	print_env(mini_env);
+    
+	/*
 	init_global_info_token(&info);
 	while (1)
     {
@@ -38,5 +45,5 @@ int main(void)
         }
         free(input);
         //free_node_tree(root);
-    }
+    }*/
 }

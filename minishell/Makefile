@@ -2,10 +2,11 @@ NAME = minishell
 CC = gcc -Wall -Werror -Wextra 
 SRC = main.c \
 	parsing/lexer/manipulate_input.c \
-	parsing/parser/parser.c \
 	parsing/lexer/init_src_token.c \
-	parsing/lexer/manipulate_token.c
-	
+	parsing/lexer/manipulate_token.c \
+	parsing/parser/parser.c \
+	parsing/parser/manip_env.c
+
 OBJ = $(SRC:%.c=%.o) 
 
 

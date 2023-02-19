@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/18 16:44:01 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/19 18:18:35 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,5 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 		init_global_info_token(info);
 		tok = tokenize(src, info);
 	}
-	return (root);	
-	// si ya pas despace a la fin il ajoute pas dans le tree
-	// ou ptete il creerpas le token
+	return (root);
 }

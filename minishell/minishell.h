@@ -42,6 +42,15 @@ typedef struct node_s
 	struct node_s *prev_sibling;
 } t_node;
 
+/* structure of env linked list*/
+typedef struct env_s
+{
+    char *txt;
+    char* var_name;
+    char *var_value;
+	struct env_s *next;
+} t_env;
+
 
 /* manipulate the input*/
 char	next_char(t_source *src); // return the next char et avance de 1 car dans linput (update pos)
@@ -62,4 +71,15 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info);
 t_node *new_node(void);
 void	init_node(t_node *node, t_token *tok);
 void	add_node(t_node *root, t_node *node);
+
+/*env*/
+t_env   *copy_env(char *original[]);
+t_env   *add_node_env(t_env *head);
+t_env   *new_node_env(void);
+void    print_env(t_env *head);
+void    insert_input_env(t_env *head);
+void    expand_env(t_env *head, t_node *root);
+char    *ft_strcpy(char *str);
+void    create_var_name(t_env *node);
+void    create_var_value(t_env *node);
 #endif
