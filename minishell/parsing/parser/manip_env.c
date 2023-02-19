@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/19 21:58:38 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/19 22:06:06 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,33 +120,48 @@ t_env   *copy_env(char *original[])
 	t_env	*ptr;
 
 	i = 0;
+	printf("c1\n");
 	if (!original || original[0] == NULL)
 		return (NULL);
 	mini_env = malloc(sizeof(t_env));
+	printf("c2\n");
 	if (mini_env == NULL)
 		return (NULL);
 	mini_env -> next = NULL;
+	printf("c3\n");
 	while (original[i])
 		i++;
+	printf("c4\n");
 	while(i > 0)
 	{
+		printf("c5\n");
 		mini_env = add_node_env(mini_env);
+		printf("c6\n");
 		i--;
 	}
 	ptr = mini_env;
+	printf("c7\n");
 	while (original[i] && ptr != NULL)
 	{
+		printf("c8\n");
 		ptr -> txt = ft_strcpy(original[i]);
+		printf("c9\n");
 		ptr = ptr -> next;
+		printf("c10\n");
 		i++;
 	}
 	ptr = mini_env;
-	while(ptr != NULL)
+	printf("c11\n");
+	/*while(ptr != NULL)
 	{
+		printf("c12\n");
 		create_var_name(ptr);
+		printf("c13\n");
 		create_var_value(ptr);
+		printf("c14\n");
 		ptr = ptr -> next;
 	}
+	*/
 	return (mini_env);
 }
 
