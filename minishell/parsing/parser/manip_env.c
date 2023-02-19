@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/19 22:06:06 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/19 22:16:59 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void    create_var_value(t_env *node)
 
 	if (!node)
 		return ;
+	if (node -> txt == NULL)
+		return ;
 	equal = 0;
 	while(node -> txt[equal] != '=')
 		equal++;
@@ -98,19 +100,30 @@ void    create_var_name(t_env *node)
 	
 	if (!node)
 		return ;
-	i = 0;
-	while(node -> txt[i] != '=')
-		i++;
-	node -> var_name = malloc((sizeof(char))*i + 1);
-	if (node -> var_name == NULL)
+	if (node -> txt == NULL)
 		return ;
 	i = 0;
+	printf("var name 1\n");
+	while(node -> txt[i] != '=')
+		i++;
+	printf("var name 2\n");
+	node -> var_name = malloc((sizeof(char))*i + 1);
+	printf("var name 3\n");
+	if (node -> var_name == NULL)
+		return ;
+	printf("var name 4\n");
+	i = 0;
+	printf("var name 5\n");
 	while(node -> txt[i] != '=')
 	{
+		printf("var name 6\n");
 		node -> var_name[i] = node -> txt[i];
+		printf("var name 7\n");
 		i++;
 	}
+	printf("var name 8\n");
 	node ->var_name[i] = '\0';
+	printf("var name 9\n");
 }
 
 t_env   *copy_env(char *original[])
@@ -152,7 +165,7 @@ t_env   *copy_env(char *original[])
 	}
 	ptr = mini_env;
 	printf("c11\n");
-	/*while(ptr != NULL)
+	while(ptr != NULL)
 	{
 		printf("c12\n");
 		create_var_name(ptr);
@@ -161,7 +174,6 @@ t_env   *copy_env(char *original[])
 		printf("c14\n");
 		ptr = ptr -> next;
 	}
-	*/
 	return (mini_env);
 }
 
