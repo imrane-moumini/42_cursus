@@ -77,9 +77,16 @@ t_env   *copy_env(char *original[]);
 t_env   *add_node_env(t_env *head);
 t_env   *new_node_env(void);
 void    print_env(t_env *head);
-void    insert_input_env(t_env *head);
+int     is_env_var(t_node *root);
+void    insert_input_env(t_env *head, t_node *root);
 void    expand_env(t_env *head, t_node *root);
 char    *ft_strcpy(char *str);
 void    create_var_name(t_env *node);
 void    create_var_value(t_env *node);
+int		ft_stcmp(char *str1, char *str2);
+char	*extract_name(char *str);
+char	*extract_value(char *str);
+t_env	*last_env_node(t_env *head);
+t_node	*do_i_have_to_expand(t_node *root);
+char	*return_matching_value(t_env *head, char *str);
 #endif

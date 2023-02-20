@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/19 22:23:27 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/20 22:35:58 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,3 +191,159 @@ void    print_env(t_env *head)
 		ptr = ptr -> next;
 	}
 }
+int		ft_stcmp(char *str1, char *str2)
+{
+	int i;
+
+	i = 0;
+	while (str2[i] != '\0')
+	{
+		if (str1[i] != str2[i])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+int     is_env_var(t_node *root)
+{
+	int i;
+	
+	i = 0;
+	if (ft_stcmp(root -> first_child -> text, "export"))
+		return (1);
+	return (0);
+}
+char	*extract_name(char *str)
+{
+	int i;
+	char *ptr;
+	
+	i = 0;
+	while (str[i] != '=')
+		i++;
+	ptr = malloc(sizeof((char * i) + 1));
+	if (!ptr)
+		return (NULL);
+	i = 0;
+	while (str[i] != '=')
+	{
+		ptr[i] = str[i];
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
+}
+char	*extract_value(char *str)
+{
+	int i;
+	int equal;
+	char *ptr;
+	
+	i = 0;
+	equal = 0;
+	while (str[i] != '=')
+		i++;
+	equal = i;
+	while(str[i] != '\0')
+		i++;
+	ptr = malloc(sizeof((char *(i - equal)) + 1));
+	if (!ptr)
+		return (NULL);
+	equal++;
+	i = 0;
+	while (str[equal] != '\0')
+	{
+		ptr[i] = str[equal];
+		i++;
+		equal++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
+}
+
+t_env	*last_env_node(t_env *head)
+{
+	t_env *ptr;
+	
+	ptr = head;
+	while (ptr -> next != NULL)
+		ptr = ptr -> next;
+	return (ptr);
+}
+void    insert_input_env(t_env *head, t_node *root)
+{
+	char *var_env_name;
+	char *var_env_value;
+	char *env_input;
+	t_env	*last_node;
+	env_input = ft_strcpy(root -> first_child -> text);
+	var_env_name = extract_name(root -> first_child -> text);
+	var_env_value = extract_value(root -> first_child -> text);
+	add_node_env(head);
+	last_node = last_env_node(head);
+	last_node -> var_name = var_env_name;
+	last_node -> var_value = var_env_value;
+	last_node -> txt = env_input;
+}
+t_node		*do_i_have_to_expand(t_node *root)
+{
+	t_node *ptr;
+	
+	ptr = root -> first_child;
+	while (ptr != NULL)
+	{
+		if (ptr -> txt[0] == '&')
+			return (ptr);
+		ptr = ptr -> next_sibling;
+	}
+	return (NULL);
+}
+char	*return_matching_value(t_env *head, char *str)
+{
+	t_env *ptr;
+
+	ptr = head;
+	while (ptr != NULL)
+	{
+		if ( ft_stcmp(ptr -> txt, str) == 1)
+			return (ptr -> var_value);
+		ptr = ptr -> next;
+	}
+	return (NULL);
+}
+void    expand_env(t_env *head, t_node *root)
+{
+	t_env *ptr;
+	char	*str;
+	char	*new_text;
+	
+	ptr = do_i_have_to_expand(root);
+	if (!ptr)
+		return ;
+	// remplacer ptr -> text par la value
+		// trouver la var qui correspond
+			// si strcmp(ptr -> text++, head -> text) == 1
+			// pointer vers cet élément
+		// str = strcpy(la value de la var)
+		// ptr -> text free
+		// ptr -> text = str;
+	new_text = ptr -> text++;
+	str = ft_strcpy(return_matching_value(head, new_text));
+	free(ptr -> text);
+	ptr -> text = str;
+}
+
+
+
+// faire insert input in env -> export
+// faire expand env -> quand le mec met $ je vois et remplace
+// faire function env -> env
+// faire exit -> exit
+// faire ctr D -> quitte le shell
+// faire ctrl \ -> ne fait rien
+// dire à matthieu si c bon 
+// demander comment il a géré la grammaire, genre ça c faux, ça c vrai
+// demande à matthieu les guillemets
+// faire historique
+// rendre la structure avec tout bien fait pour que l'execution soit simple
+// faire valgrind

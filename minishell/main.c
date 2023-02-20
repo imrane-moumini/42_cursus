@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/19 21:29:35 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/20 22:40:14 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main(int argc, char *argv[], char *env[])
     (void)argc;
     (void)argv;
 	mini_env = copy_env(env);
-	print_env(mini_env);
+	//print_env(mini_env);
     
 	/*
 	init_global_info_token(&info);
@@ -46,4 +46,11 @@ int main(int argc, char *argv[], char *env[])
         free(input);
         //free_node_tree(root);
     }*/
+
+    // afficher env apres que j'ai ajouté var env
+    // afficher input avant expand
+    // afficher inout apres expand
+    // make
+    // regler pb
+    // faire test du dessus
 }
