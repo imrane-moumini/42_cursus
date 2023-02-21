@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/20 22:35:58 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/21 21:49:48 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,27 +104,18 @@ void    create_var_name(t_env *node)
 	if (node -> txt == NULL)
 		return ;
 	i = 0;
-	printf("var name 1\n");
 	while(node -> txt[i] != '=')
 		i++;
-	printf("var name 2\n");
 	node -> var_name = malloc((sizeof(char))*i + 1);
-	printf("var name 3\n");
 	if (node -> var_name == NULL)
 		return ;
-	printf("var name 4\n");
 	i = 0;
-	printf("var name 5\n");
 	while(node -> txt[i] != '=')
 	{
-		printf("var name 6\n");
 		node -> var_name[i] = node -> txt[i];
-		printf("var name 7\n");
 		i++;
 	}
-	printf("var name 8\n");
 	node ->var_name[i] = '\0';
-	printf("var name 9\n");
 }
 
 t_env   *copy_env(char *original[])
@@ -134,45 +125,31 @@ t_env   *copy_env(char *original[])
 	t_env	*ptr;
 
 	i = 0;
-	printf("c1\n");
 	if (!original || original[0] == NULL)
 		return (NULL);
 	mini_env = malloc(sizeof(t_env));
-	printf("c2\n");
 	if (mini_env == NULL)
 		return (NULL);
 	mini_env -> next = NULL;
-	printf("c3\n");
 	while (original[i])
 		i++;
-	printf("c4\n");
 	while(i > 0)
 	{
-		printf("c5\n");
 		mini_env = add_node_env(mini_env);
-		printf("c6\n");
 		i--;
 	}
 	ptr = mini_env;
-	printf("c7\n");
 	while (original[i] && ptr != NULL)
 	{
-		printf("c8\n");
 		ptr -> txt = ft_strcpy(original[i]);
-		printf("c9\n");
 		ptr = ptr -> next;
-		printf("c10\n");
 		i++;
 	}
 	ptr = mini_env;
-	printf("c11\n");
 	while(ptr != NULL)
 	{
-		printf("c12\n");
 		create_var_name(ptr);
-		printf("c13\n");
 		create_var_value(ptr);
-		printf("c14\n");
 		ptr = ptr -> next;
 	}
 	return (mini_env);
@@ -181,7 +158,8 @@ t_env   *copy_env(char *original[])
 void    print_env(t_env *head)
 {
 	t_env *ptr;
-
+	if (!head)
+		return ;
 	ptr = head;
 	while (ptr != NULL)
 	{
@@ -196,6 +174,8 @@ int		ft_stcmp(char *str1, char *str2)
 	int i;
 
 	i = 0;
+	if (!str1 || !str2)
+		return (0);
 	while (str2[i] != '\0')
 	{
 		if (str1[i] != str2[i])
@@ -206,10 +186,10 @@ int		ft_stcmp(char *str1, char *str2)
 }
 int     is_env_var(t_node *root)
 {
-	int i;
-	
-	i = 0;
-	if (ft_stcmp(root -> first_child -> text, "export"))
+
+	if (!root)
+		return (0);
+	if (ft_stcmp(root -> first_child -> txt, "export"))
 		return (1);
 	return (0);
 }
@@ -219,9 +199,11 @@ char	*extract_name(char *str)
 	char *ptr;
 	
 	i = 0;
+	if (!str)
+		return (NULL);
 	while (str[i] != '=')
 		i++;
-	ptr = malloc(sizeof((char * i) + 1));
+	ptr = malloc((sizeof(char) *i) + 1);
 	if (!ptr)
 		return (NULL);
 	i = 0;
@@ -241,12 +223,14 @@ char	*extract_value(char *str)
 	
 	i = 0;
 	equal = 0;
+	if (!str)
+		return (NULL);
 	while (str[i] != '=')
 		i++;
 	equal = i;
 	while(str[i] != '\0')
 		i++;
-	ptr = malloc(sizeof((char *(i - equal)) + 1));
+	ptr = malloc( (sizeof(char)) *(i - equal) + 1);
 	if (!ptr)
 		return (NULL);
 	equal++;
@@ -266,6 +250,8 @@ t_env	*last_env_node(t_env *head)
 	t_env *ptr;
 	
 	ptr = head;
+	if (!ptr)
+		return (NULL);
 	while (ptr -> next != NULL)
 		ptr = ptr -> next;
 	return (ptr);
@@ -276,9 +262,12 @@ void    insert_input_env(t_env *head, t_node *root)
 	char *var_env_value;
 	char *env_input;
 	t_env	*last_node;
-	env_input = ft_strcpy(root -> first_child -> text);
-	var_env_name = extract_name(root -> first_child -> text);
-	var_env_value = extract_value(root -> first_child -> text);
+	
+	if (!head || !root)
+		return ;
+	env_input = ft_strcpy(root -> first_child -> txt);
+	var_env_name = extract_name(root -> first_child -> txt);
+	var_env_value = extract_value(root -> first_child -> txt);
 	add_node_env(head);
 	last_node = last_env_node(head);
 	last_node -> var_name = var_env_name;
@@ -289,6 +278,8 @@ t_node		*do_i_have_to_expand(t_node *root)
 {
 	t_node *ptr;
 	
+	if (!root)
+		return (NULL);
 	ptr = root -> first_child;
 	while (ptr != NULL)
 	{
@@ -303,6 +294,8 @@ char	*return_matching_value(t_env *head, char *str)
 	t_env *ptr;
 
 	ptr = head;
+	if (!ptr || !str)
+		return (NULL);
 	while (ptr != NULL)
 	{
 		if ( ft_stcmp(ptr -> txt, str) == 1)
@@ -313,10 +306,12 @@ char	*return_matching_value(t_env *head, char *str)
 }
 void    expand_env(t_env *head, t_node *root)
 {
-	t_env *ptr;
+	t_node *ptr;
 	char	*str;
 	char	*new_text;
 	
+	if (!head || !root)
+		return ;
 	ptr = do_i_have_to_expand(root);
 	if (!ptr)
 		return ;
@@ -327,10 +322,10 @@ void    expand_env(t_env *head, t_node *root)
 		// str = strcpy(la value de la var)
 		// ptr -> text free
 		// ptr -> text = str;
-	new_text = ptr -> text++;
+	new_text = ptr -> txt++;
 	str = ft_strcpy(return_matching_value(head, new_text));
-	free(ptr -> text);
-	ptr -> text = str;
+	free(ptr -> txt);
+	ptr -> txt = str;
 }
 
 

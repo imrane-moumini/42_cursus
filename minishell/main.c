@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/20 22:40:14 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/21 21:21:52 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,41 @@
 
 int main(int argc, char *argv[], char *env[])
 {
-	//t_info_tok info;
     t_env	*mini_env;
-	
+	char *input;
+    t_source src;
+    t_info_tok info;
+    t_node *root;
     (void)argc;
     (void)argv;
 	mini_env = copy_env(env);
 	//print_env(mini_env);
     
-	/*
+	
 	init_global_info_token(&info);
 	while (1)
     {
-        char *input;
-        t_source src;
-        t_info_tok info;
-        t_node *root;
-        t_node *ptr;
+        
 		
         input = readline("minishell> ");
 		root = parse_simple_command(input, &src, &info);
-        ptr = root -> first_child;
-        if (ptr)
-        {
-            while (ptr != NULL)
-            {
-                printf("%s\n", ptr -> txt);
-                ptr = ptr -> next_sibling;
-            }
-        }
+		if (is_env_var(root))
+			insert_input_env(mini_env, root);
+		 // afficher env apres que j'ai ajouté var env
+        printf("----------------------\n");
+		print_env(mini_env);
+		printf("----------------------\n");
+		// afficher ast avant expand
+		print_ast(root);
+		printf("----------------------\n");
+		// afficher ast apres expand
+		expand_env(mini_env,root);
+		print_ast(root);
         free(input);
         //free_node_tree(root);
-    }*/
+    }
 
-    // afficher env apres que j'ai ajouté var env
-    // afficher input avant expand
-    // afficher inout apres expand
+   
     // make
     // regler pb
     // faire test du dessus

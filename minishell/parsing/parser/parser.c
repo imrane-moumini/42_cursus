@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/19 18:18:35 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/21 21:06:20 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,17 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 		tok = tokenize(src, info);
 	}
 	return (root);
+}
+
+void    print_ast(t_node *node)
+{
+	t_node *ptr;
+	if (!node)
+		return ; 
+	ptr = node -> first_child;
+	while (ptr != NULL)
+	{
+		ft_printf("%s\n", ptr -> txt);
+		ptr = ptr -> next_sibling;
+	}
 }

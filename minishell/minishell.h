@@ -71,6 +71,7 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info);
 t_node *new_node(void);
 void	init_node(t_node *node, t_token *tok);
 void	add_node(t_node *root, t_node *node);
+void    print_ast(t_node *node);
 
 /*env*/
 t_env   *copy_env(char *original[]);
