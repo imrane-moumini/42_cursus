@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/23 17:30:16 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/23 19:27:54 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@ int main(int argc, char *argv[], char *env[])
     t_source src;
     t_info_tok info;
     t_node *root;
+	struct sigaction action_exit;
+	sigset_t	sigmask;
     (void)argc;
     (void)argv;
+
+	sigemptyset(&sigmask);
 	mini_env = copy_env(env);
 	//print_env(mini_env);
     
@@ -36,6 +40,7 @@ int main(int argc, char *argv[], char *env[])
 		root = parse_simple_command(input, &src, &info);
 		if (is_env_var(root))
 			insert_input_env(mini_env, root);
+		ft_exit(mini_env,root);
 		 // afficher env apres que j'ai ajouté var env
         printf("----------------------\n");
 		print_env(mini_env);
@@ -51,7 +56,21 @@ int main(int argc, char *argv[], char *env[])
     }
 
    
-    // make
-    // regler pb
-    // faire test du dessus
+   // faire ctrl c fait rien
+// faire exit -> exit
+// faire ctr D -> quitte le shell
+// faire ctrl \ -> ne fait rien
+// dire à matthieu si c bon 
+// demander comment il a géré la grammaire, genre ça c faux, ça c vrai
+// demande à matthieu les guillemets
+// faire historique
+// rendre la structure avec tout bien fait pour que l'execution soit simple
+// faire valgrind
+// faire function qui free tous les alloc
+// export sans option
+
+// question mathieu
+	// comment t'as fait ça on a pas le droit de faire
+	// comment on fait historique
+	// c'est quoi les histoires de guillemets
 }

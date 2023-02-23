@@ -1,6 +1,8 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <unistd.h>
+# include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <readline/readline.h>
@@ -93,4 +95,11 @@ t_node	*do_i_have_to_expand(t_node *root);
 char	*return_matching_value(t_env *head, char *str);
 void	cut_dollar_sign(char *str);
 int     is_nbr(char c);
+
+/*signaux*/
+void	init_struct_sign();
+
+/*builtin exit*/
+void ft_exit(t_env *mini_env,t_node *root);
+void ft_free(t_env *mini_env, t_node *root);
 #endif

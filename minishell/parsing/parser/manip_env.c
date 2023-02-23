@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/23 17:40:25 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/23 18:34:38 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,8 @@ int     is_env_var(t_node *root)
 
 	if (!root)
 		return (0);
+	if (is_nbr(root -> first_child -> next_sibling -> txt[0]) == 0)
+		ft_printf("export : '%s' is not a valid identifier\n",root -> first_child -> next_sibling -> txt );
 	if (ft_stcmp(root -> first_child -> txt, "export") && (is_nbr(root -> first_child -> next_sibling -> txt[0]) == 0))
 		return (1);
 	return (0);
@@ -365,17 +367,3 @@ void    expand_env(t_env *head, t_node *root)
 	ptr -> txt = str;
 }
 
-
-
-// faire insert input in env -> export
-// faire expand env -> quand le mec met $ je vois et remplace
-// faire function env -> env
-// faire exit -> exit
-// faire ctr D -> quitte le shell
-// faire ctrl \ -> ne fait rien
-// dire à matthieu si c bon 
-// demander comment il a géré la grammaire, genre ça c faux, ça c vrai
-// demande à matthieu les guillemets
-// faire historique
-// rendre la structure avec tout bien fait pour que l'execution soit simple
-// faire valgrind

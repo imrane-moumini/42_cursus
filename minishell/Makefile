@@ -5,7 +5,9 @@ SRC = main.c \
 	parsing/lexer/init_src_token.c \
 	parsing/lexer/manipulate_token.c \
 	parsing/parser/parser.c \
-	parsing/parser/manip_env.c
+	parsing/parser/manip_env.c \
+	signaux/signal.c \
+	builtin/exit.c
 
 OBJ = $(SRC:%.c=%.o) 
 
