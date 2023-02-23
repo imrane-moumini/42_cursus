@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/23 16:28:13 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/23 17:40:25 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,27 @@ char    *ft_strcpy(char *str)
 	if (!ptr)
 		return (NULL);
 	while (str[i])
+	{
+		ptr[i] = str[i];
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
+}
+char    *ft_strcpy_env(char *str)
+{
+	int i;
+	int length;
+	char *ptr;
+	
+	if (!str)
+		return (NULL);
+	i = 0;
+	length = ft_strlen(str);
+	ptr = malloc((sizeof(char) *length) + 1);
+	if (!ptr)
+		return (NULL);
+	while (str[i] != '\0' && str[i] != ' ' && str[i] != '\t')
 	{
 		ptr[i] = str[i];
 		i++;
@@ -184,12 +205,19 @@ int		ft_stcmp(char *str1, char *str2)
 	}
 	return (1);
 }
+
+int     is_nbr(char c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
 int     is_env_var(t_node *root)
 {
 
 	if (!root)
 		return (0);
-	if (ft_stcmp(root -> first_child -> txt, "export"))
+	if (ft_stcmp(root -> first_child -> txt, "export") && (is_nbr(root -> first_child -> next_sibling -> txt[0]) == 0))
 		return (1);
 	return (0);
 }
@@ -228,14 +256,14 @@ char	*extract_value(char *str)
 	while (str[i] != '=')
 		i++;
 	equal = i;
-	while(str[i] != '\0')
+	while(str[i] != '\0' && str[i] != ' ' && str[i] != '\t')
 		i++;
 	ptr = malloc( (sizeof(char)) *(i - equal) + 1);
 	if (!ptr)
 		return (NULL);
 	equal++;
 	i = 0;
-	while (str[equal] != '\0')
+	while (str[equal] != '\0' && str[equal] != ' ' && str[equal] != '\t')
 	{
 		ptr[i] = str[equal];
 		i++;
@@ -265,7 +293,7 @@ void    insert_input_env(t_env *head, t_node *root)
 	
 	if (!head || !root)
 		return ;
-	env_input = ft_strcpy(root -> first_child -> next_sibling -> txt);
+	env_input = ft_strcpy_env(root -> first_child -> next_sibling -> txt);
 	var_env_name = extract_name(root -> first_child -> txt);
 	var_env_value = extract_value(root -> first_child -> txt);
 	add_node_env(head);
@@ -283,10 +311,8 @@ t_node		*do_i_have_to_expand(t_node *root)
 	ptr = root -> first_child;
 	while (ptr != NULL)
 	{
-		printf("check expand =>%s\n", ptr -> txt);
 		if (ptr -> txt[0] == '$')
 			return (ptr);
-		printf("C3\n");
 		ptr = ptr -> next_sibling;
 	}
 	return (NULL);
@@ -330,25 +356,12 @@ void    expand_env(t_env *head, t_node *root)
 	
 	if (!head || !root)
 		return ;
-	printf("c1\n");
 	ptr = do_i_have_to_expand(root);
 	if (!ptr)
 		return ;
-	printf("c2\n");
-	// remplacer ptr -> text par la value
-		// trouver la var qui correspond
-			// si strcmp(ptr -> text++, head -> text) == 1
-			// pointer vers cet élément
-		// str = strcpy(la value de la var)
-		// ptr -> text free
-		// ptr -> text = str;
-	printf("ptr before cut->%s\n", ptr -> txt);
 	cut_dollar_sign(ptr -> txt);
-	printf("ptr after cut->%s\n", ptr -> txt);
-	printf("c4\n");
 	str = ft_strcpy(return_matching_value(head, ptr -> txt));
-	// renvoi 0 car g pas enlevr $ dolalr rien match donc ecrit nul
-	//free(ptr -> txt); // segdault ici
+	free(ptr -> txt);
 	ptr -> txt = str;
 }
 

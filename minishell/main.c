@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/23 15:23:13 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/23 17:30:16 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int main(int argc, char *argv[], char *env[])
     
 	
 	init_global_info_token(&info);
+	
 	while (1)
     {
         // ajout export aui lieu dejouter bob=ranger
@@ -45,6 +46,7 @@ int main(int argc, char *argv[], char *env[])
 		// afficher ast apres expand
 		expand_env(mini_env,root);
 		print_ast(root);
+		free(input);
         //free_node_tree(root);
     }
 

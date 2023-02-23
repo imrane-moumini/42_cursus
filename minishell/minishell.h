@@ -82,6 +82,7 @@ int     is_env_var(t_node *root);
 void    insert_input_env(t_env *head, t_node *root);
 void    expand_env(t_env *head, t_node *root);
 char    *ft_strcpy(char *str);
+char    *ft_strcpy_env(char *str);
 void    create_var_name(t_env *node);
 void    create_var_value(t_env *node);
 int		ft_stcmp(char *str1, char *str2);
@@ -91,4 +92,5 @@ t_env	*last_env_node(t_env *head);
 t_node	*do_i_have_to_expand(t_node *root);
 char	*return_matching_value(t_env *head, char *str);
 void	cut_dollar_sign(char *str);
+int     is_nbr(char c);
 #endif
