@@ -90,4 +90,5 @@ char	*extract_value(char *str);
 t_env	*last_env_node(t_env *head);
 t_node	*do_i_have_to_expand(t_node *root);
 char	*return_matching_value(t_env *head, char *str);
+void	cut_dollar_sign(char *str);
 #endif

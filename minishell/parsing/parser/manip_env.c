@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/21 21:49:48 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/23 16:28:13 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,7 +265,7 @@ void    insert_input_env(t_env *head, t_node *root)
 	
 	if (!head || !root)
 		return ;
-	env_input = ft_strcpy(root -> first_child -> txt);
+	env_input = ft_strcpy(root -> first_child -> next_sibling -> txt);
 	var_env_name = extract_name(root -> first_child -> txt);
 	var_env_value = extract_value(root -> first_child -> txt);
 	add_node_env(head);
@@ -283,8 +283,10 @@ t_node		*do_i_have_to_expand(t_node *root)
 	ptr = root -> first_child;
 	while (ptr != NULL)
 	{
-		if (ptr -> txt[0] == '&')
+		printf("check expand =>%s\n", ptr -> txt);
+		if (ptr -> txt[0] == '$')
 			return (ptr);
+		printf("C3\n");
 		ptr = ptr -> next_sibling;
 	}
 	return (NULL);
@@ -304,17 +306,35 @@ char	*return_matching_value(t_env *head, char *str)
 	}
 	return (NULL);
 }
+
+void	cut_dollar_sign(char *str)
+{
+	int i;
+	int length;
+
+	i = 0;
+	length = ft_strlen(str);
+	while (str[i + 1])
+	{
+		str[i] = str[i + 1];
+		i++;
+	}
+	length = length -1;
+	str[length] = '\0';
+}
+
 void    expand_env(t_env *head, t_node *root)
 {
 	t_node *ptr;
 	char	*str;
-	char	*new_text;
 	
 	if (!head || !root)
 		return ;
+	printf("c1\n");
 	ptr = do_i_have_to_expand(root);
 	if (!ptr)
 		return ;
+	printf("c2\n");
 	// remplacer ptr -> text par la value
 		// trouver la var qui correspond
 			// si strcmp(ptr -> text++, head -> text) == 1
@@ -322,9 +342,13 @@ void    expand_env(t_env *head, t_node *root)
 		// str = strcpy(la value de la var)
 		// ptr -> text free
 		// ptr -> text = str;
-	new_text = ptr -> txt++;
-	str = ft_strcpy(return_matching_value(head, new_text));
-	free(ptr -> txt);
+	printf("ptr before cut->%s\n", ptr -> txt);
+	cut_dollar_sign(ptr -> txt);
+	printf("ptr after cut->%s\n", ptr -> txt);
+	printf("c4\n");
+	str = ft_strcpy(return_matching_value(head, ptr -> txt));
+	// renvoi 0 car g pas enlevr $ dolalr rien match donc ecrit nul
+	//free(ptr -> txt); // segdault ici
 	ptr -> txt = str;
 }
 

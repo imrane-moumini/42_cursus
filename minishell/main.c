@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/21 21:21:52 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/23 15:23:13 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ int main(int argc, char *argv[], char *env[])
 	init_global_info_token(&info);
 	while (1)
     {
-        
-		
+        // ajout export aui lieu dejouter bob=ranger
+		// n'a pas expand
+		// quand je lance une deuxième commande ya un segfault
         input = readline("minishell> ");
 		root = parse_simple_command(input, &src, &info);
 		if (is_env_var(root))
@@ -44,7 +45,6 @@ int main(int argc, char *argv[], char *env[])
 		// afficher ast apres expand
 		expand_env(mini_env,root);
 		print_ast(root);
-        free(input);
         //free_node_tree(root);
     }
 
