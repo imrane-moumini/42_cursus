@@ -6,23 +6,22 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:06:18 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/24 22:52:32 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/24 23:39:48 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-void ft_free(t_env *mini_env, t_node *root, t_source *src, t_info_tok *tok) 
+void free_ast(t_node **root);
 {
-	t_env *ptr_env;
+	t_node *ptr_root;
 	t_node *ptr_node;
 	t_node *save;
-	t_env *save_env;
-	free(input);
-	// free node
-	if (root)
+	if (!root)
+		return ;
+	ptr_root = *root;
+	if (ptr_root)
 	{
-		ptr_node = root -> first_child;
+		ptr_node = ptr_root -> first_child;
 		if (ptr_node)
 		{
 			if (ptr_node -> next_sibling != NULL)
@@ -43,12 +42,17 @@ void ft_free(t_env *mini_env, t_node *root, t_source *src, t_info_tok *tok)
 				free(ptr_node);
 			}
 		}
-		ptr_node = NULL;
+		root = NULL;
 		
 	}
 	free(root);
 	root = NULL;
-	//free env
+}
+void free_env(t_env **mini_env)
+{
+	t_env *ptr_env;
+	t_env *save_env;
+
 	ptr_env = mini_env;
 	if (ptr_env)
 	{
@@ -68,6 +72,11 @@ void ft_free(t_env *mini_env, t_node *root, t_source *src, t_info_tok *tok)
 		free(ptr_env);
 		ptr_env = NULL;
 	}
+}
+void ft_free(t_env *mini_env, t_node *root, t_source *src, t_info_tok *tok) 
+{
+	free_ast(root)
+	free_env(mini_env);
 	free_src(src);
 	free_tok(tok);
 	free_info(info);
