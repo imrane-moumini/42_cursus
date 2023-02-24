@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:06:18 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/24 23:39:48 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/25 00:23:46 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ void free_env(t_env **mini_env)
 	t_env *ptr_env;
 	t_env *save_env;
 
-	ptr_env = mini_env;
+	if (!mini_env)
+		return ;
+	ptr_env = *mini_env;
 	if (ptr_env)
 	{
 		while (ptr_env -> next != NULL)
@@ -65,12 +67,11 @@ void free_env(t_env **mini_env)
 			free(ptr_env);
 			ptr_env = save;
 		}
-		// ajouter les sécuritées et mettre NULL
 		free(ptr_env -> txt);
 		free(ptr_env -> var_name);
 		free(ptr_env -> var_value);
 		free(ptr_env);
-		ptr_env = NULL;
+		mini_env = NULL;
 	}
 }
 void ft_free(t_env *mini_env, t_node *root, t_source *src, t_info_tok *tok) 
@@ -104,8 +105,7 @@ void free_src(t_source **src)
 		ptr = *src;
 		if (ptr)
 		{
-			if(ptr -> buffer)
-				free (ptr -> buffer);
+			free (ptr -> buffer);
 			free(ptr);
 		}
 		src = NULL;
@@ -135,11 +135,8 @@ void free_info_buf(t_info_tok **info)
 		ptr = *info
 		if (ptr)
 		{
-			if (ptr -> tok_buf)
-			{
-				free(ptr -> tok_buf);
-				ptr -> tok_buf = NULL;
-			}
+			free(ptr -> tok_buf);
+			ptr -> tok_buf = NULL;
 		}
 		info = NULL
 	}
