@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/18 16:43:41 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/24 21:05:54 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,13 @@ void	add_to_buf(char c, t_info_tok *info)
 
 void	free_token(t_token *tok)
 {
-	if(tok->text)
-        free(tok->text);
-    free(tok);
+	if (tok)
+	{
+		if(tok->text)
+        	free(tok->text);
+    	free(tok);
+		tok = NULL;
+	}
 }
 
 t_token	*tokenize(t_source *src, t_info_tok *info)
@@ -57,7 +61,6 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 	c = src -> buffer[src -> curpos];
 	while (c)
 	{
-		printf("c is =%c\n", c);
 		if (c == ' ' || c == '\t' || c == '\n')
 		{
 			if (info -> tok_bufindex != -1)
@@ -74,9 +77,7 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 		}
 		src -> curpos++;
 		c = src -> buffer[src -> curpos];
-		
 	}
-	printf("c after loop is =%c\n", c);
 	if (c == '\0' || c == '\n')
 	{
 		info -> tok_bufindex++;
@@ -84,7 +85,6 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 		src -> end_input = 1;
 	}
 	tok = create_token(info -> tok_buf, src, info);
-	printf("tok in tokenize =>%s\n", tok -> text);
 	return tok;
 }
 

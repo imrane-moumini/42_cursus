@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/21 21:06:20 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/24 21:12:03 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,25 +68,22 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 	init_node(root,NULL);
 	if (src -> end_input != 1)
 		tok = tokenize(src, info);
+	free_info_buf(info);
 	while (src -> exit != 1)
 	{	
 		printf("token in pars =%s\n", tok -> text);
 		node = new_node();
 		if (!node)
-		{
-			//free_node_tree(root);
-			free_token(tok);
 			return (NULL);
-		}
 		if (tok)
 		{
 			init_node(node, tok);
-			printf("node in pars => %s\n", node -> txt);
 			add_node(root, node);
 		}
-		free(info -> tok_buf);
+		free_info_buf(info);
 		init_global_info_token(info);
 		tok = tokenize(src, info);
+		free_info_buf(info);
 	}
 	return (root);
 }

@@ -101,5 +101,8 @@ void	init_struct_sign();
 
 /*builtin exit*/
 void ft_exit(t_env *mini_env,t_node *root);
+
+/*free*/
+void free_info_buf(t_info_tok *info);
 void ft_free(t_env *mini_env, t_node *root);
 #endif
