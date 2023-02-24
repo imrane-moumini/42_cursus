@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/24 21:12:03 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/24 21:51:08 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	init_node(t_node *node, t_token *tok)
 	node -> first_child = NULL;
 	node -> next_sibling = NULL;
 	node -> prev_sibling = NULL;
+	free_tok(tok);
 }
 
 void add_node(t_node *root, t_node *node)
@@ -71,7 +72,6 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 	free_info_buf(info);
 	while (src -> exit != 1)
 	{	
-		printf("token in pars =%s\n", tok -> text);
 		node = new_node();
 		if (!node)
 			return (NULL);

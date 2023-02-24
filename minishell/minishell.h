@@ -104,5 +104,15 @@ void ft_exit(t_env *mini_env,t_node *root);
 
 /*free*/
 void free_info_buf(t_info_tok *info);
+void free_src(t_source *src);
+void free_tok(t_token *tok);
 void ft_free(t_env *mini_env, t_node *root);
 #endif
+
+// free tok g mis au bon endroit
+//  free info_buff g mius au bon endroit
+
+
+// faut je creer free info
+// faut je mette free info au bon endroit
+//

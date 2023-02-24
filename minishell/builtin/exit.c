@@ -6,13 +6,13 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:33:31 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/24 21:10:05 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/24 22:00:06 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void ft_free(t_env *mini_env, t_node *root, char *input)
+void ft_free(t_env *mini_env, t_node *root, t_source *src, t_info_tok *tok) 
 {
 	t_env *ptr_env;
 	t_node *ptr_node;
@@ -61,6 +61,7 @@ void ft_free(t_env *mini_env, t_node *root, char *input)
 			free(ptr_env);
 			ptr_env = save;
 		}
+		// ajouter les sécuritées et mettre NULL
 		free(ptr_env -> txt);
 		free(ptr_env -> var_name);
 		free(ptr_env -> var_value);
@@ -68,17 +69,32 @@ void ft_free(t_env *mini_env, t_node *root, char *input)
 		ptr_env = NULL;
 	}
 	// free source_s;
+	
+	// free (token);
+		// faut hje fasse le leien entre tok et node pour savoir quand free
+		// voir init node et add node
+	// free info_tok
+	if ()
+}
+void free_src(t_source *src)
+{
 	if (src)
 	{
-		free (src -> buffer);
+		if(src -> buffer)
+			free (src -> buffer);
 		free(src);
 		src = NULL;
 	}
-	// free (token);
-	// free info_tok
-	
 }
-
+void free_tok(t_token *tok)
+{
+	if (tok)
+	{
+		free(tok -> text);
+		free(tok);
+		tok = NULL;
+	}
+}
 void free_info_buf(t_info_tok *info)
 {
 	if (info)
