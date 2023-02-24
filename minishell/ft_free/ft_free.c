@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:06:18 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/24 22:13:28 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/24 22:52:32 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,41 +68,70 @@ void ft_free(t_env *mini_env, t_node *root, t_source *src, t_info_tok *tok)
 		free(ptr_env);
 		ptr_env = NULL;
 	}
-	// free source_s;
-	
-	// free (token);
-		// faut hje fasse le leien entre tok et node pour savoir quand free
-		// voir init node et add node
-	// free info_tok
-	if ()
+	free_src(src);
+	free_tok(tok);
+	free_info(info);
 }
-void free_src(t_source *src)
+void free_info(t_info_tok **info)
 {
+	t_info_tok *ptr;
+	if (info)
+	{
+		ptr = *info;
+		if (ptr)
+		{
+			if (ptr -> tok_buf)
+				free(ptr -> tok_buf);
+			free(ptr)
+		}
+		info = NULL;
+	}
+}
+void free_src(t_source **src)
+{
+	t_source *ptr;
 	if (src)
 	{
-		if(src -> buffer)
-			free (src -> buffer);
-		free(src);
+		ptr = *src;
+		if (ptr)
+		{
+			if(ptr -> buffer)
+				free (ptr -> buffer);
+			free(ptr);
+		}
 		src = NULL;
 	}
 }
-void free_tok(t_token *tok)
+void free_tok(t_token **tok)
 {
+	t_token *ptr;
+	
 	if (tok)
 	{
-		free(tok -> text);
-		free(tok);
+		ptr = *tok;
+		if (ptr)
+		{
+			free(ptr-> text);
+			free(ptr);
+		}
 		tok = NULL;
 	}
 }
-void free_info_buf(t_info_tok *info)
+void free_info_buf(t_info_tok **info)
 {
+	t_info_tok *ptr;
+	
 	if (info)
 	{
-		if (info -> tok_buf)
+		ptr = *info
+		if (ptr)
 		{
-			free(info -> tok_buf);
-			info -> tok_buf = NULL;
+			if (ptr -> tok_buf)
+			{
+				free(ptr -> tok_buf);
+				ptr -> tok_buf = NULL;
+			}
 		}
+		info = NULL
 	}
 }
