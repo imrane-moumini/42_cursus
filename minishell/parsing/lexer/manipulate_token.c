@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/25 16:51:23 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/25 17:48:34 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,14 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 	}
     info -> tok_buf[0] = '\0';
 	printf ("c3.5.9\n");
+	printf("buffer is =>%s\n",src -> buffer);
+	printf("curpos is =>%li\n", src -> curpos);
+	printf("c with curpos is =>%c\n", src -> buffer[src -> curpos]);
 	c = src -> buffer[src -> curpos];
 	printf ("c3.5.10\n");
 	while (c)
 	{
+		printf("c is =>%c\n", c);
 		printf ("c3.5.11\n");
 		if (c == ' ' || c == '\t' || c == '\n')
 		{

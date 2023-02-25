@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/25 17:17:50 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/25 17:20:46 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 			return (NULL);
 		if (tok)
 		{
-			init_node(node, tok);
+			root = init_node(node, tok);
 			printf ("c3.9\n");
 			if (root)
 				printf ("c3.90\n");

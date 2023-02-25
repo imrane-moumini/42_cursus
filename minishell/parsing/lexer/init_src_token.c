@@ -6,12 +6,12 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 20:00:16 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/25 16:53:10 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/25 17:50:57 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
+// pb avec la valeur de src
 t_source	*init_src(t_source *src, char *input)
 {
 	src = malloc(sizeof(t_source));
