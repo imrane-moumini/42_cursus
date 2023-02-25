@@ -6,12 +6,12 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:06:18 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/25 14:57:08 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/25 16:08:58 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
-void free_ast(t_node **root);
+#include "../minishell.h"
+void free_ast(t_node **root)
 {
 	t_node *ptr_root;
 	t_node *ptr_node;
@@ -60,12 +60,12 @@ void free_env(t_env **mini_env)
 	{
 		while (ptr_env -> next != NULL)
 		{
-			save = ptr_env -> next;
+			save_env = ptr_env -> next;
 			free(ptr_env -> txt);
 			free(ptr_env -> var_name);
 			free(ptr_env -> var_value);
 			free(ptr_env);
-			ptr_env = save;
+			ptr_env = save_env;
 		}
 		free(ptr_env -> txt);
 		free(ptr_env -> var_name);
@@ -76,7 +76,7 @@ void free_env(t_env **mini_env)
 }
 void ft_free(t_env **mini_env, t_node **root, t_source **src, t_info_tok **info) 
 {
-	free_ast(root)
+	free_ast(root);
 	free_env(mini_env);
 	free_src(src);
 	free_info(info);
@@ -91,7 +91,7 @@ void free_info(t_info_tok **info)
 		{
 			if (ptr -> tok_buf)
 				free(ptr -> tok_buf);
-			free(ptr)
+			free(ptr);
 		}
 		info = NULL;
 	}
@@ -125,18 +125,17 @@ void free_tok(t_token **tok)
 		tok = NULL;
 	}
 }
-void free_info_buf(t_info_tok **info)
+void free_info_buf(t_info_tok *info)
 {
 	t_info_tok *ptr;
 	
 	if (info)
 	{
-		ptr = *info
+		ptr = info;
 		if (ptr)
 		{
 			free(ptr -> tok_buf);
 			ptr -> tok_buf = NULL;
 		}
-		info = NULL
 	}
 }

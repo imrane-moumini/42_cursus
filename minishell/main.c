@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/25 15:32:35 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/25 15:33:55 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ int main(int argc, char *argv[], char *env[])
     t_source *src;
     t_info_tok *info;
     t_node *root;
-	struct sigaction action_exit;
-	sigset_t	sigmask;
+	//struct sigaction action_exit;
+	//sigset_t	sigmask;
     (void)argc;
     (void)argv;
 
-	sigemptyset(&sigmask);
+	//sigemptyset(&sigmask);
 	mini_env = copy_env(env);
 	//print_env(mini_env);
     src = NULL;
 	info = NULL;
 	root = NULL;
 	
-	init_global_info_token(&info);
+	init_global_info_token(info);
 	
 	while (1)
     {

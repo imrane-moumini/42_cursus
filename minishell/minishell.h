@@ -103,7 +103,7 @@ void	init_struct_sign();
 void ft_exit(t_env **mini_env,t_node **root, t_source **src, t_info_tok **info);
 
 /*free*/
-void free_info_buf(t_info_tok **info);
+void free_info_buf(t_info_tok *info);
 void free_src(t_source **src);
 void free_tok(t_token **tok);
 void free_info(t_info_tok **info);

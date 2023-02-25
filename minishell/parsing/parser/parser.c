@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/25 15:10:43 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/25 15:35:48 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	init_node(t_node *node, t_token *tok)
 	node -> first_child = NULL;
 	node -> next_sibling = NULL;
 	node -> prev_sibling = NULL;
-	free_tok(tok);
 }
 
 void add_node(t_node *root, t_node *node)
