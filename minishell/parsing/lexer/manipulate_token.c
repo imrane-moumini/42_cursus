@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/25 17:48:34 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/25 20:31:19 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,38 +44,45 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 {
 	char c;
 	t_token *tok;
-	
-	printf ("c3.5.1\n");
+	printf("buff is in tokenize before loop =>%s\n", src -> buffer);
+	printf("curpos in tokenize before loop =>%li\n", src -> curpos);
+	//printf ("c3.5.1\n");
 	if (src -> end_input == 1)
 		src -> exit = 1;
-	printf ("c3.5.2\n");
+	//printf ("c3.5.2\n");
 	tok = NULL;
-	printf ("c3.5.3\n");
+	//printf ("c3.5.3\n");
 	if(!src || !src->buffer || !src->bufsize)
         return NULL;
-	printf ("c3.5.4\n");
+	//printf ("c3.5.4\n");
 	if (!(info -> tok_buf))
 	{
-		printf ("c3.5.5\n");
+		//printf ("c3.5.5\n");
 		info -> tok_bufsize = 1024;
-		printf ("c3.5.6\n");
+		//printf ("c3.5.6\n");
 		info -> tok_buf = malloc(info -> tok_bufsize);
-		printf ("c3.5.7\n");
+		//printf ("c3.5.7\n");
 		if (!(info -> tok_buf))
 			return NULL;
-		printf ("c3.5.8\n");
+		//printf ("c3.5.8\n");
 	}
     info -> tok_buf[0] = '\0';
-	printf ("c3.5.9\n");
-	printf("buffer is =>%s\n",src -> buffer);
-	printf("curpos is =>%li\n", src -> curpos);
-	printf("c with curpos is =>%c\n", src -> buffer[src -> curpos]);
+	//printf ("c3.5.9\n");
+	//printf("buffer is =>%s\n",src -> buffer);
+	//printf("curpos is =>%li\n", src -> curpos);
+	//printf("c with curpos is =>%c\n", src -> buffer[src -> curpos]);
 	c = src -> buffer[src -> curpos];
-	printf ("c3.5.10\n");
+	printf("buff is in tokenize before loop c=>%s\n", src -> buffer);
+	printf("curpos in tokenize before loop c =>%li\n", src -> curpos);
+	
+	//printf ("c3.5.10\n");
 	while (c)
 	{
-		printf("c is =>%c\n", c);
-		printf ("c3.5.11\n");
+		//printf("c is =>%c\n", c);
+		//printf ("c3.5.11\n");
+		printf("buff is in tokenize in loop =>%s\n", src -> buffer);
+		printf("curpos in tokenize in loop =>%li\n", src -> curpos);
+		printf("c before if is =>%c\n", c);
 		if (c == ' ' || c == '\t' || c == '\n')
 		{
 			printf ("c3.5.12\n");
@@ -113,7 +120,10 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 		printf ("c3.5.24\n");
 	}
 	tok = create_token(info -> tok_buf, src, info);
-	printf ("c3.5.25\n");
+	printf("buff is in tokenize in loop after create=>%s\n", src -> buffer);
+	printf("curpos in tokenize in loop after create=>%li\n", src -> curpos);
+	exit (1);
+	//printf ("c3.5.25\n");
 	return tok;
 }
 
