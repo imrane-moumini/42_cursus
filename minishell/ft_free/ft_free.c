@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:06:18 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/25 00:23:46 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/25 14:57:08 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,11 @@ void free_env(t_env **mini_env)
 		mini_env = NULL;
 	}
 }
-void ft_free(t_env *mini_env, t_node *root, t_source *src, t_info_tok *tok) 
+void ft_free(t_env **mini_env, t_node **root, t_source **src, t_info_tok **info) 
 {
 	free_ast(root)
 	free_env(mini_env);
 	free_src(src);
-	free_tok(tok);
 	free_info(info);
 }
 void free_info(t_info_tok **info)
