@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/25 16:56:10 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/25 17:17:50 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,29 @@ void add_node(t_node *root, t_node *node)
 {
 	t_node *ptr;
 	t_node *prev;
-	
+	printf("c3.9.1\n");
 	if (root -> first_child == NULL)
+	{
 		root -> first_child = node;
+		printf("c3.9.2\n");
+	}
 	else
 	{
+		printf("c3.9.3\n");
 		ptr = root -> first_child;
+		printf("c3.9.4\n");
 		while (ptr != NULL)
 		{
+			printf("c3.9.5\n");
 			prev = ptr;
+			printf("c3.9.6\n");
 			ptr = ptr -> next_sibling;
+			printf("c3.9.7\n");
 		}
 		prev -> next_sibling = node;
+		printf("c3.9.8\n");
 		node -> prev_sibling = prev;
+		printf("c3.9.9\n");
 	}
 }
 t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
@@ -88,6 +98,10 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 		{
 			init_node(node, tok);
 			printf ("c3.9\n");
+			if (root)
+				printf ("c3.90\n");
+			if (node)
+				printf ("c3.91\n");
 			add_node(root, node);
 			printf ("c3.10\n");
 			free_tok(&tok);
