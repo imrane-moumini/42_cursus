@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/23 18:34:38 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/25 17:03:27 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,27 @@ t_env	*new_node_env(void)
 t_env   *add_node_env(t_env *head)
 {
 	t_env *ptr;
-
+	printf("c3.9.1\n");
 	if (!head)
 		return (NULL);
+	printf("c3.9.2\n");
 	ptr = head;
+	printf("c3.9.3\n");
 	if (head -> next == NULL)
 	{
+		printf("c3.9.4\n");
 		head -> next = new_node_env();
+		printf("c3.9.5\n");
 		return (head);
 	}
 	else
 	{
+		printf("c3.9.6\n");
 		while (ptr -> next != NULL)
 			ptr = ptr -> next;
+		printf("c3.9.7\n");
 		ptr -> next = new_node_env();
+		printf("c3.9.8\n");
 	}
 	return (head);
 }

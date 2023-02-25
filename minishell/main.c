@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/25 15:33:55 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/25 16:52:38 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,18 @@ int main(int argc, char *argv[], char *env[])
 	
 	while (1)
     {
-        // ajout export aui lieu dejouter bob=ranger
-		// n'a pas expand
-		// quand je lance une deuxième commande ya un segfault
-		init_global_info_token(info);
+		printf("c1\n");
+		info = init_global_info_token(info);
+		printf("c2\n");
         input = readline("minishell> ");
+		printf("c3\n");
 		root = parse_simple_command(input, src, info);
+		printf("c4\n");
 		ft_exit(&mini_env, &root, &src, &info);
+		printf("c5\n");
 		if (is_env_var(root))
 			insert_input_env(mini_env, root);
+		printf("c6\n");
 		 // afficher env apres que j'ai ajouté var env
         printf("----------------------\n");
 		print_env(mini_env);

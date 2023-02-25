@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/24 21:05:54 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/25 16:51:23 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,46 +45,71 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 	char c;
 	t_token *tok;
 	
+	printf ("c3.5.1\n");
 	if (src -> end_input == 1)
 		src -> exit = 1;
+	printf ("c3.5.2\n");
 	tok = NULL;
+	printf ("c3.5.3\n");
 	if(!src || !src->buffer || !src->bufsize)
         return NULL;
+	printf ("c3.5.4\n");
 	if (!(info -> tok_buf))
 	{
+		printf ("c3.5.5\n");
 		info -> tok_bufsize = 1024;
+		printf ("c3.5.6\n");
 		info -> tok_buf = malloc(info -> tok_bufsize);
+		printf ("c3.5.7\n");
 		if (!(info -> tok_buf))
 			return NULL;
+		printf ("c3.5.8\n");
 	}
     info -> tok_buf[0] = '\0';
+	printf ("c3.5.9\n");
 	c = src -> buffer[src -> curpos];
+	printf ("c3.5.10\n");
 	while (c)
 	{
+		printf ("c3.5.11\n");
 		if (c == ' ' || c == '\t' || c == '\n')
 		{
+			printf ("c3.5.12\n");
 			if (info -> tok_bufindex != -1)
 			{
+				printf ("c3.5.13\n");
 				info -> tok_bufindex++;
+				printf ("c3.5.14\n");
 				info -> tok_buf[info -> tok_bufindex] = '\0';
+				printf ("c3.5.15\n");
 				break;	
 			}
 		}
 		else
 		{
+			printf ("c3.5.16\n");
 			info -> tok_bufindex++;
+			printf ("c3.5.17\n");
 			add_to_buf(c, info);
+			printf ("c3.5.18\n");
 		}
 		src -> curpos++;
+		printf ("c3.5.19\n");
 		c = src -> buffer[src -> curpos];
+		printf ("c3.5.20\n");
 	}
 	if (c == '\0' || c == '\n')
 	{
+		printf ("c3.5.21\n");
 		info -> tok_bufindex++;
+		printf ("c3.5.22\n");
 		info -> tok_buf[info -> tok_bufindex] = '\0';
+		printf ("c3.5.23\n");
 		src -> end_input = 1;
+		printf ("c3.5.24\n");
 	}
 	tok = create_token(info -> tok_buf, src, info);
+	printf ("c3.5.25\n");
 	return tok;
 }
 

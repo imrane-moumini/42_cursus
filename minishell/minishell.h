@@ -59,10 +59,10 @@ char	next_char(t_source *src); // return the next char et avance de 1 car dans l
 void	unget_char(t_source *src); // recule de 1 car dans linput
 char	peek_char(t_source *src); // return le next char sans update pos 
 void	skip_white_spaces(t_source *src);
-void	init_src(t_source *src, char *input); // init input struct
+t_source	*init_src(t_source *src, char *input); // init input struct
 
 /* manipulate the token*/
-void init_global_info_token(t_info_tok *info);
+t_info_tok *init_global_info_token(t_info_tok *info);
 t_token	*tokenize(t_source *src, t_info_tok *info);
 void	free_token(t_token *tok);
 void	add_to_buf(char c, t_info_tok *info);
@@ -71,7 +71,7 @@ t_token	*create_token(char *str , t_source *src, t_info_tok *info);
 /* parsing*/
 t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info);
 t_node *new_node(void);
-void	init_node(t_node *node, t_token *tok);
+t_node	*init_node(t_node *node, t_token *tok);
 void	add_node(t_node *root, t_node *node);
 void    print_ast(t_node *node);
 
