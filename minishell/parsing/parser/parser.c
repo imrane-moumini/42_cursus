@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/24 21:51:08 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/25 15:10:43 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 		{
 			init_node(node, tok);
 			add_node(root, node);
+			free_tok(&tok);
 		}
 		free_info_buf(info);
 		init_global_info_token(info);

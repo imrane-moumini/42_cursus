@@ -7,7 +7,8 @@ SRC = main.c \
 	parsing/parser/parser.c \
 	parsing/parser/manip_env.c \
 	signaux/signal.c \
-	builtin/exit.c
+	builtin/exit.c \
+	ft_free/ft_free.c
 
 OBJ = $(SRC:%.c=%.o) 
 

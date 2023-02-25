@@ -100,19 +100,14 @@ int     is_nbr(char c);
 void	init_struct_sign();
 
 /*builtin exit*/
-void ft_exit(t_env *mini_env,t_node *root);
+void ft_exit(t_env **mini_env,t_node **root, t_source **src, t_info_tok **info);
 
 /*free*/
-void free_info_buf(t_info_tok *info);
-void free_src(t_source *src);
-void free_tok(t_token *tok);
-void ft_free(t_env *mini_env, t_node *root);
+void free_info_buf(t_info_tok **info);
+void free_src(t_source **src);
+void free_tok(t_token **tok);
+void free_info(t_info_tok **info);
+void free_ast(t_node **root);
+void free_env(t_env **mini_env);
+void ft_free(t_env **mini_env, t_node **root, t_source **src, t_info_tok **info);
 #endif
-
-// free tok g mis au bon endroit
-//  free info_buff g mius au bon endroit
-
-
-// faut je creer free info
-// faut je mette free info au bon endroit
-//
