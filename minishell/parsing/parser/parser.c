@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/26 19:37:14 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/26 20:31:51 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 t_node	*new_node(t_token *tok)
 {
 	t_node *node;
+	if (tok)
+		printf("node in tok is =>%s\n",tok -> text);
 	node = malloc(sizeof(t_node));
 	if (tok)
 		node -> txt = tok -> text;
@@ -25,7 +27,7 @@ t_node	*new_node(t_token *tok)
 	return (node);
 }
 
-void add_node_to_ast(t_node *root, t_node *node)
+t_node *add_node_to_ast(t_node *root, t_node *node)
 {
 	t_node *ptr;
 	t_node *prev;
@@ -34,13 +36,16 @@ void add_node_to_ast(t_node *root, t_node *node)
 	{
 		root -> first_child = node;
 		//printf("c3.9.2\n");
+		printf("i am root\n");
+		printf("%s\n",node -> txt);
 	}
 	else
 	{
 		//printf("c3.9.3\n");
 		ptr = root -> first_child;
+		prev = ptr;
 		//printf("c3.9.4\n");
-		while (ptr != NULL)
+		while (ptr -> next_sibling != NULL)
 		{
 			//printf("c3.9.5\n");
 			prev = ptr;
@@ -48,11 +53,18 @@ void add_node_to_ast(t_node *root, t_node *node)
 			ptr = ptr -> next_sibling;
 			//printf("c3.9.7\n");
 		}
+		printf("im child\n");
+		printf("%s\n",node -> txt);
 		prev -> next_sibling = node;
 		//printf("c3.9.8\n");
 		node -> prev_sibling = prev;
 		//printf("c3.9.9\n");
 	}
+	printf("--------------------\n");
+	printf("ast in add to ast is \n");
+	print_ast(root);
+	printf("--------------------\n");
+	return (root);
 }
 t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 {
@@ -93,7 +105,7 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 				printf ("c3.90\n");
 			if (node)
 				printf ("c3.91\n");
-			add_node_to_ast(root, node);
+			root = add_node_to_ast(root, node);
 			printf ("c3.10\n");
 			free_tok(&tok);
 			printf ("c3.11\n");
@@ -108,6 +120,9 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 		free_info_buf(info);
 		//printf ("c3.16\n");
 	}
+	printf("----------------------\n");
+	printf("txt of fisrt child =>%s\n", root -> first_child -> txt);
+	printf("----------------------\n");
 	return (root);
 }
 
