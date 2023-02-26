@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/26 18:14:12 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/26 19:02:59 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ void	add_to_buf(char c, t_info_tok *info)
 {
 	char *tmp;
 	
+	printf("c in add to buf is =>%c\n",c);
+	printf("tok buff index in add is =>%i\n", info -> tok_bufindex);
 	if (info -> tok_bufindex >= info -> tok_bufsize)
 	{
-		tmp = malloc(sizeof(char) * (info -> tok_bufsize *2));
+		tmp = ft_calloc((info -> tok_bufsize *2), sizeof(char));
 		if (!tmp)
 			return ;
-		ft_strlcpy(tmp, info -> tok_buf, info -> tok_bufsize);
+		ft_strlcpy(tmp, info -> tok_buf, ft_strlen(info -> tok_buf));
 		free(info -> tok_buf);
 		info -> tok_buf = tmp;
 		info -> tok_bufsize = info -> tok_bufsize * 2;
@@ -60,7 +62,7 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 		//printf ("c3.5.5\n");
 		info -> tok_bufsize = 1024;
 		//printf ("c3.5.6\n");
-		info -> tok_buf = malloc(info -> tok_bufsize);
+		info -> tok_buf = ft_calloc(info -> tok_bufsize, sizeof(char));
 		//printf ("c3.5.7\n");
 		if (!(info -> tok_buf))
 			return NULL;
@@ -92,6 +94,7 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 				info -> tok_bufindex++;
 				printf ("c3.5.14\n");
 				info -> tok_buf[info -> tok_bufindex] = '\0';
+				printf("onfo tok_buf is =>%s\n", info -> tok_buf);
 				src -> curpos++;
 				printf ("c3.5.15\n");
 				break;	
@@ -103,6 +106,7 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 			info -> tok_bufindex++;
 			printf ("c3.5.17\n");
 			add_to_buf(c, info);
+			printf("buff after add is =>%s\n", info -> tok_buf);
 			printf ("c3.5.18\n");
 		}
 		src -> curpos++;
@@ -121,10 +125,12 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 		printf ("c3.5.24\n");
 	}
 	tok = create_token(info -> tok_buf, src, info);
+	info -> tok_bufindex = -1;
+	printf("tok is => %s\n", tok -> text);
 	printf("buff is in tokenize in loop after create=>%s\n", src -> buffer);
 	printf("curpos in tokenize in loop after create=>%li\n", src -> curpos);
-	// tema pk le chiffre change 
-	// tema pk src plus le droit
+	// buf pas bonne valeur a la fin
+	// ne se colle pas entre eux
 	//exit (1);
 	//printf ("c3.5.25\n");
 	return tok;
