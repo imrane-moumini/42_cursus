@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/25 16:52:38 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/26 18:17:43 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int main(int argc, char *argv[], char *env[])
         input = readline("minishell> ");
 		printf("c3\n");
 		root = parse_simple_command(input, src, info);
+		print_ast(root);
 		printf("c4\n");
 		ft_exit(&mini_env, &root, &src, &info);
 		printf("c5\n");

@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/25 20:31:19 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/26 18:14:12 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 	c = src -> buffer[src -> curpos];
 	printf("buff is in tokenize before loop c=>%s\n", src -> buffer);
 	printf("curpos in tokenize before loop c =>%li\n", src -> curpos);
-	
+
 	//printf ("c3.5.10\n");
 	while (c)
 	{
@@ -92,6 +92,7 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 				info -> tok_bufindex++;
 				printf ("c3.5.14\n");
 				info -> tok_buf[info -> tok_bufindex] = '\0';
+				src -> curpos++;
 				printf ("c3.5.15\n");
 				break;	
 			}
@@ -122,7 +123,9 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 	tok = create_token(info -> tok_buf, src, info);
 	printf("buff is in tokenize in loop after create=>%s\n", src -> buffer);
 	printf("curpos in tokenize in loop after create=>%li\n", src -> curpos);
-	exit (1);
+	// tema pk le chiffre change 
+	// tema pk src plus le droit
+	//exit (1);
 	//printf ("c3.5.25\n");
 	return tok;
 }
