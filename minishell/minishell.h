@@ -70,9 +70,8 @@ t_token	*create_token(char *str , t_source *src, t_info_tok *info);
 
 /* parsing*/
 t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info);
-t_node *new_node(void);
-t_node	*init_node(t_node *node, t_token *tok);
-void	add_node(t_node *root, t_node *node);
+t_node	*new_node(t_token *tok);
+void	add_node_to_ast(t_node *root, t_node *node);
 void    print_ast(t_node *node);
 
 /*env*/

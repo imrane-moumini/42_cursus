@@ -6,24 +6,15 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/25 20:23:26 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/26 19:37:14 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_node *new_node(void)
+t_node	*new_node(t_token *tok)
 {
 	t_node *node;
-
-	node = malloc(sizeof(t_node));
-	if (!node)
-		return (NULL);
-	return node;
-}
-
-t_node	*init_node(t_node *node, t_token *tok)
-{
 	node = malloc(sizeof(t_node));
 	if (tok)
 		node -> txt = tok -> text;
@@ -34,7 +25,7 @@ t_node	*init_node(t_node *node, t_token *tok)
 	return (node);
 }
 
-void add_node(t_node *root, t_node *node)
+void add_node_to_ast(t_node *root, t_node *node)
 {
 	t_node *ptr;
 	t_node *prev;
@@ -72,16 +63,15 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 	if (!input)
 		return (NULL);
 	src = init_src(src, input);
-	printf("buff is in parse =>%s\n", src -> buffer);
-	printf("=>curpos in parse %li\n", src -> curpos);
+	//printf("buff is in parse =>%s\n", src -> buffer);
+	//printf("=>curpos in parse %li\n", src -> curpos);
 	//printf ("c3.2\n");
 	info = init_global_info_token(info);
 	//printf ("c3.3\n");
-	root = new_node();
 	//printf ("c3.4\n");
+	root = new_node(NULL);
 	if (!root)
 		return (NULL);
-	root = init_node(root,NULL);
 	if (src -> end_input != 1)
 	{
 		//printf ("c3.5\n");
@@ -92,22 +82,21 @@ t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 	//printf ("c3.7\n");
 	while (src -> exit != 1)
 	{	
-		node = new_node();
-		//printf ("c3.8\n");
-		if (!node)
-			return (NULL);
 		if (tok)
 		{
-			root = init_node(node, tok);
+			node = new_node(tok);
+			if (!node)
+				return (NULL);
+			printf ("c3.8\n");
 			//printf ("c3.9\n");
 			if (root)
-				//printf ("c3.90\n");
+				printf ("c3.90\n");
 			if (node)
-				//printf ("c3.91\n");
-			add_node(root, node);
-			//printf ("c3.10\n");
+				printf ("c3.91\n");
+			add_node_to_ast(root, node);
+			printf ("c3.10\n");
 			free_tok(&tok);
-			//printf ("c3.11\n");
+			printf ("c3.11\n");
 		}
 		//printf ("c3.12\n");
 		free_info_buf(info);
