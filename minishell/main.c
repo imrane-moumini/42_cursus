@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/26 18:17:43 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/27 21:59:38 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,7 @@ int main(int argc, char *argv[], char *env[])
 // faire function qui free tous les alloc
 // export sans option
 
-// question mathieu
-	// comment t'as fait ça on a pas le droit de faire
-	// comment on fait historique
-	// c'est quoi les histoires de guillemets
-	// comment on reconnait leak readline comparé aux autres
+
+// quand ya pas despace avec le $a ça bug
+// quand je met que un seul truc en fait ça segfault
 }

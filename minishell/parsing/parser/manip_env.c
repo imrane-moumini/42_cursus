@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/26 19:25:45 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/27 22:00:07 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,13 +213,18 @@ int     is_nbr(char c)
 }
 int     is_env_var(t_node *root)
 {
-
+	printf("5.1\n");
 	if (!root)
 		return (0);
+	printf("5.2\n");
+	// faire solution pour fonctionne même si ya que 1 argument
 	if (is_nbr(root -> first_child -> next_sibling -> txt[0]) == 0)
 		ft_printf("export : '%s' is not a valid identifier\n",root -> first_child -> next_sibling -> txt );
+	// ici mettre boucle while pour que ça fonctionne
+	printf("5.3\n");
 	if (ft_stcmp(root -> first_child -> txt, "export") && (is_nbr(root -> first_child -> next_sibling -> txt[0]) == 0))
 		return (1);
+	printf("5.4\n");
 	return (0);
 }
 char	*extract_name(char *str)
@@ -292,16 +297,26 @@ void    insert_input_env(t_env *head, t_node *root)
 	char *env_input;
 	t_env	*last_node;
 	
+	printf("5.5\n");
 	if (!head || !root)
 		return ;
+	printf("5.6\n");
 	env_input = ft_strcpy_env(root -> first_child -> next_sibling -> txt);
+	printf("5.7\n");
 	var_env_name = extract_name(root -> first_child -> txt);
+	printf("5.8\n");
 	var_env_value = extract_value(root -> first_child -> txt);
+	printf("5.9\n");
 	add_node_env(head);
+	printf("5.10\n");
 	last_node = last_env_node(head);
+	printf("5.11\n");
 	last_node -> var_name = var_env_name;
+	printf("5.12\n");
 	last_node -> var_value = var_env_value;
+	printf("5.13\n");
 	last_node -> txt = env_input;
+	printf("5.14\n");
 }
 t_node		*do_i_have_to_expand(t_node *root)
 {

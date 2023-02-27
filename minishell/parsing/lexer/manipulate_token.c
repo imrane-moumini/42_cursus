@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/26 19:14:26 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/27 21:40:51 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	add_to_buf(char c, t_info_tok *info)
 {
 	char *tmp;
 	
-	//printf("c in add to buf is =>%c\n",c);
-	//printf("tok buff index in add is =>%i\n", info -> tok_bufindex);
 	if (info -> tok_bufindex >= info -> tok_bufsize)
 	{
 		tmp = ft_calloc((info -> tok_bufsize *2), sizeof(char));
@@ -46,93 +44,49 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 {
 	char c;
 	t_token *tok;
-	//printf("buff is in tokenize before loop =>%s\n", src -> buffer);
-	//printf("curpos in tokenize before loop =>%li\n", src -> curpos);
-	//printf ("c3.5.1\n");
+
 	if (src -> end_input == 1)
 		src -> exit = 1;
-	//printf ("c3.5.2\n");
 	tok = NULL;
-	//printf ("c3.5.3\n");
 	if(!src || !src->buffer || !src->bufsize)
         return NULL;
-	//printf ("c3.5.4\n");
 	if (!(info -> tok_buf))
 	{
-		//printf ("c3.5.5\n");
 		info -> tok_bufsize = 1024;
-		//printf ("c3.5.6\n");
 		info -> tok_buf = ft_calloc(info -> tok_bufsize, sizeof(char));
-		//printf ("c3.5.7\n");
 		if (!(info -> tok_buf))
 			return NULL;
-		//printf ("c3.5.8\n");
 	}
     info -> tok_buf[0] = '\0';
-	//printf ("c3.5.9\n");
-	//printf("buffer is =>%s\n",src -> buffer);
-	//printf("curpos is =>%li\n", src -> curpos);
-	//printf("c with curpos is =>%c\n", src -> buffer[src -> curpos]);
 	c = src -> buffer[src -> curpos];
-	//printf("buff is in tokenize before loop c=>%s\n", src -> buffer);
-	//printf("curpos in tokenize before loop c =>%li\n", src -> curpos);
-
-	//printf ("c3.5.10\n");
 	while (c)
 	{
-		//printf("c is =>%c\n", c);
-		//printf ("c3.5.11\n");
-		//printf("buff is in tokenize in loop =>%s\n", src -> buffer);
-		//printf("curpos in tokenize in loop =>%li\n", src -> curpos);
-		//printf("c before if is =>%c\n", c);
 		if (c == ' ' || c == '\t' || c == '\n')
 		{
-			//printf ("c3.5.12\n");
 			if (info -> tok_bufindex != -1)
 			{
-				//printf ("c3.5.13\n");
 				info -> tok_bufindex++;
-				//printf ("c3.5.14\n");
 				info -> tok_buf[info -> tok_bufindex] = '\0';
-				//printf("onfo tok_buf is =>%s\n", info -> tok_buf);
 				src -> curpos++;
-				//printf ("c3.5.15\n");
 				break;	
 			}
 		}
 		else
 		{
-			//printf ("c3.5.16\n");
 			info -> tok_bufindex++;
-			//printf ("c3.5.17\n");
 			add_to_buf(c, info);
-			//printf("buff after add is =>%s\n", info -> tok_buf);
-			//printf ("c3.5.18\n");
 		}
 		src -> curpos++;
-		//printf ("c3.5.19\n");
 		c = src -> buffer[src -> curpos];
-		//printf ("c3.5.20\n");
 	}
 	if (c == '\0' || c == '\n')
 	{
-		//printf ("c3.5.21\n");
 		info -> tok_bufindex++;
-		//printf ("c3.5.22\n");
 		info -> tok_buf[info -> tok_bufindex] = '\0';
-		//printf ("c3.5.23\n");
 		src -> end_input = 1;
-		//printf ("c3.5.24\n");
 	}
 	tok = create_token(info -> tok_buf, src, info);
 	info -> tok_bufindex = -1;
-	//printf("tok is => %s\n", tok -> text);
-	//printf("buff is in tokenize in loop after create=>%s\n", src -> buffer);
-	//printf("curpos in tokenize in loop after create=>%li\n", src -> curpos);
-	// buf pas bonne valeur a la fin
-	// ne se colle pas entre eux
-	//exit (1);
-	//printf ("c3.5.25\n");
 	return tok;
 }
 
