@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/26 20:52:14 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/27 21:22:07 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_node	*new_node(t_token *tok)
 		printf("node in tok is =>%s\n",tok -> text);
 	node = malloc(sizeof(t_node));
 	if (tok)
-		node -> txt = tok -> text;
+		node -> txt = ft_strcpy((tok -> text));
 	node -> children = 0;
 	node -> first_child = NULL;
 	node -> next_sibling = NULL;
@@ -48,9 +48,8 @@ t_node *add_node_to_ast(t_node *root, t_node *node)
 		//printf("c3.9.3\n");
 		ptr = root -> first_child;
 		printf("ptr first child is =>%s\n", ptr -> txt);
-		prev = ptr;
 		//printf("c3.9.4\n");
-		while (ptr -> next_sibling != NULL)
+		while (ptr != NULL)
 		{
 			//printf("c3.9.5\n");
 			printf("im here\n");
@@ -70,7 +69,10 @@ t_node *add_node_to_ast(t_node *root, t_node *node)
 	printf("ast in add to ast is \n");
 	print_ast(root);
 	printf("--------------------\n");
+	if (root)
+		printf("root before return %s\n", root -> first_child -> txt);
 	return (root);
+	// pk root deviens null après l'appel
 }
 t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info)
 {
