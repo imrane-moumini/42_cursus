@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/27 22:00:07 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/27 22:54:05 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,21 +211,27 @@ int     is_nbr(char c)
 		return (1);
 	return (0);
 }
-int     is_env_var(t_node *root)
+void     is_env_var(t_env *mini_env, t_node *root)
 {
+	t_node *ptr;
 	printf("5.1\n");
 	if (!root)
-		return (0);
+		return ;
 	printf("5.2\n");
 	// faire solution pour fonctionne même si ya que 1 argument
-	if (is_nbr(root -> first_child -> next_sibling -> txt[0]) == 0)
-		ft_printf("export : '%s' is not a valid identifier\n",root -> first_child -> next_sibling -> txt );
-	// ici mettre boucle while pour que ça fonctionne
-	printf("5.3\n");
-	if (ft_stcmp(root -> first_child -> txt, "export") && (is_nbr(root -> first_child -> next_sibling -> txt[0]) == 0))
-		return (1);
-	printf("5.4\n");
-	return (0);
+	// mettre tout ça dans une boucle while
+	ptr = root -> first_child;
+	if (ptr)
+	{
+		if (is_nbr(ptr -> txt[0] == 0))
+		{
+			ft_printf("export : '%s' is not a valid identifier\n",ptr -> txt);
+			return ;
+		}
+		if (ft_stcmp(ptr -> txt, "export") && (ptr -> next_sibling != NULL))
+			insert_input_env(mini_env, root);
+		ptr = ptr -> next_sibling;
+	}
 }
 char	*extract_name(char *str)
 {
@@ -300,12 +306,16 @@ void    insert_input_env(t_env *head, t_node *root)
 	printf("5.5\n");
 	if (!head || !root)
 		return ;
+	if ((root -> first_child == NULL))
+		return ;
+	if ((root -> first_child -> next_sibling == NULL))
+		return ;
 	printf("5.6\n");
 	env_input = ft_strcpy_env(root -> first_child -> next_sibling -> txt);
 	printf("5.7\n");
-	var_env_name = extract_name(root -> first_child -> txt);
+	var_env_name = extract_name(root -> first_child -> next_sibling -> txt);
 	printf("5.8\n");
-	var_env_value = extract_value(root -> first_child -> txt);
+	var_env_value = extract_value(root -> first_child -> next_sibling -> txt);
 	printf("5.9\n");
 	add_node_env(head);
 	printf("5.10\n");
@@ -318,13 +328,13 @@ void    insert_input_env(t_env *head, t_node *root)
 	last_node -> txt = env_input;
 	printf("5.14\n");
 }
-t_node		*do_i_have_to_expand(t_node *root)
+t_node		*do_i_have_to_expand(t_node *node)
 {
 	t_node *ptr;
 	
-	if (!root)
+	if (!node)
 		return (NULL);
-	ptr = root -> first_child;
+	ptr = node;
 	while (ptr != NULL)
 	{
 		if (ptr -> txt[0] == '$')
@@ -368,16 +378,25 @@ void	cut_dollar_sign(char *str)
 void    expand_env(t_env *head, t_node *root)
 {
 	t_node *ptr;
+	t_node *expand;
 	char	*str;
 	
 	if (!head || !root)
 		return ;
-	ptr = do_i_have_to_expand(root);
-	if (!ptr)
-		return ;
-	cut_dollar_sign(ptr -> txt);
-	str = ft_strcpy(return_matching_value(head, ptr -> txt));
-	free(ptr -> txt);
-	ptr -> txt = str;
+	// mettre tout ça dans une boucle while
+	
+	ptr = root -> first_child;
+	while (ptr)
+	{
+		expand = do_i_have_to_expand(ptr);
+		if (expand)
+		{
+			cut_dollar_sign(expand -> txt);
+			str = ft_strcpy(return_matching_value(head, expand -> txt));
+			free(expand -> txt);
+			expand -> txt = str;
+		}
+		ptr = ptr -> next_sibling;
+	}
 }
 

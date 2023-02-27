@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/27 21:59:38 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/27 22:24:40 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ int main(int argc, char *argv[], char *env[])
 		printf("c4\n");
 		ft_exit(&mini_env, &root, &src, &info);
 		printf("c5\n");
-		if (is_env_var(root))
-			insert_input_env(mini_env, root);
+		is_env_var(mini_env, root);
 		printf("c6\n");
 		 // afficher env apres que j'ai ajouté var env
         printf("----------------------\n");
@@ -56,6 +55,7 @@ int main(int argc, char *argv[], char *env[])
 		print_ast(root);
 		printf("----------------------\n");
 		// afficher ast apres expand
+		// c dans expand que je dois mettre la boucle
 		expand_env(mini_env,root);
 		print_ast(root);
 		ft_free(NULL, &root, &src,&info);

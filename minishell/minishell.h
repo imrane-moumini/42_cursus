@@ -79,7 +79,7 @@ t_env   *copy_env(char *original[]);
 t_env   *add_node_env(t_env *head);
 t_env   *new_node_env(void);
 void    print_env(t_env *head);
-int     is_env_var(t_node *root);
+void     is_env_var(t_env *mini_env, t_node *root);
 void    insert_input_env(t_env *head, t_node *root);
 void    expand_env(t_env *head, t_node *root);
 char    *ft_strcpy(char *str);
