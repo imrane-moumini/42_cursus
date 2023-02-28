@@ -59,17 +59,17 @@ char	next_char(t_source *src); // return the next char et avance de 1 car dans l
 void	unget_char(t_source *src); // recule de 1 car dans linput
 char	peek_char(t_source *src); // return le next char sans update pos 
 void	skip_white_spaces(t_source *src);
-t_source	*init_src(t_source *src, char *input); // init input struct
+t_source	**init_src(t_source **src, char *input); // init input struct
 
 /* manipulate the token*/
-t_info_tok *init_global_info_token(t_info_tok *info);
+t_info_tok **init_global_info_token(t_info_tok **info);
 t_token	*tokenize(t_source *src, t_info_tok *info);
 void	free_token(t_token *tok);
 void	add_to_buf(char c, t_info_tok *info);
 t_token	*create_token(char *str , t_source *src, t_info_tok *info);
 
 /* parsing*/
-t_node *parse_simple_command(char *input, t_source *src, t_info_tok *info);
+t_node *parse_simple_command(char *input, t_source **src, t_info_tok **info);
 t_node	*new_node(t_token *tok);
 t_node	*add_node_to_ast(t_node *root, t_node *node);
 void    print_ast(t_node *node);
@@ -79,7 +79,7 @@ t_env   *copy_env(char *original[]);
 t_env   *add_node_env(t_env *head);
 t_env   *new_node_env(void);
 void    print_env(t_env *head);
-void     is_env_var(t_env *mini_env, t_node *root);
+void    is_env_var(t_env *mini_env, t_node *root);
 void    insert_input_env(t_env *head, t_node *root);
 void    expand_env(t_env *head, t_node *root);
 char    *ft_strcpy(char *str);

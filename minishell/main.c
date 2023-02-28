@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/27 23:04:14 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/28 21:33:19 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,14 @@ int main(int argc, char *argv[], char *env[])
 	info = NULL;
 	root = NULL;
 	
-	init_global_info_token(info);
 	
 	while (1)
     {
 		printf("c1\n");
-		info = init_global_info_token(info);
 		printf("c2\n");
         input = readline("minishell> ");
 		printf("c3\n");
-		root = parse_simple_command(input, src, info);
+		root = parse_simple_command(input, &src, &info);
 		print_ast(root);
 		printf("c4\n");
 		ft_exit(&mini_env, &root, &src, &info);
