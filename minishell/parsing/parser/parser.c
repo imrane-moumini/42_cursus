@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/28 21:50:55 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/28 22:00:52 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_node *parse_simple_command(char *input, t_source **src, t_info_tok **info)
 		return (NULL);
 	if (src_ft -> end_input != 1)
 		tok = tokenize(src_ft, info_ft);
-	free_info_buf(info_ft);
+	free_info(info);
 	while (src_ft -> exit != 1)
 	{	
 		if (tok)
@@ -74,15 +74,15 @@ t_node *parse_simple_command(char *input, t_source **src, t_info_tok **info)
 			if (!node)
 				return (NULL);
 			root = add_node_to_ast(root, node);
+			free_info(info);
 			free_tok(&tok);
 		}
-		free_info_buf(info_ft);
 		info = init_global_info_token(info);
 		info_ft = *(info);
 		tok = tokenize(src_ft, info_ft);
-		free_info_buf(info_ft);
 	}
 	free_tok(&tok);
+	free_info(info);
 	return (root);
 }
 
