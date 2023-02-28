@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/27 22:24:40 by imrane           ###   ########.fr       */
+/*   Updated: 2023/02/27 23:04:14 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int main(int argc, char *argv[], char *env[])
 // export sans option
 
 
-// quand ya pas despace avec le $a ça bug
-// quand je met que un seul truc en fait ça segfault
+// gérer decoupage token quadn pas espace ex $a$a ou a|a
+// gérer env qui se met après le null
+// exit fonctionne mais j'ai des leak, gérer les leaks en prio avant de faire la suite
 }
