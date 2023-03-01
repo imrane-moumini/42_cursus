@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/01 18:39:09 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/01 18:48:43 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -385,7 +385,6 @@ void    expand_env(t_env *head, t_node *root)
 	
 	if (!head || !root)
 		return ;
-	// mettre tout ça dans une boucle while
 	
 	ptr = root -> first_child;
 	while (ptr)
@@ -402,3 +401,4 @@ void    expand_env(t_env *head, t_node *root)
 	}
 }
 
+// quand je rappel ma fnction le dollars n'est pas ajouté
