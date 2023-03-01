@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/01 15:30:19 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/01 18:39:09 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ int		ft_stcmp(char *str1, char *str2)
 	i = 0;
 	if (!str1 || !str2)
 		return (0);
-	while (str2[i] != '\0')
+	while (str1[i] != '\0')
 	{
 		if (str1[i] != str2[i])
 			return (0);
