@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/01 18:27:46 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/01 19:03:54 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,11 @@ int main(int argc, char *argv[], char *env[])
 		// afficher ast avant expand
 		print_ast(root);
 		printf("----------------------\n");
+		printf("c1\n");
 		// afficher ast apres expand
 		// c dans expand que je dois mettre la boucle
 		expand_env(mini_env,root);
+		printf("c2\n");
 		print_ast(root);
 		ft_free(NULL, &root, &src,&info);
     }
@@ -76,6 +78,6 @@ int main(int argc, char *argv[], char *env[])
 
 // gérer decoupage token quadn pas espace ex $a$a ou a|a
 // gérer env qui se met après le null
-
+// voir pk ça segfault quand g var d'env
 // quand dollars et avant pas un espace tu ferme mais tu curpos pas plus pour débuter le prichain
 }
