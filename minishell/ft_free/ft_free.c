@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:06:18 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/01 12:15:19 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/01 15:51:50 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,11 @@ void free_src(t_source **src)
 		ptr = *src;
 		if (ptr)
 		{
-			free (ptr -> buffer);
+			if (ptr -> buffer)
+			{
+				free (ptr -> buffer);
+				ptr -> buffer = NULL;
+			}
 			free(ptr);
 		}
 		src = NULL;
@@ -126,7 +130,15 @@ void free_tok(t_token **tok)
 		ptr = *tok;
 		if (ptr)
 		{
-			free(ptr-> text);
+			if (ptr -> text)
+			{
+				if (ptr -> text)
+				{
+					free(ptr-> text);
+					ptr -> text = NULL;
+				}
+				ptr -> text = NULL;
+			}
 			free(ptr);
 		}
 		tok = NULL;
@@ -141,7 +153,11 @@ void free_info_buf(t_info_tok *info)
 		ptr = info;
 		if (ptr)
 		{
-			free(ptr -> tok_buf);
+			if (ptr -> tok_buf)
+			{
+				free(ptr -> tok_buf);
+				ptr -> tok_buf = NULL;
+			}
 			ptr -> tok_buf = NULL;
 		}
 	}

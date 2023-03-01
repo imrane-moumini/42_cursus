@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/28 22:00:52 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/01 16:35:11 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ t_node *parse_simple_command(char *input, t_source **src, t_info_tok **info)
 		return (NULL);
 	if (src_ft -> end_input != 1)
 		tok = tokenize(src_ft, info_ft);
-	free_info(info);
 	while (src_ft -> exit != 1)
 	{	
 		if (tok)
@@ -82,7 +81,6 @@ t_node *parse_simple_command(char *input, t_source **src, t_info_tok **info)
 		tok = tokenize(src_ft, info_ft);
 	}
 	free_tok(&tok);
-	free_info(info);
 	return (root);
 }
 
