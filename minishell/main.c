@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/28 21:33:19 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/01 14:57:26 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int main(int argc, char *argv[], char *env[])
 		root = parse_simple_command(input, &src, &info);
 		print_ast(root);
 		printf("c4\n");
-		ft_exit(&mini_env, &root, &src, &info);
+		ft_exit(&mini_env, &root, &src, NULL);
 		printf("c5\n");
 		is_env_var(mini_env, root);
 		printf("c6\n");

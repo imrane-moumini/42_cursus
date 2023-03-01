@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/27 22:54:05 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/01 15:30:19 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ t_env	*new_node_env(void)
 	if (!node)
 		return (NULL);
 	node -> next = NULL;
-
+	node -> txt = NULL;
+	node -> var_name = NULL;
+	node -> var_value = NULL;
 	return (node);
 }
 t_env   *add_node_env(t_env *head)
