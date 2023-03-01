@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:06:18 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/01 15:51:50 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/01 17:48:58 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void free_ast(t_node **root)
 				free(ptr_node);
 			}
 		}
+		free(ptr_root);
 		root = NULL;
 		
 	}
