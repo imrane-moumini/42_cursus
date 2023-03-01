@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:06:18 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/28 22:04:29 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/01 12:15:19 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,14 @@ void free_env(t_env **mini_env)
 }
 void ft_free(t_env **mini_env, t_node **root, t_source **src, t_info_tok **info) 
 {
-	free_ast(root);
-	free_env(mini_env);
-	free_src(src);
-	free_info(info);
+	if (root)
+		free_ast(root);
+	if (mini_env)
+		free_env(mini_env);
+	if (src)
+		free_src(src);
+	if (info)
+		free_info(info);
 }
 void free_info(t_info_tok **info)
 {
@@ -90,7 +94,10 @@ void free_info(t_info_tok **info)
 		if (ptr)
 		{
 			if (ptr -> tok_buf)
+			{
 				free(ptr -> tok_buf);
+				ptr -> tok_buf = NULL;
+			}
 			free(ptr);
 		}
 		info = NULL;
