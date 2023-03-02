@@ -4,6 +4,7 @@ SRC = main.c \
 	parsing/lexer/manipulate_input.c \
 	parsing/lexer/init_src_token.c \
 	parsing/lexer/manipulate_token.c \
+	parsing/lexer/manipulate_token2.c \
 	parsing/parser/parser.c \
 	parsing/parser/manip_env.c \
 	signaux/signal.c \

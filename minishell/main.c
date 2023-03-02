@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/02 18:40:38 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/02 19:34:13 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,13 @@ int main(int argc, char *argv[], char *env[])
 // rendre la structure avec tout bien fait pour que l'execution soit simple
 // export sans option
 
+// mettre tout ça dans des fonctions
+// gerer > et >> comme delimiteur
+// faire norminette
 
-// gérer decoupage token quadn pas espace ex $a$a ou a|a, gerer decoupage aussi <<
-// gerer ce que g le droit de faire ou non avec les <<
-// gerer les guillemets
-// quand dollars et avant pas un espace tu ferme mais tu curpos pas plus pour débuter le prichain
+// juste avant de expand
+	// gerer ce que g le droit de faire ou non avec les <<
+	// gerer les guillemets
 
 // Mathieu
 	// comment on lance un nouveau prompt ?

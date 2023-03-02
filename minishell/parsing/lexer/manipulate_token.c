@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/02 18:50:32 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/02 19:38:45 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,43 +63,18 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 	{
 		if (c == ' ' || c == '\t' || c == '\n')
 		{
-			if (info -> tok_bufindex != -1)
-			{
-				info -> tok_bufindex++;
-				info -> tok_buf[info -> tok_bufindex] = '\0';
-				src -> curpos++;
-				break;	
-			}
+			if (tokenize_space(c, src, info) == 1)
+				break;
 		}
 		else if (c == '$')
 		{
-			if (info -> tok_bufindex != -1)
-			{
-				info -> tok_bufindex++;
-				info -> tok_buf[info -> tok_bufindex] = '\0';
-				break;	
-			}
-			else
-			{
-				info -> tok_bufindex++;
-				add_to_buf(c, info);
-			}
+			if (tokenize_dollars(c, src, info) == 1)
+				break;
 		}
 		else if (c == '|')
 		{
-			if (info -> tok_bufindex != -1)
-			{
-				info -> tok_bufindex++;
-				info -> tok_buf[info -> tok_bufindex] = '\0';
-				break;	
-			}
-			else
-			{
-				info -> tok_bufindex++;
-				add_to_buf(c, info);
-				src -> curpos++;
+			if (tokenize_pipe(c, src, info) == 1)
 				break;
-			}
 		}
 		else
 		{
@@ -110,11 +85,7 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 		c = src -> buffer[src -> curpos];
 	}
 	if (c == '\0' || c == '\n')
-	{
-		info -> tok_bufindex++;
-		info -> tok_buf[info -> tok_bufindex] = '\0';
-		src -> end_input = 1;
-	}
+		tokenize_end(c, src, info);
 	tok = create_token(info -> tok_buf, src, info);
 	info -> tok_bufindex = -1;
 	return tok;
