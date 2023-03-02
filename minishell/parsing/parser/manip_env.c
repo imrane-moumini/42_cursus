@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/02 17:43:30 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/02 17:49:03 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,8 +142,6 @@ void    create_var_name(t_env *node)
 
 t_env   *copy_env(char *original[])
 {
-	// je pense qua un moment je copie un text NULl et c pour ça jaffiche null
-	
     int i;
 	t_env *mini_env;
 	t_env	*ptr;
@@ -322,20 +320,15 @@ void    insert_input_env(t_env *head, t_node *root)
 t_node		*do_i_have_to_expand(t_node *node)
 {
 	t_node *ptr;
-	printf("2.4.1\n");
+
 	if (!node)
 		return (NULL);
-	printf("2.4.2\n");
 	ptr = node;
-	printf("2.4.3\n");
 	if (ptr != NULL)
 	{
-		printf("2.4.4\n");
 		if (ptr -> txt[0] == '$')
 			return (ptr);
-		printf("2.4.5\n");
 		ptr = ptr -> next_sibling;
-		printf("2.4.6\n");
 	}
 	return (NULL);
 }
@@ -376,36 +369,20 @@ void    expand_env(t_env *head, t_node *root)
 	t_node *ptr;
 	t_node *expand;
 	char	*str;
-	printf ("C2.1\n");
+
 	if (!head || !root)
-		return ;	
-	printf ("C2.2\n");
+		return ;
 	ptr = root -> first_child;
-	printf ("C2.3\n");
 	while (ptr)
 	{
-		printf("txt is =>%s\n", ptr -> txt);
-		printf ("C2.4\n");
 		expand = do_i_have_to_expand(ptr);
-		printf ("C2.5\n");
-		if (expand)
-			printf ("expand is =>%s\n", expand -> txt);
 		if (expand)
 		{
-			printf ("C2.6\n");
 			cut_dollar_sign(expand -> txt);
-			printf ("expand after cut dollar =>%s\n", expand -> txt);
-			printf ("C2.7\n");
 			str = ft_strcpy(return_matching_value(head, expand -> txt));
-			printf ("C2.8\n");
 			free(expand -> txt);
-			printf ("C2.9\n");
 			expand -> txt = str;
 		}
-		printf ("C2.10\n");
 		ptr = ptr -> next_sibling;
-		printf ("C2.11\n");
 	}
 }
-
-// quand je rappel ma fnction le dollars n'est pas ajouté

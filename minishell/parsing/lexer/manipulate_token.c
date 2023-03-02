@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/01 18:58:58 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/02 18:37:10 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,20 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 				info -> tok_buf[info -> tok_bufindex] = '\0';
 				src -> curpos++;
 				break;	
+			}
+		}
+		else if (c == '$')
+		{
+			if (info -> tok_bufindex != -1)
+			{
+				info -> tok_bufindex++;
+				info -> tok_buf[info -> tok_bufindex] = '\0';
+				break;	
+			}
+			else
+			{
+				info -> tok_bufindex++;
+				add_to_buf(c, info);
 			}
 		}
 		else

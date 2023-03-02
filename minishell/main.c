@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/02 16:49:26 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/02 17:58:19 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int main(int argc, char *argv[], char *env[])
 	
 	while (1)
     {
-		printf("c1\n");
         input = readline("minishell> ");
 		root = parse_simple_command(input, &src, &info);
 		print_ast(root);
@@ -47,18 +46,15 @@ int main(int argc, char *argv[], char *env[])
 		// afficher ast avant expand
 		print_ast(root);
 		printf("----------------------\n");
-		printf("c2\n");
 		// afficher ast apres expand
 		// c dans expand que je dois mettre la boucle
 		expand_env(mini_env,root);
-		printf("c3\n");
 		print_ast(root);
 		ft_free(NULL, &root, &src,&info);
     }
 
    
    // faire ctrl c fait rien
-// faire exit -> exit
 // faire ctr D -> quitte le shell
 // faire ctrl \ -> ne fait rien
 // dire à matthieu si c bon 
@@ -66,13 +62,12 @@ int main(int argc, char *argv[], char *env[])
 // demande à matthieu les guillemets
 // faire historique
 // rendre la structure avec tout bien fait pour que l'execution soit simple
-// faire valgrind
-// faire function qui free tous les alloc
 // export sans option
 
 
 // gérer decoupage token quadn pas espace ex $a$a ou a|a
-// gérer env qui se met après le null
-// voir pk ça segfault quand g var d'env
 // quand dollars et avant pas un espace tu ferme mais tu curpos pas plus pour débuter le prichain
+
+// Mathieu
+	// comment on lance un nouveau prompt ?
 }
