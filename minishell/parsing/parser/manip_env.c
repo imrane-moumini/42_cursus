@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/02 16:55:22 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/02 17:27:48 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ void    create_var_name(t_env *node)
 
 t_env   *copy_env(char *original[])
 {
+	// je pense qua un moment je copie un text NULl et c pour ça jaffiche null
+	
     int i;
 	t_env *mini_env;
 	t_env	*ptr;
@@ -155,11 +157,12 @@ t_env   *copy_env(char *original[])
 	mini_env -> next = NULL;
 	while (original[i])
 		i++;
-	while(i > 0)
+	while(i > 1)
 	{
 		mini_env = add_node_env(mini_env);
 		i--;
 	}
+	i--;
 	ptr = mini_env;
 	while (original[i] && ptr != NULL)
 	{
