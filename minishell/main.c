@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/01 19:03:54 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/02 16:49:26 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,11 @@ int main(int argc, char *argv[], char *env[])
 	while (1)
     {
 		printf("c1\n");
-		printf("c2\n");
         input = readline("minishell> ");
-		printf("c3\n");
 		root = parse_simple_command(input, &src, &info);
 		print_ast(root);
-		printf("c4\n");
 		ft_exit(&mini_env, &root, &src, &info);
-		printf("c5\n");
 		is_env_var(mini_env, root);
-		printf("c6\n");
 		 // afficher env apres que j'ai ajouté var env
         printf("----------------------\n");
 		print_env(mini_env);
@@ -52,11 +47,11 @@ int main(int argc, char *argv[], char *env[])
 		// afficher ast avant expand
 		print_ast(root);
 		printf("----------------------\n");
-		printf("c1\n");
+		printf("c2\n");
 		// afficher ast apres expand
 		// c dans expand que je dois mettre la boucle
 		expand_env(mini_env,root);
-		printf("c2\n");
+		printf("c3\n");
 		print_ast(root);
 		ft_free(NULL, &root, &src,&info);
     }

@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/01 18:48:43 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/02 16:55:22 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,12 +216,8 @@ int     is_nbr(char c)
 void     is_env_var(t_env *mini_env, t_node *root)
 {
 	t_node *ptr;
-	printf("5.1\n");
 	if (!root)
 		return ;
-	printf("5.2\n");
-	// faire solution pour fonctionne même si ya que 1 argument
-	// mettre tout ça dans une boucle while
 	ptr = root -> first_child;
 	if (ptr)
 	{
@@ -304,44 +300,39 @@ void    insert_input_env(t_env *head, t_node *root)
 	char *var_env_value;
 	char *env_input;
 	t_env	*last_node;
-	
-	printf("5.5\n");
+
 	if (!head || !root)
 		return ;
 	if ((root -> first_child == NULL))
 		return ;
 	if ((root -> first_child -> next_sibling == NULL))
 		return ;
-	printf("5.6\n");
 	env_input = ft_strcpy_env(root -> first_child -> next_sibling -> txt);
-	printf("5.7\n");
 	var_env_name = extract_name(root -> first_child -> next_sibling -> txt);
-	printf("5.8\n");
 	var_env_value = extract_value(root -> first_child -> next_sibling -> txt);
-	printf("5.9\n");
 	add_node_env(head);
-	printf("5.10\n");
 	last_node = last_env_node(head);
-	printf("5.11\n");
 	last_node -> var_name = var_env_name;
-	printf("5.12\n");
 	last_node -> var_value = var_env_value;
-	printf("5.13\n");
 	last_node -> txt = env_input;
-	printf("5.14\n");
 }
 t_node		*do_i_have_to_expand(t_node *node)
 {
 	t_node *ptr;
-	
+	printf("2.4.1\n");
 	if (!node)
 		return (NULL);
+	printf("2.4.2\n");
 	ptr = node;
-	while (ptr != NULL)
+	printf("2.4.3\n");
+	if (ptr != NULL)
 	{
+		printf("2.4.4\n");
 		if (ptr -> txt[0] == '$')
 			return (ptr);
+		printf("2.4.5\n");
 		ptr = ptr -> next_sibling;
+		printf("2.4.6\n");
 	}
 	return (NULL);
 }
@@ -382,22 +373,34 @@ void    expand_env(t_env *head, t_node *root)
 	t_node *ptr;
 	t_node *expand;
 	char	*str;
-	
+	printf ("C2.1\n");
 	if (!head || !root)
-		return ;
-	
+		return ;	
+	printf ("C2.2\n");
 	ptr = root -> first_child;
+	printf ("C2.3\n");
 	while (ptr)
 	{
+		printf("txt is =>%s\n", ptr -> txt);
+		printf ("C2.4\n");
 		expand = do_i_have_to_expand(ptr);
+		printf ("C2.5\n");
+		if (expand)
+			printf ("expand is =>%s\n", expand -> txt);
 		if (expand)
 		{
+			printf ("C2.6\n");
 			cut_dollar_sign(expand -> txt);
+			printf ("C2.7\n");
 			str = ft_strcpy(return_matching_value(head, expand -> txt));
+			printf ("C2.8\n");
 			free(expand -> txt);
+			printf ("C2.9\n");
 			expand -> txt = str;
 		}
+		printf ("C2.10\n");
 		ptr = ptr -> next_sibling;
+		printf ("C2.11\n");
 	}
 }
 
