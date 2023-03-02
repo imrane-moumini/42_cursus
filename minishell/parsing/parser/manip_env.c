@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/02 17:27:48 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/02 17:43:30 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -348,7 +348,7 @@ char	*return_matching_value(t_env *head, char *str)
 		return (NULL);
 	while (ptr != NULL)
 	{
-		if ( ft_stcmp(ptr -> txt, str) == 1)
+		if (ft_stcmp(str, ptr -> txt) == 1)
 			return (ptr -> var_value);
 		ptr = ptr -> next;
 	}
@@ -394,6 +394,7 @@ void    expand_env(t_env *head, t_node *root)
 		{
 			printf ("C2.6\n");
 			cut_dollar_sign(expand -> txt);
+			printf ("expand after cut dollar =>%s\n", expand -> txt);
 			printf ("C2.7\n");
 			str = ft_strcpy(return_matching_value(head, expand -> txt));
 			printf ("C2.8\n");
