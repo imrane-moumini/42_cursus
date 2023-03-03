@@ -68,6 +68,7 @@ int tokenize_space(char c, t_source *src, t_info_tok *info);
 int tokenize_dollars(char c, t_source *src, t_info_tok *info);
 int tokenize_pipe(char c, t_source *src, t_info_tok *info);
 void tokenize_end(char c, t_source *src, t_info_tok *info);
+int tokenize_in_out(char c, t_source *src, t_info_tok *info);
 void	free_token(t_token *tok);
 void	add_to_buf(char c, t_info_tok *info);
 t_token	*create_token(char *str , t_source *src, t_info_tok *info);
