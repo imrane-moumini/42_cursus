@@ -114,6 +114,9 @@ void free_info(t_info_tok **info);
 void free_ast(t_node **root);
 void free_env(t_env **mini_env);
 void ft_free(t_env **mini_env, t_node **root, t_source **src, t_info_tok **info);
+
+/*in and out redirection*/
+int ft_in_file(t_node *head);
 #endif
-// réglé segfault quand j'écris plusieurs fois $a et changer 3 fois 
-// réglé pk ça s'ajoute après null dans l'env
+
+// je suis << bob 

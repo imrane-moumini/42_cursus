@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/02 19:34:13 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/04 14:59:17 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int main(int argc, char *argv[], char *env[])
 		root = parse_simple_command(input, &src, &info);
 		print_ast(root);
 		ft_exit(&mini_env, &root, &src, &info);
+		if (ft_in_file(root) == 0)
+			return (1);
 		is_env_var(mini_env, root);
 		 // afficher env apres que j'ai ajouté var env
         printf("----------------------\n");
