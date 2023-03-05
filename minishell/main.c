@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/04 14:59:17 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/05 18:01:00 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ int main(int argc, char *argv[], char *env[])
 	
 	while (1)
     {
+		// voir pk des fois ya une new line et parfois non
         input = readline("minishell> ");
 		root = parse_simple_command(input, &src, &info);
 		print_ast(root);
 		ft_exit(&mini_env, &root, &src, &info);
-		if (ft_in_file(root) == 0)
-			return (1);
+		ft_in_file(root);
 		is_env_var(mini_env, root);
 		 // afficher env apres que j'ai ajouté var env
         printf("----------------------\n");

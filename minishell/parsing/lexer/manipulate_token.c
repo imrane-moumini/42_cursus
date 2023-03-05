@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/03 18:56:29 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/05 17:45:28 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	free_token(t_token *tok)
 		tok = NULL;
 	}
 }
-
+// quand je mets un espace a la fin il le prend en compte 
 t_token	*tokenize(t_source *src, t_info_tok *info)
 {
 	char c;
