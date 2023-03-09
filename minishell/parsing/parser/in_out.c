@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:17:23 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/05 17:39:51 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/09 17:38:50 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int ft_in_file(t_node *head)
 		if (ft_stcmp(ptr -> next_sibling -> txt, "<") == 1)
 		{
 			printf("c8\n");
-			if ((ptr -> next_sibling -> next_sibling -> txt))
+			if (ptr -> next_sibling -> next_sibling == NULL)
 			{
 				printf("c9\n");
 				ft_printf("syntax error near unexpected token `newline'\n");

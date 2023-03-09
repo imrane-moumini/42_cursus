@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/01 16:35:11 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/09 17:37:17 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_node *parse_simple_command(char *input, t_source **src, t_info_tok **info)
 		return (NULL);
 	if (src_ft -> end_input != 1)
 		tok = tokenize(src_ft, info_ft);
-	while (src_ft -> exit != 1)
+	while (src_ft -> exit != 1 || tok != NULL)
 	{	
 		if (tok)
 		{

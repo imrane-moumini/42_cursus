@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:16:47 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/03 18:55:11 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/09 17:33:00 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,11 @@ int tokenize_pipe(char c, t_source *src, t_info_tok *info)
 void tokenize_end(char c, t_source *src, t_info_tok *info)
 {
 	(void)c;
-	info -> tok_bufindex++;
-	info -> tok_buf[info -> tok_bufindex] = '\0';
+	if (info -> tok_bufindex != -1)
+	{
+		info -> tok_bufindex++;
+		info -> tok_buf[info -> tok_bufindex] = '\0';
+	}
 	src -> end_input = 1;
 }
 

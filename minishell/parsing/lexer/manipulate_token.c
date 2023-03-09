@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/05 17:45:28 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/09 17:25:23 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 t_token *create_token(char *str, t_source *src, t_info_tok *info)
 {
 	t_token *tok;
+	if (info -> tok_bufindex == -1)
+		return (NULL);
 	tok = malloc(sizeof(t_token));
 	if (!tok)
 		return NULL;
