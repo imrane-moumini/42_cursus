@@ -116,6 +116,8 @@ void free_env(t_env **mini_env);
 void ft_free(t_env **mini_env, t_node **root, t_source **src, t_info_tok **info);
 
 /*in and out redirection*/
+int ft_in_file_first_check(t_node *ptr);
+int in_file_second_check(t_node *ptr);
 int ft_in_file(t_node *head);
 #endif
 

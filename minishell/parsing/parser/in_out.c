@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:17:23 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/09 18:10:07 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/09 20:08:03 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,65 @@
 // reflechir a logoque de parcourir en premier
 // le truc si ya un espace après les < je le gère dans le lexer direct
 
-int ft_in_file(t_node *head)
+// je vais mettre tous ces if dans des foncions 
+// mettre toutes ses fonctions dans une boucle while qui va tout parser
+
+int in_file_second_check(t_node *ptr)
 {
-    t_node *ptr;
-    
-	ptr = head;
-    if (!ptr)
-		return(2);
-	if (ptr -> first_child)
-		ptr = ptr -> first_child;
-	while (ptr != NULL)
+	if (!ptr)
+		return (1);
+	if ((ptr -> next_sibling) == NULL) // si ya un seul < et ya rien après le <
+	{
+		ft_printf("syntax error near unexpected token `newline'\n");
+		return (0);
+	}
+	if (ptr) // si ya un seul < ou un seul >
 	{
 		if (ft_stcmp(ptr -> txt, "<") == 1)
-			break;
-		ptr = ptr -> next_sibling;
+		{
+			if (ptr -> next_sibling) // si ya un truc après le <
+			{
+				if (ft_stcmp(ptr -> next_sibling -> txt, ">") == 1)
+					{
+						ft_printf("syntax error near unexpected token '%s'\n", ptr -> next_sibling -> txt);
+						return (0);
+					}
+			}
+		}
+		if (ft_stcmp(ptr -> txt, ">") == 1)
+		{
+			if (ptr -> next_sibling) // si ya un truc après le <
+			{
+				if (ft_stcmp(ptr -> next_sibling -> txt, "<") == 1)
+					{
+						ft_printf("syntax error near unexpected token '%s'\n", ptr -> next_sibling -> txt);
+						return (0);
+					}
+			}
+		}
 	}
-	// non concerné
-	if (ptr == NULL)
-		return (2);
-	// ce que j'ai pas le droit de faire
+	return (1);
+}
+int ft_in_file_first_check(t_node *ptr)
+{
+	if (!ptr)
+		return (1);
 	if (ptr -> next_sibling)
 	{
-		// si ya  <<
-		if (ft_stcmp(ptr -> next_sibling -> txt, "<") == 1)
+		if (ft_stcmp(ptr -> txt, "<") == 1 && ft_stcmp(ptr -> next_sibling -> txt, ">") == 1)
+		{
+			ft_printf("syntax error near unexpected token '>'\n");
+			return (0);
+		}
+		if (ft_stcmp(ptr -> txt, ">") == 1 && ft_stcmp(ptr -> next_sibling -> txt, "<") == 1)
+		{
+			ft_printf("syntax error near unexpected token '<'\n");
+			return (0);
+		}
+		// si ya  << ou >>
+		// si ya >>
+		// si ya <<
+		if (ft_stcmp(ptr -> next_sibling -> txt, "<") == 1 || ft_stcmp(ptr -> next_sibling -> txt, ">") == 1)
 		{
 			if (ptr -> next_sibling -> next_sibling == NULL)
 			{
@@ -62,27 +98,32 @@ int ft_in_file(t_node *head)
 					return (0);
 				}
 			}
-			// ne pas expand
 		}
 	}
-	else // si ya un seul < et ya rien après le <
+	return (1);
+}
+int ft_in_file(t_node *head)
+{
+    t_node *ptr;
+    
+	ptr = head;
+    if (!ptr)
+		return(2);
+	if (ptr -> first_child)
+		ptr = ptr -> first_child;
+	while (ptr != NULL)
 	{
-		ft_printf("syntax error near unexpected token `newline'\n");
-		return (0);
-	}
-	if (ptr) // si ya un seul <
-	{
-		if (ptr -> next_sibling) // si ya un truc après le <
-		{
-			if (ft_stcmp(ptr -> next_sibling -> txt, ">") == 1 || ft_stcmp(ptr -> next_sibling -> next_sibling -> txt, ">") == 1)
-				{
-					ft_printf("syntax error near unexpected token '%s'\n", ptr -> next_sibling -> txt);
-					return (0);
-				}
-		}
+		if (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1 )
+			break;
+		ptr = ptr -> next_sibling;
 	}
 	
-	// pas de pb
+	if (ptr == NULL)
+		return (2);
+	if (ft_in_file_first_check(ptr) == 0)
+		return (0);
+	if (in_file_second_check(ptr) == 0)
+		return (0);
 	return (1);
     
 }

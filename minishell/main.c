@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/09 17:06:59 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/09 18:39:35 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int main(int argc, char *argv[], char *env[])
 		print_ast(root);
 		printf("----------------------\n");
 		// afficher ast apres expand
-		// c dans expand que je dois mettre la boucle
+		
+		// vérifier qu'il ya pas << genre if not tu peux expand
 		expand_env(mini_env,root);
 		print_ast(root);
 		ft_free(NULL, &root, &src,&info);
@@ -69,12 +70,11 @@ int main(int argc, char *argv[], char *env[])
 
 // mettre tout ça dans des fonctions
 // gerer > et >> comme delimiteur
+// faire quand erreur tu remonte en haut pour mettre un nouveau prompt 
+// sans passer par le reste
 // faire norminette
 
 // juste avant de expand
 	// gerer ce que g le droit de faire ou non avec les <<
 	// gerer les guillemets
-
-// Mathieu
-	// comment on lance un nouveau prompt ?
 }
