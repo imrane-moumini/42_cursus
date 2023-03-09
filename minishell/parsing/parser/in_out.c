@@ -6,27 +6,11 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:17:23 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/09 20:08:03 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/09 20:38:38 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-// boucle qui a chaque < va a la prochaine lettre puyis rpochain <
-
-// in file
-    // regarde si ya juste ça < ou si ya <<
-        // si <
-        // si <<
-// out file
-
-// tout ce que je fais il faiut que je les appelle de manière continue genre
-// je decoupe tout en petite fonction
-
-// reflechir a logoque de parcourir en premier
-// le truc si ya un espace après les < je le gère dans le lexer direct
-
-// je vais mettre tous ces if dans des foncions 
-// mettre toutes ses fonctions dans une boucle while qui va tout parser
 
 int in_file_second_check(t_node *ptr)
 {
@@ -114,16 +98,19 @@ int ft_in_file(t_node *head)
 	while (ptr != NULL)
 	{
 		if (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1 )
-			break;
-		ptr = ptr -> next_sibling;
+		{
+			if (ft_in_file_first_check(ptr) == 0)
+				return (0);
+			if (in_file_second_check(ptr) == 0)
+				return (0);
+			// avancer juste qua être un truc différent de < ou >
+			while (ptr && (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1))
+				ptr = ptr -> next_sibling;
+		}
+		if (ptr && ft_stcmp(ptr -> txt, "<") != 1 && ft_stcmp(ptr -> txt, ">") != 1)
+			ptr = ptr -> next_sibling;	
 	}
 	
-	if (ptr == NULL)
-		return (2);
-	if (ft_in_file_first_check(ptr) == 0)
-		return (0);
-	if (in_file_second_check(ptr) == 0)
-		return (0);
 	return (1);
     
 }

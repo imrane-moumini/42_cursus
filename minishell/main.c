@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/09 18:39:35 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/09 20:15:18 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,11 @@ int main(int argc, char *argv[], char *env[])
 		root = parse_simple_command(input, &src, &info);
 		print_ast(root);
 		ft_exit(&mini_env, &root, &src, &info);
+		// mettre le ft_error ici et le ft exit après
 		if(ft_in_file(root) == 0)
 			return (1);
+
+		// mettrre tout le reste dans un if comme ça ça rejntre pas si erreur
 		is_env_var(mini_env, root);
 		 // afficher env apres que j'ai ajouté var env
         printf("----------------------\n");
@@ -50,6 +53,7 @@ int main(int argc, char *argv[], char *env[])
 		print_ast(root);
 		printf("----------------------\n");
 		// afficher ast apres expand
+		
 		
 		// vérifier qu'il ya pas << genre if not tu peux expand
 		expand_env(mini_env,root);
@@ -71,6 +75,7 @@ int main(int argc, char *argv[], char *env[])
 // mettre tout ça dans des fonctions
 // gerer > et >> comme delimiteur
 // faire quand erreur tu remonte en haut pour mettre un nouveau prompt 
+// mettre toutes les erreurs dans un ft erreur
 // sans passer par le reste
 // faire norminette
 
