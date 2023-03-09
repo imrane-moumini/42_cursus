@@ -120,6 +120,10 @@ int ft_in_file_first_check(t_node *ptr);
 int in_file_second_check(t_node *ptr);
 int ft_in_file(t_node *head);
 
+/*pipe*/
+int ft_pipe_first_check(t_node *ptr);
+int ft_pipe_check(t_node *head);
+
 /*error*/
 int error_pars(t_node *head);
 #endif
