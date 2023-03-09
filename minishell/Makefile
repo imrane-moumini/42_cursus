@@ -12,7 +12,8 @@ SRC = main.c \
 	parsing/parser/manip_env.c \
 	signaux/signal.c \
 	builtin/exit.c \
-	ft_free/ft_free.c
+	ft_free/ft_free.c \
+	error_pars.c
 
 OBJ = $(SRC:%.c=%.o) 
 
