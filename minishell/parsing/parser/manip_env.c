@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/02 17:49:03 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/10 19:25:50 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,11 +222,6 @@ void     is_env_var(t_env *mini_env, t_node *root)
 	ptr = root -> first_child;
 	if (ptr)
 	{
-		if (is_nbr(ptr -> txt[0] == 0))
-		{
-			ft_printf("export : '%s' is not a valid identifier\n",ptr -> txt);
-			return ;
-		}
 		if (ft_stcmp(ptr -> txt, "export") && (ptr -> next_sibling != NULL))
 			insert_input_env(mini_env, root);
 		ptr = ptr -> next_sibling;

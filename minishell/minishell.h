@@ -126,6 +126,7 @@ int ft_pipe_check(t_node *head);
 
 /*error*/
 int error_pars(t_node *head);
+int nbr_in_export(t_node *head);
 #endif
 
 // je suis << bob 
