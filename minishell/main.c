@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/10 19:07:24 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/10 20:30:01 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ int main(int argc, char *argv[], char *env[])
 			printf("----------------------\n");
 			// afficher ast apres expand
 			
-			
-			// vérifier qu'il ya pas << genre if not tu peux expand
 			expand_env(mini_env,root);
 			print_ast(root);
 		}
@@ -68,8 +66,6 @@ int main(int argc, char *argv[], char *env[])
 // rendre la structure avec tout bien fait pour que l'execution soit simple
 // export sans option
 
-// mettre toutes les erreurs dans un ft erreur
-// sans passer par le reste
 // faire norminette
 
 // juste avant de expand
