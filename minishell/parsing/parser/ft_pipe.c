@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:16:29 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/10 18:51:27 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/10 19:02:17 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,19 @@ int ft_pipe_first_check(t_node *ptr)
 		return (1);
 	if (ptr -> prev_sibling == NULL)
 	{
+		ft_printf("syntax error near unexpected token `|'\n");
 		return (0);
 	}
 	if (ptr -> next_sibling == NULL)
 	{
+		ft_printf("syntax error near unexpected token `newline'\n");
 		return (0);
 	}
 	if (ptr -> next_sibling)
 	{
 		if (ft_stcmp(ptr -> next_sibling -> txt, "|") == 1)
 		{
+			ft_printf("syntax error near unexpected token `|'\n");
 			return (0);
 		}
 	}
