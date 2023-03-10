@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:17:23 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/09 20:38:38 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/10 20:14:12 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,4 +113,26 @@ int ft_in_file(t_node *head)
 	
 	return (1);
     
+}
+
+int is_here_doc(t_node *root)
+{
+	t_node *ptr;
+	
+	if (!root)
+		return (2);
+	ptr = root -> first_child;
+	while (ptr)
+	{	
+		if (ft_stcmp(ptr -> txt, "<"))
+		{
+			if (ptr -> next_sibling)
+			{
+				if (ft_stcmp(ptr -> next_sibling -> txt, "<"))
+					return (1);
+			}
+		}
+		ptr = ptr ->next_sibling;
+	}
+	return (0);
 }

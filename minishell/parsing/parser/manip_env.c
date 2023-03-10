@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/10 19:25:50 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/10 20:13:20 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -368,6 +368,8 @@ void    expand_env(t_env *head, t_node *root)
 	if (!head || !root)
 		return ;
 	ptr = root -> first_child;
+	if (is_here_doc(root) == 1)
+		return ;
 	while (ptr)
 	{
 		expand = do_i_have_to_expand(ptr);
