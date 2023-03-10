@@ -104,7 +104,7 @@ int     is_nbr(char c);
 int is_here_doc(t_node *node);
 
 /*signaux*/
-void	init_struct_sign();
+void	ft_sigint(int sigint, siginfo_t *pid, void *idontknow);
 
 /*builtin exit*/
 void ft_exit(t_env **mini_env,t_node **root, t_source **src, t_info_tok **info);

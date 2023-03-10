@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/10 20:30:01 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/10 23:35:21 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,20 @@ int main(int argc, char *argv[], char *env[])
     t_source *src;
     t_info_tok *info;
     t_node *root;
-	//struct sigaction action_exit;
-	//sigset_t	sigmask;
-    (void)argc;
+	(void)argc;
     (void)argv;
-
-	//sigemptyset(&sigmask);
+	
+	// signal exit
+	struct sigaction action_exit;
+	sigset_t	sigmask;
+    
+	sigemptyset(&sigmask);
+	action_exit.sa_flags = SA_SIGINFO;
+	action_exit.sa_mask = sigmask;
+	action_exit.sa_sigaction = ft_sigint;
+	sigaction(SIGINT, &action_exit, NULL);
+	// programme hors signaux
 	mini_env = copy_env(env);
-	//print_env(mini_env);
     src = NULL;
 	info = NULL;
 	root = NULL;
@@ -69,5 +75,13 @@ int main(int argc, char *argv[], char *env[])
 // faire norminette
 
 // juste avant de expand
+// gerer les meta caractères en plus de $
 	// gerer les guillemets
+		// gerer les meta caracterere à ne pas gerer
+
+// demander à mathiru
+	//meta caractere et guillemets
+	// rl_on new line des signaux et bautre fnctions et dire moi ça a rien fait
+	// ya pas a free comme c une nouvelle commande genre ça  a déjà été free ava,t
+
 }

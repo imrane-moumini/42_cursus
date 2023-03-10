@@ -6,17 +6,11 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:17:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/10 21:28:37 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/10 22:04:46 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-// si guillemets (singlke ou double quote) pas fermé
-// lacher une erreur
-// le mettre dans la fonction qui gère les erreurs
-// en gros faut tjr un nombre pair de guillemets
-    // je compte toute les guillemets genre si ' single et si double
-    // je regarde si le nbr de single ou de double et pair sinon c cuit
 
 int single_quote_closed(t_node *head)
 {
@@ -71,3 +65,25 @@ int quote_closed(t_node *head)
 		return (0);
     return (1);
 }
+
+// je vais dans la fonction qui expand seulement si ya pas de guillemts
+	// si guillemets je gère l'expand différemment
+// faire fonction qui isole les parti entre guuillemets
+	// comme ça je manipule que cette partie
+	// une fois manipuler je réintègre dans le truc initiale
+	// si g fait maudif je ne vais pas dans la fonction qui expand
+	
+// trouver un moeyn de gérer ça que dans ce qui est entre les guillemets
+// deja j'appelle la fonction qui gère tout ça avant expand et je met genre si vrai
+// tu peux aller dans expand 
+
+// ski est chaud c que je dois isoler la partie entre parenthèse des autre partie
+// single quote meta
+	// $
+	// pipe
+// double quote meta
+	// $
+	// pipe
+
+// si pipe entre guillemets il faut que je le notifie a la fonction
+// qui va exécuter comme ça elle utilise pas
