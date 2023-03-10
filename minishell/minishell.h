@@ -70,6 +70,7 @@ int tokenize_pipe(char c, t_source *src, t_info_tok *info);
 void tokenize_end(char c, t_source *src, t_info_tok *info);
 int tokenize_in_out(char c, t_source *src, t_info_tok *info);
 int tokenize_single_quote(char c, t_source *src, t_info_tok *info);
+int tokenize_double_quote(char c, t_source *src, t_info_tok *info);
 void	free_token(t_token *tok);
 void	add_to_buf(char c, t_info_tok *info);
 t_token	*create_token(char *str , t_source *src, t_info_tok *info);
@@ -133,6 +134,7 @@ int nbr_in_export(t_node *head);
 /*guillemets*/
 int single_quote_closed(t_node *head);
 int quote_closed(t_node *head);
+int double_quote_closed(t_node *head);
 #endif
 
 // je suis << bob 
