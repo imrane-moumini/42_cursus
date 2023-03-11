@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:16:29 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/10 19:02:17 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/11 21:32:39 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,21 @@ int ft_pipe_check(t_node *head)
 	}
 	return (1);
 }
-// faire fonctionner + ajouter les bons messages d'erreur
+
+int how_much_pipe(t_node *root)
+{
+	t_node *ptr;
+	int count;
+
+	count = 0;
+	if (!root)
+		return (0);
+	ptr = node -> first_child;
+	while (ptr)
+	{
+		if (ft_stcmp(ptr -> txt, "|") == 1)
+			count++;
+		ptr = ptr -> next_sibling;
+	}
+	return (count);
+}

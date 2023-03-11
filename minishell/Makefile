@@ -10,10 +10,13 @@ SRC = main.c \
 	parsing/parser/guillemets.c \
 	parsing/parser/in_out.c \
 	parsing/parser/manip_env.c \
+	parsing/parser/decoupe_ast_no_quotes.c \
+	parsing/parser/manip_node_commannd.c \
+	parsing/parser/manip_node_redir.c \
 	signaux/signal.c \
 	builtin/exit.c \
 	ft_free/ft_free.c \
-	error_pars.c
+	error_pars.c 
 
 OBJ = $(SRC:%.c=%.o) 
 

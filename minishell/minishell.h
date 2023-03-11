@@ -34,7 +34,7 @@ typedef struct info_tok_s
 	int   tok_bufindex; // l'index où on doit ajouter le prochain car dans le buff
 } t_info_tok;
 
-/* structure of a node in AST*/
+/* structure of a node in first AST*/
 typedef struct node_s
 {
     char *txt;        /* value of this node */
@@ -44,6 +44,24 @@ typedef struct node_s
 	struct node_s *prev_sibling;
 } t_node;
 
+/*node of a command*/
+typedef struct com_node
+{
+    char *txt;
+    struct com_node *next_sibling;
+} t_com;
+
+/*node of a redirection*/
+typedef struct redir_node
+{
+    char *txt;
+    int heredoc;
+    int in_file;
+    int out_file;
+    int append_file;
+    int redir_file;
+    struct com_node *next_sibling;
+} t_redir;
 /* structure of env linked list*/
 typedef struct env_s
 {
@@ -126,7 +144,7 @@ int ft_in_file(t_node *head);
 /*pipe*/
 int ft_pipe_first_check(t_node *ptr);
 int ft_pipe_check(t_node *head);
-
+int how_much_pipe(t_node *root);
 /*error*/
 int error_pars(t_node *head);
 int nbr_in_export(t_node *head);
@@ -140,6 +158,12 @@ int is_there_single_quotes(t_node *root);
 int is_there_double_quotes(t_node *root);
 int is_there_both(t_node *root);
 
+/*ast command*/
+t_com **create_ast_command(t_node *root);
+
+/*manipulate node command*/
+t_com *create_com_node();
+/*manipulate node redir*/
 #endif
 
 // je suis << bob 
