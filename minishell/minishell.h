@@ -135,6 +135,11 @@ int nbr_in_export(t_node *head);
 int single_quote_closed(t_node *head);
 int quote_closed(t_node *head);
 int double_quote_closed(t_node *head);
+int is_there_quotes(t_node *root);
+int is_there_single_quotes(t_node *root);
+int is_there_double_quotes(t_node *root);
+int is_there_both(t_node *root);
+
 #endif
 
 // je suis << bob 

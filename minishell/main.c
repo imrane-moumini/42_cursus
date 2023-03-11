@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/10 23:35:21 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/11 20:24:24 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,44 @@ int main(int argc, char *argv[], char *env[])
 		root = parse_simple_command(input, &src, &info);
 		print_ast(root);
 		ft_exit(&mini_env, &root, &src, &info);
-		// mettre le ft_error ici et le ft exit après
 		if(error_pars(root) == 1)
 		{
+			
+			
 			is_env_var(mini_env, root);
-			 // afficher env apres que j'ai ajouté var env
+			//afficher env apres que j'ai ajouté var env
         	printf("----------------------\n");
 			print_env(mini_env);
 			printf("----------------------\n");
 			// afficher ast avant expand
 			print_ast(root);
 			printf("----------------------\n");
-			// afficher ast apres expand
-			
-			expand_env(mini_env,root);
+			if(is_there_quotes(root) == 0)
+			{
+				expand_env(mini_env,root);
+				// decouper et retourner les data struct
+			}
+			/*
+			if(is_there_quotes(root) == 1)
+			{
+				if(is_there_both(root) == 0)
+				{
+					if(is_there_single_quotes(root) == 1)
+					{
+						
+					}
+					if(is_there_double_quotes(root) == 1)
+					{
+						
+					}
+				}
+				else
+				{
+					// isoler les single quote faire ski a a faire
+					// isoler les double quotes faire ski ya a faire
+				}
+			*/
+			}
 			print_ast(root);
 		}
 		ft_free(NULL, &root, &src,&info);
@@ -84,4 +108,21 @@ int main(int argc, char *argv[], char *env[])
 	// rl_on new line des signaux et bautre fnctions et dire moi ça a rien fait
 	// ya pas a free comme c une nouvelle commande genre ça  a déjà été free ava,t
 
+// le truc des guillemets je vais le gérer dans le decoupage final
+// en fait a la fin de la boucle je rajoute la fonction decoupage ce que je renvoie
+// je fais une focntion qui regarde si ya des guillemets ou pas
+	// si ya je regarde si simple ou double
+	// deccoupage différente en fonction si ya ou non guillemets
+	// mais du coup j'expand que après avoir fait ça, je fais plus ma logique d'expand directr
+
+// si ya pas de guillemets
+// k'envoi tout si ya pas de > ou de |
+	// si ya >, j'envoie ce qui est avant
+		// je sauvegarde le > + ce qui se trouve imédiatement après 
+		// si ya des trics après le treuc immédia bahb c'est que ya un pipe
+		// je découpe ce qui ya après le pipe et je sauvegarde le pipe quelque part
+
+// si ya des guillemets
+	// simple guillemets
+	// double guillemets	
 }
