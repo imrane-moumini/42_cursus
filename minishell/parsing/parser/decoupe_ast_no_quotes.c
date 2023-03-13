@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/11 22:55:16 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/13 22:40:27 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,58 @@ t_com **create_ast_command(t_node *root)
 		// fonction qui decoupe command 
 			// ski est compliqué c que je dois pas prendre
 			// la redirection et ski est à sa droite immédia
-		ast[i] = // command
+		ast[i] = // command + redir, premier butes c command et autre vytes c redir
 		i++;
 	}
+}
+
+t_ast *isolate_command_redir(t_node *root)
+{
+	t_node *ptr;
+	t_ast  *save_ast;
+	t_redir *redir;
+	t_com	*com;
+
+	com = NULL;
+	redir = NULL;
+	save_ast = NULL;
+	if (!root)
+		return (NULL);
+	
+	ptr = root -> first_child;
+	
+	if (ptr)
+	{
+		// si j'ai < ou > je skipp + ski est à la droite immédiat
+		// du coup j'avance jusqu'a ce que j'ai | ou NULL
+		// si c NULL c que g tout avancé 
+		// faut que je garde le compte des avancé
+		// ce que je ne prends pas je le met direct dans l'autre objet
+
+		// on peut avoir uniquement des redirections de fichier sans commande
+		// voir avec mathieu ça et rester sur cette logique pour le moment
+		// tester la logique et voir si ça casse pas 
+		while (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+		{
+
+			if (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1 )
+			{
+				// attention géré si g 2 fois à la suite
+				ptr = ptr -> next_sibling;
+				if (ptr)
+					ptr = ptr -> next_sibling;
+			}
+			create_com_node(com);
+			com -> txt = ptr -> txt;
+			
+			ptr = ptr -> next_sibling;
+		}
+		if (ptr)
+			ptr = ptr -> next_sibling
+		save_ast = malloc(sizeof(save_ast));
+		save_ast -> command = com;
+		save_ast -> redir = ptr;
+	}
+	// la struct qui se souvient e la command + des redir
+	return (save_ast);
 }

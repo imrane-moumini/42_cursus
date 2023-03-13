@@ -58,10 +58,19 @@ typedef struct redir_node
     int heredoc;
     int in_file;
     int out_file;
-    int append_file;
-    int redir_file;
+	int append;
+    int file;
     struct com_node *next_sibling;
 } t_redir;
+
+/*node of a command*/
+typedef struct ast
+{
+    t_com *command;
+    t_redir *redir;
+	t_node *save_ptr;
+} t_ast;
+
 /* structure of env linked list*/
 typedef struct env_s
 {
@@ -158,12 +167,15 @@ int is_there_single_quotes(t_node *root);
 int is_there_double_quotes(t_node *root);
 int is_there_both(t_node *root);
 
-/*ast command*/
+/*ast et redir command*/
 t_com **create_ast_command(t_node *root);
+t_ast *isolate_command_redir(t_node *root);
+
 
 /*manipulate node command*/
-t_com *create_com_node();
+t_com *create_com_node(t_com com, t_node *node)
 /*manipulate node redir*/
+t_redir *create_redir_node(t_redir redir, t_node *node)
 #endif
 
 // je suis << bob 
