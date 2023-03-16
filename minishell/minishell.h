@@ -172,8 +172,9 @@ int is_there_both(t_node *root);
 /*ast et redir command*/
 t_com **create_ast_command_redir(t_node *root);
 t_ast *isolate_command_redir(t_node *root);
-
-
+void print_final_ast(t_com **ast);
+void print_command(t_com *com);
+void print_redir(t_redir *redir);
 /*manipulate node command*/
 t_com *create_com_node(t_com *com, t_node *node);
 /*manipulate node redir*/
