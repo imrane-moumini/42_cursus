@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/16 21:27:32 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/16 21:30:08 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ t_ast *isolate_command_redir(t_node *ptr)
 				printf("c2.10.12\n");
 				com = create_com_node(com, ptr);
 				// ok com existe jamais
+				// ok regler le pb , maintenant le pb c que ca saute un mot
 				if (com)
 					printf("com exist\n");
 				printf("c2.10.13\n");
