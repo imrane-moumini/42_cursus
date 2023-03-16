@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/16 19:54:14 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/16 21:09:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,32 +51,62 @@ t_com **create_ast_command_redir(t_node *root)
 	t_node *ptr;
 	int	nbr_pipe;
 	int i;
+	
+	save_ast = NULL;
+	printf("c2.1\n");
 	if (!root)
 		return (NULL);
 	ptr = root -> first_child;
 	i = 0;
-
+	printf("c2.2\n");
 	nbr_pipe = how_much_pipe(root);
+	printf("c2.3\n");
 	if (nbr_pipe > 0)
 	{
+		printf("c2.4\n");
 		ast = malloc(sizeof(t_com *) * ((nbr_pipe *2) + 1));
+		printf("c2.5\n");
 		ast[(nbr_pipe *2)] = NULL;
 	}
 	else
 	{
+		printf("c2.6\n");
 		ast = malloc(sizeof(t_com *) + 1);
+		printf("c2.7\n");
 		ast[1] = NULL;
+		printf("c2.8\n");
 	}
-	save_ast = malloc(sizeof(save_ast));
-	save_ast -> command = NULL;
-	save_ast -> redir = NULL;
-	save_ast -> save_ptr = ptr;
+
+	printf("c2.9\n");
 	
 	while (ast[i] != NULL)
 	{
-		save_ast = isolate_command_redir(save_ast -> save_ptr);
-		ast[i] = save_ast -> command;
-		ast[i] -> redir = save_ast -> redir; 
+		printf("c2.10\n");
+		// le pb c ici dans save-ast command et redir existe pas, voir pk
+		if (save_ast)
+		{
+			printf("i exist\n");
+			save_ast = isolate_command_redir(save_ast -> save_ptr);
+		}
+		else
+		{
+			printf("im not exist\n");
+			save_ast = isolate_command_redir(ptr);
+		}
+		printf("c2.11\n");
+		
+		if (save_ast)
+		{
+			if (save_ast -> command)
+				printf("command exist\n");
+			if (save_ast -> redir)
+				printf("redir exist\n");
+			ast[i] = save_ast -> command;
+			printf("c2.12\n");
+			if (ast[i])
+				ast[i] -> redir = save_ast -> redir;
+			printf("c2.13\n");
+		}
 		i++;
 	}
 	return (ast);
@@ -93,49 +123,66 @@ t_ast *isolate_command_redir(t_node *ptr)
 	com = NULL;
 	redir = NULL;
 	save_ast = NULL;
-	
+	save_ast = malloc(sizeof(save_ast));
+	save_ast -> command = NULL;
+	save_ast -> redir = NULL;
+	save_ast -> save_ptr = ptr;
 	if (ptr)
 	{
-		// si j'ai < ou > je skipp + ski est à la droite immédiat
-		// du coup j'avance jusqu'a ce que j'ai | ou NULL
-		// si c NULL c que g tout avancé 
-		// faut que je garde le compte des avancé
-		// ce que je ne prends pas je le met direct dans l'autre objet
-
-		// on peut avoir uniquement des redirections de fichier sans commande
-		// voir avec mathieu ça et rester sur cette logique pour le moment
-		// tester la logique et voir si ça casse pas 
+		printf("c2.10.1\n");
 		while (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 		{
-
+			printf("c2.10.2\n");
 			if (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1 )
 			{
+				printf("c2.10.3\n");
 				redir = create_redir_node(redir, ptr);
+				printf("c2.10.4\n");
 				if (ft_stcmp(ptr -> next_sibling -> txt, "<") == 1 || ft_stcmp(ptr -> next_sibling -> txt, ">") == 1 )
 				{
+					printf("c2.10.5\n");
 					ptr = ptr -> next_sibling;
+					printf("c2.10.6\n");
 					ptr = ptr -> next_sibling;
+					printf("c2.10.7\n");
 					redir = create_redir_node(redir, ptr);
+					printf("c2.10.8\n");
 				}
 				else
 				{
+					printf("c2.10.9\n");
 					ptr = ptr -> next_sibling;
+					printf("c2.10.10\n");
 					redir = create_redir_node(redir, ptr);
+					printf("c2.10.11\n");
 				}
 			}
+			// ok le pb se trouve vers la, genre je creer rien au final, a guetter
 			if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 			{
+				printf("c2.10.12\n");
 				com = create_com_node(com, ptr);
-				com -> txt = ptr -> txt;
+				printf("c2.10.13\n");
+				if (com)
+					com -> txt = ptr -> txt;
+				printf("c2.10.14\n");
 				if (ptr)
 					ptr = ptr -> next_sibling;
+				printf("c2.10.15\n");
 			}
 		}
 		if (ptr)
 			ptr = ptr -> next_sibling;
-		save_ast -> command = com;
-		save_ast -> redir = redir;
-		save_ast -> save_ptr = ptr;
+		printf("c2.10.16\n");
+		if (save_ast)
+		{
+			save_ast -> command = com;
+			printf("c2.10.17\n");
+			save_ast -> redir = redir;
+			printf("c2.10.18\n");
+			save_ast -> save_ptr = ptr;
+			printf("c2.10.19\n");
+		}
 	}
 	// la struct qui se souvient e la command + des redir
 	return (save_ast);
@@ -145,11 +192,15 @@ void print_final_ast(t_com **ast)
 {
 	int i;
 	i = 0;
+	printf("c4.1\n");
 	while(ast[i])
 	{
 		ft_printf("------------------------\n");
+		printf("c4.2\n");
 		print_command(ast[i]);
+		printf("c4.3\n");
 		print_redir(ast[i] -> redir);
+		printf("c4.4\n");
 		ft_printf("------------------------\n");
 		i++;
 	}
@@ -161,11 +212,16 @@ void print_command(t_com *com)
 	if (!com)
 		return ;
 	ptr = com;
+	printf("c4.2.1\n");
 	while (ptr)
 	{
 		ft_printf("command is \n");
-		ft_printf("%s\n",ptr -> txt);
+		printf("c4.2.2\n");
+		if (ptr)
+			ft_printf("%s\n",ptr -> txt);
+		printf("c4.2.3\n");
 		ptr = ptr -> next_sibling;
+		printf("c4.2.4\n");
 	}
 }
 void print_redir(t_redir *redir)
@@ -181,3 +237,10 @@ void print_redir(t_redir *redir)
 		ptr = ptr -> next_sibling;
 	}
 }
+
+// mes fnctions return NULL savoir pk
+// mme ptr -> txt n'exsite pas
+	// carrement je crois que ca vaut meme pas nul genre jlai meem pas alouer ou jsai pas
+	// du coup ca segfault
+// vasy je vais voir la valeur de mes struct au fil des tours pour trouver le pb
+// g trouve, le pb c aue ast -> command et redir existe pas

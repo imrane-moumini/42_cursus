@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/16 19:52:32 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/16 20:21:27 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,11 @@ int main(int argc, char *argv[], char *env[])
 			printf("----------------------\n");
 			if(is_there_quotes(root) == 0)
 			{
+				printf("c1\n");
 				expand_env(mini_env,root);
+				printf("c2\n");
 				ast = create_ast_command_redir(root);
+				printf("c3\n");
 			}
 			/*
 			if(is_there_quotes(root) == 1)
@@ -83,8 +86,10 @@ int main(int argc, char *argv[], char *env[])
 			}
 			*/
 			print_ast(root);
+			printf("c4\n");
 			printf("----------------------\n");
 			print_final_ast(ast);
+			printf("c5\n");
 		}
 		ft_free(NULL, &root, &src,&info);
     }
