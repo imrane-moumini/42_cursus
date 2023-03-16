@@ -43,14 +43,6 @@ typedef struct node_s
     struct node_s *next_sibling;
 	struct node_s *prev_sibling;
 } t_node;
-
-/*node of a command*/
-typedef struct com_node
-{
-    char *txt;
-    struct com_node *next_sibling;
-} t_com;
-
 /*node of a redirection*/
 typedef struct redir_node
 {
@@ -60,8 +52,18 @@ typedef struct redir_node
     int out_file;
 	int append;
     int file;
-    struct com_node *next_sibling;
+    struct redir_node *next_sibling;
 } t_redir;
+
+/*node of a command*/
+typedef struct com_node
+{
+    char *txt;
+    t_redir *redir;
+    struct com_node *next_sibling;
+} t_com;
+
+
 
 /*node of a command*/
 typedef struct ast
@@ -168,14 +170,14 @@ int is_there_double_quotes(t_node *root);
 int is_there_both(t_node *root);
 
 /*ast et redir command*/
-t_com **create_ast_command(t_node *root);
+t_com **create_ast_command_redir(t_node *root);
 t_ast *isolate_command_redir(t_node *root);
 
 
 /*manipulate node command*/
-t_com *create_com_node(t_com com, t_node *node)
+t_com *create_com_node(t_com *com, t_node *node);
 /*manipulate node redir*/
-t_redir *create_redir_node(t_redir redir, t_node *node)
+t_redir *create_redir_node(t_redir *redir, t_node *node);
 #endif
 
 // je suis << bob 

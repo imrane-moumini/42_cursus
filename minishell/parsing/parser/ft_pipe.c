@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:16:29 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/11 21:32:39 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/16 18:45:36 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int how_much_pipe(t_node *root)
 	count = 0;
 	if (!root)
 		return (0);
-	ptr = node -> first_child;
+	ptr = root -> first_child;
 	while (ptr)
 	{
 		if (ft_stcmp(ptr -> txt, "|") == 1)

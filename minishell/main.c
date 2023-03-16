@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/11 20:24:24 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/16 18:35:50 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main(int argc, char *argv[], char *env[])
 	// signal exit
 	struct sigaction action_exit;
 	sigset_t	sigmask;
-    
+
 	sigemptyset(&sigmask);
 	action_exit.sa_flags = SA_SIGINFO;
 	action_exit.sa_mask = sigmask;
@@ -36,8 +36,7 @@ int main(int argc, char *argv[], char *env[])
     src = NULL;
 	info = NULL;
 	root = NULL;
-	
-	
+		
 	while (1)
     {
         input = readline("minishell> ");
@@ -46,8 +45,6 @@ int main(int argc, char *argv[], char *env[])
 		ft_exit(&mini_env, &root, &src, &info);
 		if(error_pars(root) == 1)
 		{
-			
-			
 			is_env_var(mini_env, root);
 			//afficher env apres que j'ai ajouté var env
         	printf("----------------------\n");
@@ -80,13 +77,14 @@ int main(int argc, char *argv[], char *env[])
 					// isoler les single quote faire ski a a faire
 					// isoler les double quotes faire ski ya a faire
 				}
-			*/
+			
 			}
+			*/
 			print_ast(root);
 		}
 		ft_free(NULL, &root, &src,&info);
     }
-
+}
    
    // faire ctrl c fait rien
 // faire ctr D -> quitte le shell
@@ -125,4 +123,3 @@ int main(int argc, char *argv[], char *env[])
 // si ya des guillemets
 	// simple guillemets
 	// double guillemets	
-}

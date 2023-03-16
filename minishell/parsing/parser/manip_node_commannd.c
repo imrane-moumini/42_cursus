@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   manip_node_commannd.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 22:18:31 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/13 21:53:53 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/16 19:03:29 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_com *create_com_node(t_com com, t_node *node)
+t_com *create_com_node(t_com *com, t_node *node)
 {
 	t_com *ptr;
 	ptr = malloc(sizeof(t_com));
@@ -23,14 +23,14 @@ t_com *create_com_node(t_com com, t_node *node)
 	{
 		
 		ptr -> txt = malloc(sizeof(char)* ((ft_strlen(node -> txt) + 1)));
-		ft_strcpy(ptr -> txt, node -> txt, ft_strlen(node -> txt) + 1);
+		ft_strlcpy(ptr -> txt, node -> txt, ft_strlen(node -> txt) + 1);
 		ptr -> next_sibling = NULL;
 	}
 	else
 	{
 		com -> next_sibling = ptr;
 		ptr -> txt = malloc(sizeof(char)* ((ft_strlen(node -> txt) + 1)));
-		ft_strcpy(ptr -> txt, node -> txt, ft_strlen(node -> txt) + 1);
+		ft_strlcpy(ptr -> txt, node -> txt, ft_strlen(node -> txt) + 1);
 		ptr -> next_sibling = NULL;
 	}
 	return (com);

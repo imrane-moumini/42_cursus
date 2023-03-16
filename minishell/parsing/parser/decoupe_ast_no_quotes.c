@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   decoupe_ast_no_quotes.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/13 22:40:27 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/16 19:02:53 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,18 @@
 // une fois les 2 data structure créé je free la première
 
 
-t_com **create_ast_command(t_node *root)
+t_com **create_ast_command_redir(t_node *root)
 {
 	t_com **ast;
+	t_ast  *save_ast;
+	t_node *ptr;
 	int	nbr_pipe;
 	int i;
-	
+	if (!root)
+		return (NULL);
+	ptr = root -> first_child;
 	i = 0;
-	// je compte le nbr de pipe
-	// je créer un tab de pointeur de node
-		// si ya 0 pipe je fais juste 1 tab
-		// j'alloue autant d'index qu'il y a de pipe * 2
+
 	nbr_pipe = how_much_pipe(root);
 	if (nbr_pipe > 0)
 	{
@@ -66,24 +67,25 @@ t_com **create_ast_command(t_node *root)
 		ast = malloc(sizeof(t_com *) + 1);
 		ast[1] = NULL;
 	}
+	save_ast = malloc(sizeof(save_ast));
+	save_ast -> command = NULL;
+	save_ast -> redir = NULL;
+	save_ast -> save_ptr = ptr;
 	
-	// dans chaque index que je connais l'adresse de la première node
-	// du coup la je copy node dans une node vierge
-	// je rebranche tout
-	// la premiere node je la met comme adresse de l'index
 	while (ast[i] != NULL)
 	{
-		// fonction qui decoupe command 
-			// ski est compliqué c que je dois pas prendre
-			// la redirection et ski est à sa droite immédia
-		ast[i] = // command + redir, premier butes c command et autre vytes c redir
+		save_ast = isolate_command_redir(save_ast -> save_ptr);
+		ast[i] = save_ast -> command;
+		ast[i] -> redir = save_ast -> redir; 
 		i++;
 	}
+	return (ast);
 }
 
-t_ast *isolate_command_redir(t_node *root)
+
+t_ast *isolate_command_redir(t_node *ptr)
 {
-	t_node *ptr;
+	
 	t_ast  *save_ast;
 	t_redir *redir;
 	t_com	*com;
@@ -91,10 +93,6 @@ t_ast *isolate_command_redir(t_node *root)
 	com = NULL;
 	redir = NULL;
 	save_ast = NULL;
-	if (!root)
-		return (NULL);
-	
-	ptr = root -> first_child;
 	
 	if (ptr)
 	{
@@ -112,21 +110,32 @@ t_ast *isolate_command_redir(t_node *root)
 
 			if (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1 )
 			{
-				// attention géré si g 2 fois à la suite
-				ptr = ptr -> next_sibling;
+				redir = create_redir_node(redir, ptr);
+				if (ft_stcmp(ptr -> next_sibling -> txt, "<") == 1 || ft_stcmp(ptr -> next_sibling -> txt, ">") == 1 )
+				{
+					ptr = ptr -> next_sibling;
+					ptr = ptr -> next_sibling;
+					redir = create_redir_node(redir, ptr);
+				}
+				else
+				{
+					ptr = ptr -> next_sibling;
+					redir = create_redir_node(redir, ptr);
+				}
+			}
+			if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+			{
+				com = create_com_node(com, ptr);
+				com -> txt = ptr -> txt;
 				if (ptr)
 					ptr = ptr -> next_sibling;
 			}
-			create_com_node(com);
-			com -> txt = ptr -> txt;
-			
-			ptr = ptr -> next_sibling;
 		}
 		if (ptr)
-			ptr = ptr -> next_sibling
-		save_ast = malloc(sizeof(save_ast));
+			ptr = ptr -> next_sibling;
 		save_ast -> command = com;
-		save_ast -> redir = ptr;
+		save_ast -> redir = redir;
+		save_ast -> save_ptr = ptr;
 	}
 	// la struct qui se souvient e la command + des redir
 	return (save_ast);
