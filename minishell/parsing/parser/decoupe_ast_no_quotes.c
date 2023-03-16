@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/16 21:09:59 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/16 21:27:32 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,9 +162,10 @@ t_ast *isolate_command_redir(t_node *ptr)
 			{
 				printf("c2.10.12\n");
 				com = create_com_node(com, ptr);
-				printf("c2.10.13\n");
+				// ok com existe jamais
 				if (com)
-					com -> txt = ptr -> txt;
+					printf("com exist\n");
+				printf("c2.10.13\n");
 				printf("c2.10.14\n");
 				if (ptr)
 					ptr = ptr -> next_sibling;
@@ -210,25 +211,27 @@ void print_command(t_com *com)
 {
 	t_com *ptr;
 	if (!com)
+	{
+		printf("there is nos command\n");
 		return ;
+	}
 	ptr = com;
 	printf("c4.2.1\n");
 	while (ptr)
 	{
 		ft_printf("command is \n");
-		printf("c4.2.2\n");
-		if (ptr)
-			ft_printf("%s\n",ptr -> txt);
-		printf("c4.2.3\n");
+		ft_printf("%s\n",ptr -> txt);
 		ptr = ptr -> next_sibling;
-		printf("c4.2.4\n");
 	}
 }
 void print_redir(t_redir *redir)
 {
 	t_redir *ptr;
 	if (!redir)
+	{
+		ft_printf("there is no redir for this command\n");
 		return ;
+	}
 	ptr = redir;
 	while (ptr)
 	{
