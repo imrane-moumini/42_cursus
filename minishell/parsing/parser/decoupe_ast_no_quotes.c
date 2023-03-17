@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/16 21:30:08 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/17 17:38:33 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,11 +141,12 @@ t_ast *isolate_command_redir(t_node *ptr)
 				if (ft_stcmp(ptr -> next_sibling -> txt, "<") == 1 || ft_stcmp(ptr -> next_sibling -> txt, ">") == 1 )
 				{
 					printf("c2.10.5\n");
-					ptr = ptr -> next_sibling;
+					redir = create_redir_node(redir, ptr);
+					//print_redir(redir);
 					printf("c2.10.6\n");
 					ptr = ptr -> next_sibling;
 					printf("c2.10.7\n");
-					redir = create_redir_node(redir, ptr);
+					ptr = ptr -> next_sibling;
 					printf("c2.10.8\n");
 				}
 				else
@@ -248,3 +249,4 @@ void print_redir(t_redir *redir)
 	// du coup ca segfault
 // vasy je vais voir la valeur de mes struct au fil des tours pour trouver le pb
 // g trouve, le pb c aue ast -> command et redir existe pas
+// c bon command regler , la faut je fix pk redir existe pas quand jen creer

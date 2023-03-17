@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 22:17:30 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/16 19:06:05 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/17 17:41:48 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 t_redir *create_redir_node(t_redir *redir, t_node *node)
 {
 	t_redir *ptr;
+	t_redir *follow;
+	
 	ptr = malloc(sizeof(t_redir));
 	if (!node)
 		return (NULL);
@@ -29,6 +31,7 @@ t_redir *create_redir_node(t_redir *redir, t_node *node)
 		ptr -> txt = malloc(sizeof(char)* ((ft_strlen(node -> txt) + 1)));
 		ft_strlcpy(ptr -> txt, node -> txt, ft_strlen(node -> txt) + 1);
 		ptr -> next_sibling = NULL;
+		redir = ptr;
         if (ft_stcmp(ptr -> txt, "<") == 1 && ptr -> next_sibling && ft_stcmp(ptr -> next_sibling -> txt, "<") == 1)  
         {
             ptr -> heredoc = 1;
@@ -56,11 +59,13 @@ t_redir *create_redir_node(t_redir *redir, t_node *node)
             return (redir);
         }
         ptr -> file = 1;
-            
 	}
 	else
 	{
-		redir -> next_sibling = ptr;
+		follow = redir;
+		while (follow -> next_sibling != NULL)
+			follow = follow -> next_sibling;
+		follow -> next_sibling = ptr;
 		ptr -> txt = malloc(sizeof(char)* ((ft_strlen(node -> txt) + 1)));
         ptr -> file = 1;
 		ft_strlcpy(ptr -> txt, node -> txt, ft_strlen(node -> txt) + 1);
