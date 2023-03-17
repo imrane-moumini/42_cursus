@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/17 17:38:33 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/17 18:15:07 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,10 @@ t_ast *isolate_command_redir(t_node *ptr)
 				{
 					printf("c2.10.5\n");
 					redir = create_redir_node(redir, ptr);
-					//print_redir(redir);
+					printf("redir exist\n");
+					printf("first redir is %s\n", redir -> txt);
+					printf("redir is :\n");
+					print_redir(redir);
 					printf("c2.10.6\n");
 					ptr = ptr -> next_sibling;
 					printf("c2.10.7\n");

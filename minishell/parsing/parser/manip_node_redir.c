@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 22:17:30 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/17 17:41:48 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/17 18:35:39 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ t_redir *create_redir_node(t_redir *redir, t_node *node)
 	if (!node)
 		return (NULL);
 	// si existe pas t la tete sinon t kle suivant
+	if (node)
+		printf("node is => %s\n",node -> txt);
+	if (node -> next_sibling)
+		printf("node next is => %s\n",node -> next_sibling -> txt);
 	if (!redir)
 	{
         ptr -> heredoc = 0;
@@ -32,29 +36,34 @@ t_redir *create_redir_node(t_redir *redir, t_node *node)
 		ft_strlcpy(ptr -> txt, node -> txt, ft_strlen(node -> txt) + 1);
 		ptr -> next_sibling = NULL;
 		redir = ptr;
-        if (ft_stcmp(ptr -> txt, "<") == 1 && ptr -> next_sibling && ft_stcmp(ptr -> next_sibling -> txt, "<") == 1)  
+		printf("c2.10.5.1\n");
+        if (ft_stcmp(node -> txt, "<") == 1 && node -> next_sibling && ft_stcmp(node -> next_sibling -> txt, "<") == 1)  
         {
+			printf("c2.10.5.2\n");
             ptr -> heredoc = 1;
             free(ptr -> txt);
             ptr -> txt = malloc(sizeof(char) * 3);
             ft_strlcpy(ptr -> txt, "<<", 3);
             return (redir);
         }
-        if (ft_stcmp(ptr -> txt, "<") == 1 && ptr -> next_sibling && ft_stcmp(ptr -> next_sibling -> txt, "<") != 1)  
+        if (ft_stcmp(node -> txt, "<") == 1 && node -> next_sibling && ft_stcmp(node -> next_sibling -> txt, "<") != 1)  
         {
+			printf("c2.10.5.3\n");
             ptr -> in_file = 1;
             return (redir);
         }
-        if (ft_stcmp(ptr -> txt, ">") == 1 && ptr -> next_sibling && ft_stcmp(ptr -> next_sibling -> txt, ">") == 1)  
+        if (ft_stcmp(node -> txt, ">") == 1 && node -> next_sibling && ft_stcmp(node -> next_sibling -> txt, ">") == 1)  
         {
+			printf("c2.10.5.4\n");
             ptr -> append = 1;
             free(ptr -> txt);
             ptr -> txt = malloc(sizeof(char) * 3);
             ft_strlcpy(ptr -> txt, ">>", 3);
             return (redir);
         }
-        if (ft_stcmp(ptr -> txt, ">") == 1 && ptr -> next_sibling && ft_stcmp(ptr -> next_sibling -> txt, ">") != 1)  
+        if (ft_stcmp(node -> txt, ">") == 1 && node -> next_sibling && ft_stcmp(node -> next_sibling -> txt, ">") != 1)  
         {
+			printf("c2.10.5.5\n");
             ptr -> out_file= 1;
             return (redir);
         }
@@ -62,6 +71,7 @@ t_redir *create_redir_node(t_redir *redir, t_node *node)
 	}
 	else
 	{
+		printf("c2.10.5.6\n");
 		follow = redir;
 		while (follow -> next_sibling != NULL)
 			follow = follow -> next_sibling;
@@ -70,6 +80,8 @@ t_redir *create_redir_node(t_redir *redir, t_node *node)
         ptr -> file = 1;
 		ft_strlcpy(ptr -> txt, node -> txt, ft_strlen(node -> txt) + 1);
 		ptr -> next_sibling = NULL;
+		printf("c2.10.5.7\n");
 	}
+	printf("c2.10.5.8\n");
 	return (redir);
 }
