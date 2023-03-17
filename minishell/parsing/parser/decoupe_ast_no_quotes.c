@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/17 19:56:04 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/17 21:48:55 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,71 +129,45 @@ t_ast *isolate_command_redir(t_node *ptr)
 	save_ast -> save_ptr = ptr;
 	if (ptr)
 	{
+		// decoupe la command et arguments
 		printf("c2.10.1\n");
-		while (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+		while (ptr && ft_stcmp(ptr -> txt, "|") != 1 && ft_stcmp(ptr -> txt, "<") != 1 && ft_stcmp(ptr -> txt, ">") != 1)
 		{
-			printf("c2.10.2\n");
-			if (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1 )
+			com = create_com_node(com, ptr);
+			ptr = ptr -> next_sibling;
+		}
+		// decoupe redir 
+		if (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1 )
+		{
+			while (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 			{
 				if (ft_stcmp(ptr -> next_sibling -> txt, "<") == 1 || ft_stcmp(ptr -> next_sibling -> txt, ">") == 1 )
 				{
-					printf("c2.10.5\n");
 					redir = create_redir_node(redir, ptr);
-					if (redir)
-					{
-						printf("redir exist\n");
-						printf("first redir is %s\n", redir -> txt);
-						printf("redir is :\n");
-						print_redir(redir);
-					}
-					printf("c2.10.6\n");
 					ptr = ptr -> next_sibling;
-					printf("c2.10.7\n");
 					ptr = ptr -> next_sibling;
-					printf("c2.10.8\n");
 					redir = create_redir_node(redir, ptr);
 				}
 				else
 				{
-					printf("c2.10.9\n");
 					redir = create_redir_node(redir, ptr);
-					printf("c2.10.10\n");
 					ptr = ptr -> next_sibling;
-					printf("c2.10.11\n");
 					redir = create_redir_node(redir, ptr);
-
 				}
-			}
-			// ok le pb se trouve vers la, genre je creer rien au final, a guetter
-			if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
-			{
-				printf("c2.10.12\n");
-				com = create_com_node(com, ptr);
-				// ok com existe jamais
-				// ok regler le pb , maintenant le pb c que ca saute un mot
-				if (com)
-					printf("com exist\n");
-				printf("c2.10.13\n");
-				printf("c2.10.14\n");
-				if (ptr)
-					ptr = ptr -> next_sibling;
-				printf("c2.10.15\n");
+				ptr = ptr -> next_sibling;
 			}
 		}
+	// avance prochaine command
 		if (ptr)
 			ptr = ptr -> next_sibling;
-		printf("c2.10.16\n");
+		// sauvegarde debut prochainne command + redir + command
 		if (save_ast)
 		{
 			save_ast -> command = com;
-			printf("c2.10.17\n");
 			save_ast -> redir = redir;
-			printf("c2.10.18\n");
 			save_ast -> save_ptr = ptr;
-			printf("c2.10.19\n");
 		}
 	}
-	// la struct qui se souvient e la command + des redir
 	return (save_ast);
 }
 
@@ -257,3 +231,7 @@ void print_redir(t_redir *redir)
 // vasy je vais voir la valeur de mes struct au fil des tours pour trouver le pb
 // g trouve, le pb c aue ast -> command et redir existe pas
 // c bon command regler , la faut je fix pk redir existe pas quand jen creer
+// c bon j'ai regler redir mais il semble manquer un elemt a la redir, en fiat ce qui vient apres la redir va dans la command
+
+
+// faudra a la fin aue je free toutes les structure que g creer avant la final

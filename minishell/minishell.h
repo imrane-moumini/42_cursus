@@ -64,6 +64,14 @@ typedef struct com_node
 } t_com;
 
 
+typedef struct final
+{
+    char **cmds;
+    t_redir *redir;
+    
+    struct final *next;
+} t_final;
+
 
 /*node of a command*/
 typedef struct ast
