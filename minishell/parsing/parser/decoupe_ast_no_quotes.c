@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/17 18:15:07 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/17 19:56:04 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,30 +135,33 @@ t_ast *isolate_command_redir(t_node *ptr)
 			printf("c2.10.2\n");
 			if (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1 )
 			{
-				printf("c2.10.3\n");
-				redir = create_redir_node(redir, ptr);
-				printf("c2.10.4\n");
 				if (ft_stcmp(ptr -> next_sibling -> txt, "<") == 1 || ft_stcmp(ptr -> next_sibling -> txt, ">") == 1 )
 				{
 					printf("c2.10.5\n");
 					redir = create_redir_node(redir, ptr);
-					printf("redir exist\n");
-					printf("first redir is %s\n", redir -> txt);
-					printf("redir is :\n");
-					print_redir(redir);
+					if (redir)
+					{
+						printf("redir exist\n");
+						printf("first redir is %s\n", redir -> txt);
+						printf("redir is :\n");
+						print_redir(redir);
+					}
 					printf("c2.10.6\n");
 					ptr = ptr -> next_sibling;
 					printf("c2.10.7\n");
 					ptr = ptr -> next_sibling;
 					printf("c2.10.8\n");
+					redir = create_redir_node(redir, ptr);
 				}
 				else
 				{
 					printf("c2.10.9\n");
-					ptr = ptr -> next_sibling;
-					printf("c2.10.10\n");
 					redir = create_redir_node(redir, ptr);
+					printf("c2.10.10\n");
+					ptr = ptr -> next_sibling;
 					printf("c2.10.11\n");
+					redir = create_redir_node(redir, ptr);
+
 				}
 			}
 			// ok le pb se trouve vers la, genre je creer rien au final, a guetter
@@ -238,10 +241,11 @@ void print_redir(t_redir *redir)
 		return ;
 	}
 	ptr = redir;
-	while (ptr)
+	if (ptr)
 	{
-		ft_printf("redir is =>%s\n");
+		ft_printf("redir is \n");
 		ft_printf("%s\n",ptr -> txt);
+		printf("im here\n");
 		ptr = ptr -> next_sibling;
 	}
 }
