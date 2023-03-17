@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/17 22:18:31 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/17 22:47:10 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ t_ast *isolate_command_redir(t_node *ptr)
 		// decoupe redir 
 		if (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1 )
 		{
+			// soit je saute un en trop, soit je veski le deuxieme 
+			// genre rentre pas dans la condition
 			printf("c2.10.5\n");
 			while (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 			{
@@ -256,3 +258,7 @@ void print_redir(t_redir *redir)
 
 
 // faudra a la fin aue je free toutes les structure que g creer avant la final
+
+// c bon regler pb redir, le pb c que ca renvoi les append et here doc que la premiere fois 
+//apres ca transforme en in file et out file
+// voir aussi si plusieurs command separer par pipe ca fomctionne
