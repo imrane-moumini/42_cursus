@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 22:17:30 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/17 18:35:39 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/17 22:18:42 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,11 @@ t_redir *create_redir_node(t_redir *redir, t_node *node)
 		ft_strlcpy(ptr -> txt, node -> txt, ft_strlen(node -> txt) + 1);
 		ptr -> next_sibling = NULL;
 		printf("c2.10.5.7\n");
+		//printf("after add ok, redir is :\n");
+		//print_redir(redir);
 	}
 	printf("c2.10.5.8\n");
 	return (redir);
 }
+
+// le ok ne semble pas ce rajouter ou redir affiche pas tout jusquq bout
