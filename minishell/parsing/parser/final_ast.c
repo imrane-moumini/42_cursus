@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:53:16 by imoumini          #+#    #+#             */
-/*   Updated: 2023/03/18 22:41:51 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/18 22:51:41 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_final *create_final_ast(t_com **ast)
 	return (final);
 }
 
-t_final create_list_final_ast(t_final *final, t_com *ast)
+t_final *create_list_final_ast(t_final *final, t_com *ast)
 {
 	t_final *ptr;
 	t_final *follow;
@@ -36,8 +36,8 @@ t_final create_list_final_ast(t_final *final, t_com *ast)
 		return (NULL);
 	if (!final)
 	{
-		ptr -> cmds = break_linked_list_in_double_tab(ast -> command);
-		ptr -> redir = ast -> redir
+		ptr -> cmds = break_linked_list_in_double_tab(ast);
+		ptr -> redir = ast -> redir;
 		ptr -> next_sibling = NULL;
 		final = ptr;
 	}
@@ -47,8 +47,8 @@ t_final create_list_final_ast(t_final *final, t_com *ast)
 		while (follow -> next_sibling != NULL)
 			follow = follow -> next_sibling;
 		follow -> next_sibling = ptr;
-		ptr -> cmds = break_linked_list_in_double_tab(ast -> command);
-		ptr -> redir = ast -> redir
+		ptr -> cmds = break_linked_list_in_double_tab(ast);
+		ptr -> redir = ast -> redir;
 		ptr -> next_sibling = NULL;
 	}
 	return (final);
@@ -67,12 +67,13 @@ char **break_linked_list_in_double_tab(t_com *com)
 	if (!com)
 		return (NULL);
 	follow = com;
-	tab = malloc(sizeof(char *) * (ft_com_len(com) + 1))
+	tab = malloc(sizeof(char *) * (ft_com_len(com) + 1));
 	while (follow)
 	{
-		tab[i] = malloc(sizeof(char) * (ft_strlen(follow -> command -> txt) + 1));
-		tab[i] = ft_strlcpy(tab[i], follow -> command -> txt, (ft_strlen(follow -> command -> txt) + 1));
+		tab[i] = malloc(sizeof(char) * (ft_strlen(follow -> txt) + 1));
+		ft_strlcpy(tab[i], follow -> txt, (ft_strlen(follow -> txt) + 1));
 		follow = follow -> next_sibling;
+		i++;
 	}
 	return (tab);
 }
@@ -91,3 +92,5 @@ int ft_com_len(t_com *com)
 	}
 	return (i);
 }
+
+// creer fonction qui qffiche ma final structure pour voir si ca a fonctionner

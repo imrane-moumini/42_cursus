@@ -190,7 +190,7 @@ t_redir *create_redir_node(t_redir *redir, t_node *node);
 
 /*create final data structure */
 t_final *create_final_ast(t_com **ast);
-t_final create_list_final_ast(t_final *final, t_com *ast);
+t_final *create_list_final_ast(t_final *final, t_com *ast);
 char **break_linked_list_in_double_tab(t_com *com);
 int ft_com_len(t_com *com);
 #endif
