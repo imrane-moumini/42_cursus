@@ -6,43 +6,11 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/18 21:28:05 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/18 21:41:05 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-// free nouveaux ast
-	// free ast command et argument
-	// free ast pipe, redirection et nom de fichier à créer
-
-// si ast oipe et redirection = NULL c que ya pas de redirection ou pipe
-
-// ast redirection et nom de fichier à créer
-// en fait je met juste redirection et fichier
-// pipe pas besoin car je lke saurais au nbr de command
-// pour cahque commanbd je mets la redirection et le fichier
-// je vaius lire en premier ce fichier pour savoir si ya infile
-	// en fait je compte ke nombre de pipe 
-		// j'aurais le, nbr de command 
-			// si ya plus d'une command c que l'input de la prochaine est la sortie de la précedente
-			
-	// seukl le pipe separe les command
-	// la redirection est a linterieur d'unne command
-	// un tableau par commande
-	// si ya quotes je regroupe pour avoir double quote et pas 2 simple quotes
-	// je les mets à la suite
-	// si ya quote ou double quotes ce qui se trouve à la droite imédiat c le nom du fichier
-	// tu sais que si ya pipe le nombre de command = nombre de pipe *2
-	
-// ast command et arguments
-	// je créer un tableau qui contient des list chainé
-		// chaque index représnete une command , la liste se terlmine  par NULL
-	// tout ce qui est avant les redirection et les pipes
-	// je doit retirer les guillemest quand j'envoie à excecv
-	
-// une fois les 2 data structure créé je free la première
-
 
 t_com **create_ast_command_redir(t_node *root)
 {
@@ -53,64 +21,35 @@ t_com **create_ast_command_redir(t_node *root)
 	int i;
 	
 	save_ast = NULL;
-	printf("c2.1\n");
 	if (!root)
 		return (NULL);
 	ptr = root -> first_child;
 	i = 0;
-	printf("c2.2\n");
 	nbr_pipe = how_much_pipe(root);
-	printf("nbr of pipe is %i\n", nbr_pipe);
-	printf("c2.3\n");
-	//  mais en vrai c normal, ast existe mais ast de i nexiste pas
 	if (nbr_pipe > 0)
 	{
-		printf("c2.4\n");
 		ast = malloc(sizeof(t_com *) * ((nbr_pipe + 1) + 1));
-		printf("c2.5\n");
 		ast[(nbr_pipe + 1)] = NULL;
-		if (ast[i])
-			printf("ast existe\n");
 	}
 	else
 	{
-		printf("c2.6\n");
 		ast = malloc(sizeof(t_com *) + 1);
-		printf("c2.7\n");
 		ast[1] = NULL;
-		printf("c2.8\n");
 		nbr_pipe = 1;
 	}
 
-	printf("c2.9\n");
-	
 	while (nbr_pipe >= 0)
 	{
-		printf("c2.10\n");
-		// le pb c ici dans save-ast command et redir existe pas, voir pk
 		if (save_ast)
-		{
-			printf("save ast  exist\n");
 			save_ast = isolate_command_redir(save_ast -> save_ptr);
-		}
 		else
-		{
-			printf("save ast not exist\n");
 			save_ast = isolate_command_redir(ptr);
-		}
-		printf("c2.11\n");
 		
 		if (save_ast)
 		{
-			if (save_ast -> command)
-				printf("command exist\n");
-			if (save_ast -> redir)
-				printf("redir exist\n");
 			ast[i] = save_ast -> command;
-			printf("c2.12\n");
 			if (ast[i])
 				ast[i] -> redir = save_ast -> redir;
-			printf("c2.13\n");
 		}
 		nbr_pipe--;
 		i++;
@@ -136,78 +75,51 @@ t_ast *isolate_command_redir(t_node *ptr)
 	if (ptr)
 	{
 		// decoupe la command et arguments
-		printf("c2.10.1\n");
 		while (ptr && ft_stcmp(ptr -> txt, "|") != 1 && ft_stcmp(ptr -> txt, "<") != 1 && ft_stcmp(ptr -> txt, ">") != 1)
 		{
-			printf("c2.10.2\n");
 			com = create_com_node(com, ptr);
-			printf("c2.10.3\n");
 			ptr = ptr -> next_sibling;
-			printf("c2.10.4\n");
 		}
-		// decoupe redir 
-		// ok ca deconne parfois considerer comme redir parfois comme command voir ski spasse
-		// e fait le pb c que ya 6 command mais il rentre les dernieres dans la 5, genre la 5 et 6 sont combinee
-		// en fait le pb c que au lieu de sarrerter a la | il la compte comme une redir
 		if (ptr)
 		{
 			if (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1 )
 			{
-				printf("c2.10.5\n");
 				while (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 				{
-					printf("c2.10.6\n");
 					if ((ptr -> next_sibling  && ft_stcmp(ptr -> next_sibling -> txt, "<") == 1) || (ptr -> next_sibling  && (ft_stcmp(ptr -> next_sibling -> txt, ">") == 1 )))
 					{
-						printf("c2.10.7\n");
 						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 							redir = create_redir_node(redir, ptr);
-						printf("c2.10.8\n");
 						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 							ptr = ptr -> next_sibling;
-						printf("c2.10.9\n");
 						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 							ptr = ptr -> next_sibling;
-						printf("c2.10.10\n");
-						printf("after >> my value is %s\n", ptr -> txt);
 						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 							redir = create_redir_node(redir, ptr);
-						printf("c2.10.11\n");
 					}
 					else if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 					{
-						printf("c2.10.12\n");
 						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 							redir = create_redir_node(redir, ptr);
-						printf("c2.10.13\n");
 						if (ptr)
 							ptr = ptr -> next_sibling;
-						printf("c2.10.14\n");
 						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 							redir = create_redir_node(redir, ptr);
-						printf("c2.10.15\n");
 					}
-					printf("c2.10.16\n");
 					if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 						ptr = ptr -> next_sibling;
-					printf("c2.10.17\n");
 				}
 			}
 		}
 	// avance prochaine command
 		if (ptr)
 			ptr = ptr -> next_sibling;
-		printf("c2.10.18\n");
 		// sauvegarde debut prochainne command + redir + command
 		if (save_ast)
 		{
-			printf("c2.10.19\n");
 			save_ast -> command = com;
-			printf("c2.10.20\n");
 			save_ast -> redir = redir;
-			printf("c2.10.21\n");
 			save_ast -> save_ptr = ptr;
-			printf("c2.10.22\n");
 		}
 	}
 	return (save_ast);
@@ -239,7 +151,6 @@ void print_command(t_com *com)
 		return ;
 	}
 	ptr = com;
-	printf("c4.2.1\n");
 	while (ptr)
 	{
 		ft_printf("command is \n");
@@ -263,19 +174,3 @@ void print_redir(t_redir *redir)
 		ptr = ptr -> next_sibling;
 	}
 }
-
-// mes fnctions return NULL savoir pk
-// mme ptr -> txt n'exsite pas
-	// carrement je crois que ca vaut meme pas nul genre jlai meem pas alouer ou jsai pas
-	// du coup ca segfault
-// vasy je vais voir la valeur de mes struct au fil des tours pour trouver le pb
-// g trouve, le pb c aue ast -> command et redir existe pas
-// c bon command regler , la faut je fix pk redir existe pas quand jen creer
-// c bon j'ai regler redir mais il semble manquer un elemt a la redir, en fiat ce qui vient apres la redir va dans la command
-
-
-// faudra a la fin aue je free toutes les structure que g creer avant la final
-
-// c bon regler pb redir, le pb c que ca renvoi les append et here doc que la premiere fois 
-//apres ca transforme en in file et out file
-// voir aussi si plusieurs command separer par pipe ca fomctionne

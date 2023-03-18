@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/16 20:21:27 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/18 21:43:10 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,30 +105,8 @@ int main(int argc, char *argv[], char *env[])
 
 // faire norminette
 
-// juste avant de expand
-// gerer les meta caractères en plus de $
-	// gerer les guillemets
-		// gerer les meta caracterere à ne pas gerer
-
-// demander à mathiru
-	//meta caractere et guillemets
-	// rl_on new line des signaux et bautre fnctions et dire moi ça a rien fait
-	// ya pas a free comme c une nouvelle commande genre ça  a déjà été free ava,t
-
-// le truc des guillemets je vais le gérer dans le decoupage final
-// en fait a la fin de la boucle je rajoute la fonction decoupage ce que je renvoie
-// je fais une focntion qui regarde si ya des guillemets ou pas
-	// si ya je regarde si simple ou double
-	// deccoupage différente en fonction si ya ou non guillemets
-	// mais du coup j'expand que après avoir fait ça, je fais plus ma logique d'expand directr
-
-// si ya pas de guillemets
-// k'envoi tout si ya pas de > ou de |
-	// si ya >, j'envoie ce qui est avant
-		// je sauvegarde le > + ce qui se trouve imédiatement après 
-		// si ya des trics après le treuc immédia bahb c'est que ya un pipe
-		// je découpe ce qui ya après le pipe et je sauvegarde le pipe quelque part
-
-// si ya des guillemets
+// si des guillemets
 	// simple guillemets
-	// double guillemets	
+	// double guillemets
+
+// valgrind

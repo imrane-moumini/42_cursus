@@ -11,6 +11,7 @@ SRC = main.c \
 	parsing/parser/in_out.c \
 	parsing/parser/manip_env.c \
 	parsing/parser/decoupe_ast_no_quotes.c \
+	parsing/parser/final_ast.c \
 	parsing/parser/manip_node_commannd.c \
 	parsing/parser/manip_node_redir.c \
 	signaux/signal.c \
