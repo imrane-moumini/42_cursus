@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/18 19:46:25 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/18 20:41:20 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,42 +146,43 @@ t_ast *isolate_command_redir(t_node *ptr)
 			printf("c2.10.4\n");
 		}
 		// decoupe redir 
-		if (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1 )
+		if (ptr)
 		{
-			// soit je saute un en trop, soit je veski le deuxieme 
-			// genre rentre pas dans la condition
-			// ok jere ntre dans la condition  mais j'ai juste pas penser
-			// que dans la fonction reproduire la condition
-			printf("c2.10.5\n");
-			while (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+			if (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1 )
 			{
-				printf("c2.10.6\n");
-				if (ft_stcmp(ptr -> next_sibling -> txt, "<") == 1 || ft_stcmp(ptr -> next_sibling -> txt, ">") == 1 )
+				printf("c2.10.5\n");
+				while (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 				{
-					printf("c2.10.7\n");
-					redir = create_redir_node(redir, ptr);
-					printf("c2.10.8\n");
-					ptr = ptr -> next_sibling;
-					printf("c2.10.9\n");
-					ptr = ptr -> next_sibling;
-					printf("c2.10.10\n");
-					printf("after >> my value is %s\n", ptr -> txt);
-					redir = create_redir_node(redir, ptr);
-					printf("c2.10.11\n");
+					printf("c2.10.6\n");
+					if ((ptr -> next_sibling  && ft_stcmp(ptr -> next_sibling -> txt, "<") == 1) || (ptr -> next_sibling  && (ft_stcmp(ptr -> next_sibling -> txt, ">") == 1 )))
+					{
+						printf("c2.10.7\n");
+						redir = create_redir_node(redir, ptr);
+						printf("c2.10.8\n");
+						ptr = ptr -> next_sibling;
+						printf("c2.10.9\n");
+						ptr = ptr -> next_sibling;
+						printf("c2.10.10\n");
+						printf("after >> my value is %s\n", ptr -> txt);
+						redir = create_redir_node(redir, ptr);
+						printf("c2.10.11\n");
+					}
+					else
+					{
+						printf("c2.10.12\n");
+						redir = create_redir_node(redir, ptr);
+						printf("c2.10.13\n");
+						if (ptr)
+							ptr = ptr -> next_sibling;
+						printf("c2.10.14\n");
+						redir = create_redir_node(redir, ptr);
+						printf("c2.10.15\n");
+					}
+					printf("c2.10.16\n");
+					if (ptr)
+						ptr = ptr -> next_sibling;
+					printf("c2.10.17\n");
 				}
-				else
-				{
-					printf("c2.10.12\n");
-					redir = create_redir_node(redir, ptr);
-					printf("c2.10.13\n");
-					ptr = ptr -> next_sibling;
-					printf("c2.10.14\n");
-					redir = create_redir_node(redir, ptr);
-					printf("c2.10.15\n");
-				}
-				printf("c2.10.16\n");
-				ptr = ptr -> next_sibling;
-				printf("c2.10.17\n");
 			}
 		}
 	// avance prochaine command
