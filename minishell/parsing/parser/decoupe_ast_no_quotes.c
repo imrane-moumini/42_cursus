@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/18 20:41:20 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/18 21:28:05 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,9 @@ t_ast *isolate_command_redir(t_node *ptr)
 			printf("c2.10.4\n");
 		}
 		// decoupe redir 
+		// ok ca deconne parfois considerer comme redir parfois comme command voir ski spasse
+		// e fait le pb c que ya 6 command mais il rentre les dernieres dans la 5, genre la 5 et 6 sont combinee
+		// en fait le pb c que au lieu de sarrerter a la | il la compte comme une redir
 		if (ptr)
 		{
 			if (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1 )
@@ -157,29 +160,35 @@ t_ast *isolate_command_redir(t_node *ptr)
 					if ((ptr -> next_sibling  && ft_stcmp(ptr -> next_sibling -> txt, "<") == 1) || (ptr -> next_sibling  && (ft_stcmp(ptr -> next_sibling -> txt, ">") == 1 )))
 					{
 						printf("c2.10.7\n");
-						redir = create_redir_node(redir, ptr);
+						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+							redir = create_redir_node(redir, ptr);
 						printf("c2.10.8\n");
-						ptr = ptr -> next_sibling;
+						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+							ptr = ptr -> next_sibling;
 						printf("c2.10.9\n");
-						ptr = ptr -> next_sibling;
+						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+							ptr = ptr -> next_sibling;
 						printf("c2.10.10\n");
 						printf("after >> my value is %s\n", ptr -> txt);
-						redir = create_redir_node(redir, ptr);
+						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+							redir = create_redir_node(redir, ptr);
 						printf("c2.10.11\n");
 					}
-					else
+					else if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 					{
 						printf("c2.10.12\n");
-						redir = create_redir_node(redir, ptr);
+						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+							redir = create_redir_node(redir, ptr);
 						printf("c2.10.13\n");
 						if (ptr)
 							ptr = ptr -> next_sibling;
 						printf("c2.10.14\n");
-						redir = create_redir_node(redir, ptr);
+						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+							redir = create_redir_node(redir, ptr);
 						printf("c2.10.15\n");
 					}
 					printf("c2.10.16\n");
-					if (ptr)
+					if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 						ptr = ptr -> next_sibling;
 					printf("c2.10.17\n");
 				}
