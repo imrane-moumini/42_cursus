@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/18 18:12:56 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/18 19:46:25 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,17 @@ t_com **create_ast_command_redir(t_node *root)
 	i = 0;
 	printf("c2.2\n");
 	nbr_pipe = how_much_pipe(root);
+	printf("nbr of pipe is %i\n", nbr_pipe);
 	printf("c2.3\n");
+	//  mais en vrai c normal, ast existe mais ast de i nexiste pas
 	if (nbr_pipe > 0)
 	{
 		printf("c2.4\n");
-		ast = malloc(sizeof(t_com *) * ((nbr_pipe *2) + 1));
+		ast = malloc(sizeof(t_com *) * ((nbr_pipe + 1) + 1));
 		printf("c2.5\n");
-		ast[(nbr_pipe *2)] = NULL;
+		ast[(nbr_pipe + 1)] = NULL;
+		if (ast[i])
+			printf("ast existe\n");
 	}
 	else
 	{
@@ -75,22 +79,23 @@ t_com **create_ast_command_redir(t_node *root)
 		printf("c2.7\n");
 		ast[1] = NULL;
 		printf("c2.8\n");
+		nbr_pipe = 1;
 	}
 
 	printf("c2.9\n");
 	
-	while (ast[i] != NULL)
+	while (nbr_pipe >= 0)
 	{
 		printf("c2.10\n");
 		// le pb c ici dans save-ast command et redir existe pas, voir pk
 		if (save_ast)
 		{
-			printf("i exist\n");
+			printf("save ast  exist\n");
 			save_ast = isolate_command_redir(save_ast -> save_ptr);
 		}
 		else
 		{
-			printf("im not exist\n");
+			printf("save ast not exist\n");
 			save_ast = isolate_command_redir(ptr);
 		}
 		printf("c2.11\n");
@@ -107,6 +112,7 @@ t_com **create_ast_command_redir(t_node *root)
 				ast[i] -> redir = save_ast -> redir;
 			printf("c2.13\n");
 		}
+		nbr_pipe--;
 		i++;
 	}
 	return (ast);
@@ -204,12 +210,11 @@ void print_final_ast(t_com **ast)
 	printf("c4.1\n");
 	while(ast[i])
 	{
+		
 		ft_printf("------------------------\n");
-		printf("c4.2\n");
+		printf("command %i is :\n", i);
 		print_command(ast[i]);
-		printf("c4.3\n");
 		print_redir(ast[i] -> redir);
-		printf("c4.4\n");
 		ft_printf("------------------------\n");
 		i++;
 	}
