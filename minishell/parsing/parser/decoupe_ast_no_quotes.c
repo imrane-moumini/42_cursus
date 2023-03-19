@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/18 21:41:05 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/19 19:02:33 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ t_com **create_ast_command_redir(t_node *root)
 {
 	t_com **ast;
 	t_ast  *save_ast;
+	t_ast *save_save_ast;
 	t_node *ptr;
 	int	nbr_pipe;
 	int i;
@@ -38,10 +39,19 @@ t_com **create_ast_command_redir(t_node *root)
 		nbr_pipe = 1;
 	}
 
+	// c vers la que je dois free save ast sans que ca nike ma logique
+	// jvai creer une valeur de save 
+	// jvai passer le vrai a la fonction puis free la valeur de save
+	// voir le moment opportun pour free 
 	while (nbr_pipe >= 0)
 	{
 		if (save_ast)
+		{
+			// je me souvien de lancienne valeur de save ast
+			save_save_ast = save_ast;
+			// isolate cree save_ast (un nouveau save ast)
 			save_ast = isolate_command_redir(save_ast -> save_ptr);
+		}
 		else
 			save_ast = isolate_command_redir(ptr);
 		
@@ -51,9 +61,12 @@ t_com **create_ast_command_redir(t_node *root)
 			if (ast[i])
 				ast[i] -> redir = save_ast -> redir;
 		}
+		// c ici quon free lancien save ast
+		free(save_save_ast);
 		nbr_pipe--;
 		i++;
 	}
+	free(save_ast);
 	return (ast);
 }
 

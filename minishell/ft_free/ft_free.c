@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:06:18 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/19 18:30:08 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/19 19:03:14 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void ft_free_before_final_ast(t_com ***ast_before)
 	free(ast);
 	ast_before = NULL;
 }
+
 void ft_free_final_ast(t_final **ast_before)
 {
 	t_final *ast;
