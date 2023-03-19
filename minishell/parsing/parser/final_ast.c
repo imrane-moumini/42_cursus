@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:53:16 by imoumini          #+#    #+#             */
-/*   Updated: 2023/03/19 16:09:26 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/19 16:16:39 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,21 +112,23 @@ void printf_final_ast(t_final *final)
 		ft_printf("---------------------------\n");
 		ft_printf("for command %i :\n", i);
 		ft_printf("command is : \n");
-		while (follow -> command[i])
+		while (follow -> cmds[i])
 		{
-			while(follow -> command[i][j])
+			while(follow -> cmds[i][j])
 			{
-				ft_printf("%s\n", follow -> command[i][j]);
-				j++
+				ft_printf("%s\n", follow -> cmds[i][j]);
+				j++;
 			}
 			i++;
 		}
 		ft_printf("redir is : \n");
-		follow_redir = follow -> redir
+		follow_redir = follow -> redir;
+		if (!follow_redir)
+			ft_printf("this command as no redir\n");
 		while (follow_redir)
 		{
 			ft_printf("%s, heredoc : %i, in_file : %i, out_file : %i, append : %i, file : %i\n", follow_redir -> txt, follow_redir -> heredoc, follow_redir -> in_file, follow_redir -> out_file, follow_redir -> append, follow_redir -> file);
-			follow_redir = follow_redir -> next_sibling
+			follow_redir = follow_redir -> next_sibling;
 		}
 		i = 0;
 		j = 0;
