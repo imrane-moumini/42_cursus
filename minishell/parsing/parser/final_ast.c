@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:53:16 by imoumini          #+#    #+#             */
-/*   Updated: 2023/03/19 16:16:39 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:06:19 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_final *create_list_final_ast(t_final *final, t_com *ast)
 {
 	t_final *ptr;
 	t_final *follow;
+
 	ptr = malloc(sizeof(t_final));
 	if (!ast)
 		return (NULL);
@@ -61,9 +62,6 @@ char **break_linked_list_in_double_tab(t_com *com)
 	int i;
 	
 	i = 0;
-	// taille du tab = command + argument duene command
-	// nbr argument = taille de la linked list
-	// tailldes tab[i] = nbr de car de command ou arg
 	if (!com)
 		return (NULL);
 	follow = com;
@@ -110,15 +108,11 @@ void printf_final_ast(t_final *final)
 	while (follow)
 	{
 		ft_printf("---------------------------\n");
-		ft_printf("for command %i :\n", i);
+		ft_printf("for command %i :\n", j);
 		ft_printf("command is : \n");
 		while (follow -> cmds[i])
 		{
-			while(follow -> cmds[i][j])
-			{
-				ft_printf("%s\n", follow -> cmds[i][j]);
-				j++;
-			}
+			ft_printf("%s\n", follow -> cmds[i]);
 			i++;
 		}
 		ft_printf("redir is : \n");
@@ -131,7 +125,7 @@ void printf_final_ast(t_final *final)
 			follow_redir = follow_redir -> next_sibling;
 		}
 		i = 0;
-		j = 0;
+		j++;
 		follow = follow -> next_sibling;
 	}
 }
