@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:53:16 by imoumini          #+#    #+#             */
-/*   Updated: 2023/03/18 22:51:41 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/19 16:09:26 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,3 +94,42 @@ int ft_com_len(t_com *com)
 }
 
 // creer fonction qui qffiche ma final structure pour voir si ca a fonctionner
+
+void printf_final_ast(t_final *final)
+{
+	t_final *follow;
+	t_redir *follow_redir;
+	int i;
+	int j;
+	
+	j = 0;
+	i = 0;
+	if (!final)
+		return ;
+	follow = final;
+	while (follow)
+	{
+		ft_printf("---------------------------\n");
+		ft_printf("for command %i :\n", i);
+		ft_printf("command is : \n");
+		while (follow -> command[i])
+		{
+			while(follow -> command[i][j])
+			{
+				ft_printf("%s\n", follow -> command[i][j]);
+				j++
+			}
+			i++;
+		}
+		ft_printf("redir is : \n");
+		follow_redir = follow -> redir
+		while (follow_redir)
+		{
+			ft_printf("%s, heredoc : %i, in_file : %i, out_file : %i, append : %i, file : %i\n", follow_redir -> txt, follow_redir -> heredoc, follow_redir -> in_file, follow_redir -> out_file, follow_redir -> append, follow_redir -> file);
+			follow_redir = follow_redir -> next_sibling
+		}
+		i = 0;
+		j = 0;
+		follow = follow -> next_sibling;
+	}
+}

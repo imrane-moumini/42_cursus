@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/18 21:43:10 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/19 16:12:32 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int main(int argc, char *argv[], char *env[])
     t_info_tok *info;
     t_node *root;
 	t_com **ast;
+	t_final *final;
 	(void)argc;
     (void)argv;
 	
@@ -85,10 +86,14 @@ int main(int argc, char *argv[], char *env[])
 			
 			}
 			*/
+			printf("-----------------------\n");
+			printf("ast after expand is : \n");
 			print_ast(root);
 			printf("c4\n");
 			printf("----------------------\n");
-			print_final_ast(ast);
+			printf("final ast is :\n");
+			final = create_final_ast(ast);
+			printf_final_ast(final);
 			printf("c5\n");
 		}
 		ft_free(NULL, &root, &src,&info);
