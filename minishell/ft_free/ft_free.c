@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:06:18 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/01 17:48:58 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/19 18:30:08 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,75 @@ void ft_free(t_env **mini_env, t_node **root, t_source **src, t_info_tok **info)
 	if (info)
 		free_info(info);
 }
+
+void ft_free_before_final_ast(t_com ***ast_before)
+{
+	int i;
+	i = 0;
+	t_com **ast;
+	if (!ast_before)
+		return ;
+	ast = *ast_before;
+	if (!ast)
+		return ;
+		// double tableau ou chaue tab est une command
+		// les command sont des lisst chainee de ype t_com
+		// free pas les redir car ca je le free dans la final ast
+	while (ast[i])
+	{
+		if (ast[i] -> txt)
+		{
+			free(ast[i] -> txt);
+			ast[i] -> txt = NULL;
+		}
+		free(ast[i]);
+		ast[i] = NULL;
+		i++;
+	}
+	free(ast);
+	ast_before = NULL;
+}
+void ft_free_final_ast(t_final **ast_before)
+{
+	t_final *ast;
+	t_final *save_ast;
+	t_redir *save_redir;
+	
+	int i;
+
+	if (!ast_before)
+		return ;
+	ast = *ast_before;
+	if (ast)
+		return;
+		
+	while (ast)
+	{
+		save_ast = ast -> next_sibling;
+		while (ast -> cmds[i])
+		{
+			free(ast -> cmds[i]);
+			ast -> cmds[i] = NULL;
+			i++;
+		}
+		while (ast -> redir)
+		{
+			save_redir = ast -> redir -> next_sibling;
+			if (ast -> redir -> txt)
+				free(ast -> redir -> txt);
+			ast -> redir -> txt = NULL;
+			if (ast -> redir)
+				free(ast -> redir);
+			ast -> redir = NULL;
+			ast -> redir = save_redir;
+		}
+		i = 0;
+		free(ast);
+		ast = save_ast;
+	}
+	ast_before = NULL;
+}
+
 void free_info(t_info_tok **info)
 {
 	t_info_tok *ptr;

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:53:16 by imoumini          #+#    #+#             */
-/*   Updated: 2023/03/19 17:06:19 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:10:40 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,3 +129,6 @@ void printf_final_ast(t_final *final)
 		follow = follow -> next_sibling;
 	}
 }
+
+// faire valgrind
+// faire logique quand ya les guillemets

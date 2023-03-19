@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/19 16:20:26 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/19 18:21:58 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,12 @@ int main(int argc, char *argv[], char *env[])
 				printf("c3\n");
 			}
 			/*
+			// jpense finalement jvai inclure single guillemets et double guillemets dans le meme if
+			// genre je vais au sein de chaque fonction gerer le cas du single et double en meme temps
+			// je parcours, des que je vois une guillemet
+			// je vois de quel type de guilleemts
+			// je fais ske g a faire jusqua la prochainne guillemets
+			// puis ca continue
 			if(is_there_quotes(root) == 1)
 			{
 				if(is_there_both(root) == 0)
@@ -93,12 +99,14 @@ int main(int argc, char *argv[], char *env[])
 			printf("----------------------\n");
 			printf("final ast is :\n");
 			final = create_final_ast(ast);
+			ft_free_before_final_ast(&ast);
 			printf("c5\n");
 			printf_final_ast(final);
 			printf("c6\n");
 			
 		}
 		ft_free(NULL, &root, &src,&info);
+		ft_free_final_ast(&final);
     }
 }
    

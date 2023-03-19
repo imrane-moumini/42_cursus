@@ -154,6 +154,8 @@ void free_info(t_info_tok **info);
 void free_ast(t_node **root);
 void free_env(t_env **mini_env);
 void ft_free(t_env **mini_env, t_node **root, t_source **src, t_info_tok **info);
+void ft_free_before_final_ast(t_com *** ast);
+void ft_free_final_ast(t_final **ast);
 
 /*in and out redirection*/
 int ft_in_file_first_check(t_node *ptr);
