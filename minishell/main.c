@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/19 18:21:58 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/19 19:07:23 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,9 @@ int main(int argc, char *argv[], char *env[])
 		ft_free_final_ast(&final);
     }
 }
-   
+
+// regler les invalid write, conditionnal jump et invalid free
+
    // faire ctrl c fait rien
 // faire ctr D -> quitte le shell
 // faire ctrl \ -> ne fait rien

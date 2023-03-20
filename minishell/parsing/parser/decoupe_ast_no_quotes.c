@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/19 19:02:33 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/20 20:09:17 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_com **create_ast_command_redir(t_node *root)
 {
 	t_com **ast;
 	t_ast  *save_ast;
-	t_ast *save_save_ast;
 	t_node *ptr;
 	int	nbr_pipe;
 	int i;
@@ -48,7 +47,6 @@ t_com **create_ast_command_redir(t_node *root)
 		if (save_ast)
 		{
 			// je me souvien de lancienne valeur de save ast
-			save_save_ast = save_ast;
 			// isolate cree save_ast (un nouveau save ast)
 			save_ast = isolate_command_redir(save_ast -> save_ptr);
 		}
@@ -60,13 +58,13 @@ t_com **create_ast_command_redir(t_node *root)
 			ast[i] = save_ast -> command;
 			if (ast[i])
 				ast[i] -> redir = save_ast -> redir;
+			free(save_ast);
 		}
 		// c ici quon free lancien save ast
-		free(save_save_ast);
+		
 		nbr_pipe--;
 		i++;
 	}
-	free(save_ast);
 	return (ast);
 }
 
