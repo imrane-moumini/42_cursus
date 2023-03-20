@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/20 21:08:41 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:54:51 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,11 @@ t_com **create_ast_command_redir(t_node *root)
 	return (ast);
 }
 
-
+// qund je met juste < sans rien avant ca fonctionne pas
+// il me compte ni comme une redir ni l suite
+// voir pk
+// et en plus ca creer des leaks
+// qund ca c regler voir les read bizzare
 t_ast *isolate_command_redir(t_node *ptr)
 {
 	
@@ -80,7 +84,6 @@ t_ast *isolate_command_redir(t_node *ptr)
 		return (NULL);
 	com = NULL;
 	redir = NULL;
-	save_ast = NULL;
 	if (ptr)
 	{
 		// decoupe la command et arguments
@@ -110,7 +113,7 @@ t_ast *isolate_command_redir(t_node *ptr)
 					{
 						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 							redir = create_redir_node(redir, ptr);
-						if (ptr)
+						if (ptr )
 							ptr = ptr -> next_sibling;
 						if (ptr && ft_stcmp(ptr -> txt, "|") != 1) 
 							redir = create_redir_node(redir, ptr);
