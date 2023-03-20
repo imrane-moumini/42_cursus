@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/20 20:09:17 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/20 21:08:41 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,11 @@ t_ast *isolate_command_redir(t_node *ptr)
 	t_redir *redir;
 	t_com	*com;
 
+	if (!ptr)
+		return (NULL);
 	com = NULL;
 	redir = NULL;
 	save_ast = NULL;
-	save_ast = malloc(sizeof(save_ast));
-	save_ast -> command = NULL;
-	save_ast -> redir = NULL;
-	save_ast -> save_ptr = ptr;
 	if (ptr)
 	{
 		// decoupe la command et arguments
@@ -114,7 +112,7 @@ t_ast *isolate_command_redir(t_node *ptr)
 							redir = create_redir_node(redir, ptr);
 						if (ptr)
 							ptr = ptr -> next_sibling;
-						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+						if (ptr && ft_stcmp(ptr -> txt, "|") != 1) 
 							redir = create_redir_node(redir, ptr);
 					}
 					if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
@@ -126,12 +124,13 @@ t_ast *isolate_command_redir(t_node *ptr)
 		if (ptr)
 			ptr = ptr -> next_sibling;
 		// sauvegarde debut prochainne command + redir + command
-		if (save_ast)
-		{
+		save_ast = malloc(sizeof(save_ast));
+		if (com)
 			save_ast -> command = com;
+		if (redir)
 			save_ast -> redir = redir;
+		if (ptr)
 			save_ast -> save_ptr = ptr;
-		}
 	}
 	return (save_ast);
 }
