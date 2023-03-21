@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:53:16 by imoumini          #+#    #+#             */
-/*   Updated: 2023/03/21 20:51:22 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/21 22:00:10 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,14 @@ t_final *create_final_ast(t_com **ast)
 {
 	t_final *final;
 	int i;
-	printf("c4.1\n");
+
 	final = NULL;
 	i = 0;
 	while (ast[i])
 	{
-		printf("c4.2\n");
 		final = create_list_final_ast(final, ast[i]);
-		printf("c4.3\n");
 		i++;
 	}
-	printf("c4.4\n");
 	return (final);
 }
 
@@ -35,39 +32,25 @@ t_final *create_list_final_ast(t_final *final, t_com *ast)
 	t_final *ptr;
 	t_final *follow;
 	
-	printf("c4.2.1\n");
 	ptr = malloc(sizeof(t_final));
 	if (!ast)
 		return (NULL);
-	printf("c4.2.2\n");
 	if (!final)
 	{
-		printf("c4.2.3\n");
 		ptr -> cmds = break_linked_list_in_double_tab(ast);
-		printf("c4.2.4\n");
 		ptr -> redir = ast -> redir;
-		printf("c4.2.5\n");
 		ptr -> next_sibling = NULL;
-		printf("c4.2.6\n");
 		final = ptr;
-		printf("c4.2.7\n");
 	}
 	else
 	{
-		printf("c4.2.8\n");
 		follow = final;
-		printf("c4.2.9\n");
 		while (follow -> next_sibling != NULL)
 			follow = follow -> next_sibling;
-		printf("c4.2.10\n");
 		follow -> next_sibling = ptr;
-		printf("c4.2.11\n");
 		ptr -> cmds = break_linked_list_in_double_tab(ast);
-		printf("c4.2.12\n");
 		ptr -> redir = ast -> redir;
-		printf("c4.2.13\n");
 		ptr -> next_sibling = NULL;
-		printf("c4.2.14\n");
 	}
 	return (final);
 }
@@ -77,27 +60,19 @@ char **break_linked_list_in_double_tab(t_com *com)
 	char **tab;
 	t_com *follow;
 	int i;
-	printf("c4.2.3.1\n");
+
 	i = 0;
-	printf("c4.2.3.2\n");
 	if (!com)
 		return (NULL);
-	printf("c4.2.3.3\n");
 	follow = com;
-	printf("c4.2.3.4\n");
 	tab = malloc(sizeof(char *) * (ft_com_len(com) + 1));
-	printf("c4.2.3.5\n");
 	while (follow)
 	{
-		printf("c4.2.3.6\n");
 		if (follow -> txt)
 		{
 			tab[i] = malloc(sizeof(char) * (ft_strlen(follow -> txt) + 1));
-			printf("c4.2.3.7\n");
 			ft_strlcpy(tab[i], follow -> txt, (ft_strlen(follow -> txt) + 1));
-			printf("c4.2.3.8\n");
 			follow = follow -> next_sibling;
-			printf("c4.2.3.9\n");
 			i++;
 		}
 		else
