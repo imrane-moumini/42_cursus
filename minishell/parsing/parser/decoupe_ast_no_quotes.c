@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/21 20:53:04 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/21 21:30:19 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,25 +83,37 @@ t_com **create_ast_command_redir(t_node *root)
 			// en gros si jamais ya pas de commad il faut qund meme que jen voi une node vide
 			// comme ca je pourrais la remplir
 			if (save_ast -> command)
+			{
+				printf("c3.18\n");
 				ast[i] = save_ast -> command;
+				printf("c3.19\n");
+			}
 			else
 			{
+				printf("c3.20\n");
 				ast[i] = malloc(sizeof(t_com));
 				ast[i] -> txt = NULL;
+				printf("c3.21\n");
 			}
-			printf("c3.18\n");
+			printf("c3.22\n");
 			if (ast[i])
 			{
-				printf("c3.19\n");
+				printf("c3.23\n");
+				// pk ca segfault ici aleatoiremement
+				// ok le pb c que g pas de command
+				// ca rentre dans command
+				// command existe pas mais nest pas null
+				// alors segfault
+				// il faut que je valorise command a NULL i existe pas
 				ast[i] -> redir = save_ast -> redir;
-				printf("c3.20\n");
+				printf("c3.24\n");
 			}
 			free(save_ast);
-			printf("c3.21\n");
+			printf("c3.25\n");
 			i++;
 		}
 		// c ici quon free lancien save ast
-		printf("c3.22\n");
+		printf("c3.26\n");
 		nbr_pipe--;
 	}
 	return (ast);
@@ -164,7 +176,7 @@ t_ast *isolate_command_redir(t_node *ptr)
 									follow = follow -> next_sibling;
 								}
 							}
-							printf("c3.13.12\n");
+						printf("c3.13.12\n");
 						}
 						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 						{
@@ -249,7 +261,8 @@ t_ast *isolate_command_redir(t_node *ptr)
 			save_ast -> command = com;
 			printf("c3.13.31\n");
 		}
-		
+		else
+			save_ast -> command = NULL;
 		if (redir)
 		{
 			printf("c3.13.32\n");
@@ -265,6 +278,8 @@ t_ast *isolate_command_redir(t_node *ptr)
 			}
 			printf("c3.13.33\n");
 		}
+		else
+			save_ast -> redir = NULL;
 		if (ptr)
 		{
 			printf("c3.13.34\n");
