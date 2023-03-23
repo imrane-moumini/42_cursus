@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/23 16:31:30 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:50:33 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,4 +235,22 @@ Après une redir c un ficher mais seulement si c immédiat
 Le dollars n'est pas un separateur ça doit juste remplacer, ex :l$EE = ls-a et après s'assurer que ls-a est bien séparé
 Faut decouper après avoir expand
 Ls < < z1 ça doot pas fonctionner car fien a la droite immédiate 
+*/
+
+/*
+
+$USER$USER doit resulter en une string "imouminiimoumini" et non pas en "imoumini" "imoumini"
+$$USER doit afficher 14098USER
+echo $$ => 646654 (un chiffre)
+
+si on ecrit un dollar seul, il ne faut pas expand
+
+
+$Uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu => segfault pour un env inexistant, il faut remplacer 
+par du vide. Ca revient a envoyer une string vide
+
+minishell> "" => segfault aussi. car ca sera remplacer par du vide
+
+env -i ./minishell =>  si je fait echo $HOME => ca segfault car avec env -i, ca enleve les variables d env,
+donc il ny a plus de HOME
 */
