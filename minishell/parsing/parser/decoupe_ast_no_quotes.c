@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/23 15:30:57 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:39:32 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,10 @@ l'oredre des in file ou outfile par arrport a la command importe peu, lui il reg
  il ne prend que un in file et un file si yen a pusieurs ca bug pas mais
  il choisi celui qui a la plus grande prioriter
  et entre un argument et un in file il prend largument en premier
+aussi ya des cmmand meme si tu leur psse un infile ca va pas buger mais elle vont lignrer parce que
+elle prenne pas dargument comme ls par exemple
+ne pas confondre un argument dune option , meme si au final dans execv les options ou argument sont au meme endroit
+la command est assez intlligent pour ignorer les argument mme si tu lui en donne alors quelle en prend pas
 
 l$EE ($EE vaut "l -sa")
 doit donner "ls" "-a" et non "ls -a"
