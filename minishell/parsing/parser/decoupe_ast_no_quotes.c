@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/23 15:08:28 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:30:57 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,12 @@ void print_redir(t_redir *redir)
 
 < z1 ls < z2 > z3
 ATTENTION : ls est une commande
+
+l'oredre des in file ou outfile par arrport a la command importe peu, lui il regarde juste si ya un in file
+ et il le prend comme arg, en fait c le in file en soit qui compte et non lordre darriver. par contre
+ il ne prend que un in file et un file si yen a pusieurs ca bug pas mais
+ il choisi celui qui a la plus grande prioriter
+ et entre un argument et un in file il prend largument en premier
 
 l$EE ($EE vaut "l -sa")
 doit donner "ls" "-a" et non "ls -a"
