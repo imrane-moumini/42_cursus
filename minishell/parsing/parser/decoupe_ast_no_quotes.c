@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/23 15:39:32 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:31:30 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,7 @@ on a "ls < < test" car on ne peut pas avoir un redirecteur vide"
 
 
 gere : 
-Entré vide
+Entré vide -> ok 
 Redirection a un seul argument et après peut y avoir une command et pas avoir une redir
 Après une redir c un ficher mais seulement si c immédiat
 Le dollars n'est pas un separateur ça doit juste remplacer, ex :l$EE = ls-a et après s'assurer que ls-a est bien séparé
