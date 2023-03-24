@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manip_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/24 12:50:00 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/24 18:02:51 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -371,11 +371,157 @@ void	cut_dollar_sign(char *str)
 	str[length] = '\0';
 }
 
+char *catch_var(char *str)
+{
+	// je lui envoi un car apres le dollar
+	// si ya rien apres le dollar je renvoi vide
+	if (!str)
+		return (NULL);
+	int i;
+	int length;
+	char *var;
+	
+	length = 0;
+	i = 0;
+	while (str[length] != '\0' && str[length] != '$')
+		length++;
+	var = malloc(sizeof(char) * (length + 1));
+	while(str[i] != '\0' && str[i] != '$')
+	{
+		var[i] = str[i];
+		i++;
+	}
+	var[i] = '\0';
+	return (var);
+}
+
+char *before_dollar(char *str)
+{
+	int i;
+	int length;
+	char *before;
+
+	
+	i = 0;
+	length = 0;
+	while (str[length] != '$')
+		length++;
+	before = malloc(sizeof(char) * (length + 1));
+	
+	while(str[i] != '$')
+	{
+		before[i] = str[i];
+		i++;
+	}
+	before[i] = '\0';
+	return (before);
+}
+
+char *after_dollar(char *str)
+{
+	int i;
+	int j;
+	int length;
+	int save;
+	char *after;
+
+	
+	i = 0;
+	j = 0;
+	length = 0;
+	while (str[j] != '\0')
+	{
+		if (str[j] == '$')
+			break;
+		j++;
+	}
+	if (str[j] == '\0')
+		return (NULL);
+	j++;
+	while (str[j] != '\0')
+	{
+		if (str[j] == '$')
+			break;
+		j++;
+	}
+	if (str[j] == '\0')
+		return (NULL);
+	save = j;
+	while (str[j])
+	{
+		j++;
+		length++;
+	}
+	after = malloc(sizeof(char) * (length + 1));
+	
+	while(str[save] != '\0')
+	{
+		after[i] = str[save];
+		i++;
+		save++;
+	}
+	after[i] = '\0';
+	return (after);
+}
+void expand_job(t_env *head, t_node *ptr)
+{
+	int i;
+	char *save_var;
+	char *save_before_dollar;
+	char *save_after_dollar;
+	char *new_str;
+	
+	printf("c1.6.1\n");
+	i = 0;
+	save_after_dollar = malloc(sizeof(char) * 2);
+	save_after_dollar[0] = 'a';
+	save_after_dollar[1] = '\0';
+	printf("c1.6.2\n");
+	while (ptr -> txt[i] != '\0')
+	{
+		printf("c1.6.3\n");
+		if (ptr ->txt[i] == '$')
+		{
+			printf("str is %s\n", ptr -> txt+i);
+			i++;
+			//while (save_after_dollar)
+			//{
+				// ok g une boucle inf pasque jajoute tjr la variable a la fin du coup il recommece sans cesse
+				// c mon save after dollar qui est faux
+				// en fait c le fait que jajouter $user a mon ter final qui fait ca
+				printf("c1.6.4\n");
+				free(save_after_dollar);
+				save_before_dollar = before_dollar(ptr -> txt);
+				printf("save before dollar is =>%s\n",save_before_dollar);
+				printf("c1.6.5\n");
+				save_var = catch_var(ptr->txt + i);
+				printf("save var is =>%s\n",save_var);
+				printf("c1.6.6\n");
+				save_after_dollar = after_dollar(ptr -> txt);
+				printf("save after dollar is =>%s\n",save_after_dollar);
+				printf("c1.6.7\n");
+				new_str = ft_strjoin(save_before_dollar, return_matching_value(head, save_var));
+				printf("new str is =>%s\n", new_str);
+				printf("c1.6.8\n");
+				if (save_after_dollar)
+					new_str = ft_strjoin(new_str, save_after_dollar);
+				printf("c1.6.9\n");
+				printf("new str is =>%s\n", new_str);
+				free(ptr -> txt);
+				ptr -> txt = new_str;
+				printf("c1.6.10\n");
+				printf("ptr is =>%s\n", ptr -> txt);
+				i--;
+			//}
+		}
+		i++;
+	}
+}
+
 void    expand_env(t_env *head, t_node *root)
 {
 	t_node *ptr;
 	t_node *expand;
-	char	*str;
 
 	// ok ici je dois changer la logique pour expand 
 	// meme a linterieur dun mot
@@ -383,33 +529,24 @@ void    expand_env(t_env *head, t_node *root)
 	// ensuite je coupe le dollar signe dans le token et rempalce
 	// en fait c ici que je dois faire le rempalcement
 	// en haut je regarde juste dans toute la sring si ya dollar signe
+	printf("c1.1\n");
 	if (!head || !root)
 		return ;
+	printf("c1.2\n");
 	ptr = root -> first_child;
+	printf("c1.3\n");
 	if (is_here_doc(root) == 1)
 		return ;
+	printf("c1.4\n");
 	while (ptr)
 	{
+		printf("c1.5\n");
 		expand = do_i_have_to_expand(ptr);
+		printf("c1.6\n");
 		if (expand)
-		{
-			// c ici que je dois changer la logique
-			// pour remplacer tout les $
-
-			// ok je coupe le dolla signe
-			cut_dollar_sign(expand -> txt);
-			// je recupere la partie qui suit et lenvoi a une fonction
-			// qui regarde si retrouve lelement
-			// si retroiuve pas lelement normalement renvoi du vide
-			// moi la, je dois enlever le dollar, et prendre tout jusqua
-			// la fin ou jusqua que je revoir un dollar
-			// puis jenvopi ca dans ma fonction normal
-			// si jamais apres ya un dollars faut je reboucle a cet endroit
-			
-			str = ft_strcpy(return_matching_value(head, expand -> txt));
-			free(expand -> txt);
-			expand -> txt = str;
-		}
+			expand_job(head, ptr);
+		printf("c1.7\n");
 		ptr = ptr -> next_sibling;
+		printf("c1.8\n");
 	}
 }

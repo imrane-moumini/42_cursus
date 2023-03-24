@@ -140,7 +140,10 @@ char	*return_matching_value(t_env *head, char *str);
 void	cut_dollar_sign(char *str);
 int     is_nbr(char c);
 int is_here_doc(t_node *node);
-
+void expand_job(t_env *head, t_node *ptr);
+char *after_dollar(char *str);
+char *before_dollar(char *str);
+char *catch_var(char *str);
 /*signaux*/
 void	ft_sigint(int sigint, siginfo_t *pid, void *idontknow);
 
