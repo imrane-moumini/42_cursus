@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:16:47 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/10 21:24:04 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/24 12:08:21 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int tokenize_space(char c, t_source *src, t_info_tok *info)
 
 int tokenize_dollars(char c, t_source *src, t_info_tok *info)
 {
+	// je dois k'ajouter au buff come un caractère normal
+	//du coup en vrai g juste a l'ignorer
 	(void)src;
 	if (info -> tok_bufindex != -1)
 	{

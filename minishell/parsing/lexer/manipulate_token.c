@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/10 21:24:47 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/24 12:08:43 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,11 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 			if (tokenize_space(c, src, info) == 1)
 				break;
 		}
-		else if (c == '$')
-		{
-			if (tokenize_dollars(c, src, info) == 1)
-				break;
-		}
+		//else if (c == '$')
+		//{
+		//	if (tokenize_dollars(c, src, info) == 1)
+		//		break;
+		//}
 		else if (c == '|')
 		{
 			if (tokenize_pipe(c, src, info) == 1)

@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/10 20:13:20 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/24 12:50:00 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -315,15 +315,27 @@ void    insert_input_env(t_env *head, t_node *root)
 t_node		*do_i_have_to_expand(t_node *node)
 {
 	t_node *ptr;
+	int i;
 
+	i = 0;
+	// ok ici je dois changer la logique pour expand 
+	// meme a linterieur dun mot
+	// en gros la je recois token par token
+	// je regarde si ya un dollars et je remplace
+	// sauf que normalment si ya 2 fois dollars dans le même toke
+	// je dois expand si ca correspond a un truc
+	// si ca correspond a rien je renvoi du vide
 	if (!node)
 		return (NULL);
 	ptr = node;
 	if (ptr != NULL)
 	{
-		if (ptr -> txt[0] == '$')
-			return (ptr);
-		ptr = ptr -> next_sibling;
+		while (ptr -> txt[i] != '\0')
+		{
+			if (ptr -> txt[i] == '$')
+				return (ptr);
+			i++;
+		}
 	}
 	return (NULL);
 }
@@ -365,6 +377,12 @@ void    expand_env(t_env *head, t_node *root)
 	t_node *expand;
 	char	*str;
 
+	// ok ici je dois changer la logique pour expand 
+	// meme a linterieur dun mot
+	// la jenvoi token par token a do i have to expand
+	// ensuite je coupe le dollar signe dans le token et rempalce
+	// en fait c ici que je dois faire le rempalcement
+	// en haut je regarde juste dans toute la sring si ya dollar signe
 	if (!head || !root)
 		return ;
 	ptr = root -> first_child;
@@ -375,7 +393,19 @@ void    expand_env(t_env *head, t_node *root)
 		expand = do_i_have_to_expand(ptr);
 		if (expand)
 		{
+			// c ici que je dois changer la logique
+			// pour remplacer tout les $
+
+			// ok je coupe le dolla signe
 			cut_dollar_sign(expand -> txt);
+			// je recupere la partie qui suit et lenvoi a une fonction
+			// qui regarde si retrouve lelement
+			// si retroiuve pas lelement normalement renvoi du vide
+			// moi la, je dois enlever le dollar, et prendre tout jusqua
+			// la fin ou jusqua que je revoir un dollar
+			// puis jenvopi ca dans ma fonction normal
+			// si jamais apres ya un dollars faut je reboucle a cet endroit
+			
 			str = ft_strcpy(return_matching_value(head, expand -> txt));
 			free(expand -> txt);
 			expand -> txt = str;

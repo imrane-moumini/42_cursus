@@ -6,7 +6,7 @@
 /*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/24 11:39:23 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/24 12:01:28 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,9 +232,7 @@ on a "ls < < test" car on ne peut pas avoir un redirecteur vide"
 
 
 gere : 
-Entré vide -> ok 
-Redirection a un seul argument et après peut y avoir une command et pas avoir une redir
-Après une redir c un ficher mais seulement si c immédiat
+
 Le dollars n'est pas un separateur ça doit juste remplacer, ex :l$EE = ls-a et après s'assurer que ls-a est bien séparé
 Faut decouper après avoir expand
 Ls < < z1 ça doot pas fonctionner car fien a la droite immédiate 
