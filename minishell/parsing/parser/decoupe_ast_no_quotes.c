@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   decoupe_ast_no_quotes.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/23 16:50:33 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/24 11:39:23 by imrane           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,41 +90,44 @@ t_ast *isolate_command_redir(t_node *ptr)
 	redir = NULL;
 	if (ptr)
 	{
-		// decoupe la command et arguments
-		while (ptr && ft_stcmp(ptr -> txt, "|") != 1 && ft_stcmp(ptr -> txt, "<") != 1 && ft_stcmp(ptr -> txt, ">") != 1)
+		while (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 		{
-			com = create_com_node(com, ptr);
-			ptr = ptr -> next_sibling;
-		}
-		if (ptr)
-		{
-			if (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1 )
+			// decoupe la command et arguments
+			while (ptr && ft_stcmp(ptr -> txt, "|") != 1 && ft_stcmp(ptr -> txt, "<") != 1 && ft_stcmp(ptr -> txt, ">") != 1)
 			{
-				while (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+				com = create_com_node(com, ptr);
+				ptr = ptr -> next_sibling;
+			}
+			if (ptr)
+			{
+				// ok ici en fait javance jusqua pipe
+				// alors que jeverai avancer jusquau prochain truc et puis recommencer le processus
+				
+				if (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1 )
 				{
-					if ((ptr -> next_sibling  && ft_stcmp(ptr -> next_sibling -> txt, "<") == 1) || (ptr -> next_sibling  && (ft_stcmp(ptr -> next_sibling -> txt, ">") == 1 )))
-					{
-						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
-							redir = create_redir_node(redir, ptr);
+						if ((ptr -> next_sibling  && ft_stcmp(ptr -> next_sibling -> txt, "<") == 1) || (ptr -> next_sibling  && (ft_stcmp(ptr -> next_sibling -> txt, ">") == 1 )))
+						{
+							if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+								redir = create_redir_node(redir, ptr);
+							if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+								ptr = ptr -> next_sibling;
+							if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+								ptr = ptr -> next_sibling;
+							if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+								redir = create_redir_node(redir, ptr);
+						}
+						else if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+						{
+							if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+								redir = create_redir_node(redir, ptr);
+							if (ptr )
+								ptr = ptr -> next_sibling;
+	
+							if (ptr && ft_stcmp(ptr -> txt, "|") != 1) 
+								redir = create_redir_node(redir, ptr);
+						}
 						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 							ptr = ptr -> next_sibling;
-						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
-							ptr = ptr -> next_sibling;
-						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
-							redir = create_redir_node(redir, ptr);
-					}
-					else if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
-					{
-						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
-							redir = create_redir_node(redir, ptr);
-						if (ptr )
-							ptr = ptr -> next_sibling;
-
-						if (ptr && ft_stcmp(ptr -> txt, "|") != 1) 
-							redir = create_redir_node(redir, ptr);
-					}
-					if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
-						ptr = ptr -> next_sibling;
 				}
 			}
 		}
