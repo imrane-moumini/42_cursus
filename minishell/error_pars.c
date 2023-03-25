@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_pars.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 20:50:27 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/10 21:11:54 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/25 18:14:48 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,32 @@ int error_pars(t_node *head)
 		return (0);
 	}
     return (1);
+}
+
+int check_space_append_heredoc(char *str)
+{
+	int i;
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '<' || str[i] == '>')
+		{
+			if (str[i +1])
+			{
+				if (str[i + 1] == ' ' || str[i+1] == '\t')
+				{
+					i++;
+					while (str[i] == ' ' || str[i] == '\t')
+						i++;
+					if (str[i] == '>' || str[i] == '<')
+					{
+						ft_printf("parse error near '%c'\n", str[i]);
+						return (0);
+					}
+				}
+			}
+		}
+		i++;
+	}
+	return (1);
 }

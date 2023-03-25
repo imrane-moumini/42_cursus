@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/25 17:02:46 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/25 18:13:38 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int main(int argc, char *argv[], char *env[])
 	while (1)
     {
         input = readline("minishell> ");
-		if (single_enter(input) == 0)
+		// fonction ici qui tema si espace entre les >
+		if (single_enter(input) == 0 && check_space_append_heredoc(input) == 1)
 		{
 			root = parse_simple_command(input, &src, &info);
 			print_ast(root);

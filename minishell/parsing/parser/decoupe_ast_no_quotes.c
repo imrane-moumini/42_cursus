@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/25 17:37:06 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:49:08 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,21 +212,11 @@ void print_redir(t_redir *redir)
 
 Demander here doc pas expand caveut dire quoi
 
-imoumini@e2r7p16:~/42_cursus/minishell$ ls > $EEEEEEEEE
-bash: $EEEEEEEEE: ambiguous redirect
 
--> on recoit ca car $EEEEEEEEE n existe pas ds les variables d env ou si est vide ds la variable
-imoumini@e2r7p16:~/42_cursus/minishell$ export FF=""
-imoumini@e2r7p16:~/42_cursus/minishell$ ls > $FF
-bash: $FF: ambiguous redirect
-comme c'est vide, on essaie de rediriger vers un fichier inexistant et donc il faut mettre une erreur comme qd
-on a "ls < < test" car on ne peut pas avoir un redirecteur vide"
-
+imoumini@e2r7p16:~/42_cursus/minishell$ export FF="" // moi ca segfaut voir pk
 
 gere : 
 
-Le dollars n'est pas un separateur ça doit juste remplacer, ex :l$EE = ls-a et après s'assurer que ls-a est bien séparé
-Faut decouper après avoir expand
 Ls < < z1 ça doot pas fonctionner car fien a la droite immédiate 
 */
 

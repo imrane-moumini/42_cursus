@@ -118,6 +118,7 @@ t_node	*new_node(t_token *tok);
 t_node	*add_node_to_ast(t_node *root, t_node *node);
 void    print_ast(t_node *node);
 int single_enter(char *input);
+int check_space_append_heredoc(char *str);
 
 /*env*/
 t_env   *copy_env(char *original[]);
