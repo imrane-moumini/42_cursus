@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   decoupe_ast_no_quotes.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/24 12:01:28 by imrane           ###   ########.fr       */
+/*   Updated: 2023/03/25 14:19:58 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,22 +203,14 @@ void print_redir(t_redir *redir)
 }
 
 /*
+// enfait faut que jexpand avant meme de faire le lexer
+// sinon l$EE va pas fonctionner 
+// sinon quand g la command finale je la redecoupe encore a la fin genre je redecoupe si ya des options,
+// ou des epsaces
+// genre je reparcour la string si je vois un espace ou un moins je coupe
+// sinon cava me faire tout recommencer
 
-< z1 ls < z2 > z3
-ATTENTION : ls est une commande
-
-l'oredre des in file ou outfile par arrport a la command importe peu, lui il regarde juste si ya un in file
- et il le prend comme arg, en fait c le in file en soit qui compte et non lordre darriver. par contre
- il ne prend que un in file et un file si yen a pusieurs ca bug pas mais
- il choisi celui qui a la plus grande prioriter
- et entre un argument et un in file il prend largument en premier
-aussi ya des cmmand meme si tu leur psse un infile ca va pas buger mais elle vont lignrer parce que
-elle prenne pas dargument comme ls par exemple
-ne pas confondre un argument dune option , meme si au final dans execv les options ou argument sont au meme endroit
-la command est assez intlligent pour ignorer les argument mme si tu lui en donne alors quelle en prend pas
-
-l$EE ($EE vaut "l -sa")
-doit donner "ls" "-a" et non "ls -a"
+Demander here doc pas expand caveut dire quoi
 
 imoumini@e2r7p16:~/42_cursus/minishell$ ls > $EEEEEEEEE
 bash: $EEEEEEEEE: ambiguous redirect

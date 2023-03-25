@@ -144,6 +144,11 @@ void expand_job(t_env *head, t_node *ptr);
 char *after_dollar(char *str);
 char *before_dollar(char *str);
 char *catch_var(char *str);
+int nbr_of_dollar_suite(t_node *ptr);
+char *add_nbr(int nbr);
+char *after_multiple_dollar(char *str, int nbr);
+int more_than_one_dollars_suite(t_node *ptr);
+void expand_job_multiple_dollar(t_node *ptr, int nbr);
 /*signaux*/
 void	ft_sigint(int sigint, siginfo_t *pid, void *idontknow);
 

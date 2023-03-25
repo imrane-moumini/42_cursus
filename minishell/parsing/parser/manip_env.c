@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/24 18:02:51 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:41:36 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -463,6 +463,46 @@ char *after_dollar(char *str)
 	after[i] = '\0';
 	return (after);
 }
+
+void expand_job_multiple_dollar(t_node *ptr, int nbr)
+{
+	int i;
+	char *str_nbr;
+	char *save_before_dollar;
+	char *save_after_dollar;
+	char *new_str;
+	
+	i = 0;
+	printf("c1.3.1\n");
+	while (ptr -> txt[i] != '\0')
+	{
+		printf("c1.3.2\n");
+		if (ptr ->txt[i] == '$')
+		{
+			printf("c1.3.3\n");
+			save_before_dollar = before_dollar(ptr -> txt);
+			printf("save_before_dollar is =>%s\n", save_before_dollar);
+			printf("c1.3.4\n");
+			str_nbr = add_nbr(nbr);
+			printf("add_nbr is =>%s\n", str_nbr);
+			printf("c1.3.5\n");
+			save_after_dollar = after_multiple_dollar(ptr -> txt, nbr);
+			printf("c1.3.6\n");
+			printf("save_after_dollar is =>%s\n", save_after_dollar);
+			new_str = ft_strjoin(save_before_dollar, str_nbr);
+			printf("c1.3.7\n");
+			printf("new_str is =>%s\n", new_str);
+			new_str = ft_strjoin(new_str, save_after_dollar);
+			printf("new_str is =>%s\n", new_str);
+			printf("c1.3.8\n");
+			free(ptr -> txt);
+			ptr -> txt = new_str;
+			return ;
+		}
+		i++;
+	}
+}
+
 void expand_job(t_env *head, t_node *ptr)
 {
 	int i;
@@ -471,82 +511,183 @@ void expand_job(t_env *head, t_node *ptr)
 	char *save_after_dollar;
 	char *new_str;
 	
-	printf("c1.6.1\n");
 	i = 0;
 	save_after_dollar = malloc(sizeof(char) * 2);
 	save_after_dollar[0] = 'a';
 	save_after_dollar[1] = '\0';
-	printf("c1.6.2\n");
 	while (ptr -> txt[i] != '\0')
 	{
-		printf("c1.6.3\n");
 		if (ptr ->txt[i] == '$')
 		{
-			printf("str is %s\n", ptr -> txt+i);
 			i++;
-			//while (save_after_dollar)
-			//{
-				// ok g une boucle inf pasque jajoute tjr la variable a la fin du coup il recommece sans cesse
-				// c mon save after dollar qui est faux
-				// en fait c le fait que jajouter $user a mon ter final qui fait ca
-				printf("c1.6.4\n");
-				free(save_after_dollar);
-				save_before_dollar = before_dollar(ptr -> txt);
-				printf("save before dollar is =>%s\n",save_before_dollar);
-				printf("c1.6.5\n");
-				save_var = catch_var(ptr->txt + i);
-				printf("save var is =>%s\n",save_var);
-				printf("c1.6.6\n");
-				save_after_dollar = after_dollar(ptr -> txt);
-				printf("save after dollar is =>%s\n",save_after_dollar);
-				printf("c1.6.7\n");
-				new_str = ft_strjoin(save_before_dollar, return_matching_value(head, save_var));
-				printf("new str is =>%s\n", new_str);
-				printf("c1.6.8\n");
-				if (save_after_dollar)
-					new_str = ft_strjoin(new_str, save_after_dollar);
-				printf("c1.6.9\n");
-				printf("new str is =>%s\n", new_str);
-				free(ptr -> txt);
-				ptr -> txt = new_str;
-				printf("c1.6.10\n");
-				printf("ptr is =>%s\n", ptr -> txt);
-				i--;
-			//}
+			free(save_after_dollar);
+			save_before_dollar = before_dollar(ptr -> txt);
+			save_var = catch_var(ptr->txt + i);
+			save_after_dollar = after_dollar(ptr -> txt);
+			new_str = ft_strjoin(save_before_dollar, return_matching_value(head, save_var));
+			if (save_after_dollar)
+				new_str = ft_strjoin(new_str, save_after_dollar);
+			free(ptr -> txt);
+			ptr -> txt = new_str;
+			i--;
 		}
 		i++;
 	}
 }
+int more_than_one_dollars_suite(t_node *ptr)
+{
+	int i;
+	i = 0;
+	printf("c1.2.1\n");
+	while(ptr -> txt[i])
+	{
+		printf("c1.2.2\n");
+		if(ptr->txt[i] == '$')
+		{
+			printf("c1.2.3\n");
+			if (ptr->txt[i + 1])
+			{
+				printf("c1.2.4\n");
+				if (ptr->txt[i+1] == '$')
+					return (1);
+			}
+			printf("c1.2.5\n");
+		}
+		printf("c1.2.6\n");
+		i++;
+	}
+	printf("c1.2.7\n");
+	return (0);
+}
+
+// dis toi si ya plusieur daffiler tu fais comme ca
+//si yen a tu le fais
+// ou sinon je gere plusieurs puis jme dit ok je regarde si il reste des dollar
+// si il reste je fais le truc de dabitude
+// en fait il faut que je boucle jusquq sil y ait plus de dollar dans la string
+char *after_multiple_dollar(char *str, int nbr)
+{
+	int i;
+	int save;
+	int count;
+	char *after;
+	// si en gros faut je coupe meme le dernier dollar si c pair
+		// si c impair je laisse le dernier dollar pour faire lexpand
+	count = 0;
+	i =0;
+	while (str[i])
+	{
+		if (str[i] == '$' && str[i + 1] && str[i + 1] == '$')
+		{
+			if (nbr % 2)
+			{
+				while (nbr)
+				{
+					i++;
+					nbr--;
+				}
+				save = i;
+			}
+			else
+			{
+				while (nbr > 1)
+				{
+					i++;
+					nbr--;
+				}
+				save = i;
+			}
+			break;
+		}
+		i++;
+	}
+	// la je suis pile a lendroit ou il faut que je decoupe, a lindex exact
+	while (str[i] != '\0')
+		i++;
+	count = i -save;
+	after = malloc(sizeof(char) * (count + 1));
+	i =0;
+	while (str[save] != '\0')
+	{
+		after[i] = str[save]; 
+		i++;
+		save++;
+	}
+	after[i] = '\0';
+	return (after);
+}
+char *add_nbr(int nbr)
+{
+	char *str_nbr;
+
+	str_nbr = malloc(sizeof(char) * 8);
+	str_nbr[0] = '3';
+	str_nbr[1] = '1';
+	str_nbr[2] = '0';
+	str_nbr[3] = '5';
+	str_nbr[4] = '1';
+	str_nbr[5] = '6';
+	str_nbr[6] = '0';
+	str_nbr[7] = '\0';
+	while (nbr > 1)
+	{
+		str_nbr = ft_strjoin(str_nbr, str_nbr);
+		nbr = nbr/2;
+	}
+	return (str_nbr);
+}
+int nbr_of_dollar_suite(t_node *ptr)
+{
+	int i;
+	int count;
+	i = 0;
+	count = 0;
+
+	while (ptr->txt[i] != '\0')
+	{
+		while (ptr->txt[i] == '$')
+		{
+			count++;
+			i++;
+			if (ptr->txt[i] != '$')
+				return (count);
+		}
+		i++;
+	}
+	return (count);
+}
+
 
 void    expand_env(t_env *head, t_node *root)
+
 {
 	t_node *ptr;
 	t_node *expand;
 
-	// ok ici je dois changer la logique pour expand 
-	// meme a linterieur dun mot
-	// la jenvoi token par token a do i have to expand
-	// ensuite je coupe le dollar signe dans le token et rempalce
-	// en fait c ici que je dois faire le rempalcement
-	// en haut je regarde juste dans toute la sring si ya dollar signe
-	printf("c1.1\n");
 	if (!head || !root)
 		return ;
-	printf("c1.2\n");
 	ptr = root -> first_child;
-	printf("c1.3\n");
-	if (is_here_doc(root) == 1)
-		return ;
-	printf("c1.4\n");
+	//if (is_here_doc(root) == 1)
+	//	return ;
 	while (ptr)
 	{
-		printf("c1.5\n");
+		printf("c1.1\n");
 		expand = do_i_have_to_expand(ptr);
-		printf("c1.6\n");
+		printf("c1.2\n");
+		//if (/*txt is juste un dollar sans rien apres on expand pas*/)
+		while (more_than_one_dollars_suite(ptr) == 1)
+		{
+			printf("c1.3\n");
+			expand_job_multiple_dollar(ptr, nbr_of_dollar_suite(ptr));
+			printf("c1.4\n");
+		}
+		// la normalement il en reste 1 ou 0
+		expand = do_i_have_to_expand(ptr);
+		printf("c1.5\n");
 		if (expand)
 			expand_job(head, ptr);
-		printf("c1.7\n");
+		printf("c1.6\n");
 		ptr = ptr -> next_sibling;
-		printf("c1.8\n");
+		printf("c1.7\n");
 	}
 }
