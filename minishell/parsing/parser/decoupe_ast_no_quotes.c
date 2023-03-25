@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/25 14:19:58 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:37:06 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,9 +232,6 @@ Ls < < z1 ça doot pas fonctionner car fien a la droite immédiate
 
 /*
 
-$USER$USER doit resulter en une string "imouminiimoumini" et non pas en "imoumini" "imoumini"
-$$USER doit afficher 14098USER
-echo $$ => 646654 (un chiffre)
 
 si on ecrit un dollar seul, il ne faut pas expand
 

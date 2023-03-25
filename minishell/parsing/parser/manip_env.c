@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/25 16:55:12 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:42:39 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -616,27 +616,38 @@ char *after_multiple_dollar(char *str, int nbr)
 	after[i] = '\0';
 	return (after);
 }
+// apres tester aaa$$$$USER$USERnan
 char *add_nbr(int nbr)
 {
 	char *str_nbr;
+	int count;
 
-	str_nbr = malloc(sizeof(char) * 8);
-	str_nbr[0] = '3';
-	str_nbr[1] = '1';
-	str_nbr[2] = '0';
-	str_nbr[3] = '5';
-	str_nbr[4] = '1';
-	str_nbr[5] = '6';
-	str_nbr[6] = '0';
-	str_nbr[7] = '\0';
-	// =faut que je revois la logique du strjoin pasque jajoute trop
-	// 
-	if (nbr == 2)
-		return (str_nbr);
+	count = 2;
+	
+	//ca fonctionne bien il me manque juste le ^ dollars qui devient 3 chiffre
 	while (nbr > 1)
 	{
-		str_nbr = ft_strjoin(str_nbr, str_nbr);
-		nbr = nbr/2;
+		if (count == 2)
+		{
+			str_nbr = malloc(sizeof(char) * 8);
+			str_nbr[0] = '3';
+			str_nbr[1] = '1';
+			str_nbr[2] = '0';
+			str_nbr[3] = '5';
+			str_nbr[4] = '1';
+			str_nbr[5] = '6';
+			str_nbr[6] = '0';
+			str_nbr[7] = '\0';
+			count--;
+			if (nbr == 2)
+				return (str_nbr);
+		}
+		if (count == 0)
+			str_nbr = ft_strjoin(str_nbr, str_nbr);
+		if (count >= 0)
+			count--;
+		if (nbr > 0)
+			nbr = nbr/2;
 	}
 	return (str_nbr);
 }
