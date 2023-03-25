@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/25 16:41:36 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:55:12 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -579,7 +579,7 @@ char *after_multiple_dollar(char *str, int nbr)
 	{
 		if (str[i] == '$' && str[i + 1] && str[i + 1] == '$')
 		{
-			if (nbr % 2)
+			if (nbr % 2 == 0)
 			{
 				while (nbr)
 				{
@@ -629,6 +629,10 @@ char *add_nbr(int nbr)
 	str_nbr[5] = '6';
 	str_nbr[6] = '0';
 	str_nbr[7] = '\0';
+	// =faut que je revois la logique du strjoin pasque jajoute trop
+	// 
+	if (nbr == 2)
+		return (str_nbr);
 	while (nbr > 1)
 	{
 		str_nbr = ft_strjoin(str_nbr, str_nbr);
