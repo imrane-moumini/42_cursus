@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:48:42 by imoumini          #+#    #+#             */
-/*   Updated: 2023/03/26 17:58:27 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/26 18:19:57 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 void final_expand(t_final *final)
 {
 	t_final *follow;
-	t_redir *follow_redir;
+
 	char **save;
-	int i;
-	int j;
+
+
 	
-	i = 0;
+
 	if (!final)
 		return ;
 	follow = final;
@@ -53,7 +53,7 @@ int double_tab_as_space(char **tab)
 		}
 		i++;
 	}
-	return (0)
+	return (0);
 }
 
 int tab_as_space(char *tab)
@@ -74,9 +74,9 @@ int tab_as_space(char *tab)
 void free_double_tab(char **str)
 {
 	int i;
-	int j;
 
-	j = 0;
+
+
 	i = 0;
 	
 	if (!str)
@@ -86,7 +86,7 @@ void free_double_tab(char **str)
 		if (str[i])
 		{
 			free(str[i]);
-			str[i] == NULL;
+			str[i] = NULL;
 		}
 		i++;
 	}
@@ -99,9 +99,9 @@ int nbr_space(char *str)
 	count = 0;
 	i = 0;
 
-	while (tab[i])
+	while (str[i])
 	{
-		if (tab[i] == ' ' || tab[i] == '\t' || tab[i] == '-' )
+		if (str[i] == ' ' || str[i] == '\t' || str[i] == '-' )
 			count++;
 		i++;
 	}
@@ -190,7 +190,7 @@ char **tab_without_space(char *str, int nbr)
 		i++;
 		nbr--;
 	}
-	tab[j] = NULL:
+	tab[j] = NULL;
 	return (tab);
 }
 char **recreate_tab_without_space(char **tab)
