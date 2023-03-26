@@ -206,6 +206,14 @@ t_final *create_list_final_ast(t_final *final, t_com *ast);
 char **break_linked_list_in_double_tab(t_com *com);
 int ft_com_len(t_com *com);
 void printf_final_ast(t_final *final);
+void final_expand(t_final *final);
+int double_tab_as_space(char **tab);
+int tab_as_space(char *tab);
+void free_double_tab(char **str);
+int nbr_space(char *str);
+char *return_right_tab(char *str, int begin, int end);
+char **tab_without_space(char *str, int nbr);
+char **recreate_tab_without_space(char **tab);
 #endif
 
 // je suis << bob 

@@ -15,6 +15,7 @@ SRC = main.c \
 	parsing/parser/manip_node_commannd.c \
 	parsing/parser/manip_node_redir.c \
 	parsing/parser/exception.c \
+	parsing/parser/final_check_expand.c \
 	signaux/signal.c \
 	builtin/exit.c \
 	ft_free/ft_free.c \

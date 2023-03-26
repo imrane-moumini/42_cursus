@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/25 17:49:08 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/25 18:19:09 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,9 +215,6 @@ Demander here doc pas expand caveut dire quoi
 
 imoumini@e2r7p16:~/42_cursus/minishell$ export FF="" // moi ca segfaut voir pk
 
-gere : 
-
-Ls < < z1 ça doot pas fonctionner car fien a la droite immédiate 
 */
 
 /*

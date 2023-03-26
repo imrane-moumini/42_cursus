@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/25 18:13:38 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/26 18:00:16 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int main(int argc, char *argv[], char *env[])
 				printf("final ast is :\n");
 				final = create_final_ast(ast);
 				ft_free_before_final_ast(&ast);
+				final_expand(final);
 				printf("c5\n");
 				printf_final_ast(final);
 				printf("c6\n");
