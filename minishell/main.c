@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/26 18:30:57 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/30 18:21:25 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ int main(int argc, char *argv[], char *env[])
 				// afficher ast avant expand
 				print_ast(root);
 				printf("----------------------\n");
+				// en faiy il va falloir que mes fonctions pour expand au lieu que je les donne pour toute la chaine, 
+				// je la donne mot par mot 
+				// commeca je guette les guillemets et les heredoc (pas expand apres heredoc)
 				if(is_there_quotes(root) == 0)
 				{
 					printf("c1\n");

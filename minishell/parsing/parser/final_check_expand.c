@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:48:42 by imoumini          #+#    #+#             */
-/*   Updated: 2023/03/30 17:16:42 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/30 18:29:41 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ char *return_right_tab(char *str, int begin, int end)
 		{
 			printf("c6.5.7.5.3\n");
 			if (str[end])
-			tab[i] = str[end];
+				tab[i] = str[end];
 			printf("tab de i is=>%c\n", tab[i]);
 			printf("c6.5.7.5.4\n");
 			i++;
@@ -190,49 +190,33 @@ char **tab_without_space(char *str, int nbr)
 	j = 0;
 	end = 0;
 	tab = malloc(sizeof(char *) * (nbr + 1 + 1));
-	// je prcours le str 
-	// jisole la partie de pas despace jusquq espace
-	// je copie et kevoi dans tab[i]
-	// je i++
-	// je suis er vais encore jusquq dernier point jusauq ce que str[i] exuste plus
-	// en fiat je joue avec les curseurs end et begin
 	//ls-a-b-c
 	//-a-la
 	//ls-a
+	//lsaaaaaaaaaaaa-bhfl-Duu
 	printf("c6.5.7.2\n");
-	//OK LE PB SE TROUVE VERS LA
-	// DEJA PAS BONNE LOGIQUE POUR NBR DITERATION
-	//AUSSI RENVOI PAS LE -a VOIR PK
-	// changer systeme diteration
-	// sarette avant davoir tout lu genre sarrete a 5 au lieu de 8
-	// voir ausi pk begin et end sont egaut a 5
-	// en fait c qund ya plusieurs mins que ca fonctionne pas
 	while (str[i] != '\0')
 	{
 		printf("c6.5.7.3\n");
 		printf("str[i] is :=>%c\n", str[i]);
+		// la maintenant le b c que ya un NULL en plein milieu et diu coup ca va sareter avant
 		if (str[i] == ' ' || str[i] == '\t' || str[i] == '-' )
 		{
 			printf("c6.5.7.4\n");
 			begin = i;
-			// ok ca faut que je le fasse quune fois
-			// faut je me souvienne de la partie juste avant espace et que je la copie dans tab[j]
-			//if (j == 0) // ok le pb c que il vien ic que qudn j = 0
-			//{
-				printf("c6.5.7.5\n");
-				printf("begin :%i, end: %i\n", begin, end);
-				printf("str[begin] =>%c, str[end] =>%c\n", str[begin], str[end]);
+			printf("c6.5.7.5\n");
+			printf("begin :%i, end: %i\n", begin, end);
+			printf("str[begin] =>%c, str[end] =>%c\n", str[begin], str[end]);
+			if(begin != end)
+			{
 				tab[j] = return_right_tab(str, begin, end);
 				printf("right tab is =>%s\n", tab[j]);
-				printf("c6.5.7.6\n");
-				// je save de str[end] a str[begin- 1];
-				// faut que je compte ya cb de car entre end et begin
-				// je malloc ce count
-				// je copie entre end et begin
-				// ok je fais ca dans une fonction
 				j++;
-				i++;
-			//}
+			}
+			printf("c6.5.7.6\n");
+		
+			i++;
+		
 			printf("c6.5.7.7\n");
 			while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '-')
 			{
@@ -246,16 +230,16 @@ char **tab_without_space(char *str, int nbr)
 			// ok la g isoler la partie a couper
 			printf("begin :%i, end: %i\n", begin, end);
 			printf("str[begin] =>%c, str[end] =>%c\n", str[begin], str[end]);
-			tab[j] = return_right_tab(str, begin, end);
-			printf("right tab is =>%s\n", tab[j]);
+			if(begin != end)
+			{
+				tab[j] = return_right_tab(str, begin, end);
+				printf("right tab is =>%s\n", tab[j]);
+				j++;
+			}
 			printf("c6.5.7.11\n");
-			// je save str[begin] a str[end]
-			j++;
-			// faut que je copie aussi partie qui est avant
 		}
-		// en fait faut jisole toutes les parties avant et apres 
-		i++;
-		nbr--;
+		if (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '-' )
+			i++;
 		printf("c6.5.7.12\n");
 	}
 	tab[j] = NULL;
@@ -306,8 +290,6 @@ char **recreate_tab_without_space(char **tab)
 			broken_tab = tab_without_space(tab[i], nbr_space(tab[i]));
 			printf("c6.5.8\n");
 			printf("broken tab is :\n");
-			// broken tab return vide
-			// pour etre precis les [i] de broken tab sont vide mais broken tab lui existe
 			print_double_tab(broken_tab);
 			while (broken_tab[tab_i])
 			{
