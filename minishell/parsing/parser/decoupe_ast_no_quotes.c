@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/25 18:19:09 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/30 18:56:53 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,7 @@ t_com **create_ast_command_redir(t_node *root)
 		nbr_pipe = 1;
 	}
 
-	// c vers la que je dois free save ast sans que ca nike ma logique
-	// jvai creer une valeur de save 
-	// jvai passer le vrai a la fonction puis free la valeur de save
-	// voir le moment opportun pour free 
+
 	while (nbr_pipe >= 0)
 	{
 		if (save_ast)
@@ -64,19 +61,12 @@ t_com **create_ast_command_redir(t_node *root)
 			free(save_ast);
 			i++;
 		}
-		// c ici quon free lancien save ast
 		nbr_pipe--;
 	}
 	return (ast);
 }
 
-// qund je met juste < sans rien avant ca fonctionne pas
-// il me compte ni comme une redir ni l suite
-// voir pk
-// et en plus ca creer des leaks
-// qund ca c regler voir les read bizzare
-// une fois que c bon voit tous le stests sans parenthese
-// puis faire logique parenthese et voir tous les test sans parentheses
+
 t_ast *isolate_command_redir(t_node *ptr)
 {
 	
@@ -156,7 +146,6 @@ void print_final_ast(t_com **ast)
 {
 	int i;
 	i = 0;
-	printf("c4.1\n");
 	while(ast[i])
 	{
 		
@@ -202,16 +191,8 @@ void print_redir(t_redir *redir)
 	}
 }
 
+
 /*
-// enfait faut que jexpand avant meme de faire le lexer
-// sinon l$EE va pas fonctionner 
-// sinon quand g la command finale je la redecoupe encore a la fin genre je redecoupe si ya des options,
-// ou des epsaces
-// genre je reparcour la string si je vois un espace ou un moins je coupe
-// sinon cava me faire tout recommencer
-
-Demander here doc pas expand caveut dire quoi
-
 
 imoumini@e2r7p16:~/42_cursus/minishell$ export FF="" // moi ca segfaut voir pk
 
@@ -221,8 +202,6 @@ imoumini@e2r7p16:~/42_cursus/minishell$ export FF="" // moi ca segfaut voir pk
 
 
 si on ecrit un dollar seul, il ne faut pas expand
-
-
 $Uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu => segfault pour un env inexistant, il faut remplacer 
 par du vide. Ca revient a envoyer une string vide
 
@@ -230,4 +209,5 @@ minishell> "" => segfault aussi. car ca sera remplacer par du vide
 
 env -i ./minishell =>  si je fait echo $HOME => ca segfault car avec env -i, ca enleve les variables d env,
 donc il ny a plus de HOME
+// apres faire en sorte de bien decoper la logique pour pouvoir la lancdr en fonction de si ya guillemet et ou heredoc
 */
