@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:48:42 by imoumini          #+#    #+#             */
-/*   Updated: 2023/03/26 19:34:11 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/30 16:20:00 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void print_double_tab(char **str)
 	i = 0;
 	if (!str)
 	{
-		ft_printf("tab is empty\n");
+		ft_printf("double tab is empty\n");
 		return ;
 	}
-	ft_printf("tab is \n");
+	ft_printf("double tab is \n");
 	while (str[i])
 	{
 		ft_printf("%s\n", str[i]);
@@ -145,6 +145,7 @@ char *return_right_tab(char *str, int begin, int end)
 		while (begin > end)
 		{
 			printf("c6.5.7.5.3\n");
+			if (str[end])
 			tab[i] = str[end];
 			printf("tab de i is=>%c\n", tab[i]);
 			printf("c6.5.7.5.4\n");
@@ -161,7 +162,8 @@ char *return_right_tab(char *str, int begin, int end)
 		while (end > begin)
 		{
 			printf("c6.5.7.5.8\n");
-			tab[i] = str[begin];
+			if (str[begin])
+				tab[i] = str[begin];
 			printf("c6.5.7.5.9\n");
 			i++;
 			begin++;
@@ -199,7 +201,8 @@ char **tab_without_space(char *str, int nbr)
 	//OK LE PB SE TROUVE VERS LA
 	// DEJA PAS BONNE LOGIQUE POUR NBR DITERATION
 	//AUSSI RENVOI PAS LE -a VOIR PK
-	while (nbr + 2 > 0)
+	// changer systeme diteration
+	while (str[i] != '\0')
 	{
 		printf("c6.5.7.3\n");
 		if (str[i] == ' ' || str[i] == '\t' || str[i] == '-' )
@@ -222,15 +225,21 @@ char **tab_without_space(char *str, int nbr)
 				// je copie entre end et begin
 				// ok je fais ca dans une fonction
 				j++;
+				i++;
 			}
 			printf("c6.5.7.7\n");
 			while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '-')
 			{
+				// il rentre jamais la dedans
+				// la il rentre mais le pb c aue c pas "a" quil prend apres - , il va trop loin
+				// en fait a la fin il prend "-" mais ajoute pas a
+				// la g le moins a mais g pa le s
+				// c begin qui est pas bon, pas end
 				printf("c6.5.7.8\n");
 				i++;
 				printf("c6.5.7.9\n");
 			}
-			end = i-1;
+			end = i;
 			printf("c6.5.7.10\n");
 			// ok la g isoler la partie a couper
 			printf("begin :%i, end: %i\n", begin, end);
@@ -319,7 +328,7 @@ char **recreate_tab_without_space(char **tab)
 		i++;
 		j++;
 	}
-	new_tab[j] = NULL;
+	new_tab[j - 1] = NULL;
 	
 	return (new_tab);
 }
