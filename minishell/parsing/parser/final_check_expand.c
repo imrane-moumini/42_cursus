@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:48:42 by imoumini          #+#    #+#             */
-/*   Updated: 2023/03/30 16:20:00 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/30 17:16:42 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ char *return_right_tab(char *str, int begin, int end)
 		}
 		printf("c6.5.7.5.5\n");
 	}
-	else
+	else if (begin < end)
 	{
 		printf("c6.5.7.5.6\n");
 		tab = malloc(sizeof(char) * ((end - begin) + 1));
@@ -169,6 +169,8 @@ char *return_right_tab(char *str, int begin, int end)
 			begin++;
 		}
 	}
+	else
+		return (NULL);
 	printf("c6.5.7.5.10\n");
 	tab[i] = '\0';
 	return (tab);
@@ -202,22 +204,26 @@ char **tab_without_space(char *str, int nbr)
 	// DEJA PAS BONNE LOGIQUE POUR NBR DITERATION
 	//AUSSI RENVOI PAS LE -a VOIR PK
 	// changer systeme diteration
+	// sarette avant davoir tout lu genre sarrete a 5 au lieu de 8
+	// voir ausi pk begin et end sont egaut a 5
+	// en fait c qund ya plusieurs mins que ca fonctionne pas
 	while (str[i] != '\0')
 	{
 		printf("c6.5.7.3\n");
+		printf("str[i] is :=>%c\n", str[i]);
 		if (str[i] == ' ' || str[i] == '\t' || str[i] == '-' )
 		{
 			printf("c6.5.7.4\n");
 			begin = i;
 			// ok ca faut que je le fasse quune fois
 			// faut je me souvienne de la partie juste avant espace et que je la copie dans tab[j]
-			if (j == 0)
-			{
+			//if (j == 0) // ok le pb c que il vien ic que qudn j = 0
+			//{
 				printf("c6.5.7.5\n");
 				printf("begin :%i, end: %i\n", begin, end);
+				printf("str[begin] =>%c, str[end] =>%c\n", str[begin], str[end]);
 				tab[j] = return_right_tab(str, begin, end);
 				printf("right tab is =>%s\n", tab[j]);
-				// ok pb retourne pas le bon right tab ca retourne du vide
 				printf("c6.5.7.6\n");
 				// je save de str[end] a str[begin- 1];
 				// faut que je compte ya cb de car entre end et begin
@@ -226,15 +232,11 @@ char **tab_without_space(char *str, int nbr)
 				// ok je fais ca dans une fonction
 				j++;
 				i++;
-			}
+			//}
 			printf("c6.5.7.7\n");
 			while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '-')
 			{
-				// il rentre jamais la dedans
-				// la il rentre mais le pb c aue c pas "a" quil prend apres - , il va trop loin
-				// en fait a la fin il prend "-" mais ajoute pas a
-				// la g le moins a mais g pa le s
-				// c begin qui est pas bon, pas end
+				printf("str[i] is =>%c\n", str[i]);
 				printf("c6.5.7.8\n");
 				i++;
 				printf("c6.5.7.9\n");
@@ -243,6 +245,7 @@ char **tab_without_space(char *str, int nbr)
 			printf("c6.5.7.10\n");
 			// ok la g isoler la partie a couper
 			printf("begin :%i, end: %i\n", begin, end);
+			printf("str[begin] =>%c, str[end] =>%c\n", str[begin], str[end]);
 			tab[j] = return_right_tab(str, begin, end);
 			printf("right tab is =>%s\n", tab[j]);
 			printf("c6.5.7.11\n");
@@ -273,10 +276,12 @@ char **recreate_tab_without_space(char **tab)
 	printf("c6.5.1\n");
 	while (tab[i])
 	{
+		
 		printf("c6.5.2\n");
 		if(tab_as_space(tab[i]) == 1)
 		{
 			j--;
+			printf("tab before transform is %s\n", tab[i]);
 			count = nbr_space(tab[i]) + count;
 			printf("c6.5.3\n");
 			printf("nbr space is :%i\n", count);
