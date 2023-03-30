@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/30 18:21:25 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/30 19:31:21 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ int main(int argc, char *argv[], char *env[])
 					printf("c1\n");
 					expand_env(mini_env,root);
 					printf("c2\n");
+					// en fait le truc c que je ne devrais pas decoup en double tableau ou en commad le export
+					// ca creer un segfault dans create ast command, en fait quand je fais export jexport c tout 
+					// je fais pas la suite ud program, ca va empecher le segfault
 					ast = create_ast_command_redir(root);
 					printf("c3\n");
 				}
