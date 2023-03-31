@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:16:29 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/16 18:45:36 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/31 19:29:57 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,25 @@ int how_much_pipe(t_node *root)
 	t_node *ptr;
 	int count;
 
+	printf("nbr of pipe 1\n");
 	count = 0;
+	printf("nbr of pipe 2\n");
 	if (!root)
 		return (0);
+	printf("nbr of pipe 3\n");
 	ptr = root -> first_child;
+	printf("nbr of pipe 4\n");
 	while (ptr)
 	{
+		printf("nbr of pipe 5\n");
 		if (ft_stcmp(ptr -> txt, "|") == 1)
+		{
+			printf("nbr of pipe 6\n");
 			count++;
+		}
 		ptr = ptr -> next_sibling;
+		printf("nbr of pipe 7\n");
 	}
+	printf("nbr of pipe 8\n");
 	return (count);
 }

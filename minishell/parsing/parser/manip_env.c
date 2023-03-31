@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/31 16:01:57 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/31 19:33:55 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,8 +147,19 @@ t_env   *copy_env(char *original[])
 	t_env	*ptr;
 
 	i = 0;
+	// ici je renvoi NULL qund ya pas denv 
+	// en fait je dois renvoyer un env vide
 	if (!original || original[0] == NULL)
-		return (NULL);
+	{
+		mini_env = malloc(sizeof(t_env));
+		mini_env -> next = NULL;
+		mini_env = add_node_env(mini_env);
+		mini_env -> txt = ft_strcpy("nothing=nothing");
+		mini_env -> var_name = ft_strcpy("nothing");
+		mini_env -> var_value = ft_strcpy("nothing");
+		return (mini_env);
+	}
+		//return (NULL);
 	mini_env = malloc(sizeof(t_env));
 	if (mini_env == NULL)
 		return (NULL);
@@ -192,6 +203,8 @@ void    print_env(t_env *head)
 		ptr = ptr -> next;
 	}
 }
+// en fait le pb c aue pour le spipe ca dit oui alors que ya pas de pipe
+// et que pour le exit ca dit oui aussi alors que ya
 int		ft_stcmp(char *str1, char *str2)
 {
 	int i;
@@ -200,6 +213,8 @@ int		ft_stcmp(char *str1, char *str2)
 	if (!str1)
 		return (0);
 	if (!str2)
+		return (0);
+	if (str1[0] == '\0')
 		return (0);
 	printf("stcmp 2\n");
 	while (str1[i] != '\0')
