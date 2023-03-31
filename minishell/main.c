@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/31 15:34:44 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/31 17:32:21 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,13 @@ int main(int argc, char *argv[], char *env[])
 			ft_exit(&mini_env, &root, &src, &info);
 			if(error_pars(root) == 1)
 			{
+				printf("c0\n");
 				is_env_var(mini_env, root);
+				printf("c0 bis\n");
 				//afficher env apres que j'ai ajouté var env
-        		//printf("----------------------\n");
-				//print_env(mini_env);
-				//printf("----------------------\n");
+        		printf("----------------------\n");
+				print_env(mini_env);
+				printf("----------------------\n");
 				// afficher ast avant expand
 				print_ast(root);
 				printf("----------------------\n");
@@ -64,19 +66,24 @@ int main(int argc, char *argv[], char *env[])
 				{
 					printf("c1\n");
 					expand_env(mini_env,root);
-					printf("c2\n");
-					// pk il passe de c2 a c1
-					// en fait pk il retourne sans cesse dans c2
-					// ah en fait c dans comp quil va sans cesse et a un moment il va comp et ca va faire un segfault
-					ast = create_ast_command_redir(root);
-					printf("c3\n");
 					printf("-----------------------\n");
 					printf("ast after expand is : \n");
 					print_ast(root);
-					printf("c4\n");
 					printf("----------------------\n");
+					printf("c2\n");
+					ast = create_ast_command_redir(root);
+					printf("c2 bis\n");
+					printf("ast after decoupe is :\n");
+					print_final_ast(ast);
+					printf("c3\n");
 					printf("final ast is :\n");
+					printf("c4\n");
 					final = create_final_ast(ast);
+					// ok jai pas mis le NULL dans le double tableau ici
+					printf("c4 bis\n");
+					printf("final ast before final expand is :\n");
+					// ok je crois que je mets jamais NULL dans le cas de USER sans env
+					printf_final_ast(final);
 					printf("c5\n");
 					ft_free_before_final_ast(&ast);
 					printf("c6\n");

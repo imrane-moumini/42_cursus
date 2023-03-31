@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:48:42 by imoumini          #+#    #+#             */
-/*   Updated: 2023/03/31 15:10:57 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/31 17:19:33 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,19 @@ int double_tab_as_export(char **tab)
 	int i;
 
 	i = 0;
+	printf("c6.3.1\n");
+	if (!tab)
+		return (0);
+	printf("c6.3.2\n");
 	while (tab[i])
 	{
+		printf("c6.3.3\n");
+		printf("tab de i is=>%s\n", tab[i]);
+		// ok je crois que je mets jamais NULL dans le cas de USER sans env
 		if (ft_stcmp(tab[i], "export") == 1)
 			return (1);
-		i++;	
+		printf("c6.3.4\n");
+		i++;
 	}
 	
 	return (0);
@@ -50,22 +58,32 @@ void final_expand(t_final *final)
 	t_final *follow;
 	char **save;
 
+	printf("c6.1\n");
 	if (!final)
 		return ;
 	follow = final;
+	printf("c6.2\n");
 	while (follow)
 	{
+		printf("c6.3\n");
 		if (double_tab_as_export(follow -> cmds) == 0)
 		{
+			printf("c6.4\n");
 			if (double_tab_as_space(follow -> cmds) == 1)
 			{
+				printf("c6.5\n");
 				save = follow -> cmds;
+				printf("c6.6\n");
 				follow -> cmds = recreate_tab_without_space(follow -> cmds);
+				printf("c6.7\n");
 				print_double_tab(follow -> cmds);
+				printf("c6.8\n");
 				free_double_tab(save);
+				printf("c6.9\n");
 			}	
 		}
 		follow = follow -> next_sibling;
+		printf("c6.10\n");
 	}
 }
 
@@ -76,6 +94,8 @@ int double_tab_as_space(char **tab)
 
 	i = 0;
 	j = 0;
+	if (!tab)
+		return (0);
 	while (tab[i])
 	{
 		while(tab[i][j])

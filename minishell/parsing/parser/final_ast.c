@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:53:16 by imoumini          #+#    #+#             */
-/*   Updated: 2023/03/21 22:00:10 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/31 17:33:37 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,18 @@ t_final *create_final_ast(t_com **ast)
 	t_final *final;
 	int i;
 
+	printf("c4.1\n");
 	final = NULL;
 	i = 0;
+	printf("c4.2\n");
 	while (ast[i])
 	{
+		printf("c4.3\n");
 		final = create_list_final_ast(final, ast[i]);
+		printf("c4.4\n");
 		i++;
 	}
+	printf("c4.5\n");
 	return (final);
 }
 
@@ -74,6 +79,7 @@ char **break_linked_list_in_double_tab(t_com *com)
 			ft_strlcpy(tab[i], follow -> txt, (ft_strlen(follow -> txt) + 1));
 			follow = follow -> next_sibling;
 			i++;
+			tab[i] = NULL;
 		}
 		else
 		{

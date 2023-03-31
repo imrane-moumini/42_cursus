@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/30 19:23:59 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/31 17:04:37 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_com **create_ast_command_redir(t_node *root)
 		printf("c2.7\n");
 		ast = malloc(sizeof(t_com *) + 1);
 		ast[1] = NULL;
-		nbr_pipe = 1;
+		nbr_pipe = 0;
 		printf("c2.8\n");
 	}
 

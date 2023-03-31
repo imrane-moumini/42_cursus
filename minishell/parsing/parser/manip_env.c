@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/31 15:35:24 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/31 16:01:57 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,9 @@ int		ft_stcmp(char *str1, char *str2)
 	int i;
 	printf("stcmp 1\n");
 	i = 0;
-	if (!str1 || !str2)
+	if (!str1)
+		return (0);
+	if (!str2)
 		return (0);
 	printf("stcmp 2\n");
 	while (str1[i] != '\0')
