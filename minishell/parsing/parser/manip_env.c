@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/30 19:28:26 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/31 15:35:24 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,20 +195,20 @@ void    print_env(t_env *head)
 int		ft_stcmp(char *str1, char *str2)
 {
 	int i;
-	printf("c2.10.2.1\n");
+	printf("stcmp 1\n");
 	i = 0;
 	if (!str1 || !str2)
 		return (0);
-	printf("c2.10.2.2\n");
+	printf("stcmp 2\n");
 	while (str1[i] != '\0')
 	{
-		printf("c2.10.2.3\n");
+		printf("stcmp 3\n");
 		if (str1[i] != str2[i])
 			return (0);
-		printf("c2.10.2.4\n");
+		printf("stcmp 4\n");
 		i++;
 	}
-	printf("c2.10.2.5\n");
+	printf("stcmp 5\n");
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:48:42 by imoumini          #+#    #+#             */
-/*   Updated: 2023/03/30 18:56:17 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/31 15:10:57 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,21 @@ void print_double_tab(char **str)
 	}
 	
 }
+
+int double_tab_as_export(char **tab)
+{
+	int i;
+
+	i = 0;
+	while (tab[i])
+	{
+		if (ft_stcmp(tab[i], "export") == 1)
+			return (1);
+		i++;	
+	}
+	
+	return (0);
+}
 void final_expand(t_final *final)
 {
 	t_final *follow;
@@ -40,12 +55,15 @@ void final_expand(t_final *final)
 	follow = final;
 	while (follow)
 	{
-		if (double_tab_as_space(follow -> cmds) == 1)
+		if (double_tab_as_export(follow -> cmds) == 0)
 		{
-			save = follow -> cmds;
-			follow -> cmds = recreate_tab_without_space(follow -> cmds);
-			print_double_tab(follow -> cmds);
-			free_double_tab(save);
+			if (double_tab_as_space(follow -> cmds) == 1)
+			{
+				save = follow -> cmds;
+				follow -> cmds = recreate_tab_without_space(follow -> cmds);
+				print_double_tab(follow -> cmds);
+				free_double_tab(save);
+			}	
 		}
 		follow = follow -> next_sibling;
 	}

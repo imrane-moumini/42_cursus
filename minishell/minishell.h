@@ -214,6 +214,7 @@ int nbr_space(char *str);
 char *return_right_tab(char *str, int begin, int end);
 char **tab_without_space(char *str, int nbr);
 char **recreate_tab_without_space(char **tab);
+int double_tab_as_export(char **tab);
 #endif
 
 // je suis << bob 

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/30 19:31:21 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/03/31 15:34:44 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,74 +47,45 @@ int main(int argc, char *argv[], char *env[])
 		if (single_enter(input) == 0 && check_space_append_heredoc(input) == 1)
 		{
 			root = parse_simple_command(input, &src, &info);
-			print_ast(root);
+			//print_ast(root);
 			ft_exit(&mini_env, &root, &src, &info);
 			if(error_pars(root) == 1)
 			{
 				is_env_var(mini_env, root);
 				//afficher env apres que j'ai ajouté var env
-        		printf("----------------------\n");
-				print_env(mini_env);
-				printf("----------------------\n");
+        		//printf("----------------------\n");
+				//print_env(mini_env);
+				//printf("----------------------\n");
 				// afficher ast avant expand
 				print_ast(root);
 				printf("----------------------\n");
-				// en faiy il va falloir que mes fonctions pour expand au lieu que je les donne pour toute la chaine, 
-				// je la donne mot par mot 
-				// commeca je guette les guillemets et les heredoc (pas expand apres heredoc)
+				
 				if(is_there_quotes(root) == 0)
 				{
 					printf("c1\n");
 					expand_env(mini_env,root);
 					printf("c2\n");
-					// en fait le truc c que je ne devrais pas decoup en double tableau ou en commad le export
-					// ca creer un segfault dans create ast command, en fait quand je fais export jexport c tout 
-					// je fais pas la suite ud program, ca va empecher le segfault
+					// pk il passe de c2 a c1
+					// en fait pk il retourne sans cesse dans c2
+					// ah en fait c dans comp quil va sans cesse et a un moment il va comp et ca va faire un segfault
 					ast = create_ast_command_redir(root);
 					printf("c3\n");
+					printf("-----------------------\n");
+					printf("ast after expand is : \n");
+					print_ast(root);
+					printf("c4\n");
+					printf("----------------------\n");
+					printf("final ast is :\n");
+					final = create_final_ast(ast);
+					printf("c5\n");
+					ft_free_before_final_ast(&ast);
+					printf("c6\n");
+					final_expand(final);
+					printf("c7\n");
+					printf_final_ast(final);
+					printf("c8\n");
 				}
-				/*
-				// jpense finalement jvai inclure single guillemets et double guillemets dans le meme if
-				// genre je vais au sein de chaque fonction gerer le cas du single et double en meme temps
-				// je parcours, des que je vois une guillemet
-				// je vois de quel type de guilleemts
-				// je fais ske g a faire jusqua la prochainne guillemets
-				// puis ca continue
-				if(is_there_quotes(root) == 1)
-				{
-					if(is_there_both(root) == 0)
-					{
-						if(is_there_single_quotes(root) == 1)
-						{
-							
-						}
-						if(is_there_double_quotes(root) == 1)
-						{
-							
-						}
-					}
-					else
-					{
-						// isoler les single quote faire ski a a faire
-						// isoler les double quotes faire ski ya a faire
-					}
 				
-				}
-				*/
-				printf("-----------------------\n");
-				printf("ast after expand is : \n");
-				print_ast(root);
-				printf("c4\n");
-				printf("----------------------\n");
-				printf("final ast is :\n");
-				final = create_final_ast(ast);
-				printf("c5\n");
-				ft_free_before_final_ast(&ast);
-				printf("c6\n");
-				final_expand(final);
-				printf("c7\n");
-				printf_final_ast(final);
-				printf("c8\n");
 				
 			}
 			ft_free(NULL, &root, &src,&info);
