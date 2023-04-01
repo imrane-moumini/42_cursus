@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/31 19:33:55 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/01 19:01:55 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,6 @@ void    print_env(t_env *head)
 int		ft_stcmp(char *str1, char *str2)
 {
 	int i;
-	printf("stcmp 1\n");
 	i = 0;
 	if (!str1)
 		return (0);
@@ -216,16 +215,12 @@ int		ft_stcmp(char *str1, char *str2)
 		return (0);
 	if (str1[0] == '\0')
 		return (0);
-	printf("stcmp 2\n");
 	while (str1[i] != '\0')
 	{
-		printf("stcmp 3\n");
 		if (str1[i] != str2[i])
 			return (0);
-		printf("stcmp 4\n");
 		i++;
 	}
-	printf("stcmp 5\n");
 	return (1);
 }
 
@@ -235,19 +230,7 @@ int     is_nbr(char c)
 		return (1);
 	return (0);
 }
-void     is_env_var(t_env *mini_env, t_node *root)
-{
-	t_node *ptr;
-	if (!root)
-		return ;
-	ptr = root -> first_child;
-	if (ptr)
-	{
-		if (ft_stcmp(ptr -> txt, "export") && (ptr -> next_sibling != NULL))
-			insert_input_env(mini_env, root);
-		ptr = ptr -> next_sibling;
-	}
-}
+
 char	*extract_name(char *str)
 {
 	int i;
@@ -311,27 +294,43 @@ t_env	*last_env_node(t_env *head)
 		ptr = ptr -> next;
 	return (ptr);
 }
-void    insert_input_env(t_env *head, t_node *root)
+int    insert_input_env(t_env *head, t_node *node, int pipe)
 {
 	char *var_env_name;
 	char *var_env_value;
 	char *env_input;
 	t_env	*last_node;
 
-	if (!head || !root)
-		return ;
-	if ((root -> first_child == NULL))
-		return ;
-	if ((root -> first_child -> next_sibling == NULL))
-		return ;
-	env_input = ft_strcpy_env(root -> first_child -> next_sibling -> txt);
-	var_env_name = extract_name(root -> first_child -> next_sibling -> txt);
-	var_env_value = extract_value(root -> first_child -> next_sibling -> txt);
-	add_node_env(head);
-	last_node = last_env_node(head);
-	last_node -> var_name = var_env_name;
-	last_node -> var_value = var_env_value;
-	last_node -> txt = env_input;
+	if (!head)
+		return (1);
+	if ((!node))
+		return (1);
+	if ((node -> next_sibling == NULL) || ft_stcmp(node -> next_sibling -> txt, "|") == 1)
+		return (1);
+	// attention c pas forcement le premier element de la chaine
+	// c lelement juste apres de export
+	env_input = ft_strcpy_env(node ->  next_sibling -> txt);
+	var_env_name = extract_name(node ->  next_sibling -> txt);
+	var_env_value = extract_value(node ->  next_sibling -> txt);
+	// ici je regarde si g le droit ou non
+	if (pars_env_name(var_env_name, env_input) == 0 && pipe == 0 && pars_env_value(var_env_value, env_input))
+	{
+		// je vais la que si la fonction ok tu peux renvoi et aue nbr of pipe = 0
+		// dans add node env je fais le remplacement si existe deja
+		add_node_env(head);
+		last_node = last_env_node(head);
+		last_node -> var_name = var_env_name;
+		last_node -> var_value = var_env_value;
+		last_node -> txt = env_input;
+		return (1);
+	}
+	else
+	{
+		free (env_input);
+		free(var_env_name);
+		free(var_env_value);
+		return (0);
+	}
 }
 t_node		*do_i_have_to_expand(t_node *node)
 {

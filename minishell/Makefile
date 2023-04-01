@@ -18,6 +18,7 @@ SRC = main.c \
 	parsing/parser/final_check_expand.c \
 	signaux/signal.c \
 	builtin/exit.c \
+	builtin/export_with_option.c \
 	ft_free/ft_free.c \
 	error_pars.c 
 

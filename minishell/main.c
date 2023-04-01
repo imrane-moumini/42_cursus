@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/31 17:32:21 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/01 18:46:01 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ int main(int argc, char *argv[], char *env[])
 	while (1)
     {
         input = readline("minishell> ");
+		if (!input)
+			return (printf("exit\n"), 0); // free (c ici que je gere control D )
 		// fonction ici qui tema si espace entre les >
 		if (single_enter(input) == 0 && check_space_append_heredoc(input) == 1)
 		{
 			root = parse_simple_command(input, &src, &info);
 			//print_ast(root);
 			ft_exit(&mini_env, &root, &src, &info);
-			if(error_pars(root) == 1)
+			if(error_pars(root) == 1 && is_env_var(mini_env, root) == 1)
 			{
 				printf("c0\n");
-				is_env_var(mini_env, root);
-				printf("c0 bis\n");
 				//afficher env apres que j'ai ajouté var env
         		printf("----------------------\n");
 				print_env(mini_env);
@@ -110,7 +110,7 @@ int main(int argc, char *argv[], char *env[])
 // demande à matthieu les guillemets
 // faire historique
 // rendre la structure avec tout bien fait pour que l'execution soit simple
-// export sans option
+// export sans option (ca renvoi un env trier mais pas le vrai env, si je reecris env, ca menvoi lenv pas trier)
 
 // faire norminette
 
@@ -119,3 +119,23 @@ int main(int argc, char *argv[], char *env[])
 	// double guillemets
 
 // valgrind
+
+// lettre, chiffre, underscore 
+
+// exit fonctionne aue si c la seue command
+// unset fonctionne que qudn c la eule command (je gere)
+// export avec option fonctionne que quqnd c la seulele command (je gere)
+// export sans optopn c pas moi qui gere
+
+// moi comment je gere les export le pb c que je check au ans la premiere commade mais pas dans les suivantes
+// gerer les moins, @, +, \, },*{,. dans les export (dans les var), (pour les valeurs g juste pas le droit aux parentheses)
+// gerer export ligne 238 a 242
+//gerer export 269 a 272
+// si jexporte plusieurs fois la meme var avec des valeurs diff
+// il doi se souvenir de la derniere
+// unset supprime une varibale demviropnnememt (unset fonctionne dans dollar)
+
+
+// gerer le truc du dollar seul vu dans lautre fichier
+// valgrind
+// decoupe
