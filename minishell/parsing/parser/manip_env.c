@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/01 19:01:55 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/01 19:44:36 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,22 +235,31 @@ char	*extract_name(char *str)
 {
 	int i;
 	char *ptr;
-	
+	printf("c0.4.3 bis.1\n");
 	i = 0;
 	if (!str)
 		return (NULL);
-	while (str[i] != '=')
+	printf("c0.4.3 bis.2\n");
+	while (str[i] != '\0' && str[i] != '=')
 		i++;
+	printf("c0.4.3 bis.3\n");
 	ptr = malloc((sizeof(char) *i) + 1);
+	printf("c0.4.3 bis.4\n");
 	if (!ptr)
 		return (NULL);
+	printf("c0.4.3 bis.5\n");
 	i = 0;
-	while (str[i] != '=')
+	printf("c0.4.3 bis.6\n");
+	while (str[i] != '\0' && str[i] != '=')
 	{
+		printf("c0.4.3 bis.7\n");
 		ptr[i] = str[i];
+		printf("c0.4.3 bis.8\n");
 		i++;
+		printf("c0.4.3 bis.9\n");
 	}
 	ptr[i] = '\0';
+	printf("c0.4.3 bis.10\n");
 	return (ptr);
 }
 char	*extract_value(char *str)
@@ -259,27 +268,37 @@ char	*extract_value(char *str)
 	int equal;
 	char *ptr;
 	
+	printf("c0.4.3 bis bis.1\n");
 	i = 0;
 	equal = 0;
+	printf("c0.4.3 bis bis.2\n");
 	if (!str)
 		return (NULL);
-	while (str[i] != '=')
+	while (str[i] != '\0' && str[i] != '=')
 		i++;
+	printf("c0.4.3 bis bis.3\n");
 	equal = i;
 	while(str[i] != '\0' && str[i] != ' ' && str[i] != '\t')
 		i++;
+	printf("c0.4.3 bis bis.4\n");
 	ptr = malloc( (sizeof(char)) *(i - equal) + 1);
+	printf("c0.4.3 bis bis.5\n");
 	if (!ptr)
 		return (NULL);
+	printf("c0.4.3 bis bis.6\n");
 	equal++;
 	i = 0;
 	while (str[equal] != '\0' && str[equal] != ' ' && str[equal] != '\t')
 	{
+		printf("c0.4.3 bis bis.7\n");
 		ptr[i] = str[equal];
+		printf("c0.4.3 bis bis.8\n");
 		i++;
 		equal++;
+		printf("c0.4.3 bis bis.9\n");
 	}
 	ptr[i] = '\0';
+	printf("c0.4.3 bis bis.10\n");
 	return (ptr);
 }
 
@@ -300,20 +319,26 @@ int    insert_input_env(t_env *head, t_node *node, int pipe)
 	char *var_env_value;
 	char *env_input;
 	t_env	*last_node;
-
+	printf("c0.4.1\n");
 	if (!head)
 		return (1);
+	printf("c0.4.2\n");
 	if ((!node))
 		return (1);
 	if ((node -> next_sibling == NULL) || ft_stcmp(node -> next_sibling -> txt, "|") == 1)
 		return (1);
+	printf("c0.4.3\n");
 	// attention c pas forcement le premier element de la chaine
 	// c lelement juste apres de export
 	env_input = ft_strcpy_env(node ->  next_sibling -> txt);
+	printf("c0.4.3 bis\n");
 	var_env_name = extract_name(node ->  next_sibling -> txt);
+	printf("c0.4.3 bis bis\n");
 	var_env_value = extract_value(node ->  next_sibling -> txt);
+	printf("c0.4.3 bis bis bis\n");
+	printf("c0.4.4\n");
 	// ici je regarde si g le droit ou non
-	if (pars_env_name(var_env_name, env_input) == 0 && pipe == 0 && pars_env_value(var_env_value, env_input))
+	if (pars_env_name(var_env_name, env_input) == 0 && (pipe == 0) && (pars_env_value(var_env_value, env_input) == 0) && count_nbr_equal(env_input, env_input) == 0)
 	{
 		// je vais la que si la fonction ok tu peux renvoi et aue nbr of pipe = 0
 		// dans add node env je fais le remplacement si existe deja
@@ -322,10 +347,12 @@ int    insert_input_env(t_env *head, t_node *node, int pipe)
 		last_node -> var_name = var_env_name;
 		last_node -> var_value = var_env_value;
 		last_node -> txt = env_input;
+		printf("c0.4.5\n");
 		return (1);
 	}
 	else
 	{
+		printf("c0.4.6\n");
 		free (env_input);
 		free(var_env_name);
 		free(var_env_value);

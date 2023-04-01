@@ -152,6 +152,7 @@ int more_than_one_dollars_suite(t_node *ptr);
 void expand_job_multiple_dollar(t_node *ptr, int nbr);
 int pars_env_name(char *str, char *env_input);
 int pars_env_value(char *str, char *env_input);
+int count_nbr_equal(char *str, char *env_input);
 /*signaux*/
 void	ft_sigint(int sigint, siginfo_t *pid, void *idontknow);
 
