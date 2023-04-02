@@ -6,40 +6,33 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 16:06:55 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/02 17:17:51 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/02 17:24:42 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 
-/*int     is_unset(t_env **mini_env, t_node *root)
+void     is_unset(t_env **head, t_node *root)
 {
 	t_node *ptr;
 	int nbr;
 	if (!root)
-		return (1);
+		return ;
 	nbr =  how_much_pipe(root);
+	if (nbr != 0)
+		return ;
 	ptr = root -> first_child;
 	if (ptr)
 	{
-		printf("c0.3\n");
 		if (ft_stcmp(ptr -> txt, "unset") && (ptr -> next_sibling != NULL))
 		{
-			printf("c0.4\n");
-			if (insert_input_env(&mini_env, ptr, nbr) == 0)
-			{
-				printf("c0.5\n");
-				return (0);
-			}
+			if(check_if_exist(*head, ptr -> next_sibling -> txt ) == 1)
+				supp_env(head, ptr -> next_sibling -> txt);
 		}
 		ptr = ptr -> next_sibling;
-		printf("c0.6\n");
 	}
-	// faut que le retour de ske g pas le droit je le recois la comme ca je vais pas dans
-	// la suite
-	return (1);
-}*/
+}
 
 int check_if_exist(t_env *head, char *str)
 {

@@ -152,6 +152,7 @@ int pars_env_value(char *str, char *env_input);
 int count_nbr_equal(char *str, char *env_input);
 int check_if_exist(t_env *head, char *str);
 void supp_env(t_env **head, char *str);
+void     is_unset(t_env **head, t_node *root);
 /*signaux*/
 void	ft_sigint(int sigint, siginfo_t *pid, void *idontknow);
 

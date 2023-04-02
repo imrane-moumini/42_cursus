@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/02 17:04:28 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/02 17:22:28 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int main(int argc, char *argv[], char *env[])
 			ft_exit(&mini_env, &root, &src, &info);
 			printf("c0\n");
 			expand_env(mini_env,root);
+			is_unset(&mini_env, root);
 			printf("c0 bis\n");
 			if(error_pars(root) == 1 && is_env_var(mini_env, root) == 1)
 			{
