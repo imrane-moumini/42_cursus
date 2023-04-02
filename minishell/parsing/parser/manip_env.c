@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/02 16:29:34 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/02 19:44:08 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -578,6 +578,7 @@ void expand_job(t_env *head, t_node *ptr)
 			if (save_after_dollar)
 				new_str = ft_strjoin(new_str, save_after_dollar);
 			free(ptr -> txt);
+			free(save_var);
 			ptr -> txt = new_str;
 			i--;
 		}
