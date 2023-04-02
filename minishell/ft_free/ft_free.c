@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:06:18 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/02 18:44:08 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/02 19:39:10 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ void ft_free_before_final_ast(t_com ***ast_before)
 	int i;
 	i = 0;
 	t_com **ast;
+	t_com *ptr;
+	t_com *save_ptr;
+	printf("c5.1\n");
 	if (!ast_before)
 		return ;
 	ast = *ast_before;
@@ -100,18 +103,33 @@ void ft_free_before_final_ast(t_com ***ast_before)
 		// double tableau ou chaue tab est une command
 		// les command sont des lisst chainee de ype t_com
 		// free pas les redir car ca je le free dans la final ast
+	printf("c5.2\n");
+	// command 1
 	while (ast[i])
 	{
-		if (ast[i] -> txt)
+		printf("c5.3\n");
+		// contenu du premier element de command 1 mais je vais pas aux autes elements
+		ptr = ast[i];
+		while (ptr)
 		{
-			free(ast[i] -> txt);
-			ast[i] -> txt = NULL;
+			save_ptr = ptr -> next_sibling;
+			if (ptr -> txt)
+			{
+				printf("c5.4\n");
+				printf("ast i com is =>%s\n", ptr -> txt);
+				free(ptr -> txt);
+				ptr -> txt = NULL;
+			}
+			free(ptr);
+			ptr = save_ptr;
 		}
 		free(ast[i]);
+		printf("c5.5\n");
 		ast[i] = NULL;
 		i++;
 	}
 	free(ast);
+	printf("c5.6\n");
 	ast_before = NULL;
 }
 

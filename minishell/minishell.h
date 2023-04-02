@@ -52,6 +52,7 @@ typedef struct redir_node
     int out_file;
 	int append;
     int file;
+    int i;
     struct redir_node *next_sibling;
 } t_redir;
 
