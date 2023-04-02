@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:06:18 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/19 19:03:14 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/02 18:39:10 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,24 +122,30 @@ void ft_free_final_ast(t_final **ast_before)
 	t_redir *save_redir;
 	
 	int i;
-
+	printf("c9.1\n");
 	if (!ast_before)
 		return ;
+	printf("c9.2\n");
 	ast = *ast_before;
-	if (ast)
+	if (!ast)
 		return;
-		
+	printf("c9.3\n");
 	while (ast)
 	{
+		printf("c9.4\n");
 		save_ast = ast -> next_sibling;
 		while (ast -> cmds[i])
 		{
+			printf("c9.5\n");
+			printf("%s\n", ast -> cmds[i]);
 			free(ast -> cmds[i]);
 			ast -> cmds[i] = NULL;
 			i++;
 		}
+		printf("c9.6\n");
 		while (ast -> redir)
 		{
+			printf("c9.7\n");
 			save_redir = ast -> redir -> next_sibling;
 			if (ast -> redir -> txt)
 				free(ast -> redir -> txt);
@@ -149,11 +155,14 @@ void ft_free_final_ast(t_final **ast_before)
 			ast -> redir = NULL;
 			ast -> redir = save_redir;
 		}
+		printf("c9.8\n");
 		i = 0;
 		free(ast);
 		ast = save_ast;
+		printf("c9.9\n");
 	}
 	ast_before = NULL;
+	printf("c9.10\n");
 }
 
 void free_info(t_info_tok **info)

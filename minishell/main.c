@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/02 17:22:28 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/02 18:34:39 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,9 @@ int main(int argc, char *argv[], char *env[])
 				
 			}
 			ft_free(NULL, &root, &src,&info);
+			printf("c9\n");
 			ft_free_final_ast(&final);
+			printf("c10\n");
 		}
 			else (free(input));
     }
@@ -105,31 +107,13 @@ int main(int argc, char *argv[], char *env[])
    // faire ctrl c fait rien
 // faire ctr D -> quitte le shell
 // faire ctrl \ -> ne fait rien
-// demande à matthieu les guillemets
+
+// valgrind
+// norminette
+// guillemet
+// heredoc pas expand
 // faire historique
-// rendre la structure avec tout bien fait pour que l'execution soit simple
-// export sans option (ca renvoi un env trier mais pas le vrai env, si je reecris env, ca menvoi lenv pas trier)
-
-// faire norminette
-
-// si des guillemets
-	// simple guillemets
-	// double guillemets
-
-// valgrind
-
-// lettre, chiffre, underscore 
-
-// exit fonctionne aue si c la seue command
-// unset fonctionne que qudn c la eule command (je gere)
-// export avec option fonctionne que quqnd c la seulele command (je gere)
-// export sans optopn c pas moi qui gere
-
-// si jexporte plusieurs fois la meme var avec des valeurs diff
-// il doi se souvenir de la derniere
-// unset supprime une varibale demviropnnememt (unset fonctionne dans dollar)
 
 
-// gerer le truc du dollar seul vu dans lautre fichier
-// valgrind
-// decoupe
+
+

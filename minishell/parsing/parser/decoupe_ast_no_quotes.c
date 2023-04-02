@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/31 19:11:08 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/02 17:31:36 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,32 +288,3 @@ void print_redir(t_redir *redir)
 	}
 }
 
-
-/*
-
-imoumini@e2r7p16:~/42_cursus/minishell$ export FF="" // moi ca segfaut voir pk
-
-*/
-
-/*
-
-
-si on ecrit un dollar seul, il ne faut pas expand
-$Uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu => segfault pour un env inexistant, il faut remplacer 
-par du vide. Ca revient a envoyer une string vide
-
-minishell> "" => segfault aussi. car ca sera remplacer par du vide
-
-env -i ./minishell =>  si je fait echo $HOME => ca segfault car avec env -i, ca enleve les variables d env,
-donc il ny a plus de HOME
-// apres faire en sorte de bien decoper la logique pour pouvoir la lancdr en fonction de si ya guillemet et ou heredoc
-*/
-
-
-// quand jenleve le env, normalement les variable inconnu retourne du vide, pasle nom de la variable
-// je dois aussi si jajoute une var alors que lenv etait existant pouvoir lajouter et pouvoir expand a nouveau
-// la je crois en fat jexpand meme pasx
-// je regle ca
-// pui svalgrind
-// puis norminette
-// puis guillemets
