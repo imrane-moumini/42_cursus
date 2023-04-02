@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/02 15:44:09 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/02 16:29:34 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -314,7 +314,7 @@ t_env	*last_env_node(t_env *head)
 		ptr = ptr -> next;
 	return (ptr);
 }
-int    insert_input_env(t_env *head, t_node *node, int pipe)
+int    insert_input_env(t_env **head, t_node *node, int pipe)
 {
 	char *var_env_name;
 	char *var_env_value;
@@ -343,8 +343,10 @@ int    insert_input_env(t_env *head, t_node *node, int pipe)
 	{
 		// je vais la que si la fonction ok tu peux renvoi et aue nbr of pipe = 0
 		// dans add node env je fais le remplacement si existe deja
-		add_node_env(head);
-		last_node = last_env_node(head);
+		if(check_if_exist(*head, var_env_name) == 1)
+			supp_env(head, var_env_name);
+		add_node_env(*head);
+		last_node = last_env_node(*head);
 		last_node -> var_name = var_env_name;
 		last_node -> var_value = var_env_value;
 		last_node -> txt = env_input;

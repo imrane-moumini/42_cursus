@@ -123,7 +123,7 @@ t_env   *add_node_env(t_env *head);
 t_env   *new_node_env(void);
 void    print_env(t_env *head);
 int    is_env_var(t_env *mini_env, t_node *root);
-int    insert_input_env(t_env *head, t_node *root, int pipe);
+int    insert_input_env(t_env **head, t_node *root, int pipe);
 void    expand_env(t_env *head, t_node *root);
 char    *ft_strcpy(char *str);
 char    *ft_strcpy_env(char *str);
@@ -150,6 +150,8 @@ void expand_job_multiple_dollar(t_node *ptr, int nbr);
 int pars_env_name(char *str, char *env_input);
 int pars_env_value(char *str, char *env_input);
 int count_nbr_equal(char *str, char *env_input);
+int check_if_exist(t_env *head, char *str);
+void supp_env(t_env **head, char *str);
 /*signaux*/
 void	ft_sigint(int sigint, siginfo_t *pid, void *idontknow);
 

@@ -6,25 +6,13 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 17:16:25 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/02 15:53:12 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/02 16:28:47 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-// export avec option fonctionne que quqnd c la seulele command (je gere)
 
-
-// dans insert input env je regarde si g le droit dajouter la var ou non
-// je met aussi a jour la var si jamais elle existe deja
-// genre je parcours si je la voir je remplace juste la valeur
-// si je la vos pas je lajoute a la fin
-
-// ensuite je reragde si ya un pipe si un pipe je fais rien
-// je passe en argument de insert_inout_env si ya un pipe ou non
-// comme ca il affiche message derreur mais ou fat ou fait pas 
-
-// appeler juste apres pars simple command dans main
 int     is_env_var(t_env *mini_env, t_node *root)
 {
 	t_node *ptr;
@@ -42,7 +30,7 @@ int     is_env_var(t_env *mini_env, t_node *root)
 		if (ft_stcmp(ptr -> txt, "export") && (ptr -> next_sibling != NULL))
 		{
 			printf("c0.4\n");
-			if (insert_input_env(mini_env, ptr, nbr) == 0)
+			if (insert_input_env(&mini_env, ptr, nbr) == 0)
 			{
 				printf("c0.5\n");
 				return (0);
