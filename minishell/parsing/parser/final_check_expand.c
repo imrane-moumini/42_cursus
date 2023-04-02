@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:48:42 by imoumini          #+#    #+#             */
-/*   Updated: 2023/03/31 17:19:33 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/02 18:51:56 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ void free_double_tab(char **str)
 		}
 		i++;
 	}
+	free(str);
 }
 int nbr_space(char *str)
 {

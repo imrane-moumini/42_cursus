@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:06:18 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/02 18:39:10 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/02 18:44:08 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ void ft_free_final_ast(t_final **ast_before)
 			ast -> cmds[i] = NULL;
 			i++;
 		}
+		free(ast -> cmds);
 		printf("c9.6\n");
 		while (ast -> redir)
 		{
