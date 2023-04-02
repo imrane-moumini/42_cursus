@@ -102,12 +102,9 @@ t_source	**init_src(t_source **src, char *input); // init input struct
 t_info_tok **init_global_info_token(t_info_tok **info);
 t_token	*tokenize(t_source *src, t_info_tok *info);
 int tokenize_space(char c, t_source *src, t_info_tok *info);
-int tokenize_dollars(char c, t_source *src, t_info_tok *info);
 int tokenize_pipe(char c, t_source *src, t_info_tok *info);
 void tokenize_end(char c, t_source *src, t_info_tok *info);
 int tokenize_in_out(char c, t_source *src, t_info_tok *info);
-int tokenize_single_quote(char c, t_source *src, t_info_tok *info);
-int tokenize_double_quote(char c, t_source *src, t_info_tok *info);
 void	free_token(t_token *tok);
 void	add_to_buf(char c, t_info_tok *info);
 t_token	*create_token(char *str , t_source *src, t_info_tok *info);

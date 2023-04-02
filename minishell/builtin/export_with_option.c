@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 17:16:25 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/01 19:33:42 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/02 15:53:12 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,31 @@ int count_nbr_equal(char *str, char *env_input)
 {
 	int i;
 	int count;
-
+	
+	printf("c0.4.4.16\n");
+	printf("%s\n", env_input);
 	count = 0;
 	i = 0;
+	printf("c0.4.4.17\n");
 	while (str[i])
 	{
+		printf("c0.4.4.18\n");
+		printf("str[i] =>%c\n", str[i]);
 		if (str[i] == '=')
+		{
+			printf("c0.4.4.19\n");
 			count++;
+		}
+		printf("c0.4.4.20\n");
 		i++;
 	}
 	if (count == 0)
 	{
+		printf("c0.4.4.21\n");
 		ft_printf("export : '%s' is not a valid identifier\n", env_input);
 		return (1);
 	}
+	printf("c0.4.4.22\n");
 	return (0);
 }
 int pars_env_name(char *str, char *env_input)
@@ -92,7 +103,30 @@ int pars_env_name(char *str, char *env_input)
 		ft_printf("export : '%s' is not a valid identifier\n", env_input);
 		return (1);
 	}
-
+	
+	if (str[0] == '=')
+	{
+		if (str[1] == '\0')
+		{
+			ft_printf("export : '%s' is not a valid identifier\n", env_input);
+			return (1);
+		}
+	}
+	
+	if (str[0] == '"')
+	{
+		if (str[1])
+		{
+			if (str[1] == '"')
+			{
+				if (str[2] == '\0')
+				{
+					ft_printf("export : '%s' is not a valid identifier\n", env_input);
+					return (1);
+				}
+			}
+		}
+	}
 	while (str[i])
 	{
 		printf("c0.4.4.4\n");
@@ -109,7 +143,7 @@ int pars_env_name(char *str, char *env_input)
 			ft_printf("export : '%s' is not a valid identifier\n", env_input);
 			return (1);
 		}	
-		if (!(str[i] >= 'a' && str[i] <= 'z') && !(str[i] >= 'A' && str[i] <= 'Z') && !(str[i] >= '0' && str[i] <= '9'))
+		if (!(str[i] >= 'a' && str[i] <= 'z') && !(str[i] >= 'A' && str[i] <= 'Z') && !(str[i] >= '0' && str[i] <= '9') && !(str[i] == '\"') && !(str[i] == '\''))
 		{
 			printf("c0.4.4.7\n");
 			ft_printf("export : '%s' is not a valid identifier\n", env_input);

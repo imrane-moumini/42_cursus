@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/01 19:44:36 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/02 15:44:09 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,12 @@ char    *ft_strcpy_env(char *str)
 	int length;
 	char *ptr;
 	
+	printf("str in cpyr env is=>%s\n", str);
 	if (!str)
 		return (NULL);
 	i = 0;
 	length = ft_strlen(str);
-	ptr = malloc((sizeof(char) *length) + 1);
+	ptr = malloc(sizeof(char) *(length + 1));
 	if (!ptr)
 		return (NULL);
 	while (str[i] != '\0' && str[i] != ' ' && str[i] != '\t')

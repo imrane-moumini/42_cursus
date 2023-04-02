@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/01 19:10:04 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/02 15:55:03 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,10 +128,6 @@ int main(int argc, char *argv[], char *env[])
 // export avec option fonctionne que quqnd c la seulele command (je gere)
 // export sans optopn c pas moi qui gere
 
-// moi comment je gere les export le pb c que je check au ans la premiere commade mais pas dans les suivantes
-// gerer les moins, @, +, \, },*{,. dans les export (dans les var), (pour les valeurs g juste pas le droit aux parentheses)
-// gerer export ligne 238 a 242
-//gerer export 269 a 272
 // si jexporte plusieurs fois la meme var avec des valeurs diff
 // il doi se souvenir de la derniere
 // unset supprime une varibale demviropnnememt (unset fonctionne dans dollar)
