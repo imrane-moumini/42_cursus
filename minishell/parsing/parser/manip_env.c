@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/02 19:44:08 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/03 18:49:03 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -540,6 +540,8 @@ void expand_job_multiple_dollar(t_node *ptr, int nbr)
 			printf("c1.3.6\n");
 			printf("save_after_dollar is =>%s\n", save_after_dollar);
 			new_str = ft_strjoin(save_before_dollar, str_nbr);
+			free (str_nbr);
+			free(save_after_dollar);
 			printf("c1.3.7\n");
 			printf("new_str is =>%s\n", new_str);
 			new_str = ft_strjoin(new_str, save_after_dollar);
