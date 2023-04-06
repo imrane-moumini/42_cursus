@@ -17,6 +17,8 @@ SRC = main.c \
 	parsing/parser/manip_node_redir.c \
 	parsing/parser/exception.c \
 	parsing/parser/final_check_expand.c \
+	parsing/parser/final_check_expand2.c \
+	parsing/parser/final_check_expand3.c \
 	signaux/signal.c \
 	builtin/exit.c \
 	builtin/export_with_option.c \

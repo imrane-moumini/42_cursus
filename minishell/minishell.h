@@ -229,6 +229,8 @@ int tab_as_space(char *tab);
 void free_double_tab(char **str);
 int nbr_space(char *str);
 char *return_right_tab(char *str, int begin, int end);
+char *return_right_tab_begin_sup(char *str, int begin, int end);
+char *return_right_tab_begin_inf(char *str, int begin, int end);
 char **tab_without_space(char *str, int nbr);
 char **recreate_tab_without_space(char **tab);
 int double_tab_as_export(char **tab);
