@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wcista <wcista@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:06:18 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/02 19:39:10 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/04 20:17:46 by wcista           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void ft_free_before_final_ast(t_com ***ast_before)
 			free(ptr);
 			ptr = save_ptr;
 		}
-		free(ast[i]);
+		//free(ast[i]);
 		printf("c5.5\n");
 		ast[i] = NULL;
 		i++;
@@ -148,6 +148,7 @@ void ft_free_final_ast(t_final **ast_before)
 	if (!ast)
 		return;
 	printf("c9.3\n");
+	i = 0;
 	while (ast)
 	{
 		printf("c9.4\n");

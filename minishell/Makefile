@@ -1,5 +1,5 @@
 NAME = minishell
-CC = gcc -Wall -Werror -Wextra 
+CC = gcc -Wall -Werror -Wextra -g
 SRC = main.c \
 	parsing/lexer/manipulate_input.c \
 	parsing/lexer/init_src_token.c \
@@ -21,7 +21,18 @@ SRC = main.c \
 	builtin/export_with_option.c \
 	builtin/ft_unset.c \
 	ft_free/ft_free.c \
-	error_pars.c 
+	error_pars.c \
+	exe/redir.c \
+	exe/heredoc.c \
+	exe/heredoc_signal.c \
+	exe/pipex.c \
+	exe/pipex_init.c \
+	exe/pipex_errors.c \
+	exe/struct.c \
+	exe/exec.c \
+	exe/childs.c \
+	exe/ft_strcmp.c \
+	exe/ft_strjoin_free.c \
 
 OBJ = $(SRC:%.c=%.o) 
 

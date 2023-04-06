@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wcista <wcista@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/02 19:03:19 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:03:06 by wcista           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	g_exit_status;
 
 int main(int argc, char *argv[], char *env[])
 {
@@ -90,7 +92,7 @@ int main(int argc, char *argv[], char *env[])
 				printf("c7\n");
 				printf_final_ast(final);
 				printf("c8\n");
-				
+				executor(final, env);
 				
 			}
 			ft_free(NULL, &root, &src,&info);

@@ -8,6 +8,14 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "libft/libft.h"
+//walid
+# include <fcntl.h>
+# include <stddef.h>
+# include <stdbool.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+
+
 // structure de l'input de l'user
 typedef struct source_s
 {   
@@ -52,7 +60,8 @@ typedef struct redir_node
     int out_file;
 	int append;
     int file;
-    int i;
+	int	fd_in;
+	int	fd_out;
     struct redir_node *next_sibling;
 } t_redir;
 
@@ -219,6 +228,11 @@ char *return_right_tab(char *str, int begin, int end);
 char **tab_without_space(char *str, int nbr);
 char **recreate_tab_without_space(char **tab);
 int double_tab_as_export(char **tab);
+
+/*EXEC*/
+void	remove_heredoc(t_final *cmds);
+void	executor(t_final *cmds, char *env[]);
+
 #endif
 
 // je suis << bob 
