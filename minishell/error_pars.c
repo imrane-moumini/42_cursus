@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 20:50:27 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/01 18:45:17 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/06 15:59:44 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ int error_pars(t_node *head)
     {
 		return(0);
 	}
-	// remplacer par une fonction export qui tema tout, 
-	// attention normalement je suis senser une var apres expand
-	// du coup export doi avoir leiu apres le expand
 	if (quote_closed(head) == 0)
 	{
 		return (0);

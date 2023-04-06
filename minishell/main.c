@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/06 15:35:04 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/06 17:15:18 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main(int argc, char *argv[], char *env[])
 	t_final *final;
 	(void)argc;
     (void)argv;
-	
+	/*
 	// signal exit
 	struct sigaction action_exit;
 	sigset_t	sigmask;
@@ -35,6 +35,7 @@ int main(int argc, char *argv[], char *env[])
 	action_exit.sa_mask = sigmask;
 	action_exit.sa_sigaction = ft_sigint;
 	sigaction(SIGINT, &action_exit, NULL);
+	*/
 	// programme hors signaux
 	mini_env = copy_env(env);
     src = NULL;

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/06 15:31:19 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/06 17:27:22 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,54 +17,16 @@ t_com **create_ast_command_redir(t_node *root)
 	t_com **ast;
 	t_ast  *save_ast;
 	t_node *ptr;
-	
 	int	nbr_pipe;
-	int i;
-
-
+	
 	save_ast = NULL;
+	ast = NULL;
 	if (!root)
 		return (NULL);
 	ptr = root -> first_child;
-	i = 0;
 	nbr_pipe = how_much_pipe(root);
-
-	if (nbr_pipe > 0)
-	{
-		ast = malloc(sizeof(t_com *) * ((nbr_pipe + 1) + 1));
-		ast[(nbr_pipe + 1)] = NULL;
-	}
-	else
-	{
-		ast = malloc(sizeof(t_com *) + 1);
-		ast[1] = NULL;
-		nbr_pipe = 0;
-	}
-
-
-	while (nbr_pipe >= 0)
-	{
-		if (save_ast)
-			save_ast = isolate_command_redir(save_ast -> save_ptr);
-		else
-			save_ast = isolate_command_redir(ptr);
-		
-		if (save_ast)
-		{
-			if (save_ast -> command)
-				ast[i] = save_ast -> command;
-			else
-			{
-				ast[i] = malloc(sizeof(t_com));
-				ast[i] -> txt = NULL;
-			}
-			if (ast[i])
-				ast[i] -> redir = save_ast -> redir;
-			free(save_ast);
-			i++;
-		}
-		nbr_pipe--;
-	}
+	ast = malloc_ast(ast, nbr_pipe);
+	ast = create_ast_command_redir_while(ast, save_ast, ptr, nbr_pipe);
 	return (ast);
 }
 
@@ -92,31 +54,7 @@ t_ast *isolate_command_redir(t_node *ptr)
 			if (ptr)
 			{
 				if (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1 )
-				{
-						if ((ptr -> next_sibling  && ft_stcmp(ptr -> next_sibling -> txt, "<") == 1) || (ptr -> next_sibling  && (ft_stcmp(ptr -> next_sibling -> txt, ">") == 1 )))
-						{
-							if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
-								redir = create_redir_node(redir, ptr);
-							if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
-								ptr = ptr -> next_sibling;
-							if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
-								ptr = ptr -> next_sibling;
-							if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
-								redir = create_redir_node(redir, ptr);
-						}
-						else if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
-						{
-							if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
-								redir = create_redir_node(redir, ptr);
-							if (ptr )
-								ptr = ptr -> next_sibling;
-	
-							if (ptr && ft_stcmp(ptr -> txt, "|") != 1) 
-								redir = create_redir_node(redir, ptr);
-						}
-						if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
-							ptr = ptr -> next_sibling;
-				}
+					ptr = return_ptr(&redir, ptr);
 			}
 		}
 		if (ptr)

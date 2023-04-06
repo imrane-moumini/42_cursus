@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/06 15:54:39 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/06 15:59:20 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -669,20 +669,12 @@ void    expand_env(t_env *head, t_node *root)
 	while (ptr)
 	{
 		expand = do_i_have_to_expand(ptr);
-		printf("c1.2\n");
 		//if (/*txt is juste un dollar sans rien apres on expand pas*/)
 		while (more_than_one_dollars_suite(ptr) == 1)
-		{
-			printf("c1.3\n");
 			expand_job_multiple_dollar(ptr, nbr_of_dollar_suite(ptr));
-			printf("c1.4\n");
-		}
 		expand = do_i_have_to_expand(ptr);
-		printf("c1.5\n");
 		if (expand)
 			expand_job(head, ptr);
-		printf("c1.6\n");
 		ptr = ptr -> next_sibling;
-		printf("c1.7\n");
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wcista <wcista@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:06:18 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/04 20:17:46 by wcista           ###   ########.fr       */
+/*   Updated: 2023/04/06 16:02:06 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,42 +94,30 @@ void ft_free_before_final_ast(t_com ***ast_before)
 	t_com **ast;
 	t_com *ptr;
 	t_com *save_ptr;
-	printf("c5.1\n");
+	
 	if (!ast_before)
 		return ;
 	ast = *ast_before;
 	if (!ast)
 		return ;
-		// double tableau ou chaue tab est une command
-		// les command sont des lisst chainee de ype t_com
-		// free pas les redir car ca je le free dans la final ast
-	printf("c5.2\n");
-	// command 1
 	while (ast[i])
 	{
-		printf("c5.3\n");
-		// contenu du premier element de command 1 mais je vais pas aux autes elements
 		ptr = ast[i];
 		while (ptr)
 		{
 			save_ptr = ptr -> next_sibling;
 			if (ptr -> txt)
 			{
-				printf("c5.4\n");
-				printf("ast i com is =>%s\n", ptr -> txt);
 				free(ptr -> txt);
 				ptr -> txt = NULL;
 			}
 			free(ptr);
 			ptr = save_ptr;
 		}
-		//free(ast[i]);
-		printf("c5.5\n");
 		ast[i] = NULL;
 		i++;
 	}
 	free(ast);
-	printf("c5.6\n");
 	ast_before = NULL;
 }
 
@@ -140,32 +128,24 @@ void ft_free_final_ast(t_final **ast_before)
 	t_redir *save_redir;
 	
 	int i;
-	printf("c9.1\n");
 	if (!ast_before)
 		return ;
-	printf("c9.2\n");
 	ast = *ast_before;
 	if (!ast)
 		return;
-	printf("c9.3\n");
 	i = 0;
 	while (ast)
 	{
-		printf("c9.4\n");
 		save_ast = ast -> next_sibling;
 		while (ast -> cmds[i])
 		{
-			printf("c9.5\n");
-			printf("%s\n", ast -> cmds[i]);
 			free(ast -> cmds[i]);
 			ast -> cmds[i] = NULL;
 			i++;
 		}
 		free(ast -> cmds);
-		printf("c9.6\n");
 		while (ast -> redir)
 		{
-			printf("c9.7\n");
 			save_redir = ast -> redir -> next_sibling;
 			if (ast -> redir -> txt)
 				free(ast -> redir -> txt);
@@ -175,14 +155,11 @@ void ft_free_final_ast(t_final **ast_before)
 			ast -> redir = NULL;
 			ast -> redir = save_redir;
 		}
-		printf("c9.8\n");
 		i = 0;
 		free(ast);
 		ast = save_ast;
-		printf("c9.9\n");
 	}
 	ast_before = NULL;
-	printf("c9.10\n");
 }
 
 void free_info(t_info_tok **info)
