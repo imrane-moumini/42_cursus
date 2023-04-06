@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/06 17:27:22 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/06 17:39:10 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ t_com **create_ast_command_redir(t_node *root)
 
 t_ast *isolate_command_redir(t_node *ptr)
 {
-	
-	t_ast  *save_ast;
 	t_redir *redir;
 	t_com	*com;
 
@@ -57,23 +55,8 @@ t_ast *isolate_command_redir(t_node *ptr)
 					ptr = return_ptr(&redir, ptr);
 			}
 		}
-		if (ptr)
-			ptr = ptr -> next_sibling;
-		save_ast = malloc(sizeof(save_ast));
-		if (com)
-			save_ast -> command = com;
-		else
-			save_ast -> command = NULL;
-			
-		if (redir)
-			save_ast -> redir = redir;
-		else
-			save_ast -> redir = NULL;
-			
-		if (ptr)
-			save_ast -> save_ptr = ptr;
 	}
-	return (save_ast);
+	return (return_save_ast(ptr, com, redir));
 }
 
 void print_final_ast(t_com **ast)

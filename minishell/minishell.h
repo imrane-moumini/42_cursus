@@ -205,6 +205,7 @@ int is_there_both(t_node *root);
 /*ast et redir command*/
 t_com **create_ast_command_redir(t_node *root);
 t_node *return_ptr(t_redir **redir, t_node *ptr);
+t_ast  *return_save_ast(t_node *ptr, t_com *com, t_redir *redir);
 t_ast *isolate_command_redir(t_node *root);
 t_com ** malloc_ast(t_com **ast, int nbr_pipe);
 t_com **create_ast_command_redir_while(t_com **ast, t_ast *save_ast, t_node *ptr, int nbr_pipe);

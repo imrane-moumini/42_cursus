@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:07:06 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/06 17:26:52 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/06 17:35:00 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ t_com **create_ast_command_redir_while(t_com **ast, t_ast *save_ast, t_node *ptr
 	int i;
 
 	i = 0;
-	printf("c2.2.1\n");
 	while (nbr_pipe >= 0)
 	{
-		printf("c2.2.2\n");
 		if (save_ast)
 			save_ast = isolate_command_redir(save_ast -> save_ptr);
 		else
@@ -85,4 +83,26 @@ t_node *return_ptr(t_redir **redir, t_node *ptr)
 	if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
 		ptr = ptr -> next_sibling;
 	return (ptr);
+}
+
+t_ast  *return_save_ast(t_node *ptr, t_com *com, t_redir *redir)
+{
+	t_ast  *save_ast;
+	
+	if (ptr)
+			ptr = ptr -> next_sibling;
+	save_ast = malloc(sizeof(save_ast));
+	if (com)
+		save_ast -> command = com;
+	else
+		save_ast -> command = NULL;
+		
+	if (redir)
+		save_ast -> redir = redir;
+	else
+		save_ast -> redir = NULL;
+		
+	if (ptr)
+			save_ast -> save_ptr = ptr;
+	return (save_ast);
 }
