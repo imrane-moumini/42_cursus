@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:16:29 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/01 19:03:01 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/06 15:43:43 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int ft_pipe_check(t_node *head)
 		{
 			if (ft_pipe_first_check(ptr) == 0)
 				return (0);
-			// avancer juste qua être un truc différent de  |
 			while (ptr && (ft_stcmp(ptr -> txt, "|") == 1))
 				ptr = ptr -> next_sibling;
 		}

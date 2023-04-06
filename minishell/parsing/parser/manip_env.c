@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/03 18:56:07 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/06 15:54:39 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,8 +148,6 @@ t_env   *copy_env(char *original[])
 	t_env	*ptr;
 
 	i = 0;
-	// ici je renvoi NULL qund ya pas denv 
-	// en fait je dois renvoyer un env vide
 	if (!original || original[0] == NULL)
 	{
 		mini_env = malloc(sizeof(t_env));
@@ -160,7 +158,7 @@ t_env   *copy_env(char *original[])
 		mini_env -> var_value = ft_strcpy("nothing");
 		return (mini_env);
 	}
-		//return (NULL);
+
 	mini_env = malloc(sizeof(t_env));
 	if (mini_env == NULL)
 		return (NULL);
@@ -204,8 +202,7 @@ void    print_env(t_env *head)
 		ptr = ptr -> next;
 	}
 }
-// en fait le pb c aue pour le spipe ca dit oui alors que ya pas de pipe
-// et que pour le exit ca dit oui aussi alors que ya
+
 int		ft_stcmp(char *str1, char *str2)
 {
 	int i;
@@ -236,31 +233,22 @@ char	*extract_name(char *str)
 {
 	int i;
 	char *ptr;
-	printf("c0.4.3 bis.1\n");
+
 	i = 0;
 	if (!str)
 		return (NULL);
-	printf("c0.4.3 bis.2\n");
 	while (str[i] != '\0' && str[i] != '=')
 		i++;
-	printf("c0.4.3 bis.3\n");
 	ptr = malloc((sizeof(char) *i) + 1);
-	printf("c0.4.3 bis.4\n");
 	if (!ptr)
 		return (NULL);
-	printf("c0.4.3 bis.5\n");
 	i = 0;
-	printf("c0.4.3 bis.6\n");
 	while (str[i] != '\0' && str[i] != '=')
 	{
-		printf("c0.4.3 bis.7\n");
 		ptr[i] = str[i];
-		printf("c0.4.3 bis.8\n");
 		i++;
-		printf("c0.4.3 bis.9\n");
 	}
 	ptr[i] = '\0';
-	printf("c0.4.3 bis.10\n");
 	return (ptr);
 }
 char	*extract_value(char *str)
@@ -268,38 +256,28 @@ char	*extract_value(char *str)
 	int i;
 	int equal;
 	char *ptr;
-	
-	printf("c0.4.3 bis bis.1\n");
+
 	i = 0;
 	equal = 0;
-	printf("c0.4.3 bis bis.2\n");
 	if (!str)
 		return (NULL);
 	while (str[i] != '\0' && str[i] != '=')
 		i++;
-	printf("c0.4.3 bis bis.3\n");
 	equal = i;
 	while(str[i] != '\0' && str[i] != ' ' && str[i] != '\t')
 		i++;
-	printf("c0.4.3 bis bis.4\n");
 	ptr = malloc( (sizeof(char)) *(i - equal) + 1);
-	printf("c0.4.3 bis bis.5\n");
 	if (!ptr)
 		return (NULL);
-	printf("c0.4.3 bis bis.6\n");
 	equal++;
 	i = 0;
 	while (str[equal] != '\0' && str[equal] != ' ' && str[equal] != '\t')
 	{
-		printf("c0.4.3 bis bis.7\n");
 		ptr[i] = str[equal];
-		printf("c0.4.3 bis bis.8\n");
 		i++;
 		equal++;
-		printf("c0.4.3 bis bis.9\n");
 	}
 	ptr[i] = '\0';
-	printf("c0.4.3 bis bis.10\n");
 	return (ptr);
 }
 
@@ -320,29 +298,18 @@ int    insert_input_env(t_env **head, t_node *node, int pipe)
 	char *var_env_value;
 	char *env_input;
 	t_env	*last_node;
-	printf("c0.4.1\n");
+
 	if (!head)
 		return (1);
-	printf("c0.4.2\n");
 	if ((!node))
 		return (1);
 	if ((node -> next_sibling == NULL) || ft_stcmp(node -> next_sibling -> txt, "|") == 1)
 		return (1);
-	printf("c0.4.3\n");
-	// attention c pas forcement le premier element de la chaine
-	// c lelement juste apres de export
 	env_input = ft_strcpy_env(node ->  next_sibling -> txt);
-	printf("c0.4.3 bis\n");
 	var_env_name = extract_name(node ->  next_sibling -> txt);
-	printf("c0.4.3 bis bis\n");
 	var_env_value = extract_value(node ->  next_sibling -> txt);
-	printf("c0.4.3 bis bis bis\n");
-	printf("c0.4.4\n");
-	// ici je regarde si g le droit ou non
 	if (pars_env_name(var_env_name, env_input) == 0 && (pipe == 0) && (pars_env_value(var_env_value, env_input) == 0) && count_nbr_equal(env_input, env_input) == 0)
 	{
-		// je vais la que si la fonction ok tu peux renvoi et aue nbr of pipe = 0
-		// dans add node env je fais le remplacement si existe deja
 		if(check_if_exist(*head, var_env_name) == 1)
 			supp_env(head, var_env_name);
 		add_node_env(*head);
@@ -350,12 +317,10 @@ int    insert_input_env(t_env **head, t_node *node, int pipe)
 		last_node -> var_name = var_env_name;
 		last_node -> var_value = var_env_value;
 		last_node -> txt = env_input;
-		printf("c0.4.5\n");
 		return (1);
 	}
 	else
 	{
-		printf("c0.4.6\n");
 		free (env_input);
 		free(var_env_name);
 		free(var_env_value);
@@ -368,13 +333,6 @@ t_node		*do_i_have_to_expand(t_node *node)
 	int i;
 
 	i = 0;
-	// ok ici je dois changer la logique pour expand 
-	// meme a linterieur dun mot
-	// en gros la je recois token par token
-	// je regarde si ya un dollars et je remplace
-	// sauf que normalment si ya 2 fois dollars dans le même toke
-	// je dois expand si ca correspond a un truc
-	// si ca correspond a rien je renvoi du vide
 	if (!node)
 		return (NULL);
 	ptr = node;
@@ -423,8 +381,6 @@ void	cut_dollar_sign(char *str)
 
 char *catch_var(char *str)
 {
-	// je lui envoi un car apres le dollar
-	// si ya rien apres le dollar je renvoi vide
 	if (!str)
 		return (NULL);
 	int i;
@@ -523,29 +479,17 @@ void expand_job_multiple_dollar(t_node *ptr, int nbr)
 	char *new_str;
 	
 	i = 0;
-	printf("c1.3.1\n");
 	while (ptr -> txt[i] != '\0')
 	{
-		printf("c1.3.2\n");
 		if (ptr ->txt[i] == '$')
 		{
-			printf("c1.3.3\n");
 			save_before_dollar = before_dollar(ptr -> txt);
-			printf("save_before_dollar is =>%s\n", save_before_dollar);
-			printf("c1.3.4\n");
 			str_nbr = add_nbr(nbr);
-			printf("add_nbr is =>%s\n", str_nbr);
-			printf("c1.3.5\n");
 			save_after_dollar = after_multiple_dollar(ptr -> txt, nbr);
-			printf("c1.3.6\n");
-			printf("save_after_dollar is =>%s\n", save_after_dollar);
 			new_str = ft_strjoin(save_before_dollar, str_nbr);
 			free (str_nbr);
-			free(save_after_dollar);
-			printf("c1.3.7\n");
-			printf("new_str is =>%s\n", new_str);
 			new_str = ft_strjoin(new_str, save_after_dollar);
-			printf("new_str is =>%s\n", new_str);
+			free(save_after_dollar);
 			free(ptr -> txt);
 			ptr -> txt = new_str;
 			return ;
@@ -590,41 +534,29 @@ int more_than_one_dollars_suite(t_node *ptr)
 {
 	int i;
 	i = 0;
-	printf("c1.2.1\n");
+
 	while(ptr -> txt[i])
 	{
-		printf("c1.2.2\n");
 		if(ptr->txt[i] == '$')
 		{
-			printf("c1.2.3\n");
 			if (ptr->txt[i + 1])
 			{
-				printf("c1.2.4\n");
 				if (ptr->txt[i+1] == '$')
 					return (1);
 			}
-			printf("c1.2.5\n");
 		}
-		printf("c1.2.6\n");
 		i++;
 	}
-	printf("c1.2.7\n");
 	return (0);
 }
 
-// dis toi si ya plusieur daffiler tu fais comme ca
-//si yen a tu le fais
-// ou sinon je gere plusieurs puis jme dit ok je regarde si il reste des dollar
-// si il reste je fais le truc de dabitude
-// en fait il faut que je boucle jusquq sil y ait plus de dollar dans la string
 char *after_multiple_dollar(char *str, int nbr)
 {
 	int i;
 	int save;
 	int count;
 	char *after;
-	// si en gros faut je coupe meme le dernier dollar si c pair
-		// si c impair je laisse le dernier dollar pour faire lexpand
+
 	count = 0;
 	i =0;
 	while (str[i])
@@ -653,7 +585,7 @@ char *after_multiple_dollar(char *str, int nbr)
 		}
 		i++;
 	}
-	// la je suis pile a lendroit ou il faut que je decoupe, a lindex exact
+
 	while (str[i] != '\0')
 		i++;
 	count = i -save;
@@ -668,15 +600,13 @@ char *after_multiple_dollar(char *str, int nbr)
 	after[i] = '\0';
 	return (after);
 }
-// apres tester aaa$$$$USER$USERnan
+
 char *add_nbr(int nbr)
 {
 	char *str_nbr;
 	int count;
 
 	count = 2;
-	
-	//ca fonctionne bien il me manque juste le ^ dollars qui devient 3 chiffre
 	while (nbr > 1)
 	{
 		if (count == 2)
@@ -738,7 +668,6 @@ void    expand_env(t_env *head, t_node *root)
 	//	return ;
 	while (ptr)
 	{
-		printf("c1.1\n");
 		expand = do_i_have_to_expand(ptr);
 		printf("c1.2\n");
 		//if (/*txt is juste un dollar sans rien apres on expand pas*/)
@@ -748,7 +677,6 @@ void    expand_env(t_env *head, t_node *root)
 			expand_job_multiple_dollar(ptr, nbr_of_dollar_suite(ptr));
 			printf("c1.4\n");
 		}
-		// la normalement il en reste 1 ou 0
 		expand = do_i_have_to_expand(ptr);
 		printf("c1.5\n");
 		if (expand)

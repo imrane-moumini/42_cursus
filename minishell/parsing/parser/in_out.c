@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   in_out.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:17:23 by imrane            #+#    #+#             */
-/*   Updated: 2023/03/10 20:14:12 by imrane           ###   ########.fr       */
+/*   Updated: 2023/04/06 15:44:22 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,7 @@ int ft_in_file_first_check(t_node *ptr)
 			ft_printf("syntax error near unexpected token '<'\n");
 			return (0);
 		}
-		// si ya  << ou >>
-		// si ya >>
-		// si ya <<
+		
 		if (ft_stcmp(ptr -> next_sibling -> txt, "<") == 1 || ft_stcmp(ptr -> next_sibling -> txt, ">") == 1)
 		{
 			if (ptr -> next_sibling -> next_sibling == NULL)
@@ -103,7 +101,6 @@ int ft_in_file(t_node *head)
 				return (0);
 			if (in_file_second_check(ptr) == 0)
 				return (0);
-			// avancer juste qua être un truc différent de < ou >
 			while (ptr && (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1))
 				ptr = ptr -> next_sibling;
 		}

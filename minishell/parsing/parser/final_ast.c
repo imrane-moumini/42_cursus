@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:53:16 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/02 19:03:16 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/06 15:40:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,14 @@ t_final *create_final_ast(t_com **ast)
 {
 	t_final *final;
 	int i;
-
-	printf("c4.1\n");
+	
 	final = NULL;
 	i = 0;
-	printf("c4.2\n");
 	while (ast[i])
 	{
-		printf("c4.3\n");
 		final = create_list_final_ast(final, ast[i]);
-		printf("c4.4\n");
 		i++;
 	}
-	printf("c4.5\n");
 	return (final);
 }
 
@@ -105,8 +100,6 @@ int ft_com_len(t_com *com)
 	return (i);
 }
 
-// creer fonction qui qffiche ma final structure pour voir si ca a fonctionner
-
 void printf_final_ast(t_final *final)
 {
 	t_final *follow;
@@ -143,6 +136,3 @@ void printf_final_ast(t_final *final)
 		follow = follow -> next_sibling;
 	}
 }
-
-// faire valgrind
-// faire logique quand ya les guillemets

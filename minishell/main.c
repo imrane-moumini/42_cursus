@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wcista <wcista@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/05 16:03:06 by wcista           ###   ########.fr       */
+/*   Updated: 2023/04/06 15:35:04 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int main(int argc, char *argv[], char *env[])
 				printf("c7\n");
 				printf_final_ast(final);
 				printf("c8\n");
-				executor(final, env);
+				//executor(final, env);
 				
 			}
 			ft_free(NULL, &root, &src,&info);
