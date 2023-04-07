@@ -148,6 +148,10 @@ void    create_var_name(t_env *node);
 void    create_var_value(t_env *node);
 int		ft_stcmp(char *str1, char *str2);
 int		ft_stcmp_exit(char *str1, char *str2);
+void final_txt(char *save_after_dollar, char *new_str, t_node *ptr, char *save_var);
+void init_save_after_dollar(char *save_after_dollar);
+char *return_after_multiple_dollar(char *str, int i, int save);
+
 char	*extract_name(char *str);
 char	*extract_value(char *str);
 t_env	*last_env_node(t_env *head);

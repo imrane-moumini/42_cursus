@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:38:31 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/07 19:15:53 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/07 19:53:35 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ void expand_job(t_env *head, t_node *ptr)
 	char *new_str;
 
 	i = 0;
-	save_after_dollar = malloc(sizeof(char) * 2);
-	save_after_dollar[0] = 'a';
-	save_after_dollar[1] = '\0';
+	save_after_dollar = NULL;
+	init_save_after_dollar(save_after_dollar);
 	while (ptr -> txt[i] != '\0')
 	{
 		if (ptr ->txt[i] == '$')
@@ -63,11 +62,7 @@ void expand_job(t_env *head, t_node *ptr)
 			save_var = catch_var(ptr->txt + i);
 			save_after_dollar = after_dollar(ptr -> txt);
 			new_str = ft_strjoin(save_before_dollar, return_matching_value(head, save_var));
-			if (save_after_dollar)
-				new_str = ft_strjoin(new_str, save_after_dollar);
-			free(ptr -> txt);
-			free(save_var);
-			ptr -> txt = new_str;
+			final_txt(save_after_dollar, new_str, ptr, save_var);
 			i--;
 		}
 		i++;
@@ -97,10 +92,7 @@ char *after_multiple_dollar(char *str, int nbr)
 {
 	int i;
 	int save;
-	int count;
-	char *after;
 
-	count = 0;
 	i =0;
 	while (str[i])
 	{
@@ -128,20 +120,7 @@ char *after_multiple_dollar(char *str, int nbr)
 		}
 		i++;
 	}
-
-	while (str[i] != '\0')
-		i++;
-	count = i -save;
-	after = malloc(sizeof(char) * (count + 1));
-	i =0;
-	while (str[save] != '\0')
-	{
-		after[i] = str[save]; 
-		i++;
-		save++;
-	}
-	after[i] = '\0';
-	return (after);
+	return (return_after_multiple_dollar(str, i, save));
 }
 
 char *add_nbr(int nbr)

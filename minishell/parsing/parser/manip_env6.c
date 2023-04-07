@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:38:49 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/07 18:37:41 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/07 19:23:24 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,37 +68,21 @@ void    expand_env(t_env *head, t_node *root)
 {
 	t_node *ptr;
 	t_node *expand;
-	printf("c0.1\n");
+
 	if (!head || !root)
 		return ;
 	ptr = root -> first_child;
-	printf("c0.2\n");
 	//if (is_here_doc(root) == 1)
 	//	return ;
 	while (ptr)
 	{
-		printf("c0.3\n");
 		expand = do_i_have_to_expand(ptr);
-		printf("c0.4\n");
 		//if (/*txt is juste un dollar sans rien apres on expand pas*/)
 		while (more_than_one_dollars_suite(ptr) == 1)
-		{
-			printf("c0.5\n");
 			expand_job_multiple_dollar(ptr, nbr_of_dollar_suite(ptr));
-			printf("c0.6\n");
-		}
-		printf("c0.7\n");
 		expand = do_i_have_to_expand(ptr);
-		printf("c0.8\n");
 		if (expand)
-		{
-			printf("%s\n",ptr -> txt);
-			printf("c0.9\n");
 			expand_job(head, ptr);
-			printf("c0.10\n");
-			printf("%s\n",ptr -> txt);
-		}
 		ptr = ptr -> next_sibling;
-		printf("c0.11\n");
 	}
 }
