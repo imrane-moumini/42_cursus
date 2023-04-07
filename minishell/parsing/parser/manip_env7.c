@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:45:12 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/07 16:25:48 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:11:14 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,22 @@ void copy_original_to_mini(char *original[], int i, t_env *ptr)
 		i++;
 	}
 }
+
+int env_checks_quit(t_env **head, t_node *node)
+{
+	if (!head)
+		return (1);
+	if ((!node))
+		return (1);
+	if ((node -> next_sibling == NULL) || ft_stcmp(node -> next_sibling -> txt, "|") == 1)
+		return (1);
+	return (0);
+}
+
+void free_in_insert_input_env(char *env_input, char *var_env_name, char *var_env_value)
+{
+	free (env_input);
+	free(var_env_name);
+	free(var_env_value);
+}
+

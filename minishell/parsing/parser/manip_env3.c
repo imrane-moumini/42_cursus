@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:34:36 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/07 15:37:02 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:07:02 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ char	*extract_value(char *str)
 	while(str[i] != '\0' && str[i] != ' ' && str[i] != '\t')
 		i++;
 	ptr = malloc( (sizeof(char)) *(i - equal) + 1);
-	if (!ptr)
-		return (NULL);
 	equal++;
 	i = 0;
 	while (str[equal] != '\0' && str[equal] != ' ' && str[equal] != '\t')
@@ -82,11 +80,7 @@ int    insert_input_env(t_env **head, t_node *node, int pipe)
 	char *env_input;
 	t_env	*last_node;
 
-	if (!head)
-		return (1);
-	if ((!node))
-		return (1);
-	if ((node -> next_sibling == NULL) || ft_stcmp(node -> next_sibling -> txt, "|") == 1)
+	if (env_checks_quit(head, node) == 1)
 		return (1);
 	env_input = ft_strcpy_env(node ->  next_sibling -> txt);
 	var_env_name = extract_name(node ->  next_sibling -> txt);
@@ -97,16 +91,12 @@ int    insert_input_env(t_env **head, t_node *node, int pipe)
 			supp_env(head, var_env_name);
 		add_node_env(*head);
 		last_node = last_env_node(*head);
-		last_node -> var_name = var_env_name;
-		last_node -> var_value = var_env_value;
-		last_node -> txt = env_input;
+		fill_last_node(last_node, var_env_name, var_env_value, env_input);
 		return (1);
 	}
 	else
 	{
-		free (env_input);
-		free(var_env_name);
-		free(var_env_value);
+		free_in_insert_input_env(env_input, var_env_name, var_env_value);
 		return (0);
 	}
 }
