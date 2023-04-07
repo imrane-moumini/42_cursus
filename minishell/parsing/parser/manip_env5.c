@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:38:31 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/07 15:42:49 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/07 19:15:53 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void expand_job(t_env *head, t_node *ptr)
 	char *save_before_dollar;
 	char *save_after_dollar;
 	char *new_str;
-	
+
 	i = 0;
 	save_after_dollar = malloc(sizeof(char) * 2);
 	save_after_dollar[0] = 'a';

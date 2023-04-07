@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:37:52 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/07 15:41:06 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:37:03 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,10 @@ char *before_dollar(char *str)
 
 char *after_dollar(char *str)
 {
-	int i;
 	int j;
-	int length;
 	int save;
-	char *after;
-
-	
-	i = 0;
 	j = 0;
-	length = 0;
+
 	while (str[j] != '\0')
 	{
 		if (str[j] == '$')
@@ -118,19 +112,5 @@ char *after_dollar(char *str)
 	if (str[j] == '\0')
 		return (NULL);
 	save = j;
-	while (str[j])
-	{
-		j++;
-		length++;
-	}
-	after = malloc(sizeof(char) * (length + 1));
-	
-	while(str[save] != '\0')
-	{
-		after[i] = str[save];
-		i++;
-		save++;
-	}
-	after[i] = '\0';
-	return (after);
+	return (return_after(str, j, save));
 }

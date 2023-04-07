@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/06 17:15:18 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/07 18:13:06 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int main(int argc, char *argv[], char *env[])
 		if (single_enter(input) == 0 && check_space_append_heredoc(input) == 1)
 		{
 			root = parse_simple_command(input, &src, &info);
-			//print_ast(root);
+			print_ast(root);
 			ft_exit(&mini_env, &root, &src, &info);
 			printf("c0\n");
 			expand_env(mini_env,root);

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:34:13 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/07 16:25:56 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/07 19:19:53 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ int		ft_stcmp(char *str1, char *str2)
 		return (0);
 	if (str1[0] == '\0')
 		return (0);
-	if (ft_strlen(str1) != ft_strlen(str2))
-        return (0);
 	while (str1[i] != '\0')
 	{
 		if (str1[i] != str2[i])
