@@ -9,7 +9,16 @@ SRC = main.c \
 	parsing/parser/ft_pipe.c \
 	parsing/parser/guillemets.c \
 	parsing/parser/in_out.c \
+	parsing/parser/in_out2.c \
 	parsing/parser/manip_env.c \
+	parsing/parser/manip_env2.c \
+	parsing/parser/manip_env3.c \
+	parsing/parser/manip_env4.c \
+	parsing/parser/manip_env5.c \
+	parsing/parser/manip_env6.c \
+	parsing/parser/manip_env7.c \
+	parsing/parser/manip_env8.c \
+	parsing/parser/manip_env9.c \
 	parsing/parser/decoupe_ast_no_quotes.c \
 	parsing/parser/decoupe_ast_no_quotes2.c \
 	parsing/parser/final_ast.c \

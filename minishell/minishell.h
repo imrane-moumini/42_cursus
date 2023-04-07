@@ -129,6 +129,9 @@ int check_space_append_heredoc(char *str);
 
 /*env*/
 t_env   *copy_env(char *original[]);
+t_env *env_not_exist(void);
+void create_var_name_and_value(t_env *ptr);
+void copy_original_to_mini(char *original[], int i, t_env *ptr);
 t_env   *add_node_env(t_env *head);
 t_env   *new_node_env(void);
 void    print_env(t_env *head);
@@ -179,10 +182,12 @@ void free_env(t_env **mini_env);
 void ft_free(t_env **mini_env, t_node **root, t_source **src, t_info_tok **info);
 void ft_free_before_final_ast(t_com *** ast);
 void ft_free_final_ast(t_final **ast);
-
 /*in and out redirection*/
 int ft_in_file_first_check(t_node *ptr);
+int ft_in_file_first_check_wrong_arrow(t_node *ptr);
 int in_file_second_check(t_node *ptr);
+int in_file_second_check_alone(t_node *ptr);
+int in_file_second_check_something_after(t_node *ptr);
 int ft_in_file(t_node *head);
 
 /*pipe*/
