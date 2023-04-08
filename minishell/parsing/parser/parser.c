@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/08 17:29:01 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/08 18:39:01 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ t_node *parse_simple_command(char *input, t_source **src, t_info_tok **info)
 {
 	t_node *root;
 	t_token *tok;
-	t_node *node;
 	t_source *src_ft;
 	t_info_tok *info_ft;
 	
@@ -67,21 +66,13 @@ t_node *parse_simple_command(char *input, t_source **src, t_info_tok **info)
 		tok = tokenize(src_ft, info_ft);
 	while (src_ft -> exit != 1 || tok != NULL)
 	{	
-		if (tok)
-		{
-			node = new_node(tok);
-			if (!node)
-				return (NULL);
-			root = add_node_to_ast(root, node);
-			free_info(info);
-			free_tok(&tok);
-		}
+		if (!(if_tok_exist(tok, root, info)))
+			return (NULL);
 		info = init_global_info_token(info);
 		info_ft = *(info);
 		tok = tokenize(src_ft, info_ft);
 	}
-	free_tok(&tok);
-	return (root);
+	return (free_tok(&tok), root);
 }
 
 void    print_ast(t_node *node)
@@ -95,4 +86,20 @@ void    print_ast(t_node *node)
 		ft_printf("%s\n", ptr -> txt);
 		ptr = ptr -> next_sibling;
 	}
+}
+
+t_node *if_tok_exist(t_token *tok, t_node *root, t_info_tok **info)
+{
+	t_node *node;
+	
+	if (tok)
+	{
+		node = new_node(tok);
+		if (!node)
+			return (NULL);
+		add_node_to_ast(root, node);
+		free_info(info);
+		free_tok(&tok);
+	}
+	return (root);
 }
