@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mainp_node_redir2.c                                :+:      :+:    :+:   */
+/*   manip_node_redir2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:30:56 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/08 16:35:35 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/08 17:14:56 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,3 +32,25 @@ void init_redir_else(t_redir *ptr)
     ptr -> append = 0;
     ptr -> file = 0;
 }
+
+void ft_heredoc_redir(t_redir *ptr)
+{
+    ptr -> heredoc = 1;
+    free(ptr -> txt);
+    ptr -> txt = malloc(sizeof(char) * 3);
+    ft_strlcpy(ptr -> txt, "<<", 3);
+}
+
+void ft_file(t_redir *ptr)
+{
+    ptr -> in_file = 1;
+}
+
+void ft_append(t_redir *ptr)
+{
+        ptr -> append = 1;
+        free(ptr -> txt);
+        ptr -> txt = malloc(sizeof(char) * 3);
+        ft_strlcpy(ptr -> txt, ">>", 3);
+}
+

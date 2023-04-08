@@ -229,6 +229,13 @@ void print_command(t_com *com);
 void print_redir(t_redir *redir);
 void init_redir_if(t_redir *ptr, t_node *node);
 void init_redir_else(t_redir *ptr);
+void ft_heredoc_redir(t_redir *ptr);
+void add_new_redir_to_list(t_redir *redir, t_redir *ptr, t_node *node);
+t_redir *create_redir_node_if(t_redir *redir, t_node *node, t_redir *ptr);
+t_redir *create_redir_node_else(t_redir *redir, t_node *node, t_redir *ptr);
+void ft_file(t_redir *ptr);
+void ft_append(t_redir *ptr);
+void ft_outfile(t_redir *ptr);
 /*manipulate node command*/
 t_com *create_com_node(t_com *com, t_node *node);
 /*manipulate node redir*/
