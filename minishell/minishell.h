@@ -111,6 +111,8 @@ t_source	**init_src(t_source **src, char *input); // init input struct
 /* manipulate the token*/
 t_info_tok **init_global_info_token(t_info_tok **info);
 t_token	*tokenize(t_source *src, t_info_tok *info);
+int tokenize_while(t_source *src, t_info_tok *info, char c);
+void init_buf_size(t_info_tok *info);
 int tokenize_space(char c, t_source *src, t_info_tok *info);
 int tokenize_pipe(char c, t_source *src, t_info_tok *info);
 void tokenize_end(char c, t_source *src, t_info_tok *info);

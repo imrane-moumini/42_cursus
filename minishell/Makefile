@@ -5,6 +5,7 @@ SRC = main.c \
 	parsing/lexer/init_src_token.c \
 	parsing/lexer/manipulate_token.c \
 	parsing/lexer/manipulate_token2.c \
+	parsing/lexer/manipulate_token3.c \
 	parsing/parser/parser.c \
 	parsing/parser/ft_pipe.c \
 	parsing/parser/guillemets.c \

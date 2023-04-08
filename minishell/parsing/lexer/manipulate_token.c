@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/02 15:49:35 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/08 18:54:24 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	free_token(t_token *tok)
 		tok = NULL;
 	}
 }
-// quand je mets un espace a la fin il le prend en compte 
+
 t_token	*tokenize(t_source *src, t_info_tok *info)
 {
 	char c;
@@ -51,36 +51,13 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 	if(!src || !src->buffer || !src->bufsize)
         return NULL;
 	if (!(info -> tok_buf))
-	{
-		info -> tok_bufsize = 1024;
-		info -> tok_buf = ft_calloc(info -> tok_bufsize, sizeof(char));
-		if (!(info -> tok_buf))
-			return NULL;
-	}
+		init_buf_size(info);
     info -> tok_buf[0] = '\0';
 	c = src -> buffer[src -> curpos];
 	while (c)
 	{
-		if (c == ' ' || c == '\t' || c == '\n')
-		{
-			if (tokenize_space(c, src, info) == 1)
-				break;
-		}
-		else if (c == '|')
-		{
-			if (tokenize_pipe(c, src, info) == 1)
-				break;
-		}
-		else if (c == '<' || c == '>')
-		{
-			if (tokenize_in_out(c, src, info) == 1)
-				break;	
-		}
-		else
-		{
-			info -> tok_bufindex++;
-			add_to_buf(c, info);
-		}
+		if (tokenize_while(src, info, c)== 1)
+			break;
 		src -> curpos++;
 		c = src -> buffer[src -> curpos];
 	}
