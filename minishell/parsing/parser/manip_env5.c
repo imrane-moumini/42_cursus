@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:38:31 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/08 16:20:16 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/08 16:25:47 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,14 +117,7 @@ char *add_nbr(int nbr)
 		if (count == 2)
 		{
 			str_nbr = malloc(sizeof(char) * 8);
-			str_nbr[0] = '3';
-			str_nbr[1] = '1';
-			str_nbr[2] = '0';
-			str_nbr[3] = '5';
-			str_nbr[4] = '1';
-			str_nbr[5] = '6';
-			str_nbr[6] = '0';
-			str_nbr[7] = '\0';
+			init_str_nbr(str_nbr);
 			count--;
 			if (nbr == 2)
 				return (str_nbr);
