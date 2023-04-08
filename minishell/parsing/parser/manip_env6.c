@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:38:49 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/07 19:23:24 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/08 16:28:50 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int nbr_of_dollar_suite(t_node *ptr)
 
 
 void    expand_env(t_env *head, t_node *root)
-
 {
 	t_node *ptr;
 	t_node *expand;
@@ -86,3 +85,5 @@ void    expand_env(t_env *head, t_node *root)
 		ptr = ptr -> next_sibling;
 	}
 }
+
+

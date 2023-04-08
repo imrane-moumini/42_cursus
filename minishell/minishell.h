@@ -227,6 +227,8 @@ t_com **create_ast_command_redir_while(t_com **ast, t_ast *save_ast, t_node *ptr
 void print_final_ast(t_com **ast);
 void print_command(t_com *com);
 void print_redir(t_redir *redir);
+void init_redir_if(t_redir *ptr, t_node *node);
+void init_redir_else(t_redir *ptr);
 /*manipulate node command*/
 t_com *create_com_node(t_com *com, t_node *node);
 /*manipulate node redir*/

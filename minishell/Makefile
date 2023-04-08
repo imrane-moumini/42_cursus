@@ -24,6 +24,7 @@ SRC = main.c \
 	parsing/parser/final_ast.c \
 	parsing/parser/manip_node_commannd.c \
 	parsing/parser/manip_node_redir.c \
+	parsing/parser/manip_node_redir2.c \
 	parsing/parser/exception.c \
 	parsing/parser/final_check_expand.c \
 	parsing/parser/final_check_expand2.c \
