@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:38:31 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/07 19:53:35 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/08 16:20:16 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,24 +98,7 @@ char *after_multiple_dollar(char *str, int nbr)
 	{
 		if (str[i] == '$' && str[i + 1] && str[i + 1] == '$')
 		{
-			if (nbr % 2 == 0)
-			{
-				while (nbr)
-				{
-					i++;
-					nbr--;
-				}
-				save = i;
-			}
-			else
-			{
-				while (nbr > 1)
-				{
-					i++;
-					nbr--;
-				}
-				save = i;
-			}
+			after_multiple_dollar_while(nbr, &i, &save);
 			break;
 		}
 		i++;

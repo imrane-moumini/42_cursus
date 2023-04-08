@@ -151,7 +151,7 @@ int		ft_stcmp_exit(char *str1, char *str2);
 void final_txt(char *save_after_dollar, char *new_str, t_node *ptr, char *save_var);
 void init_save_after_dollar(char *save_after_dollar);
 char *return_after_multiple_dollar(char *str, int i, int save);
-
+void after_multiple_dollar_while(int nbr, int *i, int *save);
 char	*extract_name(char *str);
 char	*extract_value(char *str);
 t_env	*last_env_node(t_env *head);
