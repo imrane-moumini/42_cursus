@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 18:42:55 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/09 18:24:40 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/09 18:48:54 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,4 +144,40 @@ int is_just_tok_quotes(char *str)
 	}
 	printf("cond 6\n");
 	return (0);
+}
+
+int is_double_quotes_str_closed(char *str)
+{
+	int i;
+	int count;
+
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '"')
+			count++;
+		i++;
+	}
+	if (count % 2 == 0)
+		return (1);
+	return (0);	
+}
+
+int is_single_quotes_str_closed(char *str)
+{
+	int i;
+	int count;
+
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'')
+			count++;
+		i++;
+	}
+	if (count % 2 == 0)
+		return (1);
+	return (0);	
 }

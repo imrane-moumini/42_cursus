@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/09 18:18:33 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/09 18:28:12 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,7 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 		printf("b1\n");
 		printf("c is %c\n", c);
 		if (tokenize_while(src, info, c)== 1)
-		{
-			printf("b2\n");
-			//printf("JAVANCE\n");
-			//src -> curpos++;
 			break;
-		}
 		if (c != '"' && c != '\'')
 		{
 			printf("b3\n");
