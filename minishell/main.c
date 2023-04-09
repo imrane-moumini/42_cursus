@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/09 16:43:43 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/09 19:42:00 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ int main(int argc, char *argv[], char *env[])
 		if (!input)
 			return (printf("exit\n"), 0); // free (c ici que je gere control D )
 		// fonction ici qui tema si espace entre les >
-		if (single_enter(input) == 0 && check_space_append_heredoc(input) == 1)
+		if (does_quotes_closed(input) == 1 && single_enter(input) == 0 && check_space_append_heredoc(input) == 1)
 		{
+			//exit(1);
 			root = parse_simple_command(input, &src, &info);
 			print_ast(root);
 			ft_exit(&mini_env, &root, &src, &info);

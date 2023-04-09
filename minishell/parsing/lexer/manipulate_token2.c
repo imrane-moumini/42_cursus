@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 19:16:47 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/09 18:48:06 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/09 18:57:53 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int tokenize_single_quote(char c, t_source *src, t_info_tok *info)
 	
 	if (info -> tok_bufindex != -1 && (does_str_has_single_quotes(info -> tok_buf) == 1) && (is_double_quotes_str_closed(info -> tok_buf) == 1))
 	{
-		printf("a3.1\n");
 		info -> tok_bufindex++;
 		add_to_buf(c, info);
 		info -> tok_bufindex++;
@@ -100,7 +99,6 @@ int tokenize_double_quote(char c, t_source *src, t_info_tok *info)
 	
 	if (info -> tok_bufindex != -1 && (does_str_has_double_quotes(info -> tok_buf) == 1) && (is_single_quotes_str_closed(info -> tok_buf) == 1))
 	{
-		printf("a2.1\n");
 		info -> tok_bufindex++;
 		add_to_buf(c, info);
 		info -> tok_bufindex++;

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/09 18:28:12 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/09 18:55:07 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,32 +56,17 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 	c = src -> buffer[src -> curpos];
 	while (c)
 	{
-		printf("b1\n");
-		printf("c is %c\n", c);
 		if (tokenize_while(src, info, c)== 1)
 			break;
 		if (c != '"' && c != '\'')
-		{
-			printf("b3\n");
-			printf("JAVANCE\n");
 			src -> curpos++;
-		}
 		c = src -> buffer[src -> curpos];
-		printf("b4\n");
 	}
 	if (c == '\0' || c == '\n')
-	{
-		printf("b5\n");
 		tokenize_end(c, src, info);
-	}
 	if (is_just_tok_quotes(info -> tok_buf) == 1)
 		tok = create_token(info -> tok_buf, src, info);
-	printf("CREATE TOKEN\n");
-	if (tok)
-		printf("TOK is =>%s\n", tok ->text);
-	printf("b6\n");
 	info -> tok_bufindex = -1;
-	printf("b7\n");
 	return (tok);
 }
 // en fait le pb c que

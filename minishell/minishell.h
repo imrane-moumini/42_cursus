@@ -208,6 +208,7 @@ int in_file_second_check(t_node *ptr);
 int in_file_second_check_alone(t_node *ptr);
 int in_file_second_check_something_after(t_node *ptr);
 int ft_in_file(t_node *head);
+int does_quotes_closed(char *str);
 
 /*pipe*/
 int ft_pipe_first_check(t_node *ptr);
