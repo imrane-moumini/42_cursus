@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:48:42 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/06 17:59:48 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/09 16:52:49 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int nbr_space(char *str)
 
 	while (str[i])
 	{
-		if (str[i] == ' ' || str[i] == '\t' || str[i] == '-' )
+		if (str[i] == '-' )
 			count++;
 		i++;
 	}

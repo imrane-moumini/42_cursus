@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:47:28 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/06 19:40:27 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/09 16:53:22 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char **tab_without_space_while(char *str, int begin, int end, char **tab)
 	j = 0;
 	while (str[i] != '\0')
 	{
-		if (str[i] == ' ' || str[i] == '\t' || str[i] == '-' )
+		if (str[i] == '-' )
 		{
 			begin = i;
 			if(begin != end)

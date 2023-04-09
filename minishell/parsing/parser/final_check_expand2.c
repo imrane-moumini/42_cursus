@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:44:38 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/06 17:46:26 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/09 16:53:11 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int double_tab_as_space(char **tab)
 	{
 		while(tab[i][j])
 		{
-			if (tab[i][j] == ' ' || tab[i][j] == '\t' || tab[i][j] == '-' )
+			if (tab[i][j] == '-' )
 				return (1);
 			j++;
 		}
@@ -98,7 +98,7 @@ int tab_as_space(char *tab)
 	
 	while (tab[i])
 	{
-		if (tab[i] == ' ' || tab[i] == '\t' || tab[i] == '-' )
+		if (tab[i] == '-' )
 				return (1);
 		i++;
 	}
