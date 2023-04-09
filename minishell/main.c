@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/09 19:42:00 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/09 19:46:49 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,7 @@ int main(int argc, char *argv[], char *env[])
 // les premiere guillemets qu'on voit prime sur ce que quon doit faire
 // je peut pas anlyser mot par mot vu que je deco
 
-// deja quand je vois des guillemets il faut que jignore lespace pour decouper pour avoir tout ce qui
-// est dans les guillemets comme argument
+
 // une fois que jqurqis expand
 // va falloir que jenleve les double guillemets ou simple en focntion
 // je vais devoir recouper pasque ptete yqurq des pipes et redir
