@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:45:52 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/10 22:49:02 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/10 23:46:56 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,43 +53,75 @@ int expand_guillemets(char *str, int index_dol)
 	ou si ls guilleemts simple avant sont fermer*/
 	// les dooubles sont pas entourer de simple
 	int i;
+	int save_index_dol;
 	int index_simple;
-	int index_double_q;
+	//int index_double_q;
 	int nbr_double_q;
 	int nbr_simple;
 	
 	i = 0;
 	nbr_simple = 0;
 	nbr_double_q = 0;
-	// ok g capter je sauvegarde lindex quand je vois une simple ou une double
-	// je regarde si la derniere double que g vu a un index plus bas que la dernier simple que g vu
-	// et ca jeregarde aussi si le nombre de double avant moi est impair
-	while (index_dol > 0)
+	
+	save_index_dol = index_dol;
+	while (index_dol >= 0)
 	{
-		if (str[i] == '\'')
+		if (str[index_dol] == '\'')
 		{
 			nbr_simple++;
 			index_simple = i;
 		}
-		if (str[i] == '"')
+		if (str[index_dol] == '"')
 		{
-			index_double_q =i;
+			//index_double_q =i;
 			nbr_double_q++;
 		}
-		index_dol--;;
+		index_dol--;
 	}
+	// faut que le nbr de double avant le  dernier simple que je vois en partant du dollar ne soit pas pair
 	if (nbr_simple == 0)
 		return (1);
-	if (nbr_simple  > 0)
+	nbr_double_q = 0;
+	index_dol = save_index_dol;
+	while (i <= index_simple)
 	{
-		if (nbr_double_q == 0)
-			return (0);
-		if (index_simple > index_double_q)
-			return (1);
+		if (str[i] == '"')
+			nbr_double_q++;
+		i++;
 	}
+	
+	//if (nbr_double_q % 2 != 0 && index_simple > index_double_q)
+	//	return (1);
+	if (nbr_double_q % 2 != 0)
+		return (1);
+	// faut que le nbr de double avant le  dernier simple que je vois en partant du dollar ne soit pas pair
+	
 	return (0);
 }
+/*
+imoumini@e1r10p21:~/42_cursus/minishell$ echo "$USER"
+imoumini
+imoumini@e1r10p21:~/42_cursus/minishell$ echo '$USER'
+$USER
+imoumini@e1r10p21:~/42_cursus/minishell$ echo '"$USER"'
+"$USER"
+imoumini@e1r10p21:~/42_cursus/minishell$ echo "'"$USER"'"
+'imoumini'
+imoumini@e1r10p21:~/42_cursus/minishell$ echo "''$USER''"
+''imoumini''
+imoumini@e1r10p21:~/42_cursus/minishell$ echo "ok"$USER"dac"
+okimouminidac
+imoumini@e1r10p21:~/42_cursus/minishell$ echo "ok"'$USER'"dac"
+ok$USERdac
+imoumini@e1r10p21:~/42_cursus/minishell$ echo "ok"''$USER"''dac"
+okimoumini''dac
+imoumini@e1r10p21:~/42_cursus/minishell$ ""'$USER'""
+$USER: command not found
+imoumini@e1r10p21:~/42_cursus/minishell$ echo ""'$USER'""
+$USER
+imoumini@e1r10p21:~/42_cursus/minishell$ echo ""'$USER'""
 
+*/
 t_node *attribue_here_doc(t_node *root)
 {
 
