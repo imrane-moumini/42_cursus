@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:37:52 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/10 18:25:12 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:43:30 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ char *find_end_of_var(char *str)
 		i++;
 	if (str)
 		str = str + i;
+	printf("end of var is =>%s\n",str);
 	return (str);
 }
 char *after_dollar_deux(char *str)
@@ -144,6 +145,8 @@ char *after_dollar_deux(char *str)
 
 	if (!str)
 		return (NULL);
+	printf("after deux dollar\n");
+	printf("str is =>%s\n", str);
 	length = 0;
 	i = 0;
 	while (str[length] != '\0')
@@ -154,6 +157,7 @@ char *after_dollar_deux(char *str)
 		after[i] = str[i];
 		i++;
 	}
+	after[i] = '\0';
 	return (after);
 	
 }
