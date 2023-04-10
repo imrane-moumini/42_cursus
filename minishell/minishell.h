@@ -47,6 +47,7 @@ typedef struct node_s
 {
     char *txt;        /* value of this node */
     int    children;            /* number of child nodes */
+    int     after_here_doc;
     struct node_s *first_child; /* first child node */
     struct node_s *next_sibling;
 	struct node_s *prev_sibling;
@@ -126,7 +127,7 @@ int does_str_has_double_quotes(char *str);
 int tokenize_single_quote(char c, t_source *src, t_info_tok *info);
 int tokenize_double_quote(char c, t_source *src, t_info_tok *info);
 int is_just_tok_quotes(char *str);
-
+int next_src_is_legit(t_source *src);
 /* parsing*/
 t_node *parse_simple_command(char *input, t_source **src, t_info_tok **info);
 t_node	*new_node(t_token *tok);

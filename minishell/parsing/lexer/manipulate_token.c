@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/09 18:55:07 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/10 16:42:21 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 	{
 		if (tokenize_while(src, info, c)== 1)
 			break;
+		printf("b1\n");
 		if (c != '"' && c != '\'')
 			src -> curpos++;
 		c = src -> buffer[src -> curpos];
@@ -69,7 +70,7 @@ t_token	*tokenize(t_source *src, t_info_tok *info)
 	info -> tok_bufindex = -1;
 	return (tok);
 }
-// en fait le pb c que
+
 
 t_token *create_token(char *str, t_source *src, t_info_tok *info)
 {

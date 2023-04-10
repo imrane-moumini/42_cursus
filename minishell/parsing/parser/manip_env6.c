@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:38:49 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/10 15:10:12 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:35:09 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void    expand_env(t_env *head, t_node *root)
 	ptr = root -> first_child;
 	//if (is_here_doc(root) == 1)
 	//	return ;
+	//parse_node_heredoc()
 	while (ptr)
 	{
 		expand = do_i_have_to_expand(ptr);

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:34:36 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/10 15:15:54 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:56:16 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,10 @@ t_node		*do_i_have_to_expand(t_node *node)
 	
 	if (ptr != NULL)
 	{
-		if (does_str_has_double_quotes(ptr -> txt) == 1)
-			return (NULL);
+		// non je vais en faire une speciale
+		//if (does_str_has_single_quotes(ptr -> txt) == 1)
+		//	return (NULL);
+		// la je dois isoler la zone a expand enfait pasque ptete jaurais un truc sans guilleemts et guillemets dedans
 		while (ptr -> txt[i] != '\0')
 		{
 			if (ptr -> txt[i] == '$')

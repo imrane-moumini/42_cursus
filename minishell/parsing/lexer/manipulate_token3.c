@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 18:42:55 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/10 15:15:44 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/10 16:01:34 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,3 +187,11 @@ int is_single_quotes_str_closed(char *str)
 		return (1);
 	return (0);	
 }
+
+//int does_quotes_closed
+// mdr dabord regler le bon decoupage
+// regler expand
+// ne pas recouper une deuxemee fois si ya des guillemets (pour le -a) du coup
+	// faire fonction qui regrade si guillemets a linterieur
+	// si jamais 
+// voir pk ignore tout ce qui est apres des guillemets

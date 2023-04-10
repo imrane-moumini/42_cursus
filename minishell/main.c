@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/09 19:46:49 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:27:02 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,3 +130,7 @@ int main(int argc, char *argv[], char *env[])
 
 
 
+//heredoc
+//$?
+// supp les double guillemets 
+//env
