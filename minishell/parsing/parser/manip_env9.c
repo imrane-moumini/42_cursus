@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:45:52 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/10 17:28:35 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/10 19:52:16 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,3 +72,42 @@ int expand_guillemets(char *str, int index_dol)
 		return (1);
 	return (0);
 }
+
+t_node *attribue_here_doc(t_node *root)
+{
+
+	t_node *ptr;
+	
+	if (!root)
+		return (NULL);
+	ptr = root -> first_child;
+	while (ptr)
+	{
+		
+		if (is_it_heredoc(ptr -> txt) == 1)
+		{
+			ptr -> heredoc = 1;
+			return (ptr);
+		}
+		else
+		{
+			ptr -> heredoc = 0;
+			ptr -> after_here_doc = 0;
+		}
+		ptr = ptr -> next_sibling;
+	}
+	return (NULL);
+}
+void attribute_atfer_here_doc(t_node *node)
+{
+	t_node *ptr;
+	if (!node)
+		return ;
+	ptr = node -> next_sibling;
+	while (ptr)
+	{
+		ptr -> after_here_doc = 1;
+		ptr = ptr -> next_sibling;
+	}
+}
+

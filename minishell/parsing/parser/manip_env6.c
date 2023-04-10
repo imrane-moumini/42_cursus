@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:38:49 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/10 15:35:09 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/10 19:51:13 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void    expand_env(t_env *head, t_node *root)
 
 	if (!head || !root)
 		return ;
+	attribute_atfer_here_doc(attribue_here_doc(root));
 	ptr = root -> first_child;
 	//if (is_here_doc(root) == 1)
 	//	return ;
@@ -85,5 +86,44 @@ void    expand_env(t_env *head, t_node *root)
 		ptr = ptr -> next_sibling;
 	}
 }
+// je parsse la liste jattribue heredoc qudns'en est un et marrete
+// je me souvient dou je me suis arrerer
+// apres la ou je me suis arreter je met que c un heredoc
 
-
+// faut pas que le heredoc soit entre guillemet
+int is_it_heredoc(char *str)
+{
+	int i;
+	int simple;
+	int double_q;
+	
+	i = 0;
+	
+	if (!str)
+		return (0);
+	while (str[i])
+	{
+		if (str[i] == '<')
+		{
+			if (str[i + 1])
+			{
+				if (str[i + 1] == '<')
+					break;
+			}
+		}
+		i++;
+	}
+	if (!(str[i]))
+		return (0);
+	while (i > 0)
+	{
+		if (str[i] == '\'')
+			simple++;
+		if (str[i] == '"')
+			double_q++;
+		i--;
+	}
+	if (simple % 2 != 0 && double_q % 2 != 0)
+		return (1);
+	return (0);
+}

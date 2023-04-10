@@ -48,6 +48,7 @@ typedef struct node_s
     char *txt;        /* value of this node */
     int    children;            /* number of child nodes */
     int     after_here_doc;
+    int     heredoc;
     struct node_s *first_child; /* first child node */
     struct node_s *next_sibling;
 	struct node_s *prev_sibling;
@@ -189,7 +190,9 @@ int count_nbr_equal(char *str, char *env_input);
 int check_if_exist(t_env *head, char *str);
 void supp_env(t_env **head, char *str);
 void     is_unset(t_env **head, t_node *root);
-
+t_node *attribue_here_doc(t_node *root);
+void attribute_atfer_here_doc(t_node *node);
+int is_it_heredoc(char *str);
 /*signaux*/
 void	ft_sigint(int sigint, siginfo_t *pid, void *idontknow);
 
