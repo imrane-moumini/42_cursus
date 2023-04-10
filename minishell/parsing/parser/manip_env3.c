@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:34:36 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/07 17:07:02 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:15:54 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,11 @@ t_node		*do_i_have_to_expand(t_node *node)
 	if (!node)
 		return (NULL);
 	ptr = node;
+	
 	if (ptr != NULL)
 	{
+		if (does_str_has_double_quotes(ptr -> txt) == 1)
+			return (NULL);
 		while (ptr -> txt[i] != '\0')
 		{
 			if (ptr -> txt[i] == '$')

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:38:49 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/08 16:28:50 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:10:12 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void    expand_env(t_env *head, t_node *root)
 	while (ptr)
 	{
 		expand = do_i_have_to_expand(ptr);
-		//if (/*txt is juste un dollar sans rien apres on expand pas*/)
 		while (more_than_one_dollars_suite(ptr) == 1)
 			expand_job_multiple_dollar(ptr, nbr_of_dollar_suite(ptr));
 		expand = do_i_have_to_expand(ptr);

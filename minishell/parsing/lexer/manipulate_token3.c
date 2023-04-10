@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 18:42:55 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/09 18:48:54 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/10 15:15:44 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int does_str_has_quotes(char *str)
 	int i;
 
 	i = 0;
+	if (!str)
+		return (2);
 	while (str[i])
 	{
 		if (str[i] == '"' || str[i] == '\'')
@@ -84,6 +86,8 @@ int does_str_has_single_quotes(char *str)
 	int i;
 
 	i = 0;
+	if (!str)
+		return (2);
 	while (str[i])
 	{
 		if (str[i] == '\'')
@@ -98,6 +102,8 @@ int does_str_has_double_quotes(char *str)
 	int i;
 
 	i = 0;
+	if (!str)
+		return (2);
 	while (str[i])
 	{
 		if (str[i] == '"')
