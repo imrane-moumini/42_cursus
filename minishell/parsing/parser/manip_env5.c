@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:38:31 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/10 18:14:55 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:52:56 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,21 @@ void expand_job_multiple_dollar(t_node *ptr, int nbr)
 	i = 0;
 	while (ptr -> txt[i] != '\0')
 	{
-		if (ptr ->txt[i] == '$')
+		if (expand_guillemets(ptr -> txt, i) == 1)
 		{
-			save_before_dollar = before_dollar(ptr -> txt);
-			str_nbr = add_nbr(nbr);
-			save_after_dollar = after_multiple_dollar(ptr -> txt, nbr);
-			new_str = ft_strjoin(save_before_dollar, str_nbr);
-			free (str_nbr);
-			new_str = ft_strjoin(new_str, save_after_dollar);
-			free(save_after_dollar);
-			free(ptr -> txt);
-			ptr -> txt = new_str;
-			return ;
+			if (ptr ->txt[i] == '$')
+			{
+				save_before_dollar = before_dollar(ptr -> txt);
+				str_nbr = add_nbr(nbr);
+				save_after_dollar = after_multiple_dollar(ptr -> txt, nbr);
+				new_str = ft_strjoin(save_before_dollar, str_nbr);
+				free (str_nbr);
+				new_str = ft_strjoin(new_str, save_after_dollar);
+				free(save_after_dollar);
+				free(ptr -> txt);
+				ptr -> txt = new_str;
+				return ;
+			}
 		}
 		i++;
 	}
