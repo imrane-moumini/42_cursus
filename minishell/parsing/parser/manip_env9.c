@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:45:52 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/08 16:25:31 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/10 17:28:35 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,31 @@ void init_str_nbr(char *str_nbr)
 	str_nbr[5] = '6';
 	str_nbr[6] = '0';
 	str_nbr[7] = '\0';
+}
+
+int expand_guillemets(char *str, int index_dol)
+{
+	/* si ya pas de guillemets simple ouverte avant 
+	+  ou si ya des guillemets simple ouverte mais avant des doubles
+	ou si ls guilleemts simple avant sont fermer*/
+	int i;
+	int simple;
+	int double_q;
+	
+	i = 0;
+	simple = 0;
+	double_q = 0;
+	while (i < index_dol)
+	{
+		if (str[i] == '\'')
+			simple++;
+		if (str[i] == '"')
+			double_q++;
+		i++;
+	}
+	if (simple % 2 == 0 )
+		return (1);
+	if (simple % 2 != 0 && double_q % 2 != 0)
+		return (1);
+	return (0);
 }

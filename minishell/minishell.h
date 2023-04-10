@@ -172,6 +172,9 @@ void	cut_dollar_sign(char *str);
 int     is_nbr(char c);
 int is_here_doc(t_node *node);
 void expand_job(t_env *head, t_node *ptr);
+int expand_guillemets(char *str, int index_dol);
+char *find_end_of_var(char *str);
+char *after_dollar_deux(char *str);
 char *after_dollar(char *str);
 char *before_dollar(char *str);
 char *catch_var(char *str);
@@ -186,6 +189,7 @@ int count_nbr_equal(char *str, char *env_input);
 int check_if_exist(t_env *head, char *str);
 void supp_env(t_env **head, char *str);
 void     is_unset(t_env **head, t_node *root);
+
 /*signaux*/
 void	ft_sigint(int sigint, siginfo_t *pid, void *idontknow);
 

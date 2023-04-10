@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:38:31 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/08 16:25:47 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/10 18:14:55 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,43 @@ void expand_job(t_env *head, t_node *ptr)
 	init_save_after_dollar(save_after_dollar);
 	while (ptr -> txt[i] != '\0')
 	{
+		// ici je rentre que si ya pas de guillemets ou des double guillemets qui entoure
+		// du cop je vais faie deux choses
+			// je regarde dabord si ya des guillemets
+			//si ya des guillemets je regarde si ya uniquement des doubles
+			// si ya des simples je regarde si avant les simples ya des doubles au nombre imapir
+			// si c le cas c bon jexpand
+			// mais faut aue je fasse ca autour du dollar si c apres le dollars jexpand quqnd meem
+			// si apres le dolar immediatement ya des guillemets c pas grave ca change rien
 		if (ptr ->txt[i] == '$')
 		{
-			i++;
-			free(save_after_dollar);
-			save_before_dollar = before_dollar(ptr -> txt);
-			save_var = catch_var(ptr->txt + i);
-			save_after_dollar = after_dollar(ptr -> txt);
-			new_str = ft_strjoin(save_before_dollar, return_matching_value(head, save_var));
-			final_txt(save_after_dollar, new_str, ptr, save_var);
-			i--;
+			if (expand_guillemets(ptr -> txt, i) == 1)
+			{
+				i++;
+				// ok dans l travaill dexpand je dois ignorer les guillemets sinon ca va renvoyer NULL
+				free(save_after_dollar);
+				save_before_dollar = before_dollar(ptr -> txt);
+				printf ("E1\n");
+				if (save_before_dollar)
+					printf("%s\n", save_before_dollar);
+				save_var = catch_var(ptr->txt + i);
+				printf ("E2\n");
+				if (save_var)
+					printf("%s\n", save_var);
+				//save_after_dollar = after_dollar(ptr -> txt);
+				save_after_dollar = after_dollar_deux(find_end_of_var(ptr -> txt + i));
+				printf ("E3\n");
+				if (save_after_dollar)
+					printf("%s\n", save_after_dollar);
+				new_str = ft_strjoin(save_before_dollar, return_matching_value(head, save_var));
+				printf ("E4\n");
+				if (new_str)
+					printf("%s\n", new_str);
+				final_txt(save_after_dollar, new_str, ptr, save_var);
+				i--;
+			}
 		}
+		
 		i++;
 	}
 }
