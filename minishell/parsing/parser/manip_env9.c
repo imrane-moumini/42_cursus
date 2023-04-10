@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:45:52 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/10 19:52:16 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/10 21:39:02 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,20 +77,25 @@ t_node *attribue_here_doc(t_node *root)
 {
 
 	t_node *ptr;
-	
+	printf("attribute heredoc 1\n");
 	if (!root)
 		return (NULL);
+	printf("attribute heredoc 2\n");
 	ptr = root -> first_child;
+	printf("attribute heredoc 3\n");
 	while (ptr)
 	{
-		
-		if (is_it_heredoc(ptr -> txt) == 1)
+		printf("node is =>%s\n", ptr -> txt);
+		if (is_it_heredoc(ptr) == 1)
 		{
-			ptr -> heredoc = 1;
-			return (ptr);
+			printf("im heredoc\n");
+			ptr -> heredoc = 0;
+			ptr -> next_sibling -> heredoc = 1;
+			return (ptr -> next_sibling);
 		}
 		else
 		{
+			printf("im NOT heredoc\n");
 			ptr -> heredoc = 0;
 			ptr -> after_here_doc = 0;
 		}

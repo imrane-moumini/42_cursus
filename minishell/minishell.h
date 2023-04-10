@@ -192,7 +192,7 @@ void supp_env(t_env **head, char *str);
 void     is_unset(t_env **head, t_node *root);
 t_node *attribue_here_doc(t_node *root);
 void attribute_atfer_here_doc(t_node *node);
-int is_it_heredoc(char *str);
+int is_it_heredoc(t_node *node);
 /*signaux*/
 void	ft_sigint(int sigint, siginfo_t *pid, void *idontknow);
 

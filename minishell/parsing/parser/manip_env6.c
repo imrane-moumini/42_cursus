@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:38:49 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/10 19:51:13 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/10 21:40:17 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,39 +91,27 @@ void    expand_env(t_env *head, t_node *root)
 // apres la ou je me suis arreter je met que c un heredoc
 
 // faut pas que le heredoc soit entre guillemet
-int is_it_heredoc(char *str)
+// 
+
+//ok g capter pasque je regarde sur une string alors que je dois regarder dans le t_node 
+// ensuite je dois allourer heredoc au denier < 
+// ensuite la logique est bonne
+// pasque ya que si ya des guillemets que g"<<" sinon  g < <
+int is_it_heredoc(t_node *node)
 {
-	int i;
-	int simple;
-	int double_q;
-	
-	i = 0;
-	
-	if (!str)
+	t_node *ptr;
+
+	if (!node)
 		return (0);
-	while (str[i])
+	
+	ptr = node;
+	if (ptr -> txt[0] == '<')
 	{
-		if (str[i] == '<')
+		if (ptr -> next_sibling)
 		{
-			if (str[i + 1])
-			{
-				if (str[i + 1] == '<')
-					break;
-			}
+			if (ptr -> next_sibling -> txt[0] == '<')
+				return (1);
 		}
-		i++;
 	}
-	if (!(str[i]))
-		return (0);
-	while (i > 0)
-	{
-		if (str[i] == '\'')
-			simple++;
-		if (str[i] == '"')
-			double_q++;
-		i--;
-	}
-	if (simple % 2 != 0 && double_q % 2 != 0)
-		return (1);
 	return (0);
 }
