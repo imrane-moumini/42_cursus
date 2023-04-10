@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:45:52 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/10 21:39:02 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/10 22:49:02 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,42 @@ int expand_guillemets(char *str, int index_dol)
 	/* si ya pas de guillemets simple ouverte avant 
 	+  ou si ya des guillemets simple ouverte mais avant des doubles
 	ou si ls guilleemts simple avant sont fermer*/
+	// les dooubles sont pas entourer de simple
 	int i;
-	int simple;
-	int double_q;
+	int index_simple;
+	int index_double_q;
+	int nbr_double_q;
+	int nbr_simple;
 	
 	i = 0;
-	simple = 0;
-	double_q = 0;
-	while (i < index_dol)
+	nbr_simple = 0;
+	nbr_double_q = 0;
+	// ok g capter je sauvegarde lindex quand je vois une simple ou une double
+	// je regarde si la derniere double que g vu a un index plus bas que la dernier simple que g vu
+	// et ca jeregarde aussi si le nombre de double avant moi est impair
+	while (index_dol > 0)
 	{
 		if (str[i] == '\'')
-			simple++;
+		{
+			nbr_simple++;
+			index_simple = i;
+		}
 		if (str[i] == '"')
-			double_q++;
-		i++;
+		{
+			index_double_q =i;
+			nbr_double_q++;
+		}
+		index_dol--;;
 	}
-	if (simple % 2 == 0 )
+	if (nbr_simple == 0)
 		return (1);
-	if (simple % 2 != 0 && double_q % 2 != 0)
-		return (1);
+	if (nbr_simple  > 0)
+	{
+		if (nbr_double_q == 0)
+			return (0);
+		if (index_simple > index_double_q)
+			return (1);
+	}
 	return (0);
 }
 
