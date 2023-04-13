@@ -221,6 +221,8 @@ int does_quotes_closed(char *str);
 /* supp quotes*/
 void supp_quotes(t_node *root);
 void str_without_quotes(t_node *ptr);
+void if_double(char *new_str, int *i, int *j, t_node *ptr);
+void if_simple(char *new_str, int *i, int *j, t_node *ptr);
 /*pipe*/
 int ft_pipe_first_check(t_node *ptr);
 int ft_pipe_check(t_node *head);

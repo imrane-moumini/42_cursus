@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 16:14:54 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/13 18:48:24 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/13 19:30:21 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,47 +36,14 @@ void str_without_quotes(t_node *ptr)
 	i = 0;
 	j = 0;
 	new_str = malloc(sizeof(char) *(ft_strlen(ptr -> txt) + 1));
-	printf("c2.1\n");
 	while (ptr -> txt[i] != '\0')
 	{
-		printf("c2.2\n");	
-		if (ptr -> txt[i] == '"')
-		{
-			i++;
-			if (!ptr)
-				break;
-			while (ptr -> txt[i])
-			{
-				if (ptr -> txt[i] == '"')
-				{
-					i++;
-					break;
-				}
-				printf("char j : %c\nchar i %c", new_str[j], ptr -> txt[i]);
-				new_str[j] = ptr -> txt[i];
-				j++;
-				i++;
-			}
-		}
+		if_double(new_str, &i, &j, ptr);
 		if (!ptr)
 				break;
-		if (ptr -> txt[i] == '\'')
-		{
-			i++;
-			if (!ptr)
+		if_simple(new_str, &i, &j, ptr);
+		if (!ptr)
 				break;
-			while (ptr -> txt[i])
-			{
-				if (ptr -> txt[i] == '\'')
-				{
-					i++;
-					break;
-				}
-				new_str[j] = ptr -> txt[i];
-				j++;
-				i++;
-			}
-		}
 		if (ptr -> txt[i] != '\'' && ptr -> txt[i] != '"')
 		{
 			new_str[j] = ptr -> txt[i];
@@ -87,4 +54,45 @@ void str_without_quotes(t_node *ptr)
 	new_str[j] = '\0';
 	free(ptr -> txt);
 	ptr -> txt = new_str;
+}
+void if_double(char *new_str, int *i, int *j, t_node *ptr)
+{
+	if (ptr -> txt[*(i)] == '"')
+	{
+		*(i) = *(i) + 1;
+		if (!ptr)
+			return ;
+		while (ptr -> txt[*(i)])
+		{
+			if (ptr -> txt[*(i)] == '"')
+			{
+				*(i) = *(i) + 1;
+				break;
+			}
+			new_str[*(j)] = ptr -> txt[*(i)];
+			*(j) = *(j) + 1;
+			*(i) = *(i) + 1;
+		}
+	}
+}
+
+void if_simple(char *new_str, int *i, int *j, t_node *ptr)
+{
+	if (ptr -> txt[*(i)] == '\'')
+	{
+		*(i) = *(i) + 1;
+		if (!ptr)
+			return ;
+		while (ptr -> txt[*(i)])
+		{
+			if (ptr -> txt[*(i)] == '\'')
+			{
+				*(i) = *(i) + 1;
+				break;
+			}
+			new_str[*(j)] = ptr -> txt[*(i)];
+			*(j) = *(j) + 1;
+			*(i) = *(i) + 1;
+		}
+	}
 }
