@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:45:52 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/10 23:46:56 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/13 15:28:37 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,17 @@ int expand_guillemets(char *str, int index_dol)
 	save_index_dol = index_dol;
 	while (index_dol >= 0)
 	{
+		printf("index dol in first while %i\n",index_dol);
 		if (str[index_dol] == '\'')
 		{
+			printf("im in simple\n");
 			nbr_simple++;
-			index_simple = i;
+			index_simple = index_dol;
+			printf("index simple is %i\n", index_simple);
 		}
 		if (str[index_dol] == '"')
 		{
+			printf("im in double\n");
 			//index_double_q =i;
 			nbr_double_q++;
 		}
@@ -83,20 +87,32 @@ int expand_guillemets(char *str, int index_dol)
 		return (1);
 	nbr_double_q = 0;
 	index_dol = save_index_dol;
+	printf("index dol is %i\n", index_dol);
+	printf("index simple is %i\n", index_simple);
 	while (i <= index_simple)
 	{
+		printf("im in simple while\n");
 		if (str[i] == '"')
+		{
 			nbr_double_q++;
+		}
 		i++;
 	}
+	printf("nbr double is %i\n" , nbr_double_q);
 	
 	//if (nbr_double_q % 2 != 0 && index_simple > index_double_q)
 	//	return (1);
-	if (nbr_double_q % 2 != 0)
+	if (nbr_simple % 2 == 0)
 		return (1);
+	if (nbr_double_q > 0 && nbr_double_q % 2 != 0)
+		return (1);
+	
 	// faut que le nbr de double avant le  dernier simple que je vois en partant du dollar ne soit pas pair
 	
 	return (0);
+	// en fait cest savoir si $USER est entourer de guillemets
+	// savoir si c des simples ou des doubles
+	// si ya des doubles voir si elles sont ferner ou ouvert rt pareil pour simple
 }
 /*
 imoumini@e1r10p21:~/42_cursus/minishell$ echo "$USER"
