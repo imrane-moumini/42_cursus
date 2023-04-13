@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/10 22:19:56 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:23:54 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,33 +74,39 @@ int main(int argc, char *argv[], char *env[])
 				print_ast(root);
 				printf("----------------------\n");
 				printf("c2\n");
+				// decoupe les guillemets ici
+				// create ast apres avoir supps les guillemets
+				supp_quotes(root);
+				printf("ast after supp auotes is is : \n");
+				print_ast(root);
+				printf("----------------------\n");
 				ast = create_ast_command_redir(root);
-				printf("c2 bis\n");
+				printf("c3\n");
 				printf("ast after decoupe is :\n");
 				print_final_ast(ast);
-				printf("c3\n");
-				printf("final ast is :\n");
 				printf("c4\n");
+				printf("final ast is :\n");
+				printf("c5\n");
 				final = create_final_ast(ast);
 				// ok jai pas mis le NULL dans le double tableau ici
-				printf("c4 bis\n");
+				printf("c6 bis\n");
 				printf("final ast before final expand is :\n");
 				// ok je crois que je mets jamais NULL dans le cas de USER sans env
 				printf_final_ast(final);
-				printf("c5\n");
-				ft_free_before_final_ast(&ast);
-				printf("c6\n");
-				final_expand(final);
 				printf("c7\n");
-				printf_final_ast(final);
+				ft_free_before_final_ast(&ast);
 				printf("c8\n");
+				final_expand(final);
+				printf("c9\n");
+				printf_final_ast(final);
+				printf("c10\n");
 				//executor(final, env);
 				
 			}
 			ft_free(NULL, &root, &src,&info);
-			printf("c9\n");
+			printf("c11\n");
 			ft_free_final_ast(&final);
-			printf("c10\n");
+			printf("c12\n");
 		}
 			else (free(input));
     }

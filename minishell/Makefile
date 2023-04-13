@@ -31,6 +31,7 @@ SRC = main.c \
 	parsing/parser/final_check_expand.c \
 	parsing/parser/final_check_expand2.c \
 	parsing/parser/final_check_expand3.c \
+	parsing/parser/supp_quotes.c \
 	signaux/signal.c \
 	builtin/exit.c \
 	builtin/export_with_option.c \
