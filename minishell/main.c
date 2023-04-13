@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/13 19:50:39 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/13 20:30:03 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int main(int argc, char *argv[], char *env[])
     t_node *root;
 	t_com **ast;
 	t_final *final;
+	char **final_env;
 	(void)argc;
     (void)argv;
 	/*
@@ -97,25 +98,39 @@ int main(int argc, char *argv[], char *env[])
 				printf("c9\n");
 				printf_final_ast(final);
 				printf("c10\n");
+				// create new env double tableau
+				final_env = transform_env_in_double_tab(mini_env);
+				printf("--------------------------------\n");
+				printf("final env is \n");
+				print_double_tab_env(final_env);
+				printf("---------------------------------\n");
+				printf("c11\n");
 				//executor(final, env);
 				
 			}
 			ft_free(NULL, &root, &src,&info);
-			printf("c11\n");
-			ft_free_final_ast(&final);
 			printf("c12\n");
+			ft_free_final_ast(&final);
+			printf("c13\n");
 		}
 			else (free(input));
     }
 }
 
-// regler les invalid write, conditionnal jump et invalid free
 
-   // faire ctrl c fait rien
+
+
+
+// merge
+//$?
+// gerer -a qund c entre guillemets pour bien decouper
+// quqnd ya un espace dans les guillemets avec un moins ca fait une boucle infi alors que sans lespace ca decoupe bien =>ls"-z -u"$bob
+// voir pk
+// free final env
+// regler le pb de lenv qui ecrit NULL quand ya env -i
+// faire builtin
+// faire ctrl c fait rien
 // faire ctr D -> quitte le shell
 // faire ctrl \ -> ne fait rien
-
-
-// faire historique
-//$?
-//env
+// regler les invalid write, conditionnal jump
+//faire norminette
