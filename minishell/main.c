@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/13 18:23:54 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/13 19:50:39 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int main(int argc, char *argv[], char *env[])
         input = readline("minishell> ");
 		if (!input)
 			return (printf("exit\n"), 0); // free (c ici que je gere control D )
+		add_history(input);
 		// fonction ici qui tema si espace entre les >
 		if (does_quotes_closed(input) == 1 && single_enter(input) == 0 && check_space_append_heredoc(input) == 1)
 		{
@@ -74,8 +75,6 @@ int main(int argc, char *argv[], char *env[])
 				print_ast(root);
 				printf("----------------------\n");
 				printf("c2\n");
-				// decoupe les guillemets ici
-				// create ast apres avoir supps les guillemets
 				supp_quotes(root);
 				printf("ast after supp auotes is is : \n");
 				print_ast(root);
@@ -88,10 +87,8 @@ int main(int argc, char *argv[], char *env[])
 				printf("final ast is :\n");
 				printf("c5\n");
 				final = create_final_ast(ast);
-				// ok jai pas mis le NULL dans le double tableau ici
 				printf("c6 bis\n");
 				printf("final ast before final expand is :\n");
-				// ok je crois que je mets jamais NULL dans le cas de USER sans env
 				printf_final_ast(final);
 				printf("c7\n");
 				ft_free_before_final_ast(&ast);
@@ -118,27 +115,7 @@ int main(int argc, char *argv[], char *env[])
 // faire ctr D -> quitte le shell
 // faire ctrl \ -> ne fait rien
 
-// guillemet
-// heredoc pas expand
+
 // faire historique
-
-// quand ya des simple guillemets a linterieur de gdouble uillemet je les laisses
-// les double guillemet je les enleve tout le temps sauf qund c entourer de simple guillemets
-// les premiere guillemets qu'on voit prime sur ce que quon doit faire
-// je peut pas anlyser mot par mot vu que je deco
-
-
-// une fois que jqurqis expand
-// va falloir que jenleve les double guillemets ou simple en focntion
-// je vais devoir recouper pasque ptete yqurq des pipes et redir
-// checker differemment si les quotes sont closes, chequer direct au niveau de linput
-
-
-
-
-// supp les double guillemets
-// verfier que le doubles sont pas entourer de simple
-//
-
 //$?
 //env
