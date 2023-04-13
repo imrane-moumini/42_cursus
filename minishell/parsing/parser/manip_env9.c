@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:45:52 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/13 16:16:32 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/13 18:34:01 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,3 +152,5 @@ imoumini@e1r10p21:~/42_cursus/minishell$ echo ""'$USER'""
 la regle de supression c'est : je supprime la guillemet qui ouvre et qui ferme
 si je vois des guillemets opposer a linterieur je les laisses
 */
+
+// 
