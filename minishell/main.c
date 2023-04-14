@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/14 15:41:50 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/14 16:02:11 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ int main(int argc, char *argv[], char *env[])
 
 // merge
 //$?
-// free final env
 // regler le pb de lenv qui ecrit NULL quand ya env -i
 // faire builtin
 // faire ctrl c fait rien

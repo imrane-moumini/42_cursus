@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:45:12 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/07 17:11:14 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/14 16:17:50 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ t_env *env_not_exist(void)
 
 	mini_env = malloc(sizeof(t_env));
 	mini_env -> next = NULL;
-	mini_env = add_node_env(mini_env);
 	mini_env -> txt = ft_strcpy("nothing=nothing");
 	mini_env -> var_name = ft_strcpy("nothing");
 	mini_env -> var_value = ft_strcpy("nothing");
