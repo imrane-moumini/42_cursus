@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:35:48 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/14 16:38:23 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/14 16:48:32 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	next_char(t_source *src)
 {
-    char	nc;
+	char	nc;
 
 	nc = '\n';
 	if (!src || !src->buffer)
@@ -32,7 +32,7 @@ char	next_char(t_source *src)
 
 void	unget_char(t_source *src)
 {
-	if(!src || !src->buffer)
+	if (!src || !src->buffer)
 		return ;
 	if (src -> curpos == 0)
 		return ;
@@ -42,24 +42,25 @@ void	unget_char(t_source *src)
 
 char	peek_char(t_source *src)
 {
-    char	nc;
+	char	nc;
 
-    nc = '\n';
-    if(!src || !src->buffer)
+	nc = '\n';
+	if (!src || !src->buffer)
 		return (nc);
-    if (src -> buffer[src -> curpos])
-    {
-        nc = src -> buffer[src -> curpos + 1];
-        return (nc);
-    }
+	if (src -> buffer[src -> curpos])
+	{
+		nc = src -> buffer[src -> curpos + 1];
+		return (nc);
+	}
 	return (nc);
 }
 
 void	skip_white_spaces(t_source *src)
 {
-	if(!src || !src->buffer)
-        return ;
-	while (src -> buffer[src -> curpos]\
-		&& (src -> buffer[src -> curpos] == ' ' || src -> buffer[src -> curpos] == '\t'))
-        src -> curpos++;
+	if (!src || !src->buffer)
+		return ;
+	while (src -> buffer[src -> curpos] \
+		&& (src -> buffer[src -> curpos] == ' ' \
+		|| src -> buffer[src -> curpos] == '\t'))
+		src -> curpos++;
 }

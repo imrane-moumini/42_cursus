@@ -129,6 +129,8 @@ int tokenize_single_quote(char c, t_source *src, t_info_tok *info);
 int tokenize_double_quote(char c, t_source *src, t_info_tok *info);
 int is_just_tok_quotes(char *str);
 int next_src_is_legit(t_source *src);
+void avance_curpos(t_source *src, char c);
+int tokenize_quotes(t_source *src, t_info_tok *info, char c);
 /* parsing*/
 t_node *parse_simple_command(char *input, t_source **src, t_info_tok **info);
 t_node	*new_node(t_token *tok);
