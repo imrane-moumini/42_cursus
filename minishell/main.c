@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/14 16:02:11 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/14 16:41:00 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ int main(int argc, char *argv[], char *env[])
 	*/
 	// programme hors signaux
 	mini_env = copy_env(env);
+	final = NULL;
     src = NULL;
 	info = NULL;
 	root = NULL;
 	ast = NULL;
+	final_env = NULL;
 		
 	while (1)
     {
@@ -111,8 +113,9 @@ int main(int argc, char *argv[], char *env[])
 			ft_free(NULL, &root, &src,&info);
 			printf("c12\n");
 			ft_free_final_ast(&final);
-			free_final_env(&final_env);
 			printf("c13\n");
+			free_final_env(&final_env);
+			printf("c14\n");
 		}
 			else (free(input));
     }
@@ -124,7 +127,6 @@ int main(int argc, char *argv[], char *env[])
 
 // merge
 //$?
-// regler le pb de lenv qui ecrit NULL quand ya env -i
 // faire builtin
 // faire ctrl c fait rien
 // faire ctr D -> quitte le shell

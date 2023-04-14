@@ -3,50 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   manipulate_input.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imrane <imrane@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 18:35:48 by imrane            #+#    #+#             */
-/*   Updated: 2023/02/04 21:23:38 by imrane           ###   ########.fr       */
+/*   Updated: 2023/04/14 16:38:23 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char next_char(t_source *src)
+char	next_char(t_source *src)
 {
-    char nc;
+    char	nc;
 
-    nc = '\n';
-    if (!src || !src->buffer)
-    {
+	nc = '\n';
+	if (!src || !src->buffer)
+	{
 		return (nc);
 	}
-    if (src -> buffer[src -> curpos])
-    {
-        nc = src -> buffer[src -> curpos + 1];
-        src -> curpos++;
-        return (nc);
-    }
+	if (src -> buffer[src -> curpos])
+	{
+		nc = src -> buffer[src -> curpos + 1];
+		src -> curpos++;
+		return (nc);
+	}
 	return (nc);
 }
 
-void unget_char(t_source *src)
+void	unget_char(t_source *src)
 {
 	if(!src || !src->buffer)
-        return ;
+		return ;
 	if (src -> curpos == 0)
 		return ;
 	else
 		src -> curpos--;
 }
 
-char peek_char(t_source *src)
+char	peek_char(t_source *src)
 {
-    char nc;
+    char	nc;
 
     nc = '\n';
     if(!src || !src->buffer)
-        return (nc);
+		return (nc);
     if (src -> buffer[src -> curpos])
     {
         nc = src -> buffer[src -> curpos + 1];
@@ -55,10 +55,11 @@ char peek_char(t_source *src)
 	return (nc);
 }
 
-void skip_white_spaces(t_source *src)
+void	skip_white_spaces(t_source *src)
 {
 	if(!src || !src->buffer)
         return ;
-	while (src -> buffer[src -> curpos] && (src -> buffer[src -> curpos] == ' ' ||src -> buffer[src -> curpos] == '\t'))
+	while (src -> buffer[src -> curpos]\
+		&& (src -> buffer[src -> curpos] == ' ' || src -> buffer[src -> curpos] == '\t'))
         src -> curpos++;
 }
