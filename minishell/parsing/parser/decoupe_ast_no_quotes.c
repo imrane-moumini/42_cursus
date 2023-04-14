@@ -6,19 +6,19 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/06 17:39:10 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/14 18:42:25 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_com **create_ast_command_redir(t_node *root)
+t_com	**create_ast_command_redir(t_node *root)
 {
-	t_com **ast;
-	t_ast  *save_ast;
-	t_node *ptr;
-	int	nbr_pipe;
-	
+	t_com	**ast;
+	t_ast	*save_ast;
+	t_node	*ptr;
+	int		nbr_pipe;
+
 	save_ast = NULL;
 	ast = NULL;
 	if (!root)
@@ -26,58 +26,59 @@ t_com **create_ast_command_redir(t_node *root)
 	ptr = root -> first_child;
 	nbr_pipe = how_much_pipe(root);
 	ast = malloc_ast(ast, nbr_pipe);
-	ast = create_ast_command_redir_while(ast, save_ast, ptr, nbr_pipe);
+	ast = create_while(ast, save_ast, ptr, nbr_pipe);
 	return (ast);
 }
 
-
-t_ast *isolate_command_redir(t_node *ptr)
+t_ast	*isolate_command_redir(t_node *pt)
 {
-	t_redir *redir;
+	t_redir	*redir;
 	t_com	*com;
 
-	if (!ptr)
+	if (!pt)
 		return (NULL);
 	com = NULL;
 	redir = NULL;
-	if (ptr)
+	if (pt)
 	{
-		while (ptr && ft_stcmp(ptr -> txt, "|") != 1)
+		while (pt && ft_stcmp(pt -> txt, "|") != 1)
 		{
-			while (ptr && ft_stcmp(ptr -> txt, "|") != 1 && ft_stcmp(ptr -> txt, "<") != 1 && ft_stcmp(ptr -> txt, ">") != 1)
+			while (pt && ft_stcmp(pt -> txt, "|") != 1 \
+				&& ft_stcmp(pt->txt, "<") != 1 && ft_stcmp(pt->txt, ">") != 1)
 			{
-				com = create_com_node(com, ptr);
-				ptr = ptr -> next_sibling;
+				com = create_com_node(com, pt);
+				pt = pt -> next_sibling;
 			}
-			if (ptr)
+			if (pt)
 			{
-				if (ft_stcmp(ptr -> txt, "<") == 1 || ft_stcmp(ptr -> txt, ">") == 1 )
-					ptr = return_ptr(&redir, ptr);
+				if (ft_stcmp(pt->txt, "<") == 1 || ft_stcmp(pt->txt, ">") == 1)
+					pt = return_ptr(&redir, pt);
 			}
 		}
 	}
-	return (return_save_ast(ptr, com, redir));
+	return (return_save_ast(pt, com, redir));
 }
 
-void print_final_ast(t_com **ast)
+void	print_final_ast(t_com **ast)
 {
-	int i;
+	int	i;
+
 	i = 0;
-	while(ast[i])
+	while (ast[i])
 	{
-		
 		ft_printf("------------------------\n");
 		printf("command %i is :\n", i);
 		print_command(ast[i]);
-		print_redir(ast[i] -> redir);
+		print_redir(ast[i]->redir);
 		ft_printf("------------------------\n");
 		i++;
 	}
 }
 
-void print_command(t_com *com)
+void	print_command(t_com *com)
 {
-	t_com *ptr;
+	t_com	*ptr;
+
 	if (!com)
 	{
 		printf("there is nos command\n");
@@ -87,13 +88,15 @@ void print_command(t_com *com)
 	while (ptr)
 	{
 		ft_printf("command is \n");
-		ft_printf("%s\n",ptr -> txt);
+		ft_printf("%s\n", ptr -> txt);
 		ptr = ptr -> next_sibling;
 	}
 }
-void print_redir(t_redir *redir)
+
+void	print_redir(t_redir *redir)
 {
-	t_redir *ptr;
+	t_redir	*ptr;
+
 	if (!redir)
 	{
 		ft_printf("there is no redir for this command\n");
@@ -103,8 +106,7 @@ void print_redir(t_redir *redir)
 	while (ptr)
 	{
 		ft_printf("redir is \n");
-		ft_printf("%s\n",ptr -> txt);
+		ft_printf("%s\n", ptr -> txt);
 		ptr = ptr -> next_sibling;
 	}
 }
-
