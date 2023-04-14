@@ -6,14 +6,13 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:16:29 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/06 15:43:43 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/14 19:30:53 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-
-int ft_pipe_first_check(t_node *ptr)
+int	ft_pipe_first_check(t_node *ptr)
 {
 	if (!ptr)
 		return (1);
@@ -37,10 +36,11 @@ int ft_pipe_first_check(t_node *ptr)
 	}
 	return (1);
 }
-int ft_pipe_check(t_node *head)
+
+int	ft_pipe_check(t_node *head)
 {
-    t_node *ptr;
-    
+    t_node	*ptr;
+
 	ptr = head;
     if (!ptr)
 		return(2);
@@ -56,15 +56,15 @@ int ft_pipe_check(t_node *head)
 				ptr = ptr -> next_sibling;
 		}
 		if (ptr && ft_stcmp(ptr -> txt, "|") != 1)
-			ptr = ptr -> next_sibling;	
+			ptr = ptr -> next_sibling;
 	}
 	return (1);
 }
 
-int how_much_pipe(t_node *root)
+int	how_much_pipe(t_node *root)
 {
-	t_node *ptr;
-	int count;
+	t_node	*ptr;
+	int		count;
 
 	count = 0;
 	if (!root)

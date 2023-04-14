@@ -6,16 +6,15 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:48:42 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/09 16:52:49 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/14 19:12:35 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-
-void free_double_tab(char **str)
+void	free_double_tab(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -32,14 +31,13 @@ void free_double_tab(char **str)
 	free(str);
 }
 
-int nbr_space(char *str)
+int	nbr_space(char *str)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	count = 0;
 	i = 0;
-
 	while (str[i])
 	{
 		if (str[i] == '-' )
@@ -49,9 +47,9 @@ int nbr_space(char *str)
 	return (count);
 }
 
-char *return_right_tab(char *str, int begin, int end)
+char	*return_right_tab(char *str, int begin, int end)
 {
-	char *tab;
+	char	*tab;
 
 	if (begin > end)
 		tab = return_right_tab_begin_sup(str, begin, end);
@@ -62,13 +60,13 @@ char *return_right_tab(char *str, int begin, int end)
 	return (tab);
 }
 
-char *return_right_tab_begin_sup(char *str, int begin, int end)
+char	*return_right_tab_begin_sup(char *str, int begin, int end)
 {
-	char *tab;
-	int i;
-	
+	char	*tab;
+	int		i;
+
 	i = 0;
-	tab = malloc(sizeof(char) * (((begin - 1)- end) + 1));
+	tab = malloc(sizeof(char) * (((begin - 1) - end) + 1));
 	while (begin > end)
 	{
 		if (str[end])
@@ -80,11 +78,11 @@ char *return_right_tab_begin_sup(char *str, int begin, int end)
 	return (tab);
 }
 
-char *return_right_tab_begin_inf(char *str, int begin, int end)
+char	*return_right_tab_begin_inf(char *str, int begin, int end)
 {
-	char *tab;
-	int i;
-	
+	char	*tab;
+	int		i;
+
 	i = 0;
 	tab = malloc(sizeof(char) * ((end - begin) + 1));
 	while (end > begin)
@@ -97,4 +95,3 @@ char *return_right_tab_begin_inf(char *str, int begin, int end)
 	tab[i] = '\0';
 	return (tab);
 }
-

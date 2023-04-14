@@ -286,7 +286,7 @@ char *return_right_tab_begin_sup(char *str, int begin, int end);
 char *return_right_tab_begin_inf(char *str, int begin, int end);
 char **tab_without_space(char *str, int nbr);
 char **tab_without_space_while(char *str, int begin, int end, char **tab);
-char **recreate_tab_without_space_while(char **tab, char **new_tab, int i, int j);
+char **recreate_while(char **tab, char **new_tab, int i, int j);
 char **recreate_tab_without_space(char **tab);
 int double_tab_as_export(char **tab);
 int is_double_quotes_str_closed(char *str);
