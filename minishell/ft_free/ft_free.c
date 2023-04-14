@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:06:18 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/06 16:02:06 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/14 15:40:56 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,24 @@ void free_env(t_env **mini_env)
 		free(ptr_env);
 		mini_env = NULL;
 	}
+}
+
+void free_final_env(char ***tab_env)
+{
+	int i;
+	char **tab;
+	i = 0;
+	
+	if (!tab_env)
+		return ;
+	tab = *tab_env;
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
+	tab_env = NULL;
 }
 void ft_free(t_env **mini_env, t_node **root, t_source **src, t_info_tok **info) 
 {

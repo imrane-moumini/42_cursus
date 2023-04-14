@@ -195,6 +195,7 @@ void attribute_atfer_here_doc(t_node *node);
 int is_it_heredoc(t_node *node);
 void print_double_tab_env(char **str);
 char **transform_env_in_double_tab(t_env *node);
+void free_final_env(char ***tab_env);
 int count_nbr_env(t_env *node);
 /*signaux*/
 void	ft_sigint(int sigint, siginfo_t *pid, void *idontknow);

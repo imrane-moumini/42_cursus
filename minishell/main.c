@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/13 20:30:03 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/14 15:41:50 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int main(int argc, char *argv[], char *env[])
 			ft_free(NULL, &root, &src,&info);
 			printf("c12\n");
 			ft_free_final_ast(&final);
+			free_final_env(&final_env);
 			printf("c13\n");
 		}
 			else (free(input));
@@ -123,9 +124,6 @@ int main(int argc, char *argv[], char *env[])
 
 // merge
 //$?
-// gerer -a qund c entre guillemets pour bien decouper
-// quqnd ya un espace dans les guillemets avec un moins ca fait une boucle infi alors que sans lespace ca decoupe bien =>ls"-z -u"$bob
-// voir pk
 // free final env
 // regler le pb de lenv qui ecrit NULL quand ya env -i
 // faire builtin
