@@ -6,16 +6,16 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 16:14:54 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/15 15:37:59 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:57:29 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void supp_quotes(t_node *root)
+void	supp_quotes(t_node *root)
 {
-	t_node *ptr;
-	
+	t_node	*ptr;
+
 	if (!root)
 		return ;
 	ptr = root -> first_child;
@@ -24,14 +24,14 @@ void supp_quotes(t_node *root)
 		if (does_str_has_quotes(ptr -> txt) == 1)
 			str_without_quotes(ptr);
 		ptr = ptr -> next;
-	} 
+	}
 }
 
-void str_without_quotes(t_node *ptr)
+void	str_without_quotes(t_node *ptr)
 {
-	char *new_str;
-	int i;
-	int j;
+	char	*new_str;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -40,10 +40,10 @@ void str_without_quotes(t_node *ptr)
 	{
 		if_double(new_str, &i, &j, ptr);
 		if (!ptr)
-				break;
+			break ;
 		if_simple(new_str, &i, &j, ptr);
 		if (!ptr)
-				break;
+			break ;
 		if (ptr -> txt[i] != '\'' && ptr -> txt[i] != '"')
 		{
 			new_str[j] = ptr -> txt[i];
@@ -55,7 +55,8 @@ void str_without_quotes(t_node *ptr)
 	free(ptr -> txt);
 	ptr -> txt = new_str;
 }
-void if_double(char *new_str, int *i, int *j, t_node *ptr)
+
+void	if_double(char *new_str, int *i, int *j, t_node *ptr)
 {
 	if (ptr -> txt[*(i)] == '"')
 	{
@@ -67,7 +68,7 @@ void if_double(char *new_str, int *i, int *j, t_node *ptr)
 			if (ptr -> txt[*(i)] == '"')
 			{
 				*(i) = *(i) + 1;
-				break;
+				break ;
 			}
 			new_str[*(j)] = ptr -> txt[*(i)];
 			*(j) = *(j) + 1;
@@ -76,7 +77,7 @@ void if_double(char *new_str, int *i, int *j, t_node *ptr)
 	}
 }
 
-void if_simple(char *new_str, int *i, int *j, t_node *ptr)
+void	if_simple(char *new_str, int *i, int *j, t_node *ptr)
 {
 	if (ptr -> txt[*(i)] == '\'')
 	{
@@ -88,7 +89,7 @@ void if_simple(char *new_str, int *i, int *j, t_node *ptr)
 			if (ptr -> txt[*(i)] == '\'')
 			{
 				*(i) = *(i) + 1;
-				break;
+				break ;
 			}
 			new_str[*(j)] = ptr -> txt[*(i)];
 			*(j) = *(j) + 1;

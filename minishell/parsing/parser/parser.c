@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/15 15:37:59 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:54:13 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_node	*new_node(t_token *tok)
 {
-	t_node *node;
+	t_node	*node;
 
 	node = malloc(sizeof(t_node));
 	if (tok)
@@ -26,10 +26,10 @@ t_node	*new_node(t_token *tok)
 	return (node);
 }
 
-t_node *add_node_to_ast(t_node *root, t_node *node)
+t_node	*add_node_to_ast(t_node *root, t_node *node)
 {
-	t_node *ptr;
-	t_node *prev;
+	t_node	*ptr;
+	t_node	*prev;
 
 	if (root -> first_child == NULL)
 		root -> first_child = node;
@@ -46,13 +46,14 @@ t_node *add_node_to_ast(t_node *root, t_node *node)
 	}
 	return (root);
 }
-t_node *parse_simple_command(char *input, t_source **src, t_info_tok **info)
+
+t_node	*parse_simple_command(char *input, t_source **src, t_info_tok **info)
 {
-	t_node *root;
-	t_token *tok;
-	t_source *src_ft;
-	t_info_tok *info_ft;
-	
+	t_node		*root;
+	t_token		*tok;
+	t_source	*src_ft;
+	t_info_tok	*info_ft;
+
 	if (!input)
 		return (NULL);
 	src = init_src(src, input);
@@ -75,11 +76,12 @@ t_node *parse_simple_command(char *input, t_source **src, t_info_tok **info)
 	return (free_tok(&tok), root);
 }
 
-void    print_ast(t_node *node)
+void	print_ast(t_node *node)
 {
-	t_node *ptr;
+	t_node	*ptr;
+
 	if (!node)
-		return ; 
+		return ;
 	ptr = node -> first_child;
 	while (ptr != NULL)
 	{
@@ -88,10 +90,10 @@ void    print_ast(t_node *node)
 	}
 }
 
-t_node *if_tok_exist(t_token *tok, t_node *root, t_info_tok **info)
+t_node	*if_tok_exist(t_token *tok, t_node *root, t_info_tok **info)
 {
-	t_node *node;
-	
+	t_node	*node;
+
 	if (tok)
 	{
 		node = new_node(tok);
