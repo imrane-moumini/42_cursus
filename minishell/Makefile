@@ -44,6 +44,7 @@ SRC = main.c \
 	builtin/ft_unset.c \
 	ft_free/ft_free.c \
 	error_pars.c \
+	error_pars2.c \
 	exe/redir.c \
 	exe/heredoc.c \
 	exe/heredoc_signal.c \

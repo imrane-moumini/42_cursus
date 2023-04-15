@@ -241,6 +241,7 @@ int ft_pipe_check(t_node *head);
 int how_much_pipe(t_node *root);
 /*error*/
 int error_pars(t_node *head);
+int end_comm(char *str, int i, int single, int double_q);
 int nbr_in_export(t_node *head);
 
 /*guillemets*/

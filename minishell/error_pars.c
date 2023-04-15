@@ -6,34 +6,33 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 20:50:27 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/09 19:44:45 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 19:19:29 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-
-int error_pars(t_node *head)
+int	error_pars(t_node *head)
 {
-    if (!head)
-    {
-		return(2);
+	if (!head)
+	{
+		return (2);
 	}
-    if (ft_in_file(head) == 0)
-    {
-		return(0);
+	if (ft_in_file(head) == 0)
+	{
+		return (0);
 	}
 	if (ft_pipe_check(head) == 0)
-    {
-		return(0);
+	{
+		return (0);
 	}
-    return (1);
+	return (1);
 }
 
-int check_space_append_heredoc(char *str)
+int	check_space_append_heredoc(char *str)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	while (str[i] != '\0')
 	{
@@ -41,7 +40,7 @@ int check_space_append_heredoc(char *str)
 		{
 			if (str[i +1])
 			{
-				if (str[i + 1] == ' ' || str[i+1] == '\t')
+				if (str[i + 1] == ' ' || str[i + 1] == '\t')
 				{
 					i++;
 					while (str[i] == ' ' || str[i] == '\t')
@@ -59,30 +58,23 @@ int check_space_append_heredoc(char *str)
 	return (1);
 }
 
-int does_quotes_closed(char *str)
+int	does_quotes_closed(char *str)
 {
-	int i;
-	int single;
-	int double_q;
+	int	i;
+	int	single;
+	int	double_q;
 
 	single = 0;
 	double_q = 0;
 	i = 0;
-	
 	while (str[i])
 	{
 		if (str[i] == '"')
 			double_q++;
 		if (str[i] == '\'')
 			single++;
-		if (str[i] == '|')
-		{
-			if (single % 2 != 0 || double_q % 2 != 0)
-			{
-				ft_printf("error : quotes are not closed\n");
-				return (0);
-			}
-		}
+		if (end_comm(str, i, single, double_q) == 0)
+			return (0);
 		i++;
 	}
 	if (single % 2 != 0 || double_q % 2 != 0)
@@ -91,5 +83,5 @@ int does_quotes_closed(char *str)
 		return (0);
 	}
 	else
-		return (1);	
+		return (1);
 }
