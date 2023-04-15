@@ -6,24 +6,24 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 22:17:30 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/08 17:25:27 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:42:23 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_redir *create_redir_node(t_redir *redir, t_node *node)
+t_redir	*create_redir_node(t_redir *redir, t_node *node)
 {
-	t_redir *ptr;
-	
+	t_redir	*ptr;
+
 	ptr = malloc(sizeof(t_redir));
 	if (!node)
 		return (NULL);
 	if (!redir)
 	{
-        init_redir_if(ptr, node);
+		init_redir_if(ptr, node);
 		redir = ptr;
-        redir = create_redir_node_if(redir, node, ptr);
+		redir = create_redir_node_if(redir, node, ptr);
 	}
 	else
 	{
@@ -33,4 +33,3 @@ t_redir *create_redir_node(t_redir *redir, t_node *node)
 	}
 	return (redir);
 }
-

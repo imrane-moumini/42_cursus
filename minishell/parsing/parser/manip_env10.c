@@ -6,16 +6,16 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 20:01:08 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/15 16:12:24 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:38:01 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int count_nbr_env(t_env *node)
+int	count_nbr_env(t_env *node)
 {
-	t_env *ptr;
-	int i;
+	t_env	*ptr;
+	int		i;
 
 	i = 0;
 	if (!node)
@@ -28,12 +28,13 @@ int count_nbr_env(t_env *node)
 	}
 	return (i);
 }
-char **transform_env_in_double_tab(t_env *node)
+
+char	**transform_env_in_double_tab(t_env *node)
 {
-	int i;
-	char **new_str;
-	t_env *ptr;
-	
+	int		i;
+	char	**new_str;
+	t_env	*ptr;
+
 	if (!node)
 		return (NULL);
 	ptr = node;
@@ -49,9 +50,10 @@ char **transform_env_in_double_tab(t_env *node)
 	return (new_str);
 }
 
-void print_double_tab_env(char **str)
+void	print_double_tab_env(char **str)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	if (!str)
 		return ;
