@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/15 17:25:29 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:07:50 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int main(int argc, char *argv[], char *env[])
 	char **final_env;
 	(void)argc;
     (void)argv;
-	/*
+	
 	// signal exit
 	struct sigaction action_exit;
 	sigset_t	sigmask;
@@ -36,7 +36,9 @@ int main(int argc, char *argv[], char *env[])
 	action_exit.sa_mask = sigmask;
 	action_exit.sa_sigaction = ft_sigint;
 	sigaction(SIGINT, &action_exit, NULL);
-	*/
+	
+	// signal control D
+	signal(SIGQUIT, SIG_IGN);
 	// programme hors signaux
 	mini_env = copy_env(env);
 	final = NULL;
@@ -138,3 +140,4 @@ int main(int argc, char *argv[], char *env[])
 	// qund jsuis dans la boucle while
 	// qund jsuis dans un fork (genre dans mon cat)
 	// qund jsuis dans le heredoc
+// etre a laffut de tous les exit status
