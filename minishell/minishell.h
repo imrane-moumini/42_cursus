@@ -197,6 +197,9 @@ int pars_env_value(char *str, char *env_input);
 int count_nbr_equal(char *str, char *env_input);
 int check_if_exist(t_env *head, char *str);
 void supp_env(t_env **head, char *str);
+int supp_env_first(t_env *ptr, t_env **head, char *str);
+int supp_env_last(t_env *ptr, char *str, t_env *before);
+int supp_env_milieu(t_env *ptr, t_env *before, char *str);
 void     is_unset(t_env **head, t_node *root);
 t_node *attribue_here_doc(t_node *root);
 void attribute_atfer_here_doc(t_node *node);
@@ -309,5 +312,3 @@ void	remove_heredoc(t_final *cmds);
 void	executor(t_final *cmds, char *env[]);
 
 #endif
-
-// je suis << bob 

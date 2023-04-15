@@ -43,6 +43,7 @@ SRC = main.c \
 	builtin/export_with_option.c \
 	builtin/export_with_option2.c \
 	builtin/ft_unset.c \
+	builtin/ft_unset2.c \
 	ft_free/ft_free.c \
 	error_pars.c \
 	error_pars2.c \
