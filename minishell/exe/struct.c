@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wcista <wcista@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 14:35:42 by wcista            #+#    #+#             */
-/*   Updated: 2023/04/04 02:32:26 by wcista           ###   ########.fr       */
+/*   Updated: 2023/04/15 15:37:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	free_all(t_final *cmds)
 
 	while (cmds)
 	{
-		tmp = cmds->next_sibling;
+		tmp = cmds->next;
 		free(cmds->redir);
 		free(cmds);
 		cmds = tmp;
@@ -49,13 +49,13 @@ void	free_all(t_final *cmds)
 	while (i < 10)
 	{
 		node = (t_final *)malloc(sizeof(t_final));
-		node->next_sibling = NULL;
+		node->next = NULL;
 		node->redir = (t_redir *)malloc(sizeof(t_redir));
 		attributes(node, i);
 		if (!head)
 			head = node;
 		if (tail)
-			tail->next_sibling = node;
+			tail->next = node;
 		tail = node;
 		i++;
 	}
@@ -70,7 +70,7 @@ int	lenlist(t_final *L)
 	while (L)
 	{
 		len++;
-		L = L->next_sibling;
+		L = L->next;
 	}
 	return (len);
 }
@@ -80,7 +80,7 @@ void	print_struct(t_final *cmds)
 	while (cmds)
 	{
 		printf("file = %d\n", cmds->redir->file);
-		cmds = cmds->next_sibling;
+		cmds = cmds->next;
 	}
 }
 
@@ -92,7 +92,7 @@ static t_final	*createcell(int data)
 	if (!cell)
 		return (NULL);
 	cell->redir->append = data;
-	cell->next_sibling = NULL;
+	cell->next = NULL;
 	return (cell);
 }
 
@@ -110,7 +110,7 @@ t_final	*addat(t_final *L, int data, int pos)
 		return (cell);
 	if (pos == 0)
 	{
-		cell->next_sibling = L;
+		cell->next = L;
 		return (cell);
 	}
 	i = 0;
@@ -118,9 +118,9 @@ t_final	*addat(t_final *L, int data, int pos)
 	{
 		i++;
 		precedent = current;
-		current = current->next_sibling;
+		current = current->next;
 	}
-	precedent->next_sibling = cell;
-	cell->next_sibling = current;
+	precedent->next = cell;
+	cell->next = current;
 	return (L);
 }

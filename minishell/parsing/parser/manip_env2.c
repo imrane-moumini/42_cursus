@@ -6,28 +6,28 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:34:13 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/07 19:19:53 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 15:58:31 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void    create_var_name(t_env *node)
+void	create_var_name(t_env *node)
 {
-	int i;
-	
+	int	i;
+
 	if (!node)
 		return ;
 	if (node -> txt == NULL)
 		return ;
 	i = 0;
-	while(node -> txt[i] != '=')
+	while (node -> txt[i] != '=')
 		i++;
-	node -> var_name = malloc((sizeof(char))*i + 1);
+	node -> var_name = malloc((sizeof(char)) * i + 1);
 	if (node -> var_name == NULL)
 		return ;
 	i = 0;
-	while(node -> txt[i] != '=')
+	while (node -> txt[i] != '=')
 	{
 		node -> var_name[i] = node -> txt[i];
 		i++;
@@ -35,10 +35,10 @@ void    create_var_name(t_env *node)
 	node ->var_name[i] = '\0';
 }
 
-t_env   *copy_env(char *original[])
+t_env	*copy_env(char *original[])
 {
-    int i;
-	t_env *mini_env;
+	int		i;
+	t_env	*mini_env;
 	t_env	*ptr;
 
 	i = 0;
@@ -50,37 +50,37 @@ t_env   *copy_env(char *original[])
 	mini_env -> next = NULL;
 	while (original[i])
 		i++;
-	while(i > 1)
+	while (i > 1)
 	{
 		mini_env = add_node_env(mini_env);
 		i--;
 	}
 	i--;
 	ptr = mini_env;
-	copy_original_to_mini(original, i, ptr); 
+	copy_original_to_mini(original, i, ptr);
 	ptr = mini_env;
 	create_var_name_and_value(ptr);
 	return (mini_env);
 }
 
-void    print_env(t_env *head)
+void	print_env(t_env *head)
 {
-	t_env *ptr;
+	t_env	*ptr;
+
 	if (!head)
 		return ;
 	ptr = head;
 	while (ptr != NULL)
 	{
 		ft_printf("%s\n", ptr -> txt);
-		//printf("var name :%s\n", ptr -> var_name);
-		//printf("var value :%s\n", ptr -> var_value);
 		ptr = ptr -> next;
 	}
 }
 
-int		ft_stcmp(char *str1, char *str2)
+int	ft_stcmp(char *str1, char *str2)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	if (!str1)
 		return (0);
@@ -97,7 +97,7 @@ int		ft_stcmp(char *str1, char *str2)
 	return (1);
 }
 
-int     is_nbr(char c)
+int	is_nbr(char c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:44:38 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/14 19:15:24 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 15:37:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	final_expand(t_final *final)
 				free_double_tab(save);
 			}	
 		}
-		follow = follow -> next_sibling;
+		follow = follow -> next;
 	}
 }
 

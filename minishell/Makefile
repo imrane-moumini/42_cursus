@@ -11,8 +11,10 @@ SRC = main.c \
 	parsing/parser/parser.c \
 	parsing/parser/ft_pipe.c \
 	parsing/parser/guillemets.c \
+	parsing/parser/guillemets2.c \
 	parsing/parser/in_out.c \
 	parsing/parser/in_out2.c \
+	parsing/parser/in_out3.c \
 	parsing/parser/manip_env.c \
 	parsing/parser/manip_env2.c \
 	parsing/parser/manip_env3.c \

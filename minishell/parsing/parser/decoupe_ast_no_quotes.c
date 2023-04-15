@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 20:31:15 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/14 18:42:25 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 15:37:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_ast	*isolate_command_redir(t_node *pt)
 				&& ft_stcmp(pt->txt, "<") != 1 && ft_stcmp(pt->txt, ">") != 1)
 			{
 				com = create_com_node(com, pt);
-				pt = pt -> next_sibling;
+				pt = pt -> next;
 			}
 			if (pt)
 			{
@@ -89,7 +89,7 @@ void	print_command(t_com *com)
 	{
 		ft_printf("command is \n");
 		ft_printf("%s\n", ptr -> txt);
-		ptr = ptr -> next_sibling;
+		ptr = ptr -> next;
 	}
 }
 
@@ -107,6 +107,6 @@ void	print_redir(t_redir *redir)
 	{
 		ft_printf("redir is \n");
 		ft_printf("%s\n", ptr -> txt);
-		ptr = ptr -> next_sibling;
+		ptr = ptr -> next;
 	}
 }

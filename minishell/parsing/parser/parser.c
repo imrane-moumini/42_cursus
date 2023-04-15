@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/08 18:39:01 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 15:37:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_node	*new_node(t_token *tok)
 		node -> txt = ft_strcpy((tok -> text));
 	node -> children = 0;
 	node -> first_child = NULL;
-	node -> next_sibling = NULL;
+	node -> next = NULL;
 	node -> prev_sibling = NULL;
 	return (node);
 }
@@ -39,9 +39,9 @@ t_node *add_node_to_ast(t_node *root, t_node *node)
 		while (ptr != NULL)
 		{
 			prev = ptr;
-			ptr = ptr -> next_sibling;
+			ptr = ptr -> next;
 		}
-		prev -> next_sibling = node;
+		prev -> next = node;
 		node -> prev_sibling = prev;
 	}
 	return (root);
@@ -84,7 +84,7 @@ void    print_ast(t_node *node)
 	while (ptr != NULL)
 	{
 		ft_printf("%s\n", ptr -> txt);
-		ptr = ptr -> next_sibling;
+		ptr = ptr -> next;
 	}
 }
 

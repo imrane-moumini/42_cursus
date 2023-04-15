@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:06:18 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/14 16:41:58 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 17:24:13 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void free_ast(t_node **root)
 		ptr_node = ptr_root -> first_child;
 		if (ptr_node)
 		{
-			if (ptr_node -> next_sibling != NULL)
+			if (ptr_node -> next != NULL)
 			{
-				while (ptr_node -> next_sibling != NULL)
+				while (ptr_node -> next != NULL)
 				{
-					save = ptr_node -> next_sibling;
+					save = ptr_node -> next;
 					free(ptr_node -> txt);
 					free(ptr_node);
 					ptr_node = save;
@@ -125,7 +125,7 @@ void ft_free_before_final_ast(t_com ***ast_before)
 		ptr = ast[i];
 		while (ptr)
 		{
-			save_ptr = ptr -> next_sibling;
+			save_ptr = ptr -> next;
 			if (ptr -> txt)
 			{
 				free(ptr -> txt);
@@ -156,7 +156,7 @@ void ft_free_final_ast(t_final **ast_before)
 	i = 0;
 	while (ast)
 	{
-		save_ast = ast -> next_sibling;
+		save_ast = ast -> next;
 		while (ast -> cmds[i])
 		{
 			free(ast -> cmds[i]);
@@ -166,7 +166,7 @@ void ft_free_final_ast(t_final **ast_before)
 		free(ast -> cmds);
 		while (ast -> redir)
 		{
-			save_redir = ast -> redir -> next_sibling;
+			save_redir = ast -> redir -> next;
 			if (ast -> redir -> txt)
 				free(ast -> redir -> txt);
 			ast -> redir -> txt = NULL;
@@ -258,4 +258,11 @@ void free_info_buf(t_info_tok *info)
 			ptr -> tok_buf = NULL;
 		}
 	}
+}
+
+void free_expand_job_mutiple(char *str_nbr, char *dollar, char *txt)
+{
+	free(dollar);
+	free(txt);
+	free (str_nbr);
 }

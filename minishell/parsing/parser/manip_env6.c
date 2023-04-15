@@ -6,33 +6,33 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:38:49 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/10 21:40:17 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 17:29:05 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void    create_var_value(t_env *node)
+void	create_var_value(t_env *node)
 {
-	int i;
-	int equal;
+	int	i;
+	int	equal;
 
 	if (!node)
 		return ;
 	if (node -> txt == NULL)
 		return ;
 	equal = 0;
-	while(node -> txt[equal] != '=')
+	while (node -> txt[equal] != '=')
 		equal++;
 	i = equal;
 	while (node -> txt[i] != '\0')
 		i++;
-	node -> var_value = malloc((sizeof(char) *(i - equal)) + 1);
+	node->var_value = malloc((sizeof(char) * (i - equal)) + 1);
 	if (node -> var_value == NULL)
 		return ;
 	i = 0;
 	equal++;
-	while(node -> txt[equal] != '\0')
+	while (node -> txt[equal] != '\0')
 	{
 		node -> var_value[i] = node -> txt[equal];
 		i++;
@@ -41,13 +41,13 @@ void    create_var_value(t_env *node)
 	node ->var_value[i] = '\0';
 }
 
-int nbr_of_dollar_suite(t_node *ptr)
+int	nbr_of_dollar_suite(t_node *ptr)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
+
 	i = 0;
 	count = 0;
-
 	while (ptr->txt[i] != '\0')
 	{
 		while (ptr->txt[i] == '$')
@@ -62,19 +62,15 @@ int nbr_of_dollar_suite(t_node *ptr)
 	return (count);
 }
 
-
-void    expand_env(t_env *head, t_node *root)
+void	expand_env(t_env *head, t_node *root)
 {
-	t_node *ptr;
-	t_node *expand;
+	t_node	*ptr;
+	t_node	*expand;
 
 	if (!head || !root)
 		return ;
 	attribute_atfer_here_doc(attribue_here_doc(root));
 	ptr = root -> first_child;
-	//if (is_here_doc(root) == 1)
-	//	return ;
-	//parse_node_heredoc()
 	while (ptr)
 	{
 		expand = do_i_have_to_expand(ptr);
@@ -83,33 +79,22 @@ void    expand_env(t_env *head, t_node *root)
 		expand = do_i_have_to_expand(ptr);
 		if (expand)
 			expand_job(head, ptr);
-		ptr = ptr -> next_sibling;
+		ptr = ptr -> next;
 	}
 }
-// je parsse la liste jattribue heredoc qudns'en est un et marrete
-// je me souvient dou je me suis arrerer
-// apres la ou je me suis arreter je met que c un heredoc
 
-// faut pas que le heredoc soit entre guillemet
-// 
-
-//ok g capter pasque je regarde sur une string alors que je dois regarder dans le t_node 
-// ensuite je dois allourer heredoc au denier < 
-// ensuite la logique est bonne
-// pasque ya que si ya des guillemets que g"<<" sinon  g < <
-int is_it_heredoc(t_node *node)
+int	is_it_heredoc(t_node *node)
 {
-	t_node *ptr;
+	t_node	*ptr;
 
 	if (!node)
 		return (0);
-	
 	ptr = node;
 	if (ptr -> txt[0] == '<')
 	{
-		if (ptr -> next_sibling)
+		if (ptr -> next)
 		{
-			if (ptr -> next_sibling -> txt[0] == '<')
+			if (ptr -> next -> txt[0] == '<')
 				return (1);
 		}
 	}

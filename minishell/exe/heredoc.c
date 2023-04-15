@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wcista <wcista@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 19:16:50 by wcista            #+#    #+#             */
-/*   Updated: 2023/04/04 20:06:45 by wcista           ###   ########.fr       */
+/*   Updated: 2023/04/15 15:37:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static bool	init_heredoc(t_final *cmds, int i, int j)
 	h->fd = open(h->file_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (h->fd == -1)
 		return (free_heredoc(h, cmds, false));
-	cmds->redir = cmds->redir->next_sibling;
+	cmds->redir = cmds->redir->next;
 	while (1)
 	{
 		h->input = readline("> ");
@@ -89,10 +89,10 @@ static void	define_heredoc(t_final *cmds)
 				if (!init_heredoc(cmds, i, j))
 					exit(EXIT_FAILURE);
 			j++;
-			cmds->redir = cmds->redir->next_sibling;
+			cmds->redir = cmds->redir->next;
 		}
 		i++;
-		cmds = cmds->next_sibling;
+		cmds = cmds->next;
 	}
 	exit(EXIT_SUCCESS);
 }
@@ -118,10 +118,10 @@ void	remove_heredoc(t_final *cmds)
 				free(file_name);
 			}
 			j++;
-			redir = redir->next_sibling;
+			redir = redir->next;
 		}
 		i++;
-		cmds = cmds->next_sibling;
+		cmds = cmds->next;
 	}
 }
 

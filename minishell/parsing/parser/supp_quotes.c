@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 16:14:54 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/13 19:30:21 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 15:37:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void supp_quotes(t_node *root)
 	{
 		if (does_str_has_quotes(ptr -> txt) == 1)
 			str_without_quotes(ptr);
-		ptr = ptr -> next_sibling;
+		ptr = ptr -> next;
 	} 
 }
 

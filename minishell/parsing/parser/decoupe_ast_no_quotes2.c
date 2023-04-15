@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:07:06 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/14 19:03:53 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 15:37:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,16 @@ t_com	**create_while(t_com **ast, t_ast *save_ast, t_node *ptr, int nbr_pipe)
 
 t_node	*return_ptr(t_redir **redir, t_node *pt)
 {
-	if ((pt -> next_sibling \
-		&& ft_stcmp(pt->next_sibling-> txt, "<") == 1) || (pt->next_sibling \
-		&& (ft_stcmp(pt -> next_sibling -> txt, ">") == 1)))
+	if ((pt -> next \
+		&& ft_stcmp(pt->next-> txt, "<") == 1) || (pt->next \
+		&& (ft_stcmp(pt -> next -> txt, ">") == 1)))
 	{
 		if (pt && ft_stcmp(pt -> txt, "|") != 1)
 			*redir = create_redir_node(*redir, pt);
 		if (pt && ft_stcmp(pt -> txt, "|") != 1)
-			pt = pt -> next_sibling;
+			pt = pt -> next;
 		if (pt && ft_stcmp(pt -> txt, "|") != 1)
-			pt = pt -> next_sibling;
+			pt = pt -> next;
 		if (pt && ft_stcmp(pt -> txt, "|") != 1)
 			*redir = create_redir_node(*redir, pt);
 	}
@@ -77,12 +77,12 @@ t_node	*return_ptr(t_redir **redir, t_node *pt)
 		if (pt && ft_stcmp(pt -> txt, "|") != 1)
 			*redir = create_redir_node(*redir, pt);
 		if (pt)
-			pt = pt -> next_sibling;
+			pt = pt -> next;
 		if (pt && ft_stcmp(pt -> txt, "|") != 1)
 			*redir = create_redir_node(*redir, pt);
 	}
 	if (pt && ft_stcmp(pt -> txt, "|") != 1)
-		pt = pt -> next_sibling;
+		pt = pt -> next;
 	return (pt);
 }
 
@@ -91,7 +91,7 @@ t_ast	*return_save_ast(t_node *ptr, t_com *com, t_redir *redir)
 	t_ast	*save_ast;
 
 	if (ptr)
-			ptr = ptr -> next_sibling;
+			ptr = ptr -> next;
 	save_ast = malloc(sizeof(save_ast));
 	if (com)
 		save_ast -> command = com;

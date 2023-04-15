@@ -6,23 +6,23 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 18:47:11 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/07 15:47:18 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 15:55:53 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char    *ft_strcpy(char *str)
+char	*ft_strcpy(char *str)
 {
-	int i;
-	int length;
-	char *ptr;
-	
+	int		i;
+	int		length;
+	char	*ptr;
+
 	if (!str)
 		return (NULL);
 	i = 0;
 	length = ft_strlen(str);
-	ptr = malloc((sizeof(char) *length) + 1);
+	ptr = malloc((sizeof(char) * length) + 1);
 	if (!ptr)
 		return (NULL);
 	while (str[i])
@@ -33,12 +33,13 @@ char    *ft_strcpy(char *str)
 	ptr[i] = '\0';
 	return (ptr);
 }
-char    *ft_strcpy_env(char *str)
+
+char	*ft_strcpy_env(char *str)
 {
-	int i;
-	int length;
-	char *ptr;
-	
+	int		i;
+	int		length;
+	char	*ptr;
+
 	printf("str in cpyr env is=>%s\n", str);
 	if (!str)
 		return (NULL);
@@ -58,8 +59,8 @@ char    *ft_strcpy_env(char *str)
 
 t_env	*new_node_env(void)
 {
-	t_env *node;
-	
+	t_env	*node;
+
 	node = malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);
@@ -69,9 +70,11 @@ t_env	*new_node_env(void)
 	node -> var_value = NULL;
 	return (node);
 }
-t_env   *add_node_env(t_env *head)
+
+t_env	*add_node_env(t_env *head)
 {
-	t_env *ptr;
+	t_env	*ptr;
+
 	if (!head)
 		return (NULL);
 	ptr = head;

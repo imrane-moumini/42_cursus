@@ -50,7 +50,7 @@ typedef struct node_s
     int     after_here_doc;
     int     heredoc;
     struct node_s *first_child; /* first child node */
-    struct node_s *next_sibling;
+    struct node_s *next;
 	struct node_s *prev_sibling;
 } t_node;
 /*node of a redirection*/
@@ -64,7 +64,7 @@ typedef struct redir_node
     int file;
 	int	fd_in;
 	int	fd_out;
-    struct redir_node *next_sibling;
+    struct redir_node *next;
 } t_redir;
 
 /*node of a command*/
@@ -72,7 +72,7 @@ typedef struct com_node
 {
     char *txt;
     t_redir *redir;
-    struct com_node *next_sibling;
+    struct com_node *next;
 } t_com;
 
 /*node de la structure final qui sera donne a l'executeur*/
@@ -81,7 +81,7 @@ typedef struct final
     char **cmds;
     t_redir *redir;
     
-    struct final *next_sibling;
+    struct final *next;
 } t_final;
 
 
@@ -147,8 +147,8 @@ void create_var_name_and_value(t_env *ptr);
 void copy_original_to_mini(char *original[], int i, t_env *ptr);
 int env_checks_quit(t_env **head, t_node *node);
 char *return_after(char *str, int j, int save);
-void fill_last_node(t_env *last_node, char *var_env_name, char *var_env_value, char *env_input);
-void free_in_insert_input_env(char *env_input, char *var_env_name, char *var_env_value);
+void fill_last_node(t_env *last_node, char *name, char *value, char *env);
+void	free_in_insert_input_env(char *env, char *var_name, char *var_value);
 t_env   *add_node_env(t_env *head);
 t_env   *new_node_env(void);
 void    print_env(t_env *head);
@@ -161,7 +161,7 @@ void    create_var_name(t_env *node);
 void    create_var_value(t_env *node);
 int		ft_stcmp(char *str1, char *str2);
 int		ft_stcmp_exit(char *str1, char *str2);
-void final_txt(char *save_after_dollar, char *new_str, t_node *ptr, char *save_var);
+void	final_txt(char *a_dol, char *new_str, t_node *ptr, char *save_var);
 void init_save_after_dollar(char *save_after_dollar);
 char *return_after_multiple_dollar(char *str, int i, int save);
 void after_multiple_dollar_while(int nbr, int *i, int *save);
@@ -215,6 +215,8 @@ void free_env(t_env **mini_env);
 void ft_free(t_env **mini_env, t_node **root, t_source **src, t_info_tok **info);
 void ft_free_before_final_ast(t_com *** ast);
 void ft_free_final_ast(t_final **ast);
+void free_expand_job_mutiple(char *str_nbr, char *dollar, char *txt);
+
 /*in and out redirection*/
 int ft_in_file_first_check(t_node *ptr);
 int ft_in_file_first_check_wrong_arrow(t_node *ptr);
@@ -223,6 +225,9 @@ int in_file_second_check_alone(t_node *ptr);
 int in_file_second_check_something_after(t_node *ptr);
 int ft_in_file(t_node *head);
 int does_quotes_closed(char *str);
+int in_file_next(t_node *ptr);
+void print_error_next(t_node *ptr);
+void	print_error_second_check(t_node *ptr);
 
 /* supp quotes*/
 void supp_quotes(t_node *root);

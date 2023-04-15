@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 20:01:08 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/13 20:27:56 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 16:12:24 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,41 @@ void print_double_tab_env(char **str)
 		printf("%s\n", str[i]);
 		i++;
 	}
+}
+
+char	*find_end_of_var(char *str)
+{
+	int	i;
+
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (str[i] != '\0' && str[i] != '$' && str[i] != ' ' \
+		&& str[i] != '\t' && str[i] != '\'' && str[i] != '"')
+		i++;
+	if (str)
+		str = str + i;
+	return (str);
+}
+
+char	*after_dollar_deux(char *str)
+{
+	int		i;
+	char	*after;
+	int		length;
+
+	if (!str)
+		return (NULL);
+	length = 0;
+	i = 0;
+	while (str[length] != '\0')
+		length++;
+	after = malloc(sizeof(char) * (length + 1));
+	while (str[i] != '\0')
+	{
+		after[i] = str[i];
+		i++;
+	}
+	after[i] = '\0';
+	return (after);
 }

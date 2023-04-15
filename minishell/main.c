@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/14 16:41:00 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 17:25:29 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,3 +133,8 @@ int main(int argc, char *argv[], char *env[])
 // faire ctrl \ -> ne fait rien
 // regler les invalid write, conditionnal jump
 //faire norminette
+
+//signaux 
+	// qund jsuis dans la boucle while
+	// qund jsuis dans un fork (genre dans mon cat)
+	// qund jsuis dans le heredoc

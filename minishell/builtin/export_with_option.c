@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 17:16:25 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/07 18:19:58 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 15:37:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int     is_env_var(t_env *mini_env, t_node *root)
 	ptr = root -> first_child;
 	if (ptr)
 	{
-		if (ft_stcmp(ptr -> txt, "export") && (ptr -> next_sibling != NULL))
+		if (ft_stcmp(ptr -> txt, "export") && (ptr -> next != NULL))
 		{
 			if (insert_input_env(&mini_env, ptr, nbr) == 0)
 				return (0);
 		}
-		ptr = ptr -> next_sibling;
+		ptr = ptr -> next;
 	}
 	// faut que le retour de ske g pas le droit je le recois la comme ca je vais pas dans
 	// la suite

@@ -6,15 +6,15 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:45:12 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/14 16:17:50 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 17:31:16 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_env *env_not_exist(void)
+t_env	*env_not_exist(void)
 {
-	t_env *mini_env;
+	t_env	*mini_env;
 
 	mini_env = malloc(sizeof(t_env));
 	mini_env -> next = NULL;
@@ -24,9 +24,9 @@ t_env *env_not_exist(void)
 	return (mini_env);
 }
 
-void create_var_name_and_value(t_env *ptr)
+void	create_var_name_and_value(t_env *ptr)
 {
-	while(ptr != NULL)
+	while (ptr != NULL)
 	{
 		create_var_name(ptr);
 		create_var_value(ptr);
@@ -34,7 +34,7 @@ void create_var_name_and_value(t_env *ptr)
 	}
 }
 
-void copy_original_to_mini(char *original[], int i, t_env *ptr)
+void	copy_original_to_mini(char *original[], int i, t_env *ptr)
 {
 	while (original[i] && ptr != NULL)
 	{
@@ -44,21 +44,20 @@ void copy_original_to_mini(char *original[], int i, t_env *ptr)
 	}
 }
 
-int env_checks_quit(t_env **head, t_node *node)
+int	env_checks_quit(t_env **head, t_node *node)
 {
 	if (!head)
 		return (1);
 	if ((!node))
 		return (1);
-	if ((node -> next_sibling == NULL) || ft_stcmp(node -> next_sibling -> txt, "|") == 1)
+	if ((node -> next == NULL) || ft_stcmp(node -> next -> txt, "|") == 1)
 		return (1);
 	return (0);
 }
 
-void free_in_insert_input_env(char *env_input, char *var_env_name, char *var_env_value)
+void	free_in_insert_input_env(char *env, char *var_name, char *var_value)
 {
-	free (env_input);
-	free(var_env_name);
-	free(var_env_value);
+	free(env);
+	free(var_name);
+	free(var_value);
 }
-

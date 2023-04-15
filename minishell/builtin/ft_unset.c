@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 16:06:55 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/02 17:24:42 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 15:37:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void     is_unset(t_env **head, t_node *root)
 	ptr = root -> first_child;
 	if (ptr)
 	{
-		if (ft_stcmp(ptr -> txt, "unset") && (ptr -> next_sibling != NULL))
+		if (ft_stcmp(ptr -> txt, "unset") && (ptr -> next != NULL))
 		{
-			if(check_if_exist(*head, ptr -> next_sibling -> txt ) == 1)
-				supp_env(head, ptr -> next_sibling -> txt);
+			if(check_if_exist(*head, ptr -> next -> txt ) == 1)
+				supp_env(head, ptr -> next -> txt);
 		}
-		ptr = ptr -> next_sibling;
+		ptr = ptr -> next;
 	}
 }
 

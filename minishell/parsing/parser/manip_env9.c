@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:45:52 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/13 18:34:01 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 15:37:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ t_node *attribue_here_doc(t_node *root)
 		{
 			printf("im heredoc\n");
 			ptr -> heredoc = 0;
-			ptr -> next_sibling -> heredoc = 1;
-			return (ptr -> next_sibling);
+			ptr -> next -> heredoc = 1;
+			return (ptr -> next);
 		}
 		else
 		{
@@ -109,7 +109,7 @@ t_node *attribue_here_doc(t_node *root)
 			ptr -> heredoc = 0;
 			ptr -> after_here_doc = 0;
 		}
-		ptr = ptr -> next_sibling;
+		ptr = ptr -> next;
 	}
 	return (NULL);
 }
@@ -118,11 +118,11 @@ void attribute_atfer_here_doc(t_node *node)
 	t_node *ptr;
 	if (!node)
 		return ;
-	ptr = node -> next_sibling;
+	ptr = node -> next;
 	while (ptr)
 	{
 		ptr -> after_here_doc = 1;
-		ptr = ptr -> next_sibling;
+		ptr = ptr -> next;
 	}
 }
 

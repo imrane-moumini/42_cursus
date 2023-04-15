@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 21:53:16 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/14 19:08:24 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 15:37:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,18 @@ t_final	*create_list_final_ast(t_final *final, t_com *ast)
 	{
 		ptr -> cmds = break_linked_list_in_double_tab(ast);
 		ptr -> redir = ast -> redir;
-		ptr -> next_sibling = NULL;
+		ptr -> next = NULL;
 		final = ptr;
 	}
 	else
 	{
 		follow = final;
-		while (follow -> next_sibling != NULL)
-			follow = follow -> next_sibling;
-		follow -> next_sibling = ptr;
+		while (follow -> next != NULL)
+			follow = follow -> next;
+		follow -> next = ptr;
 		ptr -> cmds = break_linked_list_in_double_tab(ast);
 		ptr -> redir = ast -> redir;
-		ptr -> next_sibling = NULL;
+		ptr -> next = NULL;
 	}
 	return (final);
 }
@@ -72,13 +72,13 @@ char	**break_linked_list_in_double_tab(t_com *com)
 		{
 			tab[i] = malloc(sizeof(char) * (ft_strlen(follow -> txt) + 1));
 			ft_strlcpy(tab[i], follow -> txt, (ft_strlen(follow -> txt) + 1));
-			follow = follow -> next_sibling;
+			follow = follow -> next;
 			tab[++i] = NULL;
 		}
 		else
 		{
 			tab[i] = NULL;
-			follow = follow -> next_sibling;
+			follow = follow -> next;
 		}
 	}
 	return (tab);
@@ -94,7 +94,7 @@ int	ft_com_len(t_com *com)
 	while (follow)
 	{
 		i++;
-		follow = follow -> next_sibling;
+		follow = follow -> next;
 	}
 	return (i);
 }
@@ -128,10 +128,10 @@ void printf_final_ast(t_final *final)
 		while (follow_redir)
 		{
 			ft_printf("%s, heredoc : %i, in_file : %i, out_file : %i, append : %i, file : %i\n", follow_redir -> txt, follow_redir -> heredoc, follow_redir -> in_file, follow_redir -> out_file, follow_redir -> append, follow_redir -> file);
-			follow_redir = follow_redir -> next_sibling;
+			follow_redir = follow_redir -> next;
 		}
 		i = 0;
 		j++;
-		follow = follow -> next_sibling;
+		follow = follow -> next;
 	}
 }

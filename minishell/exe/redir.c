@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:39:32 by wcista            #+#    #+#             */
-/*   Updated: 2023/04/06 15:33:40 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 15:37:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	redir_parsing(t_redir *redir)
 			//in = true;
 			//out = false;
 			i++;
-			redir = redir->next_sibling;
+			redir = redir->next;
 			if (!redir_infile(redir))
 				return (i);
 		}
@@ -97,14 +97,14 @@ int	redir_parsing(t_redir *redir)
 			//in = true;
 			//out = false;
 			i++;
-			redir = redir->next_sibling;
+			redir = redir->next;
 		}
 		else if (redir->out_file == 1)
 		{
 			//in = false;
 			//out = true;
 			i++;
-			redir = redir->next_sibling;
+			redir = redir->next;
 			if (!redir_outfile(redir))
 				return (i);
 		}
@@ -113,7 +113,7 @@ int	redir_parsing(t_redir *redir)
 			//in = false;
 			//out = true;
 			i++;
-			redir = redir->next_sibling;
+			redir = redir->next;
 			if (!redir_append(redir))
 				return (i);
 		}
@@ -123,7 +123,7 @@ int	redir_parsing(t_redir *redir)
 				return (i);
 		}
 		i++;
-		redir = redir->next_sibling;
+		redir = redir->next;
 	}
 	return (i);
 }
@@ -145,16 +145,16 @@ int	redir_last_infile(t_redir *redir, int i)
 		{
 			k = j;
 			j++;
-			redir = redir->next_sibling;
+			redir = redir->next;
 		}
 		else if (redir->heredoc == 1)
 		{
 			k = j;
 			j++;
-			redir = redir->next_sibling;
+			redir = redir->next;
 		}
 		j++;
-		redir = redir->next_sibling;
+		redir = redir->next;
 	}
 	return (k);
 }
@@ -172,16 +172,16 @@ int		redir_last_outfile(t_redir *redir, int i)
 		{
 			k = j;
 			j++;
-			redir = redir->next_sibling;
+			redir = redir->next;
 		}
 		if (redir->append == 1)
 		{
 			k = j;
 			j++;
-			redir = redir->next_sibling;
+			redir = redir->next;
 		}
 		j++;
-		redir = redir->next_sibling;
+		redir = redir->next;
 	}
 	return (k);
 }

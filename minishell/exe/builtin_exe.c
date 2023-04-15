@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exe.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wcista <wcista@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 18:50:34 by wcista            #+#    #+#             */
-/*   Updated: 2023/04/04 02:12:38 by wcista           ###   ########.fr       */
+/*   Updated: 2023/04/15 15:37:59 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool	ft_builtin_check(t_final *cmds, t_pipex *p, int i)
 	{
 		if (i == j)
 			builtins_exe(cmds, p, i);
-		cmds = cmds->next_sibling;
+		cmds = cmds->next;
 		j++;
 	}
 }
