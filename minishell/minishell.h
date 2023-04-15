@@ -176,6 +176,7 @@ int     is_nbr(char c);
 int is_here_doc(t_node *node);
 void expand_job(t_env *head, t_node *ptr);
 int expand_guillemets(char *str, int index_dol);
+void expand_guillemets_first(char *str, int *index_dol, int *nbr_simple, int *index_simple);
 char *find_end_of_var(char *str);
 char *after_dollar_deux(char *str);
 char *after_dollar(char *str);

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/15 18:07:50 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 18:12:47 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,3 +141,32 @@ int main(int argc, char *argv[], char *env[])
 	// qund jsuis dans un fork (genre dans mon cat)
 	// qund jsuis dans le heredoc
 // etre a laffut de tous les exit status
+
+/*
+imoumini@e1r10p21:~/42_cursus/minishell$ echo "$USER"
+imoumini
+imoumini@e1r10p21:~/42_cursus/minishell$ echo '$USER'
+$USER
+imoumini@e1r10p21:~/42_cursus/minishell$ echo '"$USER"'
+"$USER"
+imoumini@e1r10p21:~/42_cursus/minishell$ echo "'"$USER"'"
+'imoumini'
+imoumini@e1r10p21:~/42_cursus/minishell$ echo "''$USER''"
+''imoumini''
+imoumini@e1r10p21:~/42_cursus/minishell$ echo "ok"$USER"dac"
+okimouminidac
+imoumini@e1r10p21:~/42_cursus/minishell$ echo "ok"'$USER'"dac"
+ok$USERdac
+imoumini@e1r10p21:~/42_cursus/minishell$ echo "ok"''$USER"''dac"
+okimoumini''dac
+imoumini@e1r10p21:~/42_cursus/minishell$ ""'$USER'""
+$USER: command not found
+imoumini@e1r10p21:~/42_cursus/minishell$ echo ""'$USER'""
+$USER
+imoumini@e1r10p21:~/42_cursus/minishell$ echo ""'$USER'""
+
+la regle de supression c'est : je supprime la guillemet qui ouvre et qui ferme
+si je vois des guillemets opposer a linterieur je les laisses
+*/
+
+// 

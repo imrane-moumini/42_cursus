@@ -25,6 +25,7 @@ SRC = main.c \
 	parsing/parser/manip_env8.c \
 	parsing/parser/manip_env9.c \
 	parsing/parser/manip_env10.c \
+	parsing/parser/manip_env11.c \
 	parsing/parser/decoupe_ast_no_quotes.c \
 	parsing/parser/decoupe_ast_no_quotes2.c \
 	parsing/parser/final_ast.c \
