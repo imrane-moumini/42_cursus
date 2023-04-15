@@ -6,32 +6,33 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:33:31 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/15 15:37:59 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/15 19:39:14 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-void ft_exit(t_env **mini_env,t_node **root, t_source **src, t_info_tok **info)
+void	ft_exit(t_env **env, t_node **root, t_source **src, t_info_tok **info)
 {
-    t_node *ptr;
+	t_node	*ptr;
 
-    if (!root)
-        return ;
-    ptr = *root;
-    if (ptr -> first_child == NULL)
-        return ;
-    ptr = ptr -> first_child;
-    if ((ft_stcmp_exit(ptr -> txt, "exit") == 1) && (ptr -> next == NULL))
+	if (!root)
+		return ;
+	ptr = *root;
+	if (ptr -> first_child == NULL)
+		return ;
+	ptr = ptr -> first_child;
+	if ((ft_stcmp_exit(ptr -> txt, "exit") == 1) && (ptr -> next == NULL))
 	{
-		ft_free(mini_env, root, src, info);
+		ft_free(env, root, src, info);
 		exit (1);
 	}
 }
-int		ft_stcmp_exit(char *str1, char *str2)
+
+int	ft_stcmp_exit(char *str1, char *str2)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	if (!str1)
 		return (0);
@@ -40,7 +41,7 @@ int		ft_stcmp_exit(char *str1, char *str2)
 	if (str1[0] == '\0')
 		return (0);
 	if (ft_strlen(str1) != ft_strlen(str2))
-        return (0);
+		return (0);
 	while (str1[i] != '\0')
 	{
 		if (str1[i] != str2[i])
