@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wcista <wcista@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:52:52 by wcista            #+#    #+#             */
-/*   Updated: 2023/04/18 02:32:34 by wcista           ###   ########.fr       */
+/*   Updated: 2023/04/22 16:15:04 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ t_node		*add_node_to_ast(t_node *root, t_node *node);
 void		print_ast(t_node *node);
 int			single_enter(char *input);
 int			check_space_append_heredoc(char *str);
+int			only_space(char *str);
 
 /*env*/
 t_env		*copy_env(char *original[]);

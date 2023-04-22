@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/21 18:29:41 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/22 16:17:26 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int main(int argc, char *argv[], char *env[])
 		if (!input)
 			ft_exit_d(&mini_env);
 		add_history(input);
-		if (does_quotes_closed(input) == 1 && single_enter(input) == 0 && check_space_append_heredoc(input) == 1)
+		if ( single_enter(input) == 0 && does_quotes_closed(input) == 1 && check_space_append_heredoc(input) == 1)
 		{
 			root = parse_simple_command(input, &src, &info);
 			if (check_if_exist(mini_env, "?") == 1)
