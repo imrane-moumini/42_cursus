@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/22 16:17:26 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/22 17:04:21 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,16 +213,6 @@ exit
 
 
 
-MINISHELL
-minishell>           (avec des espaces)
-[3]    88540 segmentation fault (core dumped)  ./minishell
-
-
-#0  0x0000555555557a6e in ft_stcmp (str1=0x555555585 <error: Cannot access memory at address 0x555555585>, 
-    str2=0x555555563046 "<") at parsing/parser/manip_env2.c:89
-#1  0x000055555555722c in ft_in_file (head=0x5555555852a0) at parsing/parser/in_out.c:62
-#2  0x000055555555c55c in error_pars (head=0x5555555852a0) at error_pars.c:31
-#3  0x00005555555557e9 in main (argc=1, argv=0x7fffffffdba8, env=0x7fffffffdbb8) at main.c:75
 
 COMMAND :
 gdb
