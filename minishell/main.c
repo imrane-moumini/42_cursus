@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/22 17:04:21 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/22 17:47:16 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int main(int argc, char *argv[], char *env[])
 		if (!input)
 			ft_exit_d(&mini_env);
 		add_history(input);
-		if ( single_enter(input) == 0 && does_quotes_closed(input) == 1 && check_space_append_heredoc(input) == 1)
+		if (single_enter(input) == 0 && does_quotes_closed(input) == 1 && check_space_append_heredoc(input) == 1)
 		{
 			root = parse_simple_command(input, &src, &info);
 			if (check_if_exist(mini_env, "?") == 1)
@@ -71,7 +71,6 @@ int main(int argc, char *argv[], char *env[])
 			fill_last_node(last_node, ft_strcpy("?"), exit_status, ft_strjoin(ft_strcpy("?="), exit_status));
 			expand_env(mini_env,root);
 			is_unset(&mini_env, root);
-			//printf("c0 bis\n");
 			if(error_pars(root) == 1 && is_env_var(mini_env, root) == 1)
 			{
 				supp_quotes(root);
@@ -83,13 +82,12 @@ int main(int argc, char *argv[], char *env[])
 				executor(final, final_env);
 				free_env(&mini_env);
 				mini_env = copy_env(final_env);
-				//printf("exit_status = %d\n", g_exit_status);
-				//print_double_tab_env(final_env);
-				
+				ft_free(NULL, &root, &src,&info);
+				ft_free_final_ast(&final);
+				free_final_env(&final_env);
 			}
-			ft_free(NULL, &root, &src,&info);
-			ft_free_final_ast(&final);
-			free_final_env(&final_env);
+			else
+				ft_free(NULL, &root, &src,&info);
 		}
 			else (free(input));
 	}
@@ -131,14 +129,7 @@ imoumini@e1r10p21:~/42_cursus/minishell$ echo ""'$USER'""
 $USER
 imoumini@e1r10p21:~/42_cursus/minishell$ echo ""'$USER'""
 
-la regle de supression c'est : je supprime la guillemet qui ouvre et qui ferme
-si je vois des guillemets opposer a linterieur je les laisses
-*/
 
-// env -i
-//
-
-/*
 
 LEAKS : echo mathieu 
 
@@ -174,8 +165,6 @@ __pthread_kill_implementation (no_tid=0, signo=6, threadid=140737350932288) at .
 #9  0x000055555555bfe1 in free_final_env (tab_env=0x7fffffffd940) at ft_free/ft_free.c:92
 #10 0x0000555555555901 in main (argc=1, argv=0x7fffffffdba8, env=0x7fffffffdbb8) at main.c:92
 
-minishell>echo "'"
-minishell: error: quotes are not closed
 
 TON MINISHELL
 minishell>export a="mathieu gruson"
@@ -228,10 +217,6 @@ MINISHELL
 minishell>echo -nnnnnnnnnnnnnnnnnnnnnnnnnnn matheiu
 -nnnnnnnnnnnnnnnnnnnnnnnnnnn matheiu
 
-
-MINISHELL
-minishell>echo "mateiu | ls"
-minishell: error: quotes are not closed
 
 
 MINISHELL 
