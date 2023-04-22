@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:52:52 by wcista            #+#    #+#             */
-/*   Updated: 2023/04/22 18:11:10 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/22 20:54:30 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,8 @@ int			insert_input_env(t_env **head, t_node *root, int pipe);
 void		expand_env(t_env *head, t_node *root);
 char		*ft_strcpy(char *str);
 char		*ft_strcpy_env(char *str);
+void		if_double_env(char *new_str, int *i, int *j, char *str);
+void		if_simple_env(char *new_str, int *i, int *j, char *str);
 void		create_var_name(t_env *node);
 void		create_var_value(t_env *node);
 int			ft_stcmp(char *str1, char *str2);

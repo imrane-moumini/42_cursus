@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:38:49 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/22 18:50:27 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/22 20:16:24 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,31 +73,13 @@ void	expand_env(t_env *head, t_node *root)
 	ptr = root -> first_child;
 	while (ptr)
 	{
-		printf("c1\n");
 		expand = do_i_have_to_expand(ptr);
-		printf("c2\n");
 		while (more_than_one_dollars_suite(ptr) == 1)
-		{
-			printf("c3\n");
 			expand_job_multiple_dollar(ptr, nbr_of_dollar_suite(ptr));
-			printf("c4\n");
-			if (ptr)
-				printf("ptr in expand more than %s\n", ptr -> txt);
-		}
-		printf("c5\n");
-		
 		expand = do_i_have_to_expand(ptr);
-		printf("c6\n");
 		if (expand)
-		{
-			printf("c7\n");
 			expand_job(head, ptr);
-			if (ptr)
-				printf("ptr after expand job %s\n", ptr -> txt);
-			printf("c8\n");
-		}
 		ptr = ptr -> next;
-		printf("c9\n");
 	}
 }
 
