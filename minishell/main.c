@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/22 18:25:35 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/22 21:39:16 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,15 +166,6 @@ __pthread_kill_implementation (no_tid=0, signo=6, threadid=140737350932288) at .
 #10 0x0000555555555901 in main (argc=1, argv=0x7fffffffdba8, env=0x7fffffffdbb8) at main.c:92
 
 
-TON MINISHELL
-minishell>export a="mathieu gruson"
-minishell>echo $a
-mathieu
-
-BASH
-minishell>export a="mathieu gruson"
-minishell>echo $a
-mathieu
 
 BASH
 imoumini@e2r9p11:~/minishell_imrane$ cat << "$USER"
