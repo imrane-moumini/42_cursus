@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wcista <wcista@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/04 02:19:53 by wcista            #+#    #+#             */
-/*   Updated: 2023/04/16 07:58:07 by wcista           ###   ########.fr       */
+/*   Created: 2023/04/20 13:54:37 by wcista            #+#    #+#             */
+/*   Updated: 2023/04/21 05:28:08 by wcista           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,22 @@
 
 extern int	g_exit_status;
 
-void	executor(t_final *cmds, char *env[])
+bool	builtin_pwd(t_pipex *p)
 {
-	cmds->exit_tmp = g_exit_status;
-	if (!ft_heredoc(cmds, env))
-		return ;
-	pipex(cmds, env);
-	remove_heredoc(cmds);
+	char	*pwd;
+
+	pwd = NULL;
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+	{
+		p->exit_status = 1;
+		print_perror("error retrieving current directory: \
+pwd: cannot access parent directories");
+		return (true);
+	}
+	ft_putstr_fd(pwd, 1);
+	ft_putstr_fd("\n", 1);
+	free(pwd);
+	p->exit_status = 0;
+	return (true);
 }

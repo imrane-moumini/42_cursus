@@ -1,5 +1,7 @@
 NAME = minishell
+
 CC = gcc -Wall -Werror -Wextra -g
+
 SRC = main.c \
 	parsing/lexer/manipulate_input.c \
 	parsing/lexer/init_src_token.c \
@@ -39,7 +41,6 @@ SRC = main.c \
 	parsing/parser/final_check_expand3.c \
 	parsing/parser/supp_quotes.c \
 	signaux/signal.c \
-	builtin/exit.c \
 	builtin/export_with_option.c \
 	builtin/export_with_option2.c \
 	builtin/ft_unset.c \
@@ -48,19 +49,34 @@ SRC = main.c \
 	error_pars.c \
 	error_pars2.c \
 	exe/redir.c \
+	exe/redir_utils.c \
 	exe/heredoc.c \
+	exe/heredoc_expand.c \
+	exe/heredoc_utils.c \
 	exe/heredoc_signal.c \
 	exe/pipex.c \
 	exe/pipex_init.c \
+	exe/pipex_lonely.c \
 	exe/pipex_errors.c \
-	exe/struct.c \
 	exe/exec.c \
 	exe/childs.c \
-	exe/ft_strcmp.c \
-	exe/ft_strjoin_free.c \
+	exe/cmd_access.c \
+	exe/free_exe.c \
+	exe/print_status.c \
+	exe/builtin.c \
+	exe/builtin_cd.c \
+	exe/builtin_cd_utils.c \
+	exe/builtin_echo.c \
+	exe/builtin_env.c \
+	exe/builtin_exit.c \
+	exe/builtin_export.c \
+	exe/builtin_pwd.c \
+	exe/utils.c \
+	exe/utils_2.c \
+	prompt_name.c \
+	print_errors.c
 
 OBJ = $(SRC:%.c=%.o) 
-
 
 all: $(NAME)
 
@@ -74,6 +90,7 @@ $(NAME) : $(OBJ)
 clean :
 	rm -f $(OBJ)
 	make fclean -C libft
+
 fclean : clean
 	rm -f $(NAME)
 

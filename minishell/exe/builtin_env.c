@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   builtin_env.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wcista <wcista@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/27 17:16:57 by wcista            #+#    #+#             */
-/*   Updated: 2023/04/04 19:34:20 by wcista           ###   ########.fr       */
+/*   Created: 2023/04/20 14:05:45 by wcista            #+#    #+#             */
+/*   Updated: 2023/04/21 05:23:14 by wcista           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell_exe.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	size_t	i;
+extern int	g_exit_status;
 
-	if (ft_strlen(s1) != ft_strlen(s2))
-		return (1);
+bool	builtin_env(char *env[], t_pipex *p)
+{
+	int	i;
+
 	i = 0;
-	while (s1[i] != '\0')
+	if (!env)
+		return (true);
+	while (env[i])
 	{
-		if (s1[i] != s2[i])
-			return (1);
+		ft_putstr_fd(env[i], 1);
+		ft_putstr_fd("\n", 1);
 		i++;
 	}
-	return (0);
+	p->exit_status = 0;
+	return (true);
 }

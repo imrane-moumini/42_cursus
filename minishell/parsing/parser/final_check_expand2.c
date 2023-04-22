@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   final_check_expand2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wcista <wcista@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:44:38 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/15 15:37:59 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/18 03:17:27 by wcista           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,7 @@ void	print_double_tab(char **str)
 
 	i = 0;
 	if (!str)
-	{
-		ft_printf("double tab is empty\n");
 		return ;
-	}
-	ft_printf("double tab is \n");
 	while (str[i])
 	{
 		ft_printf("%s\n", str[i]);
@@ -64,9 +60,9 @@ void	final_expand(t_final *final)
 				follow -> cmds = recreate_tab_without_space(follow -> cmds);
 				print_double_tab(follow -> cmds);
 				free_double_tab(save);
-			}	
+			}
 		}
-		follow = follow -> next;
+		follow = follow->next;
 	}
 }
 

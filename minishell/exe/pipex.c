@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wcista <wcista@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 17:47:53 by wcista            #+#    #+#             */
-/*   Updated: 2023/04/05 20:30:50 by wcista           ###   ########.fr       */
+/*   Created: 2023/04/20 12:59:17 by wcista            #+#    #+#             */
+/*   Updated: 2023/04/21 04:25:41 by wcista           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,17 @@
 
 extern int	g_exit_status;
 
-void	close_unused_pipes(t_pipex *p, int i)
+void	close_unused_pipes(t_pipex *p)
 {
 	int	j;
 
 	j = 0;
-	while (j < p->len + 1)
+	while (j < p->nb_cmds - 1)
 	{
-		if (i != j)
-		{
-			printf("__________________________________Unused pipes : p->fd[%d][%d]\n", j, 0);
-			close(p->fd[j][0]);
-		}
-		if (i + 1 != j)
-		{
-			printf("__________________________________Unused pipes : p->fd[%d][%d]\n", j, 1);
+		if (p->i != j)
 			close(p->fd[j][1]);
-		}
+		if (p->i - 1 != j)
+			close(p->fd[j][0]);
 		j++;
 	}
 }
@@ -40,12 +34,10 @@ static void	close_pipes_main(t_pipex *p)
 	int	i;
 
 	i = 0;
-	while (i < p->len + 1)
+	while (i < p->nb_cmds - 1)
 	{
-		if (i != p->len + 1)
-			close(p->fd[i][0]);
-		if (i != 0)
-			close(p->fd[i][1]);
+		close(p->fd[i][0]);
+		close(p->fd[i][1]);
 		i++;
 	}
 }
@@ -55,9 +47,11 @@ static void	wait_childs(t_pipex *p)
 	int	i;
 
 	i = 0;
-	while (i < p->len)
+	while (i < p->nb_cmds)
 	{
-		waitpid(i, &g_exit_status, 0);
+		waitpid(p->child[i], &g_exit_status, 0);
+		if (WIFEXITED(g_exit_status))
+			g_exit_status = (WEXITSTATUS(g_exit_status));
 		i++;
 	}
 }
@@ -68,21 +62,19 @@ void	pipex(t_final *cmds, char *env[])
 
 	p = (t_pipex *)malloc(sizeof(t_pipex));
 	if (!p)
-		return ;
-	p->len = lenlist(cmds);
+		return (print_perror("malloc"));
+	p->i = 0;
+	p->fd = NULL;
+	p->child = NULL;
+	p->nb_cmds = lenlist(cmds);
+	p->exit_status = cmds->exit_tmp;
+	if (p->nb_cmds == 1 && isbuiltin(cmds))
+		return (lonely_builtin(cmds, env, p));
 	if (!init_pipes(p))
 		return ;
-	if (!init_forks(cmds, p, env))
+	if (!init_forks(cmds, env, p))
 		return ;
-	/*Si besoin de quelque chose dans le process parent,
-	on ne ferme que les pipes que l'on utilise pas en laissant
-	ouvert que les pipes que l'on utilise.
-	S'il n'y a besoin de rien faire dans le main, on peut fermer
-	tous les fds.*/
 	close_pipes_main(p);
-	printf("\nHELLO\nWORLD\n");
-	//close(p->fd[p->len][0]);
-	//close(p->fd[0][1]);
 	wait_childs(p);
-	free(p);
+	free_pipex(p);
 }
