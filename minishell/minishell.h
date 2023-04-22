@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:52:52 by wcista            #+#    #+#             */
-/*   Updated: 2023/04/22 16:15:04 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/22 18:11:10 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct redir_node
 	char				*txt;
 	int					heredoc;
 	int					in_file;
+	int					quotes;
 	int					out_file;
 	int					append;
 	int					file;

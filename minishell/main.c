@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/22 17:47:16 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/22 18:25:35 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int main(int argc, char *argv[], char *env[])
 				mini_env = copy_env(final_env);
 				ft_free(NULL, &root, &src,&info);
 				ft_free_final_ast(&final);
-				free_final_env(&final_env);
+				//free_final_env(&final_env);
 			}
 			else
 				ft_free(NULL, &root, &src,&info);
@@ -218,16 +218,6 @@ minishell>echo -nnnnnnnnnnnnnnnnnnnnnnnnnnn matheiu
 -nnnnnnnnnnnnnnnnnnnnnnnnnnn matheiu
 
 
-
-MINISHELL 
-minishell>echo           |            |        
-minishell: syntax error near unexpected token `|'
-[3]    89292 segmentation fault (core dumped)  ./minishell
-
-MINISHELL
-minishell>echo            |        
-minishell: syntax error near unexpected token `newline'
-[3]    90470 segmentation fault (core dumped)  ./minishell
 
 ==79096== 4,277 bytes in 69 blocks are still reachable in loss record 69 of 83
 ==79096==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
