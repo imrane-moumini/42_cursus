@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wcista <wcista@student.42.fr>              +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/23 02:22:27 by wcista           ###   ########.fr       */
+/*   Updated: 2023/04/23 15:01:00 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int main(int argc, char *argv[], char *env[])
 	char **final_env;
 	t_env *last_node;
 	char *exit_status;
-	char	*prompt_name;
+	//char	*prompt_name;
 	(void)argc;
     (void)argv;
 	
@@ -42,7 +42,7 @@ int main(int argc, char *argv[], char *env[])
 	action_exit.sa_sigaction = ft_sigint;
 	sigaction(SIGINT, &action_exit, NULL);
 	
-	// signal control D
+	// signal control slash
 	signal(SIGQUIT, SIG_IGN);
 	// programme hors signaux
 	mini_env = copy_env(env);
@@ -54,9 +54,9 @@ int main(int argc, char *argv[], char *env[])
 	final_env = NULL;
 	while (1)
 	{
-		prompt_name = get_prompt_name(mini_env);
-		input = readline(prompt_name);
-		free(prompt_name);
+		//prompt_name = get_prompt_name(mini_env);
+		input = readline("minishell>");
+		//free(prompt_name);
 		if (!input)
 			ft_exit_d(&mini_env);
 		add_history(input);
@@ -79,11 +79,11 @@ int main(int argc, char *argv[], char *env[])
 				ft_free_before_final_ast(&ast);
 				final_expand(final);
 				final_env = transform_env_in_double_tab(mini_env);
-				executor(final, final_env);
 				free_env(&mini_env);
+				ft_free(NULL, &root, &src, &info);
+				executor(final, final_env);
 				mini_env = copy_env(final_env);
 				free_final_env(&final_env);
-				ft_free(NULL, &root, &src,&info);
 				ft_free_final_ast(&final);
 			}
 			else
@@ -134,49 +134,8 @@ imoumini@e1r10p21:~/42_cursus/minishell$ echo ""'$USER'""
 LEAKS : echo mathieu 
 
 
-double free : minishell>echo $$$USER$USER$USER$$
-
-minishell>minishell>echo $$$USER$USER$USER$$
-
-minishell>free(): double free detected in tcache 2
-[4]    95705 IOT instruction (core dumped)  ./minishell
-
-minishell>echo $$$USER$USER$USER$$
-[Detaching after fork from child process 96276]
-"{
-free(): double free detected in tcache 2
-
-Program received signal SIGABRT, Aborted.
-__pthread_kill_implementation (no_tid=0, signo=6, threadid=140737350932288) at ./nptl/pthread_kill.c:44
-44      ./nptl/pthread_kill.c: No such file or directory.
-(gdb) bt
-#0  __pthread_kill_implementation (no_tid=0, signo=6, threadid=140737350932288) at ./nptl/pthread_kill.c:44
-#1  __pthread_kill_internal (signo=6, threadid=140737350932288) at ./nptl/pthread_kill.c:78
-#2  __GI___pthread_kill (threadid=140737350932288, signo=signo@entry=6) at ./nptl/pthread_kill.c:89
-#3  0x00007ffff7d68476 in __GI_raise (sig=sig@entry=6) at ../sysdeps/posix/raise.c:26
-#4  0x00007ffff7d4e7f3 in __GI_abort () at ./stdlib/abort.c:79
-#5  0x00007ffff7daf6f6 in __libc_message (action=action@entry=do_abort, fmt=fmt@entry=0x7ffff7f01b8c "%s\n")
-    at ../sysdeps/posix/libc_fatal.c:155
-#6  0x00007ffff7dc6d7c in malloc_printerr (str=str@entry=0x7ffff7f04710 "free(): double free detected in tcache 2")
-    at ./malloc/malloc.c:5664
-#7  0x00007ffff7dc912b in _int_free (av=0x7ffff7f3fc80 <main_arena>, p=0x5555555a2ed0, have_lock=0)
-    at ./malloc/malloc.c:4473
-#8  0x00007ffff7dcb4d3 in __GI___libc_free (mem=<optimized out>) at ./malloc/malloc.c:3391
-#9  0x000055555555bfe1 in free_final_env (tab_env=0x7fffffffd940) at ft_free/ft_free.c:92
-#10 0x0000555555555901 in main (argc=1, argv=0x7fffffffdba8, env=0x7fffffffdbb8) at main.c:92
 
 
-
-BASH
-imoumini@e2r9p11:~/minishell_imrane$ cat << "$USER"
-> $HOME
-> $USER
-$HOME
-MINISHELL
-minishell>cat << "$USER"
-> $HOME
-> $USER
-/mnt/nfs/homes/imoumini
 
 BASH (qd on fait control D)
 imoumini@e2r9p11:~/minishell_imrane$ ^C
@@ -201,12 +160,7 @@ run
 => tape les commandes que tu veux, si ca segfault voir commande si dessous 
 bt
 
-BASH
-imoumini@e2r9p11:~/minishell_imrane$ echo -nnnnnnnnnnnnnn matheu
-matheuimoumini@e2r9p11:~/minishell_imrane$ 
-MINISHELL
-minishell>echo -nnnnnnnnnnnnnnnnnnnnnnnnnnn matheiu
--nnnnnnnnnnnnnnnnnnnnnnnnnnn matheiu
+
 
 
 
