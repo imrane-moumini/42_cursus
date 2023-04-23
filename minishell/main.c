@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wcista <wcista@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/22 21:39:16 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/23 02:22:27 by wcista           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int main(int argc, char *argv[], char *env[])
 	char **final_env;
 	t_env *last_node;
 	char *exit_status;
-	//char	*prompt_name;
+	char	*prompt_name;
 	(void)argc;
     (void)argv;
 	
@@ -54,9 +54,9 @@ int main(int argc, char *argv[], char *env[])
 	final_env = NULL;
 	while (1)
 	{
-		//prompt_name = get_prompt_name(mini_env);
-		input = readline("minishell>");
-		//free(prompt_name);
+		prompt_name = get_prompt_name(mini_env);
+		input = readline(prompt_name);
+		free(prompt_name);
 		if (!input)
 			ft_exit_d(&mini_env);
 		add_history(input);
@@ -82,9 +82,9 @@ int main(int argc, char *argv[], char *env[])
 				executor(final, final_env);
 				free_env(&mini_env);
 				mini_env = copy_env(final_env);
+				free_final_env(&final_env);
 				ft_free(NULL, &root, &src,&info);
 				ft_free_final_ast(&final);
-				//free_final_env(&final_env);
 			}
 			else
 				ft_free(NULL, &root, &src,&info);
