@@ -53,6 +53,7 @@ SRC = main.c \
 	exe/heredoc.c \
 	exe/heredoc_expand.c \
 	exe/heredoc_utils.c \
+	exe/heredoc_utils_2.c \
 	exe/heredoc_signal.c \
 	exe/pipex.c \
 	exe/pipex_init.c \

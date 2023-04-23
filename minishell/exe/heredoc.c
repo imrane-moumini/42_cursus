@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 19:16:50 by wcista            #+#    #+#             */
-/*   Updated: 2023/04/23 21:06:33 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/23 21:53:41 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern int	g_exit_status;
 
-static bool	free_heredoc(t_heredoc *h, bool n)
+bool	free_heredoc(t_heredoc *h, bool n)
 {
 	if (access(h->file_name, W_OK) == -1)
 	{
@@ -62,22 +62,8 @@ static bool	init_heredoc(char *env[], t_redir *redir, int i, int j)
 	if (h->fd == -1)
 		return (free_heredoc(h, false));
 	redir = redir->next;
-	while (1)
-	{
-		h->input = readline("> ");
-		if (g_exit_status == 42)
-			return (g_exit_status = 130, free_heredoc(h, false));
-		if (!ft_strcmp(h->input, redir->txt))
-			break ;
-		if (!redir->quotes)
-			h->input = heredoc_expand(h, env, false);
-		h->reader = write(h->fd, h->input, ft_strlen(h->input));
-		if (h->reader == -1)
-			return (free_heredoc(h, false));
-		h->reader = write(h->fd, "\n", 1);
-		free(h->input);
-		h->input = NULL;
-	}
+	if (!infinite_loop(env, redir, h))
+		return (false);
 	return (free_heredoc(h, true));
 }
 
