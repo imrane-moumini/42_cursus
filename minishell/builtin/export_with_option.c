@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 17:16:25 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/22 21:35:50 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:48:05 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,31 +49,49 @@ int	count_nbr_equal(char *str, char *env_input)
 		i++;
 	}
 	if (count == 0)
+	{
+		printf("c7\n");
 		return (print_error_export(env_input), 1);
+	}
 	return (0);
 }
 
 int	pars_env_name(char *str, char *env_input)
 {
 	int	i;
-
+	printf("str is :%s\n", str);
 	i = 0;
 	if (!str)
 		return (1);
 	if (!env_input)
 		return (1);
 	if (pars_env_name_nb_equ(str, env_input) == 1)
+	{
+		printf("c1\n");
 		return (1);
+	}
 	if (pars_env_name_quote(str, env_input) == 1)
+	{
+		printf("c2\n");
 		return (1);
+	}
 	while (str[i])
 	{
 		if (pars_env_name_f_if(str, env_input, i) == 1)
+		{
+			printf("c3\n");
 			return (1);
+		}
 		if (pars_env_name_s_if(str, env_input, i) == 1)
+		{
+			printf("c4\n");
 			return (1);
+		}
 		if (pars_env_name_t_if(str, env_input, i) == 1)
+		{
+			printf("c5\n");
 			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -91,7 +109,10 @@ int	pars_env_value(char *str, char *env_input)
 	while (str[i])
 	{
 		if (str[i] == '\\')
+		{
+			printf("c6\n");
 			return (print_error_export(env_input), 1);
+		}
 		i++;
 	}
 	return (0);

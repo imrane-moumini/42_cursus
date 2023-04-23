@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/23 15:01:00 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/23 15:24:18 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int main(int argc, char *argv[], char *env[])
 			is_unset(&mini_env, root);
 			if(error_pars(root) == 1 && is_env_var(mini_env, root) == 1)
 			{
+				//ft_free(NULL, NULL, NULL, &info);
 				supp_quotes(root);
 				ast = create_ast_command_redir(root);
 				final = create_final_ast(ast);
