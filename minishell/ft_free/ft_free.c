@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 22:06:18 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/23 16:55:07 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/23 17:17:33 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ void free_final_env(char ***tab_env)
 }
 void ft_free(t_env **mini_env, t_node **root, t_source **src, t_info_tok **info) 
 {
-	printf("c0\n");
 	if (root)
 		free_ast(root);
 	if (mini_env)
@@ -186,32 +185,17 @@ void ft_free_final_ast(t_final **ast_before)
 void free_info(t_info_tok **info)
 {
 	t_info_tok *ptr;
-	printf("c1\n");
 	if (info)
 	{
 		ptr = *info;
-		printf("c2\n");
 		if (ptr)
 		{
 			if (ptr -> tok_buf)
 			{
-				// printf("c3\n");
-				// printf("adress free : %p\n", ptr -> tok_buf);
 				free(ptr -> tok_buf);
-				// printf("c3.1\n");
 				ptr -> tok_buf = NULL;
 			}
-			// if (ptr -> tok_buf)
-			// {
-			// 	printf("c3.3\n");
-			// 	free(ptr -> tok_buf);
-			// 	printf("c3.4\n");
-			// 	ptr -> tok_buf = NULL;
-			// }
-			// printf("c4\n");
-			printf("free malloc : %p\n", ptr);
 			free(ptr);
-			// printf("c5\n");
 			ptr = NULL;
 		}
 		else

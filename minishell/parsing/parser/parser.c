@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:57 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/23 17:05:55 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/23 17:15:22 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,16 @@ t_node	*parse_simple_command(char *input, t_source **src, t_info_tok **info)
 	root = new_node(NULL);
 	src_ft = *src;
 	info_ft = *info;
-	printf("info sur info_ft %s\n", info_ft->tok_buf);
-	printf("suivi malloc : %p\n", info_ft);
 	if (!root)
 		return (NULL);
 	if (src_ft -> end_input != 1)
 		tok = tokenize(src_ft, info_ft);
-	printf("c-1.2.0\n");
 	while (src_ft -> exit != 1 || tok != NULL)
 	{
-		printf("c-1.2.1\n");
 		if (!(if_tok_exist(tok, root, info)))
 			return (NULL);
 		info = init_global_info_token(info);
 		info_ft = *(info);
-		printf("info sur info_ft %s\n", info_ft->tok_buf);
-		printf("suivi malloc bis : %p\n", info_ft);
 		tok = tokenize(src_ft, info_ft);
 	}
 	return (free_tok(&tok), root);
@@ -100,22 +94,14 @@ t_node	*if_tok_exist(t_token *tok, t_node *root, t_info_tok **info)
 {
 	t_node	*node;
 
-	printf("c-1.2.2\n");
 	if (tok)
 	{
-		printf("c-1.2.2.0\n");
 		node = new_node(tok);
-		printf("c-1.2.2.1\n");
 		if (!node)
-		{
-			printf("c-1.2.3\n");
 			return (NULL);
-		}
-		printf("c-1.2.2.2\n");
 		add_node_to_ast(root, node);
 		free_tok(&tok);
 	}
-	printf("c-1.2\n");
 	free_info(info);
 	info = NULL;
 	return (root);

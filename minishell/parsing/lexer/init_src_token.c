@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 20:00:16 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/23 16:33:30 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/23 17:15:32 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_info_tok	**init_global_info_token(t_info_tok **info)
 	t_info_tok	*info_ft;
 
 	*(info) = malloc(sizeof(t_info_tok));
-	printf("adress malloc : %p\n", *(info));
 	info_ft = *(info);
 	info_ft -> tok_buf = NULL;
 	info_ft -> tok_bufsize = 0;

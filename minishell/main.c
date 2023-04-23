@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/23 16:56:16 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/23 17:15:48 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int main(int argc, char *argv[], char *env[])
 				final_expand(final);
 				final_env = transform_env_in_double_tab(mini_env);
 				free_env(&mini_env);
-				printf("c-1.0\n");
 				ft_free(NULL, &root, &src, &info);
 				executor(final, final_env);
 				mini_env = copy_env(final_env);
@@ -89,10 +88,7 @@ int main(int argc, char *argv[], char *env[])
 				ft_free_final_ast(&final);
 			}
 			else
-			{
-				printf("c-1.1\n");
 				ft_free(NULL, &root, &src,&info);
-			}
 		}
 			else (free(input));
 	}
