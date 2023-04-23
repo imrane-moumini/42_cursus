@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 18:26:21 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/23 17:51:07 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/23 21:05:28 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,22 @@ extern int	g_exit_status;
 void	ft_sigint(int sigint)
 {
 	g_exit_status += sigint;
-	if (sigint == 2)
-	{
-		write(1, "\n", 2);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
+
+	write(1, "\n", 2);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	// ft_putstr_fd("sigint_____main\n", 2);
+}
+
+void	ft_sigint_heredoc(int sigint)
+{
+	g_exit_status += sigint;
+
+	signal(SIGINT, SIG_IGN);
+	write(1, "\n", 2);
+	close(0);
+	g_exit_status = 42;
 }
 void	ft_signal(int i)
 {
@@ -38,11 +47,13 @@ void	ft_signal(int i)
 		signal(SIGINT, handle_sigint_2);
 		signal(SIGQUIT, SIG_IGN);
 	}
+	*/
 	if (i == 3)
 	{
-		signal(SIGINT, handle_sigint_3);
+		signal(SIGINT, ft_sigint_heredoc);
 		signal(SIGQUIT, SIG_IGN);
 	}
+	/*
 	if (i == 4)
 	{
 		signal(SIGINT, SIG_IGN);
