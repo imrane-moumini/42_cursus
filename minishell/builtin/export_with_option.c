@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 17:16:25 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/23 15:58:26 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/23 17:32:34 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ int	count_nbr_equal(char *str, char *env_input)
 		i++;
 	}
 	if (count == 0)
-	{
-		printf("c7\n");
 		return (print_error_export(env_input), 1);
-	}
 	return (0);
 }
 
