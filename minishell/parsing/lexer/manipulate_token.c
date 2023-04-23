@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 21:23:13 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/14 16:58:50 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/23 16:28:41 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	add_to_buf(char c, t_info_tok *info)
 		ft_strlcpy(tmp, info -> tok_buf, ft_strlen(info -> tok_buf));
 		free(info -> tok_buf);
 		info -> tok_buf = tmp;
+		printf("adress malloc : %p\n", info -> tok_buf);
 		info -> tok_bufsize = info -> tok_bufsize * 2;
 	}
 	info -> tok_buf[info -> tok_bufindex] = c;
