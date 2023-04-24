@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/24 20:32:31 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/24 21:09:41 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,17 +131,6 @@ bt
 */
 /*
 
-imoumini@e2r10p12:/mnt/nfs/homes/imoumini/42_cursus/minishell$ export a="s -a"
-==599236== Invalid read of size 1
-==599236==    at 0x10F6BD: str_without_quotes (supp_quotes.c:39)
-==599236==    by 0x10F5A3: supp_quotes (supp_quotes.c:25)
-==599236==    by 0x109684: main (main.c:63)
-==599236==  Address 0x4b6ba29 is 0 bytes after a block of size 9 alloc'd
-==599236==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==599236==    by 0x10B496: ft_strcpy (manip_env.c:25)
-==599236==    by 0x10A6FA: new_node (parser.c:21)
-==599236==    by 0x10A976: if_tok_exist (parser.c:99)
-==599236==    by 0x10A878: parse_simple_command (parser.c:70)
-==599236==    by 0x109582: main (main.c:52)
+echo "$USER" '$SUER' mathie > z1
 
 */
