@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 14:48:42 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/14 19:12:35 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/24 20:33:49 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,11 @@ char	*return_right_tab_begin_sup(char *str, int begin, int end)
 	tab = malloc(sizeof(char) * (((begin - 1) - end) + 1));
 	while (begin > end)
 	{
-		if (str[end])
+		if (str[end] && str[end] != ' ')
+		{
 			tab[i] = str[end];
-		i++;
+			i++;
+		}
 		end++;
 	}
 	tab[i] = '\0';
@@ -87,9 +89,11 @@ char	*return_right_tab_begin_inf(char *str, int begin, int end)
 	tab = malloc(sizeof(char) * ((end - begin) + 1));
 	while (end > begin)
 	{
-		if (str[begin])
+		if (str[begin] && str[begin] != ' ')
+		{	
 			tab[i] = str[begin];
-		i++;
+			i++;
+		}
 		begin++;
 	}
 	tab[i] = '\0';
