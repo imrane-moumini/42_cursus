@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:07:06 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/15 15:37:59 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/24 19:53:24 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_com	**malloc_ast(t_com **ast, int nbr_pipe)
 	}
 	else
 	{
-		ast = malloc(sizeof(t_com *) + 1);
+		ast = malloc(sizeof(t_com *) * 2);
 		ast[1] = NULL;
 		nbr_pipe = 0;
 	}
