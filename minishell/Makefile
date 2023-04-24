@@ -40,7 +40,7 @@ SRC = main.c \
 	parsing/parser/final_check_expand2.c \
 	parsing/parser/final_check_expand3.c \
 	parsing/parser/supp_quotes.c \
-	signaux/signal.c \
+	signals/signal.c \
 	builtin/export_with_option.c \
 	builtin/export_with_option2.c \
 	builtin/ft_unset.c \
@@ -54,7 +54,6 @@ SRC = main.c \
 	exe/heredoc_expand.c \
 	exe/heredoc_utils.c \
 	exe/heredoc_utils_2.c \
-	exe/heredoc_signal.c \
 	exe/pipex.c \
 	exe/pipex_init.c \
 	exe/pipex_lonely.c \
