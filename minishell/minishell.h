@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wcista <wcista@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 21:52:52 by wcista            #+#    #+#             */
-/*   Updated: 2023/04/24 21:55:16 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/24 18:53:48 by wcista           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ void		create_var_value(t_env *node);
 int			ft_stcmp(char *str1, char *str2);
 int			ft_stcmp_exit(char *str1, char *str2);
 void		final_txt(char *a_dol, char *new_str, t_node *ptr, char *save_var);
-char *		init_save_after_dollar(char *save_after_dollar);
+void		init_save_after_dollar(char *save_after_dollar);
 char		*return_after_multiple_dollar(char *str, int i, int save);
 void		after_multiple_dollar_while(int nbr, int *i, int *save);
 void		init_str_nbr(char *str_nbr);

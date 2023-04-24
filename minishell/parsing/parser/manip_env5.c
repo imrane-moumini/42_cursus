@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:38:31 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/24 21:56:57 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/22 18:53:02 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	expand_job(t_env *head, t_node *ptr)
 
 	i = 0;
 	a_do = NULL;
-	a_do = init_save_after_dollar(a_do);
+	init_save_after_dollar(a_do);
 	while (ptr -> txt[i] != '\0')
 	{
 		if (ptr ->txt[i] == '$')
@@ -64,7 +64,7 @@ void	expand_job(t_env *head, t_node *ptr)
 				a_do = after_dollar_deux(find_end_of_var(ptr->txt + (i + 1)));
 				str = ft_strjoin(b_do, return_matching_value(head, save_var));
 				final_txt(a_do, str, ptr, save_var);
-			}	
+			}
 		}
 		i++;
 	}
