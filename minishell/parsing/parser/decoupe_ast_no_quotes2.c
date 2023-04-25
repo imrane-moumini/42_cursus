@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:07:06 by imoumini          #+#    #+#             */
-/*   Updated: 2023/04/24 20:02:25 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/25 12:04:56 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_com	**create_while(t_com **ast, t_ast *save_ast, t_node *ptr, int nbr_pipe)
 	i = 0;
 	while (nbr_pipe-- >= 0)
 	{
-		if (save_ast)
+		if (save_ast && save_ast -> save_ptr)
 			save_ast = isolate_command_redir(save_ast -> save_ptr);
 		else
 			save_ast = isolate_command_redir(ptr);
@@ -51,6 +51,7 @@ t_com	**create_while(t_com **ast, t_ast *save_ast, t_node *ptr, int nbr_pipe)
 			if (ast[i])
 				ast[i]->redir = save_ast->redir;
 			free(save_ast);
+			save_ast = NULL;
 			i++;
 		}
 	}
@@ -88,12 +89,11 @@ t_node	*return_ptr(t_redir **redir, t_node *pt)
 
 t_ast	*return_save_ast(t_node *ptr, t_com *com, t_redir *redir)
 {
-	(void) redir;
 	t_ast	*save_ast;
 
 	if (ptr)
 			ptr = ptr -> next;
-	save_ast = malloc(sizeof(*save_ast));
+	save_ast = malloc(sizeof(t_ast));
 	if (com)
 		save_ast -> command = com;
 	else

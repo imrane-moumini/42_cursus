@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 20:57:56 by imrane            #+#    #+#             */
-/*   Updated: 2023/04/23 21:14:48 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/04/25 11:52:11 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int main(int argc, char *argv[], char *env[])
 				free_env(&mini_env);
 				ft_free(NULL, &root, &src, &info);
 				executor(final, final_env);
-				printf("g_exit_status = %d\n", g_exit_status);
+				//printf("g_exit_status = %d\n", g_exit_status);
 				mini_env = copy_env(final_env);
 				free_final_env(&final_env);
 				ft_free_final_ast(&final);
