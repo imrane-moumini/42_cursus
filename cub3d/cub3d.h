@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:46 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/18 17:57:56 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/19 21:14:56 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,55 @@
 # include "minilibx/mlx.h"
 # include <X11/keysym.h>
 # include <X11/X.h>
+
+#define WHITE 0xFFFFFF
+#define BLACK 0x000000
+#define VIOLET 0x7f00ff
+#define RED 0xFF0000
+
+typedef struct s_rect
+{
+	int	x;
+	int	y;
+	int width;
+	int height;
+	int color;
+}	t_rect;
+
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp; /* bits per pixel */
+	int		line_len; /*nbr de bytes que represente une ligne sur notre image*/
+	int		endian;
+}	t_img;
+
 typedef struct s_game
 {
-
+	/* ptr de minilibx et window*/
 	void	*mlx_ptr;
 	void	*win_ptr;
+	/* img property*/
+	t_img	img_wall;
+	t_img	img_floor;
+	t_img	img_perso;
+	t_img	img_laser;
+	t_img	img_view;
+
+	int x_perso;
+	int y_perso;
+	int x_wall;
+	int y_wall;
+	int x_floor;
+	int y_floor;
+	int x_laser;
+	int y_laser;
+	int x_view;
+	int y_view;
+
+
+
 	
 }				t_game;
 
