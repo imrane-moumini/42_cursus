@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/20 21:01:34 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/20 23:07:13 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,50 @@ int render_rect(t_game *g, t_rect rect, t_img *img)
 	return (0);
 }
 
+int render_line(t_game *g, t_rect rect, t_img *img)
+{
+	int	i;
+	int j;
+	if (g->win_ptr == NULL)
+		return (1);
+	i = rect.y;
+	while (i < rect.y + rect.height)
+	{
+		j = rect.x;
+		while (j < rect.x + rect.width)
+			img_pix_put(img, j++, i, rect.color);
+		++i;
+	}
+	j = 32;
+	return (0);
+}
+int render_line_up(t_rect rect, t_img *img)
+{
+	int	i;
+	int j;
+	
+	j = rect.x;
+	while (j < (rect.x) + (rect.width/6))
+	{
+		i = rect.y;
+		while (i < rect.y + (rect.height+5))
+		{
+			img_pix_put(img, j, i++, rect.color);
+		}
+		j++;
+	}
+	return (0);
+}
+
 int	fill_image(t_game *g)
 {
 	//printf("c1\n");
-	render_rect(g, (t_rect){0,0, 10, 10, WHITE}, &g->img_wall);
+	render_rect(g, (t_rect){0,0, 64, 64, WHITE}, &g->img_wall);
 	//printf("c2\n");
-	render_rect(g, (t_rect){0,0, 10, 10, RED}, &g->img_perso);
+	render_line(g, (t_rect){32,32, 32, 1, RED}, &g->img_perso);
+	render_line_up((t_rect){40,31, 32, 1, RED}, &g->img_perso);
 	//printf("c3\n");
-	render_rect(g, (t_rect){0,0, 10, 10, VIOLET}, &g->img_floor);
+	render_rect(g, (t_rect){0,0, 64, 64, BLACK}, &g->img_floor);
 	return (0);
 }
 int main(int argc, char *argv[])

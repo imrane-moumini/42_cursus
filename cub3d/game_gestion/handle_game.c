@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 17:54:29 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/20 21:01:28 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/20 21:04:40 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ void	ft_image(t_game *g)
 void	ft_put_img_to_window_while(t_game *g, int i, int j)
 {
 	if (g->tab[i][j] == '1')
-		mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_wall.mlx_img, 0, 0);
+		mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_wall.mlx_img, j * 64, i * 64);
 	if (g->tab[i][j] == '0')
-		mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_floor.mlx_img, 20, 20);
+		mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_floor.mlx_img, j * 64, i * 64);
 	if (g->tab[i][j] == 'P')
-		mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_perso.mlx_img, 10, 10);
+		mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_perso.mlx_img, j * 64, i * 64);
 }
 
 void	ft_put_img_to_window(t_game *g)
