@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:40 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/20 20:28:34 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/20 20:47:15 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,3 +55,4 @@ int	nb_ligne(char *file)
 	close(fd);
 	return (counter);
 }
+

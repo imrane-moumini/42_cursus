@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/20 20:26:32 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/20 21:01:34 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int render_rect(t_game *g, t_rect rect, t_img *img)
 	return (0);
 }
 
-int	render(t_game *g)
+int	fill_image(t_game *g)
 {
 	//printf("c1\n");
 	render_rect(g, (t_rect){0,0, 10, 10, WHITE}, &g->img_wall);
@@ -63,9 +63,6 @@ int	render(t_game *g)
 	render_rect(g, (t_rect){0,0, 10, 10, RED}, &g->img_perso);
 	//printf("c3\n");
 	render_rect(g, (t_rect){0,0, 10, 10, VIOLET}, &g->img_floor);
-	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_wall.mlx_img, 0, 0);
-	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_perso.mlx_img, 10, 10);
-	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_floor.mlx_img, 20, 20);
 	return (0);
 }
 int main(int argc, char *argv[])
@@ -93,22 +90,18 @@ int main(int argc, char *argv[])
     g.mlx_ptr = mlx_init();
     if (g.mlx_ptr == NULL)
 		return (1);
-    g.win_ptr = mlx_new_window(g.mlx_ptr, 600, 300, "CUB3D");
+    g.win_ptr = mlx_new_window(g.mlx_ptr, 64 * g.column, 64 * g.ligne, "CUB3D");
     if (g.win_ptr == NULL)
 	{
 		free(g.win_ptr);
 		return (1);
 	}
-
-	g.img_wall.mlx_img = mlx_new_image(g.mlx_ptr, 600, 300);
-	g.img_wall.addr = mlx_get_data_addr(g.img_wall.mlx_img, &g.img_wall.bpp, &g.img_wall.line_len, &g.img_wall.endian);
-	g.img_perso.mlx_img = mlx_new_image(g.mlx_ptr, 600, 300);
-	g.img_perso.addr = mlx_get_data_addr(g.img_perso.mlx_img, &g.img_perso.bpp, &g.img_perso.line_len, &g.img_perso.endian);
-	g.img_floor.mlx_img = mlx_new_image(g.mlx_ptr, 600, 300);
-	g.img_floor.addr = mlx_get_data_addr(g.img_floor.mlx_img, &g.img_floor.bpp, &g.img_floor.line_len, &g.img_floor.endian);
-	mlx_loop_hook(g.mlx_ptr, &render, &g);
+	ft_image(&g);
+	// mlx_loop_hook(g.mlx_ptr, &render, &g);
+	fill_image(&g);
 	mlx_hook(g.win_ptr, KeyPress, KeyPressMask, &handle_input, &g);
 	mlx_hook(g.win_ptr, DestroyNotify, StructureNotifyMask, &handle_click, &g);
+	ft_put_img_to_window(&g);
     mlx_loop(g.mlx_ptr);
 	mlx_destroy_window(g.mlx_ptr, g.win_ptr);
     mlx_destroy_display(g.mlx_ptr);

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:46 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/20 20:26:07 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/20 21:01:20 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,9 @@ char	*fill_tab_while(char **tab, char *p, int fd);
 char	**fill_tab(char **tab, char *file);
 int		nb_column(char **tab);
 int		nb_ligne(char *file);
+
+/*img gestion*/
+void	ft_image(t_game *g);
+void	ft_put_img_to_window(t_game *g);
+void	ft_put_img_to_window_while(t_game *g, int i, int j);
 #endif
