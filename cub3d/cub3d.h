@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:46 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/20 19:19:51 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/20 20:26:07 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ typedef struct s_game
 
 	int x;
 	int y;
+	int ligne;
+	int column;
+	char **tab;
 	
 }				t_game;
 
@@ -70,4 +73,13 @@ typedef struct s_game
 int	handle_click(t_game *game);
 int	handle_input(int key, t_game *game);
 
+/*fill double tab*/
+void	print_double_tab(char **str);
+char	**allocate_line(char **tab, char *file);
+char	*allocate_column_while(char **tab, char *p, int fd);
+char	**allocate_column(char **tab, char *file);
+char	*fill_tab_while(char **tab, char *p, int fd);
+char	**fill_tab(char **tab, char *file);
+int		nb_column(char **tab);
+int		nb_ligne(char *file);
 #endif

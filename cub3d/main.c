@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/20 19:34:02 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/20 20:26:32 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,25 @@ int	render(t_game *g)
 int main(int argc, char *argv[])
 {
     t_game g;
-	//char	**tab;
-    (void)argc;
-    (void)argv;
-    
+    if (argc < 1)
+		return (0);
+	g.tab = NULL;
+	g.tab = allocate_line(g.tab, argv[1]);
+	if (g.tab == NULL)
+	{
+		free(g.tab);
+		exit(1);
+	}
+	g.tab = allocate_column(g.tab, argv[1]);
+	if (g.tab == NULL)
+	{
+		free(g.tab);
+		exit(1);
+	}
+	g.tab = fill_tab(g.tab, argv[1]);
+	print_double_tab(g.tab);
+	g.column = nb_column(g.tab);
+	g.ligne = nb_ligne(argv[1]);
     g.mlx_ptr = mlx_init();
     if (g.mlx_ptr == NULL)
 		return (1);
@@ -84,7 +99,7 @@ int main(int argc, char *argv[])
 		free(g.win_ptr);
 		return (1);
 	}
-	
+
 	g.img_wall.mlx_img = mlx_new_image(g.mlx_ptr, 600, 300);
 	g.img_wall.addr = mlx_get_data_addr(g.img_wall.mlx_img, &g.img_wall.bpp, &g.img_wall.line_len, &g.img_wall.endian);
 	g.img_perso.mlx_img = mlx_new_image(g.mlx_ptr, 600, 300);
