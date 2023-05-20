@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/20 19:28:02 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/20 19:34:02 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ int render_rect(t_game *g, t_rect rect, t_img *img)
 int	render(t_game *g)
 {
 	//printf("c1\n");
-	render_rect(g, (t_rect){0,0, 100, 100, WHITE}, &g->img_wall);
+	render_rect(g, (t_rect){0,0, 10, 10, WHITE}, &g->img_wall);
 	//printf("c2\n");
 	render_rect(g, (t_rect){0,0, 10, 10, RED}, &g->img_perso);
 	//printf("c3\n");
-	render_rect(g, (t_rect){0,0, 10, 10, BLACK}, &g->img_floor);
+	render_rect(g, (t_rect){0,0, 10, 10, VIOLET}, &g->img_floor);
 	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_wall.mlx_img, 0, 0);
-	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_perso.mlx_img, 10, 0);
-	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_floor.mlx_img, 20, 0);
+	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_perso.mlx_img, 10, 10);
+	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_floor.mlx_img, 20, 20);
 	return (0);
 }
 int main(int argc, char *argv[])
@@ -100,3 +100,6 @@ int main(int argc, char *argv[])
     free(g.mlx_ptr);
     //printf("everything is ok\n");
 }
+
+// recuperer la map
+// afficher la map a lecran avec technique so long +  new tech
