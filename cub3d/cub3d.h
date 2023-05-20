@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:46 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/19 21:14:56 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/20 19:19:51 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,8 @@ typedef struct s_game
 	t_img	img_laser;
 	t_img	img_view;
 
-	int x_perso;
-	int y_perso;
-	int x_wall;
-	int y_wall;
-	int x_floor;
-	int y_floor;
-	int x_laser;
-	int y_laser;
-	int x_view;
-	int y_view;
-
-
-
+	int x;
+	int y;
 	
 }				t_game;
 
