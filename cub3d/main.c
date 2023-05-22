@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/20 23:07:13 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/22 22:07:00 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 void	img_pix_put(t_img *img, int x, int y, int color)
 {
 	char    *pixel;
-
-	//printf("pix 1\n");
-	// ca veut dire que le x ou le y est trop grand
+	printf("c4\n");
     pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	//printf("pix 2\n");
-	//printf("pix 3\n");
+	printf("c5\n");
 	*(int *)pixel = color;
-	//printf("pix 4\n");
+	printf("c6\n");
 }
 
 
@@ -33,21 +30,12 @@ int render_rect(t_game *g, t_rect rect, t_img *img)
 	if (g->win_ptr == NULL)
 		return (1);
 	i = rect.y;
-	//printf("--------------------------------------------------\n");
-	//printf("y is %i\n", rect.y);
-	//printf("x is %i\n", rect.x);
-	//printf("c4\n");
 	while (i < rect.y + rect.height)
 	{
-		//printf("c5\n");
 		j = rect.x;
-		//printf("c6\n");
 		while (j < rect.x + rect.width)
 		{
-			//printf("c7\n");
-			//printf("i is :%i\n", i);
-			//printf("j is :%i\n", j);
-			//printf("rect.x + rect.width is :%i\n",rect.x + rect.width );
+			printf("i in rect is =>%i, j in rect is =>%i\n", i, j);
 			img_pix_put(img, j++, i, rect.color);
 		}
 		++i;
@@ -92,13 +80,7 @@ int render_line_up(t_rect rect, t_img *img)
 
 int	fill_image(t_game *g)
 {
-	//printf("c1\n");
-	render_rect(g, (t_rect){0,0, 64, 64, WHITE}, &g->img_wall);
-	//printf("c2\n");
-	render_line(g, (t_rect){32,32, 32, 1, RED}, &g->img_perso);
-	render_line_up((t_rect){40,31, 32, 1, RED}, &g->img_perso);
-	//printf("c3\n");
-	render_rect(g, (t_rect){0,0, 64, 64, BLACK}, &g->img_floor);
+	ft_render_mini_map(g);
 	return (0);
 }
 int main(int argc, char *argv[])
@@ -133,7 +115,6 @@ int main(int argc, char *argv[])
 		return (1);
 	}
 	ft_image(&g);
-	// mlx_loop_hook(g.mlx_ptr, &render, &g);
 	fill_image(&g);
 	mlx_hook(g.win_ptr, KeyPress, KeyPressMask, &handle_input, &g);
 	mlx_hook(g.win_ptr, DestroyNotify, StructureNotifyMask, &handle_click, &g);
@@ -142,8 +123,10 @@ int main(int argc, char *argv[])
 	mlx_destroy_window(g.mlx_ptr, g.win_ptr);
     mlx_destroy_display(g.mlx_ptr);
     free(g.mlx_ptr);
-    //printf("everything is ok\n");
 }
 
-// recuperer la map
-// afficher la map a lecran avec technique so long +  new tech
+// faire deplacement du personnage
+	// avancer, reculer, rotation
+// ajout laser tout droit
+// ajout laser vu devant lui
+// faire ray casting

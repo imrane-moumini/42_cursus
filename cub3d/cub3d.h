@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:46 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/20 21:01:20 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/22 21:49:21 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,7 @@ typedef struct s_game
 	void	*mlx_ptr;
 	void	*win_ptr;
 	/* img property*/
-	t_img	img_wall;
-	t_img	img_floor;
-	t_img	img_perso;
-	t_img	img_laser;
-	t_img	img_view;
+	t_img	img_mini_map;
 
 	int x;
 	int y;
@@ -86,5 +82,11 @@ int		nb_ligne(char *file);
 /*img gestion*/
 void	ft_image(t_game *g);
 void	ft_put_img_to_window(t_game *g);
-void	ft_put_img_to_window_while(t_game *g, int i, int j);
+void	ft_render_mini_map(t_game *g);
+void	ft_render_mini_map_while(t_game *g, int i, int j);
+void	img_pix_put(t_img *img, int x, int y, int color);
+int 	render_rect(t_game *g, t_rect rect, t_img *img);
+int 	render_line(t_game *g, t_rect rect, t_img *img);
+int 	render_line_up(t_rect rect, t_img *img);
+int		fill_image(t_game *g);
 #endif
