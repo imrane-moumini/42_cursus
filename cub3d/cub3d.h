@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:46 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/23 18:15:41 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:37:26 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,5 @@ void	ft_render_mini_map_while(t_game *g, int i, int j);
 void	img_pix_put(t_img *img, int x, int y, int color);
 int 	render_rect(t_game *g, t_rect rect, t_img *img);
 int 	render_line(t_game *g, t_rect rect, t_img *img);
-int 	render_line_up(t_rect rect, t_img *img);
 int		fill_image(t_game *g);
 #endif

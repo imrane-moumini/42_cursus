@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/23 18:26:26 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:39:24 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 void	img_pix_put(t_img *img, int x, int y, int color)
 {
 	char    *pixel;
-	printf("c4\n");
+
     pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	printf("c5\n");
 	*(int *)pixel = color;
-	printf("c6\n");
 }
 
 
@@ -30,10 +28,10 @@ int render_rect(t_game *g, t_rect rect, t_img *img)
 	if (g->win_ptr == NULL)
 		return (1);
 	i = 0;
-	while (i < 64)
+	while (i < 64 && (i + rect.y < g->ligne *64))
 	{
 		j = 0;
-		while (j < 64)
+		while (j < 64 && (j + rect.x < g->column *64))
 		{
 			img_pix_put(img, j + rect.x , i + rect.y , rect.color);
 			j++;
@@ -45,38 +43,11 @@ int render_rect(t_game *g, t_rect rect, t_img *img)
 
 int render_line(t_game *g, t_rect rect, t_img *img)
 {
-	// int	i;
-	// int j;
 	if (g->win_ptr == NULL)
 		return (1);
-	// i = rect.y;
-	// while (i < rect.y + rect.height)
-	// {
-	// 	j = rect.x;
-	// 	while (j < rect.x + rect.width)
-			img_pix_put(img, rect.x, rect.y, rect.color);
-	// 	++i;
-	// }
-	// j = 32;
+	img_pix_put(img, rect.x, rect.y, rect.color);
 	return (0);
 }
-// int render_line_up(t_rect rect, t_img *img)
-// {
-// 	int	i;
-// 	int j;
-	
-// 	j = rect.x;
-// 	while (j < (rect.x) + (rect.width/6))
-// 	{
-// 		i = rect.y;
-// 		while (i < rect.y + (rect.height+5))
-// 		{
-// 			img_pix_put(img, j, i++, rect.color);
-// 		}
-// 		j++;
-// 	}
-// 	return (0);
-// }
 
 int	fill_image(t_game *g)
 {
