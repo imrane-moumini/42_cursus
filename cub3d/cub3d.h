@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:46 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/22 21:49:21 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:15:41 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ typedef struct s_rect
 {
 	int	x;
 	int	y;
-	int width;
-	int height;
 	int color;
 }	t_rect;
 

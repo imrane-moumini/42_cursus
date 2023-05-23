@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/23 16:59:14 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:26:26 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,16 @@ int render_rect(t_game *g, t_rect rect, t_img *img)
 
 	if (g->win_ptr == NULL)
 		return (1);
-	i = rect.y;
-	while (i < rect.y + rect.height)
+	i = 0;
+	while (i < 64)
 	{
-		j = rect.x;
-		while (j < rect.x + rect.width)
+		j = 0;
+		while (j < 64)
 		{
-			printf("i in rect is =>%i, j in rect is =>%i\n", i, j);
-			img_pix_put(img, j++, i, rect.color);
+			img_pix_put(img, j + rect.x , i + rect.y , rect.color);
+			j++;
 		}
-		++i;
+		i++;
 	}
 	return (0);
 }
@@ -60,23 +60,23 @@ int render_line(t_game *g, t_rect rect, t_img *img)
 	// j = 32;
 	return (0);
 }
-int render_line_up(t_rect rect, t_img *img)
-{
-	int	i;
-	int j;
+// int render_line_up(t_rect rect, t_img *img)
+// {
+// 	int	i;
+// 	int j;
 	
-	j = rect.x;
-	while (j < (rect.x) + (rect.width/6))
-	{
-		i = rect.y;
-		while (i < rect.y + (rect.height+5))
-		{
-			img_pix_put(img, j, i++, rect.color);
-		}
-		j++;
-	}
-	return (0);
-}
+// 	j = rect.x;
+// 	while (j < (rect.x) + (rect.width/6))
+// 	{
+// 		i = rect.y;
+// 		while (i < rect.y + (rect.height+5))
+// 		{
+// 			img_pix_put(img, j, i++, rect.color);
+// 		}
+// 		j++;
+// 	}
+// 	return (0);
+// }
 
 int	fill_image(t_game *g)
 {

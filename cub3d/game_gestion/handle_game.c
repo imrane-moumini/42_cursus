@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 17:54:29 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/23 16:55:21 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/23 18:28:31 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,22 @@ void	ft_render_mini_map_while(t_game *g, int i, int j)
 	if (g->tab[i][j] == '1')
 	{
 		printf("c1\n");
-		render_rect(g, (t_rect){i*64,j*64, 64 * g->column, 64 * g->ligne, WHITE}, &g->img_mini_map);
-		printf("c1 bis\n");
 		printf("i is =>%i, j is =>%i\n", i, j);
-		printf("column =>%i, ligne =>%i\n", 64 * g->column, 64 * g->ligne);
+		printf("olumn =>%i, ligne =>%i\n\n", g->column, g->ligne);
+		printf("column*64 =>%i, ligne*64 =>%i\n", 64 * g->column, 64 * g->ligne);
+		render_rect(g, (t_rect){64*i,64*j,WHITE}, &g->img_mini_map);
+		printf("c1 bis\n");
 		// exit(0);
 	}
 	if (g->tab[i][j] == '0')
 	{
 		printf("c2\n");
-		render_rect(g, (t_rect){i*64,j*64, g->column, 64 * g->ligne, BLACK}, &g->img_mini_map);
+		render_rect(g, (t_rect){64*i,64*j,BLACK}, &g->img_mini_map);
 	}
 	if (g->tab[i][j] == 'P')
 	{
 		printf("c3\n");
-		render_line(g, (t_rect){i*64,j*64, 64 * g->column, 64 * g->ligne, RED}, &g->img_mini_map);
+		render_line(g, (t_rect){i*64,j*64, RED}, &g->img_mini_map);
 		//render_line_up((t_rect){i*40,j*31, 32 * g->column, 1 * g->ligne, RED}, &g->img_mini_map);
 	}
 }
@@ -83,6 +84,8 @@ void	ft_render_mini_map(t_game *g)
 		{
 			printf("c0 bis\n");
 			ft_render_mini_map_while(g, i, j);
+			if (j == 2)
+				return ;
 			printf("c0 bi bis\n");
 			j++;
 		}
