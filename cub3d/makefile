@@ -1,5 +1,6 @@
 NAME = cub3d
 CC = gcc -Wall -Werror -Wextra
+CC += -g3
 SRC = main.c \
 	game_gestion/handle_game.c \
 	map_gestion/create_map.c \
@@ -16,7 +17,7 @@ all: $(NAME)
 $(NAME) : $(OBJ_CUB3D)
 		$(MAKE) --no-print-directory -C libft
 		$(MAKE) --no-print-directory all -C minilibx
-		$(CC) $(OBJ_CUB3D) minilibx/libmlx_Linux.a libft/libft.a $(libx) $(libxflags) -o $(NAME) -g
+		$(CC) $(OBJ_CUB3D) minilibx/libmlx_Linux.a libft/libft.a $(libx) $(libxflags) -o $(NAME)
 
 %.o : %.c
 			$(CC) $(libx) $(libxflags) -c $< -o $@

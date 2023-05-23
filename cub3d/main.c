@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/22 22:07:00 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:59:14 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,19 @@ int render_rect(t_game *g, t_rect rect, t_img *img)
 
 int render_line(t_game *g, t_rect rect, t_img *img)
 {
-	int	i;
-	int j;
+	// int	i;
+	// int j;
 	if (g->win_ptr == NULL)
 		return (1);
-	i = rect.y;
-	while (i < rect.y + rect.height)
-	{
-		j = rect.x;
-		while (j < rect.x + rect.width)
-			img_pix_put(img, j++, i, rect.color);
-		++i;
-	}
-	j = 32;
+	// i = rect.y;
+	// while (i < rect.y + rect.height)
+	// {
+	// 	j = rect.x;
+	// 	while (j < rect.x + rect.width)
+			img_pix_put(img, rect.x, rect.y, rect.color);
+	// 	++i;
+	// }
+	// j = 32;
 	return (0);
 }
 int render_line_up(t_rect rect, t_img *img)
@@ -124,7 +124,8 @@ int main(int argc, char *argv[])
     mlx_destroy_display(g.mlx_ptr);
     free(g.mlx_ptr);
 }
-
+// faire cadrilage au debut
+// faire juste un pixel pour le personnage
 // faire deplacement du personnage
 	// avancer, reculer, rotation
 // ajout laser tout droit
