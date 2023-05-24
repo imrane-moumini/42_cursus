@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/23 19:39:24 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/23 19:51:56 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int render_line(t_game *g, t_rect rect, t_img *img)
 {
 	if (g->win_ptr == NULL)
 		return (1);
-	img_pix_put(img, rect.x, rect.y, rect.color);
+	img_pix_put(img, rect.x , rect.y, rect.color);
 	return (0);
 }
 

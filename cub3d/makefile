@@ -3,6 +3,7 @@ CC = gcc -Wall -Werror -Wextra
 CC += -g3
 SRC = main.c \
 	game_gestion/handle_game.c \
+	game_gestion/handle_game2.c \
 	map_gestion/create_map.c \
 	map_gestion/map_element.c
 	
