@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 17:54:29 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/24 18:19:57 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:25:26 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,38 @@ void	ft_render_mini_map_while(t_game *g, int i, int j)
 	if (g->tab[i][j] == '0')
 		render_rect(g, (t_rect){64*j,64*i,BLACK}, &g->img_mini_map);
 	if (g->tab[i][j] == 'P')
-		render_line(g, (t_rect){64*j,64*i,RED}, &g->img_mini_map);
+		render_perso(g, (t_rect){64*j,64*i,RED}, &g->img_mini_map);
+}
+
+void	ft_render_mini_map_while_without_perso(t_game *g, int i, int j)
+{
+	if (g->tab[i][j] == '1')
+		render_rect(g, (t_rect){64*j,64*i,BLUE}, &g->img_mini_map);
+	if (g->tab[i][j] == '0')
+		render_rect(g, (t_rect){64*j,64*i,BLACK}, &g->img_mini_map);
 }
 
 void	ft_render_mini_map(t_game *g)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (g->tab[i] != NULL)
+	{
+		while (g->tab[i][j] != '\0')
+		{
+			ft_render_mini_map_while(g, i, j);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	trace_line(g);
+}
+
+void	ft_render_mini_map_without_perso(t_game *g)
 {
 	int	i;
 	int	j;

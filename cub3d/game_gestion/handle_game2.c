@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:59:09 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/24 18:14:51 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/24 20:00:49 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,16 @@
 
 void move_d(t_game *g)
 {
-	(void)g;
+	t_rect rect;
+	mlx_destroy_image(g -> mlx_ptr, g->img_mini_map.mlx_img);
+	// j'avamce de 10
+	ft_image(g);
+	ft_render_mini_map_without_perso(g); 
+	g->pos_pers.x = g->pos_pers.x + 10;
+	rect.x = g->pos_pers.x;
+	rect.y = g->pos_pers.y;
+	render_perso(g, rect, &g->img_mini_map);
+	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_mini_map.mlx_img, 0, 0);
 	// je peux pas juste inverser les cases dams le tab ca ferait de trop grand boom
 	// je dois effacer le point rouge dans limage et raficher a nouveau limage par dessus
 }
@@ -52,3 +61,4 @@ void	trace_line(t_game *g)
 		j++;
 	}
 }
+
