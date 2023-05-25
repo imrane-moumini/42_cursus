@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:59:09 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/25 18:00:49 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:56:58 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void move_d(t_game *g)
 	// j'avamce de 10
 	ft_image(g);
 	ft_render_mini_map_without_perso(g); 
+	if (g->pos_pers->x + 10 < g->column *64)
 	g->pos_pers->x = g->pos_pers->x + 10;
 	rect.x = g->pos_pers->x;
 	rect.y = g->pos_pers->y;
@@ -34,6 +35,7 @@ void move_a(t_game *g)
 	// j'avamce de 10
 	ft_image(g);
 	ft_render_mini_map_without_perso(g); 
+	if (g->pos_pers->x - 10 > 0)
 	g->pos_pers->x = g->pos_pers->x - 10;
 	rect.x = g->pos_pers->x;
 	rect.y = g->pos_pers->y;
@@ -49,7 +51,8 @@ void move_w(t_game *g)
 	// j'avamce de 10
 	ft_image(g);
 	ft_render_mini_map_without_perso(g); 
-	g->pos_pers->y = g->pos_pers->y - 10;
+	if (g->pos_pers->y - 10 > 0)
+		g->pos_pers->y = g->pos_pers->y - 10;
 	rect.x = g->pos_pers->x;
 	rect.y = g->pos_pers->y;
 	rect.color = WHITE;
@@ -63,8 +66,9 @@ void move_s(t_game *g)
 	mlx_destroy_image(g -> mlx_ptr, g->img_mini_map.mlx_img);
 	// j'avamce de 10
 	ft_image(g);
-	ft_render_mini_map_without_perso(g); 
-	g->pos_pers->y = g->pos_pers->y + 10;
+	ft_render_mini_map_without_perso(g);
+	if (g->pos_pers->y + 10 < g->ligne *64)
+		g->pos_pers->y = g->pos_pers->y + 10;
 	rect.x = g->pos_pers->x;
 	rect.y = g->pos_pers->y;
 	rect.color = WHITE;
