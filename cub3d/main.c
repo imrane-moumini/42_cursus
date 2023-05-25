@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/25 22:47:04 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/25 22:51:48 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,6 @@ int main(int argc, char *argv[])
     mlx_destroy_display(g.mlx_ptr);
     free(g.mlx_ptr);
 }
-// faire cadrilage au debut
-// faire juste un pixel pour le personnage
-// faire deplacement du personnage
-	// avancer, reculer, rotation
-// ajout laser tout droit
-// ajout laser vu devant lui
-// faire ray casting
+// la le pb c que jarrive pas a lancer des rayons a 360 sans faire segfault
+// voir si qund je rotate je deplace juste le point de depart et continue formule ou si je deplace le rayons 
+	// mais garde le meme point de depart
