@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 17:54:29 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/25 20:50:21 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/25 21:39:20 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ void	ft_render_mini_map(t_game *g)
 		i++;
 	}
 	trace_line(g);
-	draw_line(g, g->pos_pers->x + 10, g->pos_pers->y);
+	drawLine_angle(&g->img_mini_map, g->pos_pers->x + 10, g->pos_pers->y, 38, g->column *64, g);
+	//draw_line(g, g->pos_pers->x + 10, g->pos_pers->y);
 }
 
 void	ft_render_mini_map_without_perso(t_game *g)

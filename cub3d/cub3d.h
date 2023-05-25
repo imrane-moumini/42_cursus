@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:46 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/25 20:50:42 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/25 21:40:17 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "minilibx/mlx.h"
 # include <X11/keysym.h>
 # include <X11/X.h>
+#include <math.h>
 
 #define BLUE 0x0000FF
 #define BLACK 0x000000
@@ -97,6 +98,7 @@ int 	render_perso_rect(t_game *g, t_rect rect, t_img *img);
 int		fill_image(t_game *g);
 void	trace_line(t_game *g);
 int 	draw_line(t_game *g, int x, int y);
+void drawLine_angle(t_img *img, int x, int y, double angle, int length, t_game *g);
 /*mouvement*/
 void 	move_d(t_game *g);
 void 	move_s(t_game *g);
