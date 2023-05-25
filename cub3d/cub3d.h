@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:46 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/25 20:39:10 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/25 20:50:42 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int 	render_rect(t_game *g, t_rect rect, t_img *img);
 int 	render_perso_rect(t_game *g, t_rect rect, t_img *img);
 int		fill_image(t_game *g);
 void	trace_line(t_game *g);
-int 	draw_line(t_game *g);
+int 	draw_line(t_game *g, int x, int y);
 /*mouvement*/
 void 	move_d(t_game *g);
 void 	move_s(t_game *g);
