@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/25 21:44:31 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/25 21:48:56 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int render_perso_rect(t_game *g, t_rect rect, t_img *img)
 	g->pos_pers->x = rect.x;
 	g->pos_pers->y = rect.y;
 	//draw_line(g, g->pos_pers->x + 10, g->pos_pers->y);
-	drawLine_angle(&g->img_mini_map, g->pos_pers->x + 10, g->pos_pers->y, 38, g->column *64, g);
+	drawLine_angle(g->pos_pers->x + 10, g->pos_pers->y, 38, g);
 	return (0);
 }
 
