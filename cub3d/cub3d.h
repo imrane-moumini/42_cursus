@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:46 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/25 21:49:02 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/25 22:38:39 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_pos
 {
 	int	x;
 	int	y;
-
+	int degree;
 }	t_pos;
 typedef struct s_img
 {
@@ -104,6 +104,7 @@ void 	move_d(t_game *g);
 void 	move_s(t_game *g);
 void	move_a(t_game *g);
 void 	move_w(t_game *g);
+void 	move_left(t_game *g);
 void	ft_render_mini_map_without_perso(t_game *g);
 void	ft_render_mini_map_while_without_perso(t_game *g, int i, int j);
 

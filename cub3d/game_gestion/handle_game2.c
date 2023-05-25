@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:59:09 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/25 18:56:58 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/25 22:29:50 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,12 @@ void move_s(t_game *g)
 	render_perso_rect(g, rect, &g->img_mini_map);
 	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_mini_map.mlx_img, 0, 0);
 }
+// en vrai c facile g juste a faire + 1 jusqa arriver a 360 et revenir a 0;
+// em fait faut que je donne les degree dans la fonction meme appelant 
+// a chaque fois aue je le rappelle je met a jour langle dans lequel je me trouve
+
+
+
 // x = ligne
 // y = column
 // comme ils inversent column et igne bah moi ausi dans mon t_game je fois inverser
