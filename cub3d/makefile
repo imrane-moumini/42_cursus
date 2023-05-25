@@ -5,7 +5,8 @@ SRC = main.c \
 	game_gestion/handle_game.c \
 	game_gestion/handle_game2.c \
 	map_gestion/create_map.c \
-	map_gestion/map_element.c
+	map_gestion/map_element.c \
+	raycasting/math_formula.c
 	
 
 OBJ_CUB3D = $(SRC:%.c=%.o) 
