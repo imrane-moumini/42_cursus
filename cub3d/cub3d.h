@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:46 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/24 19:57:31 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:01:15 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 #define VIOLET 0x7f00ff
 #define RED 0xFF0000
 #define GREEN 0x00FF00
+#define WHITE 0xFFFFFF
 
 typedef struct s_rect
 {
@@ -66,7 +67,7 @@ typedef struct s_game
 	int ligne;
 	int column;
 	char **tab;
-	t_pos	pos_pers;
+	t_pos	*pos_pers;
 	
 }				t_game;
 
@@ -91,11 +92,15 @@ void	ft_render_mini_map(t_game *g);
 void	ft_render_mini_map_while(t_game *g, int i, int j);
 void	img_pix_put(t_img *img, int x, int y, int color);
 int 	render_rect(t_game *g, t_rect rect, t_img *img);
-int 	render_perso(t_game *g, t_rect rect, t_img *img);
+int 	render_perso_rect(t_game *g, t_rect rect, t_img *img);
 int		fill_image(t_game *g);
 void	trace_line(t_game *g);
+
 /*mouvement*/
 void move_d(t_game *g);
+void move_s(t_game *g);
+void move_a(t_game *g);
+void move_w(t_game *g);
 void	ft_render_mini_map_without_perso(t_game *g);
 void	ft_render_mini_map_while_without_perso(t_game *g, int i, int j);
 

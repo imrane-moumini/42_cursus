@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/24 19:36:40 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:49:12 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,25 @@ int render_rect(t_game *g, t_rect rect, t_img *img)
 	return (0);
 }
 
-int render_perso(t_game *g, t_rect rect, t_img *img)
+int render_perso_rect(t_game *g, t_rect rect, t_img *img)
 {
+	int	i;
+	int j;
 	if (g->win_ptr == NULL)
 		return (1);
-	img_pix_put(img, rect.x , rect.y, rect.color);
-	g->pos_pers.x = rect.x;
-	g->pos_pers.y = rect.y;
+	i = 0;
+	while (i < 10 && (i + rect.y < g->ligne *64))
+	{
+		j = 0;
+		while (j < 10 && (j + rect.x < g->column *64))
+		{
+			img_pix_put(img, j + rect.x , i + rect.y , rect.color);
+			j++;
+		}
+		i++;
+	}
+	g->pos_pers->x = rect.x;
+	g->pos_pers->y = rect.y;
 	return (0);
 }
 
@@ -82,6 +94,7 @@ int main(int argc, char *argv[])
     if (g.mlx_ptr == NULL)
 		return (1);
     g.win_ptr = mlx_new_window(g.mlx_ptr, 64 * g.column, 64 * g.ligne, "CUB3D");
+	g.pos_pers = malloc(sizeof(t_pos));
     if (g.win_ptr == NULL)
 	{
 		free(g.win_ptr);

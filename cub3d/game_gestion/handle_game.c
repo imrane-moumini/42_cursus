@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 17:54:29 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/24 19:25:26 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:01:29 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ int	handle_input(int key, t_game *game)
 		//ft_destroy_map(game);
 		exit(0);
 	}
-	// if (key == XK_w)
-	// 	move_w(game);
-	// if (key == XK_a)
-	// 	move_a(game);
-	// if (key == XK_s)
-	// 	move_s(game);
-	// if (key == XK_d)
-	// 	move_d(game);
+	if (key == XK_w)
+		move_w(game);
+	if (key == XK_a)
+		move_a(game);
+	if (key == XK_s)
+		move_s(game);
+	if (key == XK_d)
+		move_d(game);
 	return (0);
 }
 
@@ -52,7 +52,7 @@ void	ft_render_mini_map_while(t_game *g, int i, int j)
 	if (g->tab[i][j] == '0')
 		render_rect(g, (t_rect){64*j,64*i,BLACK}, &g->img_mini_map);
 	if (g->tab[i][j] == 'P')
-		render_perso(g, (t_rect){64*j,64*i,RED}, &g->img_mini_map);
+		render_perso_rect(g, (t_rect){64*j,64*i,WHITE}, &g->img_mini_map);
 }
 
 void	ft_render_mini_map_while_without_perso(t_game *g, int i, int j)
@@ -94,7 +94,7 @@ void	ft_render_mini_map_without_perso(t_game *g)
 	{
 		while (g->tab[i][j] != '\0')
 		{
-			ft_render_mini_map_while(g, i, j);
+			ft_render_mini_map_while_without_perso(g, i, j);
 			j++;
 		}
 		j = 0;
