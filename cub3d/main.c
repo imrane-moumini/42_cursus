@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/25 22:51:48 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:05:05 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,10 @@ int render_perso_rect(t_game *g, t_rect rect, t_img *img)
 	g->pos_pers->y = rect.y;
 	//draw_line(g, g->pos_pers->x + 10, g->pos_pers->y);
 	g->pos_pers -> degree = 0;
-	while (i < 61)
+	while (i < 360)
 	{
-		drawLine_angle(g->pos_pers->x + 10, g->pos_pers->y, g->pos_pers -> degree++ , g);
+		printf("i : %i\n", i);
+		drawLine_angle(g->pos_pers->x, g->pos_pers->y, g->pos_pers -> degree++ , g);
 		if (g->pos_pers -> degree >= 360)
 			break;
 		i++;
