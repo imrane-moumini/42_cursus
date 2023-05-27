@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:40 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/27 20:32:13 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/27 20:42:24 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void save_wall(t_game *g)
 	ptr = g->node;
 	while (g->tab[i])
 	{
+		j = 0;
 		while (g->tab[i][j])
 		{
 			if (g->tab[i][j] == '1')
@@ -141,12 +142,9 @@ void save_wall(t_game *g)
 	}
 }
 
-// spois in wall j'ai pas la bonne logique genre jsuis pas dans un mur
+// ok g les bonnes coordonner de carrer
+// ptete in wall j'ai pas la bonne logique genre jsuis pas dans un mur
 
-
-// sois g pas les bonnes coordonnees => voir cette option
-	// deja g pas e bon nmbre de carrer, j'en est 4 alors que j'aurais du en avir 12
-	// j'incremente pas bien le x deja
 
 int in_wall(int x, int y, t_game *g)
 {
