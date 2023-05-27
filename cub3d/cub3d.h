@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:46 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/27 19:21:01 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/27 19:50:09 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ typedef struct s_game
 }				t_game;
 
 /* game gestion*/
-int	handle_click(t_game *game);
-int	handle_input(int key, t_game *game);
+int		handle_click(t_game *game);
+int		handle_input(int key, t_game *game);
 
 /*fill double tab*/
 void	print_double_tab(char **str);
@@ -105,7 +105,7 @@ char	**fill_tab(char **tab, char *file);
 int		nb_column(char **tab);
 int		nb_ligne(char *file);
 void	save_wall(t_game *g);
-/*img gestion*/
+/*img and line gestion*/
 void	ft_image(t_game *g);
 void	ft_put_img_to_window(t_game *g);
 void	ft_render_mini_map(t_game *g);
@@ -116,7 +116,8 @@ int 	render_perso_rect(t_game *g, t_rect rect, t_img *img);
 int		fill_image(t_game *g);
 void	trace_line(t_game *g);
 int 	draw_line(t_game *g, int x, int y);
-void drawLine_angle(int x, int y, double angle, t_game *g);
+void	drawLine_angle(int x, int y, double angle, t_game *g);
+int		in_wall(int x, int y, t_game *g);
 /*mouvement*/
 void 	move_d(t_game *g);
 void 	move_s(t_game *g);

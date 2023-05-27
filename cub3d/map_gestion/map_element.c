@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:40 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/27 19:21:26 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/27 20:32:13 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,10 @@ void save_wall(t_game *g)
 					ptr ->first_y = j * 64;
 					ptr ->last_x = (i + 1) * 64;
 					ptr ->last_y = (j + 1) * 64;
+					// ok ca normalement c 1 carrer mais jincrement pas bien le x a chauqe carrer
+					printf("first x : %i, first y : %i\n", ptr ->first_x, ptr ->first_y);
+					printf("last x : %i, last y : %i\n", ptr ->last_x, ptr ->last_y);
+					printf("----------------------------------\n");
 				}
 				else
 				{
@@ -125,6 +129,9 @@ void save_wall(t_game *g)
 					ptr ->first_y = j * 64;
 					ptr ->last_x = (i + 1) * 64;
 					ptr ->last_y = (j + 1) * 64;
+					printf("first x : %i, first y : %i\n", ptr ->first_x, ptr ->first_y);
+					printf("last x : %i, last y : %i\n", ptr ->last_x, ptr ->last_y);
+					printf("----------------------------------\n");
 				}
 				
 			}
@@ -132,4 +139,25 @@ void save_wall(t_game *g)
 		}
 		i++;
 	}
+}
+
+// spois in wall j'ai pas la bonne logique genre jsuis pas dans un mur
+
+
+// sois g pas les bonnes coordonnees => voir cette option
+	// deja g pas e bon nmbre de carrer, j'en est 4 alors que j'aurais du en avir 12
+	// j'incremente pas bien le x deja
+
+int in_wall(int x, int y, t_game *g)
+{
+	t_coor *ptr;
+	
+	ptr = g->node;
+	while (ptr)
+	{
+		if ((x >= ptr -> first_x && x <= ptr -> last_x) && (y >= ptr -> first_y && y <= ptr -> last_y))
+			return (1);
+		ptr = ptr -> next;
+	}
+	return (0);
 }
