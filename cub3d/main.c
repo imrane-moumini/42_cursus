@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/27 17:22:50 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:45:04 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int render_perso_rect(t_game *g, t_rect rect, t_img *img)
 		i++;
 	}
 	g->pos_pers-> save.last = g->pos_pers -> degree;
-	printf("first : %i, last : %i\n", g->pos_pers-> save.first, g->pos_pers-> save.last);
+	printf("first : %i, last : %i, diff %i\n", g->pos_pers-> save.first, g->pos_pers-> save.last, g->pos_pers-> save.last - g->pos_pers-> save.first);
 	// sinon je me souviens de l'amplitude et je la replique et la renvoi 
 	return (0);
 }

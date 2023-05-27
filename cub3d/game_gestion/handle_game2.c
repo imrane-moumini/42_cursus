@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:59:09 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/27 16:49:50 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:51:05 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,25 @@ void move_s(t_game *g)
 	render_perso_rect(g, rect, &g->img_mini_map);
 	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_mini_map.mlx_img, 0, 0);
 }
-// en vrai c facile g juste a faire + 1 jusqa arriver a 360 et revenir a 0;
-// em fait faut que je donne les degree dans la fonction meme appelant 
-// a chaque fois aue je le rappelle je met a jour langle dans lequel je me trouve
 
+void move_left(t_game *g)
+{
+	t_rect rect;
+	mlx_destroy_image(g -> mlx_ptr, g->img_mini_map.mlx_img);
+	// j'avamce de 10
+	ft_image(g);
+	ft_render_mini_map_without_perso(g);
+	if (g->pos_pers-> save.first - 5 >= 0)
+		g->pos_pers-> save.first = g->pos_pers-> save.first - 5;
+	else
+		g->pos_pers-> save.first = 360 - 5;
+	rect.x = g->pos_pers->x;
+	rect.y = g->pos_pers->y;
+	rect.color = WHITE;
+	render_perso_rect(g, rect, &g->img_mini_map);
+	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_mini_map.mlx_img, 0, 0);
+}
 
-// je trace des degreee et jincremente le compteur
-// jobtien la valeur du dernier degree, ya 60 rayon tracer
-// je dois tjr avoir une vue a 60 degree
 
 
 // x = ligne

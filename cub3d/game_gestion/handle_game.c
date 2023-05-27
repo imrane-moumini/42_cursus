@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 17:54:29 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/27 17:24:26 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:46:13 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,8 @@ int	handle_input(int key, t_game *game)
 		move_s(game);
 	if (key == XK_d)
 		move_d(game);
-	// if (key == XK_Left)
-	// 	move_left(game);
-	// if (key == XK_Up)
-	// 	move_up(game);
-	// if (key == XK_Down)
-	// 	move_down(game);
+	if (key == XK_Left)
+		move_left(game);
 	// if (key == XK_Right)
 	// 	move_right(game);
 	return (0);
@@ -102,7 +98,7 @@ void	ft_render_mini_map(t_game *g)
 		i++;
 	}
 	g->pos_pers-> save.last = g->pos_pers -> degree;
-	printf("first : %i, last : %i\n", g->pos_pers-> save.first, g->pos_pers-> save.last);
+	printf("first : %i, last : %i, diff %i\n", g->pos_pers-> save.first, g->pos_pers-> save.last, g->pos_pers-> save.last - g->pos_pers-> save.first);
 	//draw_line(g, g->pos_pers->x + 10, g->pos_pers->y);
 }
 
