@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:40 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/27 20:42:24 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/27 21:01:57 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ int in_wall(int x, int y, t_game *g)
 	ptr = g->node;
 	while (ptr)
 	{
-		if ((x >= ptr -> first_x && x <= ptr -> last_x) && (y >= ptr -> first_y && y <= ptr -> last_y))
+		if ((x >= ptr -> first_y && x <= ptr -> last_y) && (y >= ptr -> first_x && y <= ptr -> last_x))
 			return (1);
 		ptr = ptr -> next;
 	}
