@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:46 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/27 16:44:17 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:53:43 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void 	move_s(t_game *g);
 void	move_a(t_game *g);
 void 	move_w(t_game *g);
 void 	move_left(t_game *g);
+void 	move_right(t_game *g);
 void	ft_render_mini_map_without_perso(t_game *g);
 void	ft_render_mini_map_while_without_perso(t_game *g, int i, int j);
 

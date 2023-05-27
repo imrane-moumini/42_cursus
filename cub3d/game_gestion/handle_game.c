@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 17:54:29 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/27 17:46:13 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:53:28 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	handle_input(int key, t_game *game)
 		move_d(game);
 	if (key == XK_Left)
 		move_left(game);
-	// if (key == XK_Right)
-	// 	move_right(game);
+	if (key == XK_Right)
+		move_right(game);
 	return (0);
 }
 

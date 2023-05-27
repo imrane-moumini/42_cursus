@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:59:09 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/27 17:51:05 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:54:36 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,24 @@ void move_left(t_game *g)
 		g->pos_pers-> save.first = g->pos_pers-> save.first - 5;
 	else
 		g->pos_pers-> save.first = 360 - 5;
+	rect.x = g->pos_pers->x;
+	rect.y = g->pos_pers->y;
+	rect.color = WHITE;
+	render_perso_rect(g, rect, &g->img_mini_map);
+	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_mini_map.mlx_img, 0, 0);
+}
+
+void move_right(t_game *g)
+{
+	t_rect rect;
+	mlx_destroy_image(g -> mlx_ptr, g->img_mini_map.mlx_img);
+	// j'avamce de 10
+	ft_image(g);
+	ft_render_mini_map_without_perso(g);
+	if (g->pos_pers-> save.first + 5 <= 360)
+		g->pos_pers-> save.first = g->pos_pers-> save.first + 5;
+	else
+		g->pos_pers-> save.first = 0 + 5;
 	rect.x = g->pos_pers->x;
 	rect.y = g->pos_pers->y;
 	rect.color = WHITE;
