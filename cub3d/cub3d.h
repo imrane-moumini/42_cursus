@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:46 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/25 22:38:39 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:44:17 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,18 @@ typedef struct s_rect
 	int	y;
 	int color;
 }	t_rect;
+typedef struct s_degree
+{
+	int	first;
+	int	last;
+
+}	t_degree;
 typedef struct s_pos
 {
 	int	x;
 	int	y;
 	int degree;
+	t_degree save;
 }	t_pos;
 typedef struct s_img
 {

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:59:09 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/25 22:29:50 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/27 16:49:50 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ void move_d(t_game *g)
 	rect.x = g->pos_pers->x;
 	rect.y = g->pos_pers->y;
 	rect.color = WHITE;
+	// quand je bouge normal pas bouger les degree
+	// en fait quand j'appelle render_perso_rect faut que je lui envoi le premier pixel du coup pixel actuel -60
+	// c meem plus precis que ca pasque si je tourne en vriter bah je vais pas faire -60 bref
+	// en gros faut que qund je bouge je reste au dernier degreer de depart
 	render_perso_rect(g, rect, &g->img_mini_map);
 	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_mini_map.mlx_img, 0, 0);
 }
@@ -79,6 +83,10 @@ void move_s(t_game *g)
 // em fait faut que je donne les degree dans la fonction meme appelant 
 // a chaque fois aue je le rappelle je met a jour langle dans lequel je me trouve
 
+
+// je trace des degreee et jincremente le compteur
+// jobtien la valeur du dernier degree, ya 60 rayon tracer
+// je dois tjr avoir une vue a 60 degree
 
 
 // x = ligne

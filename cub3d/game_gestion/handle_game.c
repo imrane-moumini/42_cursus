@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 17:54:29 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/26 17:26:52 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:24:26 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ void	ft_render_mini_map(t_game *g)
 	}
 	trace_line(g);
 	i = 0;
-	g->pos_pers -> degree = 150;
-	while (i < 61)
+	g->pos_pers -> degree = g->pos_pers-> save.first;
+	g->pos_pers-> save.first = g->pos_pers -> degree;
+	while (i < 60)
 	{
-		printf("i2 : %i\n", i);
 		if (g->pos_pers -> degree == 360)
 			g->pos_pers -> degree = 0;
 		drawLine_angle(g->pos_pers->x, g->pos_pers->y, g->pos_pers -> degree++ , g);
@@ -101,6 +101,8 @@ void	ft_render_mini_map(t_game *g)
 		// 	break;
 		i++;
 	}
+	g->pos_pers-> save.last = g->pos_pers -> degree;
+	printf("first : %i, last : %i\n", g->pos_pers-> save.first, g->pos_pers-> save.last);
 	//draw_line(g, g->pos_pers->x + 10, g->pos_pers->y);
 }
 

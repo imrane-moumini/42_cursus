@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/26 17:26:55 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/27 17:22:50 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,11 @@ int render_perso_rect(t_game *g, t_rect rect, t_img *img)
 	g->pos_pers->x = rect.x;
 	g->pos_pers->y = rect.y;
 	//draw_line(g, g->pos_pers->x + 10, g->pos_pers->y);
-	g->pos_pers -> degree = 150;
-	while (i < 61)
+	g->pos_pers -> degree = g->pos_pers-> save.first;
+	g->pos_pers-> save.first = g->pos_pers -> degree;
+	i = 0;
+	while (i < 60)
 	{
-		printf("i : %i\n", i);
 		if (g->pos_pers -> degree == 360)
 			g->pos_pers -> degree = 0;
 		drawLine_angle(g->pos_pers->x, g->pos_pers->y, g->pos_pers -> degree++ , g);
@@ -72,6 +73,9 @@ int render_perso_rect(t_game *g, t_rect rect, t_img *img)
 		// 	break;
 		i++;
 	}
+	g->pos_pers-> save.last = g->pos_pers -> degree;
+	printf("first : %i, last : %i\n", g->pos_pers-> save.first, g->pos_pers-> save.last);
+	// sinon je me souviens de l'amplitude et je la replique et la renvoi 
 	return (0);
 }
 
@@ -107,7 +111,8 @@ int main(int argc, char *argv[])
 		return (1);
     g.win_ptr = mlx_new_window(g.mlx_ptr, 64 * g.column, 64 * g.ligne, "CUB3D");
 	g.pos_pers = malloc(sizeof(t_pos));
-	g.pos_pers -> degree = 0;
+	g.pos_pers -> degree = 330;
+	g.pos_pers-> save.first = g.pos_pers -> degree;
     if (g.win_ptr == NULL)
 	{
 		free(g.win_ptr);
