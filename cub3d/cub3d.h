@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:46 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/27 17:53:43 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/27 19:21:01 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@
 #define GREEN 0x00FF00
 #define WHITE 0xFFFFFF
 #define PI 3.14159265359
+
+typedef struct s_coor
+{
+	// save range de coordonner du coup le premier
+	int	first_x;
+	int last_x;
+	int	first_y;
+	int last_y;
+	struct s_coor *next; 
+}	t_coor;
 
 typedef struct s_rect
 {
@@ -76,6 +86,7 @@ typedef struct s_game
 	int ligne;
 	int column;
 	char **tab;
+	t_coor *node;
 	t_pos	*pos_pers;
 	
 }				t_game;
@@ -93,7 +104,7 @@ char	*fill_tab_while(char **tab, char *p, int fd);
 char	**fill_tab(char **tab, char *file);
 int		nb_column(char **tab);
 int		nb_ligne(char *file);
-
+void	save_wall(t_game *g);
 /*img gestion*/
 void	ft_image(t_game *g);
 void	ft_put_img_to_window(t_game *g);

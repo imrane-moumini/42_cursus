@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/27 17:45:04 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/27 19:20:32 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ int render_rect(t_game *g, t_rect rect, t_img *img)
 		j = 0;
 		while (j < 64 && (j + rect.x < g->column *64))
 		{
+			// c ici qu'il doit se souvenir mais je dois lappeler quune fois
+			//le pb c que j = 0 a chaue lignne du coup juste vraiment une fois par rentre dans while
+			// et dois aussi lappeler une deuxieme fois qund c la derniere fois qu'il sort
 			img_pix_put(img, j + rect.x , i + rect.y , rect.color);
 			j++;
 		}
@@ -118,6 +121,7 @@ int main(int argc, char *argv[])
 		free(g.win_ptr);
 		return (1);
 	}
+	save_wall(&g);
 	ft_image(&g);
 	fill_image(&g);
 	mlx_hook(g.win_ptr, KeyPress, KeyPressMask, &handle_input, &g);
