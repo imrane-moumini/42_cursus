@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/27 19:25:46 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/28 17:19:43 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ int main(int argc, char *argv[])
 		return (1);
 	}
 	save_wall(&g);
+	print_gnode(g.node);
 	ft_image(&g);
 	fill_image(&g);
 	mlx_hook(g.win_ptr, KeyPress, KeyPressMask, &handle_input, &g);

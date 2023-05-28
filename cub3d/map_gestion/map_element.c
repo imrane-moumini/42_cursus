@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 20:23:40 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/27 21:01:57 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/28 17:23:04 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,30 +109,31 @@ void save_wall(t_game *g)
 		{
 			if (g->tab[i][j] == '1')
 			{
-				if (!(g->node -> next))
+				if (!(g->node))
 				{
+					printf("im here\n");
 					// le premier x et y c 64 * i et 64 *j
 					// le dermier x et y c 64 * (i + 1) et 64 * (j + 1) 
-					ptr ->first_x = i * 64;
-					ptr ->first_y = j * 64;
-					ptr ->last_x = (i + 1) * 64;
-					ptr ->last_y = (j + 1) * 64;
+					ptr ->first_y = i * 64;
+					ptr ->first_x = j * 64;
+					ptr ->last_y = (i + 1) * 64;
+					ptr ->last_x = (j + 1) * 64;
 					// ok ca normalement c 1 carrer mais jincrement pas bien le x a chauqe carrer
-					printf("first x : %i, first y : %i\n", ptr ->first_x, ptr ->first_y);
-					printf("last x : %i, last y : %i\n", ptr ->last_x, ptr ->last_y);
-					printf("----------------------------------\n");
+					// printf("first x : %i, first y : %i\n", ptr ->first_x, ptr ->first_y);
+					// printf("last x : %i, last y : %i\n", ptr ->last_x, ptr ->last_y);
+					// printf("----------------------------------\n");
 				}
 				else
 				{
 					add_node(g->node, new_node());
 					ptr = last_node(g->node);
-					ptr ->first_x = i * 64;
-					ptr ->first_y = j * 64;
-					ptr ->last_x = (i + 1) * 64;
-					ptr ->last_y = (j + 1) * 64;
-					printf("first x : %i, first y : %i\n", ptr ->first_x, ptr ->first_y);
-					printf("last x : %i, last y : %i\n", ptr ->last_x, ptr ->last_y);
-					printf("----------------------------------\n");
+					ptr ->first_y = i * 64;
+					ptr ->first_x = j * 64;
+					ptr ->last_y = (i + 1) * 64;
+					ptr ->last_x = (j + 1) * 64;
+					// printf("first x : %i, first y : %i\n", ptr ->first_x, ptr ->first_y);
+					// printf("last x : %i, last y : %i\n", ptr ->last_x, ptr ->last_y);
+					// printf("----------------------------------\n");
 				}
 				
 			}
@@ -144,6 +145,8 @@ void save_wall(t_game *g)
 
 // ok g les bonnes coordonner de carrer
 // ptete in wall j'ai pas la bonne logique genre jsuis pas dans un mur
+//  une histoire dinversement entre les x et y
+// regarder par arrpor au graph et au valeur du printf, tu vas truver
 
 
 int in_wall(int x, int y, t_game *g)
@@ -151,9 +154,17 @@ int in_wall(int x, int y, t_game *g)
 	t_coor *ptr;
 	
 	ptr = g->node;
+	// je crois que le pb c aue je regarde que pour la derniere node
 	while (ptr)
 	{
-		if ((x >= ptr -> first_y && x <= ptr -> last_y) && (y >= ptr -> first_x && y <= ptr -> last_x))
+		//if (ptr -> first_x == 128)
+		// {
+			// printf("------------------- in wall ---------------------------------------------------\n");
+			// printf("x is : %i, y is %i\n", x, y);
+			// printf("first_x is : %i, first y is %i\n", ptr -> first_x , ptr -> first_y );
+			// printf("last_x is : %i, last y is %i\n", ptr -> last_x , ptr -> last_y );
+		//}
+		if ((x >= ptr -> first_x && x <= ptr -> last_x) && (y >= ptr -> first_y && y <= ptr -> last_y))
 			return (1);
 		ptr = ptr -> next;
 	}

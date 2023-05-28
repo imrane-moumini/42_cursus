@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:49:53 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/27 20:05:30 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/05/28 17:19:32 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,19 @@ void drawLine_angle(int x, int y, double angle,t_game *g)
 		// printf("c2\n");
     }
 	// printf("im here\n");
+}
+void print_gnode(t_coor *head)
+{
+    if (!head)
+        return;
+    t_coor *ptr;
+    ptr = head;
+    int count;
+    count = 0;
+    while (ptr)
+    {
+        count++;
+        ptr = ptr -> next;
+    }
+    printf("%i\n", count);
 }
