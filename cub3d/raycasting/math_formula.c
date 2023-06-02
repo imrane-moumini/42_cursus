@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:49:53 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/28 17:19:32 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:18:49 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,18 @@ void drawLine_angle(int x, int y, double angle,t_game *g)
     int sx = (x < newX) ? 1 : -1;
     int sy = (y < newY) ? 1 : -1;
     int err = dx - dy;
+    int ok = 0;
     while ((x != newX || y != newY ) && (x < g->column * 64 && x > 0) && (y < g->ligne*64 && y > 0))
     {
         // printf("c2\n");
 	    // printf("c1 x %i y %i\n", x, y);
         if (in_wall(x, y, g) == 0)
+        {
+            ok = 1;
             img_pix_put(&g->img_mini_map, x, y, RED);
+        }
+        if (in_wall(x, y, g) == 1 && ok)
+            break;
         // printf("c3\n");
         int err2 = 2 * err;
         if (err2 > -dy)

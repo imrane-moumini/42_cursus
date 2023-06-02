@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/28 17:19:43 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:06:14 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int render_perso_rect(t_game *g, t_rect rect, t_img *img)
 	{
 		if (g->pos_pers -> degree == 360)
 			g->pos_pers -> degree = 0;
-		drawLine_angle(g->pos_pers->x, g->pos_pers->y, g->pos_pers -> degree++ , g);
+		//if (in_wall(g->pos_pers->x, g->pos_pers->y, g) == 0)
+			drawLine_angle(g->pos_pers->x, g->pos_pers->y, g->pos_pers -> degree++ , g);
 		// if (g->pos_pers -> degree >= 360)
 		// 	break;
 		i++;
