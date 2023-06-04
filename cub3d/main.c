@@ -33,9 +33,6 @@ int render_rect(t_game *g, t_rect rect, t_img *img)
 		j = 0;
 		while (j < 64 && (j + rect.x < g->column *64))
 		{
-			// c ici qu'il doit se souvenir mais je dois lappeler quune fois
-			//le pb c que j = 0 a chaue lignne du coup juste vraiment une fois par rentre dans while
-			// et dois aussi lappeler une deuxieme fois qund c la derniere fois qu'il sort
 			img_pix_put(img, j + rect.x , i + rect.y , rect.color);
 			j++;
 		}
@@ -63,7 +60,6 @@ int render_perso_rect(t_game *g, t_rect rect, t_img *img)
 	}
 	g->pos_pers->x = rect.x;
 	g->pos_pers->y = rect.y;
-	//draw_line(g, g->pos_pers->x + 10, g->pos_pers->y);
 	g->pos_pers -> degree = g->pos_pers-> save.first;
 	g->pos_pers-> save.first = g->pos_pers -> degree;
 	i = 0;
@@ -71,15 +67,10 @@ int render_perso_rect(t_game *g, t_rect rect, t_img *img)
 	{
 		if (g->pos_pers -> degree == 360)
 			g->pos_pers -> degree = 0;
-		//if (in_wall(g->pos_pers->x, g->pos_pers->y, g) == 0)
-			drawLine_angle(g->pos_pers->x, g->pos_pers->y, g->pos_pers -> degree++ , g);
-		// if (g->pos_pers -> degree >= 360)
-		// 	break;
+		drawLine_angle(g->pos_pers->x, g->pos_pers->y, g->pos_pers -> degree++ , g);
 		i++;
 	}
 	g->pos_pers-> save.last = g->pos_pers -> degree;
-	//printf("first : %i, last : %i, diff %i\n", g->pos_pers-> save.first, g->pos_pers-> save.last, g->pos_pers-> save.last - g->pos_pers-> save.first);
-	// sinon je me souviens de l'amplitude et je la replique et la renvoi 
 	return (0);
 }
 
@@ -114,6 +105,7 @@ int main(int argc, char *argv[])
     if (g.mlx_ptr == NULL)
 		return (1);
     g.win_ptr = mlx_new_window(g.mlx_ptr, 64 * g.column, 64 * g.ligne, "CUB3D");
+	g.win2_ptr = mlx_new_window(g.mlx_ptr, 64 * g.column, 64 * g.ligne, "CUB3D");
 	g.pos_pers = malloc(sizeof(t_pos));
 	g.pos_pers -> degree = 330;
 	g.pos_pers-> save.first = g.pos_pers -> degree;

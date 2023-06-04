@@ -78,8 +78,10 @@ typedef struct s_game
 	/* ptr de minilibx et window*/
 	void	*mlx_ptr;
 	void	*win_ptr;
+	void	*win2_ptr;
 	/* img property*/
 	t_img	img_mini_map;
+	t_img	cub3dmap;
 
 	int x;
 	int y;
