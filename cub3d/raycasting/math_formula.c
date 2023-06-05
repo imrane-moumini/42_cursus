@@ -33,7 +33,20 @@ int draw_line(t_game *g, int x, int y)
 	}
 	return (0);
 }
-
+// je rempli la fonction puis je gère le bail pour qu'il le fasse autnt de fois que width ecran
+void save_wall_length(t_game *g, double angle, int i)
+{
+    double dist;
+    double hauteur;
+    int newX = g->first_x + (int)(g->last_x * cos(angleInRadians));
+    int newY = g->first_y + (int)(g->last_y* sin(angleInRadians));
+    int dx = abs(newX - g->fist_x);
+    int dy = abs(newY - g->first_y);
+    dist= srt( (dx *dx) + (dy * dy));
+    hauteur = (((g->column)/2)/tan(30)* 64)/dist;
+    g->wall_tab[i] = hauteur;
+    //hauteur de la colonne sur l'ecran = (dist_ecran x hauteur_mur) / dist;
+}
 void drawLine_angle(int x, int y, double angle,t_game *g)
 {
     double angleInRadians = angle * (PI / 180.0);  // Conversion degrés -> radians
@@ -47,6 +60,9 @@ void drawLine_angle(int x, int y, double angle,t_game *g)
     int sy = (y < newY) ? 1 : -1;
     int err = dx - dy;
     int ok = 0;
+    //enregister la valeur du premier x et du premier y dans g 
+    g->first_x = x;
+    g->first_y = y;
     while ((x != newX || y != newY ) && (x < g->column * 64 && x > 0) && (y < g->ligne*64 && y > 0))
     {
         if (in_wall(x, y, g) == 0)
@@ -55,7 +71,13 @@ void drawLine_angle(int x, int y, double angle,t_game *g)
             img_pix_put(&g->img_mini_map, x, y, RED);
         }
         if (in_wall(x, y, g) == 1 && ok)
+        {
+            g->last_x = x;
+            g->last_y = y;
+            save_wall_length(g, angle,g->counter);
+            //projection(g->column * 64, g->ligne *64, (g->column)/2, ((g->column)/2)/tan(30), 60/g->column);
             break;
+        }
         int err2 = 2 * err;
         if (err2 > -dy)
         {

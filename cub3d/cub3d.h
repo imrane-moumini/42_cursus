@@ -85,11 +85,17 @@ typedef struct s_game
 
 	int x;
 	int y;
+	int first_x;
+	int first_y;
+	int last_x;
+	int last_y;
 	int ligne;
 	int column;
 	char **tab;
+	int counter;
 	t_coor *node;
 	t_pos	*pos_pers;
+	double 	wall_tab[1000];
 	
 }				t_game;
 

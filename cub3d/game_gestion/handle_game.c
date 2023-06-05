@@ -120,13 +120,8 @@ void	ft_render_mini_map_without_perso(t_game *g)
 	trace_line(g);
 }
 
-
 void	ft_put_img_to_window(t_game *g)
 {
 	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_mini_map.mlx_img, 0, 0);
-}
-
-void draw_3D(t_game *g)
-{
-
+	mlx_put_image_to_window(g->mlx_ptr, g->win2_ptr, g->cub3dmap.mlx_img, 0, 0);
 }

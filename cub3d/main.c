@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
     g.mlx_ptr = mlx_init();
     if (g.mlx_ptr == NULL)
 		return (1);
-    g.win_ptr = mlx_new_window(g.mlx_ptr, 64 * g.column, 64 * g.ligne, "CUB3D");
+    g.win_ptr = mlx_new_window(g.mlx_ptr, 64 * g.column, 64 * g.ligne, "Minimap");
 	g.win2_ptr = mlx_new_window(g.mlx_ptr, 64 * g.column, 64 * g.ligne, "CUB3D");
 	g.pos_pers = malloc(sizeof(t_pos));
 	g.pos_pers -> degree = 330;
