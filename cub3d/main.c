@@ -63,13 +63,16 @@ int render_perso_rect(t_game *g, t_rect rect, t_img *img)
 	g->pos_pers -> degree = g->pos_pers-> save.first;
 	g->pos_pers-> save.first = g->pos_pers -> degree;
 	i = 0;
-	while (i < 60)
+	while (i <= g-> column * 64)
 	{
 		if (g->pos_pers -> degree == 360)
 			g->pos_pers -> degree = 0;
-		drawLine_angle(g->pos_pers->x, g->pos_pers->y, g->pos_pers -> degree++ , g);
+		// l'angle doit pas depasser les 60 degré du coup faut je multiplie par 0,6
+		drawLine_angle(g->pos_pers->x, g->pos_pers->y, g->pos_pers -> degree++ , g, i);
 		i++;
 	}
+	if (g->counter > g->colum*64)
+		g->counter = 0;
 	g->pos_pers-> save.last = g->pos_pers -> degree;
 	return (0);
 }
@@ -77,6 +80,7 @@ int render_perso_rect(t_game *g, t_rect rect, t_img *img)
 int	fill_image(t_game *g)
 {
 	ft_render_mini_map(g);
+	ft_fill_3Dmap(g);
 	return (0);
 }
 int main(int argc, char *argv[])
@@ -114,6 +118,7 @@ int main(int argc, char *argv[])
 		free(g.win_ptr);
 		return (1);
 	}
+	g.counter = 0;
 	save_wall(&g);
 	print_gnode(g.node);
 	ft_image(&g);

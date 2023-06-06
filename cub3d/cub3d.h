@@ -124,7 +124,7 @@ int 	render_perso_rect(t_game *g, t_rect rect, t_img *img);
 int		fill_image(t_game *g);
 void	trace_line(t_game *g);
 int 	draw_line(t_game *g, int x, int y);
-void	drawLine_angle(int x, int y, double angle, t_game *g);
+void	drawLine_angle(int x, int y, double angle, t_game *g, int i);
 int		in_wall(int x, int y, t_game *g);
 /*mouvement*/
 void 	move_d(t_game *g);

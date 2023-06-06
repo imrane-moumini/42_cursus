@@ -36,8 +36,10 @@ int draw_line(t_game *g, int x, int y)
 // je rempli la fonction puis je gère le bail pour qu'il le fasse autnt de fois que width ecran
 void save_wall_length(t_game *g, double angle, int i)
 {
+    // faut que jajoute dans la fonction qui appelle celle quiu lappelle la notion i++ taille width
     double dist;
     double hauteur;
+    double angleInRadians = angle * (PI / 180.0);
     int newX = g->first_x + (int)(g->last_x * cos(angleInRadians));
     int newY = g->first_y + (int)(g->last_y* sin(angleInRadians));
     int dx = abs(newX - g->fist_x);
@@ -47,7 +49,7 @@ void save_wall_length(t_game *g, double angle, int i)
     g->wall_tab[i] = hauteur;
     //hauteur de la colonne sur l'ecran = (dist_ecran x hauteur_mur) / dist;
 }
-void drawLine_angle(int x, int y, double angle,t_game *g)
+void drawLine_angle(int x, int y, double angle,t_game *g, int i)
 {
     double angleInRadians = angle * (PI / 180.0);  // Conversion degrés -> radians
     int newX = x + (int)(g->column *64 * cos(angleInRadians));
@@ -65,16 +67,18 @@ void drawLine_angle(int x, int y, double angle,t_game *g)
     g->first_y = y;
     while ((x != newX || y != newY ) && (x < g->column * 64 && x > 0) && (y < g->ligne*64 && y > 0))
     {
-        if (in_wall(x, y, g) == 0)
+        if (in_wall(x, y, g) == 0 && i<= 60)
         {
             ok = 1;
+            // en fait ça c'est 60 fois max
             img_pix_put(&g->img_mini_map, x, y, RED);
         }
-        if (in_wall(x, y, g) == 1 && ok)
+        if (in_wall(x, y, g) == 1 && ok && g->counter <= g->column*64)
         {
             g->last_x = x;
             g->last_y = y;
-            save_wall_length(g, angle,g->counter);
+            // ça c'est width fois
+            save_wall_length(g, angle * (60/(g->column*64)),g->counter++);
             //projection(g->column * 64, g->ligne *64, (g->column)/2, ((g->column)/2)/tan(30), 60/g->column);
             break;
         }
@@ -107,8 +111,8 @@ void print_gnode(t_coor *head)
     printf("%i\n", count);
 }
 
-void projection(int with_screen, int length_screen, int center, int dist_screen, int angle_2_rayon_cons)
-{
+//void projection(int with_screen, int length_screen, int center, int dist_screen, int angle_2_rayon_cons)
+//{
 
 // en fqit je fqis tout ce qui este n bqs pour connaitre la taille de tous le smurs en face de moi
 // jenregistre la taille de tout ces murs + les éléments important qui vont avec
@@ -155,4 +159,61 @@ void projection(int with_screen, int length_screen, int center, int dist_screen,
                 // normalement avec ces element si je bidouille drawline angle je suis capable de tracer le trait 
             //On ajoute l’angle suivant (donne la nouvelle colonne)
         //On répète l’opération jusqu’à atteindre l’autre côté du champ visuel. (fin boucle while)
+//}
+
+void ft_fill_3Dmap(t_game *g)
+{
+    // la il me faut un drawline adapté auy tracage de mur en 3D
+    // la ya plus denotion de map c'est juste je trace tous les traits
+    // jincremente les angles de 1 * cazlcul pour tracer le trait
+    double i = 0;
+    int j = 0;
+    // faut que je trouve le x et le y dune colonne complete et que je les mets
+    // en fait normalement le traity fait la taille de la hauteur
+    // du coup faut je compare les x et y dans la fonction
+    // faut que je passe la hauteur en argument
+    while (i <= g->column * 64)
+    {
+        drawLine_angle_3D(64, 64, i,g, g->wall_tab[j]);
+        i = i + (60/(g->column*64));
+    }
+}
+
+
+
+void drawLine_angle_3D(int x, int y, double angle,t_game *g, double hauteur)
+{
+    double angleInRadians = angle * (PI / 180.0);  // Conversion degrés -> radians
+    int newX = x + (int)(g->column *64 * cos(angleInRadians));
+    int newY = y + (int)(g->ligne *64 * sin(angleInRadians));
+
+    // Dessiner le trait entre les points (x, y) et (newX, newY)
+    int dx = abs(newX - x);
+    int dy = abs(newY - y);
+    int sx = (x < newX) ? 1 : -1;
+    int sy = (y < newY) ? 1 : -1;
+    int err = dx - dy;
+    int ok = 0;
+    //enregister la valeur du premier x et du premier y dans g 
+    g->first_x = x;
+    g->first_y = y;
+    int i = 0;
+    while ((x != newX || y != newY ) && (x < g->column * 64 && x > 0) && (y < g->ligne*64 && y > 0))
+    {
+        if (i == hauteur)
+            break;
+        img_pix_put(&g->cub3dmap, x, y, RED);
+        int err2 = 2 * err;
+        if (err2 > -dy)
+        {
+            err -= dy;
+            x += sx;
+        }
+        if (err2 < dx)
+        {
+            err += dx;
+            y += sy;
+        }
+        i++;
+    }
 }

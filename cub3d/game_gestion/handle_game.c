@@ -90,13 +90,18 @@ void	ft_render_mini_map(t_game *g)
 	i = 0;
 	g->pos_pers -> degree = g->pos_pers-> save.first;
 	g->pos_pers-> save.first = g->pos_pers -> degree;
-	while (i < 60)
+	// en fait faut que je fasse width fois mais 
+	// drawline angle c que 60 pasque jecris que 60 rayon
+
+	while (i <= g-> column * 64)
 	{
 		if (g->pos_pers -> degree == 360)
 			g->pos_pers -> degree = 0;
-		drawLine_angle(g->pos_pers->x, g->pos_pers->y, g->pos_pers -> degree++ , g);
+		drawLine_angle(g->pos_pers->x, g->pos_pers->y, g->pos_pers -> degree++ , g, i);
 		i++;
 	}
+	if (g->counter > g->colum*64)
+		g->counter = 0;
 	g->pos_pers-> save.last = g->pos_pers -> degree;
 }
 
