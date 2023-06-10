@@ -42,11 +42,13 @@ void save_wall_length(t_game *g, double angle, int i)
     double angleInRadians = angle * (PI / 180.0);
     int newX = g->first_x + (int)(g->last_x * cos(angleInRadians));
     int newY = g->first_y + (int)(g->last_y* sin(angleInRadians));
-    int dx = abs(newX - g->fist_x);
+    int dx = abs(newX - g->first_x);
     int dy = abs(newY - g->first_y);
-    dist= srt( (dx *dx) + (dy * dy));
-    hauteur = (((g->column)/2)/tan(30)* 64)/dist;
+    dist= sqrt( (dx *dx) + (dy * dy));
+    //hauteur = (((g->column)/2)/tan(30)* 64)/dist;
+    hauteur = 277/dist;
     g->wall_tab[i] = hauteur;
+    //printf("hauteur is %f\n", hauteur);
     //hauteur de la colonne sur l'ecran = (dist_ecran x hauteur_mur) / dist;
 }
 void drawLine_angle(int x, int y, double angle,t_game *g, int i)
@@ -79,6 +81,7 @@ void drawLine_angle(int x, int y, double angle,t_game *g, int i)
             g->last_y = y;
             // ça c'est width fois
             save_wall_length(g, angle * (60/(g->column*64)),g->counter++);
+            //printf("%i\n",g->counter);
             //projection(g->column * 64, g->ligne *64, (g->column)/2, ((g->column)/2)/tan(30), 60/g->column);
             break;
         }
@@ -193,7 +196,6 @@ void drawLine_angle_3D(int x, int y, double angle,t_game *g, double hauteur)
     int sx = (x < newX) ? 1 : -1;
     int sy = (y < newY) ? 1 : -1;
     int err = dx - dy;
-    int ok = 0;
     //enregister la valeur du premier x et du premier y dans g 
     g->first_x = x;
     g->first_y = y;

@@ -126,6 +126,8 @@ void	trace_line(t_game *g);
 int 	draw_line(t_game *g, int x, int y);
 void	drawLine_angle(int x, int y, double angle, t_game *g, int i);
 int		in_wall(int x, int y, t_game *g);
+void ft_fill_3Dmap(t_game *g);
+void drawLine_angle_3D(int x, int y, double angle,t_game *g, double hauteur);
 /*mouvement*/
 void 	move_d(t_game *g);
 void 	move_s(t_game *g);
@@ -136,4 +138,5 @@ void 	move_right(t_game *g);
 void	ft_render_mini_map_without_perso(t_game *g);
 void	ft_render_mini_map_while_without_perso(t_game *g, int i, int j);
 void print_gnode(t_coor *head);
+
 #endif

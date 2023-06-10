@@ -46,8 +46,8 @@ void	ft_image(t_game *g)
 {
 	g->img_mini_map.mlx_img = mlx_new_image(g->mlx_ptr, 64 * g->column, 64 * g->ligne);
 	g->img_mini_map.addr = mlx_get_data_addr(g->img_mini_map.mlx_img, &g->img_mini_map.bpp, &g->img_mini_map.line_len, &g->img_mini_map.endian);
-	g->cub3dmap.mlx_img = mlx_new_image(g->mlx_ptr, 64 * g->column, 64 * g->ligne);
-	g->cub3dmap.addr = mlx_get_data_addr(g->cub3dmap.mlx_img, &g->cub3dmap.bpp, &g->cub3dmap.line_len, &g->cub3dmap.endian);
+	//g->cub3dmap.mlx_img = mlx_new_image(g->mlx_ptr, 64 * g->column, 64 * g->ligne);
+	//g->cub3dmap.addr = mlx_get_data_addr(g->cub3dmap.mlx_img, &g->cub3dmap.bpp, &g->cub3dmap.line_len, &g->cub3dmap.endian);
 }
 
 
@@ -100,7 +100,7 @@ void	ft_render_mini_map(t_game *g)
 		drawLine_angle(g->pos_pers->x, g->pos_pers->y, g->pos_pers -> degree++ , g, i);
 		i++;
 	}
-	if (g->counter > g->colum*64)
+	if (g->counter > g->column*64)
 		g->counter = 0;
 	g->pos_pers-> save.last = g->pos_pers -> degree;
 }
@@ -128,5 +128,5 @@ void	ft_render_mini_map_without_perso(t_game *g)
 void	ft_put_img_to_window(t_game *g)
 {
 	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_mini_map.mlx_img, 0, 0);
-	mlx_put_image_to_window(g->mlx_ptr, g->win2_ptr, g->cub3dmap.mlx_img, 0, 0);
+	//mlx_put_image_to_window(g->mlx_ptr, g->win2_ptr, g->cub3dmap.mlx_img, 0, 0);
 }
