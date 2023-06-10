@@ -178,7 +178,8 @@ void ft_fill_3Dmap(t_game *g)
     while (i <= g->column * 64)
     {
         drawLine_angle_3D(64, 64, i,g, g->wall_tab[j]);
-        i = i + (60/(g->column*64));
+        //i = i + (60/(g->column*64));
+        i++;
     }
 }
 
@@ -218,4 +219,5 @@ void drawLine_angle_3D(int x, int y, double angle,t_game *g, double hauteur)
         }
         i++;
     }
+    printf("im here\n");
 }

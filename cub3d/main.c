@@ -80,7 +80,7 @@ int render_perso_rect(t_game *g, t_rect rect, t_img *img)
 int	fill_image(t_game *g)
 {
 	ft_render_mini_map(g);
-	//ft_fill_3Dmap(g);
+	ft_fill_3Dmap(g);
 	return (0);
 }
 int main(int argc, char *argv[])
@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
     if (g.mlx_ptr == NULL)
 		return (1);
     g.win_ptr = mlx_new_window(g.mlx_ptr, 64 * g.column, 64 * g.ligne, "Minimap");
-	//g.win2_ptr = mlx_new_window(g.mlx_ptr, 64 * g.column, 64 * g.ligne, "CUB3D");
+	g.win2_ptr = mlx_new_window(g.mlx_ptr, 64 * g.column, 64 * g.ligne, "CUB3D");
 	g.pos_pers = malloc(sizeof(t_pos));
 	g.pos_pers -> degree = 330;
 	g.pos_pers-> save.first = g.pos_pers -> degree;
