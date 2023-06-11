@@ -48,7 +48,8 @@ void save_wall_length(t_game *g, double angle, int i)
     //hauteur = (((g->column)/2)/tan(30)* 64)/dist;
     hauteur = (277 * 64)/dist;
     g->wall_tab[i] = hauteur;
-    //printf("hauteur is %f\n", hauteur);
+    g->tab_length++;
+    printf("hauteur is %f\n", hauteur);
     //hauteur de la colonne sur l'ecran = (dist_ecran x hauteur_mur) / dist;
 }
 void drawLine_angle(int x, int y, double angle,t_game *g, int i)
@@ -175,9 +176,10 @@ void ft_fill_3Dmap(t_game *g)
     // en fait normalement le traity fait la taille de la hauteur
     // du coup faut je compare les x et y dans la fonction
     // faut que je passe la hauteur en argument
-    while (i <= g->column * 64)
+    while (i <= g->column * 64 && j < g->tab_length)
     {
-        drawLine_angle_3D(64, 64, i,g, g->wall_tab[j]);
+        //drawLine_angle_3D(64, 64, i,g, g->wall_tab[j++]);
+        drawLine_angle_3D2(i, g, g->wall_tab[j++]);
         //projection(g->column * 64, g->ligne *64, (g->column)/2, ((g->column)/2)/tan(30), 60/g->column);
         //i = i + (60/(g->column*64));
         i++;
@@ -221,6 +223,22 @@ void drawLine_angle_3D(int x, int y, double angle,t_game *g, double hauteur)
         i++;
     }
     //printf("im here\n");
+}
+
+void drawLine_angle_3D2(int x, t_game *g, double hauteur)
+{
+    int	i;
+
+	if (g->win_ptr == NULL)
+		return;
+	i = 0;
+	while (i < hauteur)
+	{
+        //printf("hauteur is: %f, ", hauteur);
+        //printf("%i\n", i);
+        img_pix_put(&g->cub3dmap, x, i, RED);
+		i++;
+	}
 }
 
 //void projection(int with_screen, int length_screen, int center, int dist_screen, int angle_2_rayon_cons)

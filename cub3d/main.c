@@ -119,6 +119,7 @@ int main(int argc, char *argv[])
 		return (1);
 	}
 	g.counter = 0;
+	g.tab_length = 0;
 	save_wall(&g);
 	print_gnode(g.node);
 	ft_image(&g);

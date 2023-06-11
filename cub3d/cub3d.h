@@ -96,6 +96,7 @@ typedef struct s_game
 	t_coor *node;
 	t_pos	*pos_pers;
 	double 	wall_tab[1000];
+	int		tab_length;
 	
 }				t_game;
 
@@ -128,6 +129,7 @@ void	drawLine_angle(int x, int y, double angle, t_game *g, int i);
 int		in_wall(int x, int y, t_game *g);
 void ft_fill_3Dmap(t_game *g);
 void drawLine_angle_3D(int x, int y, double angle,t_game *g, double hauteur);
+void drawLine_angle_3D2(int x, t_game *g, double hauteur);
 /*mouvement*/
 void 	move_d(t_game *g);
 void 	move_s(t_game *g);
