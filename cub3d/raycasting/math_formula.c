@@ -186,7 +186,7 @@ void ft_fill_3Dmap(t_game *g)
         // faut avancer jusqua la fin de la width
         // faut avancer le j de telle sorte a ce que ca fasse tout le tab
         // faut aussi que je modifie le y de debut pour donner cette impression
-        
+
 
     }
 }
@@ -233,15 +233,21 @@ void drawLine_angle_3D(int x, int y, double angle,t_game *g, double hauteur)
 void drawLine_angle_3D2(int x, t_game *g, double hauteur)
 {
     int	i;
-
+    double debut_mur = (g->ligne/2) - (hauteur/2);
+    if (debut_mur < 0)
+    {
+        debut_mur = debut_mur * -1;
+    }
 	if (g->win_ptr == NULL)
 		return;
 	i = 0;
+    // tu commence a (g->ligne/2) - (hauteur/2) et tu dessine pixel
 	while (i < hauteur)
 	{
         //printf("hauteur is: %f, ", hauteur);
         //printf("%i\n", i);
-        img_pix_put(&g->cub3dmap, x, i, RED);
+        printf("debut mur = %f\n", (g->ligne/2) - (hauteur/2));
+        img_pix_put(&g->cub3dmap, x, i + debut_mur, RED);
 		i++;
 	}
 }
