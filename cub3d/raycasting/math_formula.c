@@ -176,12 +176,17 @@ void ft_fill_3Dmap(t_game *g)
     // en fait normalement le traity fait la taille de la hauteur
     // du coup faut je compare les x et y dans la fonction
     // faut que je passe la hauteur en argument
-    while (i <= g->column * 64 && j < g->tab_length)
+    while (i <= g->column * 64 )
     {
         //drawLine_angle_3D(64, 64, i,g, g->wall_tab[j++]);
-        drawLine_angle_3D2(i, g, g->wall_tab[j++]);
+        
+        drawLine_angle_3D2(i, g, g->wall_tab[j]);
+        if (j < g->tab_length)
+            j++;
         //projection(g->column * 64, g->ligne *64, (g->column)/2, ((g->column)/2)/tan(30), 60/g->column);
         //i = i + (60/(g->column*64));
+        //printf("i is :%f\n", i);
+        //printf("j is :%i\n", j);
         i++;
         // faut avancer jusqua la fin de la width
         // faut avancer le j de telle sorte a ce que ca fasse tout le tab
@@ -232,8 +237,10 @@ void drawLine_angle_3D(int x, int y, double angle,t_game *g, double hauteur)
 
 void drawLine_angle_3D2(int x, t_game *g, double hauteur)
 {
-    int	i;
+    double	i;
+    
     double debut_mur = ((g->ligne * 64)/2) - (hauteur/2);
+    
     if (debut_mur < 0)
     {
         debut_mur = debut_mur * -1;
@@ -242,12 +249,17 @@ void drawLine_angle_3D2(int x, t_game *g, double hauteur)
 		return;
 	i = 0;
     // tu commence a (g->ligne/2) - (hauteur/2) et tu dessine pixel
+    // un mur qui prend tout lecranb prend toute la longeur de lecran
+    // pk entre ici et la boucle while le x diminue
+    //printf("x is :%i\n", x);
 	while (i < hauteur)
 	{
         //printf("hauteur is: %f, ", hauteur);
         //printf("%i\n", i);
-        printf("debut mur = %f\n", (g->ligne/2) - (hauteur/2));
+        printf("debut mur = %f\n", debut_mur);
+        printf("x in while is :%i\n", x);
         img_pix_put(&g->cub3dmap, x, i + debut_mur, RED);
+        
 		i++;
 	}
 }
