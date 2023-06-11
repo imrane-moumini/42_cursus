@@ -183,6 +183,11 @@ void ft_fill_3Dmap(t_game *g)
         //projection(g->column * 64, g->ligne *64, (g->column)/2, ((g->column)/2)/tan(30), 60/g->column);
         //i = i + (60/(g->column*64));
         i++;
+        // faut avancer jusqua la fin de la width
+        // faut avancer le j de telle sorte a ce que ca fasse tout le tab
+        // faut aussi que je modifie le y de debut pour donner cette impression
+        
+
     }
 }
 

@@ -126,6 +126,7 @@ int main(int argc, char *argv[])
 	fill_image(&g);
 	mlx_hook(g.win_ptr, KeyPress, KeyPressMask, &handle_input, &g);
 	mlx_hook(g.win_ptr, DestroyNotify, StructureNotifyMask, &handle_click, &g);
+	printf("tab length is :%i\n",g.tab_length);
 	ft_put_img_to_window(&g);
     mlx_loop(g.mlx_ptr);
 	mlx_destroy_window(g.mlx_ptr, g.win_ptr);
