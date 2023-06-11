@@ -46,7 +46,7 @@ void save_wall_length(t_game *g, double angle, int i)
     int dy = abs(newY - g->first_y);
     dist= sqrt( (dx *dx) + (dy * dy));
     //hauteur = (((g->column)/2)/tan(30)* 64)/dist;
-    hauteur = 277/dist;
+    hauteur = (277 * 64)/dist;
     g->wall_tab[i] = hauteur;
     //printf("hauteur is %f\n", hauteur);
     //hauteur de la colonne sur l'ecran = (dist_ecran x hauteur_mur) / dist;
@@ -178,6 +178,7 @@ void ft_fill_3Dmap(t_game *g)
     while (i <= g->column * 64)
     {
         drawLine_angle_3D(64, 64, i,g, g->wall_tab[j]);
+        //projection(g->column * 64, g->ligne *64, (g->column)/2, ((g->column)/2)/tan(30), 60/g->column);
         //i = i + (60/(g->column*64));
         i++;
     }
@@ -219,5 +220,10 @@ void drawLine_angle_3D(int x, int y, double angle,t_game *g, double hauteur)
         }
         i++;
     }
-    printf("im here\n");
+    //printf("im here\n");
 }
+
+//void projection(int with_screen, int length_screen, int center, int dist_screen, int angle_2_rayon_cons)
+//{
+
+//}
