@@ -233,7 +233,7 @@ void drawLine_angle_3D(int x, int y, double angle,t_game *g, double hauteur)
 void drawLine_angle_3D2(int x, t_game *g, double hauteur)
 {
     int	i;
-    double debut_mur = (g->ligne/2) - (hauteur/2);
+    double debut_mur = ((g->ligne * 64)/2) - (hauteur/2);
     if (debut_mur < 0)
     {
         debut_mur = debut_mur * -1;
