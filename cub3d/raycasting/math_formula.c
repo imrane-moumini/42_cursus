@@ -43,7 +43,11 @@ void save_wall_length(t_game *g, double angle, int i)
     int newX = g->first_x + (int)(g->last_x * cos(angleInRadians));
     int newY = g->first_y + (int)(g->last_y* sin(angleInRadians));
     int dx = abs(newX - g->first_x);
+    if (dx < 0)
+        dx = dx * -1;
     int dy = abs(newY - g->first_y);
+      if (dy < 0)
+        dy = dy * -1;
     dist= sqrt( (dx *dx) + (dy * dy));
     //hauteur = (((g->column)/2)/tan(30)* 64)/dist;
     hauteur = (277 * 64)/dist;
