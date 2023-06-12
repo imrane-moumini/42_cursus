@@ -141,3 +141,4 @@ int main(int argc, char *argv[])
 // mathieu doit m'expliquer son code sur comment il a calculer les murs
 // regler l'histoire de normalement le 60 degré et du coup les 60 traits doit
 // etre sur une vue a g->column*64 n(du coup multiplier le 1 par 0.6) pour eviter les repetitions
+//voir pk ça ça fait que rien ne saffiche dans les 2 fenetres => i = i + (60/(g->column*64));
