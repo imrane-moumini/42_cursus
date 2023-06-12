@@ -138,6 +138,6 @@ int main(int argc, char *argv[])
     mlx_destroy_display(g.mlx_ptr);
     free(g.mlx_ptr);
 }
-// la le pb c que jarrive pas a lancer des rayons a 360 sans faire segfault
-// voir si qund je rotate je deplace juste le point de depart et continue formule ou si je deplace le rayons 
-	// mais garde le meme point de depart
+// mathieu doit m'expliquer son code sur comment il a calculer les murs
+// regler l'histoire de normalement le 60 degré et du coup les 60 traits doit
+// etre sur une vue a g->column*64 n(du coup multiplier le 1 par 0.6) pour eviter les repetitions

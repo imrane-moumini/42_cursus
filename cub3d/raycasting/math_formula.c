@@ -37,6 +37,7 @@ int draw_line(t_game *g, int x, int y)
 void save_wall_length(t_game *g, double angle, int i)
 {
     // faut que jajoute dans la fonction qui appelle celle quiu lappelle la notion i++ taille width
+    
     double dist;
     double hauteur;
     double angleInRadians = angle * (PI / 180.0);
@@ -52,7 +53,25 @@ void save_wall_length(t_game *g, double angle, int i)
     //hauteur = (((g->column)/2)/tan(30)* 64)/dist;
     hauteur = (277 * 64)/dist;
     g->wall_tab[i] = hauteur;
-    printf("debut mur = %f\n", ((g->ligne * 64)/2) - (hauteur/2));
+    
+    /*
+    double pi = 3.1415926535897932384626433832;
+    double resultx = 10 * sin((angle) * pi / 180);
+    double resulty = 10 * cos((angle) * pi / 180);
+    double pixelx = g->first_x; 
+	double pixely = g->first_y;
+    int pixels = sqrt((resultx * resultx) + (resulty * resulty));
+	resultx /= pixels;
+	resulty /= pixels;
+    double distx = ((double)g->first_x - pixelx);
+	if (distx < 0)
+		distx *= -1;
+	double disty = ((double)g->first_y - pixely);
+	if (disty < 0)
+		disty *= -1;
+    g->wall_tab[i] = sqrt((distx * distx) + (disty * disty));
+    */
+    printf("debut mur = %f\n", ((g->ligne * 64)/2) - (sqrt(hauteur)/2));
     printf("i is %i\n",i);
     
     g->tab_length++;
