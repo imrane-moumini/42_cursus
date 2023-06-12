@@ -48,6 +48,9 @@ void save_wall_length(t_game *g, double angle, int i)
     //hauteur = (((g->column)/2)/tan(30)* 64)/dist;
     hauteur = (277 * 64)/dist;
     g->wall_tab[i] = hauteur;
+    printf("debut mur = %f\n", ((g->ligne * 64)/2) - (hauteur/2));
+    printf("i is %i\n",i);
+    
     g->tab_length++;
     printf("hauteur is %f\n", hauteur);
     //hauteur de la colonne sur l'ecran = (dist_ecran x hauteur_mur) / dist;
@@ -58,7 +61,7 @@ void drawLine_angle(int x, int y, double angle,t_game *g, int i)
     double angleInRadians = angle * (PI / 180.0);  // Conversion degrés -> radians
     int newX = x + (int)(g->column *64 * cos(angleInRadians));
     int newY = y + (int)(g->ligne *64 * sin(angleInRadians));
-    static int e = 0;
+    //static int e = 0;
     //static int f = 0;
     //static int h = 0;
     // Dessiner le trait entre les points (x, y) et (newX, newY)
@@ -93,10 +96,8 @@ void drawLine_angle(int x, int y, double angle,t_game *g, int i)
             g->last_x = x;
             g->last_y = y;
             
-            printf("e is %i\n", e);
-            e++;
-            // le pb c qu'il remplis 2 fois le truc car jappelle 2 fois la fonction
-            // mais normalement il doit remplir qu'une fois
+            //printf("e is %i\n", e);
+            //e++;
             if (g->counter <= g->column*64)
                 save_wall_length(g, angle * (60/(g->column*64)),g->counter++);
             //printf("%i\n",g->counter);
