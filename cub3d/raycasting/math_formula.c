@@ -57,7 +57,8 @@ void drawLine_angle(int x, int y, double angle,t_game *g, int i)
     double angleInRadians = angle * (PI / 180.0);  // Conversion degrés -> radians
     int newX = x + (int)(g->column *64 * cos(angleInRadians));
     int newY = y + (int)(g->ligne *64 * sin(angleInRadians));
-
+    static int e = 0;
+    static int f = 0;
     // Dessiner le trait entre les points (x, y) et (newX, newY)
     int dx = abs(newX - x);
     int dy = abs(newY - y);
@@ -70,17 +71,22 @@ void drawLine_angle(int x, int y, double angle,t_game *g, int i)
     g->first_y = y;
     while ((x != newX || y != newY ) && (x < g->column * 64 && x > 0) && (y < g->ligne*64 && y > 0))
     {
+        // normalement je dois avoir 1000 trait et me souvenir de 1000 truc
         if (in_wall(x, y, g) == 0 && i<= 60)
         {
             ok = 1;
             // en fait ça c'est 60 fois max
             img_pix_put(&g->img_mini_map, x, y, RED);
         }
+        printf("f is %i\n", f);
+        f++;
         if (in_wall(x, y, g) == 1 && ok && g->counter <= g->column*64)
         {
             g->last_x = x;
             g->last_y = y;
             // ça c'est width fois
+            printf("e is %i\n", e);
+            e++;
             save_wall_length(g, angle * (60/(g->column*64)),g->counter++);
             //printf("%i\n",g->counter);
             //projection(g->column * 64, g->ligne *64, (g->column)/2, ((g->column)/2)/tan(30), 60/g->column);
@@ -176,6 +182,7 @@ void ft_fill_3Dmap(t_game *g)
     // en fait normalement le traity fait la taille de la hauteur
     // du coup faut je compare les x et y dans la fonction
     // faut que je passe la hauteur en argument
+    //printf("width is %i\n", g->column * 64);
     while (i <= g->column * 64 )
     {
         //drawLine_angle_3D(64, 64, i,g, g->wall_tab[j++]);
@@ -252,16 +259,21 @@ void drawLine_angle_3D2(int x, t_game *g, double hauteur)
     // un mur qui prend tout lecranb prend toute la longeur de lecran
     // pk entre ici et la boucle while le x diminue
     //printf("x is :%i\n", x);
+    
+    //printf("hauteur is: %f, ", hauteur);
+    //printf("%f\n", i);
+    // i et hauteur = 0 donc rentre pqs dedqns
 	while (i < hauteur)
 	{
-        //printf("hauteur is: %f, ", hauteur);
-        //printf("%i\n", i);
-        printf("debut mur = %f\n", debut_mur);
-        printf("x in while is :%i\n", x);
+        
+        //printf("debut mur = %f\n", debut_mur);
+        //printf("x in while is :%i\n", x);
+        
         img_pix_put(&g->cub3dmap, x, i + debut_mur, RED);
         
 		i++;
 	}
+  
 }
 
 //void projection(int with_screen, int length_screen, int center, int dist_screen, int angle_2_rayon_cons)
