@@ -103,8 +103,8 @@ void	ft_render_mini_map(t_game *g)
 		drawLine_angle(g->pos_pers->x, g->pos_pers->y, g->pos_pers -> degree++ , g, i);
 		i++;
 	}
-	if (g->counter > g->column*64)
-		g->counter = 0;
+	//if (g->counter > g->column*64)
+		//g->counter = 0;
 	g->pos_pers-> save.last = g->pos_pers -> degree;
 	
 }

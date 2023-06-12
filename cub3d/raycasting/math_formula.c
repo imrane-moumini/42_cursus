@@ -49,7 +49,7 @@ void save_wall_length(t_game *g, double angle, int i)
     hauteur = (277 * 64)/dist;
     g->wall_tab[i] = hauteur;
     g->tab_length++;
-    //printf("hauteur is %f\n", hauteur);
+    printf("hauteur is %f\n", hauteur);
     //hauteur de la colonne sur l'ecran = (dist_ecran x hauteur_mur) / dist;
 }
 void drawLine_angle(int x, int y, double angle,t_game *g, int i)
@@ -59,47 +59,44 @@ void drawLine_angle(int x, int y, double angle,t_game *g, int i)
     int newX = x + (int)(g->column *64 * cos(angleInRadians));
     int newY = y + (int)(g->ligne *64 * sin(angleInRadians));
     static int e = 0;
-    static int f = 0;
-    static int h = 0;
+    //static int f = 0;
+    //static int h = 0;
     // Dessiner le trait entre les points (x, y) et (newX, newY)
     int dx = abs(newX - x);
     int dy = abs(newY - y);
     int sx = (x < newX) ? 1 : -1;
     int sy = (y < newY) ? 1 : -1;
     int err = dx - dy;
-    //int ok = 0;
     //enregister la valeur du premier x et du premier y dans g 
     g->first_x = x;
     g->first_y = y;
     // deja dans la boucle den dessous jy suis pleins de fopis donc faut pas se dire une fois par appel
     // ok je rentre dans la fonction 2561 fois mais seulement 121 fois dans in wall
     
+
     while ((x != newX || y != newY ) && (x < g->column * 64) && (y < g->ligne*64))
     {
         // normalement je dois avoir 1000 trait et me souvenir de 1000 truc
         if (x > 0 && y > 0 && in_wall(x, y, g) == 0 && i<= 60)
         {
-            //ok = 1;
-            // en fait ça c'est 60 fois max
             img_pix_put(&g->img_mini_map, x, y, RED);
             //printf("h is :%i\n",h);
-            h++;
+            //h++;
             //printf("i is %i\n",i);
         }
         //printf("f is %i\n", f);
-        f++;
-        //printf("counter is %i\n", g->counter);
-        // en fait la rpd c que in_wall = 1 n'est vrai que 122 fois
-        // ok je crois avoir capté, c'ets pasque jenregistre de degré en dégré
-        // normalement je dois augmenter les degré par 0,6
-        if (in_wall(x, y, g) == 1 /*&& ok */&& g->counter <= g->column*64)
+        //f++;
+        //printf("counter is %i\n",g->counter);
+        // counter retourne a 0 c'est pour ça que ca recommence
+        if (in_wall(x, y, g) == 1 && g->counter <= g->column*64)
         {
             g->last_x = x;
             g->last_y = y;
-            // ça c'est width fois
-            // ya 53 mur mais il rentre ici 122 fois pk il rentre pas plus ?
+            
             printf("e is %i\n", e);
             e++;
+            // le pb c qu'il remplis 2 fois le truc car jappelle 2 fois la fonction
+            // mais normalement il doit remplir qu'une fois
             save_wall_length(g, angle * (60/(g->column*64)),g->counter++);
             //printf("%i\n",g->counter);
             //projection(g->column * 64, g->ligne *64, (g->column)/2, ((g->column)/2)/tan(30), 60/g->column);

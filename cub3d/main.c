@@ -75,8 +75,8 @@ int render_perso_rect(t_game *g, t_rect rect, t_img *img)
 		//printf("i is %i\n", i);
 		i++;
 	}
-	if (g->counter > g->column*64)
-		g->counter = 0;
+	//if (g->counter > g->column*64)
+		//g->counter = 0;
 	//printf("g column is %d\n",g-> column * 64);
 	g->pos_pers-> save.last = g->pos_pers -> degree;
 	return (0);
