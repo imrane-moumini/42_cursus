@@ -61,7 +61,7 @@ typedef struct s_pos
 {
 	int	x;
 	int	y;
-	int degree;
+	double degree;
 	t_degree save;
 }	t_pos;
 typedef struct s_img
@@ -95,7 +95,7 @@ typedef struct s_game
 	int counter;
 	t_coor *node;
 	t_pos	*pos_pers;
-	double 	wall_tab[1000];
+	double 	wall_tab[5000];
 	int		tab_length;
 	
 }				t_game;

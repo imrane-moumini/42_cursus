@@ -152,7 +152,7 @@ void save_wall(t_game *g)
 int in_wall(int x, int y, t_game *g)
 {
 	t_coor *ptr;
-	
+	//static int i = 0;
 	ptr = g->node;
 	// je crois que le pb c aue je regarde que pour la derniere node
 	while (ptr)
@@ -165,7 +165,11 @@ int in_wall(int x, int y, t_game *g)
 			// printf("last_x is : %i, last y is %i\n", ptr -> last_x , ptr -> last_y );
 		//}
 		if ((x >= ptr -> first_x && x <= ptr -> last_x) && (y >= ptr -> first_y && y <= ptr -> last_y))
+		{
+			//printf("1 in wall %i\n", i);
+			//i++;
 			return (1);
+		}
 		ptr = ptr -> next;
 	}
 	return (0);
