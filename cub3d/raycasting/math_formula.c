@@ -88,7 +88,7 @@ void drawLine_angle(int x, int y, double angle,t_game *g, int i)
         //f++;
         //printf("counter is %i\n",g->counter);
         // counter retourne a 0 c'est pour ça que ca recommence
-        if (in_wall(x, y, g) == 1 && g->counter <= g->column*64)
+        if (in_wall(x, y, g) == 1)
         {
             g->last_x = x;
             g->last_y = y;
@@ -97,7 +97,8 @@ void drawLine_angle(int x, int y, double angle,t_game *g, int i)
             e++;
             // le pb c qu'il remplis 2 fois le truc car jappelle 2 fois la fonction
             // mais normalement il doit remplir qu'une fois
-            save_wall_length(g, angle * (60/(g->column*64)),g->counter++);
+            if (g->counter <= g->column*64)
+                save_wall_length(g, angle * (60/(g->column*64)),g->counter++);
             //printf("%i\n",g->counter);
             //projection(g->column * 64, g->ligne *64, (g->column)/2, ((g->column)/2)/tan(30), 60/g->column);
             break;
