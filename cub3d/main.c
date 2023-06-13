@@ -154,3 +154,5 @@ int main(int argc, char *argv[])
 // g testé de le rajouter quand meme dans la boucle qui apple drawline (elle appelle aussi save_wall) mais rebelotte ça prend trop de temps
 // de toute facon il faut lancer 1000 rayon dans 60 degré donc soit je met la le calcul soit je le met dans le truc qui met les lignes
 // mais je pense que c la ou je me souvien des hauteurs, dans tous les cas ca fonctionne pas, voir avec mathieu
+// je suis pas sur si ma technique pour detecter un mur est compatible avec lalgo, voir avec mathieu et si c bon voir
+// si je calcule bien les murs
