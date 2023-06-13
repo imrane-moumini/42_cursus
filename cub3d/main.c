@@ -142,3 +142,8 @@ int main(int argc, char *argv[])
 // regler l'histoire de normalement le 60 degré et du coup les 60 traits doit
 // etre sur une vue a g->column*64 n(du coup multiplier le 1 par 0.6) pour eviter les repetitions
 //voir pk ça ça fait que rien ne saffiche dans les 2 fenetres => i = i + (60/(g->column*64));
+	// en fait quand je fais *0.6 ça fait une boucle trop grande et affiche rien
+	// lui g limpression il utilise pas le i comme x mais pour faire ses calculs
+	// du coup ya une logique que g pas capté qu'il faut q'uil m'explique
+	// pasque dans le tuto ca dit le prochain trait je le trace au porchain degree 
+	// donc normalement à i + 1 mais ca fonctionne pas

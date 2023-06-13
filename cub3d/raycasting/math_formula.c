@@ -280,7 +280,7 @@ void drawLine_angle_3D(int x, int y, double angle,t_game *g, double hauteur)
 void drawLine_angle_3D2(int x, t_game *g, double hauteur)
 {
     double	i;
-    
+    //x = x + (60/(g->column*64));
     double debut_mur = ((g->ligne * 64)/2) - (hauteur/2);
     
     if (debut_mur < 0)
@@ -308,6 +308,7 @@ void drawLine_angle_3D2(int x, t_game *g, double hauteur)
         
 		i++;
 	}
+    printf("put pixel in 3D\n");
   
 }
 
