@@ -147,3 +147,10 @@ int main(int argc, char *argv[])
 	// du coup ya une logique que g pas capté qu'il faut q'uil m'explique
 	// pasque dans le tuto ca dit le prochain trait je le trace au porchain degree 
 	// donc normalement à i + 1 mais ca fonctionne pas
+// g capté, en faut les 1000 rayons * 0,6 je lmes lances pas dans la fonction qui trace les traits
+// je les lances dans la fonction qui est censé enregistrer les murs
+// comme ça j'aurais 1000 murs et je pourrais bien reporter la chose
+// mais g l'impression que c'est ce que g fait quand g enregistré 1000 valeurs dans le tab
+// g testé de le rajouter quand meme dans la boucle qui apple drawline (elle appelle aussi save_wall) mais rebelotte ça prend trop de temps
+// de toute facon il faut lancer 1000 rayon dans 60 degré donc soit je met la le calcul soit je le met dans le truc qui met les lignes
+// mais je pense que c la ou je me souvien des hauteurs, dans tous les cas ca fonctionne pas, voir avec mathieu

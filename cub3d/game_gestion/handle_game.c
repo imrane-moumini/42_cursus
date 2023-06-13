@@ -101,6 +101,7 @@ void	ft_render_mini_map(t_game *g)
 		//drawLine_angle(g->pos_pers->x, g->pos_pers->y, g->pos_pers -> degree , g, i);
 		//g->pos_pers -> degree = g->pos_pers -> degree + (60/(g->column*64));
 		drawLine_angle(g->pos_pers->x, g->pos_pers->y, g->pos_pers -> degree++ , g, i);
+		//i = i + (60/(g->column*64));
 		i++;
 	}
 	//if (g->counter > g->column*64)
