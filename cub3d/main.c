@@ -156,3 +156,16 @@ int main(int argc, char *argv[])
 // mais je pense que c la ou je me souvien des hauteurs, dans tous les cas ca fonctionne pas, voir avec mathieu
 // je suis pas sur si ma technique pour detecter un mur est compatible avec lalgo, voir avec mathieu et si c bon voir
 // si je calcule bien les murs
+// en fait g l'impression que cest dans la fonction ou il dessine
+// le straits qu'il calcuul la hauteur sauf que je vois pas a quel moment
+// il voit un mur
+// dans sa boucle il incremente un i qui represente les degré mais je comprends pas 
+// ce qu'il en faitr en fait. 
+// dans sa logique ca voudrait dire il a deja les hauteur des murs
+// au moment de smurs mais meme ca jsuis pas sur
+// bon en fait faut qu'il m'explique son code sinon je vais jamais capter
+// vraiment chaque ligne
+// la g vu que sa loigique est totaklmeent differernet
+// il fait tout en meme temps danbs ldraw_line_dir3d
+// g l'impression qu'il reutilse meme plus la map 2D
+// sacahnt que la fonction draw_line_dir3D est longue de ouf et g pas tout capté

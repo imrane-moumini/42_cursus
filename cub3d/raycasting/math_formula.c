@@ -236,6 +236,25 @@ void ft_fill_3Dmap(t_game *g)
 
 
     }
+    /*
+    while (j <= g->tab_length)
+    {
+        //drawLine_angle_3D(64, 64, i,g, g->wall_tab[j++]);
+        
+        drawLine_angle_3D2(i, g, g->wall_tab[j]);
+        
+        //projection(g->column * 64, g->ligne *64, (g->column)/2, ((g->column)/2)/tan(30), 60/g->column);
+        i = i + (60/(g->column*64));
+        //printf("i is :%f\n", i);
+        //printf("j is :%i\n", j);
+        j++;
+        // faut avancer jusqua la fin de la width
+        // faut avancer le j de telle sorte a ce que ca fasse tout le tab
+        // faut aussi que je modifie le y de debut pour donner cette impression
+
+
+    }
+    */
 }
 
 
