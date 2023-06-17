@@ -303,10 +303,10 @@ void drawLine_angle_3D2(int x, t_game *g, double hauteur)
     double	i;
     //x = x + (60/(g->column*64));
     double debut_mur = ((g->ligne * 64)/2) - (hauteur/2);
-    
+    printf("debut mur is %f\n", debut_mur);
     if (debut_mur < 0)
     {
-        debut_mur = debut_mur * -1;
+        debut_mur = 0;
     }
 	if (g->win_ptr == NULL)
 		return;
