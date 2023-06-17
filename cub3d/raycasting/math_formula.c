@@ -80,6 +80,7 @@ void save_wall_length(t_game *g, double angle, int i)
 }
 void drawLine_angle(int x, int y, double angle,t_game *g, int i)
 {
+    (void)i;
     //printf("angle is %f\n", angle);
     double angleInRadians = angle * (PI / 180.0);  // Conversion degrés -> radians
     int newX = x + (int)(g->column *64 * cos(angleInRadians));
@@ -103,8 +104,9 @@ void drawLine_angle(int x, int y, double angle,t_game *g, int i)
     while ((x != newX || y != newY ) && (x < g->column * 64) && (y < g->ligne*64))
     {
         // normalement je dois avoir 1000 trait et me souvenir de 1000 truc
-        if (x > 0 && y > 0 && in_wall(x, y, g) == 0 && i<= 60)
+        if (x > 0 && y > 0 && in_wall(x, y, g) == 0 /*&& i<= 60*/)
         {
+
             img_pix_put(&g->img_mini_map, x, y, RED);
             //printf("h is :%i\n",h);
             //h++;
@@ -327,7 +329,7 @@ void drawLine_angle_3D2(int x, t_game *g, double hauteur)
         
 		i++;
 	}
-    printf("put pixel in 3D\n");
+    //printf("put pixel in 3D\n");
   
 }
 
