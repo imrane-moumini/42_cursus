@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/06/18 20:47:58 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/06/18 21:03:14 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ int render_perso_rect(t_game *g, t_rect rect, t_img *img)
 		// l'angle doit pas depasser les 60 degré du coup faut je multiplie par 0,6
 		drawLine_angle(g->pos_pers->x, g->pos_pers->y, g->pos_pers -> degree , g, i);
 		g->pos_pers -> degree = g->pos_pers -> degree + degreeincr;
-		printf("degree  is %f\n", g->pos_pers -> degree);
-		printf("i is %i\n", i);
+		// printf("degree  is %f\n", g->pos_pers -> degree);
+		// printf("i is %i\n", i);
 		//printf("i is %i\n", i);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:49:53 by imoumini          #+#    #+#             */
-/*   Updated: 2023/06/18 20:49:36 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/06/18 21:26:22 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ void save_wall_length(t_game *g, double angle, int i)
     dist= sqrt( (distx * distx) + (disty * disty));
     // dist= sqrt( (dx *dx) + (dy * dy));
     //hauteur = (((g->column)/2)/tan(30)* 64)/dist;
-    // hauteur = (277 * 64)/dist;
-    hauteur = (64 / dist * 277);
+    printf("hauteur AVANT : %f\n", dist);
+    hauteur = ((277 * 3) * 64)/dist;
+    // hauteur = (64 / dist * 277);
+    printf("hauteur APRES : %f\n", hauteur);
     g->wall_tab[i] = hauteur;
     
     /*
@@ -86,7 +88,7 @@ void save_wall_length(t_game *g, double angle, int i)
     g->wall_tab[i] = sqrt((distx * distx) + (disty * disty));
     */
     printf("debut mur = %f\n", ((g->ligne * 64)/2) - (sqrt(hauteur)/2));
-    printf("i is %i\n",i);
+    // printf("i is %i\n",i);
     
     g->tab_length++;
     printf("hauteur is %f\n", hauteur);
@@ -317,11 +319,11 @@ void drawLine_angle_3D2(int x, t_game *g, double hauteur)
 {
     double	i;
     //x = x + (60/(g->column*64));
-    printf("hauteur avant : %f\n", hauteur);
-    double debut_mur = ((SCREEN_LENGTH)/2) - (hauteur/2); // CONVERSION
+    // printf("hauteur avant : %f\n", hauteur);
+    double debut_mur = ((SCREEN_LENGTH)/2) - (hauteur/2); 
     // debut_mur = hauteur;
     // double taille_mur = // rc.printy = (Y_3D / 2) - (rc.tab[rc.index] / 2);
-    printf("hauteur apres : %f\n", debut_mur);
+    // printf("hauteur apres : %f\n", debut_mur);
     /* debut mur est inverse donc c'est bon*/
     if (debut_mur < 0)
     {
