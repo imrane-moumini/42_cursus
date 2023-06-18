@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_formula.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:49:53 by imoumini          #+#    #+#             */
-/*   Updated: 2023/06/02 16:18:49 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/06/18 19:35:54 by mgruson          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,25 @@ void save_wall_length(t_game *g, double angle, int i)
     if (dx < 0)
         dx = dx * -1;
     int dy = abs(newY - g->first_y);
-      if (dy < 0)
+    if (dy < 0)
+    {
         dy = dy * -1;
-    dist= sqrt( (dx *dx) + (dy * dy));
+    }
+    
+
+	double distx = ((double)g->first_x - g->last_x);
+	if (distx < 0)
+		distx *= -1;
+    
+	double disty = ((double)g->first_y - g->last_y);
+	if (disty < 0)
+		disty *= -1;
+        
+    dist= sqrt( (distx * distx) + (disty * disty));
+    // dist= sqrt( (dx *dx) + (dy * dy));
     //hauteur = (((g->column)/2)/tan(30)* 64)/dist;
-    hauteur = (277 * 64)/dist;
+    // hauteur = (277 * 64)/dist;
+    hauteur = (64 / dist * 277);
     g->wall_tab[i] = hauteur;
     
     /*
@@ -302,8 +316,12 @@ void drawLine_angle_3D2(int x, t_game *g, double hauteur)
 {
     double	i;
     //x = x + (60/(g->column*64));
-    double debut_mur = ((g->ligne * 64)/2) - (hauteur/2);
-    printf("debut mur is %f\n", debut_mur);
+    printf("hauteur avant : %f\n", hauteur);
+    double debut_mur = ((g->ligne * 64)/2) - (hauteur/2); // CONVERSION
+    // debut_mur = hauteur;
+    // double taille_mur = // rc.printy = (Y_3D / 2) - (rc.tab[rc.index] / 2);
+    printf("hauteur apres : %f\n", debut_mur);
+    /* debut mur est inverse donc c'est bon*/
     if (debut_mur < 0)
     {
         debut_mur = 0;
@@ -319,18 +337,21 @@ void drawLine_angle_3D2(int x, t_game *g, double hauteur)
     //printf("hauteur is: %f, ", hauteur);
     //printf("%f\n", i);
     // i et hauteur = 0 donc rentre pqs dedqns
-	while (i < hauteur)
+    
+	while (i < g->ligne * 64)
 	{
         
         //printf("debut mur = %f\n", debut_mur);
-        //printf("x in while is :%i\n", x);
-        
-        img_pix_put(&g->cub3dmap, x, i + debut_mur, RED);
-        
-		i++;
+        // printf("i :%f ; debut mur : %f, (debut_mur + hauteur) : %f\n", i, debut_mur, (debut_mur + hauteur));
+        if (i >= debut_mur && i < (debut_mur + hauteur))
+        {
+            // printf("c1 : x %i, i %i\n", x, (int)i);
+            img_pix_put(&g->cub3dmap, x, i, RED);
+        }
+        i++;
 	}
     //printf("put pixel in 3D\n");
-  
+    /*  il faut diviser par deux au milieu */
 }
 
 //void projection(int with_screen, int length_screen, int center, int dist_screen, int angle_2_rayon_cons)
