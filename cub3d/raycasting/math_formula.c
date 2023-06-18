@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math_formula.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgruson <mgruson@student.42.fr>            +#+  +:+       +#+        */
+/*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:49:53 by imoumini          #+#    #+#             */
-/*   Updated: 2023/06/18 19:35:54 by mgruson          ###   ########.fr       */
+/*   Updated: 2023/06/18 20:33:33 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,7 +234,7 @@ void ft_fill_3Dmap(t_game *g)
     // du coup faut je compare les x et y dans la fonction
     // faut que je passe la hauteur en argument
     //printf("width is %i\n", g->column * 64);
-    while (i <= g->column * 64 )
+    while (i <= SCREEN_WIDTH )
     {
         //drawLine_angle_3D(64, 64, i,g, g->wall_tab[j++]);
         
@@ -317,7 +317,7 @@ void drawLine_angle_3D2(int x, t_game *g, double hauteur)
     double	i;
     //x = x + (60/(g->column*64));
     printf("hauteur avant : %f\n", hauteur);
-    double debut_mur = ((g->ligne * 64)/2) - (hauteur/2); // CONVERSION
+    double debut_mur = ((SCREEN_LENGTH)/2) - (hauteur/2); // CONVERSION
     // debut_mur = hauteur;
     // double taille_mur = // rc.printy = (Y_3D / 2) - (rc.tab[rc.index] / 2);
     printf("hauteur apres : %f\n", debut_mur);
@@ -338,14 +338,14 @@ void drawLine_angle_3D2(int x, t_game *g, double hauteur)
     //printf("%f\n", i);
     // i et hauteur = 0 donc rentre pqs dedqns
     
-	while (i < g->ligne * 64)
+	while (i < SCREEN_LENGTH)
 	{
         
         //printf("debut mur = %f\n", debut_mur);
-        // printf("i :%f ; debut mur : %f, (debut_mur + hauteur) : %f\n", i, debut_mur, (debut_mur + hauteur));
+        printf("i :%f ; debut mur : %f, (debut_mur + hauteur) : %f\n", i, debut_mur, (debut_mur + hauteur));
         if (i >= debut_mur && i < (debut_mur + hauteur))
         {
-            // printf("c1 : x %i, i %i\n", x, (int)i);
+            printf("c1 : x %i, i %i\n", x, (int)i);
             img_pix_put(&g->cub3dmap, x, i, RED);
         }
         i++;

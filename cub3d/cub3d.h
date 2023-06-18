@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:46 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/28 17:19:18 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/06/18 20:24:17 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@
 #define GREEN 0x00FF00
 #define WHITE 0xFFFFFF
 #define PI 3.14159265359
+#define SCREEN_WIDTH 960
+#define SCREEN_LENGTH 600
 
 typedef struct s_coor
 {

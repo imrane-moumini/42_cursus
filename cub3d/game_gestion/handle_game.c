@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 17:54:29 by imoumini          #+#    #+#             */
-/*   Updated: 2023/05/27 19:25:58 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/06/18 20:36:51 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_image(t_game *g)
 {
 	g->img_mini_map.mlx_img = mlx_new_image(g->mlx_ptr, 64 * g->column, 64 * g->ligne);
 	g->img_mini_map.addr = mlx_get_data_addr(g->img_mini_map.mlx_img, &g->img_mini_map.bpp, &g->img_mini_map.line_len, &g->img_mini_map.endian);
-	g->cub3dmap.mlx_img = mlx_new_image(g->mlx_ptr, 64 * g->column, 64 * g->ligne);
+	g->cub3dmap.mlx_img = mlx_new_image(g->mlx_ptr, SCREEN_WIDTH, SCREEN_LENGTH);
 	g->cub3dmap.addr = mlx_get_data_addr(g->cub3dmap.mlx_img, &g->cub3dmap.bpp, &g->cub3dmap.line_len, &g->cub3dmap.endian);
 }
 

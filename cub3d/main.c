@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/06/02 16:06:14 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/06/18 20:24:43 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int main(int argc, char *argv[])
     if (g.mlx_ptr == NULL)
 		return (1);
     g.win_ptr = mlx_new_window(g.mlx_ptr, 64 * g.column, 64 * g.ligne, "Minimap");
-	g.win2_ptr = mlx_new_window(g.mlx_ptr, 64 * g.column, 64 * g.ligne, "CUB3D");
+	g.win2_ptr = mlx_new_window(g.mlx_ptr, SCREEN_WIDTH, SCREEN_LENGTH, "CUB3D");
 	g.pos_pers = malloc(sizeof(t_pos));
 	g.pos_pers -> degree = 330;
 	g.pos_pers-> save.first = g.pos_pers -> degree;
