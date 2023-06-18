@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:49:53 by imoumini          #+#    #+#             */
-/*   Updated: 2023/06/18 20:33:33 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/06/18 20:49:36 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,8 @@ void drawLine_angle(int x, int y, double angle,t_game *g, int i)
             
             //printf("e is %i\n", e);
             //e++;
-            if (g->counter <= g->column*64)
-                save_wall_length(g, angle * (60/(g->column*64)),g->counter++);
+            if (g->counter <= SCREEN_WIDTH)
+                save_wall_length(g, angle * (60/(SCREEN_WIDTH)),g->counter++);
             //printf("%i\n",g->counter);
             //projection(g->column * 64, g->ligne *64, (g->column)/2, ((g->column)/2)/tan(30), 60/g->column);
             break;
@@ -252,6 +252,7 @@ void ft_fill_3Dmap(t_game *g)
 
 
     }
+    printf("i is :%f\n", i);
     /*
     while (j <= g->tab_length)
     {
@@ -342,14 +343,16 @@ void drawLine_angle_3D2(int x, t_game *g, double hauteur)
 	{
         
         //printf("debut mur = %f\n", debut_mur);
-        printf("i :%f ; debut mur : %f, (debut_mur + hauteur) : %f\n", i, debut_mur, (debut_mur + hauteur));
+        // printf("i :%f ; debut mur : %f, (debut_mur + hauteur) : %f\n", i, debut_mur, (debut_mur + hauteur));
         if (i >= debut_mur && i < (debut_mur + hauteur))
         {
-            printf("c1 : x %i, i %i\n", x, (int)i);
+            // printf("c1 : x %i, i %i\n", x, (int)i);
             img_pix_put(&g->cub3dmap, x, i, RED);
         }
         i++;
 	}
+    //printf("i :%f ; debut mur : %f, (debut_mur + hauteur) : %f\n", i, debut_mur, (debut_mur + hauteur));
+
     //printf("put pixel in 3D\n");
     /*  il faut diviser par deux au milieu */
 }

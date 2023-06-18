@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/06/18 20:24:43 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/06/18 20:47:58 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int render_perso_rect(t_game *g, t_rect rect, t_img *img)
 	g->pos_pers -> degree = g->pos_pers-> save.first;
 	g->pos_pers-> save.first = g->pos_pers -> degree;
 	i = 0;
-	double degreeincr = 60.00/(double)(g->column*64);
-	while (i <= g-> column * 64)
+	double degreeincr = 60.00/(double)(SCREEN_WIDTH);
+	while (i <= SCREEN_WIDTH)
 	{
 		if (g->pos_pers -> degree == 360)
 			g->pos_pers -> degree = 0;
