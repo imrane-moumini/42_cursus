@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/06/22 20:45:04 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/06/22 21:21:37 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 unsigned int	ft_get_color(t_img *data, int x, int y)
 {
 	char	*dst;
-
+	printf("get color before calcul \n");
+	printf("x is %i\n", x);
+	printf("y is %i\n", y);
 	dst = data->addr + (y * data->line_len + x * 4);
+	printf("get color after calcul \n");
 	return (*(unsigned int *)dst);
 }
 
@@ -33,6 +36,7 @@ int 	ft_draw_wall_ratio(t_game *g, double hauteur, int x)
 	// x = rc->printy + rc->i;
 	// y = rc->index;
 	//ratio = ((double)d.y / wall_size);
+	printf("wall size is %f\n", wall_size);
 	ratio = ((double)g->warrior.heigth_y / wall_size);
 	//ratio *= rc->i;
 	ratio *= x;
@@ -229,12 +233,14 @@ int main(int argc, char *argv[])
 	}
 	g.counter = 0;
 	g.tab_length = 0;
+	g.warrior.mlx_img = mlx_xpm_file_to_image(g.mlx_ptr, "./walle.xpm", \
+		&g.warrior.width_x, &g.warrior.heigth_y);
+	printf("main g.warrior.heigth_y is %i\n", g.warrior.heigth_y);
+	printf("main g.warrior.width.x is %i\n", g.warrior.width_x);
 	save_wall(&g);
 	print_gnode(g.node);
 	ft_image(&g);
 	fill_image(&g);
-	g.warrior.mlx_img = mlx_xpm_file_to_image(g.mlx_ptr, "./walle.xpm", \
-		&g.warrior.width_x, &g.warrior.heigth_y);
 	g.warrior.mlx_img = mlx_get_data_addr(g.warrior.mlx_img, &g.warrior.bpp, &g.warrior.line_len, &g.warrior.endian);
 	//printf("degree at end is %f\n",g.pos_pers -> degree);
 	mlx_hook(g.win_ptr, KeyPress, KeyPressMask, &handle_input, &g);

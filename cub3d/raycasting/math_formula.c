@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:49:53 by imoumini          #+#    #+#             */
-/*   Updated: 2023/06/22 20:52:02 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/06/22 21:16:44 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,16 @@ void save_wall_length(t_game *g, double angle, int i)
     {
         dy = dy * -1;
     }
-    //g->texture[i] = (int)g->last_y % g->warrior.heigth_y;
-
+    printf("last y is %i\n",g->last_y  );
+    printf("g->warrior.heigth_y is %i\n",g->warrior.heigth_y );
+    printf("before calcul \n");
+    //if (g->last_y != 0)
+        g->texture[i] = (int)g->last_y % g->warrior.heigth_y;
+    //else
+    //{
+    //    g->texture[i] = 1;
+    //}
+    printf("after calcul \n");
 	double distx = ((double)g->first_x - g->last_x);
 	if (distx < 0)
 		distx *= -1;
