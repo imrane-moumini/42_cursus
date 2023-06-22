@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/06/22 21:21:37 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/06/22 21:51:27 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 unsigned int	ft_get_color(t_img *data, int x, int y)
 {
+	// bon clairement ya un truc dans la logique ou g faux
+	// pasque si je bidouiille pour as avoir des 0 bah je casse la logique du coup voir avce mathieu
 	char	*dst;
-	printf("get color before calcul \n");
-	printf("x is %i\n", x);
-	printf("y is %i\n", y);
+	 printf("get color before calcul \n");
+	 printf("x is %i\n", x);
+	 printf("y is %i\n", y);
 	dst = data->addr + (y * data->line_len + x * 4);
 	printf("get color after calcul \n");
 	return (*(unsigned int *)dst);
@@ -37,10 +39,12 @@ int 	ft_draw_wall_ratio(t_game *g, double hauteur, int x)
 	// y = rc->index;
 	//ratio = ((double)d.y / wall_size);
 	printf("wall size is %f\n", wall_size);
+	printf("x is %i\n", x);
 	ratio = ((double)g->warrior.heigth_y / wall_size);
 	//ratio *= rc->i;
-	ratio *= x;
-	color = ft_get_color(&g->warrior, g->texture[x - 1], ratio);
+	ratio *= (x + 1);
+	printf("ratio is %f\n", ratio);
+	color = ft_get_color(&g->warrior, g->texture[x], ratio);
 	return (color);
 	//ft_my_mlx_pixel_put(&v->ig2, x, y, color);
 }

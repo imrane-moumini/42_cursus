@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 19:49:53 by imoumini          #+#    #+#             */
-/*   Updated: 2023/06/22 21:16:44 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/06/22 21:24:21 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,16 @@ void save_wall_length(t_game *g, double angle, int i)
     {
         dy = dy * -1;
     }
-    printf("last y is %i\n",g->last_y  );
-    printf("g->warrior.heigth_y is %i\n",g->warrior.heigth_y );
-    printf("before calcul \n");
+    // printf("last y is %i\n",g->last_y  );
+    // printf("g->warrior.heigth_y is %i\n",g->warrior.heigth_y );
+    // printf("before calcul \n");
     //if (g->last_y != 0)
         g->texture[i] = (int)g->last_y % g->warrior.heigth_y;
     //else
     //{
     //    g->texture[i] = 1;
     //}
-    printf("after calcul \n");
+    //printf("after calcul \n");
 	double distx = ((double)g->first_x - g->last_x);
 	if (distx < 0)
 		distx *= -1;
@@ -183,7 +183,7 @@ void ft_fill_3Dmap(t_game *g)
 void drawLine_angle_3D2(int x, t_game *g, double hauteur)
 {
     double	i;
-    //int color;
+    int color;
     //x = x + (60/(g->column*64));
     // printf("hauteur avant : %f\n", hauteur);
     double debut_mur = ((SCREEN_LENGTH)/2) - (hauteur/2); 
@@ -202,7 +202,7 @@ void drawLine_angle_3D2(int x, t_game *g, double hauteur)
     
     //printf("hauteur is: %f, ", hauteur);
     //printf("%f\n", i);
-    //color = ft_draw_wall_ratio(g, hauteur, x);
+    color = ft_draw_wall_ratio(g, hauteur, x);
 	while (i < SCREEN_LENGTH)
 	{
         
@@ -211,7 +211,7 @@ void drawLine_angle_3D2(int x, t_game *g, double hauteur)
         if (i >= debut_mur && i < (debut_mur + hauteur))
         {
             // printf("c1 : x %i, i %i\n", x, (int)i);
-            img_pix_put(&g->cub3dmap, x, i, RED);
+            img_pix_put(&g->cub3dmap, x, i, color);
         }
         i++;
 	}
