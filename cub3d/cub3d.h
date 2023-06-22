@@ -6,7 +6,7 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:46 by imoumini          #+#    #+#             */
-/*   Updated: 2023/06/18 20:24:17 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/06/22 20:43:53 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ typedef struct s_img
 	int		bpp; /* bits per pixel */
 	int		line_len; /*nbr de bytes que represente une ligne sur notre image*/
 	int		endian;
+	int		width_x; // width de limage quand c un sprite
+	int		heigth_y; // eight de limage quand c un sprite
 }	t_img;
 
 typedef struct s_game
@@ -84,9 +86,11 @@ typedef struct s_game
 	/* img property*/
 	t_img	img_mini_map;
 	t_img	cub3dmap;
-
+	double	texture[960];
 	int x;
 	int y;
+	t_img	warrior;
+
 	int first_x;
 	int first_y;
 	int last_x;
@@ -118,6 +122,8 @@ int		nb_ligne(char *file);
 void	save_wall(t_game *g);
 /*img and line gestion*/
 void	ft_image(t_game *g);
+void	ft_image_minimap(t_game *g);
+void	ft_image_3D(t_game *g);
 void	ft_put_img_to_window(t_game *g);
 void	ft_render_mini_map(t_game *g);
 void	ft_render_mini_map_while(t_game *g, int i, int j);
@@ -132,6 +138,8 @@ int		in_wall(int x, int y, t_game *g);
 void ft_fill_3Dmap(t_game *g);
 void drawLine_angle_3D(int x, int y, double angle,t_game *g, double hauteur);
 void drawLine_angle_3D2(int x, t_game *g, double hauteur);
+unsigned int	ft_get_color(t_img *data, int x, int y);
+int 	ft_draw_wall_ratio(t_game *g, double hauteur, int x);
 /*mouvement*/
 void 	move_d(t_game *g);
 void 	move_s(t_game *g);

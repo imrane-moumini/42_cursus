@@ -6,11 +6,109 @@
 /*   By: imoumini <imoumini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 15:59:05 by imoumini          #+#    #+#             */
-/*   Updated: 2023/06/18 21:03:14 by imoumini         ###   ########.fr       */
+/*   Updated: 2023/06/22 20:45:04 by imoumini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+unsigned int	ft_get_color(t_img *data, int x, int y)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_len + x * 4);
+	return (*(unsigned int *)dst);
+}
+
+int 	ft_draw_wall_ratio(t_game *g, double hauteur, int x)
+{
+	// x = le pixel en longueur de la fenetre faut que ca soit pas plus grand que la fenetre
+	int		color;
+	double	ratio;
+	double	wall_size;
+	// int		x;
+	// int		y;
+
+	wall_size = hauteur;
+	// x = rc->printy + rc->i;
+	// y = rc->index;
+	//ratio = ((double)d.y / wall_size);
+	ratio = ((double)g->warrior.heigth_y / wall_size);
+	//ratio *= rc->i;
+	ratio *= x;
+	color = ft_get_color(&g->warrior, g->texture[x - 1], ratio);
+	return (color);
+	//ft_my_mlx_pixel_put(&v->ig2, x, y, color);
+}
+
+// void	ft_draw_texture_and_floor(t_v *v, t_raycast *rc)
+// {
+// 	while (rc->i <= rc->tab[rc->index] && (rc->printy + rc->i) <= 599)
+// 	{
+// 		if (rc->dir[rc->index] == 'N' && (rc->printy + rc->i) > 0)
+// 			ft_draw_wall_ratio(v, v->walln, rc);
+// 		if (rc->dir[rc->index] == 'S' && (rc->printy + rc->i) > 0)
+// 			ft_draw_wall_ratio(v, v->walls, rc);
+// 		if (rc->dir[rc->index] == 'O' && (rc->printy + rc->i) > 0)
+// 			ft_draw_wall_ratio(v, v->wallw, rc);
+// 		if (rc->dir[rc->index] == 'E' && (rc->printy + rc->i) > 0)
+// 			ft_draw_wall_ratio(v, v->walle, rc);
+// 		rc->i++;
+// 	}
+// 	while ((rc->printy + rc->i) > rc->tab[rc->index] 
+// 	&& (rc->printy + rc->i) <= 599)
+// 	{
+// 		ft_my_mlx_pixel_put(&v->ig2, (rc->printy + rc->i), rc->index, 
+// 		ft_rgb_to_int(0, v->valfrgb[0], v->valfrgb[1], v->valfrgb[2]));
+// 		rc->i++;
+// 	}
+// }
+
+
+int	ft_rgb_to_int(int t, int r, int g, int b)
+{
+	int	color;
+
+	color = 0;
+	color |= b;
+	color |= g << 8;
+	color |= r << 16;
+	color |= t << 24;
+	return (color);
+}
+
+double return_degree_start(char *tab[])
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	if (!tab)
+		return (0);
+	//printf("im here \n");
+	while (tab[i])
+	{
+		//printf("im here 2\n");
+		j = 0;
+		while(tab[i][j])
+		{
+			//printf("im here 3\n");
+			if (tab[i][j] == 'E')
+				return (330);
+			if (tab[i][j] == 'N')
+				return (240);
+			if (tab[i][j] == 'W')
+				return (150);
+			if (tab[i][j] == 'S')
+				return (60);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 void	img_pix_put(t_img *img, int x, int y, int color)
 {
 	char    *pixel;
@@ -120,7 +218,9 @@ int main(int argc, char *argv[])
     g.win_ptr = mlx_new_window(g.mlx_ptr, 64 * g.column, 64 * g.ligne, "Minimap");
 	g.win2_ptr = mlx_new_window(g.mlx_ptr, SCREEN_WIDTH, SCREEN_LENGTH, "CUB3D");
 	g.pos_pers = malloc(sizeof(t_pos));
-	g.pos_pers -> degree = 330;
+	// g.pos_pers -> degree = 330;
+	g.pos_pers -> degree = return_degree_start(g.tab);
+	//printf("degree at first is %f\n",g.pos_pers -> degree);
 	g.pos_pers-> save.first = g.pos_pers -> degree;
     if (g.win_ptr == NULL)
 	{
@@ -133,8 +233,14 @@ int main(int argc, char *argv[])
 	print_gnode(g.node);
 	ft_image(&g);
 	fill_image(&g);
+	g.warrior.mlx_img = mlx_xpm_file_to_image(g.mlx_ptr, "./walle.xpm", \
+		&g.warrior.width_x, &g.warrior.heigth_y);
+	g.warrior.mlx_img = mlx_get_data_addr(g.warrior.mlx_img, &g.warrior.bpp, &g.warrior.line_len, &g.warrior.endian);
+	//printf("degree at end is %f\n",g.pos_pers -> degree);
 	mlx_hook(g.win_ptr, KeyPress, KeyPressMask, &handle_input, &g);
 	mlx_hook(g.win_ptr, DestroyNotify, StructureNotifyMask, &handle_click, &g);
+	mlx_hook(g.win2_ptr, KeyPress, KeyPressMask, &handle_input, &g);
+	mlx_hook(g.win2_ptr, DestroyNotify, StructureNotifyMask, &handle_click, &g);
 	printf("tab length is :%i\n",g.tab_length);
 	ft_put_img_to_window(&g);
     mlx_loop(g.mlx_ptr);
@@ -142,34 +248,15 @@ int main(int argc, char *argv[])
     mlx_destroy_display(g.mlx_ptr);
     free(g.mlx_ptr);
 }
-// mathieu doit m'expliquer son code sur comment il a calculer les murs
-// regler l'histoire de normalement le 60 degré et du coup les 60 traits doit
-// etre sur une vue a g->column*64 n(du coup multiplier le 1 par 0.6) pour eviter les repetitions
-//voir pk ça ça fait que rien ne saffiche dans les 2 fenetres => i = i + (60/(g->column*64));
-	// en fait quand je fais *0.6 ça fait une boucle trop grande et affiche rien
-	// lui g limpression il utilise pas le i comme x mais pour faire ses calculs
-	// du coup ya une logique que g pas capté qu'il faut q'uil m'explique
-	// pasque dans le tuto ca dit le prochain trait je le trace au porchain degree 
-	// donc normalement à i + 1 mais ca fonctionne pas
-// g capté, en faut les 1000 rayons * 0,6 je lmes lances pas dans la fonction qui trace les traits
-// je les lances dans la fonction qui est censé enregistrer les murs
-// comme ça j'aurais 1000 murs et je pourrais bien reporter la chose
-// mais g l'impression que c'est ce que g fait quand g enregistré 1000 valeurs dans le tab
-// g testé de le rajouter quand meme dans la boucle qui apple drawline (elle appelle aussi save_wall) mais rebelotte ça prend trop de temps
-// de toute facon il faut lancer 1000 rayon dans 60 degré donc soit je met la le calcul soit je le met dans le truc qui met les lignes
-// mais je pense que c la ou je me souvien des hauteurs, dans tous les cas ca fonctionne pas, voir avec mathieu
-// je suis pas sur si ma technique pour detecter un mur est compatible avec lalgo, voir avec mathieu et si c bon voir
-// si je calcule bien les murs
-// en fait g l'impression que cest dans la fonction ou il dessine
-// le straits qu'il calcuul la hauteur sauf que je vois pas a quel moment
-// il voit un mur
-// dans sa boucle il incremente un i qui represente les degré mais je comprends pas 
-// ce qu'il en faitr en fait. 
-// dans sa logique ca voudrait dire il a deja les hauteur des murs
-// au moment de smurs mais meme ca jsuis pas sur
-// bon en fait faut qu'il m'explique son code sinon je vais jamais capter
-// vraiment chaque ligne
-// la g vu que sa loigique est totaklmeent differernet
-// il fait tout en meme temps danbs ldraw_line_dir3d
-// g l'impression qu'il reutilse meme plus la map 2D
-// sacahnt que la fonction draw_line_dir3D est longue de ouf et g pas tout capté
+
+// eyefish
+// texture
+// determiner la direction pour savoir quel mur mettre
+// ciel et sol
+// valgrind
+
+
+// g faiut le debut de la logique 3D
+// pour le moment je bosse sur move_D
+// la quand hje fais ,le 3D sisncrit sur la fenetre 2D
+// ca normalement c quand je vaistrop loin bah il ecrit sur la 2D

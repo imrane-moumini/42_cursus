@@ -17,7 +17,7 @@ void move_d(t_game *g)
 	t_rect rect;
 	mlx_destroy_image(g -> mlx_ptr, g->img_mini_map.mlx_img);
 	// j'avamce de 10
-	ft_image(g);
+	ft_image_minimap(g);
 	ft_render_mini_map_without_perso(g); 
 	if (g->pos_pers->x + 10 < g->column *64)
 	{
@@ -31,8 +31,17 @@ void move_d(t_game *g)
 	// en fait quand j'appelle render_perso_rect faut que je lui envoi le premier pixel du coup pixel actuel -60
 	// c meem plus precis que ca pasque si je tourne en vriter bah je vais pas faire -60 bref
 	// en gros faut que qund je bouge je reste au dernier degreer de depart
+	g->tab_length = 0;
+	g->counter = 0;
 	render_perso_rect(g, rect, &g->img_mini_map);
 	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_mini_map.mlx_img, 0, 0);
+	mlx_destroy_image(g -> mlx_ptr, g->cub3dmap.mlx_img);
+	ft_image_3D(g);
+	
+	// faut que je recalcule les hauteur
+	ft_fill_3Dmap(g);
+	//printf("tab length is :%i\n",g->tab_length);
+	mlx_put_image_to_window(g->mlx_ptr, g->win2_ptr, g->cub3dmap.mlx_img, 0, 0);
 }
 
 void move_a(t_game *g)
@@ -40,7 +49,7 @@ void move_a(t_game *g)
 	t_rect rect;
 	mlx_destroy_image(g -> mlx_ptr, g->img_mini_map.mlx_img);
 	// j'avamce de 10
-	ft_image(g);
+	ft_image_minimap(g);
 	ft_render_mini_map_without_perso(g); 
 	if (g->pos_pers->x - 10 > 0)
 	{
@@ -50,8 +59,17 @@ void move_a(t_game *g)
 	rect.x = g->pos_pers->x;
 	rect.y = g->pos_pers->y;
 	rect.color = WHITE;
+	g->tab_length = 0;
+	g->counter = 0;
 	render_perso_rect(g, rect, &g->img_mini_map);
 	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_mini_map.mlx_img, 0, 0);
+	mlx_destroy_image(g -> mlx_ptr, g->cub3dmap.mlx_img);
+	ft_image_3D(g);
+	
+	// faut que je recalcule les hauteur
+	ft_fill_3Dmap(g);
+	//printf("tab length is :%i\n",g->tab_length);
+	mlx_put_image_to_window(g->mlx_ptr, g->win2_ptr, g->cub3dmap.mlx_img, 0, 0);
 }
 
 void move_w(t_game *g)
@@ -59,7 +77,7 @@ void move_w(t_game *g)
 	t_rect rect;
 	mlx_destroy_image(g -> mlx_ptr, g->img_mini_map.mlx_img);
 	// j'avamce de 10
-	ft_image(g);
+	ft_image_minimap(g);
 	ft_render_mini_map_without_perso(g); 
 	if (g->pos_pers->y - 10 > 0)
 	{
@@ -69,8 +87,17 @@ void move_w(t_game *g)
 	rect.x = g->pos_pers->x;
 	rect.y = g->pos_pers->y;
 	rect.color = WHITE;
+	g->tab_length = 0;
+	g->counter = 0;
 	render_perso_rect(g, rect, &g->img_mini_map);
 	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_mini_map.mlx_img, 0, 0);
+	mlx_destroy_image(g -> mlx_ptr, g->cub3dmap.mlx_img);
+	ft_image_3D(g);
+	
+	// faut que je recalcule les hauteur
+	ft_fill_3Dmap(g);
+	//printf("tab length is :%i\n",g->tab_length);
+	mlx_put_image_to_window(g->mlx_ptr, g->win2_ptr, g->cub3dmap.mlx_img, 0, 0);
 }
 
 void move_s(t_game *g)
@@ -78,7 +105,7 @@ void move_s(t_game *g)
 	t_rect rect;
 	mlx_destroy_image(g -> mlx_ptr, g->img_mini_map.mlx_img);
 	// j'avamce de 10
-	ft_image(g);
+	ft_image_minimap(g);
 	ft_render_mini_map_without_perso(g);
 	if (g->pos_pers->y + 10 < g->ligne *64)
 	{
@@ -88,8 +115,17 @@ void move_s(t_game *g)
 	rect.x = g->pos_pers->x;
 	rect.y = g->pos_pers->y;
 	rect.color = WHITE;
+	g->tab_length = 0;
+	g->counter = 0;
 	render_perso_rect(g, rect, &g->img_mini_map);
 	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_mini_map.mlx_img, 0, 0);
+	mlx_destroy_image(g -> mlx_ptr, g->cub3dmap.mlx_img);
+	ft_image_3D(g);
+	
+	// faut que je recalcule les hauteur
+	ft_fill_3Dmap(g);
+	//printf("tab length is :%i\n",g->tab_length);
+	mlx_put_image_to_window(g->mlx_ptr, g->win2_ptr, g->cub3dmap.mlx_img, 0, 0);
 }
 
 void move_left(t_game *g)
@@ -97,7 +133,7 @@ void move_left(t_game *g)
 	t_rect rect;
 	mlx_destroy_image(g -> mlx_ptr, g->img_mini_map.mlx_img);
 	// j'avamce de 10
-	ft_image(g);
+	ft_image_minimap(g);
 	ft_render_mini_map_without_perso(g);
 	if (g->pos_pers-> save.first - 5 >= 0)
 		g->pos_pers-> save.first = g->pos_pers-> save.first - 5;
@@ -106,8 +142,17 @@ void move_left(t_game *g)
 	rect.x = g->pos_pers->x;
 	rect.y = g->pos_pers->y;
 	rect.color = WHITE;
+	g->tab_length = 0;
+	g->counter = 0;
 	render_perso_rect(g, rect, &g->img_mini_map);
 	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_mini_map.mlx_img, 0, 0);
+	mlx_destroy_image(g -> mlx_ptr, g->cub3dmap.mlx_img);
+	ft_image_3D(g);
+	
+	// faut que je recalcule les hauteur
+	ft_fill_3Dmap(g);
+	//printf("tab length is :%i\n",g->tab_length);
+	mlx_put_image_to_window(g->mlx_ptr, g->win2_ptr, g->cub3dmap.mlx_img, 0, 0);
 }
 
 void move_right(t_game *g)
@@ -115,7 +160,7 @@ void move_right(t_game *g)
 	t_rect rect;
 	mlx_destroy_image(g -> mlx_ptr, g->img_mini_map.mlx_img);
 	// j'avamce de 10
-	ft_image(g);
+	ft_image_minimap(g);
 	ft_render_mini_map_without_perso(g);
 	if (g->pos_pers-> save.first + 5 <= 360)
 		g->pos_pers-> save.first = g->pos_pers-> save.first + 5;
@@ -124,8 +169,17 @@ void move_right(t_game *g)
 	rect.x = g->pos_pers->x;
 	rect.y = g->pos_pers->y;
 	rect.color = WHITE;
+	g->tab_length = 0;
+	g->counter = 0;
 	render_perso_rect(g, rect, &g->img_mini_map);
 	mlx_put_image_to_window(g->mlx_ptr, g->win_ptr, g->img_mini_map.mlx_img, 0, 0);
+	mlx_destroy_image(g -> mlx_ptr, g->cub3dmap.mlx_img);
+	ft_image_3D(g);
+	
+	// faut que je recalcule les hauteur
+	ft_fill_3Dmap(g);
+	//printf("tab length is :%i\n",g->tab_length);
+	mlx_put_image_to_window(g->mlx_ptr, g->win2_ptr, g->cub3dmap.mlx_img, 0, 0);
 }
 
 

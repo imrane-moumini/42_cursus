@@ -50,6 +50,18 @@ void	ft_image(t_game *g)
 	g->cub3dmap.addr = mlx_get_data_addr(g->cub3dmap.mlx_img, &g->cub3dmap.bpp, &g->cub3dmap.line_len, &g->cub3dmap.endian);
 }
 
+void	ft_image_minimap(t_game *g)
+{
+	g->img_mini_map.mlx_img = mlx_new_image(g->mlx_ptr, 64 * g->column, 64 * g->ligne);
+	g->img_mini_map.addr = mlx_get_data_addr(g->img_mini_map.mlx_img, &g->img_mini_map.bpp, &g->img_mini_map.line_len, &g->img_mini_map.endian);
+}
+
+void	ft_image_3D(t_game *g)
+{
+	g->cub3dmap.mlx_img = mlx_new_image(g->mlx_ptr, SCREEN_WIDTH, SCREEN_LENGTH);
+	g->cub3dmap.addr = mlx_get_data_addr(g->cub3dmap.mlx_img, &g->cub3dmap.bpp, &g->cub3dmap.line_len, &g->cub3dmap.endian);
+}
+
 
 void	ft_render_mini_map_while(t_game *g, int i, int j)
 {
@@ -57,7 +69,7 @@ void	ft_render_mini_map_while(t_game *g, int i, int j)
 		render_rect(g, (t_rect){64*j,64*i,BLUE}, &g->img_mini_map);
 	if (g->tab[i][j] == '0')
 		render_rect(g, (t_rect){64*j,64*i,BLACK}, &g->img_mini_map);
-	if (g->tab[i][j] == 'P')
+	if (g->tab[i][j] == 'N' || g->tab[i][j] == 'O' || g->tab[i][j] == 'W' || g->tab[i][j] == 'E' || g->tab[i][j] == 'S')
 		render_perso_rect(g, (t_rect){64*j,64*i,WHITE}, &g->img_mini_map);
 }
 
