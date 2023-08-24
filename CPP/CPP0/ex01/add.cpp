@@ -2,7 +2,7 @@
 #include "add.hpp"
 int check_if_input_is_empty(std::string contact_info)
 {
-    if (std::strcmp(input, "") == 0)
+    if (contact_info.compare("") == 0)
         return (1);
     return (0);
 }
@@ -49,21 +49,6 @@ void fill_nickname(PhoneBook& phone_book, int i)
         std::getline(std::cin, contact_info);
     }
     phone_book.tab[i].fill_nickname(contact_info);
-}
-
-void fill_phone_number(PhoneBook& phone_book, int i)
-{
-    std::string contact_info;
-    std::cout << "Enter the phone number of the contact\n";
-    std::getline(std::cin, contact_info);
-    
-    while (check_if_input_is_empty(contact_info) == 1)
-    {
-        std::cout << "input can't be empty\n";
-        std::cout << "Enter the phone number of the contact\n";
-        std::getline(std::cin, contact_info);
-    }
-    phone_book.tab[i].fill_phone_number(contact_info);
 }
 
 void fill_phone_number(PhoneBook& phone_book, int i)

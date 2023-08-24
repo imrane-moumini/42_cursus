@@ -2,6 +2,7 @@
 #include "search.hpp"
 #include "add.hpp"
 #include <cstring>
+#include <cstdlib>
 int nbr_contact;
 
 void fill_contact_info(PhoneBook &phone_book, int i)
@@ -13,11 +14,10 @@ void fill_contact_info(PhoneBook &phone_book, int i)
     fill_phone_number(phone_book, i);
     fill_darkest_secret(phone_book, i);
 }
-int main(int argc, char *argv[])
+int main()
 {
     int i;
     int affiche;
-
     affiche = 0;
     i = 0;
     std::string input;
@@ -62,13 +62,13 @@ int main(int argc, char *argv[])
                 // gérer affiche un index, gérer si l'index existe pas
                 std::cout << "Enter a specific index for which you would like to see info\n";
                 std::getline(std::cin, input);
-                while (std::stoi(input) > nbr_contact)
+                while (std::atoi(input.c_str()) > nbr_contact)
                 {
                     std::cout << "there isn't any " << input << " index";
                     std::cout << "Enter a specific index for which you would like to see info\n";
                     std::getline(std::cin, input);
                 }
-                print_specific_index(phone_book, std::stoi(input));
+                print_specific_index(phone_book, std::atoi(input.c_str()));
             }
             else if (input.compare("EXIT") == 0)
                 return (1);

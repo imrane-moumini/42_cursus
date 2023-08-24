@@ -4,8 +4,7 @@ FLAGS		= -Wall -Werror -Wextra -std=c++98
 SRC			= add.cpp \
 				Contact.cpp \
 				main.cpp \
-				PhoneBook.cpp \
-				Search.cpp
+				search.cpp
 OBJ			= $(SRC:.cpp=.o)
 RM			= rm -f
 

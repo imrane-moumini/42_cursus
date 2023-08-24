@@ -11,8 +11,11 @@ private:
 	std::string phone_number;
 	std::string darkest_secret;
 public:
-// getter
-	Contact() = default;
+
+	Contact(){
+		
+	};
+	// getter
 	std::string get_first_name();
 	std::string get_last_name();
 	std::string get_nickname();
