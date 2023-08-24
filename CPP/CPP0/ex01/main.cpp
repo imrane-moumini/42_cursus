@@ -5,6 +5,15 @@
 #include <cstdlib>
 int nbr_contact;
 
+int is_numeric(const std::string& str) {
+    for (long unsigned int i;  i < str.length(); i++ ) {
+        if (!std::isdigit(str[i])) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 void fill_contact_info(PhoneBook &phone_book, int i)
 {
 
@@ -60,9 +69,12 @@ int main()
                     // gérer affiche un index, gérer si l'index existe pas
                     std::cout << "Enter a specific index for which you would like to see info\n";
                     std::getline(std::cin, input);
-                    while (std::atoi(input.c_str()) > nbr_contact)
+                    while (is_numeric(input) || std::atoi(input.c_str()) > nbr_contact)
                     {
-                        std::cout << "there isn't any " << input << " index";
+                        if (is_numeric(input))
+                            std::cout << input << "is not a number\n";
+                        else
+                            std::cout << "there isn't any " << input << " index\n";
                         std::cout << "Enter a specific index for which you would like to see info\n";
                         std::getline(std::cin, input);
                     }
@@ -78,3 +90,5 @@ int main()
             std::cout << "Your command is invalid, you can only choose between : 'EXIT' or 'SEARCH' or 'ADD'\n";
     };
 }
+// gerer le phone number si pas chiffre
+// gerer index choisi n'est pas un chiffre

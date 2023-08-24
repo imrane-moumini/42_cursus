@@ -57,9 +57,12 @@ void fill_phone_number(PhoneBook& phone_book, int i)
     std::cout << "Enter the phone number of the contact\n";
     std::getline(std::cin, contact_info);
     
-    while (check_if_input_is_empty(contact_info) == 1)
+    while (is_numeric(contact_info) || check_if_input_is_empty(contact_info) == 1)
     {
-        std::cout << "input can't be empty\n";
+        if (is_numeric(contact_info))
+            std::cout << contact_info << " is not a number\n";
+        else
+            std::cout << "input can't be empty\n";
         std::cout << "Enter the phone number of the contact\n";
         std::getline(std::cin, contact_info);
     }

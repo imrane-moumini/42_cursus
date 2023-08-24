@@ -8,4 +8,5 @@ void fill_last_name(PhoneBook& phone_book, int i);
 void fill_nickname(PhoneBook& phone_book, int i);
 void fill_phone_number(PhoneBook& phone_book, int i);
 void fill_darkest_secret(PhoneBook& phone_book, int i);
+int is_numeric(const std::string& str);
 #endif
