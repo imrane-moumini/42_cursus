@@ -6,7 +6,7 @@
 int nbr_contact;
 
 int is_numeric(const std::string& str) {
-    for (long unsigned int i;  i < str.length(); i++ ) {
+    for (long unsigned int i = 0;  i < str.length(); i++ ) {
         if (!std::isdigit(str[i])) {
             return 0;
         }
@@ -69,10 +69,10 @@ int main()
                     // gérer affiche un index, gérer si l'index existe pas
                     std::cout << "Enter a specific index for which you would like to see info\n";
                     std::getline(std::cin, input);
-                    while (is_numeric(input) || std::atoi(input.c_str()) > nbr_contact)
+                    while (!is_numeric(input) || std::atoi(input.c_str()) > nbr_contact)
                     {
-                        if (is_numeric(input))
-                            std::cout << input << "is not a number\n";
+                        if (!is_numeric(input))
+                            std::cout << input << " is not a number\n";
                         else
                             std::cout << "there isn't any " << input << " index\n";
                         std::cout << "Enter a specific index for which you would like to see info\n";
