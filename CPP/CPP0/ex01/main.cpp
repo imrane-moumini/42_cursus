@@ -45,7 +45,7 @@ int main()
             {
                 if (nbr_contact < 8)
                     nbr_contact++;
-                if (nbr_contact > 8)
+                if (nbr_contact >= 8)
                     i = 0;
                 phone_book.tab[i] = Contact();
                 fill_contact_info(phone_book, i);
@@ -90,5 +90,4 @@ int main()
             std::cout << "Your command is invalid, you can only choose between : 'EXIT' or 'SEARCH' or 'ADD'\n";
     };
 }
-// gerer le phone number si pas chiffre
-// gerer index choisi n'est pas un chiffre
+// voit pk le 8eme contact est ecris en vide
