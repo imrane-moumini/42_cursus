@@ -43,9 +43,9 @@ int main()
         {
             if (input.compare("ADD") == 0)
             {
-                if (nbr_contact < 8)
+                if (nbr_contact <= 8)
                     nbr_contact++;
-                if (nbr_contact >= 8)
+                if (nbr_contact > 8)
                     i = 0;
                 phone_book.tab[i] = Contact();
                 fill_contact_info(phone_book, i);
@@ -58,7 +58,7 @@ int main()
                     std::cout << "the phoneBook is empty right now please add contact first\n";
                 else
                 {
-                    while (affiche + 1 <= nbr_contact)
+                    while (affiche < 8 && affiche < nbr_contact)
                     {
                         std::cout << (1 + affiche) << "|";
                         std::cout << "   ";
@@ -69,11 +69,11 @@ int main()
                     // gérer affiche un index, gérer si l'index existe pas
                     std::cout << "Enter a specific index for which you would like to see info\n";
                     std::getline(std::cin, input);
-                    while (!is_numeric(input) || std::atoi(input.c_str()) > nbr_contact)
+                    while (!is_numeric(input) || (std::atoi(input.c_str()) > nbr_contact || std::atoi(input.c_str()) > 8 || std::atoi(input.c_str()) <= 0))
                     {
                         if (!is_numeric(input))
                             std::cout << input << " is not a number\n";
-                        else
+                        else if (std::atoi(input.c_str()) > nbr_contact || std::atoi(input.c_str()) > 8 || std::atoi(input.c_str()) <= 0)
                             std::cout << "there isn't any " << input << " index\n";
                         std::cout << "Enter a specific index for which you would like to see info\n";
                         std::getline(std::cin, input);
