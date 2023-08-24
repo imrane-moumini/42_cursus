@@ -4,10 +4,11 @@
 void print_right_text(std::string str){
     int i;
     int diff;
-
+    int length;
     i = 0;
     if (str.length() > 10)
     {
+        
         while (i < 8)
         {
             std::cout << str[i];
@@ -19,10 +20,17 @@ void print_right_text(std::string str){
     else
     {
         diff = 10 - str.length();
+        length = str.length();
+        diff--;
         while (diff)
         {
             std::cout << ' ';
             diff--;
+        }
+        while (i < length)
+        {
+            std::cout << str[i];
+            i++;
         }
         std::cout << '|';
     }

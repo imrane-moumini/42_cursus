@@ -46,29 +46,30 @@ int main()
             {
                 // gérer si le répertoir est vide
                 if (phone_book.tab[0].get_first_name().compare("Artena") == 0)
-                    std::cout << "the phoneBook is empty right now please add contact first";
+                    std::cout << "the phoneBook is empty right now please add contact first\n";
                 else
                 {
-                    while (affiche + 1 < nbr_contact)
+                    while (affiche + 1 <= nbr_contact)
                     {
-                        std::cout << '0' + 1 + affiche << "|";
+                        std::cout << (1 + affiche) << "|";
                         std::cout << "   ";
                         print_phonebook(phone_book, affiche);
                         affiche++;
                         std::cout << std::endl;
                     }
-                }
-                affiche = 0;
-                // gérer affiche un index, gérer si l'index existe pas
-                std::cout << "Enter a specific index for which you would like to see info\n";
-                std::getline(std::cin, input);
-                while (std::atoi(input.c_str()) > nbr_contact)
-                {
-                    std::cout << "there isn't any " << input << " index";
+                    // gérer affiche un index, gérer si l'index existe pas
                     std::cout << "Enter a specific index for which you would like to see info\n";
                     std::getline(std::cin, input);
+                    while (std::atoi(input.c_str()) > nbr_contact)
+                    {
+                        std::cout << "there isn't any " << input << " index";
+                        std::cout << "Enter a specific index for which you would like to see info\n";
+                        std::getline(std::cin, input);
+                    }
+                    print_specific_index(phone_book, std::atoi(input.c_str()));
                 }
-                print_specific_index(phone_book, std::atoi(input.c_str()));
+                affiche = 0;
+                
             }
             else if (input.compare("EXIT") == 0)
                 return (1);
