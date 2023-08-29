@@ -13,7 +13,7 @@ public:
     void setWeapon(Weapon& arme);
     
 private:
-    Weapon arme;
+    Weapon *arme;
     std::string name;
 };
 

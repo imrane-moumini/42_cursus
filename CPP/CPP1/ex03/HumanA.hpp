@@ -12,7 +12,7 @@ public:
     void attack();
     
 private:
-    Weapon arme;
+    Weapon& arme;
     std::string name;
 };
 

@@ -1,7 +1,7 @@
 #include "HumanB.hpp"
 
 void HumanB::attack(){
-    std::cout << name << " attack with their " << arme.getType() << std::endl;
+    std::cout << name << " attack with their " << arme->getType() << std::endl;
 };
 
 HumanB::HumanB(std::string name){
@@ -9,7 +9,7 @@ HumanB::HumanB(std::string name){
 };
 
 void HumanB::setWeapon(Weapon& arme){
-    this->arme = arme;
+    this->arme = &arme;
 };
 
 
