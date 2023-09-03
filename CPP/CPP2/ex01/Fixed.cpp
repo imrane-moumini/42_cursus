@@ -11,13 +11,19 @@ Fixed::Fixed(int const nbr){
     std::cout << StockEnt << std::endl;
 }
 
+Fixed::Fixed(float const nbr){
+    std::cout << "Float constructor called" << std::endl;
+    StockEnt = roundf(nbr * (1 << NbrBytesFr));
+    std::cout << StockEnt << std::endl;
+}
 
-Fixed::Fixed(Fixed &rhs){
+Fixed::Fixed(const Fixed& rhs){
     std::cout << "Copy constructor called" << std::endl;
     StockEnt = rhs.getRawBits();
 }
 
-Fixed& Fixed::operator=(Fixed &rhs){
+
+Fixed& Fixed::operator=(const Fixed& rhs){
     std::cout << "Copy assignment operator called " << std::endl;
     StockEnt = rhs.getRawBits();
     return *this;
@@ -38,3 +44,17 @@ void	Fixed::setRawBits(int const raw)
 	StockEnt = raw;
 }
 
+float Fixed::toFloat() const {
+
+    return (float)StockEnt/ (1 << NbrBytesFr); 
+}
+
+int Fixed::toInt() const {
+    return StockEnt >> NbrBytesFr; 
+}
+
+std::ostream& operator <<(std::ostream &out, const Fixed &fixed)
+{
+	out << fixed.toFloat();
+	return (out);
+}
