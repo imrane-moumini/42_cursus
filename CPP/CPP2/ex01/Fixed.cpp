@@ -8,13 +8,13 @@ Fixed::Fixed(){
 Fixed::Fixed(int const nbr){
     std::cout << "Int constructor called" << std::endl;
     StockEnt = nbr << NbrBytesFr;
-    std::cout << StockEnt << std::endl;
+
 }
 
-Fixed::Fixed(float const nbr){
+Fixed::Fixed(const float  nbr){
     std::cout << "Float constructor called" << std::endl;
     StockEnt = roundf(nbr * (1 << NbrBytesFr));
-    std::cout << StockEnt << std::endl;
+
 }
 
 Fixed::Fixed(const Fixed& rhs){
@@ -30,7 +30,7 @@ Fixed& Fixed::operator=(const Fixed& rhs){
 }
 
 int Fixed::getRawBits() const {
-    std::cout << "getRawBits member function called" << std::endl;
+    //std::cout << "getRawBits member function called" << std::endl;
     return StockEnt; 
 }
 
@@ -38,7 +38,7 @@ Fixed::~Fixed(){
     std::cout << "Destructor called" << std::endl;
 }
 
-void	Fixed::setRawBits(int const raw)
+void	Fixed::setRawBits(const int raw)
 {
 	std::cout << "setRawBits member function called" << std::endl;
 	StockEnt = raw;

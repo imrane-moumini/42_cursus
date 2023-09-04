@@ -19,4 +19,6 @@ std::cout << "c is " << c.toInt() << " as integer" << std::endl;
 std::cout << "d is " << d.toInt() << " as integer" << std::endl;
 
 return 0; 
+//pour la ligne 9 le float cpnstrructor est appelé puis c le coppy assignment
+// ca a du sens mais voir comment ne pas appeler le float et juste le assig
 }
