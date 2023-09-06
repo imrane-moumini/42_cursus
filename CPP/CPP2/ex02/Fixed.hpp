@@ -18,23 +18,25 @@ public:
     void setRawBits(int const raw);
     int toInt (void) const;
     float toFloat(void) const;
-    Fixed& min(Fixed& nbr1, Fixed& nbr2);
-    Fixed& min(const Fixed& nbr1, const Fixed& nbr2);
-    Fixed& max(Fixed& nbr1, Fixed& nbr2);
-    Fixed& max(const Fixed& nbr1, const Fixed& nbr2);
+    static Fixed& min(Fixed& nbr1, Fixed& nbr2);
+    static const Fixed& min(const Fixed&  nbr1,  const Fixed&  nbr2);
+    static Fixed& max(Fixed& nbr1, Fixed& nbr2);
+    static const Fixed& max( const Fixed&  nbr1,  const Fixed&  nbr2);
     //overloading
-    bool operator>(Fixed& obj);
-    bool operator<(Fixed& obj);
-    bool operator>=(Fixed& obj);
-    bool operator<=(Fixed& obj);
-    bool operator==(Fixed& obj);
-    bool operator!=(Fixed& obj);
-    int  operator+(Fixed& obj);
-    int  operator-(Fixed& obj);
-    int  operator*(Fixed& obj);
-    int  operator/(Fixed& obj);
-    Fixed&  operator++(int nbr);
-    Fixed&  operator--(int nbr);
+    bool operator>(const Fixed&  obj)  const ;
+    bool operator<(const Fixed&  obj)  const ;
+    bool operator>=(const Fixed&  obj)  const ;
+    bool operator<=(const Fixed&  obj)  const ;
+    bool operator==(const Fixed&  obj)  const ;
+    bool operator!=(const Fixed&  obj)  const ;
+    Fixed  operator+(const Fixed&  obj)  const ;
+    Fixed  operator-(const Fixed&  obj)  const ;
+    Fixed  operator*(const Fixed&  obj)  const ;
+    Fixed  operator/(const Fixed&  obj)  const ;
+    Fixed&  operator++();
+    Fixed&  operator--();
+    Fixed   operator++(int);
+    Fixed   operator--(int);
     
 
 private:

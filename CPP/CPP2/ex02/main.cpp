@@ -19,3 +19,6 @@ std::cout << Fixed::max( a, b ) << std::endl;
 return 0; 
 
 }
+// regarder vido lifetime object
+// regarder comment class fonctionne under the hood
+// voir pk le dernier chiffre n'est pas bon

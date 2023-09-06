@@ -58,3 +58,115 @@ std::ostream& operator <<(std::ostream &out, const Fixed &fixed)
 	out << fixed.toFloat();
 	return (out);
 }
+
+bool Fixed::operator>(const Fixed&  obj) const {
+    if (this->getRawBits() > obj.getRawBits())
+        return true;
+    else
+        return false;
+
+}
+
+bool Fixed::operator<(const Fixed&  obj) const {
+    if (this->getRawBits() < obj.getRawBits())
+        return true;
+    else
+        return false;
+}
+
+bool Fixed::operator>=(const Fixed&  obj) const {
+    if (this->getRawBits() >= obj.getRawBits() )
+        return true;
+    else
+        return false;
+
+}
+
+bool Fixed::operator<=(const Fixed&  obj) const {
+    if (this->getRawBits() <= obj.getRawBits() )
+        return true;
+    else
+        return false;
+}
+
+bool Fixed::operator==(const Fixed&  obj) const {
+    if (this->getRawBits() == obj.getRawBits() )
+        return true;
+    else
+        return false;
+}
+
+bool Fixed::operator!=(const Fixed&  obj) const {
+    if (this->getRawBits() != obj.getRawBits() )
+        return true;
+    else
+        return false;
+}
+
+Fixed Fixed::operator+(const Fixed&  obj) const {
+    Fixed copy( this->getRawBits() + obj.getRawBits() );
+    return ( copy);
+}
+
+Fixed Fixed::operator-(const Fixed&  obj) const {
+    Fixed copy(this->getRawBits() - obj.getRawBits());
+    return (copy);
+}
+
+Fixed Fixed::operator*(const Fixed&  obj) const {
+    Fixed copy(this->getRawBits() * obj.getRawBits());
+    return (copy);
+}
+
+Fixed Fixed::operator/(const Fixed&  obj) const {
+    Fixed copy(this->getRawBits() / obj.getRawBits());
+    return (copy);
+}
+
+Fixed& Fixed::operator++(){
+    this->StockEnt++;
+    return (*this);
+}
+
+Fixed Fixed::operator++(int) {
+    Fixed copy(*this);
+    this->StockEnt++;
+    return copy; 
+}
+
+Fixed& Fixed::operator--(){
+    this->StockEnt--;
+    return (*this);
+}
+
+Fixed Fixed::operator--(int) {
+    Fixed copy(*this);
+    this->StockEnt--;
+    return copy; 
+}
+
+
+Fixed& Fixed::min(Fixed& nbr1, Fixed& nbr2) {
+    if (nbr1 < nbr2)
+        return (nbr1);
+    else
+        return (nbr2);
+}
+const Fixed& Fixed::min( const Fixed& nbr1,  const Fixed&   nbr2) {
+    if (nbr1 < nbr2)
+        return (nbr1);
+    else
+        return (nbr2);
+}
+Fixed& Fixed::max(Fixed& nbr1, Fixed& nbr2) {
+    if (nbr1 > nbr2)
+        return (nbr1);
+    else
+        return (nbr2);
+}
+const Fixed& Fixed::max( const Fixed&  nbr1, const Fixed&  nbr2) {
+    if (nbr1 > nbr2)
+        return (nbr1);
+    else
+        return (nbr2);
+}
