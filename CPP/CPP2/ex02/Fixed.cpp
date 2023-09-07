@@ -104,22 +104,22 @@ bool Fixed::operator!=(const Fixed&  obj) const {
 }
 
 Fixed Fixed::operator+(const Fixed&  obj) const {
-    Fixed copy( this->getRawBits() + obj.getRawBits() );
+    Fixed copy( this->toFloat() + obj.toFloat() );
     return ( copy);
 }
 
 Fixed Fixed::operator-(const Fixed&  obj) const {
-    Fixed copy(this->getRawBits() - obj.getRawBits());
+    Fixed copy(this->toFloat() - obj.toFloat());
     return (copy);
 }
 
 Fixed Fixed::operator*(const Fixed&  obj) const {
-    Fixed copy(this->getRawBits() * obj.getRawBits());
+    Fixed copy(this->toFloat() * obj.toFloat());
     return (copy);
 }
 
 Fixed Fixed::operator/(const Fixed&  obj) const {
-    Fixed copy(this->getRawBits() / obj.getRawBits());
+    Fixed copy(this->toFloat() / obj.toFloat());
     return (copy);
 }
 
