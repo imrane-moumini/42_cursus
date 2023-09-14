@@ -38,6 +38,16 @@ int main()
     {
         std::cout << "Enter a Command\n";
         std::getline(std::cin, input);
+        if (std::cin.eof())
+        {
+            std::cout << "wrong input, relaunch the programm\n";
+            return (0);
+        }
+        if (std::cin.fail())
+        {
+            std::cout << "wrong input, relaunch the program\n";
+            return (0);
+        }
         // l'utilisateur choisi entre ADD, SEARCh et EXIt, sinon refuse
         if (input.compare("EXIT") == 0 || input.compare("SEARCH") == 0 || input.compare("ADD") == 0)
         {
