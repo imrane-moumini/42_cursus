@@ -1,49 +1,15 @@
 #include "search.hpp"
 #include <cstring>
-
+#include <iomanip>
 void print_right_text(std::string str){
-    int i;
-    int diff;
-    int length;
-    i = 0;
     if (str.length() > 10)
-    {
-        
-        while (i < 8)
-        {
-            std::cout << str[i];
-            i++;
-        }
-        std::cout << '.';
-        std::cout << '|';
-    }
+        std::cout << std::right << std::setw(10) << str.substr(0, 9) << "." << "|";
     else
-    {
-        diff = 10 - str.length();
-        length = str.length();
-        diff--;
-        while (diff)
-        {
-            std::cout << ' ';
-            diff--;
-        }
-        while (i < length)
-        {
-            std::cout << str[i];
-            i++;
-        }
-        std::cout << '|';
-    }
+        std::cout << std::right << std::setw(11) << str.substr(0, 10) << "|";
 }
 void print_phonebook(PhoneBook& phone_book, int index){
-    //fonction général qui va compter et renvoyer le bon truc bien formate
-    //print first name
     print_right_text(phone_book.tab[index].get_first_name());
-    std::cout << "   ";
-    //print last name
     print_right_text(phone_book.tab[index].get_last_name());
-    std::cout << "   ";
-    //print nickname
     print_right_text(phone_book.tab[index].get_nickname());
 }
 

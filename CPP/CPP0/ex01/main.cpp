@@ -71,7 +71,6 @@ int main()
                     while (affiche < 8 && affiche < nbr_contact)
                     {
                         std::cout << (1 + affiche) << "|";
-                        std::cout << "   ";
                         print_phonebook(phone_book, affiche);
                         affiche++;
                         std::cout << std::endl;
