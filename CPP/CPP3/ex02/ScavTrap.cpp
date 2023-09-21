@@ -1,20 +1,32 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap() : ClapTrap("Jonh Doe", 100 , 50,20){ 
+ScavTrap::ScavTrap() : ClapTrap("Jonh Doe"){ 
     std::cout << "ScavTrap defaut constructor called" << std::endl;
+    this->HitPoints = 100;
+    this->EnergyPoints = 50;
+    this->AttackDamage = 20;
 }
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name, 100 , 50,20){
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name){
     std::cout << "ScavTrap defaut constructor called" << std::endl;
+    this->HitPoints = HitPoints;
+    this->EnergyPoints = EnergyPoints;
+    this->AttackDamage = AttackDamage;
 }
 
-ScavTrap::ScavTrap(ScavTrap& copy) : ClapTrap(copy.myName(), copy.nbrHitPoints() , copy.nbrEnergyPoints(),copy.nbrAttackDamage()){ 
+ScavTrap::ScavTrap(ScavTrap& copy) : ClapTrap(copy.name){ 
     std::cout << "ScavTrap copy constructor called" << std::endl;
+    this->HitPoints = copy.HitPoints;
+    this->EnergyPoints = copy.EnergyPoints;
+    this->AttackDamage = copy.AttackDamage;
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& copy){ 
-    *this = copy; 
     std::cout << "ScavTrap operator copy constructor called" << std::endl;
+    this->name = copy.name;
+    this->HitPoints = copy.HitPoints;
+    this->EnergyPoints = copy.EnergyPoints;
+    this->AttackDamage = copy.AttackDamage;
     return (*this);
 }
 

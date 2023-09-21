@@ -1,4 +1,5 @@
 #include "ScavTrap.hpp"
+#include "ScavTrap.hpp"
 
 int	main(void)
 {

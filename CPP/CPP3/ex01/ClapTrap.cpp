@@ -9,19 +9,20 @@ ClapTrap::ClapTrap(std::string name) : HitPoints(10),EnergyPoints(10), AttackDam
     this->name = name;
 }
 
-ClapTrap::ClapTrap(std::string name, int hitPoints, int EnergyPoints, int AttackDamage)
- : HitPoints(hitPoints),EnergyPoints(EnergyPoints), AttackDamage(AttackDamage){
-    std::cout << "ClapTrap argumen all construt have been called" << std::endl;
-    this->name = name;
-} 
 ClapTrap::ClapTrap(ClapTrap& copy){
     std::cout << "ClapTrap copy construt have been called" << std::endl;
-    *this = copy;
+    this->name = copy.name;
+    this->HitPoints = copy.HitPoints;
+    this->EnergyPoints = copy.EnergyPoints;
+    this->AttackDamage = copy.AttackDamage;
 }
 
 ClapTrap& ClapTrap::operator=(ClapTrap& copy){
     std::cout << "ClapTrap assignment  operator construt have been called" << std::endl;
-    *this = copy;
+    this->name = copy.name;
+    this->HitPoints = copy.HitPoints;
+    this->EnergyPoints = copy.EnergyPoints;
+    this->AttackDamage = copy.AttackDamage;
     return (*this);
 }
 
@@ -39,19 +40,19 @@ void ClapTrap::attack(const std::string& target){
             std::cout << "ClapTrap "<< this->name << " doesn't have enought Energy points to attack" << std::endl;
 }
 
-int ClapTrap::nbrHitPoints(){
+int ClapTrap::nbrHitPoints() const{
     return (HitPoints);
 };
 
-int ClapTrap::nbrEnergyPoints(){
+int ClapTrap::nbrEnergyPoints() const {
     return (EnergyPoints);
 };
 
-int ClapTrap::nbrAttackDamage(){
+int ClapTrap::nbrAttackDamage() const{
     return (AttackDamage);
 };
 
-std::string ClapTrap::myName(){
+std::string ClapTrap::myName() const{
     return (name);
 };
 

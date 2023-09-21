@@ -1,20 +1,32 @@
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap() : ClapTrap("Jonh Doe", 100 , 100,30){ 
+FragTrap::FragTrap() : ClapTrap("Jonh Doe"){ 
     std::cout << "FragTrap defaut constructor called" << std::endl;
+    this->HitPoints = 100;
+    this->EnergyPoints = 100;
+    this->AttackDamage = 30;
 }
 
-FragTrap::FragTrap(std::string name) : ClapTrap(name, 100 , 100,30){
+FragTrap::FragTrap(std::string name) : ClapTrap(name){
     std::cout << "FragTrap defaut constructor called" << std::endl;
+    this->HitPoints = 100;
+    this->EnergyPoints = 100;
+    this->AttackDamage = 30;
 }
 
-FragTrap::FragTrap(FragTrap& copy) : ClapTrap(copy.myName(), copy.nbrHitPoints() , copy.nbrEnergyPoints(),copy.nbrAttackDamage()){ 
+FragTrap::FragTrap(FragTrap& copy) : ClapTrap(copy.name){ 
     std::cout << "FragTrap copy constructor called" << std::endl;
+    this->HitPoints = copy.HitPoints;
+    this->EnergyPoints = copy.EnergyPoints;
+    this->AttackDamage = copy.AttackDamage;
 }
 
 FragTrap& FragTrap::operator=(const FragTrap& copy){ 
-    *this = copy; 
     std::cout << "FragTrap operator copy constructor called" << std::endl;
+    this->name = copy.name;
+    this->HitPoints = copy.HitPoints;
+    this->EnergyPoints = copy.EnergyPoints;
+    this->AttackDamage = copy.AttackDamage;
     return (*this);
 }
 

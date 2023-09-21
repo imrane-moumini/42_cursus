@@ -7,7 +7,6 @@ class ClapTrap{
     public:
         ClapTrap();
         ClapTrap(std::string name);
-        ClapTrap(std::string name, int hitPoints, int EnergyPoints, int AttackDamage);
         ClapTrap(ClapTrap& copy);
         ClapTrap& operator=(ClapTrap& copy);
         ~ClapTrap();
@@ -15,14 +14,14 @@ class ClapTrap{
         virtual void attack(const std::string& target);
         void takeDamage(unsigned int amount);
         void beRepaired(unsigned int amount);
-        std::string myName();
-        int nbrHitPoints();
-        int nbrEnergyPoints();
-        int nbrAttackDamage();
+        std::string myName() const;
+        int nbrHitPoints() const;
+        int nbrEnergyPoints() const;
+        int nbrAttackDamage() const;
         void useEnergyPoints();
 
 
-    private:
+    protected:
         std::string name;
         int HitPoints;
         int EnergyPoints;

@@ -11,17 +11,40 @@ ClapTrap::ClapTrap(std::string name) : HitPoints(10),EnergyPoints(10), AttackDam
 
 ClapTrap::ClapTrap(ClapTrap& copy){
     std::cout << "copy construt have been called" << std::endl;
-    *this = copy;
+    this->name = copy.getName();
+    this->HitPoints = copy.getHitPoints();
+    this->EnergyPoints = copy.getEnergyPoints();
+    this->AttackDamage = copy.getAttackDamage();
 }
 
 ClapTrap& ClapTrap::operator=(ClapTrap& copy){
     std::cout << "assignment  operator construt have been called" << std::endl;
-    *this = copy;
+
+    this->name = copy.getName();
+    this->HitPoints = copy.getHitPoints();
+    this->EnergyPoints = copy.getEnergyPoints();
+    this->AttackDamage = copy.getAttackDamage();
     return (*this);
 }
 
 ClapTrap::~ClapTrap(){
         std::cout << "default destruct have been called" << std::endl;
+}
+
+std::string ClapTrap::getName(void){
+    return (name);
+}
+
+int ClapTrap::getHitPoints(void){
+    return (HitPoints);
+}
+
+int ClapTrap::getEnergyPoints(void){
+    return (EnergyPoints);
+}
+
+int ClapTrap::getAttackDamage(void){
+    return (AttackDamage);
 }
 
 void ClapTrap::attack(const std::string& target){
