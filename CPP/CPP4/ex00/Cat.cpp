@@ -13,7 +13,7 @@ Cat::Cat(Cat& copy) : Animal(copy.type){
 
 Cat& Cat::operator=(Cat& copy){
     std::cout << "Cat copy assignation constructor call" << std::endl;
-    *this = copy;
+    this->type = copy.type;
     return (*this);
 }
 

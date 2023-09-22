@@ -10,8 +10,8 @@ Cat::Cat(std::string type) : Animal(type){
 }
 
 Cat::Cat(Cat& copy) : Animal(copy.type){
-    std::cout << "Cat copy constructor call" << std::endl;
-    BrainPtr = new Brain;
+     std::cout << "Cat copy constructor call" << std::endl;
+     BrainPtr = new Brain;
     if (copy.BrainPtr)
     {
         for (int i = 0; i < 100; i++)

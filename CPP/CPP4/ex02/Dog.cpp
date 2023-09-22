@@ -10,7 +10,7 @@ Dog::Dog(std::string type): Animal(type){
 }
 
 Dog::Dog(Dog& copy) :  Animal(copy.type){
-    std::cout << "Dog copy constructor call" << std::endl;
+     std::cout << "Dog copy constructor call" << std::endl;
     BrainPtr = new Brain;
     if (copy.BrainPtr)
     {
@@ -23,6 +23,7 @@ Dog::Dog(Dog& copy) :  Animal(copy.type){
 }
 
 Dog& Dog::operator=(Dog& copy){
+    
     std::cout << "Dog copy assignation constructor call" << std::endl;
     delete BrainPtr;
     this->type = copy.type;

@@ -11,14 +11,14 @@ Animal::Animal(std::string type){
 
 Animal::Animal(Animal& copy){
     
-     std::cout << "Animal copy constructor call" << std::endl;
-    *this = copy;
+    std::cout << "Animal copy constructor call" << std::endl;
+    this->type = copy.type;
 }
 
 Animal& Animal::operator=(Animal& copy){
     
     std::cout << "Animal copy assignation constructor call" << std::endl;
-    *this = copy;
+    this->type = copy.type;
     return (*this);
 }
 

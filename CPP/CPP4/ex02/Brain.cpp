@@ -5,13 +5,19 @@ Brain::Brain() {
 }
 
 Brain::Brain(Brain& copy) {
-    *this = copy;
     std::cout << "Brain copy constructor call" << std::endl;
+    for (int i = 0; i < 100; i++)
+    {
+        this->ideas[i] = copy.ideas[i];
+    }
 }
 
 Brain& Brain::operator=(Brain& copy){
     std::cout << "Brain copy assignation constructor call" << std::endl;
-    *this = copy;
+    for (int i = 0; i < 100; i++)
+    {
+        this->ideas[i] = copy.ideas[i];
+    }
     return (*this);
 }
 
