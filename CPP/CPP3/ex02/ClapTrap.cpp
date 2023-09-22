@@ -56,9 +56,7 @@ std::string ClapTrap::myName() const{
     return (name);
 };
 
-void ClapTrap::useEnergyPoints(){
-    EnergyPoints--;
-};
+
 void ClapTrap::beRepaired(unsigned int amount){
         if (this->EnergyPoints > 0)
         {
@@ -72,5 +70,6 @@ void ClapTrap::beRepaired(unsigned int amount){
 
 void ClapTrap::takeDamage(unsigned int amount){
     std::cout <<  "ClapTrap " << this->name << "have been attacked and lost" << amount << " hit points" << std::endl;
+    this->HitPoints = this->HitPoints - amount;
 }
 

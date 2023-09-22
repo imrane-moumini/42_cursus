@@ -8,7 +8,7 @@ FragTrap::FragTrap() : ClapTrap("Jonh Doe"){
 }
 
 FragTrap::FragTrap(std::string name) : ClapTrap(name){
-    std::cout << "FragTrap defaut constructor called" << std::endl;
+    std::cout << "FragTrap name constructor called" << std::endl;
     this->HitPoints = 100;
     this->EnergyPoints = 100;
     this->AttackDamage = 30;
@@ -35,15 +35,15 @@ FragTrap::~FragTrap(){
 }
 
 void FragTrap::attack(const std::string& target){
-        if (this-> nbrHitPoints()> 0)
+        if (this->EnergyPoints > 0)
         {
-            std::cout <<  "FragTrap " << this->myName() << "attacks " << target << " causing " << this->nbrAttackDamage() << " points of damage!" << std::endl;
-            this->useEnergyPoints();
+            std::cout <<  "FragTrap " << this->name << " attacks " << target << " causing " << this->AttackDamage << " points of damage!" << std::endl;
+            this->EnergyPoints--;
         }
         else
-            std::cout << "FragTrap "<< this->myName() << " doesn't have enought Energy points to attack" << std::endl;
+            std::cout << "FragTrap "<< this->name<< " doesn't have enought Energy points to attack" << std::endl;
 }
 
 void FragTrap::highFivesGuys(){
-        std::cout << "HIGH FIVE !!" << std::endl;
+        std::cout << this->name << " asks for a HIGH FIVE !!" << std::endl;
 }

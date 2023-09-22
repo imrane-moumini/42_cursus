@@ -18,7 +18,7 @@ class ClapTrap{
         int nbrHitPoints() const;
         int nbrEnergyPoints() const;
         int nbrAttackDamage() const;
-        void useEnergyPoints();
+
 
 
     protected:
