@@ -5,6 +5,7 @@
 #include <exception>
 #include "Form.hpp"
 
+// demander pk cette ligne nécessaire
 class Form; 
 
 class Bureaucrat {

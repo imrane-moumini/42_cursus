@@ -2,6 +2,7 @@
 #define FORM_H
 #include "Bureaucrat.hpp"
 
+// demander pk cette ligne nécessaire
 class Bureaucrat;
 
 class Form {

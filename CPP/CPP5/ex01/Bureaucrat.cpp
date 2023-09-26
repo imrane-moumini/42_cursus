@@ -1,6 +1,6 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat() : grade(150), name("Jonh Doe")
+Bureaucrat::Bureaucrat() : name("Jonh Doe"), grade(150)
 {
     std::cout << "Bureaucrat default constructor called \n";
 }
@@ -36,11 +36,11 @@ Bureaucrat::~Bureaucrat(){
 }
 
 const char * Bureaucrat::GradeTooHighException::what() const throw(){
-    return "you can't improve more the grade\n";
+    return "EXCEPTION : you can't improve more the grade\n";
 }
 
 const char * Bureaucrat::GradeTooLowException::what() const throw(){
-    return "you can't degrade more the grade\n";
+    return "EXCEPTION : you can't degrade more the grade\n";
 }
 
 int Bureaucrat::getGrade() const {
@@ -72,9 +72,14 @@ std::ostream& operator<<(std::ostream &out, const Bureaucrat&  obj)
 }
 
 void Bureaucrat::signForm(Form& obj){
-    obj.beSigned(*this);
-    if (obj.getSigne())
+    if (this->getGrade() <= obj.getGrade())
+    {
         std::cout << this->name << " signed " << obj.getName() << std::endl;
+        obj.beSigned(*this);
+    }
     else
-        std::cout << this->name << " couldn't signed " << obj.getName() << "because he can't right now" << std::endl;
+    {
+        std::cout << this->name << " couldn't signed " << obj.getName() << " because he can't right now" << std::endl;
+        obj.beSigned(*this);
+    }
 }

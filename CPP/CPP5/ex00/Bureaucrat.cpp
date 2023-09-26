@@ -36,11 +36,11 @@ Bureaucrat::~Bureaucrat(){
 }
 
 const char * Bureaucrat::GradeTooHighException::what() const throw(){
-    return "you can't improve more the grade\n";
+    return "EXCEPTION : you can't improve more the grade\n";
 }
 
 const char * Bureaucrat::GradeTooLowException::what() const throw(){
-    return "you can't degrade more the grade\n";
+    return "EXCEPTION : you can't degrade more the grade\n";
 }
 
 int Bureaucrat::getGrade() const {
