@@ -83,3 +83,10 @@ void Bureaucrat::signForm(AForm& obj){
         obj.beSigned(*this);
     }
 }
+
+void Bureaucrat::executeForm(AForm const &  obj){
+    if ((this->getGrade() <= obj.getGrade()) && obj.getSigne())
+        std::cout << this->name << " executed " << obj.getName();
+    else
+        std::cout << this->name << " couldn't exceute " << obj.getName() << std::endl;
+}

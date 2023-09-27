@@ -2,6 +2,7 @@
 #define SHRUBBERYCEATIONFORM_H
 
 #include "AForm.hpp"
+class Bureaucrat;
 
 class ShrubberyCreationForm : public AForm {
     public:
@@ -10,7 +11,8 @@ class ShrubberyCreationForm : public AForm {
     ShrubberyCreationForm(ShrubberyCreationForm& copy);
     ShrubberyCreationForm& operator=(ShrubberyCreationForm& copy);
     ~ShrubberyCreationForm();
-
+    void execute(Bureaucrat const & executor);
+    
     private:
     std::string target;
 };

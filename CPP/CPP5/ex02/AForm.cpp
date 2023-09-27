@@ -1,18 +1,18 @@
 #include "AForm.hpp"
 
-AForm::AForm() : name("default name"), signe(false), grade(150) {
+AForm::AForm() : name("default name"), signe(false), grade(150), execGrade(150) {
     std::cout << "AForm default constructor called \n";
 }
 
-AForm::AForm(std::string const name, int const grade) : name(name), signe(false), grade(grade) {
+AForm::AForm(std::string const name, int const grade, const int execGrade) : name(name), signe(false), grade(grade),  execGrade(execGrade) {
     std::cout << "AForm param constructor called \n";
-    if (grade > 150)
+    if (grade > 150 || execGrade > 150)
         throw AForm::GradeTooHighException();
-    if (grade < 1)
+    if (grade < 1 || execGrade < 1)
         throw AForm::GradeTooLowException();
 }
 
-AForm::AForm(AForm& copy) : name(copy.name), signe(copy.signe), grade(copy.grade) {
+AForm::AForm(AForm& copy) : name(copy.name), signe(copy.signe), grade(copy.grade), execGrade(copy.execGrade) {
     std::cout << "AForm copy constructor called \n";
 }
 
@@ -38,6 +38,10 @@ int  AForm::getGrade() const {
     return (grade);
 }
 
+int  AForm::getExecGrade() const {
+    return (execGrade);
+}
+
 void AForm::beSigned(Bureaucrat& obj){
     if (obj.getGrade() <= grade)
         signe = true;
@@ -53,6 +57,10 @@ const char* AForm::GradeTooLowException::what() const throw(){
     return ("EXCEPTION AForm : Grade is too Low \n");
 }
 
+const char *AForm::AFormNotSigned::what() const throw()
+{
+    return ("EXCEPTION AForm : AForm Not Signed \n");
+}
 
 void AForm::setSigne(){
     signe = false;
