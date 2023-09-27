@@ -57,9 +57,9 @@ const char* AForm::GradeTooLowException::what() const throw(){
     return ("EXCEPTION AForm : Grade is too Low \n");
 }
 
-const char *AForm::AFormNotSigned::what() const throw()
+const char *AForm::AFormCantExcecute::what() const throw()
 {
-    return ("EXCEPTION AForm : AForm Not Signed \n");
+    return ("EXCEPTION AForm : AForm can't be excecuted \n");
 }
 
 void AForm::setSigne(){

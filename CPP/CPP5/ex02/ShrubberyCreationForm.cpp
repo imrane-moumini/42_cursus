@@ -1,10 +1,10 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", 72, 45), target("Default name"){
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", 145, 137), target("Default name"){
     std::cout << "ShrubberyCreationForm default constructor called\n";
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("ShrubberyCreationForm", 72, 45), target(target){
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("ShrubberyCreationForm", 145, 137), target(target){
     std::cout << "ShrubberyCreationForm argument constructor called\n";
 }
 
@@ -62,5 +62,5 @@ void ShrubberyCreationForm::execute(Bureaucrat const & bur){
         Outfile.close();
     }
     else
-        throw AForm::AFormNotSigned();
+        throw AForm::AFormCantExcecute();
 }

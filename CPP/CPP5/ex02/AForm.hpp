@@ -34,7 +34,7 @@ class AForm {
         public:
         const char* what() const throw();
     };
-     class AFormNotSigned : public std::exception {
+     class AFormCantExcecute : public std::exception {
         public:
         const char* what() const throw();
     };

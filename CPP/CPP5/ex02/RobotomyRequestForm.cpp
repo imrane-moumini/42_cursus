@@ -1,10 +1,10 @@
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 145, 137), target("Default name"){
+RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 72, 45), target("Default name"){
     std::cout << "RobotomyRequestForm default constructor called\n";
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("RobotomyRequestForm", 145, 137), target(target){
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("RobotomyRequestForm", 72, 45), target(target){
     std::cout << "RobotomyRequestForm argument constructor called\n";
 }
 
@@ -37,5 +37,5 @@ void RobotomyRequestForm::execute(Bureaucrat const & bur){
             std::cout << "robotomy failed\n";
     }
     else
-        throw AForm::AFormNotSigned();
+        throw AForm::AFormCantExcecute();
 }
