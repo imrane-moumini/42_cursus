@@ -21,5 +21,6 @@ class ScalarConverter {
 int nbrElementAfterPoint(const char *str);
 void printNotNumb(std::string str);
 void printLetter(std::string str);
+int moreThanOnePoint(std::string str);
 int	isPrint(int c);
 #endif

@@ -2,6 +2,10 @@
 #include <iomanip>
 int	isPrint(int c)
 {
+    if (c < 0)
+    {
+        return (0);
+    }
 	if (!(c >= 0 && c <= 31) && (c <= 126))
 	{
 		return (1);
@@ -92,6 +96,26 @@ int nbrElementAfterPoint(const char *str)
     }
     return (count);
 
+}
+
+int moreThanOnePoint(std::string str)
+{
+    int nombreOccurrences = 0;
+    size_t pos = str.find('.');
+    while (pos != std::string::npos)
+    {
+        nombreOccurrences++;
+        pos = str.find('.', pos + 1);
+    }
+    if (nombreOccurrences > 1)
+    {
+        std::cout << "char: " << "impossible"<< std::endl;
+        std::cout << "int: " << "impossible"<< std::endl;
+        std::cout << "float: " << "impossible" << std::endl;
+        std::cout << "double: " << "impossible" << std::endl;
+        return (1);
+    }
+    return (0);
 }
 int main(int argc, char *argv[])
 {

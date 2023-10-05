@@ -8,7 +8,7 @@ void ScalarConverter::convert(std::string str){
     int nbrI;
     char nbrC;
     std::cout << "c1\n";
-    if (!(str.c_str()[0] >= '0' && str.c_str()[0] <= '9') && (str.c_str()[1]) && !(str.c_str()[1] <= '0' && str.c_str()[1] >= '9'))
+    if (!(str.c_str()[0] >= '0' && str.c_str()[0] <= '9') && (str.c_str()[1]) && !(str.c_str()[1] >= '0' && str.c_str()[1] <= '9'))
     {
         std::cout << "c2\n";
         printNotNumb(str);
@@ -22,6 +22,7 @@ void ScalarConverter::convert(std::string str){
     }
     if ((str.find('.') == std::string::npos))
     {
+        
         std::cout << "c4\n";
         nbrD = std::atof(str.c_str());
         nbrF = static_cast<float>(nbrD);
@@ -40,6 +41,9 @@ void ScalarConverter::convert(std::string str){
     {
         int count;
         std::cout << "c5\n";
+
+        if (moreThanOnePoint(str))
+            return ;
         count = nbrElementAfterPoint(str.c_str());
         nbrD = std::atof(str.c_str());
         nbrF = static_cast<float>(nbrD);
