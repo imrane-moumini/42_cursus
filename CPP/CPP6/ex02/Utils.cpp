@@ -53,9 +53,9 @@ Base* generate(void){
     Base* ptr;
     std::srand(std::time(0)); 
     int nbr = std::rand() % 3 + 1;
-    if (nbr % 3)
+    if (nbr == 1)
         ptr = generateA();
-    else if (nbr % 2)
+    else if (nbr == 2)
         ptr = generateB();
     else
         ptr = generateC();
