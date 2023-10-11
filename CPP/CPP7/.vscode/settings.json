@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "*.tpp": "cpp",
-        "string_view": "cpp"
+        "string_view": "cpp",
+        "new": "cpp"
     }
 }
