@@ -3,7 +3,8 @@
 
 int main(void)
 {
-    Array<char *> array(10);
+    
+    Array<int> array(10);
     try {
         std::cout << array[0] << std::endl;
     } catch (Array<int>::OutOfBounds& obj)
@@ -11,5 +12,7 @@ int main(void)
         std::cout << obj.what();
     }
 
+    
+    
 
 }
