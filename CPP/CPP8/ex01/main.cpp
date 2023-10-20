@@ -2,6 +2,7 @@
 
 int main()
 {
+{
     Span sp = Span(5);
     sp.addNumber(6);
     sp.addNumber(3);
@@ -17,5 +18,21 @@ int main()
     } catch (Span::FullVect& obj){
         std::cout << obj.what();
     }
+}
+
+{
+    std::cout << "--------------------------ADD RANGE---------------------\n";
+    Span sp = Span(100);
+    std::vector<int> vector;
+    for (int i = 0; i < 100 ;i++)
+        vector.push_back(8);
+    try {
+        sp.addRange(vector.begin(), vector.end());
+        std::cout << sp.shortestSpan() << std::endl;
+        std::cout << sp.longestSpan() << std::endl;
+    } catch (Span::FullVect& obj){
+        std::cout << obj.what();
+    }
+}
     return 0;
 }

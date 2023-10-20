@@ -25,6 +25,7 @@ class Span {
     void addNumber(int nbr);
     int  shortestSpan();
     int  longestSpan();
+    void addRange(std::vector<int>::iterator begin, std::vector<int>::iterator end);
 
     class FullVect : public std::exception {
         public:

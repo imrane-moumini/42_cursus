@@ -21,7 +21,7 @@ Span::~Span() {
 }
 
 const char* Span::FullVect::what() const throw() {
-    return ("EXCEPTION : Span is already full\n");
+    return ("EXCEPTION : there is not enough space to add this/those element(s)\n");
 }
 
 void Span::addNumber(int nbr){
@@ -80,4 +80,14 @@ int Span::longestSpan(){
     }
     
     return (*itmax - *itmin);
+}
+
+void Span::addRange(std::vector<int>::iterator begin, std::vector<int>::iterator end){
+    if (nbrElementInVec + static_cast<int>(std::distance(begin, end) > maxElement))
+        throw Span::FullVect();
+    else
+    {
+        vec.insert(vec.end(),begin, end);
+        nbrElementInVec = nbrElementInVec + static_cast<int>(std::distance(begin, end));
+    }
 }
