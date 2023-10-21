@@ -1,9 +1,11 @@
-NAME		= Span
+		= Span
 CC			= c++
-FLAGS		= -Wall -Werror -Wextra -std=c++98
+FLAGS		= -Wall -Werror -Wextra -std=c++98 -g -MMD
 SRC			= main.cpp \
 				Span.cpp
 OBJ			= $(SRC:.cpp=.o)
+DEP			= $(SRC:.cpp=.d)
+
 RM			= rm -f
 
 all		: $(NAME)
@@ -24,3 +26,5 @@ fclean	: clean
 
 re		: fclean
 	make all
+
+-include $(DEP)
