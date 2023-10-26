@@ -82,23 +82,25 @@ int main(int argc, char *argv[])
     // faut que je transforme la deuxieme partie en chiffre
     // faut que je remplie mon objet en renvoyant bien les bonnes parties
     mapCSV = fillMap(mapCSV,fileCSV,1);
-    std::cout << "new fill MAP\n";
+    //std::cout << "new fill MAP\n";
     mapArg = fillMap(mapArg,fileArg,0);
-    std::cout << "size is "<<mapArg.size() << std::endl;
+    //std::cout << "size is "<<mapArg.size() << std::endl;
    
     for (std::map<std::string, float>::iterator itArg = mapArg.begin(); itArg != mapArg.end(); itArg++)
     {
         //std::cout << itArg->second << std::endl;
         for (std::map<std::string, float>::iterator itCSV = mapCSV.begin(); itCSV != mapCSV.end(); itCSV++)
         {
-            //voir pk ya une valeur en trop dans mon mapArg
+            //vya pas de valeur en trop dans ma map je dois juste gérer ce que ma map
 
             //std::cout << "ARG: "<< itArg->second << std::endl;
             //std::cout << "FILE: "<< itCSV->first << std::endl;
-            if (itArg->first.find(itCSV->first) != std::string::npos )
+            if (itArg->first.find("date") == std::string::npos && itArg->first.find(itCSV->first) != std::string::npos )
             {
-                std::cout << "ARG second: " << itArg->second <<std::endl;
-                std::cout << "FILE second " << itCSV->second <<std::endl;
+                //std::cout << "ARG first: " << itArg->first <<std::endl;
+                //std::cout << "FILE first " << itCSV->first <<std::endl;
+                //std::cout << "ARG second: " << itArg->second <<std::endl;
+                //std::cout << "FILE second " << itCSV->second <<std::endl;
                 std::cout << ( itArg->second * itCSV->second ) << std::endl;
             }
         }
