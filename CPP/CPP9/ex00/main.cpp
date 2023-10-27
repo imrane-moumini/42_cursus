@@ -6,6 +6,7 @@ bool checkYear(std::string date)
     int pos = static_cast<int>(date.find('-'));
     std::string dateStr = date.substr(0, pos);
     int nbr = std::atoi(dateStr.c_str());
+    //std::cout << "YEAR: "<< dateStr<< std::endl;
     if (dateStr.size() < 4 || dateStr.size() > 4)
         return (false);
     if (nbr <= 0)
@@ -19,14 +20,27 @@ bool checkDay(std::string date)
     // c'est juste ce qu'il y a entre 2 tiret
     int pos1 = static_cast<int>(date.find('-'));
     int pos2 = static_cast<int>(date.find('-', pos1 + 1));
-    std::string dateStr = date.substr(pos1, pos2);
+    std::string dateStr = date.substr(pos1 + 1, pos2 - pos1 - 1);
     int nbr = std::atoi(dateStr.c_str());
+    //std::cout << "DAY: " << dateStr<< std::endl;
     if (dateStr.size() < 2 || dateStr.size() > 2)
+    {
+        // g pas la bonne dateStr, elle est trop grande
+        
+        std::cout << dateStr.size() << std::endl;
+        //std::cout << "c3.1\n";
         return (false);
+    }
     if (nbr <= 0)
+    {
+        //std::cout << "c3.2\n";
         return (false);
+    }
     if (nbr > 31)
+    {
+        //std::cout << "c3.3\n";
         return (false);
+    }
     return (true);
     //checker si jamais c 2 tiret d'affilé
 }
@@ -36,35 +50,50 @@ bool checkMonth(std::string date)
     // c'est juste ce qu'il y a entre 2 tiret
     int pos1 = static_cast<int>(date.find('-'));
     int pos2 = static_cast<int>(date.find('-', pos1 + 1));
-    std::string dateStr = date.substr(pos2, date.length() - pos2);
+    std::string dateStr = date.substr(pos2 + 1, date.length() - pos2 - 2);
+    //std::cout << "MONTH: "<< dateStr<< std::endl;
     int nbr = std::atoi(dateStr.c_str());
     if (dateStr.size() < 2 || dateStr.size() > 2)
+    {
+        //std::cout << "c4.1\n";
+        std::cout<<dateStr.size() <<std::endl;
         return (false);
+    }
     if (nbr <= 0)
+    {
+        //std::cout << "c4.2\n";
         return (false);
+    }
     if (nbr > 12)
+    {
+        //std::cout << "c4.3\n";
         return (false);
+    }
     return (true);
 }
 bool checkDate(std::string date)
 {
     if (std::count(date.begin(), date.end(), '-') != 2)
     {
+        //std::cout << "c1\n";
         std::cout << "Error: bad input => " << date << std::endl;
         return (false);
     }    
     if (!checkYear(date))
     {
+        //std::cout << "c2\n";
         std::cout << "Error: bad input => " << date << std::endl;
         return (false);
     } 
     if (!checkDay(date))
     {
+        //std::cout << "c3\n";
         std::cout << "Error: bad input => " << date << std::endl;
         return (false);
     } 
     if (!checkMonth(date))
     {
+        //std::cout << "c4\n";
         std::cout << "Error: bad input => " << date << std::endl;
         return (false);
     } 
@@ -74,8 +103,10 @@ bool checkValue(std::string nbrStr)
 {
     for (long unsigned int i = 0; i < nbrStr.size(); i++)
     {
-        if (!std::isdigit(nbrStr[i]))
+        if (nbrStr[i] != '.' && nbrStr[i] != ' ' && !std::isdigit(nbrStr[i]))
         {
+            //std::cout << "c5\n";
+            //std::cout << nbrStr[i] << std::endl;
             std::cout << "Error: bad input => " << nbrStr << std::endl;
             return (false);
         }
