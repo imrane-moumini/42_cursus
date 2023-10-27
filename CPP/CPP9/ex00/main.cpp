@@ -1,5 +1,96 @@
 #include "BitcoinExchange.hpp"
+bool checkYear(std::string date)
+{
+    // compter nombre delement avant premier tirer
+        // regarder si 4 élément meme si c grand pas grave
+    int pos = static_cast<int>(date.find('-'));
+    std::string dateStr = date.substr(0, pos);
+    int nbr = std::atoi(dateStr.c_str());
+    if (dateStr.size() < 4 || dateStr.size() > 4)
+        return (false);
+    if (nbr <= 0)
+        return (false);
+    return (true);
+    
+}
 
+bool checkDay(std::string date)
+{
+    // c'est juste ce qu'il y a entre 2 tiret
+    int pos1 = static_cast<int>(date.find('-'));
+    int pos2 = static_cast<int>(date.find('-', pos1 + 1));
+    std::string dateStr = date.substr(pos1, pos2);
+    int nbr = std::atoi(dateStr.c_str());
+    if (dateStr.size() < 2 || dateStr.size() > 2)
+        return (false);
+    if (nbr <= 0)
+        return (false);
+    if (nbr > 31)
+        return (false);
+    return (true);
+    //checker si jamais c 2 tiret d'affilé
+}
+
+bool checkMonth(std::string date)
+{
+    // c'est juste ce qu'il y a entre 2 tiret
+    int pos1 = static_cast<int>(date.find('-'));
+    int pos2 = static_cast<int>(date.find('-', pos1 + 1));
+    std::string dateStr = date.substr(pos2, date.length() - pos2);
+    int nbr = std::atoi(dateStr.c_str());
+    if (dateStr.size() < 2 || dateStr.size() > 2)
+        return (false);
+    if (nbr <= 0)
+        return (false);
+    if (nbr > 12)
+        return (false);
+    return (true);
+}
+bool checkDate(std::string date)
+{
+    if (std::count(date.begin(), date.end(), '-') != 2)
+    {
+        std::cout << "Error: bad input => " << date << std::endl;
+        return (false);
+    }    
+    if (!checkYear(date))
+    {
+        std::cout << "Error: bad input => " << date << std::endl;
+        return (false);
+    } 
+    if (!checkDay(date))
+    {
+        std::cout << "Error: bad input => " << date << std::endl;
+        return (false);
+    } 
+    if (!checkMonth(date))
+    {
+        std::cout << "Error: bad input => " << date << std::endl;
+        return (false);
+    } 
+    return (true);
+}
+bool checkValue(std::string nbrStr)
+{
+    for (long unsigned int i = 0; i < nbrStr.size(); i++)
+    {
+        if (!std::isdigit(nbrStr[i]))
+        {
+            std::cout << "Error: bad input => " << nbrStr << std::endl;
+            return (false);
+        }
+    }
+    float nbr = std::atof(nbrStr.c_str());
+    if (nbr < 0 || nbr > 1000)
+    {
+        if (nbr < 0)
+            std::cout << "Error: not a positive number." << std::endl;
+        else
+            std::cout << "Error: too large a number." << std::endl;
+        return (false);
+    }
+    return (true);
+}
 std::string extractFirstPart(std::string line, int nbr)
 {
     // faut que je renvoit tout ce qui est avant la virgule
@@ -35,16 +126,16 @@ std::string extractLastPart(std::string line, int nbr)
     return (extractStr);  
 }
 
-std::map<std::string, float>& fillMap(std::map<std::string, float>& mapFile,std::ifstream& file, int nbr){
+std::multimap<std::string, std::string>& fillMap(std::multimap<std::string, std::string>& mapFile,std::ifstream& file, int nbr){
     std::string firstPart;
     std::string secondPart;
     std::string line;
+    std::pair<std::string, float>  pair;
     while(std::getline(file, line))
     {
         firstPart = extractFirstPart(line, nbr);
         secondPart = extractLastPart(line, nbr);
-        mapFile[firstPart] = std::atof(secondPart.c_str());
-        //std::cout << mapFile[firstPart] << std::endl;
+        mapFile.insert(std::make_pair(firstPart,secondPart));
     }
     return (mapFile);
 }
@@ -56,8 +147,8 @@ int main(int argc, char *argv[])
         std::cout << "wrong number of arguments\n";
         return (1);
     } 
-    std::map<std::string, float> mapCSV;
-    std::map<std::string, float> mapArg;
+    std::multimap<std::string, std::string> mapCSV;
+    std::multimap<std::string, std::string> mapArg;
     
     
     std::ifstream fileCSV("data.csv");
@@ -74,34 +165,21 @@ int main(int argc, char *argv[])
     }
     
 
-    // il fauit que je lise mon fichier ligne par ligne
-    // faut que je vérifie si le fichier n'est pas empty
-    // ensuite il faut que je découpe la ligne en 2
-    // faut que je vérifie si la premiere partie est valide
-    // faut que je vérifie si la deuxième partie est valide
-    // faut que je transforme la deuxieme partie en chiffre
-    // faut que je remplie mon objet en renvoyant bien les bonnes parties
     mapCSV = fillMap(mapCSV,fileCSV,1);
-    //std::cout << "new fill MAP\n";
     mapArg = fillMap(mapArg,fileArg,0);
-    //std::cout << "size is "<<mapArg.size() << std::endl;
    
-    for (std::map<std::string, float>::iterator itArg = mapArg.begin(); itArg != mapArg.end(); itArg++)
+    for (std::multimap<std::string, std::string>::iterator itArg = mapArg.begin(); itArg != mapArg.end(); itArg++)
     {
-        //std::cout << itArg->second << std::endl;
-        for (std::map<std::string, float>::iterator itCSV = mapCSV.begin(); itCSV != mapCSV.end(); itCSV++)
+        if (!checkDate(itArg->first))
+            itArg++;
+        if (!checkValue(itArg->second))
+            itArg++;
+        for (std::multimap<std::string, std::string>::iterator itCSV = mapCSV.begin(); itCSV != mapCSV.end(); itCSV++)
         {
-            //vya pas de valeur en trop dans ma map je dois juste gérer ce que ma map
-
-            //std::cout << "ARG: "<< itArg->second << std::endl;
-            //std::cout << "FILE: "<< itCSV->first << std::endl;
             if (itArg->first.find("date") == std::string::npos && itArg->first.find(itCSV->first) != std::string::npos )
             {
-                //std::cout << "ARG first: " << itArg->first <<std::endl;
-                //std::cout << "FILE first " << itCSV->first <<std::endl;
-                //std::cout << "ARG second: " << itArg->second <<std::endl;
-                //std::cout << "FILE second " << itCSV->second <<std::endl;
-                std::cout << ( itArg->second * itCSV->second ) << std::endl;
+                std::cout << itCSV->first << " => " << itArg->second << " = ";
+                std::cout << (std::atof((itArg->second).c_str()) * std::atof((itCSV->second).c_str()) ) << std::endl;
             }
         }
     }
