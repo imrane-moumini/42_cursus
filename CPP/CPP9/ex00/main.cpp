@@ -15,7 +15,7 @@ std::string createNewDay(std::string day)
     else
     {
         std::ostringstream oss;
-        oss << nbr;
+        oss << nbr - 1;
         newDay = oss.str();
         return (newDay);
     }
@@ -30,16 +30,19 @@ std::string newDate(std::string date)
     std::string newMonth;
     std::string newYear;
 
+    std::cout << "DATE IS: " << date << std::endl;
     int pos = static_cast<int>(date.find('-'));
     newYear = date.substr(0, pos);
-
+    
     int pos1 = static_cast<int>(date.find('-'));
-    int pos2 = static_cast<int>(date.find('-', pos1 + 1));
-    newMonth = date.substr(pos2 + 1, date.length() - pos2 - 2);
+    newMonth = date.substr(pos1 + 1, 2);
+    std::cout << "new MONTH: " << newMonth << std::endl;
 
-    int pos3 = static_cast<int>(date.find('-'));
-    int pos4 = static_cast<int>(date.find('-', pos3 + 1));
-    newDay = createNewDay(date.substr(pos3 + 1, pos4 - pos3 - 1));
+    int pos2 = static_cast<int>(date.find('-'));
+    int pos3 = static_cast<int>(date.find('-', pos2 + 1));
+    newDay = createNewDay(date.substr(pos3 + 1, 2));
+    std::cout << "new DAY: " << newDay <<std::endl;
+
     newDate = newYear + '-' + newMonth + '-' + newDay;
     return (newDate);
 
@@ -63,10 +66,10 @@ bool checkYear(std::string date)
 bool checkDay(std::string date)
 {
     // c'est juste ce qu'il y a entre 2 tiret
-    std::cout << "DATE IS : " << date << std::endl;
     int pos1 = static_cast<int>(date.find('-'));
     int pos2 = static_cast<int>(date.find('-', pos1 + 1));
-    std::string dateStr = date.substr(pos1 + 1, pos2 - pos1 - 1);
+    std::string dateStr = date.substr(pos2 + 1, date.length() - pos2 - 2);
+    std::cout << "MONTH: "<< dateStr<< std::endl;
     int nbr = std::atoi(dateStr.c_str());
     //std::cout << "DAY: " << dateStr<< std::endl;
     if (dateStr.size() < 2 || dateStr.size() > 2)
@@ -94,25 +97,28 @@ bool checkDay(std::string date)
 bool checkMonth(std::string date)
 {
     // c'est juste ce qu'il y a entre 2 tiret
+    std::cout << "DATE IS : " << date << std::endl;
     int pos1 = static_cast<int>(date.find('-'));
     int pos2 = static_cast<int>(date.find('-', pos1 + 1));
-    std::string dateStr = date.substr(pos2 + 1, date.length() - pos2 - 2);
-    //std::cout << "MONTH: "<< dateStr<< std::endl;
+    std::string dateStr = date.substr(pos1 + 1, pos2 - pos1 - 1);
+    std::cout << "DAY: " << dateStr << std::endl;
     int nbr = std::atoi(dateStr.c_str());
+    
     if (dateStr.size() < 2 || dateStr.size() > 2)
     {
         //std::cout << "c4.1\n";
+        std::cout << "c0.4.1\n";
         std::cout<<dateStr.size() <<std::endl;
         return (false);
     }
     if (nbr <= 0)
     {
-        //std::cout << "c4.2\n";
+        std::cout << "c0.4.2\n";
         return (false);
     }
     if (nbr > 12)
     {
-        //std::cout << "c4.3\n";
+        std::cout << "c0.4.3\n";
         return (false);
     }
     return (true);
@@ -121,24 +127,28 @@ bool checkDate(std::string date)
 {
     if (std::count(date.begin(), date.end(), '-') != 2)
     {
+        std::cout << "c0.1\n";
         //std::cout << "c1\n";
         std::cout << "Error: bad input => " << date << std::endl;
         return (false);
     }    
     if (!checkYear(date))
     {
+        std::cout << "c0.2\n";
         //std::cout << "c2\n";
         std::cout << "Error: bad input => " << date << std::endl;
         return (false);
     } 
     if (!checkDay(date))
     {
+        std::cout << "c0.3\n";
         //std::cout << "c3\n";
         std::cout << "Error: bad input => " << date << std::endl;
         return (false);
     } 
     if (!checkMonth(date))
     {
+        std::cout << "c0.4\n";
         //std::cout << "c4\n";
         std::cout << "Error: bad input => " << date << std::endl;
         return (false);
@@ -242,7 +252,6 @@ int main(int argc, char *argv[])
         std::cout << "cannot open the file that your provied please check the filename\n";
         return (1);
     }
-    std::cout << "c-2\n";
 
     mapCSV = fillMap(mapCSV,fileCSV,1);
     mapArg = fillMap(mapArg,fileArg,0);
@@ -251,7 +260,6 @@ int main(int argc, char *argv[])
     it = mapCSV.end();
     it--;
     lastDate = (it->first).c_str();
-    std::cout << "c-1\n";
     // faire si trouve pas date prend date la plus proche inférieur
     // faire si date trop petite il prend 0 comme value
     // gérer si input est vide
@@ -266,6 +274,16 @@ int main(int argc, char *argv[])
     {
         std::cout << "c0\n";
         findDate = 0;
+        if (itArg != mapArg.end() && itArg->first.find("date") != std::string::npos)
+        {
+            findDate = 1;
+            std::cout << "IM HERE\n";
+            itArg++;
+            if (itArg != mapArg.end())
+                std::cout << "CHELOU\n";
+        }
+        if (itArg == mapArg.end())
+            break;
         if (itArg != mapArg.end() && !checkDate(itArg->first))
         {
             findDate = 1;
@@ -273,43 +291,37 @@ int main(int argc, char *argv[])
             //std::advance(itArgSave, 2);
             if ((itArg != mapArg.end()) /*&& (itArgSave != mapArg.end())*/)
             {
-                std::cout << "IM HERE\n";
                 itArg++;
-                if (itArg != mapArg.end())
-                    std::cout << "YEP\n";
             }
+            std::cout << "c1\n";
         }
         if (findDate == 0 && itArg != mapArg.end() && !checkValue(itArg->second))
         {
-            // ma théorie c'est que ici je ++
-            // j'arrive à la derniere valeur sauf que la dernier valeur c'est pas end 
-            // du coup ça remonte et ça ++ et du coup c après je vais déréférerncer un truc que g pas le droit
-
             findDate = 1;
-            if (itArg != mapArg.end())
-                itArg++;
+            //if (itArg != mapArg.end())
+                //itArg++;
         }
         if (findDate == 0 && itArg != mapArg.end() &&  firstDate > itArg->first)
         {
             std::cout << itArg->first << " => " << itArg->second << " = ";
             std::cout << (std::atof((itArg->second).c_str()) * std::atof((mapCSV.begin()->second).c_str()) ) << std::endl;
             findDate = 1;
-            if (itArg != mapArg.end())
-                itArg++;
+            //if (itArg != mapArg.end())
+                //itArg++;
         }
         if (findDate == 0 && itArg != mapArg.end() &&  lastDate < itArg->first)
         {
             std::cout << itArg->first << " => " << itArg->second << " = ";
             std::cout << (std::atof((itArg->second).c_str()) * std::atof((mapCSV.end()->second).c_str()) ) << std::endl;
             findDate = 1;
-            if (itArg != mapArg.end())
-                itArg++;
+            //if (itArg != mapArg.end())
+                //itArg++;
         }
         // rajoute la condition genre pas trouvé (global value)
-        std::cout << "c1\n";
+        std::cout << "c2\n";
         if (findDate == 0 && itArg != mapArg.end())
         {
-            std::cout << "c1.bis\n";
+            std::cout << "c3\n";
             for (std::multimap<std::string, std::string>::iterator itCSV = mapCSV.begin(); itCSV != mapCSV.end(); itCSV++)
             {
                 if (itArg->first.find("date") == std::string::npos && itArg->first.find(itCSV->first) != std::string::npos )
@@ -321,18 +333,26 @@ int main(int argc, char *argv[])
                 if (itArg->first.find("date") != std::string::npos)
                     findDate = 1;
             }
-            std::cout << "c2\n";
+            std::cout << "c4\n";
             if (findDate == 0)
+            {
+                std::cout << "ITarg->first is: " << itArg->first << std::endl;
                 saveDate = newDate(itArg->first);
+                std::cout << "saveDate is : " << saveDate << std::endl;
+                //return (1);
+                
+            }
+            
             while (findDate == 0)
             {
+                std::cout << "IM HERE\n";
                 // sinon je remplace pas juste je l'utilise comme comparaison
                 std::cout << saveDate << std::endl;
                 for (std::multimap<std::string, std::string>::iterator itCSV = mapCSV.begin(); itCSV != mapCSV.end(); itCSV++)
                 {
                     if (saveDate.find("date") == std::string::npos && saveDate.find(itCSV->first) != std::string::npos )
                     {
-                        std::cout << itCSV->first << " => " << itArg->second << " = ";
+                        std::cout << itArg->first << " => " << itArg->second << " = ";
                         std::cout << (std::atof((itArg->second).c_str()) * std::atof((itCSV->second).c_str())) << std::endl;
                         findDate = 1;
                     }
