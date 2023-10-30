@@ -3,7 +3,6 @@ int findDate = 0;
 
 std::string createNewDay(std::string day)
 {
-
     std::string newDay;
     int nbr = std::atoi(day.c_str());
     if (nbr < 10)
@@ -19,8 +18,6 @@ std::string createNewDay(std::string day)
         newDay = oss.str();
         return (newDay);
     }
-
-
 }
 
 std::string newDate(std::string date)
@@ -30,18 +27,18 @@ std::string newDate(std::string date)
     std::string newMonth;
     std::string newYear;
 
-    std::cout << "DATE IS: " << date << std::endl;
+    //std::cout << "DATE IS: " << date << std::endl;
     int pos = static_cast<int>(date.find('-'));
     newYear = date.substr(0, pos);
     
     int pos1 = static_cast<int>(date.find('-'));
     newMonth = date.substr(pos1 + 1, 2);
-    std::cout << "new MONTH: " << newMonth << std::endl;
+    //std::cout << "new MONTH: " << newMonth << std::endl;
 
     int pos2 = static_cast<int>(date.find('-'));
     int pos3 = static_cast<int>(date.find('-', pos2 + 1));
     newDay = createNewDay(date.substr(pos3 + 1, 2));
-    std::cout << "new DAY: " << newDay <<std::endl;
+    //std::cout << "new DAY: " << newDay <<std::endl;
 
     newDate = newYear + '-' + newMonth + '-' + newDay;
     return (newDate);
@@ -69,7 +66,7 @@ bool checkDay(std::string date)
     int pos1 = static_cast<int>(date.find('-'));
     int pos2 = static_cast<int>(date.find('-', pos1 + 1));
     std::string dateStr = date.substr(pos2 + 1, date.length() - pos2 - 2);
-    std::cout << "MONTH: "<< dateStr<< std::endl;
+    //std::cout << "MONTH: "<< dateStr<< std::endl;
     int nbr = std::atoi(dateStr.c_str());
     //std::cout << "DAY: " << dateStr<< std::endl;
     if (dateStr.size() < 2 || dateStr.size() > 2)
@@ -97,28 +94,28 @@ bool checkDay(std::string date)
 bool checkMonth(std::string date)
 {
     // c'est juste ce qu'il y a entre 2 tiret
-    std::cout << "DATE IS : " << date << std::endl;
+    //std::cout << "DATE IS : " << date << std::endl;
     int pos1 = static_cast<int>(date.find('-'));
     int pos2 = static_cast<int>(date.find('-', pos1 + 1));
     std::string dateStr = date.substr(pos1 + 1, pos2 - pos1 - 1);
-    std::cout << "DAY: " << dateStr << std::endl;
+    //std::cout << "DAY: " << dateStr << std::endl;
     int nbr = std::atoi(dateStr.c_str());
     
     if (dateStr.size() < 2 || dateStr.size() > 2)
     {
         //std::cout << "c4.1\n";
-        std::cout << "c0.4.1\n";
+        //std::cout << "c0.4.1\n";
         std::cout<<dateStr.size() <<std::endl;
         return (false);
     }
     if (nbr <= 0)
     {
-        std::cout << "c0.4.2\n";
+        //std::cout << "c0.4.2\n";
         return (false);
     }
     if (nbr > 12)
     {
-        std::cout << "c0.4.3\n";
+        //std::cout << "c0.4.3\n";
         return (false);
     }
     return (true);
@@ -127,14 +124,14 @@ bool checkDate(std::string date)
 {
     if (std::count(date.begin(), date.end(), '-') != 2)
     {
-        std::cout << "c0.1\n";
+        //std::cout << "c0.1\n";
         //std::cout << "c1\n";
         std::cout << "Error: bad input => " << date << std::endl;
         return (false);
     }    
     if (!checkYear(date))
     {
-        std::cout << "c0.2\n";
+        //std::cout << "c0.2\n";
         //std::cout << "c2\n";
         std::cout << "Error: bad input => " << date << std::endl;
         return (false);
@@ -148,7 +145,7 @@ bool checkDate(std::string date)
     } 
     if (!checkMonth(date))
     {
-        std::cout << "c0.4\n";
+        //std::cout << "c0.4\n";
         //std::cout << "c4\n";
         std::cout << "Error: bad input => " << date << std::endl;
         return (false);
@@ -220,10 +217,18 @@ std::multimap<std::string, std::string>& fillMap(std::multimap<std::string, std:
     std::pair<std::string, float>  pair;
     while(std::getline(file, line))
     {
-        firstPart = extractFirstPart(line, nbr);
-        secondPart = extractLastPart(line, nbr);
-        mapFile.insert(std::make_pair(firstPart,secondPart));
+        if (line.find("date") == std::string::npos)
+        {
+            std::cout << "LINE is: " << line << std::endl;
+            firstPart = extractFirstPart(line, nbr);
+            std::cout << "First part : " << firstPart << std::endl;
+            secondPart = extractLastPart(line, nbr);
+            std::cout << "Second part : " << secondPart << std::endl;
+            mapFile.insert(std::make_pair(firstPart,secondPart));
+            std::cout << "MAP begin is: "<< mapFile.begin()->first << std::endl;
+        }
     }
+    
     return (mapFile);
 }
 int main(int argc, char *argv[])
@@ -253,6 +258,15 @@ int main(int argc, char *argv[])
         return (1);
     }
 
+    //ok ça foire quand ya pas de barre
+    // ça foire aussi quand je retir la ligne qyi foire, faire debug
+
+
+
+
+
+
+
     mapCSV = fillMap(mapCSV,fileCSV,1);
     mapArg = fillMap(mapArg,fileArg,0);
     firstDate = ((mapCSV.begin())->first).c_str();
@@ -260,6 +274,8 @@ int main(int argc, char *argv[])
     it = mapCSV.end();
     it--;
     lastDate = (it->first).c_str();
+    //std::cout << "first date is : " << firstDate << std::endl;
+    //std::cout << "last date is : " << lastDate << std::endl;
     // faire si trouve pas date prend date la plus proche inférieur
     // faire si date trop petite il prend 0 comme value
     // gérer si input est vide
@@ -270,17 +286,19 @@ int main(int argc, char *argv[])
     // tout mettre dans le header file
     // relire consigne pour voir si on a le droit de toucher au CSV file
     //std::multimap<std::string, std::string>::iterator itArgSave;
+    //std::cout << "DATE before boucle: " << mapArg.begin()->first << std::endl;
     for (std::multimap<std::string, std::string>::iterator itArg = mapArg.begin(); itArg != mapArg.end(); itArg++)
     {
-        std::cout << "c0\n";
+        //std::cout << "c0\n";
+        std::cout << "DATE: " << itArg->first << std::endl;
         findDate = 0;
         if (itArg != mapArg.end() && itArg->first.find("date") != std::string::npos)
         {
             findDate = 1;
-            std::cout << "IM HERE\n";
+            //std::cout << "IM HERE\n";
             itArg++;
-            if (itArg != mapArg.end())
-                std::cout << "CHELOU\n";
+            //if (itArg != mapArg.end())
+                //std::cout << "CHELOU\n";
         }
         if (itArg == mapArg.end())
             break;
@@ -293,7 +311,7 @@ int main(int argc, char *argv[])
             {
                 itArg++;
             }
-            std::cout << "c1\n";
+            //std::cout << "c1\n";
         }
         if (findDate == 0 && itArg != mapArg.end() && !checkValue(itArg->second))
         {
@@ -303,6 +321,7 @@ int main(int argc, char *argv[])
         }
         if (findDate == 0 && itArg != mapArg.end() &&  firstDate > itArg->first)
         {
+            //std::cout << "IM HERE\n" << std::endl;
             std::cout << itArg->first << " => " << itArg->second << " = ";
             std::cout << (std::atof((itArg->second).c_str()) * std::atof((mapCSV.begin()->second).c_str()) ) << std::endl;
             findDate = 1;
@@ -312,16 +331,16 @@ int main(int argc, char *argv[])
         if (findDate == 0 && itArg != mapArg.end() &&  lastDate < itArg->first)
         {
             std::cout << itArg->first << " => " << itArg->second << " = ";
-            std::cout << (std::atof((itArg->second).c_str()) * std::atof((mapCSV.end()->second).c_str()) ) << std::endl;
+            std::cout << (std::atof((itArg->second).c_str()) * std::atof((it->second).c_str()) ) << std::endl;
             findDate = 1;
             //if (itArg != mapArg.end())
                 //itArg++;
         }
         // rajoute la condition genre pas trouvé (global value)
-        std::cout << "c2\n";
+        //std::cout << "c2\n";
         if (findDate == 0 && itArg != mapArg.end())
         {
-            std::cout << "c3\n";
+            //std::cout << "c3\n";
             for (std::multimap<std::string, std::string>::iterator itCSV = mapCSV.begin(); itCSV != mapCSV.end(); itCSV++)
             {
                 if (itArg->first.find("date") == std::string::npos && itArg->first.find(itCSV->first) != std::string::npos )
@@ -333,21 +352,20 @@ int main(int argc, char *argv[])
                 if (itArg->first.find("date") != std::string::npos)
                     findDate = 1;
             }
-            std::cout << "c4\n";
+            //std::cout << "c4\n";
             if (findDate == 0)
             {
-                std::cout << "ITarg->first is: " << itArg->first << std::endl;
+                //std::cout << "ITarg->first is: " << itArg->first << std::endl;
                 saveDate = newDate(itArg->first);
-                std::cout << "saveDate is : " << saveDate << std::endl;
+                //std::cout << "saveDate is : " << saveDate << std::endl;
                 //return (1);
-                
             }
             
             while (findDate == 0)
             {
-                std::cout << "IM HERE\n";
+                //std::cout << "IM HERE\n";
                 // sinon je remplace pas juste je l'utilise comme comparaison
-                std::cout << saveDate << std::endl;
+                //std::cout << saveDate << std::endl;
                 for (std::multimap<std::string, std::string>::iterator itCSV = mapCSV.begin(); itCSV != mapCSV.end(); itCSV++)
                 {
                     if (saveDate.find("date") == std::string::npos && saveDate.find(itCSV->first) != std::string::npos )
