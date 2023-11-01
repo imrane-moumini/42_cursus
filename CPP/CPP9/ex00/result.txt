@@ -1,48 +1,128 @@
+2010-01-02   3
+2011-01-03   3
+2011-01-03   2
+2011-01-03   1
+2011-01-03   1.2
+2011-01-09   1
+2012-01-11   -1
+2012-01-11   1
+2012-01-11   2147483648
+2018-03-04 
+
 c0
-MONTH: 03
-DATE IS : 2018-01-03 
-DAY: 01
+DATE: 2010-01-02 
+Date in Checkday is: 2010-01-02 
+debut: 8
+fin: 2
+DAY: 02 
+size is: 3
+c3.1
+c0.3
+Error: bad input => 2010-01-02 
+c1
 c2
-c3
-2018-01-03 =>  3 = 45117.7
-c4
 c0
-MONTH: 05
-DATE IS : 2019-03-05 
-DAY: 03
+DATE: 2011-01-03 
+Date in Checkday is: 2011-01-03 
+debut: 8
+fin: 2
+DAY: 03 
+size is: 3
+c3.1
+c0.3
+Error: bad input => 2011-01-03 
+c1
 c2
-c3
-2019-03-05 =>  2 = 7744.5
-c4
 c0
-MONTH: 05
-DATE IS : 2019-03-05 
-DAY: 03
+DATE: 2011-01-03 
+Date in Checkday is: 2011-01-03 
+debut: 8
+fin: 2
+DAY: 03 
+size is: 3
+c3.1
+c0.3
+Error: bad input => 2011-01-03 
+c1
 c2
-c3
-2019-03-05 =>  1 = 3872.25
-c4
 c0
-MONTH: 05
-DATE IS : 2019-03-05 
-DAY: 03
+DATE: 2011-01-03 
+Date in Checkday is: 2011-01-03 
+debut: 8
+fin: 2
+DAY: 03 
+size is: 3
+c3.1
+c0.3
+Error: bad input => 2011-01-03 
+c1
 c2
-c3
-2019-03-05 =>  1 = 3872.25
-c4
 c0
-MONTH: 05
-DATE IS : 2019-03-05 
-DAY: 03
+DATE: 2011-01-03 
+Date in Checkday is: 2011-01-03 
+debut: 8
+fin: 2
+DAY: 03 
+size is: 3
+c3.1
+c0.3
+Error: bad input => 2011-01-03 
+c1
 c2
-c3
-2019-03-05 =>  1.2 = 4646.7
-c4
 c0
-MONTH: 08
-DATE IS : 2020-04-08 
+DATE: 2011-01-09 
+Date in Checkday is: 2011-01-09 
+debut: 8
+fin: 2
+DAY: 09 
+size is: 3
+c3.1
+c0.3
+Error: bad input => 2011-01-09 
+c1
+c2
+c0
+DATE: 2012-01-11 
+Date in Checkday is: 2012-01-11 
+debut: 8
+fin: 2
+DAY: 11 
+size is: 3
+c3.1
+c0.3
+Error: bad input => 2012-01-11 
+c1
+c2
+c0
+DATE: 2012-01-11 
+Date in Checkday is: 2012-01-11 
+debut: 8
+fin: 2
+DAY: 11 
+size is: 3
+c3.1
+c0.3
+Error: bad input => 2012-01-11 
+c1
+c2
+c0
+DATE: 2012-01-11 
+Date in Checkday is: 2012-01-11 
+debut: 8
+fin: 2
+DAY: 11 
+size is: 3
+c3.1
+c0.3
+Error: bad input => 2012-01-11 
+c1
+c2
+c0
+DATE: 2018-03-04
+Date in Checkday is: 2018-03-04
+debut: 8
+fin: 1
 DAY: 04
-Error: bad input =>  -1
+Error: bad input => 
+c92
 c2
-c0
-IM HERE
