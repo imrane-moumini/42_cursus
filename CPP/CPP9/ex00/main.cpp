@@ -1,6 +1,15 @@
 #include "BitcoinExchange.hpp"
 int findDate = 0;
-
+int count(const char *str)
+{
+    int i;
+    i = 0;
+    if (!str)
+        return (0);
+    while (str[i] && std::isdigit(str[i]))
+        i++;
+    return (i);
+}
 std::string createNewDay(std::string day)
 {
     std::string newDay;
@@ -131,9 +140,17 @@ bool checkYear(std::string date)
         // regarder si 4 élément meme si c grand pas grave
     int pos = static_cast<int>(date.find('-'));
     std::string dateStr = date.substr(0, pos);
+    for (long unsigned int i = 0; i < dateStr.size(); i++)
+    {
+        if (dateStr[i] != ' ' && !std::isdigit(dateStr[i]))
+        {
+            std::cout << "Error: bad input => " << date << std::endl;
+            return (false);
+        }
+    }
     int nbr = std::atoi(dateStr.c_str());
     //std::cout << "YEAR: "<< dateStr<< std::endl;
-    if (dateStr.size() < 4 || dateStr.size() > 4)
+    if (count(dateStr.c_str()) < 4 || count(dateStr.c_str()) > 4)
         return (false);
     if (nbr <= 0)
         return (false);
@@ -151,12 +168,21 @@ bool checkDay(std::string date)
     std::cout << "fin: " << date.length() - pos2 - 2 <<std::endl;
     std::string dateStr = date.substr(pos2 + 1, date.length() - pos2 - 1);
     int nbr = std::atoi(dateStr.c_str());
+
+    for (long unsigned int i = 0; i < dateStr.size(); i++)
+    {
+        if (dateStr[i] != ' ' && !std::isdigit(dateStr[i]))
+        {
+            std::cout << "Error: bad input => " << date << std::endl;
+            return (false);
+        }
+    }
     std::cout << "DAY: " << dateStr<< std::endl;
-    if (dateStr.size() < 2 || dateStr.size() > 2)
+    if (count(dateStr.c_str()) < 2 || count(dateStr.c_str()) > 2)
     {
         // g pas la bonne dateStr, elle est trop grande
-        
-        std::cout << "size is: "<< dateStr.size() << std::endl;
+        //faut pas que je prenne les espaces
+        std::cout << "size is: "<< count(dateStr.c_str()) << std::endl;
         std::cout << "c3.1\n";
         return (false);
     }
@@ -183,12 +209,20 @@ bool checkMonth(std::string date)
     std::string dateStr = date.substr(pos1 + 1, pos2 - pos1 - 1);
     //std::cout << "DAY: " << dateStr << std::endl;
     int nbr = std::atoi(dateStr.c_str());
-    
-    if (dateStr.size() < 2 || dateStr.size() > 2)
+
+    for (long unsigned int i = 0; i < dateStr.size(); i++)
+    {
+        if (dateStr[i] != ' ' && !std::isdigit(dateStr[i]))
+        {
+            std::cout << "Error: bad input => " << date << std::endl;
+            return (false);
+        }
+    }
+    if (count(dateStr.c_str()) < 2 || count(dateStr.c_str()) > 2)
     {
         //std::cout << "c4.1\n";
         //std::cout << "c0.4.1\n";
-        std::cout<<dateStr.size() <<std::endl;
+        std::cout<<count(dateStr.c_str()) <<std::endl;
         return (false);
     }
     if (nbr <= 0)
@@ -239,14 +273,15 @@ bool checkValue(std::string nbrStr)
 {
     if (!nbrStr.size())
     {
+        std::cout << "c7\n";
         std::cout << "Error: bad input => " << nbrStr << std::endl;
         return (false);
     }
     for (long unsigned int i = 0; i < nbrStr.size(); i++)
     {
-        if (nbrStr[i] != '.' && !std::isdigit(nbrStr[i]))
+        if (nbrStr[i] != '.' &&  nbrStr[i] != ' ' && !std::isdigit(nbrStr[i]))
         {
-            //std::cout << "c5\n";
+            std::cout << "c6\n";
             //std::cout << nbrStr[i] << std::endl;
             std::cout << "Error: bad input => " << nbrStr << std::endl;
             return (false);
@@ -255,6 +290,7 @@ bool checkValue(std::string nbrStr)
     float nbr = std::atof(nbrStr.c_str());
     if (nbr < 0 || nbr > 1000)
     {
+        std::cout << "c7\n";
         if (nbr < 0)
             std::cout << "Error: not a positive number." << std::endl;
         else
