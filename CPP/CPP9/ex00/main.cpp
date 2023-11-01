@@ -1,4 +1,11 @@
 #include "BitcoinExchange.hpp"
+
+// au lieu d'afficher les messages directemennts
+// je vais enregistrer les messages dans une 3eme multimap
+// ensuite je vais reparcourir le stream object du doc
+// comparer la première partie avec celle de la 3eme map
+// et afficher la value correspondante
+// je el fais en dernier
 int findDate = 0;
 int count(const char *str)
 {
@@ -397,20 +404,9 @@ int main(int argc, char *argv[])
     it--;
     lastDate = (it->first).c_str();
     // faire en sorte que ça soit pas trié par défaut
-    // faut que je puisse chercher les mois et années précédentes si pas trouvés
-    //std::cout << "first date is : " << firstDate << std::endl;
-    //std::cout << "last date is : " << lastDate << std::endl;
-    // faire si trouve pas date prend date la plus proche inférieur
-    // faire si date trop petite il prend 0 comme value
-    // gérer si input est vide
-    // gérer si csv est vide 
+
     // gérer des dates fausses (trop long, sans aucun sens)
-    // gérer si respecte pas format year, day, month
-    // gérer valeurs vide dans le csv pour certaines date
     // tout mettre dans le header file
-    // relire consigne pour voir si on a le droit de toucher au CSV file
-    //std::multimap<std::string, std::string>::iterator itArgSave;
-    //std::cout << "DATE before boucle: " << mapArg.begin()->first << std::endl;
     
     for (std::multimap<std::string, std::string>::iterator itArg = mapArg.begin(); itArg != mapArg.end(); itArg++)
     {
