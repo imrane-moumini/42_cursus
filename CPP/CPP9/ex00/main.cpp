@@ -168,11 +168,11 @@ bool checkYear(std::string date)
 bool checkDay(std::string date)
 {
     // c'est juste ce qu'il y a entre 2 tiret
-    std::cout << "Date in Checkday is: " << date << std::endl;
+    //std::cout << "Date in Checkday is: " << date << std::endl;
     int pos1 = static_cast<int>(date.find('-'));
     int pos2 = static_cast<int>(date.find('-', pos1 + 1));
-    std::cout << "debut: " << pos2+1 << std::endl;
-    std::cout << "fin: " << date.length() - pos2 - 2 <<std::endl;
+    //std::cout << "debut: " << pos2+1 << std::endl;
+    //std::cout << "fin: " << date.length() - pos2 - 2 <<std::endl;
     std::string dateStr = date.substr(pos2 + 1, date.length() - pos2 - 1);
     int nbr = std::atoi(dateStr.c_str());
 
@@ -184,23 +184,23 @@ bool checkDay(std::string date)
             return (false);
         }
     }
-    std::cout << "DAY: " << dateStr<< std::endl;
+    //std::cout << "DAY: " << dateStr<< std::endl;
     if (count(dateStr.c_str()) < 2 || count(dateStr.c_str()) > 2)
     {
         // g pas la bonne dateStr, elle est trop grande
         //faut pas que je prenne les espaces
-        std::cout << "size is: "<< count(dateStr.c_str()) << std::endl;
-        std::cout << "c3.1\n";
+        //std::cout << "size is: "<< count(dateStr.c_str()) << std::endl;
+        //std::cout << "c3.1\n";
         return (false);
     }
     if (nbr <= 0)
     {
-        std::cout << "c3.2\n";
+        //std::cout << "c3.2\n";
         return (false);
     }
     if (nbr > 31)
     {
-        std::cout << "c3.3\n";
+        //std::cout << "c3.3\n";
         return (false);
     }
     return (true);
@@ -262,7 +262,7 @@ bool checkDate(std::string date)
     } 
     if (!checkDay(date))
     {
-        std::cout << "c0.3\n";
+        //std::cout << "c0.3\n";
         //std::cout << "c3\n";
         std::cout << "Error: bad input => " << date << std::endl;
         return (false);
@@ -280,7 +280,7 @@ bool checkValue(std::string nbrStr)
 {
     if (!nbrStr.size())
     {
-        std::cout << "c7\n";
+        //std::cout << "c7\n";
         std::cout << "Error: bad input => " << nbrStr << std::endl;
         return (false);
     }
@@ -288,7 +288,7 @@ bool checkValue(std::string nbrStr)
     {
         if (nbrStr[i] != '.' &&  nbrStr[i] != ' ' && !std::isdigit(nbrStr[i]))
         {
-            std::cout << "c6\n";
+            //std::cout << "c6\n";
             //std::cout << nbrStr[i] << std::endl;
             std::cout << "Error: bad input => " << nbrStr << std::endl;
             return (false);
@@ -297,7 +297,7 @@ bool checkValue(std::string nbrStr)
     float nbr = std::atof(nbrStr.c_str());
     if (nbr < 0 || nbr > 1000)
     {
-        std::cout << "c7\n";
+        //std::cout << "c7\n";
         if (nbr < 0)
             std::cout << "Error: not a positive number." << std::endl;
         else
@@ -408,16 +408,16 @@ int main(int argc, char *argv[])
     // gérer des dates fausses (trop long, sans aucun sens)
     // tout mettre dans le header file
     
-    for (std::multimap<std::string, std::string>::iterator itArg = mapArg.begin(); itArg != mapArg.end(); itArg++)
-    {
-        std::cout<< itArg->first << " " << itArg->second << std::endl;
-    }
+    //for (std::multimap<std::string, std::string>::iterator itArg = mapArg.begin(); itArg != mapArg.end(); itArg++)
+    //{
+       // std::cout<< itArg->first << " " << itArg->second << std::endl;
+    //}
     //return 1;
-    std::cout<<"\n";
+    //std::cout<<"\n";
     for (std::multimap<std::string, std::string>::iterator itArg = mapArg.begin(); itArg != mapArg.end(); itArg++)
     {
-        std::cout << "c0\n";
-        std::cout << "DATE: " << itArg->first << std::endl;
+        //std::cout << "c0\n";
+        //std::cout << "DATE: " << itArg->first << std::endl;
         findDate = 0;
         //if (itArg != mapArg.end() && itArg->first.find("date") != std::string::npos)
         //{
@@ -438,12 +438,12 @@ int main(int argc, char *argv[])
             //{
             //    itArg++;
             //}
-            std::cout << "c1\n";
+            //std::cout << "c1\n";
         }
         if (findDate == 0 && itArg != mapArg.end() && !checkValue(itArg->second))
         {
             findDate = 1;
-            std::cout << "c92\n";
+            //std::cout << "c92\n";
             //if (itArg != mapArg.end())
                 //itArg++;
         }
@@ -465,10 +465,10 @@ int main(int argc, char *argv[])
                 //itArg++;
         }
         // rajoute la condition genre pas trouvé (global value)
-        std::cout << "c2\n";
+        //std::cout << "c2\n";
         if (findDate == 0 && itArg != mapArg.end())
         {
-            std::cout << "c3\n";
+            //std::cout << "c3\n";
             for (std::multimap<std::string, std::string>::iterator itCSV = mapCSV.begin(); itCSV != mapCSV.end(); itCSV++)
             {
                 if (itArg->first.find("date") == std::string::npos && itArg->first.find(itCSV->first) != std::string::npos )
@@ -480,7 +480,7 @@ int main(int argc, char *argv[])
                 if (itArg->first.find("date") != std::string::npos)
                     findDate = 1;
             }
-            std::cout << "c4\n";
+            //std::cout << "c4\n";
             if (findDate == 0)
             {
                 //std::cout << "ITarg->first is: " << itArg->first << std::endl;
@@ -493,7 +493,7 @@ int main(int argc, char *argv[])
             {
                 //std::cout << "c5\n";
                 // sinon je remplace pas juste je l'utilise comme comparaison
-                std::cout << "SaveDate: " << saveDate << std::endl;
+                //std::cout << "SaveDate: " << saveDate << std::endl;
                 for (std::multimap<std::string, std::string>::iterator itCSV = mapCSV.begin(); itCSV != mapCSV.end(); itCSV++)
                 {
                     if (saveDate.find("date") == std::string::npos && saveDate.find(itCSV->first) != std::string::npos )
@@ -511,13 +511,3 @@ int main(int argc, char *argv[])
     fileArg.close();
     fileCSV.close();
 }
-
- // déjà je vais me souvenir des dates les plus grandes et plus petites comme ça je vais gérer ces 2 cas
-                // si la valeur de la variable globale a pas été trouvé bah je relance une loop 
-                // la j'affiche la valeur juste avant
-                // commen,t signifier qu'il s'agit de la valeur juste en dessous ?
-                    // je fais étape par étape : toutes les années et tous les mois depuis 2009-01-02 jusqu'à 2023-03-29
-                        //ya que les jours que je suis pas sur 
-                        // du coup si date exsite pas je vais dans la meme année et le meme mois et je teste les jours -1
-                    // en gros je créer une boucle qui va modifier la date de itArg-> first et réessayer
-                    // je créer une variable qui va se souvenir de itArg de base
