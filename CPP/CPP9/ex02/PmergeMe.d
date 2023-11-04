@@ -1,1 +1,1 @@
-PmergeMe.o: PmergeMe.cpp
+PmergeMe.o: PmergeMe.cpp PmergeMe.hpp
