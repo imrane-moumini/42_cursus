@@ -1,4 +1,17 @@
 #include "PmergeMe.hpp"
+bool hasDuplicates(const std::vector<int>& vec) {
+    std::set<int> encountered;
+
+    for (std::vector<int>::const_iterator it = vec.begin(); it != vec.end(); ++it) {
+        if (encountered.find(*it) != encountered.end()) {
+            return true; // Found a duplicate
+        } else {
+            encountered.insert(*it);
+        }
+    }
+
+    return false; // No duplicates found
+}
 
 int main(int argc, char *argv[])
 {
@@ -25,7 +38,11 @@ int main(int argc, char *argv[])
 		    deque.push_back(num);
 		    vector.push_back(num);
 	    }
-	
+	if (hasDuplicates(vector))
+	{
+		std::cout << "input can't have duplicates elements\n";
+		return (1);
+	}
 	std::cout << "Vector Before:	";
 	for (size_t i = 0; i < vector.size(); i++)
 		std::cout << vector[i] << " ";
