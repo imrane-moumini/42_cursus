@@ -45,40 +45,72 @@ int main(int argc, char *argv[])
         {
             case '+':
             {
-                result = stack.top();
-                stack.pop();
-                result = result + stack.top();
-                stack.pop();
-                stack.push((result));
+                if (stack.size() >= 2)
+                {
+                    result = stack.top();
+                    stack.pop();
+                    result = result + stack.top();
+                    stack.pop();
+                    stack.push((result));
+                }
+                else
+                {
+                    std::cout << "input error\n";
+                    return 1;
+                }
                 break;
             }
             case '-':
             {
-                value1 = stack.top();
-                stack.pop();
-                value2 = stack.top();
-                stack.pop();
-                result = value2 - value1;
-                stack.push((result));
+                if (stack.size() >= 2)
+                {
+                    value1 = stack.top();
+                    stack.pop();
+                    value2 = stack.top();
+                    stack.pop();
+                    result = value2 - value1;
+                    stack.push((result));
+                }
+                else
+                {
+                    std::cout << "input error\n";
+                    return 1;
+                }
                 break;
             }
             case '*':
             {
-                result = stack.top();
-                stack.pop();
-                result = result * stack.top();
-                stack.pop();
-                stack.push((result));
+                if (stack.size() >= 2)
+                {
+                    result = stack.top();
+                    stack.pop();
+                    result = result * stack.top();
+                    stack.pop();
+                    stack.push((result));
+                }
+                else
+                {
+                    std::cout << "input error\n";
+                    return 1;
+                }
                 break;
             }
             case '/':
             {
-                value1 = stack.top();
-                stack.pop();
-                value2 = stack.top();
-                stack.pop();
-                result = value2 / value1;
-                stack.push((result));
+                if (stack.size() >= 2)
+                {
+                    value1 = stack.top();
+                    stack.pop();
+                    value2 = stack.top();
+                    stack.pop();
+                    result = value2 / value1;
+                    stack.push((result));
+                }
+                else
+                {
+                    std::cout << "input error\n";
+                    return 1;
+                }
                 break;
             }
 
