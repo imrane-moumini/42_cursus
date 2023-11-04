@@ -1,1 +1,1 @@
-RPN.o: RPN.cpp
+RPN.o: RPN.cpp RPN.hpp
