@@ -1,7 +1,9 @@
 #include "BitcoinExchange.hpp"
 
-btc::btc(std::ifstream& fileCSV) : mapCSV(fillMap(fileCSV, 1)), findDate(0), firstDate((mapCSV.begin())->first.c_str())
+btc::btc(std::ifstream& fileCSV) : findDate(0)
 {
+    mapCSV = fillMap(fileCSV, 1);
+    firstDate = (mapCSV.begin())->first.c_str();
     std::multimap<std::string, std::string>::iterator it;
 
     it = mapCSV.end();
@@ -29,7 +31,7 @@ btc& btc::operator=(btc& copy)
         firstDate = copy.firstDate;
         saveDate = copy.saveDate;
     }
-    return (*this)
+    return (*this);
 }
 btc::~btc()
 {
@@ -59,8 +61,12 @@ void btc::getValue(std::ifstream& fileArg)
             }
             if (findDate == 0 &&  lastDate < firstPart)
             {
+                std::multimap<std::string, std::string>::iterator it;
+
+                it = mapCSV.end();
+                it--;
                 std::cout << firstPart << " => " << secondPart  << " = ";
-                std::cout << (std::atof((secondPart ).c_str()) * std::atof((it->second).c_str()) ) << std::endl;
+                std::cout << (std::atof((secondPart).c_str()) * std::atof((it->second).c_str()) ) << std::endl;
                 findDate = 1;
             }
             if (findDate == 0)
@@ -103,6 +109,7 @@ std::multimap<std::string, std::string> btc::fillMap(std::ifstream& file, int nb
     std::string secondPart;
     std::string line;
     std::pair<std::string, float>  pair;
+
     while(std::getline(file, line))
     {
         if (line.find("date") == std::string::npos)

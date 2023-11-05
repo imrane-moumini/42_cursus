@@ -25,10 +25,8 @@ int main(int argc, char *argv[])
         return (1);
     }
 
-
     btc obj(fileCSV);
     obj.getValue(fileArg);
-
     fileArg.close();
     fileCSV.close();
 }

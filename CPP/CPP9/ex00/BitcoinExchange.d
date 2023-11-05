@@ -1,1 +1,1 @@
-BitcoinExchange.o: BitcoinExchange.cpp
+BitcoinExchange.o: BitcoinExchange.cpp BitcoinExchange.hpp
