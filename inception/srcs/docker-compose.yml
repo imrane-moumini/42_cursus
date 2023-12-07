@@ -1,5 +1,5 @@
 version: '3'
- services:
+services:
   mariadb:
    container_name: mariadb # Le nom du container, oui vraiment.
    networks:
