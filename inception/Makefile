@@ -1,6 +1,6 @@
 # Define variables
 DOCKER_COMPOSE_FILE=./srcs/docker-compose.yml
-DATA_DIR=/home/mgruson/data
+DATA_DIR=/home/imoumini/data
 
 # Phony targets
 .PHONY: all clean fclean stop setup 
