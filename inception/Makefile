@@ -7,9 +7,9 @@ DATA_DIR=/home/imoumini/data
 
 # Default target
 all:
-	@if [ $$(sudo docker-compose -f $(DOCKER_COMPOSE_FILE) images | wc -l) -eq 2 ]; then \
+	@if [ $$(sudo docker-compose -f $(DOCKER_COMPOSE_FILE) images | wc -l) -eq 1 ]; then \
 		echo "Starting containers..."; \
-		mkdir -p $(DATA_DIR)/wordpress $(DATA_DIR)/mariadb; \
+		sudo mkdir -p $(DATA_DIR)/wordpress $(DATA_DIR)/mariadb; \
 		sudo docker-compose -f $(DOCKER_COMPOSE_FILE) up -d --build; \
 	else \
 		echo "Containers already build"; \
