@@ -1,7 +1,5 @@
-#!bin/bash
-
-#to be sure that teh database exist
-sleep 10
+#!/bin/bash
+#set -eux
 
 if [ ! -d /run/php ]; then
 	mkdir /run/php;
@@ -46,4 +44,4 @@ wp cache flush --allow-root
 
 fi
 
-exec /usr/sbin/php-fpm7.3 -F -R
+exec /usr/sbin/php-fpm7.4 -F -R

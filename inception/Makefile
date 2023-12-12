@@ -1,32 +1,23 @@
-# Define variables
-DOCKER_COMPOSE_FILE=./srcs/docker-compose.yml
-DATA_DIR=/home/imoumini/data
+all: 
+	sudo mkdir -p /home/imoumini/data/mariadb
+	sudo mkdir -p /home/imoumini/data/wordpress
+	sudo docker compose -f ./srcs/docker-compose.yml build
+	sudo docker compose -f ./srcs/docker-compose.yml up -d
 
-# Phony targets
-.PHONY: all clean fclean stop setup 
+logs:
+	sudo docker logs wordpress
+	sudo docker logs mariadb
+	sudo docker logs nginx
 
-# Default target
-all:
-	@if [ $$(sudo docker-compose -f $(DOCKER_COMPOSE_FILE) images | wc -l) -eq 1 ]; then \
-		echo "Starting containers..."; \
-		sudo mkdir -p $(DATA_DIR)/wordpress $(DATA_DIR)/mariadb; \
-		sudo docker-compose -f $(DOCKER_COMPOSE_FILE) up -d --build; \
-	else \
-		echo "Containers already build"; \
-	fi
+clean:
+	sudo docker container stop nginx mariadb wordpress
+	sudo docker network rm inception
 
-
-up :
-	sudo docker-compose -f $(DOCKER_COMPOSE_FILE) up -d
-	
-# Clean up containers
-clean: stop
-	sudo docker-compose -f $(DOCKER_COMPOSE_FILE) down -v
-
-# Remove data directories and clean up containers
 fclean: clean
-	sudo rm -rf $(DATA_DIR)/wordpress $(DATA_DIR)/mariadb; sudo docker stop $(shell sudo docker ps -qa); sudo docker rm $(shell sudo docker ps -qa); sudo docker rmi -f $(shell sudo docker images -qa); sudo docker rm $(shell sudo docker volume ls -q); sudo docker network rm $(shell sudo docker network ls -q) 2> /dev/null
+	@sudo rm -rf /home/imoumini/data/mariadb/*
+	@sudo rm -rf /home/imoumini/data/wordpress/*
+	@docker system prune -af
 
-# Stop containers
-stop:
-	sudo docker-compose -f $(DOCKER_COMPOSE_FILE) stop
+re: fclean all
+
+.Phony: all logs clean fclean
