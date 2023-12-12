@@ -28,7 +28,33 @@ services:
     expose:
       - "3306"
 
-  # Define the Nginx service
+  # Define the WordPress service
+  wordpress:
+    # Use the wordpress image
+    image: wordpress
+    # Set the container name
+    container_name: wordpress
+    # Load environment variables from the .env file
+    env_file: .env
+    # Mount the wordpress volume
+    volumes:
+      - wordpress:/var/www/html/wordpress
+    # Connect to the inception network
+    networks:
+      - inception
+    # Build the image using the Dockerfile in the requirements/wordpress directory
+    build: 
+      context: requirements/wordpress
+      dockerfile: Dockerfile
+    # Depend on the mariadb service
+    depends_on:                       
+      - mariadb
+    # Restart the container if it fails
+    restart: on-failure
+    # Expose port 9000 to other containers in the inception network
+    expose: 
+      - "9000"
+    # Define the Nginx service
   nginx:
     # Use the nginx image
     image: nginx
@@ -36,7 +62,7 @@ services:
     container_name: nginx
     # Mount the wordpress volume
     volumes:
-      - wordpress:/var/www/wordpress
+      - wordpress:/var/www/html/wordpress
     # Connect to the inception network
     networks:
       - inception
@@ -54,34 +80,6 @@ services:
       - "443:443"
     # Restart the container if it fails
     restart: on-failure
-
-  # Define the WordPress service
-  wordpress:
-    # Use the wordpress image
-    image: wordpress
-    # Set the container name
-    container_name: wordpress
-    # Load environment variables from the .env file
-    env_file: .env
-    # Mount the wordpress volume
-    volumes:
-      - wordpress:/var/www/wordpress
-    # Connect to the inception network
-    networks:
-      - inception
-    # Build the image using the Dockerfile in the requirements/wordpress directory
-    build: 
-      context: requirements/wordpress
-      dockerfile: Dockerfile
-    # Depend on the mariadb service
-    depends_on:                       
-      - mariadb
-    # Restart the container if it fails
-    restart: on-failure
-    # Expose port 9000 to other containers in the inception network
-    expose: 
-      - "9000"
-
 # Define the volumes to use
 volumes:
   # Define the wordpress volume
