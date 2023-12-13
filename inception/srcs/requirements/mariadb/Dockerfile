@@ -17,7 +17,7 @@ RUN chmod -R 755 /var/lib/mysql/
 
 EXPOSE 3306
 
-COPY ./tools/dbscript.sh ./
-RUN chmod +x ./dbscript.sh
+COPY ./tools/mariadb.sh ./
+RUN chmod +x ./mariadb.sh
 
-ENTRYPOINT ["bash", "./dbscript.sh"]
+ENTRYPOINT ["bash", "./mariadb.sh"]

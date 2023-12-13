@@ -21,9 +21,9 @@ RUN chmod -R 755 /var/www/*
 
 EXPOSE 9000
 
-COPY ./tools/wpscript.sh ./
-RUN chmod +x ./wpscript.sh
+COPY ./tools/auto_config.sh ./
+RUN chmod +x ./auto_config.sh
 
-COPY ./tools/www.conf /etc/php/7.4/fpm/pool.d/www.conf
+COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
-ENTRYPOINT ["bash", "./wpscript.sh"]
+ENTRYPOINT ["bash", "./auto_config.sh"]

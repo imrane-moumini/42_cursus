@@ -14,9 +14,9 @@ clean:
 	sudo docker network rm inception
 
 fclean: clean
-	@sudo rm -rf /home/imoumini/data/mariadb/*
-	@sudo rm -rf /home/imoumini/data/wordpress/*
-	@docker system prune -af
+	sudo rm -rf /home/imoumini/data/mariadb/*
+	sudo rm -rf /home/imoumini/data/wordpress/*
+	sudo docker system prune -af
 
 re: fclean all
 
