@@ -13,7 +13,7 @@ services:
       - "3306"
     networks:
       - inception
-    restart: unless-stopped
+    restart: on-failure
     env_file: .env
     healthcheck:
       test: mysqladmin ping --host=localhost -p${SQL_ROOT_PASSWORD}
@@ -34,7 +34,7 @@ services:
       - "9000"
     networks:
       - inception
-    restart: unless-stopped
+    restart: on-failure
     env_file: .env
     depends_on:
       mariadb:
@@ -54,7 +54,7 @@ services:
       - "443:443"
     networks:
       - inception
-    restart: unless-stopped
+    restart: on-failure
     env_file: .env
     healthcheck:
       test: 'curl -kfsSL https://localhost:443/status'
