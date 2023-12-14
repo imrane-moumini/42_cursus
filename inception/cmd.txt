@@ -1,0 +1,12 @@
+docker exec -it container_id_or_name bash
+
+# Access MariaDB from within the container
+mysql -u root -p
+
+SHOW DATABASES;
+
+USE your_database_name;
+
+SHOW TABLES;
+
+SELECT * FROM your_table_name;
