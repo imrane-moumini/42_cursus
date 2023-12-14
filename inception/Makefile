@@ -1,8 +1,7 @@
 all: 
 	sudo mkdir -p /home/imoumini/data/mariadb
 	sudo mkdir -p /home/imoumini/data/wordpress
-	sudo docker compose -f ./srcs/docker-compose.yml build
-	sudo docker compose -f ./srcs/docker-compose.yml up -d
+	sudo docker-compose -f ./srcs/docker-compose.yml up -d --build;
 
 logs:
 	sudo docker logs wordpress
