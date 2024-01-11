@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     struct sockaddr_in sockStructServ;
     struct sockaddr_in sockStructClient;
 
-    portNb = 18000;
+    portNb = 6697;
     
     /* Initialize socket structure */
     sockFd = socket(AF_INET, SOCK_STREAM, 0);
@@ -72,6 +72,5 @@ int main(int argc, char *argv[])
     std::cout << "YES \n";
 }
 
-// connecter à un client irc
+// trouver comment faire que irssi se connecte a un autre port que le 6697
 // accepter plusieurs requêtes
-// repondre au client irc
