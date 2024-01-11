@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     portNb = 18000;
 
     /* Initialize socket structure */
-    sockFd = socket (AF_INET, SOCK_STREAM, 0);
+    sockFd = socket(AF_INET, SOCK_STREAM, 0);
 
     if (sockFd < 0)
     {
@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
         exit(1);
     }
     std::cout << "sock fd is " << sockFd << std::endl;
-    bzero((char *)&sockFd, sizeof(sockFd));
+    bzero((char *)&sockStructServ, sizeof(sockStructServ));
     sockStructServ.sin_family = AF_INET;
     sockStructServ.sin_addr.s_addr = INADDR_ANY;
     sockStructServ.sin_port = htons(portNb);
