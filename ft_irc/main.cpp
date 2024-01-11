@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     struct sockaddr_in sockStructClient;
 
     portNb = 18000;
-
+    
     /* Initialize socket structure */
     sockFd = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -41,6 +41,7 @@ int main(int argc, char *argv[])
 
     listen(sockFd, 5);
     clientLen = sizeof(sockStructClient);
+
     newsockFd = accept(sockFd, (struct sockaddr *)&sockStructClient, &clientLen);
 
     if(newsockFd < 0)
@@ -49,16 +50,24 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    while (1)
+    while ((nbCar = read(newsockFd, buff, 10000)) > 0)
     {
-        nbCar = read(newsockFd, buff, 10000);
-        if (nbCar)
+        
+        std::cout << "nb car is " << nbCar << std::endl;
+        std::cout << buff << std::endl;
+
+        //end ofg http request
+        if (buff[-1] == '\n')
         {
-            std::cout << "nothing to read anymore\n";
-            exit(1);
+            std::cout << "IM HERE \n";
+            break;
         }
+        
+        memset(buff, 0, 10000);
+        
         /* Write a response to the client */
         nbCar = write(newsockFd,"HTTP/1.0 200 OK \r\n\r\nI got your message",38);
         close(newsockFd);
     }
+    std::cout << "YES \n";
 }
