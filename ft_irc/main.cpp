@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
         std::cout << "error socket fd\n";
         exit(1);
     }
-    std::cout << "sock fd is " << sockFd << std::endl;
+    
     bzero((char *)&sockStructServ, sizeof(sockStructServ));
     sockStructServ.sin_family = AF_INET;
     sockStructServ.sin_addr.s_addr = INADDR_ANY;
@@ -41,15 +41,15 @@ int main(int argc, char *argv[])
 
     listen(sockFd, 5);
     clientLen = sizeof(sockStructClient);
-
+    std::cout << "waiting for a request... " << std::endl;
     newsockFd = accept(sockFd, (struct sockaddr *)&sockStructClient, &clientLen);
-
+    std::cout << "i have accepted your request " << std::endl;
     if(newsockFd < 0)
     {
         std::cout << "error connect\n";
         exit(1);
     }
-
+    
     while ((nbCar = read(newsockFd, buff, 10000)) > 0)
     {
         
@@ -64,10 +64,14 @@ int main(int argc, char *argv[])
         }
         
         memset(buff, 0, 10000);
-        
+
         /* Write a response to the client */
         nbCar = write(newsockFd,"HTTP/1.0 200 OK \r\n\r\nI got your message",38);
         close(newsockFd);
     }
     std::cout << "YES \n";
 }
+
+// connecter à un client irc
+// accepter plusieurs requêtes
+// repondre au client irc
