@@ -1,7 +1,8 @@
 NAME		= ft_irc
 CC			= c++
 FLAGS		= -Wall -Werror -Wextra -std=c++98
-SRC			= main.cpp 
+SRC			= main.cpp \
+				i_handleSocket.cpp
 OBJ			= $(SRC:.cpp=.o)
 DEP			= $(SRC:.cpp=.d)
 RM			= rm -f
