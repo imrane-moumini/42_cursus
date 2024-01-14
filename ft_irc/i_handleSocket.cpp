@@ -31,3 +31,19 @@ int i_setup_socket(sockaddr_in *sockStructServ, int portNb)
     listen(sockFd, 5);
     return (sockFd);
 }
+
+void i_handle_connexion(int newsockFd)
+{
+    char buff[10000];
+    int nbCar;
+
+    nbCar = read(newsockFd, buff, 10000);
+    std::cout << "nb car is " << nbCar << std::endl;
+    std::cout << buff << std::endl;
+    
+    memset(buff, 0, 10000);
+    /* Write a response to the client */
+    nbCar = i_send_message(newsockFd,"HTTP/1.0 200 OK \r\n\r\nI got your message");
+    
+    close(newsockFd);
+}

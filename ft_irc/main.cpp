@@ -8,8 +8,6 @@ int main(int argc, char *argv[])
     int newsockFd;
     int portNb;
     socklen_t clientLen;
-    int nbCar;
-    char buff[10000];
     (void)argc;
     (void) argv;
     struct sockaddr_in sockStructServ;
@@ -34,17 +32,9 @@ int main(int argc, char *argv[])
             std::cout << "error connect\n";
             exit(1);
         }
+        
         //handle connexion
-        nbCar = read(newsockFd, buff, 10000);
-        std::cout << "nb car is " << nbCar << std::endl;
-        std::cout << buff << std::endl;
-        
-        memset(buff, 0, 10000);
-
-        /* Write a response to the client */
-        nbCar = i_send_message(newsockFd,"HTTP/1.0 200 OK \r\n\r\nI got your message");
-        
-        close(newsockFd);
+       i_handle_connexion(newsockFd);
     }
     std::cout << "YES \n";
 }
