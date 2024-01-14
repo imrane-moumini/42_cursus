@@ -19,22 +19,22 @@ int main(int argc, char *argv[])
     
     /* Initialize socket structure */
     sockFd = socket(AF_INET, SOCK_STREAM, 0);
-
     i_init_and_bind_socket(sockFd, &sockStructServ, portNb);
-    listen(sockFd, 5);
-    clientLen = sizeof(sockStructClient);
-    std::cout << "waiting for a request... " << std::endl;
-    newsockFd = accept(sockFd, (struct sockaddr *)&sockStructClient, &clientLen);
-    std::cout << "i have accepted your request " << std::endl;
-
-    if(newsockFd < 0)
-    {
-        std::cout << "error connect\n";
-        exit(1);
-    }
     
-    while ((nbCar = read(newsockFd, buff, 10000)) > 0)
+    while (true)
     {
+        listen(sockFd, 5);
+        clientLen = sizeof(sockStructClient);
+        std::cout << "waiting for a request... " << std::endl;
+        newsockFd = accept(sockFd, (struct sockaddr *)&sockStructClient, &clientLen);
+        std::cout << "i have accepted your request " << std::endl;
+
+        if(newsockFd < 0)
+        {
+            std::cout << "error connect\n";
+            exit(1);
+        }
+        nbCar = read(newsockFd, buff, 10000);
         std::cout << "nb car is " << nbCar << std::endl;
         std::cout << buff << std::endl;
         
