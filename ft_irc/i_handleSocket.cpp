@@ -47,3 +47,20 @@ void i_handle_connexion(int newsockFd)
     
     close(newsockFd);
 }
+
+int i_accept_connexion(int sockFd, sockaddr_in *sockStructClient)
+{
+    socklen_t clientLen;
+    int newsockFd;
+
+    clientLen = sizeof(*(sockStructClient));
+    std::cout << "waiting for a request... " << std::endl;
+    newsockFd = accept(sockFd, (struct sockaddr *)sockStructClient, &clientLen);
+    std::cout << "i have accepted your request " << std::endl;
+    if(newsockFd < 0)
+    {
+        std::cout << "error connect\n";
+        exit(1);
+    }
+    return (newsockFd);
+}

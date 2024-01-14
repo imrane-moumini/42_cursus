@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
     int sockFd;
     int newsockFd;
     int portNb;
-    socklen_t clientLen;
+    
     (void)argc;
     (void) argv;
     struct sockaddr_in sockStructServ;
@@ -22,16 +22,7 @@ int main(int argc, char *argv[])
     {
         
         // accept connexion
-        clientLen = sizeof(sockStructClient);
-        std::cout << "waiting for a request... " << std::endl;
-        newsockFd = accept(sockFd, (struct sockaddr *)&sockStructClient, &clientLen);
-        std::cout << "i have accepted your request " << std::endl;
-
-        if(newsockFd < 0)
-        {
-            std::cout << "error connect\n";
-            exit(1);
-        }
+        newsockFd = i_accept_connexion(sockFd, &sockStructClient);
         
         //handle connexion
        i_handle_connexion(newsockFd);
