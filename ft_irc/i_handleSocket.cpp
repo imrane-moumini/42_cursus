@@ -6,8 +6,10 @@ int i_send_message(int newsockFd, std::string message)
     return (write(newsockFd, message.c_str(), message.length()));
 }
 
-void i_init_and_bind_socket(int sockFd, sockaddr_in *sockStructServ, int portNb)
+int i_setup_socket(sockaddr_in *sockStructServ, int portNb)
 {
+    int sockFd;
+    sockFd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockFd < 0)
     {
         std::cout << "error socket fd\n";
@@ -26,5 +28,6 @@ void i_init_and_bind_socket(int sockFd, sockaddr_in *sockStructServ, int portNb)
         perror ("The following error occurred\n");
         exit(1);
     }
-
+    listen(sockFd, 5);
+    return (sockFd);
 }

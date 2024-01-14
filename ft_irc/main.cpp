@@ -18,12 +18,12 @@ int main(int argc, char *argv[])
     portNb = 6697;
     
     /* Initialize socket structure */
-    sockFd = socket(AF_INET, SOCK_STREAM, 0);
-    i_init_and_bind_socket(sockFd, &sockStructServ, portNb);
-    listen(sockFd, 5);
+    sockFd = i_setup_socket(&sockStructServ, portNb);
+    
     while (true)
     {
         
+        // accept connexion
         clientLen = sizeof(sockStructClient);
         std::cout << "waiting for a request... " << std::endl;
         newsockFd = accept(sockFd, (struct sockaddr *)&sockStructClient, &clientLen);
@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
             std::cout << "error connect\n";
             exit(1);
         }
+        //handle connexion
         nbCar = read(newsockFd, buff, 10000);
         std::cout << "nb car is " << nbCar << std::endl;
         std::cout << buff << std::endl;

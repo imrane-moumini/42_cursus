@@ -16,5 +16,5 @@
 
 // socket function
 int i_send_message(int newsockFd, std::string message);
-void i_init_and_bind_socket(int sockFd, sockaddr_in *sockStructServ, int portNb);
+int i_setup_socket(sockaddr_in *sockStructServ, int portNb);
 #endif
