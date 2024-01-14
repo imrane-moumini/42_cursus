@@ -28,7 +28,7 @@ int i_setup_socket(sockaddr_in *sockStructServ, int portNb)
         perror ("The following error occurred\n");
         exit(1);
     }
-    listen(sockFd, 5);
+    listen(sockFd, 100);
     return (sockFd);
 }
 
