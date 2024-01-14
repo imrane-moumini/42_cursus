@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
     portNb = 6697;
     //initialize my current set of sockets
     
+    
     /* Initialize socket structure */
     sockFd = i_setup_socket(&sockStructServ, portNb);
     FD_ZERO(&current_sockets);
