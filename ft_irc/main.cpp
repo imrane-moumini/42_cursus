@@ -20,10 +20,10 @@ int main(int argc, char *argv[])
     /* Initialize socket structure */
     sockFd = socket(AF_INET, SOCK_STREAM, 0);
     i_init_and_bind_socket(sockFd, &sockStructServ, portNb);
-    
+    listen(sockFd, 5);
     while (true)
     {
-        listen(sockFd, 5);
+        
         clientLen = sizeof(sockStructClient);
         std::cout << "waiting for a request... " << std::endl;
         newsockFd = accept(sockFd, (struct sockaddr *)&sockStructClient, &clientLen);
