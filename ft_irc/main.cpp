@@ -4,8 +4,8 @@
 
 int main(int argc, char *argv[])
 {
-    int sockFd;
-    int newsockFd;
+    int serveurSockFd;
+    int clientSockFd;
     int portNb;
     fd_set current_sockets, ready_sockets;
     (void)argc;
@@ -16,11 +16,11 @@ int main(int argc, char *argv[])
     portNb = 6697;
     //initialize my current set of sockets
     
-    
+
     /* Initialize socket structure */
-    sockFd = i_setup_socket(&sockStructServ, portNb);
+    serveurSockFd = i_setup_socket(&sockStructServ, portNb);
     FD_ZERO(&current_sockets);
-    FD_SET(sockFd, &current_sockets);
+    FD_SET(serveurSockFd, &current_sockets);
 
     while (true)
     {
@@ -36,14 +36,14 @@ int main(int argc, char *argv[])
         {
             if (FD_ISSET(i, &ready_sockets))
             {
-                if (i == sockFd){
+                if (i == serveurSockFd){
                     // this is a new connexion
                     // accept connexion
-                    newsockFd = i_accept_connexion(sockFd, &sockStructClient);
-                    FD_SET(newsockFd, &current_sockets);
+                    clientSockFd = i_accept_connexion(serveurSockFd, &sockStructClient);
+                    FD_SET(clientSockFd, &current_sockets);
                 } else {
                     //handle connexion
-                    i_handle_connexion(newsockFd);
+                    i_handle_connexion(clientSockFd);
                     FD_CLR(i, &current_sockets);
                 }
             }
@@ -56,5 +56,7 @@ int main(int argc, char *argv[])
     std::cout << "YES \n";
 }
 
-// trouver comment faire que irssi se connecte a un autre port que le 6697
-// accepter plusieurs requêtes
+// plusieurs irssi en meme tremps
+//rpd à tout le monde
+// voir comportrement quand j'interront des clients
+// commencer à gérer requetes

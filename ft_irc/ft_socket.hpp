@@ -18,8 +18,8 @@
 #include <unistd.h>
 
 // socket function
-int i_send_message(int newsockFd, std::string message);
+int i_send_message(int clientSockFd, std::string message);
 int i_setup_socket(sockaddr_in *sockStructServ, int portNb);
-void i_handle_connexion(int newsockFd);
+void i_handle_connexion(int clientSockFd);
 int i_accept_connexion(int sockFd,sockaddr_in *sockStructClient);
 #endif
