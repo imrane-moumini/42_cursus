@@ -38,16 +38,19 @@ int i_setup_socket(sockaddr_in *sockStructServ, int portNb)
 
 void i_handle_connexion(int clientSockFd)
 {
-    char buff[10000];
+    char buff[513];
     int nbCar;
 
-    nbCar = read(clientSockFd, buff, 10000);
+    nbCar = read(clientSockFd, buff, 512);
+    buff[nbCar] = 0;
+    
     std::cout << "nb car is " << nbCar << std::endl;
     std::cout << buff << std::endl;
     
-    memset(buff, 0, 10000);
+    memset(buff, 0, 513);
     /* Write a response to the client */
-    nbCar = i_send_message(clientSockFd,"HTTP/1.0 200 OK \r\n\r\nI got your message");
+    // mettre un \r\n à la fin du message
+    nbCar = i_send_message(clientSockFd,"I got your message \r\n");
     
     close(clientSockFd);
 }
