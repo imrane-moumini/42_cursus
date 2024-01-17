@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     struct sockaddr_in sockStructServ;
     struct sockaddr_in sockStructClient;
 
-    portNb = 6697;
+    portNb = 6667;
     //initialize my current set of sockets
     
 

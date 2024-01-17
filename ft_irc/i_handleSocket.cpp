@@ -50,7 +50,7 @@ void i_handle_connexion(int clientSockFd)
     memset(buff, 0, 513);
     /* Write a response to the client */
     // mettre un \r\n à la fin du message
-    nbCar = i_send_message(clientSockFd,"I got your message \r\n");
+    nbCar = i_send_message(clientSockFd,":Welcome to the Internet Relay Network haha!imrane@localhost\r\n");
     
     close(clientSockFd);
 }
