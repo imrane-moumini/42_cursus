@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
                     FD_SET(clientSockFd, &current_sockets);
                 } else {
                     //handle connexion
-                    i_handle_connexion(clientSockFd);
+                    i_handle_request(clientSockFd);
                     FD_CLR(i, &current_sockets);
                 }
             }

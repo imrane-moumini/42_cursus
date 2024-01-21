@@ -16,10 +16,12 @@
 #include <sys/time.h> 
 #include <sys/types.h>  
 #include <unistd.h>
+#include <arpa/inet.h>
 
 // socket function
 int i_send_message(int clientSockFd, std::string message);
 int i_setup_socket(sockaddr_in *sockStructServ, int portNb);
-void i_handle_connexion(int clientSockFd);
+void i_handle_first_connexion(int clientSockFd);
 int i_accept_connexion(int sockFd,sockaddr_in *sockStructClient);
+void i_handle_request(int clientSockFd);
 #endif

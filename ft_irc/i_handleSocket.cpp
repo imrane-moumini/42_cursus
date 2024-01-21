@@ -3,7 +3,8 @@
 
 int i_send_message(int clientSockFd, std::string message)
 {
-    return (write(clientSockFd, message.c_str(), message.length()));
+    //return (write(clientSockFd, message.c_str(), message.length()));
+    return (send(clientSockFd, message.c_str(), message.length() ,0));
 }
 
 int i_setup_socket(sockaddr_in *sockStructServ, int portNb)
@@ -36,23 +37,55 @@ int i_setup_socket(sockaddr_in *sockStructServ, int portNb)
     return (serveurSockFd);
 }
 
-void i_handle_connexion(int clientSockFd)
+void i_handle_first_connexion(int clientSockFd)
 {
     char buff[513];
     int nbCar;
 
     nbCar = read(clientSockFd, buff, 512);
-    buff[nbCar] = 0;
+    if (nbCar == 0)
+    {
+        close(clientSockFd);
+        std::cout << "i close the connection for the sock" << clientSockFd << "\n";
+    }
+    else
+    {
+        buff[nbCar] = 0;
     
-    std::cout << "nb car is " << nbCar << std::endl;
-    std::cout << buff << std::endl;
+        std::cout << "nb car is " << nbCar << std::endl;
+        std::cout << buff << std::endl;
+
+        memset(buff, 0, 513);
+        nbCar = i_send_message(clientSockFd,":localhost 421 * LS :Unknown command\r\n");
+        nbCar = i_send_message(clientSockFd,":localhost 001 haha :Welcome to the Internet Relay Network haha!imrane@localhost\r\n");
+        nbCar = i_send_message(clientSockFd,":localhost 002 haha :Your host is localhost, running version 1.0\r\n");
+        nbCar = i_send_message(clientSockFd,":localhost 003 haha :This server was created 01/01/24\r\n");
+        nbCar = i_send_message(clientSockFd,":localhost 004 haha localhost 1.0\r\n");
+    }
+}
+
+void i_handle_request(int clientSockFd)
+{
+    char buff[513];
+    int nbCar;
+
+    nbCar = read(clientSockFd, buff, 512);
+    if (nbCar == 0)
+    {
+        close(clientSockFd);
+        std::cout << "i close the connection for the sock" << clientSockFd << "\n";
+    }
+    else
+    {
+        buff[nbCar] = 0;
     
-    memset(buff, 0, 513);
-    /* Write a response to the client */
-    // mettre un \r\n à la fin du message
-    nbCar = i_send_message(clientSockFd,":Welcome to the Internet Relay Network haha!imrane@localhost\r\n");
-    
-    close(clientSockFd);
+        std::cout << "nb car is " << nbCar << std::endl;
+        std::cout << buff << std::endl;
+
+        memset(buff, 0, 513);
+    }
+    std::cout << "IM HERE IN HANDLE REQUEST\n";
+    // le pong doit ^petre envoyé avant 301 seconds
 }
 
 int i_accept_connexion(int serveurSockFd, sockaddr_in *sockStructClient)
@@ -64,10 +97,14 @@ int i_accept_connexion(int serveurSockFd, sockaddr_in *sockStructClient)
     std::cout << "waiting for a request... " << std::endl;
     clientSockFd = accept(serveurSockFd, (struct sockaddr *)sockStructClient, &clientLen);
     std::cout << "i have accepted your request " << std::endl;
+    printf("New connection , socket fd is %d , ip is : %s , port : %d\n" , clientSockFd , inet_ntoa(sockStructClient->sin_addr) , ntohs
+				(sockStructClient->sin_port));
+    
     if(clientSockFd < 0)
     {
         std::cout << "error connect\n";
         exit(1);
     }
+    i_handle_first_connexion(clientSockFd);
     return (clientSockFd);
 }
