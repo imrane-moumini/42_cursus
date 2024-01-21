@@ -77,6 +77,7 @@ void i_handle_request(int clientSockFd)
     }
     else
     {
+        std::cout << "IM HERE IN HANDLE REQUEST\n";
         buff[nbCar] = 0;
     
         std::cout << "nb car is " << nbCar << std::endl;
@@ -84,7 +85,7 @@ void i_handle_request(int clientSockFd)
 
         memset(buff, 0, 513);
     }
-    std::cout << "IM HERE IN HANDLE REQUEST\n";
+    
     // le pong doit ^petre envoyé avant 301 seconds
 }
 

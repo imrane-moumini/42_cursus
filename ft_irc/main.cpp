@@ -25,13 +25,14 @@ int main(int argc, char *argv[])
     while (true)
     {
         // save current sockets because select is destructive
+        std::cout << "BEGINING OF WHILE\n";
         ready_sockets = current_sockets;
         if (select(FD_SETSIZE, &ready_sockets, NULL, NULL, NULL) < 0)
         {
             perror("select error");
             exit(1);
         }
-
+        std::cout << "AFTER SELECT\n";
         for (int i=0; i < FD_SETSIZE; i++)
         {
             if (FD_ISSET(i, &ready_sockets))
@@ -43,17 +44,13 @@ int main(int argc, char *argv[])
                     FD_SET(clientSockFd, &current_sockets);
                 } else {
                     //handle connexion
-                    i_handle_request(clientSockFd);
-                    FD_CLR(i, &current_sockets);
+                    std::cout << "SOMEONE IS TALKING\n";
+                    i_handle_request(i);
+                    //FD_CLR(i, &current_sockets);
                 }
             }
         }
-        
-        
-        
-        
     }
-    std::cout << "YES \n";
 }
 
 // plusieurs irssi en meme tremps
