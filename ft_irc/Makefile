@@ -1,10 +1,11 @@
-NAME		= ft_irc
+NAME		= irc
 CC			= c++
 FLAGS		= -Wall -Werror -Wextra -std=c++98
 SRC			= main.cpp \
-				i_handleSocket.cpp
+server.cpp \
+
+
 OBJ			= $(SRC:.cpp=.o)
-DEP			= $(SRC:.cpp=.d)
 RM			= rm -f
 
 all		: $(NAME)
@@ -25,5 +26,3 @@ fclean	: clean
 
 re		: fclean
 	make all
-
--include $(DEP)
