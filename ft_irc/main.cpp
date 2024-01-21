@@ -53,8 +53,3 @@ int main(int argc, char *argv[])
     }
 }
 
-// plusieurs irssi en meme tremps
-//rpd à tout le monde
-// voir comportrement quand j'interront des clients
-// fermer le serveur proprement (sans ctr+C)
-// commencer à gérer requetes
