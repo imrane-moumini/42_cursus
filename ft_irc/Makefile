@@ -23,7 +23,7 @@ $(NAME) : $(OBJ)
 .PHONY	: all clean fclean re
 
 clean	:
-	$(RM) $(OBJ)
+	$(RM) $(OBJ) $(DEP)
 
 fclean	: clean
 	$(RM) $(NAME)
