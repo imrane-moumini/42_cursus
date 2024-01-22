@@ -126,29 +126,44 @@ void client::setMode(std::string mode)
 
 // utils
 
-std::string client::fillStrParam(std::string str, client* clientPtr)
+void client::fillStrParam(std::string str, client* clientPtr)
 {
     char **tabSplit;
+    char **splitNickname;
     tabSplit = ft_split(str.c_str(), ' ');
-    std::cout << "FILL StrParam\n";
+    //std::cout << "FILL StrParam\n";
     int i = 0;
+    int argUser = 1;
     while(tabSplit[i])
     {
-        std::cout << tabSplit[i] << std::endl;
-        i++;
-    }
-    (void)clientPtr;
-    /*pos = str.find("NICK");
-    if (pos != std::string::npos)
-    {
-        pos++;
-        pos++;
-        while ((str.c_str() + pos + i) && *((str.c_str()) + pos + i) != ' ')
+        std::string temp;
+        temp = tabSplit[i];
+        if (tabSplit[i] && temp.find("NICK") != std::string::npos)
         {
             i++;
+            if (tabSplit[i])
+            {
+                splitNickname = ft_split(tabSplit[i], '\r');
+                clientPtr->setNickName(copyString(splitNickname[0]));
+            }
+            i++;
+            while (tabSplit[i])
+            {
+                if (argUser == 1)
+                    clientPtr->setUserName(copyString(tabSplit[i]));
+                if (argUser == 2)
+                    clientPtr->setMode(copyString(tabSplit[i]));
+                if (argUser == 3)
+                    clientPtr->setHostName(copyString(tabSplit[i]));
+                if (argUser == 4)
+                    clientPtr->setRealName(copyString(tabSplit[i]));
+                i++;
+                argUser++;
+            }
         }
-        return (str.substr(pos, i));
-    }*/
-    return (" ");
+        if (tabSplit[i])
+            i++; 
+    }
+    (void)clientPtr;
 
 }

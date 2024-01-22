@@ -13,7 +13,25 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <ctype.h>
 #include "ft_split.hpp"
+
+char* copyString(const char* original) {
+    char* copy = (char*)malloc(strlen(original) + 1);
+
+    if (copy != NULL) {
+        // Copy alphanumeric characters only
+        int copyIndex = 0;
+        for (int i = 0; original[i] != '\0'; ++i) {
+            if (isalnum(original[i])) {
+                copy[copyIndex++] = original[i];
+            }
+        }
+        copy[copyIndex] = '\0'; // Null-terminate the new string
+    }
+
+    return copy;
+}
 
  int	number_of_tab(char const *s, char c)
 {

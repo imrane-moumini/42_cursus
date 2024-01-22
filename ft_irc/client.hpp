@@ -41,7 +41,7 @@ class client {
         void        setMode(std::string mode);
 
         //utiles
-        std::string fillStrParam(std::string str, client* clientPtr);
+        void fillStrParam(std::string str, client* clientPtr);
     protected:
         std::string nickName;
         std::string realName;
