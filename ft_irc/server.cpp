@@ -132,6 +132,11 @@ void	Server::i_accept_connexion(void)
 void	Server::i_handle_first_connexion(void)
 {
 	char buff[513];
+	std::string nickname;
+	std::string realName;
+	std::string userName;
+    std::string hostName;
+	std::cout << "New connection , socket fd is " << this->M_struct->clientSockFd << "ip is : " << inet_ntoa(this->M_struct->sockStructClient.sin_addr) << " , port : " << ntohs(this->M_struct->sockStructClient.sin_port) << std::endl;
     int nbCar;
 
     nbCar = read(this->M_struct->clientSockFd, buff, 512);
@@ -142,19 +147,33 @@ void	Server::i_handle_first_connexion(void)
     }
     else
     {
+		client * clientPtr;
         buff[nbCar] = 0;
     
         std::cout << "nb car is " << nbCar << std::endl;
         std::cout << buff << std::endl;
 
-        memset(buff, 0, 513);
+        
+		// créer le client
+		clientPtr = this->createClient();
+		clientPtr->setIp(inet_ntoa(this->M_struct->sockStructClient.sin_addr));
+		clientPtr->setPort(ntohs(this->M_struct->sockStructClient.sin_port));
+		clientPtr->setHostName("localhost");
+		clientPtr->fillStrParam(buff, clientPtr);
+		// remplir les infos du client
+		//ajouter le client dans la liste
+		// utiliser le fd pour savoir à quel client je fais référence
         nbCar = i_send_message(this->M_struct->clientSockFd,":localhost 421 * LS :Unknown command\r\n");
         nbCar = i_send_message(this->M_struct->clientSockFd,":localhost 001 haha :Welcome to the Internet Relay Network haha!imrane@localhost\r\n");
         nbCar = i_send_message(this->M_struct->clientSockFd,":localhost 002 haha :Your host is localhost, running version 1.0\r\n");
         nbCar = i_send_message(this->M_struct->clientSockFd,":localhost 003 haha :This server was created 01/01/24\r\n");
         nbCar = i_send_message(this->M_struct->clientSockFd,":localhost 004 haha localhost 1.0\r\n");
-    }
+		clientPtr->setWelcomeMessageSent(true);
+		memset(buff, 0, 513);
+	}
+
 }
+
 void	Server::i_handle_request(int i)
 {
 	char buff[513];
@@ -202,6 +221,7 @@ void	Server::mainProgram(void)
 					// accept connexion
 					i_accept_connexion();
 					addNewSocketToThePool(this->M_struct->clientSockFd);
+					
 				}
 				else
 				{
@@ -212,6 +232,12 @@ void	Server::mainProgram(void)
 		}
 	}
 	return ;
+}
+client* Server::createClient()
+{
+  client* ptr;
+  ptr = new client();
+  return (ptr);
 }
 
 const char *Server::WrongPortException::what() const throw()
