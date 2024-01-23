@@ -178,13 +178,22 @@ void	Server::i_handle_request(int i)
 {
 	char buff[513];
     int nbCar;
+	std::string temp;
 
     nbCar = read(i, buff, 512);
+	temp = buff;
     if (nbCar == 0)
     {
         close(i);
+		FD_CLR(i, &(this->M_struct->current_sockets));
         std::cout << "i close the connection for the sock" << i << "\n";
     }
+	else if (temp.find("QUIT") != std::string::npos)
+	{
+		close(i);
+		FD_CLR(i, &(this->M_struct->current_sockets));
+        std::cout << "sock " << i << "just disconnect" << "\n";
+	}
     else
     {
         std::cout << "IM HERE IN HANDLE REQUEST\n";
