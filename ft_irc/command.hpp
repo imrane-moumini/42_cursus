@@ -13,7 +13,7 @@
 #ifndef COMMAND_HPP
 #define COMMAND_HPP
 
-
+# define CLRF	"\r\n"
 # define SERVER_NAME				"ircserv"
 # define SERVER_HOSTNAME			std::string(SERVER_NAME) + ".fr"
 # define SERVER_VERSION				"v4.2"
@@ -59,8 +59,9 @@
 # define ERR_UMODEUNKNOWNFLAG(target)				RPL_PREFIX("501", "") + " " + target + " :Unknown MODE flag" + CLRF
 # define ERR_USERSDONTMATCH(target)					RPL_PREFIX("502", "") + " " + target + " :Cant change mode for other users" +  CLRF
 
-// #include "server.hpp"
+#include "server.hpp"
 
+class Server;
 class command {
 
 	public:
@@ -71,12 +72,12 @@ class command {
 
 		
 		std::string		PASS();
-		std::string		NICK();
+		std::string		NICK(int fd, Server* serv);
 		std::string		USER();
 		std::string		PING();
 		std::string		PONG();
 		std::string		OPER();
-		std::string		QUIT();
+		std::string		QUIT(int fd, Server* serv);
 		std::string		JOIN();
 		std::string		PART();
 		std::string		TOPIC();

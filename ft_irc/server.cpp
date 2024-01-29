@@ -73,8 +73,20 @@ void	Server::fill_commands_vector(void)
 {
 	this->M_commands.push_back("NICK");
 	this->M_commands.push_back("PASS");
-	this->M_commands.push_back("userhost");
+	this->M_commands.push_back("USER");
 	this->M_commands.push_back("MODE");
+	this->M_commands.push_back("PING");
+	this->M_commands.push_back("QUIT");
+	this->M_commands.push_back("OPER");
+	this->M_commands.push_back("JOIN");
+	this->M_commands.push_back("PART");
+	this->M_commands.push_back("KILL");
+	this->M_commands.push_back("NOTICE");
+	this->M_commands.push_back("TOPIC");
+	this->M_commands.push_back("KICK");
+	this->M_commands.push_back("PRIVMSG");
+	this->M_commands.push_back("WALLOPS");
+	this->M_commands.push_back("userhost");
 	return ;
 }
 
@@ -293,7 +305,7 @@ int	Server::fillCmdMap(void)
 	return (1);
 }
 
-void	Server::chooseAndExecuteAction(void)
+void	Server::chooseAndExecuteAction(int clientFd)
 {
 	std::map<std::string, std::string>::iterator m_it = this->M_cmdMap.begin();
 	std::map<std::string, std::string>::iterator m_ite = this->M_cmdMap.end();
@@ -315,7 +327,7 @@ void	Server::chooseAndExecuteAction(void)
 				// std::cout << "La commande existe !" << std::endl;
 				// std::cout << "Il s'agit de " << it_found->second << std::endl;
 				toggle = true;
-				executeCmd(i);
+				executeCmd(i, clientFd);
 				//on lance la fonction switch, on lui passe i
 			}
 			if (toggle == true)
@@ -326,13 +338,18 @@ void	Server::chooseAndExecuteAction(void)
 	return ;
 }
 
-void	Server::executeCmd(int i)
+void	Server::executeCmd(int i, int clientFd)
 {
+	
 	switch (i)
 	{
 		case 1 :
 		{
 			std::cout << "On lance NICK" << std::endl;
+			std::string message = commandObj->NICK(clientFd, this);
+			if (message.find("nothing") == std::string::npos)
+				i_send_message(clientFd,message);
+			//std::cout << "NICKNAME AFTER NICK IS " << (this->findClientBySocket(clientFd))->getNickName() << std::endl;
 			break ;
 		}
 		case 2 :
@@ -350,6 +367,67 @@ void	Server::executeCmd(int i)
 			std::cout << "On lance MODE" << std::endl;
 			break ;
 		}
+		case 5 :
+		{
+			std::cout << "On lance PING" << std::endl;
+			break ;
+		}
+		case 6 :
+		{
+			std::cout << "On lance QUIT" << std::endl;
+			commandObj->QUIT(clientFd, this);
+			break ;
+		}
+		case 7 :
+		{
+			std::cout << "On lance OPER" << std::endl;
+			break ;
+		}
+		case 8 :
+		{
+			std::cout << "On lance JOIN" << std::endl;
+			break ;
+		}
+		case 9 :
+		{
+			std::cout << "On lance PART" << std::endl;
+			break ;
+		}
+		case 10 :
+		{
+			std::cout << "On lance KILL" << std::endl;
+			break ;
+		}
+		case 11 :
+		{
+			std::cout << "On lance NOTICE" << std::endl;
+			break ;
+		}
+		case 12 :
+		{
+			std::cout << "On lance TOPIC" << std::endl;
+			break ;
+		}
+		case 13 :
+		{
+			std::cout << "On lance KICK" << std::endl;
+			break ;
+		}
+		case 14 :
+		{
+			std::cout << "On lance PRIVMSG" << std::endl;
+			break ;
+		}
+		case 15 :
+		{
+			std::cout << "On lance WALLOPS" << std::endl;
+			break ;
+		}
+		case 16 :
+		{
+			std::cout << "On lance USER" << std::endl;
+			break ;
+		}
 		default :
 		{
 			std::cout << "On ne doit pas rentrer ici normalement" << std::endl;
@@ -363,7 +441,7 @@ void	Server::i_handle_request(int i)
 {
 	if (requestParsing(i) == 0)
 		return ;
-	chooseAndExecuteAction();
+	chooseAndExecuteAction(i);
 	this->M_requestVector.clear();
 	this->M_cmdMap.clear();
 }

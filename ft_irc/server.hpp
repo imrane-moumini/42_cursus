@@ -84,14 +84,18 @@ class Server
 			int					requestParsing(int ClientFd);
 			int					fillVectorRequest(int count, std::string tmp);
 			int					fillCmdMap(void);
-			void				executeCmd(int i);
-			void				chooseAndExecuteAction(void);
+			void				executeCmd(int i, int clientFd);
+			void				chooseAndExecuteAction(int clientFd);
 
 
 			//Handle Signal
 			void				getSignal(int index);
 			void				handle_sigint(int signal);
 			static void			handle_sigint_static(int signal);
+
+			//geter for la structure
+
+			//seter for la structure
 
 			//Exception for error handling
 			class WrongPortException : public std::exception
@@ -136,6 +140,8 @@ class Server
 						const char *what() const throw();
 			};
 
+		t_serv								*M_struct;
+		std::map<std::string, std::string>	M_cmdMap;
 	private :
 
 			Server(void);
@@ -143,10 +149,10 @@ class Server
 			std::string							M_pass_wd;
 			std::vector<std::string>			M_requestVector;
 			std::vector<std::string>			M_commands;
-			std::map<std::string, std::string>	M_cmdMap;
+			//std::map<std::string, std::string>	M_cmdMap;
 			bool								M_working;
-			t_serv								*M_struct;
-			//command						command;
+			//t_serv								*M_struct;
+			command								*commandObj;
 };
 
 
