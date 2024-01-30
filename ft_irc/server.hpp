@@ -21,6 +21,8 @@
 #include "colors.hpp"
 #include <signal.h>
 #include <map>
+#include <algorithm>
+#include <string>
 
 #include "command.hpp"
 
@@ -56,6 +58,7 @@ class Server
 			std::list<client *> listOfClients;
 			client* findClientBySocket(int clientSocketFd);
 			client*	findClientByNickName(std::string clientNickname);
+			client*	findClientByUserName(std::string clientUserName);
 			void	eraseClientFromList(std::string clientNickname);
 
 			//Getters and init constructor
@@ -142,11 +145,12 @@ class Server
 
 		t_serv								*M_struct;
 		std::map<std::string, std::string>	M_cmdMap;
+		std::string							M_pass_wd;
 	private :
 
 			Server(void);
 			std::string							M_port;
-			std::string							M_pass_wd;
+			//std::string							M_pass_wd;
 			std::vector<std::string>			M_requestVector;
 			std::vector<std::string>			M_commands;
 			//std::map<std::string, std::string>	M_cmdMap;

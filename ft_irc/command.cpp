@@ -29,7 +29,22 @@ command::~command()
 {
 
 }
-// std::string		PASS();
+std::string		command::PASS(int fd, Server* serv)
+{
+    std::string temp;
+    std::string arg;
+    client* clientTmp;
+    temp = serv->M_cmdMap["PASS"];
+    clientTmp = serv->findClientBySocket(fd);
+    if (clientTmp->isWelcomeMessageSent())
+        return (ERR_ALREADYREGISTRED(clientTmp->getNickName()));
+    if (temp.empty())
+        return (ERR_NEEDMOREPARAMS(clientTmp->getNickName(), "PASS"));
+    if (temp != serv->M_pass_wd)
+        return (ERR_PASSWDMISMATCH(clientTmp->getNickName()));
+    return ("nothing");
+}
+
 std::string		command::NICK(int fd, Server* serv)
 {
 
@@ -81,7 +96,56 @@ std::string		command::NICK(int fd, Server* serv)
     }
 
 }
-// std::string		USER();
+std::string		command::USER(int fd, Server* serv)
+{
+    std::string temp;
+    std::string arg;
+    client* clientTmp;
+
+    clientTmp = serv->findClientBySocket(fd);
+    // dejà j'envoi pas l'erreur mauvais args
+    // je vois pas le contenu de USER voir pk
+    //std::cout << "c1\n";
+    if (serv->M_cmdMap.find("USER") != serv->M_cmdMap.end() || serv->M_cmdMap.find("userhost") != serv->M_cmdMap.end())
+    {
+        //std::cout << "c2\n";
+        if (serv->M_cmdMap.find("USER") != serv->M_cmdMap.end())
+        {
+            //std::cout << "c3\n";
+            temp = serv->M_cmdMap["USER"];
+            char **tabSplit = ft_split(temp.c_str(), ' ');
+            int count = std::count(temp.begin(), temp.end(), ' ');
+            if (count < 3)
+                return (ERR_NEEDMOREPARAMS(clientTmp->getNickName(), temp));
+            if (serv->findClientByUserName(tabSplit[0]) != NULL)
+                return (ERR_ALREADYREGISTRED(tabSplit[0]));
+            clientTmp->setUserName(tabSplit[0]);
+            clientTmp->setMode(tabSplit[1]);
+            clientTmp->setHostName(tabSplit[2]);
+            clientTmp->setRealName(tabSplit[3]);
+            return ("nothing");
+        }
+        else
+        {
+            //std::cout << "c4\n";
+            temp = serv->M_cmdMap["userhost"];
+            char **tabSplit = ft_split(temp.c_str(), ' ');
+            int count = std::count(temp.begin(), temp.end(), ' ');
+            if (count < 3)
+                return (ERR_NEEDMOREPARAMS(clientTmp->getNickName(), temp));
+            if (serv->findClientByUserName(tabSplit[0]) != NULL)
+                return (ERR_ALREADYREGISTRED(tabSplit[0]));
+            clientTmp->setUserName(tabSplit[0]);
+            clientTmp->setMode(tabSplit[1]);
+            clientTmp->setHostName(tabSplit[2]);
+            clientTmp->setRealName(tabSplit[3]);
+            return ("nothing");
+        }
+    }
+    return ("BIZZARE");
+
+}
+
 // std::string		PING();
 // std::string		PONG();
 // std::string		OPER();

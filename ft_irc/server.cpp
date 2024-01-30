@@ -355,11 +355,27 @@ void	Server::executeCmd(int i, int clientFd)
 		case 2 :
 		{
 			std::cout << "On lance PASS" << std::endl;
+			std::string message = commandObj->PASS(clientFd, this);
+			if (message.find("nothing") == std::string::npos)
+				i_send_message(clientFd,message);
 			break ;
 		}
 		case 3 :
 		{
+			//client* clientTmp;
+
+    		//clientTmp = this->findClientBySocket(clientFd);
 			std::cout << "On lance USER" << std::endl;
+			std::string message = commandObj->USER(clientFd, this);
+			if (message.find("nothing") == std::string::npos)
+				i_send_message(clientFd,message);
+			/*
+			std::cout << " -------USER INFO------ " << std::endl;
+			std::cout << "USERNAME: " << clientTmp->getUserName() << std::endl;
+			std::cout << "MODE: " << clientTmp->getMode() << std::endl;
+			std::cout << "HOSTNAME: " << clientTmp->getHostName() << std::endl;
+			std::cout << "REALNAME: " << clientTmp->getRealName() << std::endl;
+			*/
 			break ;
 		}
 		case 4 :
@@ -425,7 +441,20 @@ void	Server::executeCmd(int i, int clientFd)
 		}
 		case 16 :
 		{
-			std::cout << "On lance USER" << std::endl;
+			//client* clientTmp;
+
+    		//clientTmp = this->findClientBySocket(clientFd);
+			std::cout << "On lance USER HOST" << std::endl;
+			std::string message = commandObj->USER(clientFd, this);
+			if (message.find("nothing") == std::string::npos)
+				i_send_message(clientFd,message);
+			/*
+			std::cout << " -------USER INFO------ " << std::endl;
+			std::cout << "USERNAME: " << clientTmp->getUserName() << std::endl;
+			std::cout << "MODE: " << clientTmp->getMode() << std::endl;
+			std::cout << "HOSTNAME: " << clientTmp->getHostName() << std::endl;
+			std::cout << "REALNAME: " << clientTmp->getRealName() << std::endl;
+			*/
 			break ;
 		}
 		default :
@@ -554,6 +583,17 @@ client *Server::findClientByNickName(std::string clientNickname)
 	for (std::list<client *>::iterator it = this->listOfClients.begin(); it != this->listOfClients.end(); it++) {
 		temp = (*it)->getNickName();
 		if (temp.find(clientNickname) != std::string::npos)
+			return (*it);
+	}
+	return (NULL);
+}
+
+client*	Server::findClientByUserName(std::string clientUserName)
+{
+	std::string temp;
+	for (std::list<client *>::iterator it = this->listOfClients.begin(); it != this->listOfClients.end(); it++) {
+		temp = (*it)->getUserName();
+		if (temp.find(clientUserName) != std::string::npos)
 			return (*it);
 	}
 	return (NULL);

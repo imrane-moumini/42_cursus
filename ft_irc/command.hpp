@@ -71,9 +71,9 @@ class command {
 		~command();
 
 		
-		std::string		PASS();
+		std::string		PASS(int fd, Server* serv);
 		std::string		NICK(int fd, Server* serv);
-		std::string		USER();
+		std::string		USER(int fd, Server* serv);
 		std::string		PING();
 		std::string		PONG();
 		std::string		OPER();
