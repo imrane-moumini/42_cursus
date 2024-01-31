@@ -78,6 +78,7 @@ class Server
 			void				i_accept_connexion(void);
 			void				i_handle_request(int i);
 			void				i_handle_first_connexion(void);
+			void				sendWelcomeMessage(client* clientPtr);
 
 			//Main program
 			void				mainProgram(void);
@@ -87,8 +88,8 @@ class Server
 			int					requestParsing(int ClientFd);
 			int					fillVectorRequest(int count, std::string tmp);
 			int					fillCmdMap(void);
-			void				executeCmd(int i, int clientFd);
-			void				chooseAndExecuteAction(int clientFd);
+			std::string			executeCmd(int i, int clientFd);
+			std::string			chooseAndExecuteAction(int clientFd);
 
 
 			//Handle Signal

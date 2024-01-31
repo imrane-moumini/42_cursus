@@ -32,3 +32,7 @@ IMRANE CHANGEMENT :
 - Ajout de l'objet command dans la structure de Serveur
 - ajout de la class Serveur dans la class command
 - création de la command QUIT 
+
+
+// REGARDER PK J'ARRIVE PAS A DIMINUER LA TAILLE DE TMP 
+// DANS LA FONCTION QUI DECOUPE LES COMMANDES
