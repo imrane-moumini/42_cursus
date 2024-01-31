@@ -210,7 +210,8 @@ void	Server::i_handle_first_connexion(void)
 		if (requestParsing(this->M_struct->clientSockFd) == 0)
 			return ;
 		std::cout << "c2\n";
-		if (chooseAndExecuteAction(this->M_struct->clientSockFd) == "WRONG PASS" || chooseAndExecuteAction(this->M_struct->clientSockFd) == "WRONG USER" || chooseAndExecuteAction(this->M_struct->clientSockFd) == "WRONG NICK")
+		std::string returnValue = chooseAndExecuteAction(this->M_struct->clientSockFd);
+		if (returnValue == "WRONG PASS" || returnValue == "WRONG USER" || returnValue == "WRONG NICK")
 		{
 			// si WRONG PASS je créer pas et je supp le client de la liste
 			// si erreur avec User ou Nick je créer pas aussi
@@ -229,7 +230,7 @@ void	Server::i_handle_first_connexion(void)
 		
 		memset(buff, 0, 513);
 		std::cout << "c4\n";
-		exit (1);
+		//exit (1);
 
 
 	//}
@@ -286,11 +287,11 @@ int	Server::fillVectorRequest(int count, std::string tmp)
 {
 	size_t token = 0;
 	int i = 0;
-	std::cout << "c1.3.1\n";
+	//std::cout << "c1.3.1\n";
 	while (i < count)
 	{
-		std::cout << "c1.3.2\n";
-		std::cout << "TMP IS "<< tmp << std::endl;
+		//std::cout << "c1.3.2\n";
+		//std::cout << "TMP IS "<< tmp << std::endl;
 		std::string string_copy = tmp;
 		std::string temp;
 		token = string_copy.find('\n');
@@ -300,24 +301,19 @@ int	Server::fillVectorRequest(int count, std::string tmp)
 			return (0);
 		}
 		temp = string_copy.substr(0, token);
-		std::cout << "TEMP IS " << temp << std::endl;
+		//std::cout << "TEMP IS " << temp << std::endl;
 		this->M_requestVector.push_back(temp);
 		temp.erase();
-		std::cout << "TEMP AFTER ERASE IS " << temp << std::endl;
+		//std::cout << "TEMP AFTER ERASE IS " << temp << std::endl;
 		//original
 			//string_copy.erase(0, token);
-		//moi
-			//tmp.erase(0, token);
-		// j'essaye de réduir tmp a chaque iteration
-		// pour qu'il réduit le nombre de commande à traiter
-		// et qu'il pusj bien la bonne string dans reqest vector
 		tmp = tmp.substr(token + 1, tmp.size());
 		i++;
 	}
 	// std::vector<std::string>::iterator ite = this->M_requestVector.end();
 	// for (std::vector<std::string>::iterator it = this->M_requestVector.begin(); it != ite; it++)
 	// 	std::cout << "vector = " << *it << std::endl;
-	std::cout << "c1.3.3\n";
+	//std::cout << "c1.3.3\n";
 	return (1);
 }
 
@@ -360,6 +356,7 @@ int	Server::fillCmdMap(void)
 
 std::string	Server::chooseAndExecuteAction(int clientFd)
 {
+	// il fait bien tout mais il recommence ce qui créer un bug
 	std::map<std::string, std::string>::iterator m_it = this->M_cmdMap.begin();
 	std::map<std::string, std::string>::iterator m_ite = this->M_cmdMap.end();
 	std::cout << "Je suis ici et la" << std::endl;
@@ -372,14 +369,22 @@ std::string	Server::chooseAndExecuteAction(int clientFd)
 		toggle = false;
 		std::vector<std::string>::iterator it = this->M_commands.begin();
 		std::vector<std::string>::iterator ite = this->M_commands.end();
+		std::cout << "La commande de MAP = " << m_it->first << std::endl;
 		for (; it != ite; it++)
 		{
-			std::map<std::string, std::string>::iterator it_found = this->M_cmdMap.find(*(it));
+			// en fait ici je crois que j'avance bizzarement
+			// genre je continue à avancer alors que la boucle d'en haut ça a pas changé
+			//std::map<std::string, std::string>::iterator it_found = this->M_cmdMap.find(*(it));
+			
 			//std::cout << "L'iterateur est = " << it_found->first <<std::endl;
-			if (it_found != this->M_cmdMap.end())
+			std::cout << "La commande de COMMANDS BRUTE = " << *it << std::endl;
+			//if (it_found != this->M_cmdMap.end())
+			if (m_it->first.find(*it)!= std::string::npos)
 			{
+				//this->M_cmdMap.size();
+				// il avance bien 4 fois mais 4 fois c'est la meme commande
 				std::cout << "c2.2\n";
-				std::cout << "La commande = " << *it << std::endl;
+				std::cout << "La commande à lancer = " << *it << std::endl;
 				// std::cout << "La commande existe !" << std::endl;
 				// std::cout << "Il s'agit de " << it_found->second << std::endl;
 				toggle = true;
@@ -414,9 +419,11 @@ std::string	Server::executeCmd(int i, int clientFd)
 		case 1 :
 		{
 			std::cout << "On lance NICK" << std::endl;
+			std::cout << "c2.1.1\n";
 			std::string message = commandObj->NICK(clientFd, this);
 			if (message.find("nothing") == std::string::npos)
 			{
+				std::cout << "c2.1.2\n";
 				i_send_message(clientFd,message);
 				return ("WRONG NICK");
 			}
@@ -552,6 +559,7 @@ void	Server::i_handle_request(int i)
 	if (requestParsing(i) == 0)
 		return ;
 	chooseAndExecuteAction(i);
+	
 	this->M_requestVector.clear();
 	this->M_cmdMap.clear();
 }
@@ -664,7 +672,12 @@ client *Server::findClientByNickName(std::string clientNickname)
 	for (std::list<client *>::iterator it = this->listOfClients.begin(); it != this->listOfClients.end(); it++) {
 		temp = (*it)->getNickName();
 		if (temp.find(clientNickname) != std::string::npos)
+		{
+			std::cout << "c2.1.1.3\n";
+			std::cout << "NICK IS " << clientNickname << std::endl;
+			std::cout << "client nick name found is " << (*it)->getNickName() << std::endl;
 			return (*it);
+		}
 	}
 	return (NULL);
 }

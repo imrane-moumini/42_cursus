@@ -40,7 +40,7 @@ std::string		command::PASS(int fd, Server* serv)
         return (ERR_ALREADYREGISTRED(clientTmp->getNickName()));
     if (temp.empty())
         return (ERR_NEEDMOREPARAMS(clientTmp->getNickName(), "PASS"));
-    if (temp != serv->M_pass_wd)
+    if (temp.find(serv->M_pass_wd) == std::string::npos)
         return (ERR_PASSWDMISMATCH(clientTmp->getNickName()));
     return ("nothing");
 }
@@ -55,15 +55,19 @@ std::string		command::NICK(int fd, Server* serv)
     temp = serv->M_cmdMap["NICK"];
     size_t notSpace = temp.find_first_not_of(' ');
     size_t end = temp.find(' ', notSpace);
+    std::cout << "c2.1.1.1\n";
     if (end == std::string::npos)
     {
+        std::cout << "c2.1.1.2\n";
         size_t lastcar = temp.find('\0');
         arg = temp.substr(notSpace, lastcar - 1);
         //std::cout << "ARG IS " << arg << std::endl;
         if (serv->findClientByNickName(arg) != NULL)
             return (ERR_NICKNAMEINUSE(arg, arg));
+        std::cout << "c2.1.1.3\n";
         if (arg.empty())
             return (ERR_NONICKNAMEGIVEN(arg));
+        std::cout << "c2.1.1.4\n";
         /*
         for (unsigned int i = 0; i < arg.length(); ++i)
 		{
