@@ -160,80 +160,50 @@ void	Server::i_handle_first_connexion(void)
 	//quand ya pas de connexion et que j'envoi quit
 	// je tombe sur une boucle infi
 	// je crois que c'est parce que il n'y a pas d'utilisateur rattaché
+
+	// ok fonctionne mais ne set pas les var avec ce que j'ai envoyé
+	// voir pk il n'y a pas le nickname et le hostname
+		// set yet Unauthorized command (already registered)
+		// en gros il prend pas le nom du buff pour mettre mais celui que g enregistré avant
+	// après essayer de se connecter avec le même nom
 	std::cout << "IM IN FIRST CONNEXION\n";
-	// je crois que je dois être capable de recevoir que des infos
-	// partielle et d'attendre de tout recevoir avant de traiter
-	// ou sinon j'ignore cap ls
+
 	char buff[513];
 	std::string nickname;
 	std::string realName;
 	std::string userName;
 	std::string hostName;
-	//int nbCar;
-
-	//nbCar = read(this->M_struct->clientSockFd, buff, 512);
-	//if (nbCar == 0)
-	//{
-	//	close(this->M_struct->clientSockFd);
-	//	std::cout << "i close the connection for the sock" << this->M_struct->clientSockFd << "\n";
-	//}
-	//else
-	//{
-		client * clientPtr;
-		//buff[nbCar] = 0;
 	
-		//std::cout << "nb car is " << nbCar << std::endl;
-		//std::cout << "buff =" << buff << std::endl;
-
-		// la première commande que je reçois c'est Pass
-		//si Pass ne fonctionne pas je fois pas faire les prochaines actions
-		// créer le client
-		// remplir les infos du client
-		clientPtr = this->createClient();
-		clientPtr->setNickName("Not set yet");
-		clientPtr->setsocketFd(this->M_struct->clientSockFd);
-		clientPtr->setIp(inet_ntoa(this->M_struct->sockStructClient.sin_addr));
-		clientPtr->setPort(ntohs(this->M_struct->sockStructClient.sin_port));
-		//ajouter le client dans la liste
-		this->listOfClients.push_back(clientPtr);
-		// ok fonctionne mais ne set pas les var avec ce que j'ai envoyé
-		// voir pk il n'y a pas le nickname et le hostname
-			// set yet Unauthorized command (already registered)
-			// en gros il prend pas le nom du buff pour mettre mais celui que g enregistré avant
-			// je ne vais egalement pas dans ma condition qui arrete la fonction si jamais ce cas de figure
-			// ok g capté en gros la map continet que une commande alors que le buff en contient plusieurs
-			// en fait la map se rempli de 4 fois de la meme commande
-			// commme une map ne peut contenir que 1 élément pareil
-			// ca fonctionne pas 
-		// après essayer de se connecter avec le même nom
-		std::cout << "c1\n";
-		if (requestParsing(this->M_struct->clientSockFd) == 0)
-			return ;
-		std::cout << "c2\n";
-		std::string returnValue = chooseAndExecuteAction(this->M_struct->clientSockFd);
-		if (returnValue == "WRONG PASS" || returnValue == "WRONG USER" || returnValue == "WRONG NICK")
-		{
-			// si WRONG PASS je créer pas et je supp le client de la liste
-			// si erreur avec User ou Nick je créer pas aussi
-			std::cout << "c3\n";
-			this->M_requestVector.clear();
-			this->M_cmdMap.clear();
-			this->eraseClientFromList(clientPtr->getNickName());
-			return ;
-		}
+	client * clientPtr;
+	clientPtr = this->createClient();
+	clientPtr->setNickName("Not set yet");
+	clientPtr->setsocketFd(this->M_struct->clientSockFd);
+	clientPtr->setIp(inet_ntoa(this->M_struct->sockStructClient.sin_addr));
+	clientPtr->setPort(ntohs(this->M_struct->sockStructClient.sin_port));
+	//ajouter le client dans la liste
+	this->listOfClients.push_back(clientPtr);
+	
+	std::cout << "c1\n";
+	if (requestParsing(this->M_struct->clientSockFd) == 0)
+		return ;
+	std::cout << "c2\n";
+	std::string returnValue = chooseAndExecuteAction(this->M_struct->clientSockFd);
+	if (returnValue == "WRONG PASS" || returnValue == "WRONG USER" || returnValue == "WRONG NICK")
+	{
+		std::cout << "c3\n";
 		this->M_requestVector.clear();
 		this->M_cmdMap.clear();
-		
-		//clientPtr->fillStrParam(buff, clientPtr);
-		//send welcome message
-		sendWelcomeMessage(clientPtr);
-		
-		memset(buff, 0, 513);
-		std::cout << "c4\n";
-		//exit (1);
+		this->eraseClientFromList(clientPtr->getNickName());
+		return ;
+	}
+	this->M_requestVector.clear();
+	this->M_cmdMap.clear();
+	//send welcome message
+	sendWelcomeMessage(clientPtr);
+	
+	memset(buff, 0, 513);
+	std::cout << "c4\n";
 
-
-	//}
 
 }
 
@@ -356,7 +326,6 @@ int	Server::fillCmdMap(void)
 
 std::string	Server::chooseAndExecuteAction(int clientFd)
 {
-	// il fait bien tout mais il recommence ce qui créer un bug
 	std::map<std::string, std::string>::iterator m_it = this->M_cmdMap.begin();
 	std::map<std::string, std::string>::iterator m_ite = this->M_cmdMap.end();
 	std::cout << "Je suis ici et la" << std::endl;
@@ -372,8 +341,6 @@ std::string	Server::chooseAndExecuteAction(int clientFd)
 		std::cout << "La commande de MAP = " << m_it->first << std::endl;
 		for (; it != ite; it++)
 		{
-			// en fait ici je crois que j'avance bizzarement
-			// genre je continue à avancer alors que la boucle d'en haut ça a pas changé
 			//std::map<std::string, std::string>::iterator it_found = this->M_cmdMap.find(*(it));
 			
 			//std::cout << "L'iterateur est = " << it_found->first <<std::endl;
@@ -381,15 +348,13 @@ std::string	Server::chooseAndExecuteAction(int clientFd)
 			//if (it_found != this->M_cmdMap.end())
 			if (m_it->first.find(*it)!= std::string::npos)
 			{
-				//this->M_cmdMap.size();
-				// il avance bien 4 fois mais 4 fois c'est la meme commande
+
 				std::cout << "c2.2\n";
 				std::cout << "La commande à lancer = " << *it << std::endl;
 				// std::cout << "La commande existe !" << std::endl;
 				// std::cout << "Il s'agit de " << it_found->second << std::endl;
 				toggle = true;
-				// ici je rajoute si exceuteCmd envoi wrong password
-				//je fais quitte la boucle et va pas plus loin
+				//on lance la fonction switch, on lui passe i
 				returnValue = executeCmd(i, clientFd);
 				if (returnValue == "WRONG PASS")
 					return ("WRONG PASS");
@@ -400,7 +365,7 @@ std::string	Server::chooseAndExecuteAction(int clientFd)
 				if (returnValue == "WRONG USER")
 					return ("WRONG USER");
 				std::cout << "c2.5\n";
-				//on lance la fonction switch, on lui passe i
+				
 			}
 			if (toggle == true)
 				break ;
