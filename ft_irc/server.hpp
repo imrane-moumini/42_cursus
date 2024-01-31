@@ -25,7 +25,7 @@
 #include <string>
 
 #include "command.hpp"
-
+std::string	intTostring(int number);
 typedef struct s_serv
 {
 	int					serveurSockFd;

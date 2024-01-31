@@ -16,6 +16,9 @@
 #include <ctype.h>
 #include "ft_split.hpp"
 
+
+
+
 char* copyString(const char* original) {
     char* copy = (char*)malloc(strlen(original) + 1);
 

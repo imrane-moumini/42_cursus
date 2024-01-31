@@ -110,20 +110,28 @@ std::string		command::USER(int fd, Server* serv)
     // dejà j'envoi pas l'erreur mauvais args
     // je vois pas le contenu de USER voir pk
     //std::cout << "c1\n";
+    std::cout << "c2.4.1.1\n";
     if (serv->M_cmdMap.find("USER") != serv->M_cmdMap.end() || serv->M_cmdMap.find("userhost") != serv->M_cmdMap.end())
     {
         //std::cout << "c2\n";
+        std::cout << "c2.4.1.2\n";
         if (serv->M_cmdMap.find("USER") != serv->M_cmdMap.end())
         {
             //std::cout << "c3\n";
+            std::cout << "c2.4.1.3\n";
             temp = serv->M_cmdMap["USER"];
             char **tabSplit = ft_split(temp.c_str(), ' ');
             int count = std::count(temp.begin(), temp.end(), ' ');
             if (count < 3)
                 return (ERR_NEEDMOREPARAMS(clientTmp->getNickName(), temp));
+            std::cout << "c2.4.1.4\n";
+            std::cout << "TABSPLIT[0] = " << tabSplit[0] << std::endl;
             if (serv->findClientByUserName(tabSplit[0]) != NULL)
                 return (ERR_ALREADYREGISTRED(tabSplit[0]));
-            clientTmp->setUserName(tabSplit[0]);
+            std::cout << "c2.4.1.5\n";
+            std::string name = tabSplit[0];
+            name.append(clientTmp->getNickName());
+            clientTmp->setUserName(name);
             clientTmp->setMode(tabSplit[1]);
             clientTmp->setHostName(tabSplit[2]);
             clientTmp->setRealName(tabSplit[3]);
@@ -132,13 +140,16 @@ std::string		command::USER(int fd, Server* serv)
         else
         {
             //std::cout << "c4\n";
+            std::cout << "c2.4.1.6\n";
             temp = serv->M_cmdMap["userhost"];
             char **tabSplit = ft_split(temp.c_str(), ' ');
             int count = std::count(temp.begin(), temp.end(), ' ');
             if (count < 3)
                 return (ERR_NEEDMOREPARAMS(clientTmp->getNickName(), temp));
+            std::cout << "c2.4.1.7\n";
             if (serv->findClientByUserName(tabSplit[0]) != NULL)
                 return (ERR_ALREADYREGISTRED(tabSplit[0]));
+            std::cout << "c2.4.1.8\n";
             clientTmp->setUserName(tabSplit[0]);
             clientTmp->setMode(tabSplit[1]);
             clientTmp->setHostName(tabSplit[2]);

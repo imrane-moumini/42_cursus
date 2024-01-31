@@ -44,6 +44,26 @@ Server::~Server(void)
 		delete this->M_struct;
 	return ;
 }
+std::string	intTostring(int number)
+{
+	std::string result;
+	char digitChar;
+	
+	while (number <= 0)
+	{
+		std::srand(0);
+		number = std::rand();
+	}
+	while (number > 0) 
+	{
+		digitChar = '0' + (number % 10);
+		result.push_back(digitChar);
+		number /= 10;
+	}
+	if (result.size() > 4)
+		result = result.substr(0, 4);
+	return (result);
+}
 
 std::string Server::getPort(void) const
 {
@@ -175,8 +195,16 @@ void	Server::i_handle_first_connexion(void)
 	std::string hostName;
 	
 	client * clientPtr;
+	std::string convert;
+	int			personalNumber;
+	std::string name;
+	personalNumber = std::rand();
+	convert = intTostring(personalNumber);
+	name = "NotSetYet";
+	name.append("#");
+	name.append(convert);
 	clientPtr = this->createClient();
-	clientPtr->setNickName("Not set yet");
+	clientPtr->setNickName("NotSetYet");
 	clientPtr->setsocketFd(this->M_struct->clientSockFd);
 	clientPtr->setIp(inet_ntoa(this->M_struct->sockStructClient.sin_addr));
 	clientPtr->setPort(ntohs(this->M_struct->sockStructClient.sin_port));
@@ -191,6 +219,7 @@ void	Server::i_handle_first_connexion(void)
 	if (returnValue == "WRONG PASS" || returnValue == "WRONG USER" || returnValue == "WRONG NICK")
 	{
 		std::cout << "c3\n";
+		std::cout << returnValue << std::endl;
 		this->M_requestVector.clear();
 		this->M_cmdMap.clear();
 		this->eraseClientFromList(clientPtr->getNickName());
@@ -412,6 +441,7 @@ std::string	Server::executeCmd(int i, int clientFd)
 
     		//clientTmp = this->findClientBySocket(clientFd);
 			std::cout << "On lance USER" << std::endl;
+			std::cout << "c2.4.1\n";
 			std::string message = commandObj->USER(clientFd, this);
 			if (message.find("nothing") == std::string::npos)
 			{
