@@ -552,7 +552,13 @@ void	Server::i_handle_request(int i)
 {
 	std::cout << "IM IN Handle CONNEXION\n";
 	if (requestParsing(i) == 0)
+	{
+		this->M_requestVector.clear();
+		this->M_cmdMap.clear();
+		close(i);
+		FD_CLR(i, &(this->M_struct->current_sockets));
 		return ;
+	}
 	chooseAndExecuteAction(i);
 	
 	this->M_requestVector.clear();
