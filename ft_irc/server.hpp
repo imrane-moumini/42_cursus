@@ -23,9 +23,12 @@
 #include <map>
 #include <algorithm>
 #include <string>
+#include <iomanip>
+#include <sstream>
 
+#include "channel.hpp"
 #include "command.hpp"
-std::string	intTostring(int number);
+
 typedef struct s_serv
 {
 	int					serveurSockFd;
@@ -38,6 +41,7 @@ typedef struct s_serv
 } t_serv;
 
 class client;
+class channel;
 class command;
 class Server
 {
@@ -58,8 +62,11 @@ class Server
 			std::list<client *> listOfClients;
 			client* findClientBySocket(int clientSocketFd);
 			client*	findClientByNickName(std::string clientNickname);
-			client*	findClientByUserName(std::string clientUserName);
 			void	eraseClientFromList(std::string clientNickname);
+			client*	findClientByUserName(std::string clientUserName);
+			void	sendWelcomeMessage(client* clientPtr);
+
+
 
 			//Getters and init constructor
 			std::string			getPort(void) const;
@@ -67,6 +74,7 @@ class Server
 			void				Copy_Struct(Server const &rhs);
 			void				init_struct(void);
 			void				fill_commands_vector(void);
+			std::vector<std::vector<std::string> > getCmdArgs(void) const;
 
 			//All about socket
 			void				Setup_Socket(void);
@@ -78,7 +86,6 @@ class Server
 			void				i_accept_connexion(void);
 			void				i_handle_request(int i);
 			void				i_handle_first_connexion(void);
-			void				sendWelcomeMessage(client* clientPtr);
 
 			//Main program
 			void				mainProgram(void);
@@ -90,12 +97,20 @@ class Server
 			int					fillCmdMap(void);
 			std::string			executeCmd(int i, int clientFd);
 			std::string			chooseAndExecuteAction(int clientFd);
+			// void				putRequestArgInVector(void);
 
 
 			//Handle Signal
 			void				getSignal(int index);
 			void				handle_sigint(int signal);
 			static void			handle_sigint_static(int signal);
+
+			//channel
+			std::list<channel *> getListOfChannels(void) const;
+			void				setNewChannel(channel *chan);
+			void				addClientToChannel(client *client1, std::string parameter);
+			bool				checkChannel(void) const;
+
 
 			//geter for la structure
 
@@ -145,20 +160,24 @@ class Server
 			};
 
 		t_serv								*M_struct;
-		std::map<std::string, std::string>	M_cmdMap;
+		std::map<std::string, std::vector<std::string> >	M_cmdMap;
 		std::string							M_pass_wd;
+	
 	private :
 
 			Server(void);
-			std::string							M_port;
-			//std::string							M_pass_wd;
-			std::vector<std::string>			M_requestVector;
-			std::vector<std::string>			M_commands;
-			//std::map<std::string, std::string>	M_cmdMap;
-			bool								M_working;
-			//t_serv								*M_struct;
-			command								*commandObj;
+			std::string										M_port;
+			std::vector<std::string>						M_requestVector;
+			std::vector<std::string>						M_commands;
+			// std::vector<std::vector<std::string> >			M_args;
+			bool											M_working;
+			//t_serv										*M_struct;
+			command											*commandObj;
+			std::list<channel *> 							M_listOfChannels;
 };
+
+std::string			intTostring(int number);
+std::vector<std::string> split_string_v2(const std::string& s, char delimiter);
 
 
 #endif

@@ -19,7 +19,7 @@ $(NAME) : $(OBJ)
 	$(CC) $(FLAGS) -o $@ $^
 
 .cpp.o	:
-	$(CC) $(FLAGS) -o $@ -c $< 
+	$(CC) $(FLAGS) -o $@ -c $<
 
 .PHONY	: all clean fclean re
 
