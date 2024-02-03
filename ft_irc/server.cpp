@@ -289,9 +289,7 @@ int	Server::requestParsing(int ClientFd)
 	return (1);
 }
 
-// nickname et username defaut pas l'air de fonctionner
-// g pu me connecter avec le meme nickname
-//quit affiche pas toujours le message
+
 client*	Server::findClientByUserName(std::string clientUserName)
 {
 	std::string temp;

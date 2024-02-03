@@ -19,6 +19,12 @@
 // std::string		PONG();
 // std::string		OPER();
 
+
+// parfois je peux me co avec le meme nickname
+// parfois il refuse connex alors que g des trucs différents
+
+//quit affiche pas toujours le message
+	//ptete que le client renvoi NULL
 command::command()
 {
 
@@ -142,61 +148,65 @@ std::string		command::USER(int fd, Server* serv)
 }
 
 
-// std::string		command::NICK(int fd, Server* serv)
-// {
+std::string		command::NICK(int fd, Server* serv)
+{
+	//voit pk loic a pas été changé par toto
 
-// 	//voit pk loic a pas été changé par toto
-// 	std::string temp;
-// 	std::string arg;
-// 	client* clientTmp;
-// 	temp = serv->M_cmdMap["NICK"];
-// 	size_t notSpace = temp.find_first_not_of(' ');
-// 	size_t end = temp.find(' ', notSpace);
-// 	std::cout << "c2.1.1.1\n";
-// 	if (end == std::string::npos)
-// 	{
-// 		std::cout << "c2.1.1.2\n";
-// 		size_t lastcar = temp.find('\0');
-// 		arg = temp.substr(notSpace, lastcar - 1);
-// 		//std::cout << "ARG IS " << arg << std::endl;
-// 		if (serv->findClientByNickName(arg) != NULL)
-// 			return (ERR_NICKNAMEINUSE(arg, arg));
-// 		std::cout << "c2.1.1.3\n";
-// 		if (arg.empty())
-// 			return (ERR_NONICKNAMEGIVEN(arg));
-// 		std::cout << "c2.1.1.4\n";
-// 		/*
-// 		for (unsigned int i = 0; i < arg.length(); ++i)
-// 		{
-// 			if (!std::isalnum(arg[i]) && arg[i] != '-' && arg[i] != '_')
-// 				return(ERR_ERRONEUSNICKNAME(arg, arg));
-// 		}
-// 		*/
-// 		clientTmp = serv->findClientBySocket(fd);
-// 		clientTmp->setNickName(arg);
-// 		return ("nothing");
-// 	}
-// 	else
-// 	{
-// 		arg = temp.substr(notSpace, end);
-// 		if (serv->findClientByNickName(arg) == NULL)
-// 			return (ERR_NICKNAMEINUSE(arg, arg));
-// 		if (arg.empty())
-// 			return (ERR_NONICKNAMEGIVEN(arg));
-// 		/*
-// 		for (unsigned int i = 0; i < arg.length(); ++i)
-// 		{
-// 			if (!std::isalnum(arg[i]) && arg[i] != '-' && arg[i] != '_')
-// 				return(ERR_ERRONEUSNICKNAME(arg, arg));
-// 		}
-// 		*/
-// 		clientTmp = serv->findClientBySocket(fd);
-// 		clientTmp->setNickName(arg);
+	//std::string temp;
+	std::vector<std::string> temp;
+	std::string arg;
+	client* clientTmp;
+	temp = serv->M_cmdMap["NICK"];
+	//size_t notSpace = temp.find_first_not_of(' ');
+	//size_t end = temp.find(' ', notSpace);
+	std::cout << "c2.1.1.1\n";
+	// 
+	//if (end == std::string::npos)
+	//{
+		std::cout << "c2.1.1.2\n";
+		//size_t lastcar = temp.find('\0');
+		//arg = temp.substr(notSpace, lastcar - 1);
+		//std::cout << "ARG IS " << arg << std::endl;
+		arg =  temp[0];
+		if (arg.empty())
+			return (ERR_NONICKNAMEGIVEN(arg));
+		std::cout << "c2.1.1.3\n";
+		if (serv->findClientByNickName(arg) != NULL)
+			return (ERR_NICKNAMEINUSE(arg, arg));
 		
-// 		return ("nothing");
-// 	}
-
-// }
+		
+		std::cout << "c2.1.1.4\n";
+		/*
+		for (unsigned int i = 0; i < arg.length(); ++i)
+		{
+			if (!std::isalnum(arg[i]) && arg[i] != '-' && arg[i] != '_')
+				return(ERR_ERRONEUSNICKNAME(arg, arg));
+		}
+		*/
+		clientTmp = serv->findClientBySocket(fd);
+		clientTmp->setNickName(arg);
+		return ("nothing");
+	//}
+	
+	//else
+	//{
+	//	arg = temp.substr(notSpace, end);
+	//	if (serv->findClientByNickName(arg) == NULL)
+	//		return (ERR_NICKNAMEINUSE(arg, arg));
+	//	if (arg.empty())
+	//		return (ERR_NONICKNAMEGIVEN(arg));
+		/*
+		for (unsigned int i = 0; i < arg.length(); ++i)
+		{
+			if (!std::isalnum(arg[i]) && arg[i] != '-' && arg[i] != '_')
+				return(ERR_ERRONEUSNICKNAME(arg, arg));
+		}
+		*/
+	//	clientTmp = serv->findClientBySocket(fd);
+	//	clientTmp->setNickName(arg)	
+	//	return ("nothing");
+	//}
+}
 
 std::string		command::PASS(int fd, Server* serv)
 {
