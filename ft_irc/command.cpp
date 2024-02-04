@@ -19,8 +19,12 @@
 // std::string		PONG();
 // std::string		OPER();
 
+//voir repo clbouche le std::cout du retour quand c bon et copié pour chaque command
+// voir pk je suis toujours en notset quand je me co
+//voir pk meme après nick il change pas le nick alors que j'ai pas eu d'erreur
 
-// parfois je peux me co avec le meme nickname
+
+// parfois je peux me co avec le meme nickname (mdr nick etait commenté)
 // parfois il refuse connex alors que g des trucs différents
 
 // d'abord voir les bons messages à envoyer quand ça fonctionne
@@ -106,7 +110,10 @@ std::string		command::USER(int fd, Server* serv)
 			//std::cout << "TABSPLIT[0] = " << tabSplit[0] << std::endl;
 
 		       if (serv->findClientByUserName(temp[0]) != NULL)
-		           return (ERR_ALREADYREGISTRED(temp[0]));
+			   {
+					std::cout << "USER ALREADY EXIST" << std::endl;
+					return (ERR_ALREADYREGISTRED(temp[0]));
+			   }
 			clientTmp->setUserName(temp[0].append(clientTmp->getNickName()));
 			clientTmp->setMode(temp[1]);
 			clientTmp->setHostName(temp[2]);
@@ -178,10 +185,16 @@ std::string		command::NICK(int fd, Server* serv)
 		//std::cout << "ARG IS " << arg << std::endl;
 		arg =  temp[0];
 		if (arg.empty())
+		{
+			std::cout << "NICK EMPTY" << std::endl;
 			return (ERR_NONICKNAMEGIVEN(arg));
+		}
 		std::cout << "c2.1.1.3\n";
 		if (serv->findClientByNickName(arg) != NULL)
+		{
+			std::cout << "NICK ALREADY IN USE" << std::endl;
 			return (ERR_NICKNAMEINUSE(arg, arg));
+		}
 		
 		
 		std::cout << "c2.1.1.4\n";
@@ -225,11 +238,20 @@ std::string		command::PASS(int fd, Server* serv)
 	temp = serv->M_cmdMap["PASS"];
 	clientTmp = serv->findClientBySocket(fd);
 	if (clientTmp->isWelcomeMessageSent())
+	{
+		std::cout << "PASS CLIENT ALREADY REGISTERED NO NEED PASS" << std::endl;
 		return (ERR_ALREADYREGISTRED(clientTmp->getNickName()));
+	}
 	if (temp.empty())
+	{
+		std::cout << "PASS EMPTY" << std::endl;
 		return (ERR_NEEDMOREPARAMS(clientTmp->getNickName(), "PASS"));
+	}
 	if (std::find(temp.begin(), temp.end(), serv->M_pass_wd) != temp.end())
+	{
+		std::cout << "PASS WRONG PASS" << std::endl;
 		return (ERR_PASSWDMISMATCH(clientTmp->getNickName()));
+	}
 	return ("nothing");
 }
 

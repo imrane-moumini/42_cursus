@@ -521,16 +521,39 @@ std::string	Server::executeCmd(int i, int clientFd)
 	{
 		case 1 :
 		{
-			// std::cout << "On lance NICK" << std::endl;
-			// std::cout << "c2.1.1\n";
-			// std::string message = commandObj->NICK(clientFd, this);
-			// if (message.find("nothing") == std::string::npos)
-			// {
-			// 	std::cout << "c2.1.2\n";
-			// 	i_send_message(clientFd,message);
-			// 	return ("WRONG NICK");
-			// }
-			//std::cout << "NICKNAME AFTER NICK IS " << (this->findClientBySocket(clientFd))->getNickName() << std::endl;
+			client* clientPtr;
+			std::string msg;
+			std::string oldNick;
+
+			// :haha!imrane@localhost NICK bob
+			// peut être il va manquer le code 00x
+			clientPtr = this->findClientBySocket(clientFd);
+			oldNick = clientPtr->getNickName();
+			std::cout << "On lance NICK" << std::endl;
+			std::cout << "c2.1.1\n";
+			std::string message = commandObj->NICK(clientFd, this);
+			if (message.find("nothing") == std::string::npos)
+			{
+				std::cout << "c2.1.2\n";
+				i_send_message(clientFd,message);
+				return ("WRONG NICK");
+			}
+			else
+			{
+				msg.append(":");
+				msg.append(oldNick);
+				msg.append("!");
+				msg.append(clientPtr->getUserName());
+				msg.append("@");
+				msg.append(clientPtr->getHostName());
+				msg.append(" ");
+				//msg_nick + "NICK " + args + "\r\n"
+				msg.append("NICK ");
+				msg.append(clientPtr->getNickName());
+				msg.append("\r\n");
+				i_send_message(clientFd, msg);
+				std::cout << "NICKNAME AFTER NICK IS " << (this->findClientBySocket(clientFd))->getNickName() << std::endl;
+			}
 			break ;
 		}
 		case 2 :
