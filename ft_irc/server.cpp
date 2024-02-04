@@ -66,6 +66,15 @@ std::string	intTostring(int number)
 	return (result);
 }
 
+std::string const	getTime() {
+
+	time_t	t(time(NULL));
+	std::string	res(ctime(&t));
+	res.erase(res.end() - 1);
+	
+	return (res);
+}
+
 std::string Server::getPort(void) const
 {
 	return (this->M_port);
@@ -311,10 +320,14 @@ client*	Server::findClientByUserName(std::string clientUserName)
 
 void				Server::sendWelcomeMessage(client* clientPtr)
 {
-	i_send_message(this->M_struct->clientSockFd,":localhost 001 " + clientPtr->getNickName() + " :Welcome to the Internet Relay Network " + clientPtr->getNickName()+"!" + clientPtr->getUserName() + "@localhost\r\n");
-	i_send_message(this->M_struct->clientSockFd,":localhost 002 "+ clientPtr->getNickName() +  " :Your host is localhost, running version 1.0\r\n");
-	i_send_message(this->M_struct->clientSockFd,":localhost 003 "+ clientPtr->getNickName() + " :This server was created 01/01/24\r\n");
-	i_send_message(this->M_struct->clientSockFd,":localhost 004 " + clientPtr->getNickName() + " localhost 1.0\r\n");
+	//i_send_message(this->M_struct->clientSockFd,":localhost 001 " + clientPtr->getNickName() + " :Welcome to the Internet Relay Network " + clientPtr->getNickName()+"!" + clientPtr->getUserName() + "@localhost\r\n");
+	//i_send_message(this->M_struct->clientSockFd,":localhost 002 "+ clientPtr->getNickName() +  " :Your host is localhost, running version 1.0\r\n");
+	//i_send_message(this->M_struct->clientSockFd,":localhost 003 "+ clientPtr->getNickName() + " :This server was created 01/01/24\r\n");
+	//i_send_message(this->M_struct->clientSockFd,":localhost 004 " + clientPtr->getNickName() + " localhost 1.0\r\n");
+	i_send_message(this->M_struct->clientSockFd, RPL_WELCOME(clientPtr->getNickName(), clientPtr->getUserName(), clientPtr->getHostName()));
+	i_send_message(this->M_struct->clientSockFd, RPL_YOURHOST(clientPtr->getNickName()));
+	i_send_message(this->M_struct->clientSockFd, RPL_CREATED(clientPtr->getNickName(), getTime()));
+	i_send_message(this->M_struct->clientSockFd,RPL_MYINFO(clientPtr->getNickName()));
 	clientPtr->setWelcomeMessageSent(true);
 	clientPtr->hello();
 }

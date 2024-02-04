@@ -23,6 +23,15 @@
 // parfois je peux me co avec le meme nickname
 // parfois il refuse connex alors que g des trucs différents
 
+// d'abord voir les bons messages à envoyer quand ça fonctionne
+
+//je regle NICK (meme les histoires de je reçois après)
+//apres USER
+// apres PASS
+//après ping
+// après NI C K et ça fonctionne
+// après mdpr de notre choix et port de notre choix
+
 //quit affiche pas toujours le message
 	//ptete que le client renvoi NULL
 command::command()
