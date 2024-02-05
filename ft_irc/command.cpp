@@ -19,12 +19,11 @@
 // std::string		PONG();
 // std::string		OPER();
 
-//voir repo clbouche le std::cout du retour quand c bon et copié pour chaque command
+
 // voir pk je suis toujours en notset quand je me co
 //voir pk meme après nick il change pas le nick alors que j'ai pas eu d'erreur
 
-
-// parfois je peux me co avec le meme nickname (mdr nick etait commenté)
+// voir pk Pass fonctionne pas
 // parfois il refuse connex alors que g des trucs différents
 
 // d'abord voir les bons messages à envoyer quand ça fonctionne
@@ -242,12 +241,14 @@ std::string		command::PASS(int fd, Server* serv)
 		std::cout << "PASS CLIENT ALREADY REGISTERED NO NEED PASS" << std::endl;
 		return (ERR_ALREADYREGISTRED(clientTmp->getNickName()));
 	}
-	if (temp.empty())
+	if (temp[0].empty())
 	{
 		std::cout << "PASS EMPTY" << std::endl;
 		return (ERR_NEEDMOREPARAMS(clientTmp->getNickName(), "PASS"));
 	}
-	if (std::find(temp.begin(), temp.end(), serv->M_pass_wd) != temp.end())
+	std::string clientPass = temp[0];
+	clientPass = clientPass.substr(0, clientPass.length() - 1);
+	if (clientPass != serv->M_pass_wd)
 	{
 		std::cout << "PASS WRONG PASS" << std::endl;
 		return (ERR_PASSWDMISMATCH(clientTmp->getNickName()));
