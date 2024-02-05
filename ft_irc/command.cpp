@@ -12,6 +12,21 @@
 
 #include "command.hpp"
 
+
+// not set yet g compris en gros je recoi cap ls et c tout donc créer
+//ensuite je recois les autre smais je suis dejà connecté as not set donc mdp inutile et user tsa
+// je dois soit vérifier que g bien les toute les commandes
+// ou sauter CAP LS
+// je vais opter pour la première
+// mais bellek pasque ça va aller dans handle alors que je gère dans first
+
+//en fait je vais faire 2 choses
+	// si dans first ya pas les 3 je créer pas
+	//si dans handle ya les 3 je créer (appel first), si ya que 1 c comme dab
+
+
+
+
 // std::string		PASS();
 // std::string		NICK();
 // std::string		USER();
@@ -32,7 +47,7 @@
 //apres USER
 // apres PASS
 //après ping
-// après NI C K et ça fonctionne
+// après NI C K et ça fonctionne => dans handle command (pas dans first)
 // après mdpr de notre choix et port de notre choix
 
 //quit affiche pas toujours le message
@@ -108,18 +123,22 @@ std::string		command::USER(int fd, Server* serv)
 			std::cout << "c2.4.1.4\n";
 			//std::cout << "TABSPLIT[0] = " << tabSplit[0] << std::endl;
 
-		       if (serv->findClientByUserName(temp[0]) != NULL)
-			   {
-					std::cout << "USER ALREADY EXIST" << std::endl;
-					return (ERR_ALREADYREGISTRED(temp[0]));
-			   }
+		    if (serv->findClientByUserName(temp[0]) != NULL)
+			{
+				std::cout << "USER ALREADY EXIST" << std::endl;
+				return (ERR_ALREADYREGISTRED(temp[0]));
+			}
+			std::cout << "c2.4.1.5\n";
 			clientTmp->setUserName(temp[0].append(clientTmp->getNickName()));
+			std::cout << "c2.4.1.6\n";
 			clientTmp->setMode(temp[1]);
+			std::cout << "c2.4.1.7\n";
 			clientTmp->setHostName(temp[2]);
+			std::cout << "c2.4.1.8\n";
 			clientTmp->setRealName(temp[3]);
 			
 
-			// std::cout << "c2.4.1.5\n";
+			 std::cout << "c2.4.1.9\n";
 			//    if (serv->findClientByUserName(tabSplit[0]) != NULL)
 		   //        return (ERR_ALREADYREGISTRED(tabSplit[0]));
 			// std::string name = tabSplit[0];

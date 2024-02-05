@@ -192,15 +192,7 @@ void	Server::i_accept_connexion(void)
 
 void	Server::i_handle_first_connexion(void)
 {
-	//quand ya pas de connexion et que j'envoi quit
-	// je tombe sur une boucle infi
-	// je crois que c'est parce que il n'y a pas d'utilisateur rattaché
 
-	// ok fonctionne mais ne set pas les var avec ce que j'ai envoyé
-	// voir pk il n'y a pas le nickname et le hostname
-		// set yet Unauthorized command (already registered)
-		// en gros il prend pas le nom du buff pour mettre mais celui que g enregistré avant
-	// après essayer de se connecter avec le même nom
 	std::cout << "IM IN FIRST CONNEXION\n";
 
 	char buff[513];
@@ -227,9 +219,37 @@ void	Server::i_handle_first_connexion(void)
 	this->listOfClients.push_back(clientPtr);
 	
 	std::cout << "c1\n";
-	if (requestParsing(this->M_struct->clientSockFd) == 0)
-		return ;
+	int countCommand = 0;
+	//if struct parsing n'est pas vide
+	if (this->M_cmdMap.empty())
+	{
+		if (requestParsing(this->M_struct->clientSockFd) == 0)
+			return ;
+	}
+	std::map<std::string, std::vector <std::string> >::iterator m_it = this->M_cmdMap.begin();
+	std::map<std::string, std::vector <std::string> >::iterator m_ite = this->M_cmdMap.end();
+	while (m_it != m_ite)
+	{
+		if (m_it->first.find("NICK") != std::string::npos)
+			countCommand++;
+		if (m_it->first.find("USER") != std::string::npos)
+			countCommand++;
+		if (m_it->first.find("PASS") != std::string::npos)
+			countCommand++;
+		m_it++;
+	}
+	//là j'ai l'ensemble des commandes donc si fonctionne pas je peux aller en ba
 	std::cout << "c2\n";
+	if (countCommand != 3)
+	{
+		std::cout << "c2.1\n";
+		std::cout << RED << "PAS NICK PASS & USER" << END <<std::endl;
+		//this->M_requestVector.clear();
+		//this->M_cmdMap.clear();
+	
+		this->eraseClientFromList(clientPtr->getNickName());
+		return ;
+	}
 	std::string returnValue = chooseAndExecuteAction(this->M_struct->clientSockFd);
 	if (returnValue == "WRONG PASS" || returnValue == "WRONG USER" || returnValue == "WRONG NICK")
 	{
@@ -750,6 +770,14 @@ void	Server::i_handle_request(int i)
 		this->M_cmdMap.clear();
 		close(i);
 		FD_CLR(i, &(this->M_struct->current_sockets));
+		return ;
+	}
+	
+	//là j'ai l'ensemble des commandes donc si fonctionne pas je peux aller en ba
+	std::cout << "c2\n";
+	if (this->M_cmdMap.size() > 1)
+	{
+		i_handle_first_connexion();
 		return ;
 	}
 	chooseAndExecuteAction(i);
