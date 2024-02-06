@@ -622,7 +622,8 @@ std::string	Server::executeCmd(int i, int clientFd)
 		case 6 :
 		{
 			std::cout << "On lance QUIT" << std::endl;
-			commandObj->QUIT(clientFd, this);
+			std::string message = commandObj->QUIT(clientFd, this);
+			i_send_message(clientFd,message);
 			break ;
 		}
 		case 7 :
@@ -775,16 +776,47 @@ void	Server::i_handle_request(int i)
 	
 	//là j'ai l'ensemble des commandes donc si fonctionne pas je peux aller en ba
 	std::cout << "c2\n";
-	if (this->M_cmdMap.size() > 1)
+	if (!this->findClientBySocket(i) && this->M_cmdMap.size() > 1 )
 	{
-		i_handle_first_connexion();
-		return ;
+		int countCommand = 0;
+		std::map<std::string, std::vector <std::string> >::iterator m_it = this->M_cmdMap.begin();
+		std::map<std::string, std::vector <std::string> >::iterator m_ite = this->M_cmdMap.end();
+		while (m_it != m_ite)
+		{
+			if (m_it->first.find("NICK") != std::string::npos)
+				countCommand++;
+			if (m_it->first.find("USER") != std::string::npos)
+				countCommand++;
+			if (m_it->first.find("PASS") != std::string::npos)
+				countCommand++;
+			m_it++;
+		}
+		
+		if (countCommand == 3)
+		{
+			i_handle_first_connexion();
+			return ;
+		}
 	}
-	chooseAndExecuteAction(i);
-	
-	this->M_requestVector.clear();
-	this->M_cmdMap.clear();
-	// this->M_args.clear();
+	// en fait moi ske je veuix en vrai c'est que
+	//si ya plusieurs command mais c'est pas pour se connecter c ici
+	//sinon c'est là
+	// pour vérifier ça je peux passer par le welcommeMessageSent;
+
+	// en fait je fais
+	// si client existe tu vas en bas sinon tu vas dans first
+
+
+	// le pb c que si ya USER et une autre command ça va executer
+	// moi g besoin de pas rentrer la dedans si j'attend
+	// de reunir les 3
+	if (this->findClientBySocket(i))
+	{
+		chooseAndExecuteAction(i);
+		this->M_requestVector.clear();
+		this->M_cmdMap.clear();
+		// this->M_args.clear();
+	}
 }
 
 int		Server::isAlpha(char c)

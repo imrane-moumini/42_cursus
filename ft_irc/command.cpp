@@ -13,16 +13,7 @@
 #include "command.hpp"
 
 
-// not set yet g compris en gros je recoi cap ls et c tout donc créer
-//ensuite je recois les autre smais je suis dejà connecté as not set donc mdp inutile et user tsa
-// je dois soit vérifier que g bien les toute les commandes
-// ou sauter CAP LS
-// je vais opter pour la première
-// mais bellek pasque ça va aller dans handle alors que je gère dans first
 
-//en fait je vais faire 2 choses
-	// si dans first ya pas les 3 je créer pas
-	//si dans handle ya les 3 je créer (appel first), si ya que 1 c comme dab
 
 
 
@@ -35,23 +26,24 @@
 // std::string		OPER();
 
 
-// voir pk je suis toujours en notset quand je me co
-//voir pk meme après nick il change pas le nick alors que j'ai pas eu d'erreur
 
-// voir pk Pass fonctionne pas
-// parfois il refuse connex alors que g des trucs différents
 
-// d'abord voir les bons messages à envoyer quand ça fonctionne
 
-//je regle NICK (meme les histoires de je reçois après)
-//apres USER
-// apres PASS
-//après ping
+
+
+
+//voir les messages à envoyer quand QUIT fonctionne
+
+// vérifier les comportements de NICk (toutes les erreurs)
+//vérifier les comportements de USER
+//vérifier les comportement de PASS
+//vérifier le comportement de QUIT
+
+//implémenter PING
+
 // après NI C K et ça fonctionne => dans handle command (pas dans first)
 // après mdpr de notre choix et port de notre choix
 
-//quit affiche pas toujours le message
-	//ptete que le client renvoi NULL
 command::command()
 {
 
@@ -69,7 +61,8 @@ command::~command()
 {
 
 }
-
+//quit quitte direct mon program
+// corriger quit et voir si les histoire de handle connexion et first connexion sont parfait
 std::string		command::QUIT(int fd, Server* serv)
 {
 
@@ -82,10 +75,14 @@ std::string		command::QUIT(int fd, Server* serv)
 		tempClient->goodBy();
 	if (tempClient != NULL)
 		serv->eraseClientFromList(tempClient->getNickName());
+	// :imrane 403 lol :leaving :No such channel
 
-	// si le client appartient à un channel appeler la fonction
+	// si le client appartient à un channel appeler la fonction (message :NO such, remplacé par les channels)
 	// qui prévient tout le monde qu'il s'est barré
-	return (" ");
+	std::string message = ":localhost 403 ";
+	message.append(tempClient->getNickName());
+	message.append(":leaving :No such channel\r\n");
+	return (message);
 }
 
 
