@@ -52,7 +52,7 @@ command::~command()
 
 }
 // je crois que en plus il faut que j'envoi PING de manière aléatoire
-std::string		command::PONG(int fd, Server *serv)
+std::string		command::PING(int fd, Server *serv)
 {
 	(void)serv;
 	(void)fd;

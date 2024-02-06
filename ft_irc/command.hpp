@@ -78,8 +78,8 @@ class command {
 		std::string		PASS(int fd, Server *serv);
 		std::string		NICK(int fd, Server *serv);
 		std::string		USER(int fd, Server *serv);
-		std::string		PING();
-		std::string		PONG(int fd, Server *serv);
+		//std::string		PONG();
+		std::string		PING(int fd, Server *serv);
 		std::string		OPER();
 		std::string		QUIT(int fd, Server* serv);
 		std::string		PART();
