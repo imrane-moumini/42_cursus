@@ -22,22 +22,12 @@
 // std::string		NICK();
 // std::string		USER();
 // std::string		PING();
-// std::string		PONG();
+
 // std::string		OPER();
 
 
 
 
-
-
-
-
-//voir les messages à envoyer quand QUIT fonctionne
-
-// vérifier les comportements de NICk (toutes les erreurs)
-//vérifier les comportements de USER
-//vérifier les comportement de PASS
-//vérifier le comportement de QUIT
 
 //implémenter PING
 
@@ -60,6 +50,17 @@ command& command::operator=(const command& copy)
 command::~command()
 {
 
+}
+// je crois que en plus il faut que j'envoi PING de manière aléatoire
+std::string		command::PONG(int fd, Server *serv)
+{
+	(void)serv;
+	(void)fd;
+	std::string message = ":localhost ";
+	message.append("PONG ");
+	message.append("localhost ");
+	message.append(":localhost\r\n");
+	return (message);
 }
 //quit quitte direct mon program
 // corriger quit et voir si les histoire de handle connexion et first connexion sont parfait

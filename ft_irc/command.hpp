@@ -79,7 +79,7 @@ class command {
 		std::string		NICK(int fd, Server *serv);
 		std::string		USER(int fd, Server *serv);
 		std::string		PING();
-		std::string		PONG();
+		std::string		PONG(int fd, Server *serv);
 		std::string		OPER();
 		std::string		QUIT(int fd, Server* serv);
 		std::string		PART();
