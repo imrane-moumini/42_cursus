@@ -71,6 +71,9 @@ std::string		command::QUIT(int fd, Server* serv)
 	FD_CLR(fd, &(serv->M_struct->current_sockets));
 	tempClient = serv->findClientBySocket(fd);
 	//std::cout << "IN QUIT NICK IS " << tempClient->getNickName() << std::endl;
+	std::string message = ":localhost 403 ";
+	message.append(tempClient->getNickName().c_str());
+	message.append(":leaving :No such channel\r\n");
 	if (tempClient != NULL)
 		tempClient->goodBy();
 	if (tempClient != NULL)
@@ -79,9 +82,7 @@ std::string		command::QUIT(int fd, Server* serv)
 
 	// si le client appartient à un channel appeler la fonction (message :NO such, remplacé par les channels)
 	// qui prévient tout le monde qu'il s'est barré
-	std::string message = ":localhost 403 ";
-	message.append(tempClient->getNickName());
-	message.append(":leaving :No such channel\r\n");
+	
 	return (message);
 }
 
