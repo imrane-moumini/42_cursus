@@ -12,7 +12,15 @@
 
 #include "command.hpp"
 
+//en fait quand c'est proche de 300s 
+// il renvoi nick et USER mais sans pass genre pour relancer la connex
+// dans les autres repo ya meme pas de contarbour
+// voir pk ya pas de contarbour
+// mettre un std::cout sur ce que le serveur recois comme ça je vois ce qu'il reçoit
+//et ce qu'il envoi
 
+// en fait eux déjà recoivent plusieurs fois PING alors que moi une fois
+// en plus eux ya pas de contarbour alors que moi yen a direct 1
 
 
 
@@ -58,12 +66,10 @@ std::string		command::PING(int fd, Server *serv)
 	(void)fd;
 	std::string message = ":localhost ";
 	message.append("PONG ");
-	message.append("localhost ");
-	message.append(":localhost\r\n");
+	message.append("localhost\r\n");
 	return (message);
 }
-//quit quitte direct mon program
-// corriger quit et voir si les histoire de handle connexion et first connexion sont parfait
+
 std::string		command::QUIT(int fd, Server* serv)
 {
 

@@ -14,8 +14,10 @@
 #define COMMAND_HPP
 
 # define CLRF	"\r\n"
-# define SERVER_NAME				"ircserv"
-# define SERVER_HOSTNAME			std::string(SERVER_NAME) + ".fr"
+//# define SERVER_NAME				"ircserv"
+# define SERVER_NAME				"localhost"
+//# define SERVER_HOSTNAME			std::string(SERVER_NAME) + ".fr"
+# define SERVER_HOSTNAME			std::string("localhost")
 # define SERVER_VERSION				"v4.2"
 # define CHANNEL_MODES				"klnt"
 # define USER_MODES					"io"

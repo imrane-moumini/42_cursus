@@ -616,8 +616,9 @@ std::string	Server::executeCmd(int i, int clientFd)
 		}
 		case 5 :
 		{
-			std::cout << "On lance PONG" << std::endl;
+			std::cout << "On lance PING" << std::endl;
 			std::string message = commandObj->PING(clientFd, this);
+			std::cout << YELLOW << message << END << std::endl;
 			break ;
 		}
 		case 6 :
