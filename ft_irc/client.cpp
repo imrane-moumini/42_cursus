@@ -14,14 +14,14 @@ client::client(std::string hostNameParam, int fd) : nickName("Default"), realNam
 
 }
 
-client::client(const client& copy) : nickName(copy.nickName), realName(copy.realName),userName(copy.realName),
-					hostName(copy.hostName),isOperator(copy.isOperator),welcomeMessageSent(copy.welcomeMessageSent),
-					socketFd(copy.socketFd), port(copy.port), ip(copy.ip),numberChannelJoined(copy.numberChannelJoined)  
+client::client(const client *copy) : nickName(copy->nickName), realName(copy->realName),userName(copy->realName),
+					hostName(copy->hostName),isOperator(copy->isOperator),welcomeMessageSent(copy->welcomeMessageSent),
+					socketFd(copy->socketFd), port(copy->port), ip(copy->ip),numberChannelJoined(copy->numberChannelJoined)  
 {
 
 }
 
-client& client::operator=(const client& copy)
+client& client::operator=(const client &copy)
 {
 	(void)copy;
 	return (*this);
@@ -169,14 +169,6 @@ void client::fillStrParam(std::string str, client* clientPtr)
 
 void client::hello()
 {
-	std::cout << GREEN << "client : " << this->getNickName() << std::endl
-	<< "now active on"
-	<< " socket fd: " << this->getsocketFd()
-	<< " ip: " << this->getIp()
-	<< " port: " << this->getPort()
-	<< " hostname: " << this->getHostName()
-	<< END << std::endl;
-	/*
 	std::cout	<< GREEN
 	<< "client : " << this->getNickName()
 	<< "\t now active on "
@@ -185,7 +177,6 @@ void client::hello()
 	<< "\t port: " << this->getPort()
 	<< "\thostname: " << this->getPort()
 	<< END << std::endl;
-	*/
 }
 
 void client::goodBy()
