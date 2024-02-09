@@ -39,8 +39,7 @@ command::~command()
 
 std::string		command::PING(int fd, Server *serv)
 {
-	(void)serv;
-	(void)fd;
+	
 	client * tempClient;
 	tempClient = serv->findClientBySocket(fd);
 
@@ -48,6 +47,7 @@ std::string		command::PING(int fd, Server *serv)
 	//message.append("PONG ");
 	//message.append("localhost ");
 	//message.append(":localhost\r\n");
+	tempClient->getNickName();
 	return (PONG(tempClient->getNickName()));
 }
 
@@ -107,11 +107,11 @@ std::string		command::USER(int fd, Server* serv)
 			std::cout << "c2.4.1.4\n";
 			//std::cout << "TABSPLIT[0] = " << tabSplit[0] << std::endl;
 
-		    // if (serv->findClientByUserName(temp[0]) != NULL)
-			// {
-			// 	std::cout << "USER ALREADY EXIST" << std::endl;
-			// 	return (ERR_ALREADYREGISTRED(temp[0]));
-			// }
+		    if (serv->findClientByUserName(temp[0].append(clientTmp->getNickName())) != NULL)
+			{
+				std::cout << "USER ALREADY EXIST" << std::endl;
+				return (ERR_ALREADYREGISTRED(temp[0]));
+			}
 			std::cout << "c2.4.1.5\n";
 			clientTmp->setUserName(temp[0].append(clientTmp->getNickName()));
 			std::cout << "c2.4.1.6\n";
@@ -150,11 +150,11 @@ std::string		command::USER(int fd, Server* serv)
 			for (size_t i = 0; i < temp.size(); i++)
 				std::cout << "temp[" << i << "] = " << temp[i] << std::endl;
 			std::cout << "c2.4.1.7\n";
-			// if (serv->findClientByUserName(temp[0].append(clientTmp->getNickName()) ) != NULL)
-			// {
-			// 	std::cout << "USER ALREADY EXIST" << std::endl;
-			// 	return (ERR_ALREADYREGISTRED(temp[0]));
-			// }
+			if (serv->findClientByUserName(temp[0].append(clientTmp->getNickName()) ) != NULL)
+			{
+				std::cout << "USER ALREADY EXIST" << std::endl;
+				return (ERR_ALREADYREGISTRED(temp[0]));
+			}
 			std::cout << "c2.4.1.8\n";
 			clientTmp->setUserName(temp[0].append(clientTmp->getNickName()));
 			clientTmp->setMode(temp[1]);
