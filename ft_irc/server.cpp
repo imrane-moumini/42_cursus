@@ -416,15 +416,26 @@ int	Server::fillCmdMap(void)
 		{
 			std::cout << "IN FILL CMD MAP\n";
 			std::cout << "Wrong request format. Please report to IRC's request format" << std::endl;
-			return (0);
+			first = it->c_str();
+			std::cout << "first = " << first << std::endl;
+			//temp = split_string_v2(second, ' ');
+			temp.push_back("");
+			this->M_cmdMap[first] = temp;
+			it++;
+			//return (0);
 		}
-		first = it->substr(0, space);
-		std::cout << "first = " << first << std::endl;
-		second = it->substr(space + 1, it->size());
-		std::cout << "second = " << second << std::endl;
-		temp = split_string_v2(second, ' ');
-		this->M_cmdMap[first] = temp;
-		it++;
+		else 
+		{
+			// je fais si ya pas de spaxe je met string vide en arg de la cmd
+			first = it->substr(0, space);
+			std::cout << "first = " << first << std::endl;
+			second = it->substr(space + 1, it->size());
+			std::cout << "second = " << second << std::endl;
+			temp = split_string_v2(second, ' ');
+			this->M_cmdMap[first] = temp;
+			it++;
+		}
+		
 	}
 	// std::map<std::string, std::vector<std::string> >::iterator m_it = this->M_cmdMap.begin();
 	// std::map<std::string, std::vector<std::string> >::iterator m_ite = this->M_cmdMap.end();
@@ -747,6 +758,8 @@ std::string	Server::executeCmd(int i, int clientFd)
 		default :
 		{
 			std::cout << "On ne doit pas rentrer ici normalement" << std::endl;
+			//std::string message = "421  was not coded =)\r\n";
+			//i_send_message(clientFd,message);
 			break ;
 		}
 	}

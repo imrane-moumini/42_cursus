@@ -35,6 +35,11 @@
 			// comme ça je sais ce qu'ils envoient pour pas qu'il quitte
 				// ma théorie c que a chaque message qu'il reçoit il envoi un truc et si nc 
 				// ne recoit pas de message pendant un certain nbr de message il quitte
+				// en fait g capté c pas une question d'envoi
+				// c jujste que mon program va pas à la suite quand il voit pas d'espace
+				// et si je rajoute un espace bah meme si il fait r bah ça fonctionne
+				// du coup faut que j'arrive à gérer si ya pas d'espacde
+
 			// g l'impression qu'il envoi rien bizzare, suivre le parcours du message dan sle code clbouche
 			//yanou les commande fractionné ont tout cours l'air de pas de fonctionner, retester avec puis voir parcours du message
 			// tester avec d'autre repo
