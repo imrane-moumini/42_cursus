@@ -302,10 +302,11 @@ int	Server::requestParsing(int ClientFd)
 	// std::cout << "Request size = " << size << std::endl;
 	while (find_n < size - 1)
 	{
-		find_r = tmp.find('\r', find_n + 1);
+		/*find_r = tmp.find('\r', find_n + 1);*/
 		find_n = tmp.find('\n', find_n + 1);
-		if (find_r == std::string::npos || find_n == std::string::npos)
+		if (find_r == std::string::npos /*|| find_n == std::string::npos*/)
 		{
+			std::cout << "IN REQUEST PARSING\n";
 			std::cout << "Wrong request format. Please report to IRC's request format" << std::endl;
 			return (0);
 		}
@@ -374,6 +375,7 @@ int	Server::fillVectorRequest(int count, std::string tmp)
 		token = string_copy.find('\n');
 		if (token == std::string::npos)
 		{
+			std::cout << "IN FILL VECTOR MAP\n";
 			std::cout << "Wrong request format. Please report to IRC's request format" << std::endl;
 			return (0);
 		}
@@ -412,6 +414,7 @@ int	Server::fillCmdMap(void)
 		size_t space = it->find(' ');
 		if (space == std::string::npos)
 		{
+			std::cout << "IN FILL CMD MAP\n";
 			std::cout << "Wrong request format. Please report to IRC's request format" << std::endl;
 			return (0);
 		}

@@ -297,7 +297,7 @@ std::string		command::PASS(int fd, Server* serv)
 	std::vector<std::string >temp;
 	std::string arg;
 	client* clientTmp;
-	temp = serv->M_cmdMap["PASS"];
+	temp = parsTemp(serv->M_cmdMap["PASS"]);
 	clientTmp = serv->findClientBySocket(fd);
 	if (clientTmp->isWelcomeMessageSent())
 	{
@@ -310,7 +310,8 @@ std::string		command::PASS(int fd, Server* serv)
 		return (ERR_NEEDMOREPARAMS(clientTmp->getNickName(), "PASS"));
 	}
 	std::string clientPass = temp[0];
-	clientPass = clientPass.substr(0, clientPass.length() - 1);
+	//clientPass = clientPass.substr(0, clientPass.length() - 1);
+	clientPass = temp[0];
 	if (clientPass != serv->M_pass_wd)
 	{
 		std::cout << "PASS WRONG PASS" << std::endl;

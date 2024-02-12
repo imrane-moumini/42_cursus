@@ -10,6 +10,40 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+// a la fin de chaque commande faut mettre control+V suivit de contol+m
+	// j'ai l'impression que c pas le cas dans tous les repo
+	// en fait suffit de faire en sorte de regarder que \n et ça va fonctionner sans control machin
+
+
+// voir si dans les autres repo aussi quand j'envoi des fausses commande nc quitte
+	// ne quitte pas dans les autre repo
+
+
+
+
+// envoyer command partielle
+	// quand j'envoie control D ça prend bien seulement en compte les derniers truc que g tapé meme si g pas effacer le precedent
+	// voir comment ça fonctionne dans les autre repo
+		// j'ai l'impression que ignore et au final ne prend que le dernier truc
+		// en fait quand je fais control D ça bloque le terminal et je peux pas supp le prec
+		// je peux seulement continuer a ecrire et si je met pas un espace entre le nom de la command et larg ça fonctionne pas
+		// du coup normalement notre truc devrait déjà fonctionner
+			//on prend juste la dernière et on sfait pas chier, a tester
+			// en fait je peux pas tester car nc quitte avant après un NI ctr+D et CK ctr+ D
+			// régler ça et normalement ça devrait fonctionner
+			// en fait il faut que je vois ce que les repo recoivent et envoi a chaque requete nc
+			// comme ça je sais ce qu'ils envoient pour pas qu'il quitte
+				// ma théorie c que a chaque message qu'il reçoit il envoi un truc et si nc 
+				// ne recoit pas de message pendant un certain nbr de message il quitte
+			// g l'impression qu'il envoi rien bizzare, suivre le parcours du message dan sle code clbouche
+			//yanou les commande fractionné ont tout cours l'air de pas de fonctionner, retester avec puis voir parcours du message
+			// tester avec d'autre repo
+
+		// faire en sorte que quand je quitte avec nc de manière inoipiné le client est deco
+
+	// faire strategie pour tout recouper
+// faire test sujet de correction
+
 #ifndef COMMAND_HPP
 #define COMMAND_HPP
 
