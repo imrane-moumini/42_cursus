@@ -185,6 +185,6 @@ class Server
 std::string			intTostring(int number);
 std::vector<std::string> split_string_v2(const std::string& s, char delimiter);
 std::string const	getTime();
-
+bool containsAlphanumeric(const std::vector<std::string>& strVector);
 
 #endif

@@ -39,6 +39,14 @@
 				// c jujste que mon program va pas à la suite quand il voit pas d'espace
 				// et si je rajoute un espace bah meme si il fait r bah ça fonctionne
 				// du coup faut que j'arrive à gérer si ya pas d'espacde
+			// g reussi a gerer les fausses commandes sans quitter
+			//voir pk control D 2 fois fait quitter
+			//en fait la je peux fgaire autant de control D que je veux
+			// mais ça sépare bien les commande lol
+			// comment regrouper le tout ?
+			//tester avec plusieurs command
+
+
 
 			// g l'impression qu'il envoi rien bizzare, suivre le parcours du message dan sle code clbouche
 			//yanou les commande fractionné ont tout cours l'air de pas de fonctionner, retester avec puis voir parcours du message
