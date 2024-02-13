@@ -521,6 +521,10 @@ int	Server::fillCmdMap(void)
 	{
 		if (m_it->first == "")
 		{
+			// avancer jusqu'à la prochaine clé non vide
+			// si ya pas de clé non vide je fais rien et j'attend le prochain input
+			// le pb c que ça se trouve l'autre mec ne va pas mettre de command
+			// voir si d'autre repo ils le font
 			std::string tempKey;
 			std::string tempValue;
 			std::cout << "C10\n";
@@ -544,7 +548,9 @@ int	Server::fillCmdMap(void)
 		}
 		m_it++;
 	}
-	
+	// gérer plusieurs arguments => non chois assumé ya écrit couper command pas argument et ya pas tous les gens qui l'ont fait
+	// gérer à la fisrt connexion
+	// gérer quit
 	std::cout << "AFTER PARSING IMRANE MAP IS \n";
 	m_it = this->M_cmdMap.begin();
 	m_ite = this->M_cmdMap.end();
@@ -765,6 +771,7 @@ std::string	Server::executeCmd(int i, int clientFd)
 			std::cout << "On lance PONG" << std::endl;
 			std::string message = commandObj->PING(clientFd, this);
 			i_send_message(clientFd,message);
+			return ("PING");
 			break ;
 		}
 		case 6 :
@@ -1024,7 +1031,7 @@ void	Server::i_handle_request(int i)
 		// faut pas que je clear si j'ai rien exécuté
 		std::string returnValue;
 		returnValue = chooseAndExecuteAction(i);
-		if (returnValue != "nothing launch")
+		if (!(returnValue == "nothing launch" || returnValue == "PING"))
 		{
 			this->M_requestVector.clear();
 			this->M_cmdMap.clear();
