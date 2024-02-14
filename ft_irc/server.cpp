@@ -252,7 +252,13 @@ void	Server::i_handle_first_connexion(void)
 	if (this->M_cmdMap.empty())
 	{
 		if (requestParsing(this->M_struct->clientSockFd) == 0)
+		{
+			//this->M_cmdMap.clear();
+			//std::cout << PURPLE << "MAP IS CLEAR\n" << END;
+			//close(i);
+			//FD_CLR(i, &(this->M_struct->current_sockets));
 			return ;
+		}
 	}
 	std::map<std::string, std::vector <std::string> >::iterator m_it = this->M_cmdMap.begin();
 	std::map<std::string, std::vector <std::string> >::iterator m_ite = this->M_cmdMap.end();
@@ -305,13 +311,23 @@ int	Server::requestParsing(int ClientFd)
 	size_t	find_r = 0;
 	size_t	find_n = 0;
 	int		count = 0;
+	std::cout << BLUE2 << "--------------IM IN REQUEST PARSING----------------\n" << END;
 	std::cout << "c1.1\n";
 	reader = read(ClientFd, buff, 512);
+	std::cout << "read value is " << reader << std::endl;
 	if (reader == -1)
 	{
 		std::cout << "Error reading. Please check client socket." << std::endl;
 		return (0);
 	}
+	if (reader == 0)
+	{
+		std::string message = commandObj->QUIT(ClientFd, this);
+		i_send_message(ClientFd,message);
+		std::cout << "NOTHING TO READ\n";
+		return (0);
+	}
+	
 	std::cout << "c1.2\n";
 	buff[reader] = '\0';
 	std::cout << "BUFF IS : " << buff << std::endl;
@@ -383,39 +399,23 @@ int	Server::fillVectorRequest(int count, std::string tmp)
 {
 	size_t token = 0;
 	int i = 0;
-	//std::cout << "c1.3.1\n";
+	std::cout << BLUE3 << "--------------IM IN FILL VECTOR REQUEST----------------\n" << END;
 	while (i < count)
 	{
-		//std::cout << "c1.3.2\n";
-		//std::cout << "TMP IS "<< tmp << std::endl;
 		std::string string_copy = tmp;
 		std::string temp;
 		std::cout << "string_copy IS " << string_copy << std::endl;
 		token = string_copy.find('\n');
 		if (token == std::string::npos)
 		{
-			std::cout << "IN FILL VECTOR MAP\n";
+			std::cout << "IN FILL VECTOR REQUEST\n";
 			std::cout << "Wrong request format. Please report to IRC's request format" << std::endl;
-			// faire comme fell vector CMD
-			//return (0);
+		
 			temp = string_copy;
 			std::cout << "TEMP IS " << temp << std::endl;
 			this->M_requestVector.push_back(temp);
 			temp.erase();
-			//std::cout << "TEMP AFTER ERASE IS " << temp << std::endl;
-			//original
-				//string_copy.erase(0, token);
-			//tmp = tmp.substr(token + 1, tmp.size());
 			i++;
-
-			// boucle infini quand je quitte nc 
-			// pas sur que les commandes normal fonctionnent à voir
-
-			// première sugestion si je vois l'argumeny de map vide 
-			// je colle les 2 derniers clé et je choisi la dernière valeur en valeur
-			// a partir du moment ou ya control D il envoi que les drnriers caractere que g envoyé
-			// du coup je pense que c'est la chose à faire
-			// ok je vais tenter
 
 		}
 		else
@@ -424,17 +424,10 @@ int	Server::fillVectorRequest(int count, std::string tmp)
 			std::cout << "TEMP IS " << temp << std::endl;
 			this->M_requestVector.push_back(temp);
 			temp.erase();
-			//std::cout << "TEMP AFTER ERASE IS " << temp << std::endl;
-			//original
-				//string_copy.erase(0, token);
 			tmp = tmp.substr(token + 1, tmp.size());
 			i++;
 		}
 	}
-	// std::vector<std::string>::iterator ite = this->M_requestVector.end();
-	// for (std::vector<std::string>::iterator it = this->M_requestVector.begin(); it != ite; it++)
-	// 	std::cout << "vector = " << *it << std::endl;
-	//std::cout << "c1.3.3\n";
 	return (1);
 }
 
