@@ -47,8 +47,13 @@ std::string		command::PING(int fd, Server *serv)
 	//message.append("PONG ");
 	//message.append("localhost ");
 	//message.append(":localhost\r\n");
-	tempClient->getNickName();
-	return (PONG(tempClient->getNickName()));
+	std::string msg;
+	if (tempClient)
+		msg = tempClient->getNickName();
+	else
+		msg = "";
+	
+	return (PONG(msg));
 }
 
 std::string		command::QUIT(int fd, Server* serv)
@@ -60,7 +65,8 @@ std::string		command::QUIT(int fd, Server* serv)
 	tempClient = serv->findClientBySocket(fd);
 	//std::cout << "IN QUIT NICK IS " << tempClient->getNickName() << std::endl;
 	std::string message = ":localhost 403 ";
-	message.append(tempClient->getNickName().c_str());
+	if (tempClient)
+		message.append(tempClient->getNickName().c_str());
 	message.append(":leaving :No such channel\r\n");
 	if (tempClient != NULL)
 		tempClient->goodBy();
@@ -102,24 +108,34 @@ std::string		command::USER(int fd, Server* serv)
 				std::string chaine;
   				for (std::vector<std::string>::iterator it = temp.begin(); it != temp.end(); ++it)
 					chaine += *it;
-				return (ERR_NEEDMOREPARAMS(clientTmp->getNickName(), chaine));
+				std::string msg;
+				if (clientTmp)
+					msg = clientTmp->getNickName();
+				else
+					msg = "";
+				return (ERR_NEEDMOREPARAMS(msg, chaine));
 			}
 			std::cout << "c2.4.1.4\n";
 			//std::cout << "TABSPLIT[0] = " << tabSplit[0] << std::endl;
-
-		    if (serv->findClientByUserName(temp[0].append(clientTmp->getNickName())) != NULL)
-			{
-				std::cout << "USER ALREADY EXIST" << std::endl;
-				return (ERR_ALREADYREGISTRED(temp[0]));
+			if (clientTmp)
+		    {
+				if (serv->findClientByUserName(temp[0].append(clientTmp->getNickName())) != NULL)
+				{
+					std::cout << "USER ALREADY EXIST" << std::endl;
+					return (ERR_ALREADYREGISTRED(temp[0]));
+				}
 			}
-			std::cout << "c2.4.1.5\n";
-			clientTmp->setUserName(temp[0].append(clientTmp->getNickName()));
-			std::cout << "c2.4.1.6\n";
-			clientTmp->setMode(temp[1]);
-			std::cout << "c2.4.1.7\n";
-			clientTmp->setHostName(temp[2]);
-			std::cout << "c2.4.1.8\n";
-			clientTmp->setRealName(temp[3]);
+			if (clientTmp)
+			{
+				std::cout << "c2.4.1.5\n";
+				clientTmp->setUserName(temp[0].append(clientTmp->getNickName()));
+				std::cout << "c2.4.1.6\n";
+				clientTmp->setMode(temp[1]);
+				std::cout << "c2.4.1.7\n";
+				clientTmp->setHostName(temp[2]);
+				std::cout << "c2.4.1.8\n";
+				clientTmp->setRealName(temp[3]);
+			}
 			
 
 			 std::cout << "c2.4.1.9\n";
@@ -169,61 +185,7 @@ std::string		command::USER(int fd, Server* serv)
 }
 
 
-// std::string		command::NICK(int fd, Server* serv)
-// {
 
-// 	//voit pk loic a pas été changé par toto
-// 	std::string temp;
-// 	std::string arg;
-// 	client* clientTmp;
-// 	temp = serv->M_cmdMap["NICK"];
-// 	size_t notSpace = temp.find_first_not_of(' ');
-// 	size_t end = temp.find(' ', notSpace);
-// 	std::cout << "c2.1.1.1\n";
-// 	if (end == std::string::npos)
-// 	{
-// 		std::cout << "c2.1.1.2\n";
-// 		size_t lastcar = temp.find('\0');
-// 		arg = temp.substr(notSpace, lastcar - 1);
-// 		//std::cout << "ARG IS " << arg << std::endl;
-// 		if (serv->findClientByNickName(arg) != NULL)
-// 			return (ERR_NICKNAMEINUSE(arg, arg));
-// 		std::cout << "c2.1.1.3\n";
-// 		if (arg.empty())
-// 			return (ERR_NONICKNAMEGIVEN(arg));
-// 		std::cout << "c2.1.1.4\n";
-// 		/*
-// 		for (unsigned int i = 0; i < arg.length(); ++i)
-// 		{
-// 			if (!std::isalnum(arg[i]) && arg[i] != '-' && arg[i] != '_')
-// 				return(ERR_ERRONEUSNICKNAME(arg, arg));
-// 		}
-// 		*/
-// 		clientTmp = serv->findClientBySocket(fd);
-// 		clientTmp->setNickName(arg);
-// 		return ("nothing");
-// 	}
-// 	else
-// 	{
-// 		arg = temp.substr(notSpace, end);
-// 		if (serv->findClientByNickName(arg) == NULL)
-// 			return (ERR_NICKNAMEINUSE(arg, arg));
-// 		if (arg.empty())
-// 			return (ERR_NONICKNAMEGIVEN(arg));
-// 		/*
-// 		for (unsigned int i = 0; i < arg.length(); ++i)
-// 		{
-// 			if (!std::isalnum(arg[i]) && arg[i] != '-' && arg[i] != '_')
-// 				return(ERR_ERRONEUSNICKNAME(arg, arg));
-// 		}
-// 		*/
-// 		clientTmp = serv->findClientBySocket(fd);
-// 		clientTmp->setNickName(arg);
-		
-// 		return ("nothing");
-// 	}
-
-// }
 
 std::string		command::NICK(int fd, Server* serv)
 {
@@ -267,7 +229,8 @@ std::string		command::NICK(int fd, Server* serv)
 		}
 		*/
 		clientTmp = serv->findClientBySocket(fd);
-		clientTmp->setNickName(arg);
+		if (clientTmp)
+			clientTmp->setNickName(arg);
 		return ("nothing");
 	//}
 	
@@ -297,26 +260,43 @@ std::string		command::PASS(int fd, Server* serv)
 	std::vector<std::string >temp;
 	std::string arg;
 	client* clientTmp;
-	temp = parsTemp(serv->M_cmdMap["PASS"]);
+	std::map<std::string, std::vector<std::string > >::iterator it = serv->M_cmdMap.find("PASS");
+
+    // Check if the key was found
+    if (it != serv->M_cmdMap.end()) {
+        temp = parsTemp(serv->M_cmdMap["PASS"]);
+    } else {
+        temp = parsTemp(serv->M_cmdMap["SSPA"]);
+    }
+	std::cout << "c20\n";
+	
+	//temp = serv->M_cmdMap["PASS"];	
+	std::cout << "c21\n";
 	clientTmp = serv->findClientBySocket(fd);
-	if (clientTmp->isWelcomeMessageSent())
+	std::cout << "c22\n";
+	if (clientTmp && clientTmp->isWelcomeMessageSent())
 	{
 		std::cout << "PASS CLIENT ALREADY REGISTERED NO NEED PASS" << std::endl;
 		return (ERR_ALREADYREGISTRED(clientTmp->getNickName()));
 	}
+	std::cout << "c23\n";
+	
 	if (temp[0].empty())
 	{
 		std::cout << "PASS EMPTY" << std::endl;
 		return (ERR_NEEDMOREPARAMS(clientTmp->getNickName(), "PASS"));
 	}
+	std::cout << "c24\n";
 	std::string clientPass = temp[0];
 	//clientPass = clientPass.substr(0, clientPass.length() - 1);
 	clientPass = temp[0];
+	std::cout << "c25\n";
 	if (clientPass != serv->M_pass_wd)
 	{
 		std::cout << "PASS WRONG PASS" << std::endl;
 		return (ERR_PASSWDMISMATCH(clientTmp->getNickName()));
 	}
+	std::cout << "c26\n";
 	return ("nothing");
 }
 
